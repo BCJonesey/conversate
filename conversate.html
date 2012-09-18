@@ -3,40 +3,42 @@
 </head>
 
 <body>
-	<div class="title">CONVERSATE!</div>
-	{{> users}}
-	{{> editor}}
-	{{> messages}}
+	<div class="container">
+		<h2>CONVERSATE!</h2>
+		{{> users}}
+		{{> editor}}
+		{{> messages}}
+	</div>
 </body>
 
 <template name="editor">
-	<div class="block">
-		<input type="button" id="nuke" value="NUKE ALL MESSAGES">
-		<div class="subject">
-			Subject: <input type="text" id="subject" />
-		</div>
-		<div class="body">
-			Body: <input type="text" id="body" />
-		</div>
-		<input type="button" id="send" value="Send" />
+	<div class="row-fluid block">
+		<div class="span4">
+			<p><input type="button" id="nuke" value="NUKE ALL MESSAGES"></p>
+			<p>Chat: <input type="text" id="subject" /></p>
+			<input type="button" id="send" value="Send" />
+		<div>
 	</div>
 </template>
 
 <template name="messages">
-	<div class="block">
-		Messages:
-		{{#each messages}}
-		<hr />
-		<div>{{from}}: {{subject}}</div>
-		<div>{{body}}</div>
-		{{/each}}
+	<div class="row-fluid block">
+		<div class="span4">
+			{{#each messages}}
+			<p>{{from}}: {{subject}}</p>
+			{{/each}}
+		</div>
 	</div>
 </template>
 
 <template name="users">
-	<div class="block">
-		Pick a username (or be anonymous):
-		<input type="text" id="name" />
-		<input type="button" id="be" value="I want to be this guy" />
+	<div class="row-fluid">
+		<div class="span4">
+			<p>
+				Pick a username (or be anonymous):
+				<input type="text" id="name" />
+			</p>
+			<p><input type="button" id="be" value="I want to be this guy" /></p>
+		</div>
 	</div>
 </template>

@@ -1,9 +1,4 @@
 /* CSS declarations go here */
-.title {
-	font-weight: bold;
-	font-size: 5em;
-}
 .block {
-	padding: 30px;
-	padding-bottom: 0px;
+	padding-top: 10px;
 }
