@@ -4,21 +4,26 @@
 
 <body>
 	<div class="title">CONVERSATE!</div>
-	<div id="subject">
-		Subject
-	</div>
-	<div id="body">
-		Body Text
-	</div>
-	<input type="button" value="Send" />
+	{{> editor}}
 	{{> messages}}
 </body>
+
+<template name="editor">
+	<div class="subject">
+		Subject: <input type="text" id="subject" />
+	</div>
+	<div class="body">
+		Body: <input type="text" id="body" />
+	</div>
+	<input type="button" id="send" value="Send" />
+</template>
 
 <template name="messages">
 	<div id="messages">
 		Messages:
 		{{#each messages}}
 		<div>Subject: {{subject}}</div>
+		<div>Body: {{body}}</div>
 		{{/each}}
 	</div>
 </template>
