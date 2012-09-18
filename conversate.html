@@ -4,6 +4,7 @@
 
 <body>
 	<div class="title">CONVERSATE!</div>
+	{{> users}}
 	{{> editor}}
 	{{> messages}}
 </body>
@@ -23,8 +24,17 @@
 	<div id="messages">
 		Messages:
 		{{#each messages}}
+		<hr />
+		<div>From: {{from}}</div>
 		<div>Subject: {{subject}}</div>
 		<div>Body: {{body}}</div>
 		{{/each}}
+	</div>
+</template>
+
+<template name="users">
+	<div>
+		<input type="text" id="name" />
+		<input type="button" id="be" value="I want to be this guy" />
 	</div>
 </template>
