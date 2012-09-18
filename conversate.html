@@ -10,30 +10,32 @@
 </body>
 
 <template name="editor">
-	<input type="button" id="nuke" value="NUKE ALL MESSAGES">
-	<div class="subject">
-		Subject: <input type="text" id="subject" />
+	<div class="block">
+		<input type="button" id="nuke" value="NUKE ALL MESSAGES">
+		<div class="subject">
+			Subject: <input type="text" id="subject" />
+		</div>
+		<div class="body">
+			Body: <input type="text" id="body" />
+		</div>
+		<input type="button" id="send" value="Send" />
 	</div>
-	<div class="body">
-		Body: <input type="text" id="body" />
-	</div>
-	<input type="button" id="send" value="Send" />
 </template>
 
 <template name="messages">
-	<div id="messages">
+	<div class="block">
 		Messages:
 		{{#each messages}}
 		<hr />
-		<div>From: {{from}}</div>
-		<div>Subject: {{subject}}</div>
-		<div>Body: {{body}}</div>
+		<div>{{from}}: {{subject}}</div>
+		<div>{{body}}</div>
 		{{/each}}
 	</div>
 </template>
 
 <template name="users">
-	<div>
+	<div class="block">
+		Pick a username (or be anonymous):
 		<input type="text" id="name" />
 		<input type="button" id="be" value="I want to be this guy" />
 	</div>
