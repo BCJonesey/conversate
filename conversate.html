@@ -1,13 +1,24 @@
 <head>
-  <title>conversate</title>
+  <title>Conversate</title>
 </head>
 
 <body>
-  {{> hello}}
+	<div class="title">CONVERSATE!</div>
+	<div id="subject">
+		Subject
+	</div>
+	<div id="body">
+		Body Text
+	</div>
+	<input type="button" value="Send" />
+	{{> messages}}
 </body>
 
-<template name="hello">
-  <h1>Hello World!</h1>
-  {{greeting}}
-  <input type="button" value="Click" />
+<template name="messages">
+	<div id="messages">
+		Messages:
+		{{#each messages}}
+		<div>Subject: {{subject}}</div>
+		{{/each}}
+	</div>
 </template>

@@ -1,19 +1,16 @@
-if (Meteor.is_client) {
-  Template.hello.greeting = function () {
-    return "Welcome to conversate.";
-  };
+Messages = new Meteor.Collection("messages");
 
-  Template.hello.events = {
-    'click input' : function () {
-      // template data, if any, is available in 'this'
-      if (typeof console !== 'undefined')
-        console.log("You pressed the button");
-    }
+if (Meteor.is_client) {
+  Template.messages.messages = function () {
+    return Messages.find({}, {sort: {subject: 1}});
   };
 }
 
 if (Meteor.is_server) {
   Meteor.startup(function () {
-    // code to run on server at startup
+    if (Messages.find().count() === 0)
+	{
+		Messages.insert({subject: "Message one", body: "Some random body text."});
+	}
   });
 }
