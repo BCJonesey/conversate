@@ -2,12 +2,15 @@ Messages = new Meteor.Collection("messages");
 
 if (Meteor.is_client) {
   Template.messages.messages = function () {
-    return Messages.find({}, {sort: {subject: 1}});
+    return Messages.find({});
   };
 
   Template.editor.events = {
 	'click input#send': function () {
 		Messages.insert({subject: $('#subject').val(), body: $('#body').val()});
+	},
+	'click input#nuke': function () {
+		Messages.remove({});
 	}
   };
 }
