@@ -8,17 +8,11 @@ if (Meteor.is_client) {
 	
 	Template.conversations.helpers({
 		conversation_name: function() {
-			var name = "";
-			if (this.users) {
-			 	for (var i = 0; i < this.users.length; i++) {
-				    if (i > 0) {
-						name += ", "
-					}
-					user = this.users[i];
-					name += user;
-				}
-			}
-			return name;
+			return get_conversation_users(this.users)
+		},
+		conversation_time: function() {
+			var then = moment.unix(this.time);
+			return then.format('MMM Do, YYYY h:mmA');
 		}
 	});
 	
@@ -29,13 +23,27 @@ if (Meteor.is_client) {
 		}
 	});
 	
+	get_conversation_users = function (users) {
+		var name = "";
+		if (users) {
+		 	for (var i = 0; i < users.length; i++) {
+			    if (i > 0) {
+					name += ", "
+				}
+				user = users[i];
+				name += user;
+			}
+		}
+		return name;
+	};
+	
 	get_current_conversation = function () {
 		var conversation = Session.get('conversation');
 		if (!conversation) {
-			conversation = Conversations.insert({});
+			conversation = Conversations.insert({time: moment().unix()});
 			Conversations.update(conversation, {$addToSet: {users: get_current_name()}});
 			Session.set('conversation', conversation);
 		}
 		return conversation;
-	}
+	};
 }

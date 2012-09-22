@@ -21,8 +21,16 @@
 	margin-left: 0px;
 }
 
+.conversation-item-time {
+	float: right;
+}
+
 .conversation-add {
 	text-align: center;
+}
+
+.conversation-banner {
+	margin-bottom: 20px;
 }
 
 .nav-list {
