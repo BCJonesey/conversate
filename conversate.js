@@ -6,25 +6,34 @@ if (Meteor.is_client) {
   };
 
   Template.nav.current_user = function () {
-	var user = Session.get('name');
-	if (!user)
-	{
-		user = 'Anonymous'
-	}
-	return user;
+	return get_current_name();
   };
 
-  Template.editor.events = {
-	'click input#send': function () {
+  send_message = function () {
+		Messages.insert({text: $('#message-text').val(), from: get_current_name()});
+		$('#message-text').val('');
+  }
+
+  get_current_name = function () {
 		var name = Session.get('name');
 		if (!name)
 		{
 			name = 'Anonymous'
 		}
-		Messages.insert({subject: $('#subject').val(), body: $('#body').val(), from: name});
+		return name;
+  }
+
+  Template.editor.events = {
+	'click input#send': function () {
+		send_message();
 	},
 	'click input#nuke': function () {
 		Messages.remove({});
+	},
+	'keyup input#message-text': function () {
+		if(event.keyCode == 13) {
+			send_message();
+		}
 	}
   };
 
@@ -39,7 +48,7 @@ if (Meteor.is_server) {
   Meteor.startup(function () {
     if (Messages.find().count() === 0)
 	{
-		Messages.insert({subject: "Message one", body: "Some random body text.", from: "anonymous coward"});
+		Messages.insert({text: "Some random body text.", from: "Anonymous"});
 	}
   });
 }

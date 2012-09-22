@@ -10,10 +10,11 @@
 				{{> views}}
 			</div>
 			<div class="span4 conversations">
-				{{> editor}}
+				{{> conversations}}
 			</div>
 			<div class="span5 conversation">
 				{{> messages}}
+				{{> editor}}
 			</div>
 		</div>
 	</div>
@@ -45,16 +46,20 @@
 	{{> users}}
 </template>
 
+<template name="conversations">
+	Conversations coming soon...
+</template>
+
 
 <template name="editor">
-	<p><input type="button" id="nuke" value="NUKE ALL MESSAGES"></p>
-	<p>Chat: <input type="text" id="subject" /></p>
+	<p>Chat: <input type="text" id="message-text" /></p>
 	<input type="button" id="send" value="Send" />
+	<p><input type="button" id="nuke" value="NUKE ALL MESSAGES"></p>
 </template>
 
 <template name="messages">
 	{{#each messages}}
-		<p>{{from}}: {{subject}}</p>
+		<p>{{from}}: {{text}}</p>
 	{{/each}}
 </template>
 
