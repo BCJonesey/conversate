@@ -2,3 +2,25 @@
 .block {
 	padding-top: 10px;
 }
+
+.span4 {
+	height: 400px;
+}
+
+.conversations {
+	border-right: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	padding-left: 15px;
+	padding-right: 10px;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+.nav-list {
+	padding-right: 50px;
+	margin-bottom: 100px;
+}
+
+.italicized {
+	font-style: italic;
+}

@@ -4,41 +4,64 @@
 
 <body>
 	<div class="container">
-		<h2>CONVERSATE!</h2>
-		{{> users}}
-		{{> editor}}
-		{{> messages}}
+		{{> nav}}
+		<div class="row">
+			<div class="span3 view">
+				{{> views}}
+			</div>
+			<div class="span4 conversations">
+				{{> editor}}
+			</div>
+			<div class="span5 conversation">
+				{{> messages}}
+			</div>
+		</div>
 	</div>
 </body>
 
-<template name="editor">
-	<div class="row-fluid block">
-		<div class="span4">
-			<p><input type="button" id="nuke" value="NUKE ALL MESSAGES"></p>
-			<p>Chat: <input type="text" id="subject" /></p>
-			<input type="button" id="send" value="Send" />
-		<div>
+<template name="nav">
+	<div class="navbar">
+  		<div class="navbar-inner">
+    		<a class="brand" href="#">Conversate</a>
+    		<ul class="nav">
+      			<li class="active"><a href="#">Messages</a></li>
+      			<li><a href="#">Contacts</a></li>
+      			<li><a href="#">Calendar</a></li>
+    		</ul>
+			<ul class="nav pull-right">
+				<li><a class="italicized" href="#">{{ current_user }}</a></li>
+				<li><a href="#">Settings</a></li>
+				<li><a href="#">Signout</a></li>
+			</ul>
+  		</div>
 	</div>
+</template>
+
+<template name="views">
+	<ul class="nav nav-list">
+	  <li><a href="#">Home</a></li>
+	  <li class="active"><a href="#">All Messages</a></li>
+	</ul>
+	{{> users}}
+</template>
+
+
+<template name="editor">
+	<p><input type="button" id="nuke" value="NUKE ALL MESSAGES"></p>
+	<p>Chat: <input type="text" id="subject" /></p>
+	<input type="button" id="send" value="Send" />
 </template>
 
 <template name="messages">
-	<div class="row-fluid block">
-		<div class="span4">
-			{{#each messages}}
-			<p>{{from}}: {{subject}}</p>
-			{{/each}}
-		</div>
-	</div>
+	{{#each messages}}
+		<p>{{from}}: {{subject}}</p>
+	{{/each}}
 </template>
 
 <template name="users">
-	<div class="row-fluid">
-		<div class="span4">
-			<p>
-				Pick a username (or be anonymous):
-				<input type="text" id="name" />
-			</p>
-			<p><input type="button" id="be" value="I want to be this guy" /></p>
-		</div>
-	</div>
+	<p>
+		Username:
+		<input type="text" id="name" />
+	</p>
+	<p><input type="button" id="be" value="Select" /></p>
 </template>
