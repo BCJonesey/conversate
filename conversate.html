@@ -47,7 +47,13 @@
 </template>
 
 <template name="conversations">
-	Conversations coming soon...
+		<ul class="nav nav-tabs nav-stacked">
+		{{#each conversations}}
+			<li>
+				<a href="#">{{conversation_name}}</a>
+			</li>	
+		{{/each}}
+		</ul>
 </template>
 
 
