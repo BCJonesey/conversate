@@ -23,6 +23,13 @@ if (Meteor.is_client) {
 		return name;
   }
 
+  Template.messages.helpers({
+		message_display: function () {
+			return this.text.replace(/\n/g, '<br />');
+	  	}
+  });
+	
+
   Template.editor.events = {
 	'click input#send': function () {
 		send_message();

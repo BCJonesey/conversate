@@ -21,6 +21,24 @@
 	margin-bottom: 100px;
 }
 
+.message {
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 10px;
+}
+
+#message-text {
+	width: 100%;
+	height: 100px;
+}
+
+#send {
+	float: right;
+}
+
 .italicized {
 	font-style: italic;
+}
+
+.bold {
+	font-weight: bold;
 }
