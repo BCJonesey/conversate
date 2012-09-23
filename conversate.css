@@ -1,4 +1,3 @@
-/* CSS declarations go here */
 .block {
 	padding-top: 10px;
 }
@@ -24,6 +23,10 @@
 .conversation-item-date {
 	float: right;
 	font-size: 0.7em;
+}
+
+.conversation-item-body {
+	color: #999;
 }
 
 .conversation-add {
