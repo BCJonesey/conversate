@@ -13,13 +13,20 @@ if (Meteor.is_client) {
 		conversation_time: function() {
 			var then = moment.unix(this.time);
 			return then.format('MMM Do, YYYY h:mmA');
+		},
+		conversation_body: function() {
+			var message = Messages.findOne({conversation: this._id});
+			if (message) {
+				return message.text;
+			}
+			return "Let's conversate!";
 		}
 	});
 	
 	Template.conversations.events({
 		'click li.conversation-item': function (event)
 		{
-			Session.set('conversation',event.currentTarget.id);
+			Session.set('conversation', event.currentTarget.id);
 		}
 	});
 	
