@@ -38,7 +38,12 @@
     				</ul>
   			</div>
 		</div>
-		{{> users}}
+		<div class="hero-unit">
+			<h1>Conversate.</h1>
+			<h3>Pick a name, and let's chat.</h3>
+			{{> users}}
+		</div>
+		
 	</div>
 </template>
 
@@ -104,8 +109,8 @@
 
 <template name="users">
 	<p>
-		Username:
+		Nomme de plume:
 		<input type="text" id="name" />
+		<input type="button" id="be" value="Sign in" />
 	</p>
-	<p><input type="button" id="be" value="Select" /></p>
 </template>

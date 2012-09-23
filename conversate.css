@@ -52,6 +52,11 @@
 	overflow-y: scroll;
 }
 
+#be {
+	margin-bottom: 8px;
+	margin-left: 3px;
+}
+
 #message-text {
 	width: 96.5%;
 	height: 100px;
