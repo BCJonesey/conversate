@@ -47,6 +47,11 @@
 	margin-bottom: 10px;
 }
 
+.messages {
+	height: 350px; 
+	overflow-y: scroll;
+}
+
 #message-text {
 	width: 96.5%;
 	height: 100px;

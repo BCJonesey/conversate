@@ -71,12 +71,14 @@
 </template>
 
 <template name="messages">
-	{{#each messages}}
-		<div class="message">
-			<p class="bold">{{from}}</p>
-			<p>{{{message_display}}}</p>
-		</div>
-	{{/each}}
+	<div class="messages">
+		{{#each messages}}
+			<div class="message">
+				<p class="bold">{{from}}</p>
+				<p>{{{message_display}}}</p>
+			</div>
+		{{/each}}
+	</div>
 </template>
 
 <template name="users">
