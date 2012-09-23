@@ -3,6 +3,11 @@
 </head>
 
 <body>
+	{{> page}}
+</body>
+
+<template name="page">
+	{{#if has_user}}
 	<div class="container">
 		{{> nav}}
 		<div class="row">
@@ -18,7 +23,24 @@
 			</div>
 		</div>
 	</div>
-</body>
+	{{else}}
+	{{> login}}
+	{{/if}}
+</template>
+
+<template name="login">
+	<div class="container">
+		<div class="navbar">
+  			<div class="navbar-inner">
+		    		<a class="brand" href="#">Conversate</a>
+   	 			<ul class="nav">
+      					<li class="active"><a href="#">Login</a></li>
+    				</ul>
+  			</div>
+		</div>
+		{{> users}}
+	</div>
+</template>
 
 <template name="nav">
 	<div class="navbar">
@@ -32,7 +54,7 @@
 			<ul class="nav pull-right">
 				<li><a class="italicized" href="#">{{ current_user }}</a></li>
 				<li><a href="#">Settings</a></li>
-				<li><a href="#">Signout</a></li>
+				<li><a class="nav-signout" href="#">Signout</a></li>
 			</ul>
   		</div>
 	</div>
@@ -43,7 +65,6 @@
 	  <li><a href="#">Home</a></li>
 	  <li class="active"><a href="#">All Messages</a></li>
 	</ul>
-	{{> users}}
 </template>
 
 <template name="conversations">
