@@ -4,11 +4,6 @@ if (Meteor.is_client) {
 	'click input#send': function () {
 		send_message();
 	},
-	'click input#nuke': function () {
-		Messages.remove({});
-		Conversations.remove({});
-		Session.set('conversation', null);
-	},
 	'keyup input#message-text': function () {
 		if(event.keyCode == 13) {
 			send_message();
@@ -30,6 +25,11 @@ if (Meteor.is_client) {
 	Template.nav.events({
 	'click .nav-signout': function () {
 		Session.set('name', null);
+	},
+	'click #nuke': function () {
+		Messages.remove({});
+		Conversations.remove({});
+		Session.set('conversation', null);
 	}
 	});
 
