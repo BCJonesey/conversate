@@ -10,8 +10,27 @@ if (Meteor.is_client) {
   	Template.messages.helpers({
 			message_display: function () {
 				return this.text.replace(/\n/g, '<br />');
-		  	}
+		  	},
+			conversants_display: function () {
+				var conversation_id = Session.get('conversation');
+				if (conversation_id) {
+					var conversation = Conversations.findOne({_id: conversation_id});
+					if (conversation) {
+						var users = conversation.users;
+						var displayString = 'Conversation with ' + users[0];
+						if (users.length > 1) {
+							for (var i = 1; i < users.length - 1; i++) {
+								var user = users[i];
+								displayString += ', ' + users[i];
+							}
+							displayString += ' and ' + users[users.length - 1];	
+						}
+						return displayString;
+					}
+				}
+			}
 	});
+
 
 	send_message = function () {
 		var text = $('#message-text').val();

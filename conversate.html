@@ -90,7 +90,6 @@
 		</ul>
 </template>
 
-
 <template name="editor">
 	<textarea id="message-text" />
 	<input type="button" id="send" value="Send" />
@@ -98,7 +97,7 @@
 
 <template name="messages">
 	<div class="messages-header">
-	Conversation with Bob Jones and Freddie
+	{{conversants_display}}
 	</div>
 	<div class="messages">
 		{{#each messages}}
