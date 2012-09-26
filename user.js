@@ -6,8 +6,13 @@ if (Meteor.is_client) {
 	
 	Template.users.events = {
 	    'click input#be': function () {
-			Session.set('name', $('#name').val());
-	    }	
+			set_name();
+	    },
+	    'keyup input#name': function () {
+		if(event.keyCode == 13) {
+			set_name();
+		}
+	    }
 	};
 	
 	get_current_name = function () {
@@ -18,6 +23,10 @@ if (Meteor.is_client) {
 			Session.set('name', name);
 		}
 		return name;
+	}
+
+	set_name = function () {
+		Session.set('name', $('#name').val());
 	}
 	
 }
