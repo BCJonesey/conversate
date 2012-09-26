@@ -52,6 +52,13 @@
 	overflow-y: auto;
 }
 
+.messages-header {
+	border: 1px solid #ccc;
+	background-color: #ccc;
+	margin-bottom: 15px;
+	text-align: center;
+}
+
 #be {
 	margin-bottom: 8px;
 	margin-left: 3px;
