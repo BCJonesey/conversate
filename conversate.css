@@ -6,6 +6,10 @@
 	height: 400px;
 }
 
+.container {
+	width: 1024px;
+}
+
 .conversations {	
 	border-left: 1px solid #ccc;
 	padding-left: 0px;
@@ -36,6 +40,11 @@
 .conversation-banner {
 	margin-bottom: 20px;
 }
+
+.conversation-list {
+	height: 475px;
+	overflow-y: auto;
+}	
 
 .nav-list {
 	padding-right: 50px;

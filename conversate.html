@@ -11,13 +11,13 @@
 	<div class="container">
 		{{> nav}}
 		<div class="row">
-			<div class="span2 view">
+			<div class="span3 view">
 				{{> views}}
 			</div>
-			<div class="span3 conversations">
+			<div class="span4 conversations">
 				{{> conversations}}
 			</div>
-			<div class="span7 conversation">
+			<div class="span5 conversation">
 				{{> messages}}
 				{{> editor}}
 			</div>
@@ -74,7 +74,7 @@
 </template>
 
 <template name="conversations">
-		<ul class="nav nav-tabs nav-stacked">
+		<ul class="nav nav-tabs nav-stacked conversation-list">
 		{{#each conversations}}
 			<li class="conversation-item" id="{{_id}}">
 					<a href="#">
