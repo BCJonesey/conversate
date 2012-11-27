@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
 
+  has_and_belongs_to_many :conversations
+
   attr_accessible :email, :password, :password_confirmation
 
   validates_confirmation_of :password
