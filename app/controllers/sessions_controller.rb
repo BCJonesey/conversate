@@ -11,4 +11,9 @@ class SessionsController < ApplicationController
       @login_error = true
     end
   end
+
+  def destroy
+    logout
+    redirect_to root_url
+  end
 end
