@@ -1,2 +1,27 @@
-<h1>Users#new</h1>
-<p>Find me in app/views/users/new.html.erb</p>
+<div class="row">
+  <div class="span12">
+    <h1>
+      Sign your ass up
+    </h1>
+  </div>
+</div>
+<div class="row">
+  <%= form_for @user do |f| %>
+    <% if @user.errors.any? %>
+      <div class="error-messages">
+        <h3>You fucked up</h3>
+        <ul>
+          <% for message in @user.errors.full_messages %>
+            <li><%= message %></li>
+          <% end %>
+      </div>
+    <% end %>
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
+    <%= f.submit %>
+  <% end %>
+</div>
