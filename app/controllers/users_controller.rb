@@ -28,6 +28,10 @@ class UsersController < ApplicationController
         @user.password = params[:new_password]
       end
 
+      if params[:full_name]
+        @user.full_name = params[:full_name]
+      end
+
       @edit_status = @user.save ? :success : :failure
     else
       @edit_error = :failure

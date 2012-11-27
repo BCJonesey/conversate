@@ -21,10 +21,14 @@
         Original password
       <% end %>
       <%= password_field_tag :password %>
-      <%= label_tag :new_password %>
+      <%= label_tag :new_password do %>
+        New password (optional)
+      <% end %>
       <%= password_field_tag :new_password %>
       <%= label_tag :new_password_confirmation %>
       <%= password_field_tag :new_password_confirmation %>
+      <%= label_tag :full_name %>
+      <%= text_field_tag :full_name, @user.full_name %>
       <%= submit_tag "Update", :class => "btn" %>
     <% end %>
   </div>
