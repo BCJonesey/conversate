@@ -1,5 +1,11 @@
+# General rails stuff
 .DS_Store
 log
+tmp
 
+# Sqlite3 database files
+*.sqlite3
+
+# Sublime Text project files
 /*.sublime-project
 /*.sublime-workspace
