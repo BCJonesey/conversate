@@ -6,9 +6,9 @@
   </div>
 </div>
 <div class="row">
-  <% if !current_user %>
+  <% if !logged_in? %>
     <div class="span3 offset2">
-      <a href="<%= new_session_path %>" class="full-column btn">
+      <a href="<%= new_sessions_path %>" class="full-column btn">
         Log in
         <br />
         <small>
@@ -17,7 +17,7 @@
       </a>
     </div>
     <div class="span3 offset2">
-      <a href="<%= new_user_path %>" class="full-column btn btn-primary">
+      <a href="<%= new_users_path %>" class="full-column btn btn-primary">
         Sign up
         <br />
         <small>

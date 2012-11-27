@@ -9,6 +9,7 @@ class SessionsController < ApplicationController
       redirect_back_or_to root_url
     else
       @login_error = true
+      render :new
     end
   end
 

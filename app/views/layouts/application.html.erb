@@ -7,12 +7,15 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <% if current_user %>
+  <% if logged_in? %>
     <div class="navbar navbar-inverse">
       <div class="navbar-inner">
         <ul class="pull-right nav">
           <li>
-            <a href="<%= destroy_session_path %>">Logout</a>
+            <a href="<%= edit_users_path %>">Edit Profile</a>
+          </li>
+          <li>
+            <a href="<%= destroy_sessions_path %>">Logout</a>
           </li>
         </ul>
       </div>
