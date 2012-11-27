@@ -5,3 +5,31 @@
     </h1>
   </div>
 </div>
+<div class="row">
+  <% if current_user %>
+    <div class="span4 offset4">
+      <a href="<%= destroy_session_path %>" class="full-column btn btn-danger">
+        Log out
+      </a>
+    </div>
+  <% else %>
+    <div class="span3 offset2">
+      <a href="<%= new_session_path %>" class="full-column btn">
+        Log in
+        <br />
+        <small>
+          (Like a boss)
+        </small>
+      </a>
+    </div>
+    <div class="span3 offset2">
+      <a href="<%= new_user_path %>" class="full-column btn btn-primary">
+        Sign up
+        <br />
+        <small>
+          (So that you can be a boss)
+        </small>
+      </a>
+    </div>
+  <% end %>
+</div>

@@ -1,8 +1,9 @@
 Conversate::Application.routes.draw do
   root :to => 'home#index'
 
-  get "users/new", :as => 'users'
-  get "sessions/new", :as => 'sessions'
+  resources :users, :only => [:new, :create]
+  resources :sessions, :only => [:new, :create]
+  get 'sessions/logout' => 'sessions#destroy', :as => 'destroy_session'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
