@@ -1,8 +1,8 @@
 Conversate::Application.routes.draw do
   root :to => 'home#index'
 
-  get "users/new"
-  get "sessions/new"
+  get "users/new", :as => 'users'
+  get "sessions/new", :as => 'sessions'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
