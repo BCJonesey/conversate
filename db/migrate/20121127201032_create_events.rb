@@ -3,7 +3,7 @@ class CreateEvents < ActiveRecord::Migration
     create_table :events do |t|
       t.integer :conversation_id
       t.integer :user_id
-      t.string :type
+      t.string :event_type
       t.text :data # stored as json - for type-dependent information
 
       t.timestamps
