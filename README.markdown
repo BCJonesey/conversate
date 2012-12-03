@@ -2,6 +2,7 @@ This is Parley.  It's better than what you have.
 
 ### Coding Standards
 I got here first, so I get to make the rules.
+
 ![thbbft!](http://www.mortalwombat.com/Special/BilltheCat.jpg)
 
 Lines wrap at 80 chars, at least in the `app` folder.  Other folders, especially
