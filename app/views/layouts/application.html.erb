@@ -10,6 +10,11 @@
   <% if logged_in? %>
     <div class="navbar navbar-inverse">
       <div class="navbar-inner">
+        <ul class="pull-left nav">
+          <li>
+            <a href="<%= conversations_path %>">Home</a>
+          </li>
+        </ul>
         <ul class="pull-right nav">
           <li>
             <a href="<%= edit_users_path %>">Edit Profile</a>

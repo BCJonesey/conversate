@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="span12">
+    <h1><%= @conversation.subject %></h1>
+  </div>
+</div>
+<% @conversation.pieces.each do |piece| %>
+  <div class="row">
+    <div class="span12">
+      <% if piece.type == :message %>
+        <div class="conversation-piece conversation-piece-message">
+          <span class="byline">
+            <%= piece.user.name %> wrote at <%= piece.timestamp %>:
+          </span>
+          <span class="text">
+            <%= piece.text %>
+          </span
+        </div>
+      <% elsif piece.type == :deletion %>
+        <div class="conversation-piece conversation-piece-deletion">
+          <span>
+            <%= piece.user.name %> deleted a message
+          </span>
+        </div>
+      <% elsif piece.type == :retitle %>
+        <div class="conversation-piece conversation-piece-retitle">
+          <span>
+            <%= piece.user.name %> titled the conversation <%= piece.title %>
+          </span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

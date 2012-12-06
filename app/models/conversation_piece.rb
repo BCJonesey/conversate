@@ -28,6 +28,17 @@ class ConversationPiece
     end
 
     def delete(user, timestamp)
+      Deletion.new user, timestamp, self
+    end
+  end
+
+  class Deletion < ConversationPiece
+    attr_accessor :original_message, :deletion_timestamp
+
+    def initialize(user, timestamp, message)
+      super :deletion, user, message.timestamp, 1
+      self.original_message = message
+      self.deletion_timestamp = timestamp
     end
   end
 

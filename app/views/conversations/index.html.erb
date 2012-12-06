@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="span2 offset5">
+    <a class="btn full-column" href="<%= new_conversation_path %>">
+      Start a new conversation
+    </a>
+  </div>
+</div>
+<div class="row">
+  <div class="span12">
+    <ol class="conversation-list">
+      <% @conversations.each do |conversation| %>
+        <li>
+          <a href="<%= conversation_path(conversation.id) %>">
+            <%= conversation.subject %>
+          </a>
+        </li>
+      <% end %>
+    </ol>
+  </div>
+</div>

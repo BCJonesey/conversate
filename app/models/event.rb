@@ -4,13 +4,17 @@ class Event < ActiveRecord::Base
 
   attr_accessible :conversation_id, :user_id, :event_type, :data
 
-  before_save do |event|
-    event.data = event.json.to_json
+  validates_presence_of :conversation_id
+  validates_presence_of :user_id
+  validates_presence_of :event_type
+  validates :event_type, :inclusion => { :in => %w(message deletion retitle)}
+
+  after_initialize do |event|
+    event.json = JSON::load data || {}
   end
 
-  def initialize(params={})
-    super params
-    @json = JSON::load data
+  before_save do |event|
+    event.data = event.json.to_json
   end
 
   # Public: Access and modify data stored as json in the event record. This will
@@ -33,20 +37,20 @@ class Event < ActiveRecord::Base
   #   e.msg_id
   #   # => ArgumentError
   def method_missing(meth, *args, &block)
-    meth = meth.to_s
-    setter = meth.end_with? '='
-    meth = meth[0...-1] if setter
-    if @json != nil && @json.has_key?(meth)
+    name = meth.to_s
+    setter = name.end_with? '='
+    name = name[0...-1] if setter
+    if @json != nil && @json.has_key?(name)
       if setter
-        @json[meth] = args[0]
+        @json[name] = args[0]
       else
-        @json[meth]
+        @json[name]
       end
     else
-      super
+      super meth, args, block
     end
   end
 
   protected
-  attr_reader :json
+  attr_accessor :json
 end

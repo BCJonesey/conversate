@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save
       login @user.email, params[:user][:password], false
-      redirect_to root_url
+      redirect_to conversations_url
     else
       render :new
     end
