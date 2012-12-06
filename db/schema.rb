@@ -14,14 +14,14 @@
 ActiveRecord::Schema.define(:version => 20121127201032) do
 
   create_table "conversations", :force => true do |t|
+    t.string   "subject"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.string   "subject"
   end
 
   create_table "conversations_users", :id => false, :force => true do |t|
     t.integer "conversation_id"
-    t.integer "part_id"
+    t.integer "user_id"
   end
 
   create_table "events", :force => true do |t|
