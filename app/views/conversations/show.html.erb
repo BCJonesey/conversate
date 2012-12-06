@@ -40,3 +40,12 @@
     <% end %>
   </div>
 </div>
+<div class="row">
+  <div class="span4 offset4">
+    <%= form_tag write_message_path, :method => 'put' do %>
+      <%= label_tag :text %>
+      <%= text_area_tag :text %>
+      <%= submit_tag "Write message", :class => 'btn' %>
+    <% end %>
+  </div>
+</div>

@@ -62,4 +62,17 @@ class ConversationsController < ApplicationController
     title_event.save
     render :show
   end
+
+  def write
+    @conversation = Conversation.find(params[:id])
+    render :show and return unless params[:text]
+
+    message_event = Event.new({:conversation_id => @conversation.id,
+                               :user_id => current_user.id,
+                               :event_type => 'message',
+                               :data => {:message_id => @conversation.next_message_id,
+                                         :text => params[:text]}.to_json})
+    message_event.save
+    render :show
+  end
 end

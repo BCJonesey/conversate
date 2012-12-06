@@ -6,6 +6,7 @@ Conversate::Application.routes.draw do
   get 'session/logout' => 'sessions#destroy', :as => 'destroy_sessions'
   resources :conversations, :only => [:index, :new, :create, :show]
   put 'conversations/:id/retitle' => 'conversations#retitle', :as => 'retitle_conversation'
+  put 'conversations/:id/write' => 'conversations#write', :as => 'write_message'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
