@@ -13,7 +13,7 @@
           </span>
           <span class="text">
             <%= piece.text %>
-          </span
+          </span>
         </div>
       <% elsif piece.type == :deletion %>
         <div class="conversation-piece conversation-piece-deletion">
@@ -31,3 +31,12 @@
     </div>
   </div>
 <% end %>
+<div class="row">
+  <div class="span4 offset4">
+    <%= form_tag retitle_conversation_path, :method => 'put' do %>
+      <%= label_tag :subject %>
+      <%= text_field_tag :subject %>
+      <%= submit_tag "Set subject", :class => 'btn' %>
+    <% end %>
+  </div>
+</div>

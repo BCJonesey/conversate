@@ -49,7 +49,17 @@ class ConversationsController < ApplicationController
     @conversation = Conversation.find(params[:id])
   end
 
-  def update
-    raise "Not implemented"
+  def retitle
+    @conversation = Conversation.find(params[:id])
+    render :show and return unless params[:subject]
+
+    @conversation.subject = params[:subject]
+    title_event = Event.new({:conversation_id => @conversation.id,
+                             :user_id => current_user.id,
+                             :event_type => 'retitle',
+                             :data => {:title => params[:subject]}.to_json})
+    @conversation.save
+    title_event.save
+    render :show
   end
 end
