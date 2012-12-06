@@ -75,4 +75,16 @@ class ConversationsController < ApplicationController
     message_event.save
     render :show
   end
+
+  def delete
+    @conversation = Conversation.find(params[:id])
+    render :show and return unless params[:message]
+
+    delete_event = Event.new({:conversation_id => @conversation.id,
+                              :user_id => current_user.id,
+                              :event_type => 'deletion',
+                              :data => {:message_id => params[:message].to_i}.to_json})
+    delete_event.save
+    render :show
+  end
 end

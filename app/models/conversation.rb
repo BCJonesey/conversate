@@ -16,7 +16,7 @@ class Conversation < ActiveRecord::Base
   # conversation or sidebar, plus notices of any non-text events, such as
   # retitling the conversation or changing who has access to the conversation.
   #
-  # Consecutive conversation pieces that represent the same type of event -
+  # In the future, consecutive conversation pieces that represent the same type of event -
   # deleting, sidebaring, etc (with the exception of "wrote" events) will be
   # collapsed into a single conversation piece.
   #
@@ -31,7 +31,8 @@ class Conversation < ActiveRecord::Base
         elsif event.event_type == 'retitle'
           conversation_pieces.append ConversationPiece.set_title(event.user, event.created_at, event.title)
         elsif event.event_type == 'deletion'
-          conversation_pieces.select {|cp| cp.type == :message && cp.message_id == event.message_id }.first.delete(event.user, event.created_at)
+          index = conversation_pieces.index { |cp| cp.type == :message && cp.message_id == event.message_id }
+          conversation_pieces[index] = conversation_pieces[index].delete(event.user, event.created_at)
         end
       rescue
         raise "Error with #{event.data}: #{$!} (id: #{event.id})"

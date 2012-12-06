@@ -14,6 +14,10 @@
           <span class="text">
             <%= piece.text %>
           </span>
+          <%= form_tag delete_message_path(@conversation.id), :method => 'put' do %>
+            <%= hidden_field_tag :message, piece.message_id %>
+            <%= submit_tag 'delete', :class => 'btn' %>
+          <% end %>
         </div>
       <% elsif piece.type == :deletion %>
         <div class="conversation-piece conversation-piece-deletion">
