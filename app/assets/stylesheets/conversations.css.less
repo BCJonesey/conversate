@@ -1,15 +1,24 @@
 @import "twitter/bootstrap";
 
+@messageBorderWidth: 1px;
+@messagePadding: 5px;
+
 .conversation-piece-message {
   background-color: @grayLighter;
-  border: 1px solid @grayLight;
-  margin: 5px 0;
-  padding: 5px;
+  border: @messageBorderWidth solid @grayLight;
+  margin: @messagePadding 0;
+  padding: @messagePadding;
+  position: relative;
+  .delete-message {
+    position: absolute;
+    top: @messagePadding;
+    right: @messagePadding;
+  }
 }
 
 .conversation-piece-retitle,
 .conversation-piece-deletion {
-  margin: 0 6px;
+  margin: 0 (@messagePadding + @messageBorderWidth);
 }
 
 .conversation-piece-retitle,

@@ -12,10 +12,16 @@
             <%= piece.user.name %> wrote at <%= piece.timestamp %>:
           </span>
           <span class="text"><%= piece.text %></span>
-          <%= form_tag delete_message_path(@conversation.id), :method => 'put' do %>
+          <%= form_tag delete_message_path(@conversation.id),
+                       :method => 'put',
+                       :id => "form-delete-#{piece.message_id}" do %>
             <%= hidden_field_tag :message, piece.message_id %>
-            <%= submit_tag 'delete', :class => 'btn' %>
           <% end %>
+          <div class="delete-message" data-delete-target="form-delete-<%= piece.message_id %>">
+            <a href="#">
+              <i class="icon-trash"></i>
+            </a>
+          </div>
         </div>
       <% elsif piece.type == :deletion %>
         <div class="conversation-piece conversation-piece-deletion">
