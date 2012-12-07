@@ -1,18 +1,24 @@
 @import "twitter/bootstrap";
 
-@messageBorderWidth: 1px;
-@messagePadding: 5px;
+@conversationBorderWidth: 1px;
+@conversationSpacing: 5px;
+
+.conversation-title {
+  border: @conversationBorderWidth solid @gray;
+  background-color: @grayLight;
+  margin-bottom: @conversationSpacing * 3;
+}
 
 .conversation-piece-message {
-  background-color: @grayLighter;
-  border: @messageBorderWidth solid @grayLight;
-  margin: @messagePadding 0;
-  padding: @messagePadding;
+  background-color: @white;
+  border: @conversationBorderWidth solid @grayLight;
+  margin: @conversationSpacing 0;
+  padding: @conversationSpacing;
   position: relative;
   .delete-message {
     position: absolute;
-    top: @messagePadding;
-    right: @messagePadding;
+    top: @conversationSpacing;
+    right: @conversationSpacing;
   }
   form {
     margin-bottom: 0;
@@ -21,7 +27,7 @@
 
 .conversation-piece-retitle,
 .conversation-piece-deletion {
-  margin: 0 (@messagePadding + @messageBorderWidth);
+  margin: 0 (@conversationSpacing + @conversationBorderWidth);
 }
 
 .conversation-piece-retitle,
@@ -29,7 +35,7 @@
 .byline {
   font-size: .9em;
   font-style: italic;
-  color: #888;
+  color: @grayLight;
 }
 
 .conversation-piece-retitle {
