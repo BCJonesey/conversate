@@ -4,9 +4,8 @@ class Conversation < ActiveRecord::Base
 
   attr_accessible :subject, :users
 
-  def initialize(params={})
-    super params
-    self.subject = default_conversation_title(self.users) unless self.subject
+  after_initialize do |convo|
+    convo.subject = convo.default_conversation_title if convo.subject.empty?
   end
 
   # Public: Stitch together the events on a conversation into "conversation
@@ -49,12 +48,12 @@ class Conversation < ActiveRecord::Base
     (Random::rand * 10000).to_i
   end
 
-  private
+  protected
   # Internal: Creates a default conversation title based on who the participants
   # are.
   #
-  # Returns "Conversation with <name>, <name>" for each user.
-  def default_conversation_title(users)
-    "Conversation with #{users.map {|u| u.name}.join(', ')}"
+  # Returns "A conversation with <name>, <name>" for each user.
+  def default_conversation_title()
+    "A conversation with #{self.users.map {|u| u.name}.join(', ')}"
   end
 end
