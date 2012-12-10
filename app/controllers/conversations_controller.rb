@@ -14,14 +14,14 @@ class ConversationsController < ApplicationController
     if params[:users].length > 0
       users = User.find params[:users]
       conversation = Conversation.new({:users => (users << current_user).uniq,
-                                       :subject => params[:subject]})
+                                       :title => params[:title]})
       @conversation_errors << 'Failed to save conversation' unless conversation.save
 
-      if params[:subject]
+      if params[:title]
         title_event = Event.new({:conversation_id => conversation.id,
                                  :user_id => current_user.id,
                                  :event_type => 'retitle',
-                                 :data => {:title => conversation.subject}.to_json})
+                                 :data => {:title => conversation.title}.to_json})
         @conversation_errors << 'Failed to save title event' unless title_event.save
       end
 
@@ -51,13 +51,13 @@ class ConversationsController < ApplicationController
 
   def retitle
     @conversation = Conversation.find(params[:id])
-    render :show and return unless params[:subject]
+    render :show and return unless params[:title]
 
-    @conversation.subject = params[:subject]
+    @conversation.title = params[:title]
     title_event = Event.new({:conversation_id => @conversation.id,
                              :user_id => current_user.id,
                              :event_type => 'retitle',
-                             :data => {:title => params[:subject]}.to_json})
+                             :data => {:title => params[:title]}.to_json})
     @conversation.save
     title_event.save
     render :show

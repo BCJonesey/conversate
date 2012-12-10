@@ -2,10 +2,10 @@ class Conversation < ActiveRecord::Base
   has_and_belongs_to_many :users
   has_many :events, :inverse_of => :conversation
 
-  attr_accessible :subject, :users
+  attr_accessible :title, :users
 
   after_initialize do |convo|
-    convo.subject = convo.default_conversation_title if convo.subject.empty?
+    convo.title = convo.default_conversation_title if convo.title.empty?
   end
 
   # Public: Stitch together the events on a conversation into "conversation

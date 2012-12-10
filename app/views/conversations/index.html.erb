@@ -11,7 +11,7 @@
       <% @conversations.each do |conversation| %>
         <li>
           <a href="<%= conversation_path(conversation.id) %>">
-            <%= conversation.subject %>
+            <%= conversation.title %>
           </a>
         </li>
       <% end %>

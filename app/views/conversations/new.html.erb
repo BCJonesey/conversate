@@ -18,8 +18,8 @@
           <% end %>
         </ul>
       <% end %>
-      <%= label_tag :subject %>
-      <%= text_field_tag :subject, params[:subject] %>
+      <%= label_tag :title %>
+      <%= text_field_tag :title, params[:title] %>
       <%= label_tag :users %>
       <%= select_tag :users, address_book_options(current_user),
                      :multiple => true %>
