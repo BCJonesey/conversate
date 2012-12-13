@@ -6,12 +6,32 @@ $(function() {
   var horses = $(".horse");
   var index = 0;
   var next = function() {
-    $(horses[index]).removeClass("riding");
-    index = (index + 1) % horses.length;
-    $(horses[index]).addClass("riding");
-    carousel.css("width", $(horses[index]).innerWidth() + 120 + "px");
+    var horse = $(horses[index]);
+    horse.fadeIn(1000);
+    var pic = horse.find("img");
+    if (pic.innerWidth() < horse.innerWidth()) {
+      pic.css("width", horse.innerWidth());
+    }
+    var dx = pic.innerWidth() - horse.innerWidth();
+    var dy = pic.innerHeight() - horse.innerHeight();
+    var startX = Math.random() * dx;
+    var endX = Math.random() * dx;
+    var startY = Math.random() * dy;
+    var endY = Math.random() * dy;
+
+    pic.css("left", "-" + startX + "px");
+    pic.css("top", "-" + startY + "px");
+
+    pic.animate({
+      top: -endY,
+      left: -endX
+    }, 10000, "linear")
+    setTimeout(function() {
+      index = (index + 1) % horses.length;
+      setTimeout(next, 0);
+      horse.fadeOut(1000);
+    }, 9000)
   };
 
   next();
-  setInterval(next, 30000);
 })
