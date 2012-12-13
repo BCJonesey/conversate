@@ -1,6 +1,7 @@
 // Place all the styles related to all pages here.
 // They will automatically be included in application.css.
 // You can use Less here: http://lesscss.org/
+@import "mixins.css.less";
 @import "variables.css.less";
 
 * {
@@ -9,5 +10,14 @@
 
 body {
   background-color: @backgroundColor;
+  color: @textColor;
+  .body-font;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  .title-font;
+}
+
+a {
   color: @textColor;
 }

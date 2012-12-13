@@ -1,0 +1,32 @@
+@import "mixins.css.less";
+@import "variables.css.less";
+
+form {
+  label, input {
+    display: block;
+  }
+  label {
+    padding-left: .5em;
+  }
+  input[type="text"], input[type="email"], input[type="password"] {
+    width: 100%;
+    padding: .5em;
+    border: 1px solid darken(@backgroundColor, 20%);
+    background-color: lighten(@backgroundColor, 20%);
+    color: @textColor;
+    font-size: 100%;
+  }
+  input[type="submit"] {
+    margin: 1em auto 0 auto;
+    padding: .5em 1em;
+    font-size: 100%;
+    border: 1px solid darken(@backgroundColor, 20%);
+    color: @textColor;
+    background-color: @darkBlue;
+    .transition(background-color, 0.25s);
+    &:hover {
+      background-color: @lightBlue;
+      .transition(background-color, 0.25s);
+    }
+  }
+}
