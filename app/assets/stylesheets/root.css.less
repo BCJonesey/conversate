@@ -1,28 +1,13 @@
 // Place all the styles related to all pages here.
 // They will automatically be included in application.css.
 // You can use Less here: http://lesscss.org/
+@import "variables.css.less";
 
 * {
   box-sizing: border-box;
 }
 
 body {
-  background-color: #333;
-  color: #ccc;
-}
-
-h1 {
-  text-align: center;
-}
-
-input[type='submit'] {
-  display: block;
-}
-
-.full-column {
-  width: 100%;
-}
-
-.navbar, .navbar-inner {
-  border-radius: 0;
+  background-color: @backgroundColor;
+  color: @textColor;
 }

@@ -1,42 +1,26 @@
+@import "mixins.css.less";
+@import "variables.css.less";
+
 .carousel {
-  width: 70em;
-  height: 40em;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -20em;
-  margin-left: -35em;
+  .absolutely-centered(@soloHeroWidth, @soloHeroHeight);
 
   .horse {
     display: none;
-    width: 70em;
-    height: 40em;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -20em;
-    margin-left: -35em;
+    .absolutely-centered(@soloHeroWidth, @soloHeroHeight);
     overflow: hidden;
 
     img {
-      max-width: none;
-      max-height: none;
       position: relative;
     }
   }
 }
 
 .message {
-  position: absolute;
   font-size: 10em;
-  font-family: Arvo, serif;
-  height: 4em;
-  width: 2em;
-  left: 50%;
-  top: 50%;
-  margin-left: -1em;
+  .title-font;
+  .absolutely-centered(2em, 4em);
+  // Override top margin because of text quirks.
   margin-top: -1.6em;
-  z-index: 2;
   word-break: break-word;
   line-height: .8;
   text-align: center;
@@ -44,13 +28,11 @@
   a {
     color: transparent;
     text-decoration: none;
-    -webkit-transition-property: color;
-    -webkit-transition-duration: 0.5s;
+    .transition(color);
   }
 
   &:hover a {
     color: rgba(0, 0, 0, .5);
-    -webkit-transition-property: color;
-    -webkit-transition-duration: 0.5s;
+    .transition(color);
   }
 }

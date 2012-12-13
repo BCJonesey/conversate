@@ -1,0 +1,24 @@
+.title-font {
+  font-family: Arvo, serif;
+}
+
+.body-font {
+  font-family: sans-serif;
+}
+
+.absolutely-centered(@width, @height) {
+  position: absolute;
+  height: @height;
+  width: @width;
+  top: 50%;
+  left: 50%;
+  margin-top: -(@height / 2);
+  margin-left: -(@width / 2);
+}
+
+.transition(@property, @duration: 0.5s, @function: linear, @delay: 0) {
+  -webkit-transition: @property @duration @function @delay;
+  -moz-transition: @property @duration @function @delay;
+  -o-transition: @property @duration @function @delay;
+  transition: @property @duration @function @delay;
+}
