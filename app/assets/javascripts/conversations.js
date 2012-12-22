@@ -7,7 +7,21 @@
       titleEditor.focus();
     });
     titleEditor.on("blur", function() {
-      title.find("form").submit();
+      if (titleEditor.val() == title.find(".text").text()) {
+        title.removeClass("editing");
+      }
+      else {
+        title.find("form").submit();
+      }
     });
+    titleEditor.on("keydown", function(e) {
+      if (e.keyCode == 13) { // Enter
+        if (titleEditor.val() == title.find(".text").text()) {
+          e.stopPropagation();
+          e.preventDefault();
+          title.removeClass("editing");
+        }
+      }
+    })
   })
 })();
