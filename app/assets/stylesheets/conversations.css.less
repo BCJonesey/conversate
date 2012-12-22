@@ -25,7 +25,7 @@
     .transition(background-color, 1.2s);
     border: 2px solid transparent;
     border-left: none;
-    box-shadow: inset 0px 0px 0px 4px lighten(@backgroundColor, 10%);
+    box-shadow: inset 0px 0px 0px 4px @scrollbarColor;
     .transition(box-shadow, 1s);
   }
 
@@ -36,7 +36,7 @@
 
   ::-webkit-scrollbar-thumb:hover {
     .transition(background-color, 1.2s);
-    box-shadow: inset 0px 0px 0px 4px lighten(@backgroundColor, 15%);
+    box-shadow: inset 0px 0px 0px 4px @scrollbarHoverColor;
   }
 
   #column-navigation, #column-list, #column-conversation, .divider-vertical {
