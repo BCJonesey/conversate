@@ -35,10 +35,15 @@ a {
 }
 
 .container {
-  margin: 10px auto;
+  margin: auto;
   .usual-border(all);
-  width: @navigationWidth + @listWidth + @conversationWidth + (4 * @dividerWidth);
-  height: @contentHeight + @headerHeight + 1;
+  @containerWidth: @navigationWidth + @listWidth + @conversationWidth + (4 * @dividerWidth);
+  width: @containerWidth;
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 50%;
+  margin-left: -(@containerWidth / 2);
 
   .header {
     height: @headerHeight;

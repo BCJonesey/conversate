@@ -41,16 +41,26 @@
 
   #column-navigation, #column-list, #column-conversation, .divider-vertical {
     float: left;
-    height: @contentHeight;
+    position: absolute;
+    top: @headerHeight;
+    bottom: 0;
   }
 
   #column-navigation {
     width: @navigationWidth;
+    &+ .divider-vertical {
+      left: @navigationWidth;
+    }
   }
 
   #column-list {
     width: @listWidth;
+    left: @navigationWidth + @dividerWidth;
     overflow-y: scroll;
+
+    &+ .divider-vertical {
+      left: @navigationWidth + @listWidth + @dividerWidth;
+    }
 
     .list-item {
       overflow: hidden;
@@ -92,6 +102,7 @@
 
   #column-conversation {
     width: @conversationWidth;
+    left: @navigationWidth + @listWidth + (2 * @dividerWidth);
     border-right: none;
 
     .title {
@@ -116,10 +127,14 @@
 
     #thread {
       margin-top: 0;
-      height: 370px;
       background-color: @backgroundDarkColor;
       overflow-y: scroll;
       border: none;
+      position: absolute;
+      top: @headerHeight;
+      bottom: @composeHeight;
+      left: 0;
+      right: 0;
 
       .conversation-piece {
         .message-info {
@@ -145,11 +160,13 @@
     }
 
     #compose {
-      height: 200px;
-      border: none;
+      height: @composeHeight;
       .usual-border(top);
-      .usual-border(bottom);
       background-color: @backgroundDarkerColor;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
 
       textarea {
         width: 100%;
