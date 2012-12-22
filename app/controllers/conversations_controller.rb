@@ -43,7 +43,9 @@ class ConversationsController < ApplicationController
 
   def retitle
     conversation = Conversation.find(params[:id])
-    render_conversation_view(conversation) and return if params[:title].empty?
+    if params[:title].empty? || params[:title] == conversation.title
+      render_conversation_view(conversation) and return
+    end
 
     conversation.title = params[:title]
     title_event = Event.new({:conversation_id => conversation.id,

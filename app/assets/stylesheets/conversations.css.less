@@ -119,6 +119,32 @@
       font-size: .9em;
       padding-top: 4px;
       overflow: hidden;
+
+      form {
+        display: none;
+
+        input[type="text"] {
+          .title-font;
+          font-size: .9em;
+          padding: 0;
+          text-align: center;
+          outline: none;
+        }
+
+        input[type="submit"] {
+          display: none;
+        }
+      }
+
+      &.editing {
+        .text {
+          display: none;
+        }
+
+        form {
+          display: block;
+        }
+      }
     }
 
     #thread, #compose {

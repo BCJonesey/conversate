@@ -19,13 +19,23 @@
   </div>
   <div id="column-conversation">
     <% if @opened_conversation %>
-      <div class="title"><%= @opened_conversation.title %></div>
+      <div class="title">
+        <span class="text"><%= @opened_conversation.title %></span>
+        <%= form_tag retitle_conversation_path, :method => 'put' do %>
+          <%= text_field_tag :title, @opened_conversation.title %>
+          <%= submit_tag "Retitle" %>
+        <% end %>
+      </div>
       <div id="thread">
         <% @opened_conversation.pieces.each do |piece| %>
           <% if piece.type == :message %>
             <div class="conversation-piece message">
               <div class="message-info"><%= piece.user.name %></div>
               <span class="message-text"><%= piece.text %></span>
+            </div>
+          <% elsif piece.type == :retitle %>
+            <div class="conversation-piece retitle">
+              <%= piece.user.name %> titled the conversation "<%= piece.title %>"
             </div>
           <% end %>
         <% end %>
