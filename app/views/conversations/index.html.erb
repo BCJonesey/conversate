@@ -1,20 +1,43 @@
-<div class="row">
-  <div class="span2 offset5">
-    <a class="btn full-column" href="<%= new_conversation_path %>">
-      Start a new conversation
-    </a>
+<div id="conversation-view">
+  <div id="column-navigation">
   </div>
-</div>
-<div class="row">
-  <div class="span12">
-    <ol class="conversation-list">
-      <% @conversations.each do |conversation| %>
-        <li>
-          <a href="<%= conversation_path(conversation.id) %>">
-            <%= conversation.title %>
-          </a>
-        </li>
-      <% end %>
-    </ol>
+  <div class="divider-vertical column-v">
+  </div>
+  <div id="column-list">
+    <% @conversations.each do |conversation| %>
+      <div class="list-item<%= ' highlighted' if conversation == @opened_conversation %>">
+        <a href="<%= conversation_path conversation.id %>">
+          <div class="list-title"><%= conversation.title %></div>
+          <!-- TODO: add conversation previews. -->
+          <div class="list-preview">Preview unavailable</div>
+        </a>
+      </div>
+      <div class="list-divider"></div>
+    <% end %>
+  </div>
+  <div class="divider-vertical column-v">
+  </div>
+  <div id="column-conversation">
+    <% if @opened_conversation %>
+      <div class="title"><%= @opened_conversation.title %></div>
+      <div id="thread">
+        <% @opened_conversation.pieces.each do |piece| %>
+          <% if piece.type == :message %>
+            <div class="conversation-piece message">
+              <div class="message-info"><%= piece.user.name %></div>
+              <span class="message-text"><%= piece.text %></span>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      <div id="compose">
+        <%= form_tag write_message_path, :method => 'put' do %>
+          <%= text_area_tag :text %>
+          <div class="action-bar">
+            <%= submit_tag "Send", :class => 'button pull-right' %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </div>

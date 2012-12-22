@@ -6,11 +6,15 @@
 
 * {
   box-sizing: border-box;
+  -moz-box-sizing: border-box;
 }
 
 body {
   background-color: @backgroundColor;
   color: @textColor;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
   .body-font;
 }
 
@@ -20,4 +24,26 @@ h1, h2, h3, h4, h5, h6 {
 
 a {
   color: @textColor;
+}
+
+.pull-right {
+  float: right;
+}
+
+.pull-left {
+  float: left;
+}
+
+.container {
+  margin: 10px auto;
+  border: 1px solid lighten(@backgroundColor, 20%);
+  width: @navigationWidth + @listWidth + @conversationWidth + (4 * @dividerWidth);
+  height: @contentHeight + @headerHeight + 1;
+
+  .header {
+    height: @headerHeight;
+    border-bottom: 1px solid lighten(@backgroundColor, 20%);
+    background-color: darken(@backgroundColor, 10%);
+    padding: 5px;
+  }
 }
