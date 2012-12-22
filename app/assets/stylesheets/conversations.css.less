@@ -15,7 +15,7 @@
   ::-webkit-scrollbar-track:horizontal {
     background-color: transparent;
     border-left: none;
-    border-top: 1px solid lighten(@backgroundColor, 20%);
+    .usual-border(top);
     margin-left: -1px;
     margin-right: -1px;
   }
@@ -31,7 +31,7 @@
 
   ::-webkit-scrollbar-thumb:horizontal {
     border-bottom: none;
-    border-right: 1px solid lighten(@backgroundColor, 20%);
+    .usual-border(right);
   }
 
   ::-webkit-scrollbar-thumb:hover {
@@ -99,7 +99,8 @@
       position: relative;
       margin: 0;
       height: @headerHeight;
-      border: 0 solid lighten(@backgroundColor, 20%);
+      .usual-border(all);
+      border-width: 0;
       border-bottom-width: 1px;
       .title-font;
       padding: 2px 5px;
@@ -146,15 +147,15 @@
     #compose {
       height: 200px;
       border: none;
-      border-top: 1px solid lighten(@backgroundColor, 20%);
-      border-bottom: 1px solid lighten(@backgroundColor, 20%);
+      .usual-border(top);
+      .usual-border(bottom);
       background-color: darken(@backgroundColor, 5%);
 
       textarea {
         width: 100%;
         height: 157px;
         resize: none;
-        border-color: lighten(@backgroundColor, 20%);
+        border-color: @borderColor;
         color: @textColor;
         outline: none;
         .body-font;
@@ -177,7 +178,7 @@
           .body-font;
 
           &:hover {
-            border-color: lighten(@backgroundColor, 20%);
+            border-color: @borderColor;
             background-color: @backgroundColor;
             cursor: pointer;
           }
@@ -192,6 +193,6 @@
 
   .divider-vertical {
     width: @dividerWidth;
-    background-color: lighten(@backgroundColor, 20%);
+    background-color: @borderColor;
   }
 }

@@ -1,9 +1,32 @@
+@import "variables.css.less";
+
 .title-font {
   font-family: Oswald, sans-serif;
 }
 
 .body-font {
   font-family: Lato, sans-serif;
+}
+
+@usualBorderDefinition: 1px solid @borderColor;
+.usual-border(all) {
+  border: @usualBorderDefinition;
+}
+
+.usual-border(top) {
+  border-top: @usualBorderDefinition;
+}
+
+.usual-border(bottom) {
+  border-bottom: @usualBorderDefinition;
+}
+
+.usual-border(left) {
+  border-left: @usualBorderDefinition;
+}
+
+.usual-border(right) {
+  border-right: @usualBorderDefinition;
 }
 
 .absolutely-centered(@width, @height) {
