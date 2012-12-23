@@ -187,16 +187,22 @@
         &.active {
           border-color: @lightBlue;
         }
+        &.retitle, &.deletion {
+          font-style: italic;
+        }
       }
     }
 
     .conversation-piece, textarea {
-      min-height: 40px;
-      background-color: @backgroundColor;
-      border: 1px solid @borderDarkColor;
       padding: 2px 5px;
       font-size: .9em;
       line-height: 1.5em;
+    }
+
+    .conversation-piece.message, textarea {
+      min-height: 40px;
+      background-color: @backgroundColor;
+      border: 1px solid @borderDarkColor;
     }
 
     #compose {
