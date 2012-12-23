@@ -36,10 +36,10 @@
       }
 
       target.addClass("active");
-      target.find(".message-actions").slideDown(500, function() {
+      target.find(".message-actions").slideDown(250, function() {
         $(window).on("click", function() {
           target.removeClass("active");
-          target.find(".message-actions").slideUp();
+          target.find(".message-actions").slideUp(250);
           $(window).off("click");
         });
       });
