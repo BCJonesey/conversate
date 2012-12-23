@@ -45,3 +45,25 @@
   -o-transition: @property @duration @function @delay;
   transition: @property @duration @function @delay;
 }
+
+.text-button() {
+  border: 1px solid transparent;
+  padding: 3px 15px;
+  margin-top: 0;
+  font-size: 1em;
+  display: inline-block;
+  box-shadow: none;
+  background-color: transparent;
+  color: @textColor;
+  .body-font;
+
+  &:hover {
+    border-color: @borderColor;
+    background-color: @backgroundColor;
+    cursor: pointer;
+  }
+
+  &:active {
+    background-color: @lightBlue;
+  }
+}

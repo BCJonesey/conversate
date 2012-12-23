@@ -22,6 +22,27 @@
           title.removeClass("editing");
         }
       }
-    })
-  })
+    });
+
+    $(".conversation-piece.message").on("click", function(e) {
+      var target = $(e.target);
+      if (!target.hasClass("conversation-piece")) {
+        target = target.parents(".conversation-piece").first();
+      }
+
+      if (target.hasClass("active")) {
+        e.stopPropagation();
+        return;
+      }
+
+      target.addClass("active");
+      target.find(".message-actions").slideDown(500, function() {
+        $(window).on("click", function() {
+          target.removeClass("active");
+          target.find(".message-actions").slideUp();
+          $(window).off("click");
+        });
+      });
+    });
+  });
 })();

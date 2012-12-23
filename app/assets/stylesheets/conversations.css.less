@@ -170,8 +170,22 @@
         .message-text {
           white-space: pre-wrap;
         }
+        .message-actions {
+          display: none;
+          margin: 5px;
+          margin-bottom: none;
+          padding-top: 5px;
+          border-top: 1px solid @borderDarkColor;
+
+          input[type='submit'] {
+            .text-button;
+          }
+        }
         &+ .conversation-piece {
           margin-top: 5px;
+        }
+        &.active {
+          border-color: @lightBlue;
         }
       }
     }
@@ -209,26 +223,8 @@
       }
 
       .action-bar {
-        .button {
-          border: 1px solid transparent;
-          padding: 3px 15px;
-          margin-top: 0;
-          font-size: 1em;
-          display: inline-block;
-          box-shadow: none;
-          background-color: transparent;
-          color: @textColor;
-          .body-font;
-
-          &:hover {
-            border-color: @borderColor;
-            background-color: @backgroundColor;
-            cursor: pointer;
-          }
-
-          &:active {
-            background-color: @lightBlue;
-          }
+        input[type='submit'] {
+          .text-button;
         }
       }
     }
