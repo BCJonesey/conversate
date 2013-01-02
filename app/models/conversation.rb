@@ -1,5 +1,6 @@
 class Conversation < ActiveRecord::Base
-  has_and_belongs_to_many :users
+  has_many :reading_logs
+  has_many :users, :through => :reading_logs
   has_many :events, :inverse_of => :conversation
 
   attr_accessible :title, :users
