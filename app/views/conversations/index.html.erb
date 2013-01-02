@@ -5,7 +5,7 @@
   </div>
   <div id="column-list">
     <% @conversations.each do |conversation| %>
-      <div class="list-item<%= ' highlighted' if conversation == @opened_conversation %>">
+      <div class="<%= list_item_classes(conversation, @opened_conversation, current_user) %>">
         <a href="<%= conversation_path conversation.id %>">
           <div class="list-title"><%= conversation.title %></div>
           <!-- TODO: add conversation previews. -->
