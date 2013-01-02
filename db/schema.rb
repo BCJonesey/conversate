@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130102224334) do
+ActiveRecord::Schema.define(:version => 20130102234717) do
 
   create_table "conversations", :force => true do |t|
     t.string   "title"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(:version => 20130102224334) do
     t.datetime "updated_at",      :null => false
   end
 
-  create_table "reading_logs", :id => false, :force => true do |t|
+  create_table "reading_logs", :force => true do |t|
     t.integer "conversation_id"
     t.integer "user_id"
     t.integer "last_read_event"
