@@ -15,4 +15,12 @@ class User < ActiveRecord::Base
   def name
     full_name || email
   end
+
+  def mark_as_read(conversation)
+    if conversation.events.length > 0
+      reading_log = conversation.reading_logs.where({:user_id => self.id}).first
+      reading_log.last_read_event = conversation.events.order('created_at DESC').first.id
+      reading_log.save!
+    end
+  end
 end

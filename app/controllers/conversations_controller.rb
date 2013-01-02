@@ -39,11 +39,7 @@ class ConversationsController < ApplicationController
 
   def show
     conversation = Conversation.find(params[:id])
-    if conversation.events.length > 0
-      reading_log = conversation.reading_logs.where({:user_id => current_user.id}).first
-      reading_log.last_read_event = conversation.events.order('created_at DESC').first.id
-      reading_log.save!
-    end
+    current_user.mark_as_read(conversation)
 
     render_conversation_view conversation
   end
@@ -74,6 +70,7 @@ class ConversationsController < ApplicationController
                                :data => {:message_id => conversation.next_message_id,
                                          :text => params[:text]}.to_json})
     message_event.save
+    current_user.mark_as_read(conversation)
     render_conversation_view conversation
   end
 
