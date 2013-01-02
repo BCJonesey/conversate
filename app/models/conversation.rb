@@ -49,6 +49,16 @@ class Conversation < ActiveRecord::Base
     (Random::rand * 10000).to_i
   end
 
+  # Public: Determines if this conversation is unread for the given user.
+  # A conversation is unread if (and only if) it contains a message event more
+  # recent than the last event a user has seen.
+  def unread_for?(user)
+    last_read_event_id = Conversation.reading_logs.where({:user_id => user.id}).last_read_event
+    return true if last_read_event_id == nil
+
+    Conversation.events.where({:event_type => 'message'}).order('created_at DESC').first.created_at > Event.find(last_read_event_id).created_at
+  end
+
   protected
   # Internal: Creates a default conversation title based on who the participants
   # are.

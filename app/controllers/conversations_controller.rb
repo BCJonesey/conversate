@@ -38,7 +38,10 @@ class ConversationsController < ApplicationController
   end
 
   def show
-    render_conversation_view Conversation.find(params[:id])
+    conversation = Conversation.find(params[:id])
+    conversation.reading_logs.where({:user_id => current_user.id}).first.last_read_event = conversation.events.order('created_at DESC').first.id
+    conversation.save!
+    render_conversation_view conversation
   end
 
   def retitle
