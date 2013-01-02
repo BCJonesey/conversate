@@ -65,7 +65,7 @@
     .list-item {
       overflow: hidden;
       border: none;
-      padding: 2px 5px;
+      padding: 2px 5px 2px 10px;
 
       a, a:hover {
         text-decoration: none;
@@ -90,6 +90,11 @@
         background-color: @highlightColor;
         background-image: -webkit-linear-gradient(right, @backgroundColor 0%, @highlightColor 100%);
         background-image: linear-gradient(to left, @backgroundColor 0%, @highlightColor 100%);
+      }
+
+      &.unread {
+        border-left: 5px solid @unreadColor;
+        padding-left: 5px;
       }
     }
 
