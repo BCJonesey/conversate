@@ -19,7 +19,6 @@
   <div id="column-conversation">
     <% if @opened_conversation %>
       <div class="title">
-        <span class="text"><%= @opened_conversation.title %></span>
         <%= form_tag retitle_conversation_path, :method => 'put' do %>
           <%= text_field_tag :title, @opened_conversation.title %>
           <%= submit_tag "Retitle" %>

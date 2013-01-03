@@ -10,14 +10,14 @@ form {
   }
   input {
     font-size: 100%;
-    border: 1px solid darken(@backgroundColor, 20%);
+    border: 1px solid @inputBorderColor;
     color: @textColor;
     .body-font;
   }
   input[type="text"], input[type="email"], input[type="password"] {
     width: 100%;
     padding: .5em;
-    background-color: lighten(@backgroundColor, 20%);
+    background-color: @inputBackgroundColor;
   }
   input[type="submit"] {
     margin: 1em auto 0 auto;

@@ -124,7 +124,6 @@
       .usual-border(all);
       border-width: 0;
       border-bottom-width: 1px;
-      .title-font;
       padding: 2px 5px;
       text-align: center;
       font-size: .9em;
@@ -132,14 +131,20 @@
       overflow: hidden;
 
       form {
-        display: none;
-
         input[type="text"] {
           .title-font;
           font-size: .9em;
           padding: 0;
           text-align: center;
           outline: none;
+          background-color: transparent;
+          border-color: transparent;
+          margin-top: -1px;
+
+          &:focus {
+            background-color: @inputBackgroundColor;
+            border-color: @inputBorderColor;
+          }
         }
 
         input[type="submit"] {
@@ -148,13 +153,6 @@
       }
 
       &.editing {
-        .text {
-          display: none;
-        }
-
-        form {
-          display: block;
-        }
       }
     }
 
