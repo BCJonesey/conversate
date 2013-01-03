@@ -23,4 +23,8 @@ class User < ActiveRecord::Base
       reading_log.save!
     end
   end
+
+  def unread_count
+    self.conversations.keep_if {|c| c.unread_for?(self) }.length
+  end
 end
