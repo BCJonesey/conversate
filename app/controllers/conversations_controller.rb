@@ -33,6 +33,7 @@ class ConversationsController < ApplicationController
     if @conversation_errors.length > 0
       render :new
     else
+      current_user.mark_as_read conversation
       render_conversation_view conversation
     end
   end
