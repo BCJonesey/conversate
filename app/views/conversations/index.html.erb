@@ -8,8 +8,7 @@
       <div class="<%= list_item_classes(conversation, @opened_conversation, current_user) %>">
         <a href="<%= conversation_path conversation.id %>">
           <div class="list-title"><%= conversation.title %></div>
-          <!-- TODO: add conversation previews. -->
-          <div class="list-preview">Preview unavailable</div>
+          <div class="list-participants"><%= conversation.participants %></div>
         </a>
       </div>
       <div class="list-divider"></div>

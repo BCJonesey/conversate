@@ -41,6 +41,10 @@ class Conversation < ActiveRecord::Base
     conversation_pieces
   end
 
+  def participants
+    self.events.order('created_at DESC').collect {|u| u.user.name}.uniq.join(', ')
+  end
+
   # Public: Gets the next id for a message in this conversation.
   #
   # Note - at the moment this just generates a random number and we're ignoring
