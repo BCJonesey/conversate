@@ -47,23 +47,22 @@
 }
 
 .text-button() {
-  border: 1px solid transparent;
+  border: 1px solid @borderColor;
   padding: 3px 15px;
   margin-top: 0;
   font-size: 1em;
   display: inline-block;
   box-shadow: none;
-  background-color: transparent;
+  background-color: rgb(235,235,235);
   color: @textColor;
   .body-font;
 
   &:hover {
-    border-color: @borderColor;
-    background-color: @backgroundColor;
+    background-color: @highlightColor;
     cursor: pointer;
   }
 
   &:active {
-    background-color: @lightBlue;
+    background-color: rgb(205,205,205);
   }
 }
