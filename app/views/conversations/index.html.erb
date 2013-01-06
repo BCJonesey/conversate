@@ -51,11 +51,13 @@
           <% end %>
         <% end %>
       </div>
-      <div id="compose">
-        <%= form_tag write_message_path, :method => 'put' do %>
-          <%= text_area_tag :text %>
-          <div class="action-bar">
-            <%= submit_tag "Send", :class => 'pull-right' %>
+      <div id="compose" class="clearfix">
+          <div class="pull-right">
+            <%= submit_tag "Send" %>
+          </div>
+          <div class="fill-width">
+            <%= form_tag write_message_path, :class => 'text-button', :method => 'put' do %>
+              <%= text_area_tag :text %>
           </div>
         <% end %>
       </div>

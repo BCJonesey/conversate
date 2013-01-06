@@ -226,23 +226,25 @@
       right: 0;
 
       textarea {
+        box-sizing:border-box;
         width: 100%;
-        height: 157px;
+        height: 1em;
         resize: none;
         border-color: @borderColor;
         color: @textColor;
         outline: none;
+        display: block;
         .body-font;
 
         &:focus {
           outline: none;
         }
       }
-
-      .action-bar {
+      .fill-width{
+        overflow:hidden;
+      }
         input[type='submit'] {
           .text-button;
-        }
       }
     }
   }
