@@ -46,8 +46,9 @@
     });
 
     $("#compose textarea").on("keydown", function(e) {
-      if (e.keyCode == 13 && e.ctrlKey) { // Enter
+      if (e.keyCode == 13) { // Enter
         $("#compose form").submit();
+        return false;
       }
     })
   });
@@ -56,4 +57,5 @@
 $(document).ready(function(){
 		var s1 = $('#thread')[0].scrollHeight-$('#thread').height();	
 		$('#thread').scrollTop(s1);
+		$("#compose textarea").focus();
 });
