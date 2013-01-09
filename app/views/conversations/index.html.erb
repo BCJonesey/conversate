@@ -18,8 +18,10 @@
   </div>
   <div id="column-conversation">
     <% if @opened_conversation %>
-      <div class="title">
-        <%= form_tag retitle_conversation_path, :method => 'put' do %>
+      <div class="conversation-header">
+        <%= form_tag retitle_conversation_path,
+                     :method => 'put',
+                     :class => 'title' do %>
           <%= text_field_tag :title, @opened_conversation.title %>
           <%= submit_tag "Retitle" %>
         <% end %>

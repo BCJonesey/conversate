@@ -1,21 +1,21 @@
 (function() {
-  var setupTitleEditor = function() {
-    var title = $("#column-conversation .title");
-    var titleEditor = title.find("input[type='text']");
+  var setupConversationEditor = function() {
+    var header = $("#column-conversation .title");
+    var titleEditor = header.find("input[type='text']");
 
     // TODO: Once this is done via AJAX instead of page refresh, update
     // currentTitle on title change.
     var currentTitle = titleEditor.val();
-    title.on("click", function() {
-      title.addClass("editing");
+    header.on("click", function() {
+      header.addClass("editing");
       titleEditor.focus();
     });
     titleEditor.on("blur", function() {
       if (titleEditor.val() == currentTitle) {
-        title.removeClass("editing");
+        header.removeClass("editing");
       }
       else {
-        title.find("form").submit();
+        titleEditor.parents("form").submit();
       }
     });
     titleEditor.on("keydown", function(e) {
@@ -23,7 +23,7 @@
         if (titleEditor.val() == currentTitle) {
           e.stopPropagation();
           e.preventDefault();
-          title.removeClass("editing");
+          header.removeClass("editing");
         }
       }
     });
@@ -61,7 +61,7 @@
   };
 
   $(function() {
-    setupTitleEditor();
+    setupConversationEditor();
     setupMessageMenus();
     setupCompose();
   });
