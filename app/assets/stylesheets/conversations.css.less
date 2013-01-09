@@ -74,16 +74,15 @@
       .list-title {
         border: none;
         overflow: hidden;
-        .title-font;
-        font-size: .9em;
+        .title-font(1rem);
         white-space: nowrap;
         text-overflow: ellipsis;
       }
 
       .list-participants {
         border: none;
-        font-size: .7em;
-        color: darken(@textColor, 30%);
+        .body-font(0.8rem);
+        color: lighten(@textColor, 30%);
         overflow: hidden;
         text-overflow: ellipsis;
         // This is completely unportable, but I don't care
@@ -124,10 +123,9 @@
       .usual-border(all);
       border-width: 0;
       border-bottom-width: 1px;
-      .title-font;
+      .title-font();
       padding: 2px 5px;
       text-align: center;
-      font-size: .9em;
       padding-top: 10px;
       overflow: hidden;
 
@@ -188,9 +186,6 @@
           padding-top: 5px;
           border-top: 1px solid @borderDarkColor;
 
-          input[type='submit'] {
-            .text-button;
-          }
         }
         &+ .conversation-piece {
           margin-top: 5px;
