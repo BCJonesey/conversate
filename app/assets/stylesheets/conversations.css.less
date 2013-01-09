@@ -57,7 +57,7 @@
     width: @listWidth;
     left: @navigationWidth + @dividerWidth;
     overflow-y: scroll;
-
+    background-color:white;
     &+ .divider-vertical {
       left: @navigationWidth + @listWidth + @dividerWidth;
     }
@@ -92,9 +92,9 @@
       }
 
       &.highlighted {
-        background-color: @highlightColor;
-        background-image: -webkit-linear-gradient(right, @backgroundColor 10%, @highlightColor 100%);
-        background-image: linear-gradient(to left, @backgroundColor 10%, @highlightColor 100%);
+        //background-color: @highlightColor;
+        background-image: -webkit-linear-gradient(right, transparent 10%, rgba(0,128,255,0.075) 100%);
+        background-image: linear-gradient(to left, transparent 10%, rgba(0,128,255,0.075) 100%);
       }
 
       &.unread {
@@ -104,8 +104,8 @@
     }
 
     .list-divider {
-      background-image: -webkit-linear-gradient(right, @backgroundColor 0%, @borderColor 100%);
-      background-image: linear-gradient(to left, @backgroundColor 0%, @borderColor 100%);
+      background-image: -webkit-linear-gradient(right, transparent 0%, @borderColor 100%);
+      background-image: linear-gradient(to left, transparent 0%, @borderColor 100%);
       height: @dividerWidth;
     }
   }
