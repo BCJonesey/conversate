@@ -1,12 +1,6 @@
-<div class="row">
-  <div class="span12">
-    <h1>
-      Update yo' info, fool
-    </h1>
-  </div>
-</div>
-<div class="row">
-  <div class="span4 offset4">
+<div class='form'>
+      <h1> Update yo' info, fool</h1>
+
     <%= form_tag users_path, :method => 'put' do %>
       <% if @edit_status == :failure %>
         <div class="error-messages">
@@ -31,5 +25,4 @@
       <%= text_field_tag :full_name, @user.full_name %>
       <%= submit_tag "Update", :class => "btn" %>
     <% end %>
-  </div>
 </div>
