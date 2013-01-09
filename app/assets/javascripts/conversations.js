@@ -54,8 +54,11 @@
   });
 })();
 
-$(document).ready(function(){
-		var s1 = $('#thread')[0].scrollHeight-$('#thread').height();	
-		$('#thread').scrollTop(s1);
-		$("#compose textarea").focus();
-});
+/* scroll the thread to the bottom when laoding the page */
+
+var s1 = $('#thread')[0].scrollHeight-$('#thread').height();	
+$('#thread').scrollTop(s1);
+
+/* focus on the textarea.  This is most important when the page reloads afer submission */
+
+$("#compose textarea").focus();
