@@ -52,3 +52,9 @@
     })
   });
 })();
+
+
+$(document).ready(function(){
+    var s1 = $('#thread')[0].scrollHeight-$('#thread').height();	
+		$('#thread').scrollTop(s1);
+});
