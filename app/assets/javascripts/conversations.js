@@ -27,11 +27,9 @@
         }
       }
     });
-  }
+  };
 
-  $(function() {
-    setupTitleEditor();
-
+  var setupMessageMenus = function() {
     $(".conversation-piece.message").on("click", function(e) {
       var target = $(e.target);
       if (!target.hasClass("conversation-piece")) {
@@ -52,11 +50,19 @@
         });
       });
     });
+  };
 
+  var setupCompose = function() {
     $("#compose textarea").on("keydown", function(e) {
       if (e.keyCode == 13 && e.ctrlKey) { // Enter
         $("#compose form").submit();
       }
-    })
+    });
+  };
+
+  $(function() {
+    setupTitleEditor();
+    setupMessageMenus();
+    setupCompose();
   });
 })();
