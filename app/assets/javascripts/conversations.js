@@ -20,7 +20,7 @@
     });
     titleEditor.on("keydown", function(e) {
       if (e.keyCode == 13) { // Enter
-        if (titleEditor.val() == currentTitle {
+        if (titleEditor.val() == currentTitle) {
           e.stopPropagation();
           e.preventDefault();
           title.removeClass("editing");
