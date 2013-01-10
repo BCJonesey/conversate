@@ -130,6 +130,12 @@
       padding-top: 4px;
       overflow: hidden;
 
+      form {
+        input[type="submit"] {
+          display: none;
+        }
+      }
+
       form.title {
         input[type="text"] {
           .title-font;
@@ -146,13 +152,20 @@
             border-color: @inputBorderColor;
           }
         }
+      }
 
-        input[type="submit"] {
-          display: none;
-        }
+      form.users {
+        display: none;
       }
 
       &.editing {
+        height: auto;
+        z-index: 10;
+        overflow: visible;
+
+        form.users {
+          display: block;
+        }
       }
     }
 

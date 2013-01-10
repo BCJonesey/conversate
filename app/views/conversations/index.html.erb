@@ -23,7 +23,13 @@
                      :method => 'put',
                      :class => 'title' do %>
           <%= text_field_tag :title, @opened_conversation.title %>
-          <%= submit_tag "Retitle" %>
+          <%= submit_tag 'Retitle' %>
+        <% end %>
+        <%= form_tag update_users_path,
+                     :method => 'put',
+                     :class => 'users' do %>
+          <%= text_field_tag :users, '', :autocomplete => 'off' %>
+          <%= submit_tag 'Change Users' %>
         <% end %>
       </div>
       <div id="thread">

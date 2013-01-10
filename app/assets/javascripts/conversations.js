@@ -1,32 +1,51 @@
 (function() {
   var setupConversationEditor = function() {
-    var header = $("#column-conversation .title");
-    var titleEditor = header.find("input[type='text']");
+    var header = $("#column-conversation .conversation-header");
+    var titleEditor = header.find("form.title input[type='text']");
+    var userEditor = header.find("form.users input[type='text']");
+
+    tokenize(userEditor, [{id: 1, name: 'Josh Lyman'}])
 
     // TODO: Once this is done via AJAX instead of page refresh, update
     // currentTitle on title change.
     var currentTitle = titleEditor.val();
-    header.on("click", function() {
+
+    titleEditor.on("focus", function() {
+      if (!header.hasClass("editing")) {
+        titleEditor.blur();
+      }
+    });
+
+    header.on("click", function(e) {
+      if (header.hasClass("editing")) { return; }
+
       header.addClass("editing");
-      titleEditor.focus();
-    });
-    titleEditor.on("blur", function() {
-      if (titleEditor.val() == currentTitle) {
-        header.removeClass("editing");
-      }
-      else {
-        titleEditor.parents("form").submit();
-      }
-    });
-    titleEditor.on("keydown", function(e) {
-      if (e.keyCode == 13) { // Enter
+
+      titleEditor.on("blur", function() {
         if (titleEditor.val() == currentTitle) {
-          e.stopPropagation();
-          e.preventDefault();
           header.removeClass("editing");
+          titleEditor.off("blur");
+          titleEditor.off("keydown");
+          titleEditor.attr("readonly", "true");
         }
-      }
+        else {
+          titleEditor.parents("form").submit();
+        }
+      });
+      titleEditor.on("keydown", function(e) {
+        if (e.keyCode == 13) { // Enter
+          if (titleEditor.val() == currentTitle) {
+            e.stopPropagation();
+            e.preventDefault();
+            header.removeClass("editing");
+            titleEditor.off("blur");
+            titleEditor.off("keydown");
+            titleEditor.attr("readonly", "true");
+          }
+        }
+      });
     });
+
   };
 
   var setupMessageMenus = function() {
