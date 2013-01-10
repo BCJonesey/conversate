@@ -1,0 +1,67 @@
+@import 'b-mixins.less';
+
+@main-font:"Helvetica Neue", Helvetica, Arial, sans-serif;
+@border-radius: 2px;
+
+html, body, *{
+	font-family:@main-font;
+}
+
+.btn{
+  border-radius: @border-radius;
+  font-family: @main-font;
+	font-size: 1rem;
+	font-weight: normal;
+	text-decoration:none;
+	padding:4px 10px;
+	border:1px solid #CCC;
+	background-color:#F0F0F0;
+	color:#444;
+	text-shadow:1px 1px 1px white;
+	.button-shadow();
+	cursor:pointer;
+	.user-select(none);
+
+  &:hover,
+  &.hover{
+  	background-color:#D8E8F8;
+  }
+  
+  &:active, &:focus, &.active{
+  	box-shadow:none;
+  	background-color:#D4E4F4;
+  	position:relative;
+  	top:1px;
+  }
+}
+
+.btn.btn-primary{
+	color:white;
+	text-shadow:1px 1px 1px #888;
+	background-color:#7AD;
+	border-color:#999;
+	box-shadow:0 3px 3px -3px rgba(0,0,0,0.4);
+
+  &:hover,
+  &.hover{
+	   background-color:#8BE;
+	 }
+	 &:active, 
+	 &:focus, 
+	 &.active{
+  	 box-shadow:none;
+  }
+}
+
+.btn.btn-gray{
+	color:#444;
+	text-shadow:1px 1px 1px #EEE;
+	background-color:#CCC;
+	border-color:#999;
+	box-shadow:0 3px 3px -3px rgba(0,0,0,0.4);
+
+  &:hover,
+  &.hover{
+	   background-color:#C8D8E8;
+	 }
+}
