@@ -10,13 +10,13 @@
 <body>
   <% if logged_in? %>
     <div class="container">
-      <div class="header">
-        <div class="pull-left logo">
-          <a href="<%= conversations_path %>">{{ Logo }}</a>
+      <div class="header clearfix">
+        <div class="btn-group pull-left">
+          <a href="<%= conversations_path %>" class='btn btn-primary'>Water Cooler</a>
         </div>
-        <div class="pull-right account-tools">
-          <a href="<%= edit_users_path %>">Edit Profile</a>
-          <a href="<%= destroy_sessions_path %>">Logout</a>
+        <div class="btn-group pull-right clearfix">
+          <a href="<%= edit_users_path %>" class='btn btn-gray'>Edit Profile</a>
+          <a href="<%= destroy_sessions_path %>" class='btn btn-gray'>Logout</a>
         </div>
       </div>
   <% end %>

@@ -1,11 +1,11 @@
-<div class="login-form">
+<div class="login-form form">
   <h1>
     watercooler
   </h1>
   <%= form_tag sessions_path do %>
     <%= email_field_tag :email, params[:email], :placeholder => 'email' %>
     <%= password_field_tag :password, nil, :placeholder => 'password' %>
-    <%= submit_tag 'Sign In' %>
+    <%= submit_tag 'Sign In', :class => 'btn'%>
   <% end %>
 </div>
 
