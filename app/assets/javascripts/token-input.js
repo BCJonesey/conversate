@@ -68,7 +68,10 @@
     }
   }
 
-  window.tokenize = function(input, tokenList) {
+  window.tokenize = function(input, tokenList, prefill) {
+    tokenList = tokenList || [];
+    prefill = prefill || [];
+
     input.addClass("token-input");
     input.wrap($('<div class="token-container"><ul class="tokens"><li></li></ul></div>'));
     var container = input.parents('.token-container').first();
@@ -77,6 +80,9 @@
     container.append(options);
 
     var tokens = container.find('.tokens');
+    prefill.forEach(function(tok) {
+      tokens.prepend(token(option(tok)));
+    });
 
     container.on('click', function() {
       input.focus();

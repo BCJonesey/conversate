@@ -69,3 +69,9 @@
     <% end %>
   </div>
 </div>
+<%= javascript_tag do -%>
+  var addressBook = <%= user_tokens_json(current_user.address_book) %>;
+  <% if @opened_conversation %>
+    var participants = <%= user_tokens_json(@opened_conversation.users) %>;
+  <% end %>
+<% end -%>

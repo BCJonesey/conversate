@@ -4,7 +4,8 @@
     var titleEditor = header.find("form.title input[type='text']");
     var userEditor = header.find("form.users input[type='text']");
 
-    tokenize(userEditor, [{id: 1, name: 'Josh Lyman'}])
+    // addressBook defined in index.html.erb.
+    tokenize(userEditor, addressBook, participants);
 
     // TODO: Once this is done via AJAX instead of page refresh, update
     // currentTitle on title change.

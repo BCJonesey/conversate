@@ -27,4 +27,11 @@ class User < ActiveRecord::Base
   def unread_count
     self.conversations.keep_if {|c| c.unread_for?(self) }.length
   end
+
+  # Public: returns the users this user knows.
+  # Note - currently everyone is assumed to know everyone else.  Fix this at
+  # some future date.
+  def address_book
+    return User.all - [self]
+  end
 end
