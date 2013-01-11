@@ -105,7 +105,7 @@ class ConversationsController < ApplicationController
       rl.save!
     end
     user_event.save!
-    render_conversation_view conversation
+    render_conversation_view conversation.reload
   end
 
   private
