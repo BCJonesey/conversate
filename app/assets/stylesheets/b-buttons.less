@@ -21,6 +21,7 @@ html, body, *{
 	.button-shadow();
 	cursor:pointer;
 	.user-select(none);
+	margin:0;
 
   &:hover,
   &.hover{
@@ -64,4 +65,25 @@ html, body, *{
   &.hover{
 	   background-color:#C8D8E8;
 	 }
+}
+
+.btn.btn-caret {
+  border:1px solid transparent;
+  background-color:transparent;
+  color:#DDD;
+  padding:2px 5px;
+  box-shadow:none;
+  text-shadow: none;
+  
+  &:hover {
+    color:#888
+  }
+
+  &:active, 
+  &.active {
+    position:static;
+    background-color:#DEF;
+    color:#888;
+    border-color:#CCC;
+  }
 }
