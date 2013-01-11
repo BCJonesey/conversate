@@ -23,7 +23,12 @@
           <div class="popover hidden">
             <div class="title">View Settings</div>
             <div class='popover-content'>
-            hello
+                <div class='btn-group'>
+                  <button class='btn' id='small'>Small</button>
+                  <button class='btn' id='medium'>Medium</button>
+                  <button class='btn' id='large'>Large</button>
+                </div>
+
             </div>
           </div>
           </div>
@@ -36,5 +41,6 @@
   <% end %>
 
   <%= javascript_include_tag "application" %>
+  <script type="text/javascript" src="assets/javascripts/view-settings.js"> </script>
 </body>
 </html>
