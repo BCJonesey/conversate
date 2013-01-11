@@ -35,7 +35,8 @@
     .border-left-radius(@border-radius);
   }
   // Need .dropdown-toggle since :last-child doesn't apply given a .dropdown-menu immediately after it
-   > .btn:last-child {
+   > .btn:last-child, 
+   > .btn.dropdown-toggle {
     .border-right-radius(@border-radius);
   }
 }
