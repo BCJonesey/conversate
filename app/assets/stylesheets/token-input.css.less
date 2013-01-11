@@ -1,3 +1,4 @@
+@import "mixins.css.less";
 @import "variables.css.less";
 
 .token-container {
@@ -29,8 +30,9 @@
     .token-option {
       cursor: pointer;
       list-style-type: none;
-      border: 1px solid #666;
+      border: 1px solid @inputBorderColor;
       border-bottom-width: 0;
+      .body-font();
 
       &:last-child {
         border-bottom-width: 1px;
@@ -58,14 +60,15 @@
       border: 1px solid #3a87ad;
       border-radius: 3px;
       background-color: #d9edf7;
+      .body-font();
 
       .close {
         cursor: pointer;
         margin-left: .5em;
+        margin-top: .4em;
         display: inline-block;
-        position: relative;
-        top: -0.8em;
-        left: .1em;
+        width: .7em;
+        height: .7em;
         -webkit-transform: rotate(45deg);
 
         &:after {

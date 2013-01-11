@@ -11,6 +11,34 @@
     // currentTitle on title change.
     var currentTitle = titleEditor.val();
 
+    var userIds = function() {
+      return $.map($("form.users .token"), function(u) { return $(u).attr("data-token-id"); }).sort();
+    }
+    var currentUsers = userIds();
+
+    var close = function() {
+      header.removeClass("editing");
+      titleEditor.off("blur");
+      titleEditor.off("keydown");
+      $(window).off("click");
+
+      var nowUsers = userIds();
+      if (currentUsers.toString() !== nowUsers.toString()) {
+        userEditor.val(nowUsers);
+        userEditor.parents("form").submit();
+      }
+    }
+
+    var closeIfOutside = function(e) {
+      if ($(e.target).parents(".conversation-header").length > 0 ||
+          $(e.target).closest("html").length == 0) {
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
+      close();
+    }
+
     titleEditor.on("focus", function() {
       if (!header.hasClass("editing")) {
         titleEditor.blur();
@@ -20,14 +48,12 @@
     header.on("click", function(e) {
       if (header.hasClass("editing")) { return; }
 
+      e.stopPropagation();
+      e.preventDefault();
       header.addClass("editing");
 
-      titleEditor.on("blur", function() {
+      titleEditor.on("blur", function(e) {
         if (titleEditor.val() == currentTitle) {
-          header.removeClass("editing");
-          titleEditor.off("blur");
-          titleEditor.off("keydown");
-          titleEditor.attr("readonly", "true");
         }
         else {
           titleEditor.parents("form").submit();
@@ -41,9 +67,12 @@
             header.removeClass("editing");
             titleEditor.off("blur");
             titleEditor.off("keydown");
-            titleEditor.attr("readonly", "true");
           }
         }
+      });
+
+      $(window).on("click", function(e) {
+        closeIfOutside(e)
       });
     });
 

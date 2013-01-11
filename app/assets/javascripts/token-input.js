@@ -45,7 +45,6 @@
       var query = new RegExp(input.val(), 'i');
       options.empty();
       var optionTags = tokens.filter(function(token) { return query.test(token.name); });
-      console.log(optionTags);
       var optionTags = optionTags
                              .filter(function(token) {
                                var tokens = $('.token');
@@ -56,12 +55,9 @@
                                }
                                return true;
                              });
-      console.log(optionTags);
       var optionTags = optionTags.map(function(token) { return option(token); });
 
-      console.log(optionTags);
       var firstTag = optionTags.shift();
-      console.log(firstTag);
       firstTag.addClass('target');
       options.append(firstTag);
       options.append(optionTags);
@@ -96,12 +92,21 @@
         targetDown(container);
       }
       else if (e.which == 13) { // Enter
+        e.preventDefault();
+        e.stopPropagation();
         selectOption(container);
       }
       else {
         refreshOptions(container, tokenList);
       }
     });
+
+    input.on('keydown', function(e) {
+      if (e.which == 13) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    })
 
     $('.token-option').live('mouseover', function(e) {
       var currentTarget = $('.token-option.target');

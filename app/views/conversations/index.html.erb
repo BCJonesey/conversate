@@ -55,6 +55,21 @@
             <div class="conversation-piece deletion">
               <%= piece.user.name %> deleted a message
             </div>
+          <% elsif piece.type == :update_users %>
+            <div class="conversation-piece update-users">
+              <%= piece.user.name %>
+              <% if piece.added.length > 0 %>
+                added <%= piece.added.collect {|u| u.name }.join(', ') %>
+                to the conversation
+                <% if piece.removed.length > 0 %>
+                  and
+                <% end %>
+              <% end %>
+              <% if piece.removed.length > 0 %>
+                removed <%= piece.removed.collect {|u| u.name }.join(', ') %>
+                from the conversation
+              <% end %>
+            </div>
           <% end %>
         <% end %>
       </div>

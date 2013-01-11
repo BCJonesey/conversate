@@ -7,7 +7,7 @@ class Event < ActiveRecord::Base
   validates_presence_of :conversation_id
   validates_presence_of :user_id
   validates_presence_of :event_type
-  validates :event_type, :inclusion => { :in => %w(message deletion retitle)}
+  validates :event_type, :inclusion => { :in => %w(message deletion retitle user_update)}
 
   after_initialize do |event|
     event.json = JSON::load data || {}
