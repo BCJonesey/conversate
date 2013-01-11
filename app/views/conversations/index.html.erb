@@ -1,5 +1,37 @@
 <div id="conversation-view">
   <div id="column-navigation">
+  <div class='topics'>
+    <div class='topics-group'>
+      <div class='topics-title'>Projects</div>
+      <ul class='topics-list'>
+        <li class='clearfix'>
+          <span class='topic-menu pull-right'>&#9660;</span>
+          <a>Website</a>
+        </li>
+        <li><a>TPS Reports</a></li>
+        </ul>
+        <div class='topics-archive'><a>Archived Projects</a></div>
+        </div>
+
+        <div class='topics-group'>
+        <div class='topics-title'>Off Topic</div>
+          <ul class='topics-list'>
+            <li class=''><a>Messages</a></li>
+            <li><a>Fantasy Football</a></li>
+          </ul>
+          <div class='topics-archive'> <a>Archived Off Topic</a></div>
+
+        </div>
+        
+        <div class='topics-group'>
+          <div class='topics-title'>Messages</div>
+          <ul class='topics-list'>
+            <li class='current'><a>Messages</a></li>
+            <li class=''><a>Chat</a></li>
+          </ul>
+          <div class='topics-archive'><a>Archived Messages</a></div>
+        </div>
+  </div>
   </div>
   <div class="divider-vertical column-v">
   </div>
@@ -29,8 +61,25 @@
         <% @opened_conversation.pieces.each do |piece| %>
           <% if piece.type == :message %>
             <div class="conversation-piece message">
-              <div class="message-info"><%= piece.user.name %></div>
+            <div class="message-info clearfix">
+                <div class="pull-right">
+                <span class='time'>11:11am</span>
+                <div class="btn-group btn-group-dropdown">
+                <a href='#' class="btn btn-caret dropdown-toggle">&#9660;</a>
+                <div class="dropdown-menu dropdown-menu-left hidden">
+                  <span class="menu-title">Edit Message</span>
+                  <ul> 
+                    <li><a href="#">Move to...</a> </li> 
+                    <li><a href="#">Send to Sidebar</a> </li>
+                    <li><a href="#">Delete</a> </li>
+                    </ul>
+                    </div>
+              </div>
+                </div>
+               <div class="sender"><%= piece.user.name %></div>
+            </div>
               <span class="message-text"><%= piece.text %></span>
+<!--
               <div class="message-actions">
                 <%= form_tag delete_message_path(@opened_conversation.id),
                              :method => 'put',
@@ -39,6 +88,7 @@
                   <%= submit_tag "Delete", :class => 'pull-right btn' %>
                 <% end %>
               </div>
+-->
             </div>
           <% elsif piece.type == :retitle %>
             <div class="conversation-piece retitle">
