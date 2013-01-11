@@ -43,7 +43,7 @@
                              :method => 'put',
                              :id => "form-delete-#{piece.message_id}" do %>
                   <%= hidden_field_tag :message, piece.message_id %>
-                  <%= submit_tag "Delete", :class => 'pull-right' %>
+                  <%= submit_tag "Delete", :class => 'pull-right btn' %>
                 <% end %>
               </div>
             </div>
@@ -73,11 +73,13 @@
           <% end %>
         <% end %>
       </div>
-      <div id="compose">
+      <div id="compose" class="clearfix">
         <%= form_tag write_message_path, :method => 'put' do %>
-          <%= text_area_tag :text %>
-          <div class="action-bar">
-            <%= submit_tag "Send", :class => 'pull-right' %>
+          <div class="pull-right">
+            <%= submit_tag "Send", :id => 'send', :class => 'btn btn-primary' %>
+          </div>
+          <div class="fill-width">
+              <%= text_area_tag :text %>
           </div>
         <% end %>
       </div>

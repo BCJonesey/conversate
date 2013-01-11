@@ -103,8 +103,9 @@
 
   var setupCompose = function() {
     $("#compose textarea").on("keydown", function(e) {
-      if (e.keyCode == 13 && e.ctrlKey) { // Enter
+      if (e.keyCode == 13) { // Enter
         $("#compose form").submit();
+        return false;
       }
     });
   };
@@ -115,3 +116,12 @@
     setupCompose();
   });
 })();
+
+/* scroll the thread to the bottom when laoding the page */
+
+var s1 = $('#thread')[0].scrollHeight-$('#thread').height();	
+$('#thread').scrollTop(s1);
+
+/* focus on the textarea.  This is most important when the page reloads afer submission */
+
+$("#compose textarea").focus();
