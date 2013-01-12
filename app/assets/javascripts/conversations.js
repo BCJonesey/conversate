@@ -41,3 +41,9 @@ $('#thread').scrollTop(s1);
 // focus on the textarea.  This is most important when the page reloads afer submission
 
 $("#compose textarea").focus();
+
+$(document).ready(function(){
+  $('.topics-group .topics-title').click(function(){
+    $(this).parent().toggleClass('collapsed');
+  });
+});
