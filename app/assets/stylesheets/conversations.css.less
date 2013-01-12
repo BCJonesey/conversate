@@ -309,31 +309,13 @@
     }  
 
     &.collapsed{
-    text-overflow: ellipsis;
     padding:.5rem;
-        & .topic-menu, 
         & .topics-archive{
             display:none;
-        }
-        & .topics-title{
-            .no-selection();
-            //display: inline-block;
-            //float:left;
         }
         & ul{
             display:none;
         } 
-        & li{
-            display: inline;
-            border:none;
-            background-color: transparent;
-            margin:0;
-            cursor: default;
-            background-image: none;            
-            & a{
-                display: none;
-            }    
-        }
     }
 }
 
