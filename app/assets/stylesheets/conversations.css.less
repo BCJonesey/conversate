@@ -98,9 +98,9 @@
       }
 
       &.highlighted {
-        //background-color: @highlightColor;
-        background-image: -webkit-linear-gradient(right, transparent 10%, rgba(0,128,255,0.075) 100%);
-        background-image: linear-gradient(to left, transparent 10%, rgba(0,128,255,0.075) 100%);
+        //background-color: transparent;
+        background-image: -webkit-linear-gradient(right, white 10%, #DEF 100%);
+        background-image: linear-gradient(to left, white 10%, #DEF 100%);
       }
 
       &.unread {
@@ -333,7 +333,7 @@
     .truncate();
     &:hover{
         color:#AAA;
-        text-decoration: underline;      
+        //text-decoration: underline;      
     }
   }
 }
@@ -375,7 +375,29 @@
     }
   }
   & .current a{
-    background-color:#DEF;
-    background-image: -webkit-linear-gradient(left, #DEF 0%, white 100%);
+/*
+        background-image: -webkit-linear-gradient(right, white 10%, #DEF 100%);
+        background-image: linear-gradient(to left, white 10%, #DEF 100%);
+*/
+background-color:#DEF;
   }
 }
+
+
+.conversation-piece{
+    & .message-info a.btn{
+        color:transparent;
+        &.active{color:#888;}
+    }
+    &:hover .message-info a.btn{
+        color:#EEE;
+        -webkit-transition: color 0.5s;
+        -webkit-transition-delay: color 0.25s;
+
+        &:hover,
+        &.active{
+            color:#888;
+        }
+    }
+}
+
