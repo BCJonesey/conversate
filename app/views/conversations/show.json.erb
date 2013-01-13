@@ -1,4 +1,4 @@
 { 
-	conversation: <%= raw(@conversation.to_json) %>,
-	pieces: <% @conversation.pieces.each do |piece| %><%= raw(piece.to_json) %><% end %>	 
+ 	"conversation": <%= raw(@conversation.to_json) %>,
+	"pieces": <%= raw(@conversation.pieces.to_json) %>
 }
