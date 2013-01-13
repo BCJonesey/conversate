@@ -42,7 +42,10 @@ class ConversationsController < ApplicationController
     conversation = Conversation.find(params[:id])
     current_user.mark_as_read(conversation)
 
-    render_conversation_view conversation
+    respond_to do |format|
+      format.html { render_conversation_view conversation }
+      format.json { render :json => conversation }
+    end
   end
 
   def retitle
