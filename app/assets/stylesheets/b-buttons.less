@@ -67,23 +67,43 @@ html, body, *{
 	 }
 }
 
-.btn.btn-caret {
-  border:1px solid transparent;
+@color-faint:#E0E0E0;
+@color-solid:#808080;
+
+.btn.btn-faint {
   background-color:transparent;
-  color:#DDD;
-  padding:2px 5px;
+  color:transparent;
+  border-color: transparent;
   box-shadow:none;
   text-shadow: none;
+  padding:2px 5px;
   
   &:hover {
-    color:#888
-  }
+    color:@color-solid;
+    -webkit-transition: color 0.5s;
 
+  }
   &:active, 
   &.active {
     position:static;
     background-color:#DEF;
-    color:#888;
+    color:@color-solid;
     border-color:#CCC;
   }
+}
+
+.btn-faint-container{
+    & .btn.btn-faint.active{
+      color:@color-solid;
+    }
+    &:hover .message-info a.btn{
+        color:@color-faint;
+        -webkit-transition: color 0.5s;
+        -webkit-transition-delay: color 0.25s;
+
+        &:hover,
+        &.active{
+            color:@color-solid;
+        }
+    }
 }
