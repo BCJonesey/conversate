@@ -44,7 +44,7 @@ class ConversationsController < ApplicationController
 
     respond_to do |format|
       format.html { render_conversation_view conversation }
-      format.json { render :json => conversation }
+      format.json { @conversation = conversation }
     end
   end
 
