@@ -141,6 +141,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ejs
   jquery-rails
   less-rails
   pg
