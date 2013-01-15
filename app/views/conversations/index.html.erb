@@ -31,7 +31,8 @@
             <div class="conversation-piece message btn-faint-container">
               <div class="message-info clearfix">
                 <div class="pull-right">
-                  <span class='time'>11:11am</span>
+                  <span class='time unfilled-timestamp'
+                        data-timestamp="<%= (piece.timestamp.to_i * 1000).to_s %>"></span>
                   <div class="btn-group btn-group-dropdown">
                     <a href='#' class="btn btn-faint dropdown-toggle">&#9660;</a>
                     <div class="dropdown-menu dropdown-menu-left hidden">
