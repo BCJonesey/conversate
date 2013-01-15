@@ -14,7 +14,13 @@
         right: 100%;
         margin-right:-1px;
       }
+      & form{
+          padding:0;
+          margin:0;
+          border:none;
+      }
       & .menu-title {
+        display: block;
         border-bottom:1px solid #BBB;
         padding:0;
         text-align:center;
@@ -26,7 +32,8 @@
         cursor:default;
         text-shadow: 1px 1px 1px white;
       }
-      & a {
+      & a, 
+      & .dropdown-menu-item {
         text-decoration:none;
         display:block;
         font-size:1rem;
@@ -34,16 +41,17 @@
         color:#888;
         cursor:pointer;
       }
-      & a:hover {
+      & a:hover,
+      & .dropdown-menu-item:hover{
         background-color:#E8F4FF;
       }
-      & a:active {
+      & a:active
+      & .dropdown-menu-item:active{
         background-color:#DEF;
       }
-      & * {
-        display:block;
-      }
-      
+      /*& * {
+          display:block;
+      }*/
       & ul{
         padding:0;
       }
