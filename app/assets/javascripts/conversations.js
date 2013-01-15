@@ -1,35 +1,118 @@
 (function() {
-  $(function() {
-    var title = $("#column-conversation .title");
-    var titleEditor = title.find("input[type='text']");
-    title.on("click", function() {
-      title.addClass("editing");
-      titleEditor.focus();
-    });
-    titleEditor.on("blur", function() {
-      if (titleEditor.val() == title.find(".text").text()) {
-        title.removeClass("editing");
+  var setupConversationEditor = function() {
+    var header = $("#column-conversation .conversation-header");
+    var titleEditor = header.find("form.title input[type='text']");
+    var userEditor = header.find("form.users input[type='text']");
+
+    // addressBook defined in index.html.erb.
+    tokenize(userEditor, addressBook, participants);
+
+    // TODO: Once this is done via AJAX instead of page refresh, update
+    // currentTitle on title change.
+    var currentTitle = titleEditor.val();
+
+    var userIds = function() {
+      return $.map($("form.users .token"), function(u) { return $(u).attr("data-token-id"); }).sort();
+    };
+    var currentUsers = userIds();
+
+    var close = function() {
+      header.removeClass("editing");
+      titleEditor.off("blur");
+      titleEditor.off("keydown");
+      $(window).off("click");
+
+      var nowUsers = userIds();
+      if (currentUsers.toString() !== nowUsers.toString()) {
+        userEditor.val(nowUsers);
+        userEditor.parents("form").submit();
       }
-      else {
-        title.find("form").submit();
+    };
+
+    var closeIfOutside = function(e) {
+      if ($(e.target).parents(".conversation-header").length > 0 ||
+          $(e.target).closest("html").length == 0) {
+        e.preventDefault();
+        e.stopPropagation();
+        return;
       }
-    });
-    titleEditor.on("keydown", function(e) {
-      if (e.keyCode == 13) { // Enter
-        if (titleEditor.val() == title.find(".text").text()) {
-          e.stopPropagation();
-          e.preventDefault();
-          title.removeClass("editing");
-        }
+      close();
+    };
+
+    titleEditor.on("focus", function() {
+      if (!header.hasClass("editing")) {
+        titleEditor.blur();
       }
     });
 
+    header.on("click", function(e) {
+      if (header.hasClass("editing")) { return; }
+
+      e.stopPropagation();
+      e.preventDefault();
+      header.addClass("editing");
+
+      titleEditor.on("blur", function(e) {
+        if (titleEditor.val() == currentTitle) {
+        }
+        else {
+          titleEditor.parents("form").submit();
+        }
+      });
+      titleEditor.on("keydown", function(e) {
+        if (e.keyCode == 13) { // Enter
+          if (titleEditor.val() == currentTitle) {
+            e.stopPropagation();
+            e.preventDefault();
+            header.removeClass("editing");
+            titleEditor.off("blur");
+            titleEditor.off("keydown");
+          }
+        }
+      });
+
+      $(window).on("click", function(e) {
+        closeIfOutside(e)
+      });
+    });
+  };
+
+  var setupMessageMenus = function() {
+    $(".conversation-piece.message").on("click", function(e) {
+      var target = $(e.target);
+      if (!target.hasClass("conversation-piece")) {
+        target = target.parents(".conversation-piece").first();
+      }
+
+      if (target.hasClass("active")) {
+        e.stopPropagation();
+        return;
+      }
+
+      target.addClass("active");
+      target.find(".message-actions").slideDown(250, function() {
+        $(window).on("click", function() {
+          target.removeClass("active");
+          target.find(".message-actions").slideUp(250);
+          $(window).off("click");
+        });
+      });
+    });
+  };
+
+  var setupCompose = function() {
     $("#compose textarea").on("keydown", function(e) {
       if (e.keyCode == 13) { // Enter
         $("#compose form").submit();
         return false;
       }
-    })
+    });
+  };
+
+  $(function() {
+    setupConversationEditor();
+    setupMessageMenus();
+    setupCompose();
 
     // Scroll the thread to the bottom when loading the page
     var thread = $('#thread');

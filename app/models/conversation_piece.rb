@@ -9,6 +9,10 @@ class ConversationPiece
     Retitle.new user, timestamp, title
   end
 
+  def self.update_users(user, timestamp, added, removed)
+    UpdateUsers.new user, timestamp, added, removed
+  end
+
   private
 
   def initialize(type, user, timestamp, count)
@@ -48,6 +52,16 @@ class ConversationPiece
     def initialize(user, timestamp, title)
       super :retitle, user, timestamp, 1
       self.title = title
+    end
+  end
+
+  class UpdateUsers < ConversationPiece
+    attr_accessor :added, :removed
+
+    def initialize(user, timestamp, added, removed)
+      super :update_users, user, timestamp, 1
+      self.added = added
+      self.removed = removed
     end
   end
 end

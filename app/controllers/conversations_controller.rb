@@ -87,6 +87,27 @@ class ConversationsController < ApplicationController
     render_conversation_view conversation
   end
 
+  def update_users
+    conversation = Conversation.find(params[:id])
+    updated_users = User.find(params[:users].split(',').collect {|u| u.to_i})
+    removed_users = conversation.users - updated_users
+    added_users = updated_users - conversation.users
+
+    user_event = Event.new({:conversation_id => conversation.id,
+                            :user_id => current_user.id,
+                            :event_type => 'user_update',
+                            :data => {:added => added_users.collect {|u| u.id },
+                                      :removed => removed_users.collect {|u| u.id }}.to_json})
+    conversation.reading_logs.where(:user_id => removed_users.collect {|u| u.id }).delete_all
+    added_users.each do |u|
+      rl = ReadingLog.new({:conversation_id => conversation.id,
+                           :user_id => u.id})
+      rl.save!
+    end
+    user_event.save!
+    render_conversation_view conversation.reload
+  end
+
   private
   def render_conversation_view(conversation=nil)
     @conversations = current_user.conversations.order('updated_at DESC')

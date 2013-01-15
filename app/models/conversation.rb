@@ -33,6 +33,8 @@ class Conversation < ActiveRecord::Base
         elsif event.event_type == 'deletion'
           index = conversation_pieces.index { |cp| cp.type == :message && cp.message_id == event.message_id }
           conversation_pieces[index] = conversation_pieces[index].delete(event.user, event.created_at)
+        elsif event.event_type == 'user_update'
+          conversation_pieces.append ConversationPiece.update_users(event.user, event.created_at, User.find(event.added), User.find(event.removed))
         end
       rescue
         raise "Error with #{event.data}: #{$!} (id: #{event.id})"

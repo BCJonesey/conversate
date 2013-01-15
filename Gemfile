@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.3'
+gem 'rails', '3.2.11'
 gem 'pry-rails'
 
 # Bundle edge Rails instead:
@@ -26,6 +26,7 @@ end
 gem 'jquery-rails'
 
 gem 'sorcery'
+gem 'thin'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

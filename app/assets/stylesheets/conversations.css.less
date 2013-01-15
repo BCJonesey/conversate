@@ -4,7 +4,7 @@
 .container {
 
   background-color: #F0F0F0;
-  
+
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -121,7 +121,7 @@
     left: @navigationWidth + @listWidth + (2 * @dividerWidth);
     border-right: none;
 
-    .title {
+    .conversation-header {
       background-color: @backgroundDarkerColor;
       position: relative;
       margin: 0;
@@ -136,27 +136,39 @@
       overflow: hidden;
 
       form {
-        display: none;
+        input[type="submit"] {
+          display: none;
+        }
+      }
 
+      form.title {
         input[type="text"] {
           .title-font;
           font-size: .9em;
           padding: 0;
           text-align: center;
           outline: none;
-        }
+          background-color: transparent;
+          border-color: transparent;
+          margin-top: -1px;
 
-        input[type="submit"] {
-          display: none;
+          &:focus {
+            background-color: @inputBackgroundColor;
+            border-color: @inputBorderColor;
+          }
         }
       }
 
-      &.editing {
-        .text {
-          display: none;
-        }
+      form.users {
+        display: none;
+      }
 
-        form {
+      &.editing {
+        height: auto;
+        z-index: 10;
+        overflow: visible;
+
+        form.users {
           display: block;
         }
       }
@@ -207,7 +219,7 @@
         &.active {
           border-color: @lightBlue;
         }
-        &.retitle, &.deletion {
+        &.retitle, &.deletion, &.update-users {
           font-style: italic;
           color:#888;
         }
@@ -260,7 +272,7 @@
         margin-left:10px;
         margin-right:5px;
       }
-      
+
     }
   }
 
