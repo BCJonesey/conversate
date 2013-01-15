@@ -33,7 +33,9 @@
 
     // Scroll the thread to the bottom when loading the page
     var thread = $('#thread');
-    thread.scrollTop(thread[0].scrollHeight - thread.height());
+    if (thread.length > 0) {
+      thread.scrollTop(thread[0].scrollHeight - thread.height());
+    }
 
     // Focus on the textarea.  This most important when the page reloads after
     // submission.
