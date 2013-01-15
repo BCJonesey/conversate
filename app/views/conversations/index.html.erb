@@ -39,7 +39,14 @@
                       <ul>
                         <li><a href="#">Move to...</a> </li>
                         <li><a href="#">Send to Sidebar</a> </li>
-                        <li><a href="#">Delete</a> </li>
+                        <li>
+                          <%= form_tag delete_message_path(@opened_conversation.id),
+                                       :method => 'put',
+                                       :class => 'hidden-form' do %>
+                            <%= hidden_field_tag :message, piece.message_id %>
+                            <%= submit_tag 'Delete' %>
+                          <% end %>
+                        </li>
                       </ul>
                     </div>
                   </div>
