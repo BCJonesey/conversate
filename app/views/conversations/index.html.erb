@@ -52,7 +52,7 @@
                                        :method => 'put',
                                        :class => 'hidden-form' do %>
                             <%= hidden_field_tag :message, piece.message_id %>
-                            <%= submit_tag 'Delete' %>
+                            <%= submit_tag 'Delete', :class => 'dropdown-menu-item' %>
                           <% end %>
                         </li>
                       </ul>
