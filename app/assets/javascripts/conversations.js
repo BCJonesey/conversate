@@ -13,7 +13,7 @@
 
     var userIds = function() {
       return $.map($("form.users .token"), function(u) { return $(u).attr("data-token-id"); }).sort();
-    }
+    };
     var currentUsers = userIds();
 
     var close = function() {
@@ -27,7 +27,7 @@
         userEditor.val(nowUsers);
         userEditor.parents("form").submit();
       }
-    }
+    };
 
     var closeIfOutside = function(e) {
       if ($(e.target).parents(".conversation-header").length > 0 ||
@@ -37,7 +37,7 @@
         return;
       }
       close();
-    }
+    };
 
     titleEditor.on("focus", function() {
       if (!header.hasClass("editing")) {
@@ -75,7 +75,6 @@
         closeIfOutside(e)
       });
     });
-
   };
 
   var setupMessageMenus = function() {
@@ -114,14 +113,19 @@
     setupConversationEditor();
     setupMessageMenus();
     setupCompose();
+
+    // Scroll the thread to the bottom when loading the page
+    var thread = $('#thread');
+    if (thread.length > 0) {
+      thread.scrollTop(thread[0].scrollHeight - thread.height());
+    }
+
+    // Focus on the textarea.  This most important when the page reloads after
+    // submission.
+    $('#compose textarea').focus();
+
+    $('.topics-group .topics-title').click(function(){
+      $(this).parent().toggleClass('collapsed');
+    });
   });
 })();
-
-/* scroll the thread to the bottom when laoding the page */
-
-var s1 = $('#thread')[0].scrollHeight-$('#thread').height();	
-$('#thread').scrollTop(s1);
-
-/* focus on the textarea.  This is most important when the page reloads afer submission */
-
-$("#compose textarea").focus();

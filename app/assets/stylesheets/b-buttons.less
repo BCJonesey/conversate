@@ -1,7 +1,7 @@
 @import 'b-mixins.less';
 
 @main-font:"Helvetica Neue", Helvetica, Arial, sans-serif;
-@border-radius: 2px;
+@border-radius: 0;
 
 html, body, *{
 	font-family:@main-font;
@@ -21,6 +21,7 @@ html, body, *{
 	.button-shadow();
 	cursor:pointer;
 	.user-select(none);
+	margin:0;
 
   &:hover,
   &.hover{
@@ -64,4 +65,45 @@ html, body, *{
   &.hover{
 	   background-color:#C8D8E8;
 	 }
+}
+
+@color-faint:#E0E0E0;
+@color-solid:#808080;
+
+.btn.btn-faint {
+  background-color:transparent;
+  color:transparent;
+  border-color: transparent;
+  box-shadow:none;
+  text-shadow: none;
+  padding:2px 5px;
+  
+  &:hover {
+    color:@color-solid;
+    -webkit-transition: color 0.5s;
+
+  }
+  &:active, 
+  &.active {
+    position:static;
+    background-color:#DEF;
+    color:@color-solid;
+    border-color:#CCC;
+  }
+}
+
+.btn-faint-container{
+    & .btn.btn-faint.active{
+      color:@color-solid;
+    }
+    &:hover .message-info a.btn{
+        color:@color-faint;
+        -webkit-transition: color 0.5s;
+        -webkit-transition-delay: color 0.25s;
+
+        &:hover,
+        &.active{
+            color:@color-solid;
+        }
+    }
 }

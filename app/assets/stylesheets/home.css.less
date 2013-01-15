@@ -16,8 +16,7 @@
 }
 
 .watercooler {
-  font-size: 10em;
-  .title-font;
+  .title-font(10rem);
   .absolutely-centered(1.6em, 4em);
   // Override top margin because of text quirks.
   margin-top: -1.8em;
@@ -26,6 +25,7 @@
   text-align: center;
 
   a {
+    .title-font(10rem);
     color: transparent;
     text-decoration: none;
     .transition(color);
