@@ -1,0 +1,1 @@
+var Conversation = Backbone.Model.extend({});
