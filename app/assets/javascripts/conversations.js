@@ -5,6 +5,8 @@
     var userEditor = header.find("form.users input[type='text']");
 
     // addressBook defined in index.html.erb.
+    var addressBook = addressBook || [];
+    var participants = participants || [];
     tokenize(userEditor, addressBook, participants);
 
     // TODO: Once this is done via AJAX instead of page refresh, update
