@@ -77,29 +77,6 @@
     });
   };
 
-  var setupMessageMenus = function() {
-    $(".conversation-piece.message").on("click", function(e) {
-      var target = $(e.target);
-      if (!target.hasClass("conversation-piece")) {
-        target = target.parents(".conversation-piece").first();
-      }
-
-      if (target.hasClass("active")) {
-        e.stopPropagation();
-        return;
-      }
-
-      target.addClass("active");
-      target.find(".message-actions").slideDown(250, function() {
-        $(window).on("click", function() {
-          target.removeClass("active");
-          target.find(".message-actions").slideUp(250);
-          $(window).off("click");
-        });
-      });
-    });
-  };
-
   var setupCompose = function() {
     $("#compose textarea").on("keydown", function(e) {
       if (e.keyCode == 13) { // Enter
@@ -111,7 +88,6 @@
 
   $(function() {
     setupConversationEditor();
-    setupMessageMenus();
     setupCompose();
 
     // Scroll the thread to the bottom when loading the page
