@@ -92,3 +92,8 @@
     var participants = <%= user_tokens_json(@opened_conversation.users) %>;
   <% end %>
 <% end -%>
+<%= content_for :javascript do -%>
+  <%= javascript_tag do %>
+    ConversateApp.initialize({});
+  <% end %>
+<% end -%>
