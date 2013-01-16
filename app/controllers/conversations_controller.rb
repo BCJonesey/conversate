@@ -13,35 +13,6 @@ class ConversationsController < ApplicationController
     redirect_to conversation_path(conversation.id)
   end
 
-  def create
-    @conversation_errors = []
-    conversation = nil
-    if params[:users].length > 0
-      users = User.find params[:users]
-      conversation = Conversation.new({:users => (users << current_user).uniq,
-                                       :title => params[:title]})
-      @conversation_errors << 'Failed to save conversation' unless conversation.save
-
-      unless params[:first_message].empty?
-        message_event = Event.new({:conversation_id => conversation.id,
-                                   :user_id => current_user.id,
-                                   :event_type => 'message',
-                                   :data => {:message_id => conversation.next_message_id,
-                                             :text => params[:first_message]}.to_json})
-        @conversation_errors << 'Failed to save message event' unless message_event.save
-      end
-    else
-      @conversation_errors << 'No senders'
-    end
-
-    if @conversation_errors.length > 0
-      render :new
-    else
-      current_user.mark_as_read conversation
-      render_conversation_view conversation
-    end
-  end
-
   def show
     conversation = Conversation.find(params[:id])
     current_user.mark_as_read(conversation)
