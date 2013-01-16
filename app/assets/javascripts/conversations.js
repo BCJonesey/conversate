@@ -5,7 +5,9 @@
     var userEditor = header.find("form.users input[type='text']");
 
     // addressBook defined in index.html.erb.
-    tokenize(userEditor, addressBook, participants);
+    if (window.addressBook && window.participants) {
+      tokenize(userEditor, addressBook, participants);
+    }
 
     // TODO: Once this is done via AJAX instead of page refresh, update
     // currentTitle on title change.
@@ -13,7 +15,7 @@
 
     var userIds = function() {
       return $.map($("form.users .token"), function(u) { return $(u).attr("data-token-id"); }).sort();
-    }
+    };
     var currentUsers = userIds();
 
     var close = function() {
@@ -27,7 +29,7 @@
         userEditor.val(nowUsers);
         userEditor.parents("form").submit();
       }
-    }
+    };
 
     var closeIfOutside = function(e) {
       if ($(e.target).parents(".conversation-header").length > 0 ||
@@ -37,7 +39,7 @@
         return;
       }
       close();
-    }
+    };
 
     titleEditor.on("focus", function() {
       if (!header.hasClass("editing")) {
@@ -75,30 +77,6 @@
         closeIfOutside(e)
       });
     });
-
-  };
-
-  var setupMessageMenus = function() {
-    $(".conversation-piece.message").on("click", function(e) {
-      var target = $(e.target);
-      if (!target.hasClass("conversation-piece")) {
-        target = target.parents(".conversation-piece").first();
-      }
-
-      if (target.hasClass("active")) {
-        e.stopPropagation();
-        return;
-      }
-
-      target.addClass("active");
-      target.find(".message-actions").slideDown(250, function() {
-        $(window).on("click", function() {
-          target.removeClass("active");
-          target.find(".message-actions").slideUp(250);
-          $(window).off("click");
-        });
-      });
-    });
   };
 
   var setupCompose = function() {
@@ -112,16 +90,27 @@
 
   $(function() {
     setupConversationEditor();
-    setupMessageMenus();
     setupCompose();
+
+    // Scroll the thread to the bottom when loading the page
+    var thread = $('#thread');
+    if (thread.length > 0) {
+      thread.scrollTop(thread[0].scrollHeight - thread.height());
+    }
+
+    // The page will only open in editing mode if it's a new conversation.
+    // new_conversation is defined in index.html.erb.
+    if (window.new_conversation) {
+      $('.conversation-header').click();
+      $('form.users input[type="text"]').focus();
+    }
+    else {
+      $('#compose textarea').focus();
+    }
+
+
+    $('.topics-group .topics-title').click(function(){
+      $(this).parent().toggleClass('collapsed');
+    });
   });
 })();
-
-/* scroll the thread to the bottom when laoding the page */
-
-var s1 = $('#thread')[0].scrollHeight-$('#thread').height();	
-$('#thread').scrollTop(s1);
-
-/* focus on the textarea.  This is most important when the page reloads afer submission */
-
-$("#compose textarea").focus();

@@ -51,6 +51,9 @@
 
   #column-navigation {
     width: @navigationWidth;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
     &+ .divider-vertical {
       left: @navigationWidth;
     }
@@ -59,7 +62,7 @@
   #column-list {
     width: @listWidth;
     left: @navigationWidth + @dividerWidth;
-    overflow-y: scroll;
+    //overflow-y: scroll;
     background-color:white;
     &+ .divider-vertical {
       left: @navigationWidth + @listWidth + @dividerWidth;
@@ -95,9 +98,9 @@
       }
 
       &.highlighted {
-        //background-color: @highlightColor;
-        background-image: -webkit-linear-gradient(right, transparent 10%, rgba(0,128,255,0.075) 100%);
-        background-image: linear-gradient(to left, transparent 10%, rgba(0,128,255,0.075) 100%);
+        //background-color: transparent;
+        background-image: -webkit-linear-gradient(right, white 10%, #DEF 100%);
+        background-image: linear-gradient(to left, white 10%, #DEF 100%);
       }
 
       &.unread {
@@ -146,8 +149,9 @@
           text-align: center;
           outline: none;
           background-color: transparent;
-          border-color: transparent;
+          border: 1px solid transparent;
           margin-top: -1px;
+          width: 100%;
 
           &:focus {
             background-color: @inputBackgroundColor;
@@ -188,8 +192,16 @@
 
       .conversation-piece {
         .message-info {
-          font-weight: bold;
-          color: lighten(@textColor, 10%);
+            .sender{
+              display: block;
+              overflow: hidden;
+              font-weight: bold;
+              }
+              .time{
+                color:#CCC;
+                font-size:.75rem;
+                font-style:italic;
+              }
         }
         .message-text {
           white-space: pre-wrap;
@@ -205,11 +217,9 @@
         &+ .conversation-piece {
           margin-top: 5px;
         }
-        &.active {
-          border-color: @lightBlue;
-        }
         &.retitle, &.deletion, &.update-users {
           font-style: italic;
+          color:#888;
         }
       }
     }
@@ -269,3 +279,4 @@
     background-color: @borderColor;
   }
 }
+

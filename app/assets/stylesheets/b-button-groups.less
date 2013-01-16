@@ -1,5 +1,6 @@
 @import 'b-buttons.less';
 @import 'b-mixins.less';
+@import 'variables.css.less';
 
 
 /* Button Groups */
@@ -28,15 +29,18 @@
   	margin-left:-1px;
   }
 
-
   // Set corners individual because sometimes a single button can be in a .btn-group and we need :first-child and :last-child to both match
   > .btn:first-child {
     margin-left: 0;
     .border-left-radius(@border-radius);
   }
   // Need .dropdown-toggle since :last-child doesn't apply given a .dropdown-menu immediately after it
-   > .btn:last-child {
+   > .btn:last-child, 
+   > .btn.dropdown-toggle {
     .border-right-radius(@border-radius);
+  }
+  &.btn-group-dropdown{
+    box-shadow:none;
   }
 }
 
@@ -50,10 +54,13 @@
 .btn-toolbar {
   font-size: 0; // Hack to remove whitespace that results from using inline-block
   .clearfix();
-
+  // adjust spacing for btn's
   > .btn + .btn,
   > .btn-group + .btn,
   > .btn + .btn-group {
     margin-left: 5px;
   }
+  padding:5px;
+  background-color: @backgroundDarkColor;
 }
+

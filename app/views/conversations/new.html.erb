@@ -1,31 +1,33 @@
-<div class="row">
-  <div class="span12">
-    <h1>
-      Start a new conversation
-    </h1>
-  </div>
-</div>
-<div class="row">
-  <div class="span4 offset4">
-    <%= form_tag conversations_path do %>
-      <% if @conversation_errors.length > 0 %>
-        <div class="error-messages">
-          <h3>You fucked up</h3>
-        </div>
-        <ul>
-          <% @conversation_errors.each do |error| %>
-            <li><%= error %></li>
+<div class='form'>
+    <div class="row">
+      <div class="span12">
+        <h1>
+          Start a new conversation
+        </h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span4 offset4">
+        <%= form_tag conversations_path do %>
+          <% if @conversation_errors.length > 0 %>
+            <div class="error-messages">
+              <h3>You fucked up</h3>
+            </div>
+            <ul>
+              <% @conversation_errors.each do |error| %>
+                <li><%= error %></li>
+              <% end %>
+            </ul>
           <% end %>
-        </ul>
-      <% end %>
-      <%= label_tag :title %>
-      <%= text_field_tag :title, params[:title] %>
-      <%= label_tag :users %>
-      <%= select_tag :users, address_book_options(current_user),
-                     :multiple => true %>
-      <%= label_tag :first_message %>
-      <%= text_area_tag :first_message %>
-      <%= submit_tag 'Start conversation', :class => 'btn'%>
-    <% end %>
-  </div>
+          <%= label_tag :title %>
+          <%= text_field_tag :title, params[:title] %>
+          <%= label_tag :users %>
+          <%= select_tag :users, address_book_options(current_user),
+                         :multiple => true %>
+          <%= label_tag :first_message %>
+          <%= text_area_tag :first_message %>
+          <%= submit_tag 'Start conversation', :class => 'btn'%>
+        <% end %>
+      </div>
+    </div>
 </div>

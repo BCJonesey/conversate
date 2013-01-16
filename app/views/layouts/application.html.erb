@@ -18,6 +18,21 @@
           <a href="<%= edit_users_path %>" class='btn btn-gray'>Edit Profile</a>
           <a href="<%= destroy_sessions_path %>" class='btn btn-gray'>Logout</a>
         </div>
+                <div class="btn-group pull-right clearfix">
+          <a href="#" class='btn btn-gray dropdown-toggle'>Aa</a>
+          <div class="popover hidden">
+            <div class="title">View Settings</div>
+            <div class='popover-content'>
+                <div class='btn-group'>
+                  <button class='btn' id='small'>Small</button>
+                  <button class='btn' id='medium'>Medium</button>
+                  <button class='btn' id='large'>Large</button>
+                </div>
+
+            </div>
+          </div>
+          </div>
+
       </div>
   <% end %>
   <%= yield %>
