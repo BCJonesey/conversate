@@ -10,6 +10,7 @@ class ConversationsController < ApplicationController
     conversation.users.push current_user
     conversation.save!
 
+    session[:new_conversation] = true
     redirect_to conversation_path(conversation.id)
   end
 
@@ -87,6 +88,9 @@ class ConversationsController < ApplicationController
   def render_conversation_view(conversation=nil)
     @conversations = current_user.conversations.order('updated_at DESC')
     @opened_conversation = conversation
+    @new_conversation = session[:new_conversation].nil? ? false : session[:new_conversation]
+    session[:new_conversation] = false
+
     render :index
   end
 end

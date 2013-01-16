@@ -5,9 +5,9 @@
     var userEditor = header.find("form.users input[type='text']");
 
     // addressBook defined in index.html.erb.
-    var addressBook = addressBook || [];
-    var participants = participants || [];
-    tokenize(userEditor, addressBook, participants);
+    if (addressBook && participants) {
+      tokenize(userEditor, addressBook, participants);
+    }
 
     // TODO: Once this is done via AJAX instead of page refresh, update
     // currentTitle on title change.
@@ -98,9 +98,16 @@
       thread.scrollTop(thread[0].scrollHeight - thread.height());
     }
 
-    // Focus on the textarea.  This most important when the page reloads after
-    // submission.
-    $('#compose textarea').focus();
+    // The page will only open in editing mode if it's a new conversation.
+    // new_conversation is defined in index.html.erb.
+    if (new_conversation) {
+      $('.conversation-header').click();
+      $('form.users input[type="text"]').focus();
+    }
+    else {
+      $('#compose textarea').focus();
+    }
+
 
     $('.topics-group .topics-title').click(function(){
       $(this).parent().toggleClass('collapsed');
