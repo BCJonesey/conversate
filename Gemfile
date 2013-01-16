@@ -25,10 +25,10 @@ end
 
 gem 'jquery-rails'
 
-gem 'sorcery'
-gem 'thin'
-gem 'rails-backbone'
-gem 'ejs'
+gem 'sorcery'	# For login and security.
+gem 'thin'	# A minimalist web server. Heroku likes it.
+gem 'rails-backbone'	# Used for including the backbone.js files and general integration.
+gem 'ejs'	# Required for the .ejs templates.
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
