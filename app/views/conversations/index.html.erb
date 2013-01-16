@@ -4,21 +4,25 @@
   <div class="divider-vertical column-v">
   </div>
   <div id="column-list">
-    <div class="new-conversation">
-      <a href="<%= new_conversation_path %>">New Conversation</a>
-    </div>
-    <% @conversations.each do |conversation| %>
-      <div class="<%= list_item_classes(conversation, @opened_conversation, current_user) %>">
-        <a href="<%= conversation_path conversation.id %>">
-          <div class="list-title"><%= conversation.title %></div>
-          <div class="list-participants"><%= conversation.participants %></div>
-        </a>
+    <div class='btn-toolbar border-bottom clearfix'>
+    <div class='btn-group pull-right'>
+      <a href='<%= new_conversation_path %>' class='btn'>New</a>
       </div>
-      <div class="list-divider"></div>
-    <% end %>
+    </div>
+    <div id='conversations-list'>
+      <% @conversations.each do |conversation| %>
+        <div class="<%= list_item_classes(conversation, @opened_conversation, current_user) %>">
+          <a href="<%= conversation_path conversation.id %>">
+            <div class="list-title"><%= conversation.title %></div>
+            <div class="list-participants"><%= conversation.participants %></div>
+          </a>
+        </div>
+        <div class="list-divider"></div>
+      <% end %>
+    </div>
   </div>
-  <div class="divider-vertical column-v">
-  </div>
+
+  <div class="divider-vertical column-v"></div>
   <div id="column-conversation">
     <% if @opened_conversation %>
       <div class="conversation-header">
