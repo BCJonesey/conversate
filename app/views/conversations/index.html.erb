@@ -111,9 +111,9 @@
 </div>
 <%= javascript_tag do -%>
   <% if @opened_conversation %>
-    var addressBook = <%= user_tokens_json(current_user.address_book) %>;
-    var participants = <%= user_tokens_json(@opened_conversation.users) %>;
+    window.addressBook = <%= user_tokens_json(current_user.address_book) %>;
+    window.participants = <%= user_tokens_json(@opened_conversation.users) %>;
 
-    var new_conversation = <%= @new_conversation.to_s %>;
+    window.new_conversation = <%= @new_conversation.to_s %>;
   <% end %>
 <% end -%>

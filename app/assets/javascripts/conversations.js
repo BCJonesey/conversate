@@ -5,7 +5,7 @@
     var userEditor = header.find("form.users input[type='text']");
 
     // addressBook defined in index.html.erb.
-    if (addressBook && participants) {
+    if (window.addressBook && window.participants) {
       tokenize(userEditor, addressBook, participants);
     }
 
@@ -100,7 +100,7 @@
 
     // The page will only open in editing mode if it's a new conversation.
     // new_conversation is defined in index.html.erb.
-    if (new_conversation) {
+    if (window.new_conversation) {
       $('.conversation-header').click();
       $('form.users input[type="text"]').focus();
     }
