@@ -1,1 +1,1 @@
-var Conversation = Backbone.Model.extend({});
+ConversateApp.Models.Conversation = Backbone.Model.extend({});
