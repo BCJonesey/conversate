@@ -6,7 +6,11 @@ class ConversationsController < ApplicationController
   end
 
   def new
-    @conversation_errors = []
+    conversation = Conversation.new
+    conversation.users.push current_user
+    conversation.save!
+
+    redirect_to conversation_path(conversation.id)
   end
 
   def create

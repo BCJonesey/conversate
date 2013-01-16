@@ -6,7 +6,7 @@ class Conversation < ActiveRecord::Base
   attr_accessible :title, :users
 
   after_initialize do |convo|
-    convo.title = convo.default_conversation_title if convo.title.empty?
+    convo.title = convo.default_conversation_title if (convo.title.nil? || convo.title.empty?)
   end
 
   # Public: Stitch together the events on a conversation into "conversation
@@ -59,6 +59,8 @@ class Conversation < ActiveRecord::Base
   # A conversation is unread if (and only if) it contains a message event more
   # recent than the last event a user has seen.
   def unread_for?(user)
+    return false if self.events.length == 0
+
     last_read_event_id = self.reading_logs.where({:user_id => user.id}).first.last_read_event
     return true if last_read_event_id == nil
 
@@ -69,8 +71,10 @@ class Conversation < ActiveRecord::Base
   # Internal: Creates a default conversation title based on who the participants
   # are.
   #
-  # Returns "A conversation with <name>, <name>" for each user.
+  # Returns "New Conversation" when there's only one user, or "A conversation
+  # with <name>, <name>" for each user.
   def default_conversation_title()
+    return 'New Conversation' if self.users.length <= 1
     "A conversation with #{self.users.map {|u| u.name}.join(', ')}"
   end
 end
