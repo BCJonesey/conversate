@@ -1,5 +1,6 @@
 @import 'b-buttons.less';
 @import 'b-mixins.less';
+@import 'variables.css.less';
 
 
 /* Button Groups */
@@ -53,10 +54,13 @@
 .btn-toolbar {
   font-size: 0; // Hack to remove whitespace that results from using inline-block
   .clearfix();
-
+  // adjust spacing for btn's
   > .btn + .btn,
   > .btn-group + .btn,
   > .btn + .btn-group {
     margin-left: 5px;
   }
+  padding:5px;
+  background-color: @backgroundDarkColor;
 }
+

@@ -4,6 +4,12 @@
   <div class="divider-vertical column-v">
   </div>
   <div id="column-list">
+  <div class='btn-toolbar border-bottom clearfix'>
+  <div class='btn-group pull-right'>
+    <a href='#' class='btn'>New</a>
+    </div>
+  </div>
+  <div id='conversations-list'>
     <% @conversations.each do |conversation| %>
       <div class="<%= list_item_classes(conversation, @opened_conversation, current_user) %>">
         <a href="<%= conversation_path conversation.id %>">
@@ -14,8 +20,10 @@
       <div class="list-divider"></div>
     <% end %>
   </div>
+        </div>
+
   <div class="divider-vertical column-v">
-  </div>
+</div>
   <div id="column-conversation">
     <% if @opened_conversation %>
       <div class="conversation-header">
