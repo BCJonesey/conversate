@@ -121,6 +121,6 @@
 <% end -%>
 <%= content_for :javascript do -%>
   <%= javascript_tag do %>
-    ConversateApp.initialize({});
+    ConversateApp.initialize({conversations: <%= @conversations.to_json.html_safe %>});
   <% end %>
 <% end -%>
