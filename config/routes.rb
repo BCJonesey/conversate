@@ -10,6 +10,10 @@ Conversate::Application.routes.draw do
   put 'conversations/:id/delete' => 'conversations#delete', :as => 'delete_message'
   put 'conversations/:id/updateusers' => 'conversations#update_users', :as => 'update_users'
 
+  namespace :api do
+    resources :conversations, :only => [:index, :show]
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
