@@ -11,8 +11,8 @@ var ConversateApp = {
 	Views: {},
 	Routers: {},
 	initialize: function(data) {
-		var conversations = new ConversateApp.Collections.Conversations(data.conversations);
-		new ConversateApp.Routers.Conversations({ conversations: conversations});
+		this.conversations = new ConversateApp.Collections.Conversations(data.conversations);
+		new ConversateApp.Routers.Conversations({ conversations: this.conversations});
 		Backbone.history.start();
 	}
 }
