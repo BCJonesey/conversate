@@ -1,10 +1,9 @@
-<h1>Conversations/index</h1>
-	<% conversations.each( function(conversation) { %>
-		<div>
-         	<a href="<%= conversation.get('id') %>">
-            	<div class="list-title"><%= conversation.get('title') %></div>
-        		<div class="list-participants"><%= conversation.get('participants') %></div>
-          	</a>
-        </div>
-        <div class="list-divider"></div>
-	<% });%>
+<% conversations.each( function(conversation) { %>
+	<div class="list-item">
+     	<a href="/conversations/<%= conversation.get('id') %>">
+        	<div class="list-title"><%= conversation.get('title') %></div>
+    		<div class="list-participants"><%= conversation.get('participants') %></div>
+      	</a>
+    </div>
+    <div class="list-divider"></div>
+<% });%>

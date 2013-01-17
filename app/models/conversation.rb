@@ -67,6 +67,10 @@ class Conversation < ActiveRecord::Base
     self.events.where({:event_type => 'message'}).order('created_at DESC').first.created_at > Event.find(last_read_event_id).created_at
   end
 
+  def as_json(options)
+    super(methods: [:participants])
+  end
+
   protected
   # Internal: Creates a default conversation title based on who the participants
   # are.
