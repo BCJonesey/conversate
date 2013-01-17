@@ -109,6 +109,8 @@
     <% end %>
   </div>
 </div>
+<div id="temp_backbone_hook">
+</div>
 <%= javascript_tag do -%>
   <% if @opened_conversation %>
     window.addressBook = <%= user_tokens_json(current_user.address_book) %>;
