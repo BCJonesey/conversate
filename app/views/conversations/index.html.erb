@@ -112,7 +112,7 @@
 <%= javascript_tag do -%>
   <% if @opened_conversation %>
     window.addressBook = <%= user_tokens_json(current_user.address_book) %>;
-    window.participants = <%= user_tokens_json(@opened_conversation.users) %>;
+    window.participants = <%= user_tokens_json(@opened_conversation.users - [current_user]) %>;
 
     window.new_conversation = <%= @new_conversation.to_s %>;
   <% end %>

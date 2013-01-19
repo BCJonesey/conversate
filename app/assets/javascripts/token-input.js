@@ -79,6 +79,7 @@
     prefill.forEach(function(tok) {
       tokens.prepend(token(option(tok)));
     });
+    tokens.prepend('<li class="user-reminder">You, and...</li>');
 
     container.on('click', function() {
       input.focus();
