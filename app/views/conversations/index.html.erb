@@ -10,15 +10,6 @@
       </div>
     </div>
     <div id='conversations-list'>
-      <% @conversations.each do |conversation| %>
-        <div class="<%= list_item_classes(conversation, @opened_conversation, current_user) %>">
-          <a href="<%= conversation_path conversation.id %>">
-            <div class="list-title"><%= conversation.title %></div>
-            <div class="list-participants"><%= conversation.participants %></div>
-          </a>
-        </div>
-        <div class="list-divider"></div>
-      <% end %>
     </div>
   </div>
 
@@ -115,5 +106,10 @@
     window.participants = <%= user_tokens_json(@opened_conversation.users) %>;
 
     window.new_conversation = <%= @new_conversation.to_s %>;
+  <% end %>
+<% end -%>
+<%= content_for :javascript do -%>
+  <%= javascript_tag do %>
+    ConversateApp.initialize({conversations: <%= @conversations.to_json.html_safe %>});
   <% end %>
 <% end -%>
