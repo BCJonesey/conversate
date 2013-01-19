@@ -1,110 +1,144 @@
 @import "mixins.css.less";
 @import "variables.css.less";
 
-.token-container {
-  width: 100%;
-  border: 1px solid @inputBorderColor;
-  background-color: @inputBackgroundColor;
-  font-family: sans-serif;
-  cursor: text;
-  position: relative;
-  text-align: left;
+.conversation-info{
+    height:auto;
+    overflow: visible;
+    padding:.1rem;
+    z-index: 100;
+    .title, .token-container{
+        overflow: visible;
+        width: 100%;
+        margin:0;
+        border: 1px solid transparent;
+        background-color: transparent;
+        font-family: sans-serif;
+        cursor: default;
+        font-size: 1rem;
+        padding: .1rem;
+        outline: none;
 
-  .token-input {
-    margin: 0;
-    font-size: 1em;
-    display: inline-block;
-    width: 3em;
-    border: none;
-    outline: none;
-  }
+        &:focus,
+        &.focus{
+            background-color: @inputBackgroundColor;
+            border-color: @inputBorderColor;
+            -webkit-transition: background-color .1s;
 
-  .token-options {
-    margin-top: 0;
-    padding-left: 0.2em;
-    position: absolute;
-    left: -4px;
-    right: -1px;
-    background-color: @backgroundColor;
-
-    .token-option {
-      cursor: pointer;
-      list-style-type: none;
-      border: 1px solid @inputBorderColor;
-      border-bottom-width: 0;
-      .body-font();
-
-      &:last-child {
-        border-bottom-width: 1px;
-      }
-
-      &.target {
-        background-color: #d9edf7;
-      }
+        }     
     }
-  }
-
-  .tokens {
-    padding: .2em;
-    margin: 0;
-    display: inline-block;
-
-    > li {
-      display: inline-block;
+    .title{
+        padding:.3rem;
+        text-align: center;
+        font-weight: bold;
+        .body-font();
+        &:focus{
+            cursor: text;
+        }
     }
+    
+    
+    .token-container {
+      position: relative;
+      text-align: center;
 
-    .token {
-      padding: .2em .6em .2em .2em;
-      margin-right: .2em;
-      margin-bottom: .2em;
-      border: 1px solid #3a87ad;
-      border-radius: 3px;
-      background-color: #d9edf7;
-      .body-font();
-
-      .close {
-        cursor: pointer;
-        margin-left: .5em;
-        margin-top: .4em;
+    
+      .token-options {
+        margin-top: 0;
+        padding-left: 0.2em;
+        position: absolute;
+        left: -4px;
+        right: -1px;
+        background-color: @backgroundColor;
+    
+        .token-option {
+          cursor: pointer;
+          list-style-type: none;
+          border: 1px solid @inputBorderColor;
+          border-bottom-width: 0;
+          .body-font();
+    
+          &:last-child {
+            border-bottom-width: 1px;
+          }
+    
+          &.target {
+            background-color: #d9edf7;
+          }
+        }
+      }
+      
+      .tokens {
+        padding: .2em;
+        margin: 0;
         display: inline-block;
-        width: .7em;
-        height: .7em;
-        -webkit-transform: rotate(45deg);
-
-        &:after {
-          content: "";
-          height: .7em;
-          width: .1em;
-          background-color: #555;
-          display: block;
-          position: absolute;
-          left: .3em;
-        }
-
-        &:before {
-          content: "";
-          height: .1em;
-          width: .7em;
-          background-color: #555;
-          display: block;
-          position: absolute;
-          top: .3em;
+    
+        > li {
+          display: inline-block;
+          list-style-type: none;
         }
       }
     }
-  }
+
 }
+    
+    
+    // Styling the Tokens
 
+.token-container{
+    &.focus{
+        text-align: left;
+    }
+     & .token-input {
+            margin: 0;
+            font-size: 1em;
+            display: none;
+            width: 5em;
+            border: none;
+            outline: none;
+            background-color: transparent;
+      }
+     &.focus .token-input{display: inline-block;}
+    & .token{
+        .body-font();
+        border-radius: .2rem;
+        cursor: default;
+        font-size:.8rem;
+        color:#888;
+        & .close{
+           display: none;
+        }
+    }
+    
+    .token + .token:before{
+            content: ",  "
+        }
 
+    &.focus .token{
+        border:1px solid #BDF;
+        padding:.1rem .3rem;
+        margin-right: .2rem;
+        background-color: #F0F8FF;
+        position: relative;
+        &:before{display: none}
+        & .close{
+            padding-left:.3rem;
+            display: inline;
+            color:#CCC;
+            text-shadow: 1px 1px 1px white;
+            cursor: pointer;
+        }
+        &.close:hover{
+            color:#666;
+        }
 
-
-
-
-
-
-
-
-
-
-
-
+    }
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    

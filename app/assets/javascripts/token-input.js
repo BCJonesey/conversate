@@ -6,7 +6,7 @@
   var token = function(option) {
     return $('<li class="token" data-token-id="' +
              option.attr('data-token-id') + '">' +
-             option.text() + '<span class="close"></span></li>');
+             option.text() + '<span class="close">x</span></li>');
   }
 
   var targetUp = function(root) {

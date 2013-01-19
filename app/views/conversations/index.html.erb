@@ -25,16 +25,16 @@
   <div class="divider-vertical column-v"></div>
   <div id="column-conversation">
     <% if @opened_conversation %>
-      <div class="conversation-header">
+      <div class="conversation-info">
         <%= form_tag retitle_conversation_path,
                      :method => 'put',
                      :class => 'title' do %>
-          <%= text_field_tag :title, @opened_conversation.title %>
+          <%= text_field_tag :title, @opened_conversation.title, :id => nil, :class => "title" %>
           <%= submit_tag 'Retitle' %>
         <% end %>
         <%= form_tag update_users_path,
                      :method => 'put',
-                     :class => 'users' do %>
+                     :class => 'participants' do %>
           <%= text_field_tag :users, '', :autocomplete => 'off' %>
           <%= submit_tag 'Change Users' %>
         <% end %>

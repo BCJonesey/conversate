@@ -121,19 +121,19 @@
     left: @navigationWidth + @listWidth + (2 * @dividerWidth);
     border-right: none;
 
-    .conversation-header {
+    .conversation-info {
       background-color: @backgroundDarkerColor;
       position: relative;
       margin: 0;
-      height: @headerHeight;
+//      height: @headerHeight;
       .usual-border(all);
       border-width: 0;
       border-bottom-width: 1px;
       .title-font();
-      padding: 2px 5px;
-      text-align: center;
-      padding-top: 10px;
-      overflow: hidden;
+//      padding: 2px 5px;
+//      text-align: center;
+//      padding-top: 10px;
+//      overflow: hidden;
 
       form {
         input[type="submit"] {
@@ -141,6 +141,7 @@
         }
       }
 
+/*
       form.title {
         input[type="text"] {
           .title-font;
@@ -159,7 +160,9 @@
           }
         }
       }
+*/
 
+/*
       form.users {
         display: none;
       }
@@ -172,7 +175,8 @@
         form.users {
           display: block;
         }
-      }
+ 
+     }*/
     }
 
     #thread, #compose {
