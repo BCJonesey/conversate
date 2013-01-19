@@ -14,7 +14,16 @@
         <div class="<%= list_item_classes(conversation, @opened_conversation, current_user) %>">
           <a href="<%= conversation_path conversation.id %>">
             <div class="list-title"><%= conversation.title %></div>
-            <div class="list-participants"><%= conversation.participants %></div>
+            <div class="list-participants">
+              <%# If there's only one user, it must be the current user
+                  (or we wouldn't be allowed to look at it), and we'll
+                  strip that user out of the display, so we need a placeholder. %>
+              <% if conversation.users.length > 1 %>
+                <%= conversation.participants(current_user).map {|u| u.name}.join(', ') %>
+              <% else %>
+                &nbsp;
+              <% end %>
+            </div>
           </a>
         </div>
         <div class="list-divider"></div>
@@ -112,7 +121,7 @@
 <%= javascript_tag do -%>
   <% if @opened_conversation %>
     window.addressBook = <%= user_tokens_json(current_user.address_book) %>;
-    window.participants = <%= user_tokens_json(@opened_conversation.users - [current_user]) %>;
+    window.participants = <%= user_tokens_json(@opened_conversation.participants(current_user)) %>;
 
     window.new_conversation = <%= @new_conversation.to_s %>;
   <% end %>
