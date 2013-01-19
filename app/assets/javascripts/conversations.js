@@ -18,65 +18,34 @@
     };
     var currentUsers = userIds();
 
-    var close = function() {
-      header.removeClass("editing");
-      titleEditor.off("blur");
-      titleEditor.off("keydown");
-      $(window).off("click");
-
-      var nowUsers = userIds();
-      if (currentUsers.toString() !== nowUsers.toString()) {
-        userEditor.val(nowUsers);
-        userEditor.parents("form").submit();
+    titleEditor.on("blur", function(e) {
+      if (titleEditor.val() == currentTitle) {
       }
-    };
-
-    var closeIfOutside = function(e) {
-      if ($(e.target).parents(".conversation-header").length > 0 ||
-          $(e.target).closest("html").length == 0) {
-        e.preventDefault();
-        e.stopPropagation();
-        return;
-      }
-      close();
-    };
-
-    titleEditor.on("focus", function() {
-      if (!header.hasClass("editing")) {
-        titleEditor.blur();
+      else {
+        titleEditor.parents("form").submit();
       }
     });
-
-    header.on("click", function(e) {
-      if (header.hasClass("editing")) { return; }
-
-      e.stopPropagation();
-      e.preventDefault();
-      header.addClass("editing");
-
-      titleEditor.on("blur", function(e) {
+    titleEditor.on("keydown", function(e) {
+      if (e.keyCode == 13) { // Enter
         if (titleEditor.val() == currentTitle) {
+          e.stopPropagation();
+          e.preventDefault();
         }
-        else {
-          titleEditor.parents("form").submit();
-        }
-      });
-      titleEditor.on("keydown", function(e) {
-        if (e.keyCode == 13) { // Enter
-          if (titleEditor.val() == currentTitle) {
-            e.stopPropagation();
-            e.preventDefault();
-            header.removeClass("editing");
-            titleEditor.off("blur");
-            titleEditor.off("keydown");
-          }
-        }
-      });
-
-      $(window).on("click", function(e) {
-        closeIfOutside(e)
-      });
+      }
     });
+
+    $('html').on('click', function(e) {
+      var target = $(e.target);
+      console.log(target);
+      if (target.closest('html').length > 0 &&
+          target.closest('.token-container').length == 0) {
+        var nowUsers = userIds();
+        if (currentUsers.toString() !== nowUsers.toString()) {
+          userEditor.val(nowUsers);
+          userEditor.parents("form").submit();
+        }
+      }
+    })
   };
 
   var setupCompose = function() {

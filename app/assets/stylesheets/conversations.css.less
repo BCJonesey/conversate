@@ -122,7 +122,7 @@
       background-color: @backgroundDarkerColor;
       position: relative;
       margin: 0;
-      height: @headerHeight;
+      height: @headerHeight * 3;
       .usual-border(all);
       border-width: 0;
       border-bottom-width: 1px;
@@ -156,20 +156,6 @@
           }
         }
       }
-
-      form.users {
-        display: none;
-      }
-
-      &.editing {
-        height: auto;
-        z-index: 10;
-        overflow: visible;
-
-        form.users {
-          display: block;
-        }
-      }
     }
 
     #thread, #compose {
@@ -182,7 +168,7 @@
       overflow-y: scroll;
       border: none;
       position: absolute;
-      top: @headerHeight;
+      top: @headerHeight * 3;
       bottom: @composeHeight;
       left: 0;
       right: 0;

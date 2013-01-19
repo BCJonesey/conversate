@@ -69,7 +69,7 @@ class ConversationsController < ApplicationController
   def update_users
     conversation = Conversation.find(params[:id])
     updated_users = User.find(params[:users].split(',').collect {|u| u.to_i})
-    removed_users = conversation.users - updated_users
+    removed_users = conversation.users - updated_users - [current_user]
     added_users = updated_users - conversation.users
 
     user_event = Event.new({:conversation_id => conversation.id,

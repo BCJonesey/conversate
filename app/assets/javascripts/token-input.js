@@ -47,9 +47,9 @@
       var query = new RegExp(input.val(), 'i');
       options.empty();
       var optionTags = tokens.filter(function(token) { return query.test(token.name); });
-      var optionTags = optionTags
+      optionTags = optionTags
                              .filter(function(token) {
-                               var tokens = $('.token');
+                               var tokens = root.find('.token');
                                for (var i = 0; i < tokens.length; i++) {
                                  if ($(tokens[i]).attr('data-token-id') == (token.id+ '')) {
                                    return false;
@@ -57,7 +57,8 @@
                                }
                                return true;
                              });
-      var optionTags = optionTags.map(function(token) { return option(token); });
+      if (optionTags.length == 0) { return; }
+      optionTags = optionTags.map(function(token) { return option(token); });
 
       var firstTag = optionTags.shift();
       firstTag.addClass('target');
@@ -85,7 +86,16 @@
 
     container.on('click', function() {
       input.focus();
+      container.addClass('focus');
     });
+
+    $('html').on('click', function(e) {
+      var target = $(e.target);
+      if (target.closest('html').length > 0 &&
+          target.closest('.token-container').length == 0) {
+        container.removeClass('focus');
+      }
+    })
 
     input.on('keyup', function(e) {
       if (e.which == 38) { // Up
@@ -109,14 +119,6 @@
         e.preventDefault();
         e.stopPropagation();
       }
-    });
-
-    input.on('focus', function(e) {
-      container.addClass('focus');
-    });
-
-    input.on('blur', function(e) {
-      container.removeClass('focus');
     });
 
     $('.token-option').live('mouseover', function(e) {
