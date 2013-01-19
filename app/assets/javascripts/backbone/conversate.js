@@ -11,8 +11,14 @@ var ConversateApp = {
 	Views: {},
 	Routers: {},
 	initialize: function(data) {
-		this.conversations = new ConversateApp.Collections.Conversations(data.conversations);
-		new ConversateApp.Routers.Conversations({ conversations: this.conversations});
+		var self = this;
+		self.conversations = new ConversateApp.Collections.Conversations(data.conversations);
+		new ConversateApp.Routers.Conversations({ conversations: self.conversations});
 		Backbone.history.start();
+
+		setInterval(function () {
+			console.log('fetch');
+    		self.conversations.fetch({update: true});
+		}, 5000);
 	}
 }

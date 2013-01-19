@@ -10,15 +10,6 @@
       </div>
     </div>
     <div id='conversations-list'>
-      <% @conversations.each do |conversation| %>
-        <div class="<%= list_item_classes(conversation, @opened_conversation, current_user) %>">
-          <a href="<%= conversation_path conversation.id %>">
-            <div class="list-title"><%= conversation.title %></div>
-            <div class="list-participants"><%= conversation.participants %></div>
-          </a>
-        </div>
-        <div class="list-divider"></div>
-      <% end %>
     </div>
   </div>
 
@@ -108,8 +99,6 @@
       </div>
     <% end %>
   </div>
-</div>
-<div id="temp_backbone_hook">
 </div>
 <%= javascript_tag do -%>
   <% if @opened_conversation %>
