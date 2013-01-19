@@ -106,7 +106,15 @@
         e.preventDefault();
         e.stopPropagation();
       }
-    })
+    });
+
+    input.on('focus', function(e) {
+      container.addClass('editing');
+    });
+
+    input.on('blur', function(e) {
+      container.removeClass('editing');
+    });
 
     $('.token-option').live('mouseover', function(e) {
       var currentTarget = $('.token-option.target');
