@@ -59,12 +59,13 @@ class Conversation < ActiveRecord::Base
   # A conversation is unread if (and only if) it contains a message event more
   # recent than the last event a user has seen.
   def unread_for?(user)
-    return false if self.events.length == 0
+    messages = self.events.where(:event_type => 'message')
+    return false if messages.length == 0
 
     last_read_event_id = self.reading_logs.where({:user_id => user.id}).first.last_read_event
     return true if last_read_event_id == nil
 
-    self.events.where({:event_type => 'message'}).order('created_at DESC').first.created_at > Event.find(last_read_event_id).created_at
+    messages.order('created_at DESC').first.created_at > Event.find(last_read_event_id).created_at
   end
 
   protected
