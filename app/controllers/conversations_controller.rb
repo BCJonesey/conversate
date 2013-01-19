@@ -2,6 +2,9 @@ class ConversationsController < ApplicationController
   before_filter :require_login
 
   def index
+    conversations = current_user.conversations.order('updated_at DESC')
+    redirect_to conversation_path(conversations.first.id) and return unless conversations.length == 0
+
     render_conversation_view
   end
 
