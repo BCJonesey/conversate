@@ -29,6 +29,8 @@
 
   var selectOption = function(root) {
     var target = root.find('.token-option.target');
+    if (target.length == 0) { return; }
+
     var input = root.find('input');
     input.parent().before(token(target));
     input.val('');
