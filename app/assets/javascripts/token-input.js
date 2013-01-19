@@ -109,11 +109,11 @@
     });
 
     input.on('focus', function(e) {
-      container.addClass('is-being-edited');
+      container.addClass('focus');
     });
 
     input.on('blur', function(e) {
-      container.removeClass('is-being-edited');
+      container.removeClass('focus');
     });
 
     $('.token-option').live('mouseover', function(e) {
