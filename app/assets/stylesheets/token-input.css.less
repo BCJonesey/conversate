@@ -2,57 +2,64 @@
 @import "variables.css.less";
 
 .conversation-info{
+    text-align: left;
+    background-color: @backgroundDarkerColor;
+//    position: relative;
+    margin: 0;
+//    .usual-border(all);
+    border-width: 0;
+    border-bottom: 1px solid #CCC;
+    .title-font();
+    form {
+          input[type="submit"] {
+              display: none;
+          }
+          input{
+              background-color: transparent;
+          }
+    }
+
     & form, 
     & form.title{padding:0; margin:0;border:none;}
     height:auto;
     overflow: visible;
-    padding:.2rem .7rem;
+    padding:0;
     margin:0;
     z-index: 2;
-    & input.title, 
+    & input.title{
+        padding:.4rem;
+        border:none;  
+        margin:0;
+        width:100%;
+        outline:none;
+    }
     & div.token-container{
         overflow: visible;
         width: 100%;
         margin:0;
-        border: 1px solid transparent;
-        background-color: transparent;
         font-family: sans-serif;
+        //border:none;
         cursor: default;
         font-size: 1rem;
         padding: .2rem;
         outline: none;
-        &:focus,
-        &.focus{
-            background-color: @inputBackgroundColor;
-            border-color: @inputBorderColor;
-            box-shadow:inset 0 0 .3rem rgba(0,0,0,0.2);
-            -webkit-transition: background-color .1s;
-            padding:.4rem;
-            margin:.2rem 0;
-        }     
     }
     .title{
-        text-align: center;
+//        text-align: center;
         font-weight: bold;
         .body-font();
-        &:focus{
-            cursor: text;
-        }
+        border-bottom: 1px solid #CCC;
     }
-    
-    
     .token-container {
       position: relative;
-      text-align: center;
-
-    
-      .token-options {
-        margin-top: 0;
-        padding-left: 0.2em;
-        position: absolute;
-        left: -4px;
-        right: -1px;
-        background-color: @backgroundColor;
+//      text-align: center;
+          .token-options {
+              margin-top: 0;
+            padding-left: 0.2em;
+            position: absolute;
+            left: -3px;
+            right: 0;
+            background-color: @backgroundColor;
     
         .token-option {
           cursor: pointer;
@@ -72,7 +79,7 @@
       }
       
       .tokens {
-        padding: .2em;
+        padding:0;
         padding-top:0;
         margin: 0;
         display: inline-block;
@@ -99,7 +106,7 @@
             outline: none;
             background-color: transparent;
       }
-     &.focus .token-input{display: inline-block;}
+     &.focus .token-input{display: inline;}
     & .token{
         .body-font();
         border-radius: .2rem;
@@ -116,30 +123,41 @@
     
     .token + .token:before{
             content: ",  "
-        }
+    }
+}
 
-    &.focus .token{
-        padding:.05rem .3rem .1rem;
-        margin-right: .5rem;
-        font-size: 0.8rem;
-        border: none;
-        box-shadow: 0px 1px 2px #AAA;
-        color: #444;
-        text-shadow: 1px 1px 1px white;
-        background-color: #DEF;
-        
-        &:before{display: none}
-        & .close{
-            padding-left:.3rem;
-            display: inline;
-            color:#CCC;
-//            text-shadow: 1px 1px 1px white;
-            cursor: pointer;
-        }
-        &.close:hover{
-            color:#666;
-        }
+input.title:focus, 
+.token-container.focus{
+    background-color: white;
+}
+input.title:focus{
+    border-bottom:1px solid #CCC;
+}
+.token-container.focus{
+    border-top:1px solid #CCC;
+}
 
+.token-container.focus .token{
+    padding:.05rem .3rem .1rem;
+    margin-right: .5rem;
+    font-size: 0.8rem;
+    border: none;
+    box-shadow: 0px 1px 2px #AAA;
+    color: #444;
+    text-shadow: 1px 1px 1px white;
+    background-color: #DEF;
+    
+    // remove the commas
+    &:before{display: none}
+    & .close{
+        padding-left:.3rem;
+        display: inline;
+        color:#CCC;
+    //            text-shadow: 1px 1px 1px white;
+        cursor: pointer;
+    }
+    &.close:hover{
+        color:#666;
     }
 }
     
