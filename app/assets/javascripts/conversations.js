@@ -39,6 +39,7 @@
       console.log(currentUsers);
       console.log(nowUsers);
         if (currentUsers.toString() !== nowUsers.toString()) {
+          userEditor.hide();
           userEditor.val(nowUsers);
           userEditor.parents("form").submit();
         }
