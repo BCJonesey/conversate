@@ -45,7 +45,7 @@ class Conversation < ActiveRecord::Base
 
   def participants(current_user)
     active = self.events.order('created_at DESC').collect {|e| e.user}.uniq
-    (active + (self.users - active) - [current_user])
+    (active + (self.users - active) - [current_user]) - (active - self.users)
   end
 
   # Public: Gets the next id for a message in this conversation.
