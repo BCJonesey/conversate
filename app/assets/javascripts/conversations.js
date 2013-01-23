@@ -1,8 +1,8 @@
 (function() {
   var setupConversationEditor = function() {
-    var header = $("#column-conversation .conversation-header");
+    var header = $("#column-conversation .conversation-info");
     var titleEditor = header.find("form.title input[type='text']");
-    var userEditor = header.find("form.users input[type='text']");
+    var userEditor = header.find("form.participants input[type='text']");
 
     // addressBook defined in index.html.erb.
     if (window.addressBook && window.participants) {
@@ -14,17 +14,14 @@
     var currentTitle = titleEditor.val();
 
     var userIds = function() {
-      return $.map($("form.users .token"), function(u) { return $(u).attr("data-token-id"); }).sort();
+      return $.map($("form.participants .token"), function(u) { return $(u).attr("data-token-id"); }).sort();
     };
     var currentUsers = userIds();
 
     titleEditor.on("blur", function(e) {
-      if (titleEditor.val() == currentTitle) {
-      }
-      else {
-        titleEditor.parents("form").submit();
-      }
+      titleEditor.parents("form").submit();
     });
+
     titleEditor.on("keydown", function(e) {
       if (e.keyCode == 13) { // Enter
         if (titleEditor.val() == currentTitle) {
@@ -36,10 +33,11 @@
 
     $('html').on('click', function(e) {
       var target = $(e.target);
-      console.log(target);
       if (target.closest('html').length > 0 &&
           target.closest('.token-container').length == 0) {
         var nowUsers = userIds();
+      console.log(currentUsers);
+      console.log(nowUsers);
         if (currentUsers.toString() !== nowUsers.toString()) {
           userEditor.val(nowUsers);
           userEditor.parents("form").submit();
@@ -70,8 +68,8 @@
     // The page will only open in editing mode if it's a new conversation.
     // new_conversation is defined in index.html.erb.
     if (window.new_conversation) {
-      $('.conversation-header').click();
-      $('form.users input[type="text"]').focus();
+      $('.conversation-info').click();
+      $('form.participants input[type="text"]').focus();
     }
     else {
       $('#compose textarea').focus();

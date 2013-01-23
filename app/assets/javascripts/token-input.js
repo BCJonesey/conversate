@@ -6,7 +6,7 @@
   var token = function(option) {
     return $('<li class="token" data-token-id="' +
              option.attr('data-token-id') + '">' +
-             option.text() + '<span class="close"></span></li>');
+             option.text() + '<span class="close">x</span></li>');
   }
 
   var targetUp = function(root) {
@@ -72,7 +72,7 @@
     prefill = prefill || [];
 
     input.addClass("token-input");
-    input.wrap($('<div class="token-container"><ul class="tokens"><li></li></ul></div>'));
+    input.wrap($('<div class="token-container"><ul class="tokens"><li class="token-input-wrap"></li></ul></div>'));
     var container = input.parents('.token-container').first();
 
     var options = $('<ul class="token-options"></ul>');
