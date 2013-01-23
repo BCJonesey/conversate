@@ -1,154 +1,193 @@
 @import "mixins.css.less";
 @import "variables.css.less";
 
+
 .conversation-info{
+    background-color: @backgroundDarkColor;
+    margin: 0;
+    border-width: 0;
+    border-bottom: 1px solid #CCC;
+    .title-font();
+    form {
+          input[type="submit"] {
+              display: none;
+          }
+          input{
+              background-color: transparent;
+          }
+    }
+
+    & form{padding:0; margin:0;border:none;}
     height:auto;
     overflow: visible;
-    padding:.1rem;
-    z-index: 100;
-    .title, .token-container{
-        overflow: visible;
-        width: 100%;
+    padding:0;
+    margin:0;
+    z-index: 2;
+    & .conv-info-title{
+    }
+    & div.token-container{
+        //overflow: visible;
+        //width: 100%;
         margin:0;
-        border: 1px solid transparent;
-        background-color: transparent;
         font-family: sans-serif;
+        //border:none;
         cursor: default;
-        font-size: 1rem;
-        padding: .1rem;
+        //font-size: 1rem;
+        //padding: .2rem;
         outline: none;
-
-        &:focus,
-        &.focus{
-            background-color: @inputBackgroundColor;
-            border-color: @inputBorderColor;
-            -webkit-transition: background-color .1s;
-
-        }
     }
-    .title{
-        padding:.3rem;
-        text-align: center;
-        font-weight: bold;
-        .body-font();
-        &:focus{
-            cursor: text;
-        }
-    }
-
-
-    .token-container {
-      position: relative;
-      text-align: center;
-
-
+}
+.token-container {
+  //position: relative;
+//      text-align: center;
       .token-options {
-        margin-top: 0;
+          margin-top: 0;
         padding-left: 0.2em;
         position: absolute;
-        left: -4px;
-        right: -1px;
+        left: -3px;
+        right: 0;
         background-color: @backgroundColor;
+    .token-option {
+      cursor: pointer;
+      list-style-type: none;
+      border: 1px solid @inputBorderColor;
+      border-bottom-width: 0;
+      .body-font();
 
-        .token-option {
-          cursor: pointer;
-          list-style-type: none;
-          border: 1px solid @inputBorderColor;
-          border-bottom-width: 0;
-          .body-font();
-
-          &:last-child {
-            border-bottom-width: 1px;
-          }
-
-          &.target {
-            background-color: #d9edf7;
-          }
-        }
+      &:last-child {
+        border-bottom-width: 1px;
       }
 
-      .tokens {
-        padding: .2em;
-        margin: 0;
-        display: inline-block;
-
-        > li.token, li.token-input-wrap {
-          display: inline-block;
-          list-style-type: none;
-        }
+      &.target {
+        background-color: #d9edf7;
       }
     }
+  }
 
+      .tokens {
+        padding:0;
+        padding-top:0;
+        margin: 0;
+        display: inline;
+
+        > li.token, li.token-input-wrap {
+          display: inline;
+          list-style-type: none;
+        }
+    }
+}
+
+
+
+li.user-reminder {
+  margin-right: .4em;
+  display: none;
+  font-size: 0.8rem;
+  color: #888;
+
+  &:nth-last-child(2) {
+    display: inline;
+  }
 }
 
 
     // Styling the Tokens
 
-.token-container{
-    &.focus{
-        text-align: left;
-    }
-
-    li.user-reminder {
-      margin-right: .4em;
-      display: none;
-
-      &:nth-last-child(2) {
-        display: inline;
-      }
-    }
-
-    & .token-input {
-      margin: 0;
-      font-size: 1em;
-      display: none;
-      width: 5em;
-      border: none;
-      outline: none;
-      background-color: transparent;
-    }
-    &.focus .token-input{display: inline-block;}
-    & .token, & .user-reminder{
-      .body-font();
-      border-radius: .2rem;
-      cursor: default;
-      font-size:.8rem;
-      color:#888;
-      & .close{
-        display: none;
-      }
-    }
-
-    .token + .token:before {
-      content: ",  "
-    }
-
-    &.focus .token{
-        border:1px solid #BDF;
-        padding:.1rem .3rem;
-        margin-right: .2rem;
-        background-color: #F0F8FF;
-        position: relative;
-        &:before{display: none}
-        & .close{
-            padding-left:.3rem;
+.token-input {
+            margin: 0;
+            font-size: 1em;
+            width: 5em;
+            border: none;
+            outline: none;
+            background-color: transparent;
             display: inline;
-            color:#CCC;
-            text-shadow: 1px 1px 1px white;
-            cursor: pointer;
-        }
-        &.close:hover{
-            color:#666;
-        }
-
-    }
 }
 
 
 
 
 
+    /* Rewrite */
 
+/* <div.conv-info>
+    <form>
+        <input.conv-info-title>
+    <form>
+        <div.conv-info-participants>
+            <input>*/
 
+.conv-info{
+    background-color: @backgroundDarkColor;
+}
 
+.conv-info-title{
+    border:none;
+    border-bottom: 1px solid #CCC;
+    cursor:default;
+    padding:.4rem;
+    margin:0;
+    width:100%;
+    outline:none;
+    font-weight: bold;
+    .body-font();
 
+    &:focus{
+            background-color: white;
+//            border-bottom-color: #CCC;
+            cursor:text;
+    }
+}
+
+.participants-list{
+//    border-top: 1px solid transparent;
+    padding:.2em;
+    &.focus-test,
+    &.focus{
+        background-color: white;
+//        border-top-color: #CCC;
+    }
+}
+
+// when the participants list is not focused
+
+.participant{
+    display:inline;
+    border:none;
+    font-size: 0.8rem;
+    color: #888;
+    & .participant-remove{
+        display: none;
+    }
+}
+.participant + .participant:before{
+            content: ",  "
+}
+
+// when the participants list is focused
+
+.participants-list.focus .participant,
+.participants-list.focus-test .participant{
+    padding: 0 .3rem;
+    margin-right: .5rem;
+    color: #444;
+    text-shadow: 1px 1px 1px white;
+    background-color: @highlightColor;
+    box-shadow: 0px 0px 1px @highlightColor, 0 0 2px #AAA;
+
+    // remove the commas
+    &:before{
+        display: none;
+    }
+    & input{
+        display:inline;
+    }
+    & .participant-remove{
+        padding-left:.3rem;
+        display: inline;
+        font-size:.8rem;
+        color:#CCC;
+    //            text-shadow: 1px 1px 1px white;
+        cursor: pointer;
+    }
+
+}

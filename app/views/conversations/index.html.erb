@@ -36,15 +36,14 @@
     <% if @opened_conversation %>
       <div class="conversation-info">
         <%= form_tag retitle_conversation_path,
-                     :method => 'put',
-                     :class => 'title' do %>
-          <%= text_field_tag :title, @opened_conversation.title, :id => nil, :class => "title" %>
+                     :method => 'put' do %>
+          <%= text_field_tag :title, @opened_conversation.title, :id => nil, :class => "conv-info-title" %>
           <%= submit_tag 'Retitle' %>
         <% end %>
         <%= form_tag update_users_path,
                      :method => 'put',
                      :class => 'participants' do %>
-          <%= text_field_tag :users, '', :autocomplete => 'off' %>
+          <%= text_field_tag :users, '', :autocomplete => 'off', :class => "participant-input"%>
           <%= submit_tag 'Change Users' %>
         <% end %>
       </div>

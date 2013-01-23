@@ -117,22 +117,6 @@
     left: @navigationWidth + @listWidth + (2 * @dividerWidth);
     border-right: none;
 
-    .conversation-info {
-      background-color: @backgroundDarkerColor;
-      position: relative;
-      margin: 0;
-      .usual-border(all);
-      border-width: 0;
-      border-bottom-width: 1px;
-      .title-font();
-
-      form {
-        input[type="submit"] {
-          display: none;
-        }
-      }
-    }
-
     #thread, #compose {
       padding: 5px;
     }
@@ -143,7 +127,7 @@
       overflow-y: scroll;
       border: none;
       position: absolute;
-      top: @headerHeight;
+      top: @infoHeight;
       bottom: @composeHeight;
       left: 0;
       right: 0;

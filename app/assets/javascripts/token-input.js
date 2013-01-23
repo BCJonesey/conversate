@@ -4,9 +4,9 @@
   }
 
   var token = function(option) {
-    return $('<li class="token" data-token-id="' +
+    return $('<li class="token participant" data-token-id="' +
              option.attr('data-token-id') + '">' +
-             option.text() + '<span class="close">x</span></li>');
+             option.text() + '<span class="participant-remove">x</span></li>');
   }
 
   var targetUp = function(root) {
@@ -72,7 +72,7 @@
     prefill = prefill || [];
 
     input.addClass("token-input");
-    input.wrap($('<div class="token-container"><ul class="tokens"><li class="token-input-wrap"></li></ul></div>'));
+    input.wrap($('<div class="token-container participants-list"><ul class="tokens"><li class="token-input-wrap"></li></ul></div>'));
     var container = input.parents('.token-container').first();
 
     var options = $('<ul class="token-options"></ul>');
@@ -136,7 +136,7 @@
       input.focus();
     });
 
-    $('.token .close').live('click', function(e) {
+    $('.token .participant-remove').live('click', function(e) {
       $(e.target).parents('.token').first().remove();
     });
   };
