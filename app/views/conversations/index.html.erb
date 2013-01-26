@@ -1,8 +1,9 @@
 <div id="conversation-view">
   <div id="column-navigation">
   </div>
-  <div class="divider-vertical column-v">
-  </div>
+
+  <div class="divider-vertical column-v"></div>
+
   <div id="column-list">
     <div class='btn-toolbar border-bottom clearfix'>
     <div class='btn-group pull-right'>
@@ -32,9 +33,10 @@
   </div>
 
   <div class="divider-vertical column-v"></div>
+
   <div id="column-conversation">
     <% if @opened_conversation %>
-      <div class="conversation-info">
+      <div class="conversation-info btn-faint-container">
         <%= form_tag retitle_conversation_path,
                      :method => 'put' do %>
           <%= text_field_tag :title, @opened_conversation.title, :id => nil, :class => "conv-info-title" %>
@@ -46,6 +48,24 @@
           <%= text_field_tag :users, '', :autocomplete => 'off', :class => "participant-input"%>
           <%= submit_tag 'Change Users' %>
         <% end %>
+
+
+            <div class="btn-group btn-group-dropdown pull-right conv-menu">
+                <a href='#' class="btn btn-faint dropdown-toggle">&#9660;</a>
+                <div class="dropdown-menu hidden">
+                    <span class="menu-title">Conversation</span>
+                    <ul>
+                        <li><a href="#">Change Title</a> </li>
+                        <li><a href="#">Edit Participants</a> </li>
+                        <li><a href="#">Edit Messages</a> </li>
+                        <li><a href="#">Move to...</a> </li>
+                        <li><a href="#">Delete Conversation</a> </li>
+                    </ul>
+                </div>
+            </div>
+
+
+
       </div>
       <div id="thread">
         <% @opened_conversation.pieces.each do |piece| %>
