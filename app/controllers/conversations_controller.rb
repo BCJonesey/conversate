@@ -3,11 +3,12 @@ class ConversationsController < ApplicationController
   before_filter :require_participation, :except => :index
 
   def index
-    conversations = current_user.conversations.order('updated_at DESC')
-    redirect_to conversation_path(conversations.first.id) and return unless conversations.length == 0
-
     respond_to do |format|
-      format.html { render_conversation_view }
+      format.html {
+        conversations = current_user.conversations.order('updated_at DESC')
+        redirect_to conversation_path(conversations.first.id) and return unless conversations.length == 0
+        render_conversation_view
+      }
       format.json { render :json => user_conversations }
     end
   end
