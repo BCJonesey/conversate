@@ -35,20 +35,14 @@ a {
 }
 
 .container {
-  margin: auto;
-  .usual-border(all);
-  @containerWidth: @navigationWidth + @listWidth + @conversationWidth + (4 * @dividerWidth);
-  width: @containerWidth;
-  position: absolute;
-  top: 10px;
-  bottom: 10px;
-  left: 50%;
-  margin-left: -(@containerWidth / 2);
+}
 
-  .header {
-    height: @headerHeight;
-    .usual-border(bottom);
-    background-color: @backgroundDarkestColor;
-    padding: 5px;
-  }
+.header {
+  .usual-border(bottom);
+  background-color: @backgroundDarkestColor;
+  padding: 5px;
+}
+
+.test {
+  clear: both;
 }
