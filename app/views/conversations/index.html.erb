@@ -3,33 +3,7 @@
 
   <div class="divider-vertical column-v"></div>
 
-  <div id="column-list">
-    <div class='btn-toolbar border-bottom clearfix'>
-    <div class='btn-group pull-right'>
-      <a href='<%= new_conversation_path %>' class='btn'>New</a>
-      </div>
-    </div>
-    <div id='conversations-list'>
-      <% @conversations.each do |conversation| %>
-        <div class="<%= list_item_classes(conversation, @opened_conversation, current_user) %>">
-          <a href="<%= conversation_path conversation.id %>">
-            <div class="list-title"><%= conversation.title %></div>
-            <div class="list-participants">
-              <%# If there's only one user, it must be the current user
-                  (or we wouldn't be allowed to look at it), and we'll
-                  strip that user out of the display, so we need a placeholder. %>
-              <% if conversation.users.length > 1 %>
-                <%= conversation.participants(current_user).map {|u| u.name}.join(', ') %>
-              <% else %>
-                &nbsp;
-              <% end %>
-            </div>
-          </a>
-        </div>
-        <div class="list-divider"></div>
-      <% end %>
-    </div>
-  </div>
+  <%= render 'list_column' %>
 
   <div class="divider-vertical column-v"></div>
 
