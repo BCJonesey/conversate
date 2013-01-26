@@ -1,0 +1,28 @@
+<div class="conversation-piece message btn-faint-container">
+  <div class="message-info clearfix">
+    <div class="pull-right">
+      <span class='time unfilled-timestamp'
+            data-timestamp="<%= (piece.timestamp.to_i * 1000).to_s %>"></span>
+      <div class="btn-group btn-group-dropdown">
+        <a href='#' class="btn btn-faint dropdown-toggle">&#9660;</a>
+        <div class="dropdown-menu dropdown-menu-left hidden">
+          <span class="menu-title">Edit Message</span>
+          <ul>
+            <li><a href="#">Move to...</a> </li>
+            <li><a href="#">Send to Sidebar</a> </li>
+            <li>
+              <%= form_tag delete_message_path(@opened_conversation.id),
+                           :method => 'put',
+                           :class => 'hidden-form' do %>
+                <%= hidden_field_tag :message, piece.message_id %>
+                <%= submit_tag 'Delete', :class => 'dropdown-menu-item' %>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="sender"><%= piece.user.name %></div>
+  </div>
+  <span class="message-text"><%= piece.text %></span>
+</div>
