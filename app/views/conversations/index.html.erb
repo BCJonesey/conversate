@@ -1,5 +1,16 @@
 <div id="conversation-view">
   <%= render 'navigation_column' %>
+  <div class="divider-vertical column-v">
+  </div>
+  <div id="column-list">
+    <div class='btn-toolbar border-bottom clearfix'>
+      <div class='btn-group pull-right'>
+        <a href='<%= new_conversation_path %>' class='btn'>New</a>
+      </div>
+    </div>
+    <div id='conversations-list'>
+    </div>
+  </div>
 
   <div class="divider-vertical column-v"></div>
 
@@ -15,5 +26,10 @@
     window.participants = <%= user_tokens_json(@opened_conversation.participants(current_user)) %>;
 
     window.new_conversation = <%= @new_conversation.to_s %>;
+  <% end %>
+<% end -%>
+<%= content_for :javascript do -%>
+  <%= javascript_tag do %>
+    ConversateApp.initialize({conversations: <%= @conversations.to_json(:user => current_user).html_safe %>});
   <% end %>
 <% end -%>

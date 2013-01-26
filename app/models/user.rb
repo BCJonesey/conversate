@@ -34,4 +34,9 @@ class User < ActiveRecord::Base
   def address_book
     return User.all - [self]
   end
+
+  # This avoids us writing out passwords, salts, etc. when rendering json.
+  def as_json()
+    super(:only => [:email, :full_name])
+  end
 end
