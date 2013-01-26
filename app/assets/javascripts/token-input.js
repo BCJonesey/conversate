@@ -4,9 +4,9 @@
   }
 
   var token = function(option) {
-    return $('<li class="token" data-token-id="' +
+    return $('<li class="token participant" data-token-id="' +
              option.attr('data-token-id') + '">' +
-             option.text() + '<span class="close"></span></li>');
+             option.text() + '<span class="participant-remove">x</span></li>');
   }
 
   var targetUp = function(root) {
@@ -29,6 +29,8 @@
 
   var selectOption = function(root) {
     var target = root.find('.token-option.target');
+    if (target.length == 0) { return; }
+
     var input = root.find('input');
     input.parent().before(token(target));
     input.val('');
@@ -45,9 +47,9 @@
       var query = new RegExp(input.val(), 'i');
       options.empty();
       var optionTags = tokens.filter(function(token) { return query.test(token.name); });
-      var optionTags = optionTags
+      optionTags = optionTags
                              .filter(function(token) {
-                               var tokens = $('.token');
+                               var tokens = root.find('.token');
                                for (var i = 0; i < tokens.length; i++) {
                                  if ($(tokens[i]).attr('data-token-id') == (token.id+ '')) {
                                    return false;
@@ -55,7 +57,8 @@
                                }
                                return true;
                              });
-      var optionTags = optionTags.map(function(token) { return option(token); });
+      if (optionTags.length == 0) { return; }
+      optionTags = optionTags.map(function(token) { return option(token); });
 
       var firstTag = optionTags.shift();
       firstTag.addClass('target');
@@ -69,7 +72,7 @@
     prefill = prefill || [];
 
     input.addClass("token-input");
-    input.wrap($('<div class="token-container"><ul class="tokens"><li></li></ul></div>'));
+    input.wrap($('<div class="token-container participants-list"><ul class="tokens"><li class="token-input-wrap"></li></ul></div>'));
     var container = input.parents('.token-container').first();
 
     var options = $('<ul class="token-options"></ul>');
@@ -79,10 +82,20 @@
     prefill.forEach(function(tok) {
       tokens.prepend(token(option(tok)));
     });
+    tokens.prepend('<li class="user-reminder">You, and...</li>');
 
     container.on('click', function() {
       input.focus();
+      container.addClass('focus');
     });
+
+    $('html').on('click', function(e) {
+      var target = $(e.target);
+      if (target.closest('html').length > 0 &&
+          target.closest('.token-container').length == 0) {
+        container.removeClass('focus');
+      }
+    })
 
     input.on('keyup', function(e) {
       if (e.which == 38) { // Up
@@ -106,7 +119,7 @@
         e.preventDefault();
         e.stopPropagation();
       }
-    })
+    });
 
     $('.token-option').live('mouseover', function(e) {
       var currentTarget = $('.token-option.target');
@@ -123,7 +136,7 @@
       input.focus();
     });
 
-    $('.token .close').live('click', function(e) {
+    $('.token .participant-remove').live('click', function(e) {
       $(e.target).parents('.token').first().remove();
     });
   };

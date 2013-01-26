@@ -15,7 +15,7 @@
           <a href="<%= conversations_path %>" class='btn btn-primary'>Water Cooler</a>
         </div>
         <div class="btn-group pull-right clearfix">
-          <a href="<%= edit_users_path %>" class='btn btn-gray'>Edit Profile</a>
+          <a href="<%= edit_users_path %>" class='btn btn-gray'><%= current_user.name %></a>
           <a href="<%= destroy_sessions_path %>" class='btn btn-gray'>Logout</a>
         </div>
                 <div class="btn-group pull-right clearfix">

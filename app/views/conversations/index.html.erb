@@ -1,118 +1,18 @@
 <div id="conversation-view">
-  <div id="column-navigation">
-  </div>
-  <div class="divider-vertical column-v">
-  </div>
-  <div id="column-list">
-    <div class='btn-toolbar border-bottom clearfix'>
-    <div class='btn-group pull-right'>
-      <a href='<%= new_conversation_path %>' class='btn'>New</a>
-      </div>
-    </div>
-    <div id='conversations-list'>
-      <% @conversations.each do |conversation| %>
-        <div class="<%= list_item_classes(conversation, @opened_conversation, current_user) %>">
-          <a href="<%= conversation_path conversation.id %>">
-            <div class="list-title"><%= conversation.title %></div>
-            <div class="list-participants"><%= conversation.participants %></div>
-          </a>
-        </div>
-        <div class="list-divider"></div>
-      <% end %>
-    </div>
-  </div>
+  <%= render 'navigation_column' %>
 
   <div class="divider-vertical column-v"></div>
-  <div id="column-conversation">
-    <% if @opened_conversation %>
-      <div class="conversation-header">
-        <%= form_tag retitle_conversation_path,
-                     :method => 'put',
-                     :class => 'title' do %>
-          <%= text_field_tag :title, @opened_conversation.title %>
-          <%= submit_tag 'Retitle' %>
-        <% end %>
-        <%= form_tag update_users_path,
-                     :method => 'put',
-                     :class => 'users' do %>
-          <%= text_field_tag :users, '', :autocomplete => 'off' %>
-          <%= submit_tag 'Change Users' %>
-        <% end %>
-      </div>
-      <div id="thread">
-        <% @opened_conversation.pieces.each do |piece| %>
-          <% if piece.type == :message %>
-            <div class="conversation-piece message btn-faint-container">
-              <div class="message-info clearfix">
-                <div class="pull-right">
-                  <span class='time unfilled-timestamp'
-                        data-timestamp="<%= (piece.timestamp.to_i * 1000).to_s %>"></span>
-                  <div class="btn-group btn-group-dropdown">
-                    <a href='#' class="btn btn-faint dropdown-toggle">&#9660;</a>
-                    <div class="dropdown-menu dropdown-menu-left hidden">
-                      <span class="menu-title">Edit Message</span>
-                      <ul>
-                        <li><a href="#">Move to...</a> </li>
-                        <li><a href="#">Send to Sidebar</a> </li>
-                        <li>
-                          <%= form_tag delete_message_path(@opened_conversation.id),
-                                       :method => 'put',
-                                       :class => 'hidden-form' do %>
-                            <%= hidden_field_tag :message, piece.message_id %>
-                            <%= submit_tag 'Delete', :class => 'dropdown-menu-item' %>
-                          <% end %>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div class="sender"><%= piece.user.name %></div>
-              </div>
-              <span class="message-text"><%= piece.text %></span>
-            </div>
-          <% elsif piece.type == :retitle %>
-            <div class="conversation-piece retitle">
-              <%= piece.user.name %> titled the conversation "<%= piece.title %>"
-            </div>
-          <% elsif piece.type == :deletion %>
-            <div class="conversation-piece deletion">
-              <%= piece.user.name %> deleted a message
-            </div>
-          <% elsif piece.type == :update_users %>
-            <div class="conversation-piece update-users">
-              <%= piece.user.name %>
-              <% if piece.added.length > 0 %>
-                added <%= piece.added.collect {|u| u.name }.join(', ') %>
-                to the conversation
-                <% if piece.removed.length > 0 %>
-                  and
-                <% end %>
-              <% end %>
-              <% if piece.removed.length > 0 %>
-                removed <%= piece.removed.collect {|u| u.name }.join(', ') %>
-                from the conversation
-              <% end %>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
-      <div id="compose" class="clearfix">
-        <%= form_tag write_message_path, :method => 'put' do %>
-          <div class="pull-right">
-            <%= submit_tag "Send", :id => 'send', :class => 'btn btn-primary' %>
-          </div>
-          <div class="fill-width">
-              <%= text_area_tag :text %>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
+
+  <%= render 'list_column' %>
+
+  <div class="divider-vertical column-v"></div>
+
+  <%= render 'conversation_column' %>
 </div>
 <%= javascript_tag do -%>
   <% if @opened_conversation %>
     window.addressBook = <%= user_tokens_json(current_user.address_book) %>;
-    window.participants = <%= user_tokens_json(@opened_conversation.users) %>;
+    window.participants = <%= user_tokens_json(@opened_conversation.participants(current_user)) %>;
 
     window.new_conversation = <%= @new_conversation.to_s %>;
   <% end %>

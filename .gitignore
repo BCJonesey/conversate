@@ -9,3 +9,8 @@ tmp
 # Sublime Text project files
 /*.sublime-project
 /*.sublime-workspace
+
+# CTags files
+.tags
+.gemtags
+.tags_sorted_by_file

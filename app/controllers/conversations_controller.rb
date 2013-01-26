@@ -1,7 +1,11 @@
 class ConversationsController < ApplicationController
   before_filter :require_login
+  before_filter :require_participation, :except => :index
 
   def index
+    conversations = current_user.conversations.order('updated_at DESC')
+    redirect_to conversation_path(conversations.first.id) and return unless conversations.length == 0
+
     render_conversation_view
   end
 
@@ -66,8 +70,13 @@ class ConversationsController < ApplicationController
   def update_users
     conversation = Conversation.find(params[:id])
     updated_users = User.find(params[:users].split(',').collect {|u| u.to_i})
-    removed_users = conversation.users - updated_users
+    removed_users = conversation.users - updated_users - [current_user]
     added_users = updated_users - conversation.users
+
+    puts "original #{conversation.users.map{|u| u.name}.join(',')}"
+    puts "update   #{updated_users.map{|u| u.name}.join(',')}"
+    puts "remove   #{removed_users.map{|u| u.name}.join(',')}"
+    puts "added    #{added_users.map{|u| u.name}.join(',')}"
 
     user_event = Event.new({:conversation_id => conversation.id,
                             :user_id => current_user.id,
@@ -92,5 +101,14 @@ class ConversationsController < ApplicationController
     session[:new_conversation] = false
 
     render :index
+  end
+
+  # Internal: Verifies that the current user is a participant to the given
+  # conversation.
+  def require_participation
+    unless current_user.in? Conversation.find(params[:id]).users
+      @conversations = current_user.conversations.order('updated_at DESC')
+      render :not_participating
+    end
   end
 end
