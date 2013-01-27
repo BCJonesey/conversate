@@ -1,6 +1,6 @@
 class ConversationsController < ApplicationController
   before_filter :require_login
-  before_filter :require_participation, :except => :index
+  before_filter :require_participation, :except => [:index, :new]
 
   def index
     respond_to do |format|
