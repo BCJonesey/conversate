@@ -4,7 +4,7 @@ Conversate::Application.routes.draw do
   resource :users, :only => [:new, :create, :edit, :update]
   resource :sessions, :only => [:new, :create]
   get 'session/logout' => 'sessions#destroy', :as => 'destroy_sessions'
-  resources :conversations, :only => [:index, :new, :create, :show]
+  resources :conversations, :only => [:index, :new, :show]
   put 'conversations/:id/retitle' => 'conversations#retitle', :as => 'retitle_conversation'
   put 'conversations/:id/write' => 'conversations#write', :as => 'write_message'
   put 'conversations/:id/delete' => 'conversations#delete', :as => 'delete_message'
