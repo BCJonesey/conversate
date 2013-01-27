@@ -3,10 +3,14 @@ class ConversationsController < ApplicationController
   before_filter :require_participation, :except => :index
 
   def index
-    conversations = current_user.conversations.order('updated_at DESC')
-    redirect_to conversation_path(conversations.first.id) and return unless conversations.length == 0
-
-    render_conversation_view
+    respond_to do |format|
+      format.html {
+        conversations = current_user.conversations.order('updated_at DESC')
+        redirect_to conversation_path(conversations.first.id) and return unless conversations.length == 0
+        render_conversation_view
+      }
+      format.json { render :json => user_conversations }
+    end
   end
 
   def new
@@ -22,7 +26,10 @@ class ConversationsController < ApplicationController
     conversation = Conversation.find(params[:id])
     current_user.mark_as_read(conversation)
 
-    render_conversation_view conversation
+    respond_to do |format|
+      format.html { render_conversation_view conversation }
+      format.json { @conversation = conversation }
+    end
   end
 
   def retitle
@@ -94,8 +101,12 @@ class ConversationsController < ApplicationController
   end
 
   private
+  def user_conversations
+    return current_user.conversations.order('updated_at DESC')
+  end
+
   def render_conversation_view(conversation=nil)
-    @conversations = current_user.conversations.order('updated_at DESC')
+    @conversations = user_conversations
     @opened_conversation = conversation
     @new_conversation = session[:new_conversation].nil? ? false : session[:new_conversation]
     session[:new_conversation] = false

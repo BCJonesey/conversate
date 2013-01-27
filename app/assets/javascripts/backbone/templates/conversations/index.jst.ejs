@@ -1,0 +1,9 @@
+<% conversations.each( function(conversation) { %>
+	<div class="list-item">
+     	<a href="/conversations/<%= conversation.get('id') %>">
+        	<div class="list-title"><%= conversation.get('title') %></div>
+    		<div class="list-participants"><%= conversation.get('participants') %></div>
+      	</a>
+    </div>
+    <div class="list-divider"></div>
+<% });%>
