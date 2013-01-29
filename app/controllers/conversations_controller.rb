@@ -5,11 +5,11 @@ class ConversationsController < ApplicationController
   def index
     respond_to do |format|
       format.html {
-        conversations = current_user.conversations.order('updated_at DESC')
+        conversations = user_conversations
         redirect_to conversation_path(conversations.first.id) and return unless conversations.length == 0
         render_conversation_view
       }
-      format.json { render :json => user_conversations }
+      format.json { render :json => user_conversations.to_json(:user => current_user) }
     end
   end
 
