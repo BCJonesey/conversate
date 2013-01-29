@@ -98,8 +98,7 @@
       }
 
       &.highlighted {
-        background-image: -webkit-linear-gradient(right, white 10%, #DEF 100%);
-        background-image: linear-gradient(to left, white 10%, #DEF 100%);
+        .gradient-ltr(#DEF,white, 90%);
       }
 
       &.unread {
@@ -109,8 +108,7 @@
     }
 
     .list-divider {
-      background-image: -webkit-linear-gradient(right, transparent 0%, @borderColor 100%);
-      background-image: linear-gradient(to left, transparent 0%, @borderColor 100%);
+      .gradient-ltr(@borderColor,white, 100%);
       height: @dividerWidth;
     }
   }
@@ -125,7 +123,8 @@
     }
 
     #thread {
-      background-color: @backgroundDarkColor;
+      //background-color: @backgroundDarkColor;
+      .gradient-ltr(#E0F0FF,#F4FAFF, 40%);
       overflow-y: scroll;
       border: none;
       position: absolute;
@@ -135,6 +134,9 @@
       right: 0;
 
       .conversation-piece {
+        margin-top:.5rem;
+        border-color:#9AC;
+
         .message-info {
             .sender{
               display: block;
@@ -156,14 +158,13 @@
           margin-bottom: none;
           padding-top: 5px;
           border-top: 1px solid @borderDarkColor;
+        }
 
-        }
-        &+ .conversation-piece {
-          margin-top: 5px;
-        }
         &.retitle, &.deletion, &.update-users {
-          font-style: italic;
-          color:#888;
+          color:#999;
+          font-size: .8em;
+          text-align: center;
+          margin-top:0;
         }
       }
     }
