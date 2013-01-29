@@ -9,7 +9,16 @@ class ConversationsController < ApplicationController
         redirect_to conversation_path(conversations.first.id) and return unless conversations.length == 0
         render_conversation_view
       }
-      format.json { render :json => user_conversations.to_json(:user => current_user) }
+      format.json {
+
+        # This is for later list_item class determination.
+        if (params[:id])
+          opened_conversation = Conversation.find(params[:id])
+        end
+
+        render :json => user_conversations.to_json(:user => current_user,
+                                    :opened_conversation => opened_conversation)
+      }
     end
   end
 

@@ -1,4 +1,5 @@
 class Conversation < ActiveRecord::Base
+  include ConversationsHelper
   has_many :reading_logs
   has_many :users, :through => :reading_logs
   has_many :events, :inverse_of => :conversation
@@ -73,6 +74,8 @@ class Conversation < ActiveRecord::Base
     json = super(options)
     json[:participants] = (users.length > 1) ?
       participants(options[:user]).map {|u| u.name}.join(', ') : " ";
+    json[:class] = list_item_classes(self, options[:opened_conversation],
+                                      options[:user])
     return json
   end
 

@@ -1,5 +1,5 @@
 <% conversations.each( function(conversation) { %>
-	<div class="list-item">
+	<div class="<%= conversation.get('class') %>">
      	<a href="/conversations/<%= conversation.get('id') %>">
         	<div class="list-title"><%= conversation.get('title') %></div>
     		<div class="list-participants"><%= conversation.get('participants') %></div>
