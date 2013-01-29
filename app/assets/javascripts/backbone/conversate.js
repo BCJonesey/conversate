@@ -18,7 +18,7 @@ var ConversateApp = {
 
 		setInterval(function () {
 			console.log('fetch');
-    		self.conversations.fetch({update: true});
+    		self.conversations.fetch();
 		}, 5000);
 	}
 }
