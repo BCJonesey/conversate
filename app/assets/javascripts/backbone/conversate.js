@@ -10,8 +10,9 @@ var ConversateApp = {
 	Collections: {},
 	Views: {},
 	Routers: {},
-	initialize: function(data) {
+	initialize: function(data, opened_conversation) {
 		var self = this;
+		self.opened_conversation = opened_conversation;
 		self.conversations = new ConversateApp.Collections.Conversations(data.conversations);
 		new ConversateApp.Routers.Conversations({ conversations: self.conversations});
 		Backbone.history.start();
