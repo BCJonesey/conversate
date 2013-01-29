@@ -20,6 +20,19 @@ var ConversateApp = {
 		setInterval(function () {
 			console.log('fetch');
     		self.conversations.fetch();
+
+    		// This bit should mimic the behavior of unread_count_string + favicon stuff.
+    		// Not ideal, but works for now.
+				var uc = $('.unread').length;
+    		if (uc > 0) {
+					document.title = uc + ' - Water Cooler'
+					$('link[rel="icon"]').attr('href', '/assets/watercooler-unread.png');
+				}
+				else {
+					document.title = 'Water Cooler'
+					$('link[rel="icon"]').attr('href','/assets/watercooler.png');
+				}
+
 		}, 5000);
 	}
 }
