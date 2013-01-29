@@ -72,7 +72,7 @@ class Conversation < ActiveRecord::Base
   def as_json(options)
     json = super(options)
     json[:participants] = (users.length > 1) ?
-      participants(options[:user]).map {|u| u.name}.join(', ') : "";
+      participants(options[:user]).map {|u| u.name}.join(', ') : " ";
     return json
   end
 
