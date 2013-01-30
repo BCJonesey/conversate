@@ -1,1 +1,30 @@
-Ahoy, a message!<br>
+<% messages.each( function(message) { %>
+
+<% if (message.escape('type') == 'message') { %>
+<div class="conversation-piece message btn-faint-container">
+  <div class="message-info clearfix">
+    <div class="pull-right">
+      <span class='time unfilled-timestamp'
+            data-timestamp="<%= message.escape('timestamp') %>"></span>
+      <div class="btn-group btn-group-dropdown">
+        <a href='#' class="btn btn-faint dropdown-toggle">&#9660;</a>
+        <div class="dropdown-menu dropdown-menu-left hidden">
+          <span class="menu-title">Edit Message</span>
+          <ul>
+            <li><a href="#">Move to...</a> </li>
+            <li><a href="#">Send to Sidebar</a> </li>
+            <li>
+              Delete, one day.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="sender"><%= message.get('user').email %></div>
+  </div>
+  <span class="message-text"><%= message.escape('text') %></span>
+</div>
+<% } %>
+
+<% }); %>
+
