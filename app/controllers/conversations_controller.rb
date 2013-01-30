@@ -37,7 +37,7 @@ class ConversationsController < ApplicationController
 
     respond_to do |format|
       format.html { render_conversation_view conversation }
-      format.json { @conversation = conversation }
+      format.json { render :json => conversation.pieces.to_json }
     end
   end
 
