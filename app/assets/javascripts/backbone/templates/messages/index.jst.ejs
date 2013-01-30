@@ -26,5 +26,22 @@
 </div>
 <% } %>
 
+<% if (message.escape('type') == 'update_users') { %>
+<div class="conversation-piece update-users">
+  <%= message.get('user').email %>
+  <% if (message.get('added').length > 0) { %>
+    added folks
+    to the conversation
+    <% if (message.get('removed').length > 0) { %>
+      and
+    <% } %>
+  <% } %>
+  <% if (message.get('removed').length > 0) { %>
+    removed folks
+    from the conversation
+  <% } %>
+</div>
+<% } %>
+
 <% }); %>
 
