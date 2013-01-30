@@ -28,6 +28,10 @@ var ConversateApp = {
 			console.log('fetch');
     		self.conversations.fetch();
 
+				if (self.opened_conversation) {
+					self.messages.fetch();
+				}
+
     		// This bit should mimic the behavior of unread_count_string + favicon stuff.
     		// Not ideal, but works for now.
 				var uc = $('.unread').length;
