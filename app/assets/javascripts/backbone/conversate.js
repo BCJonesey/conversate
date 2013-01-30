@@ -12,8 +12,15 @@ var ConversateApp = {
 	Routers: {},
 	initialize: function(data, opened_conversation) {
 		var self = this;
+
 		self.opened_conversation = opened_conversation;
+
 		self.conversations = new ConversateApp.Collections.Conversations(data.conversations);
+
+		if (self.opened_conversation) {
+			self.messages = new ConversateApp.Collections.Messages(data.messages);
+		}
+
 		new ConversateApp.Routers.Conversations({ conversations: self.conversations});
 		Backbone.history.start();
 
