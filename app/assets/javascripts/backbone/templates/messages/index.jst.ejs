@@ -20,7 +20,7 @@
         </div>
       </div>
     </div>
-    <div class="sender"><%= message.get('user').email %></div>
+    <div class="sender"><%= helpers.name(message.get('user')) %></div>
   </div>
   <span class="message-text"><%= message.escape('text') %></span>
 </div>
@@ -28,7 +28,7 @@
 
 <% if (message.escape('type') == 'update_users') { %>
 <div class="conversation-piece update-users">
-  <%= message.get('user').email %>
+  <%= helpers.name(message.get('user')) %>
   <% if (message.get('added').length > 0) { %>
     added folks
     to the conversation
@@ -45,13 +45,13 @@
 
 <% if (message.escape('type') == 'retitle') { %>
 <div class="conversation-piece retitle">
-  <%= message.get(user).name %> titled the conversation "<%= message.escape(title) %>"
+  <%= helpers.name(message.get('user')) %> titled the conversation "<%= message.escape('title') %>"
 </div>
 <% } %>
 
 <% if (message.escape('type') == 'deletion') { %>
 <div class="conversation-piece deletion">
-  <%= message.get(user).name %> deleted a message
+  <%= helpers.name(message.get('user')) %> deleted a message
 </div>
 <% } %>
 
