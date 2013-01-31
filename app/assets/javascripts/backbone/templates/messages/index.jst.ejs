@@ -43,5 +43,11 @@
 </div>
 <% } %>
 
+<% if (message.escape('type') == 'retitle') { %>
+<div class="conversation-piece retitle">
+  <%= message.get(user).name %> titled the conversation "<%= message.escape(title) %>"
+</div>
+<% } %>
+
 <% }); %>
 
