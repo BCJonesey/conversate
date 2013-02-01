@@ -14,7 +14,19 @@
             <li><a href="#">Move to...</a> </li>
             <li><a href="#">Send to Sidebar</a> </li>
             <li>
-              Delete, one day.
+              <form accept-charset="UTF-8"
+                action="/conversations/<%= ConversateApp.opened_conversation %>/delete"
+                class="hidden-form" method="post">
+                <div style="margin:0;padding:0;display:inline">
+                  <input name="utf8" type="hidden" value="&#x2713;" />
+                  <input name="_method" type="hidden" value="put" />
+                  <input name="authenticity_token" type="hidden"
+                    value="<%= $('meta[name="csrf-token"]').attr('content') %>" />
+                </div>
+                <input id="message" name="message" type="hidden"
+                  value="<%= message.escape('message_id')%>" />
+                <input class="dropdown-menu-item" name="commit" type="submit" value="Delete" />
+              </form>
             </li>
           </ul>
         </div>
