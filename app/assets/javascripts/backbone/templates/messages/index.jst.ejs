@@ -30,14 +30,14 @@
 <div class="conversation-piece update-users">
   <%= helpers.name(message.get('user')) %>
   <% if (message.get('added').length > 0) { %>
-    added folks
+    added <%= helpers.names(message.get('added')) %>
     to the conversation
     <% if (message.get('removed').length > 0) { %>
       and
     <% } %>
   <% } %>
   <% if (message.get('removed').length > 0) { %>
-    removed folks
+    removed <%= helpers.names(message.get('removed')) %>
     from the conversation
   <% } %>
 </div>

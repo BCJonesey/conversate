@@ -12,6 +12,11 @@ ConversateApp.Views.MessagesIndex = Backbone.View.extend({
   helpers: {
     name: function (name) {
       return name.full_name || name.email;
+    },
+    names: function (names) {
+      return _.map(names, function(name) {
+        return name.full_name || name.email;
+      }).join(', ');
     }
   }
 });
