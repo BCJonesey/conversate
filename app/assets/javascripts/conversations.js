@@ -36,8 +36,6 @@
       if (target.closest('html').length > 0 &&
           target.closest('.token-container').length == 0) {
         var nowUsers = userIds();
-      console.log(currentUsers);
-      console.log(nowUsers);
         if (currentUsers.toString() !== nowUsers.toString()) {
           userEditor.hide();
           userEditor.val(nowUsers);
@@ -54,6 +52,15 @@
         return false;
       }
     });
+
+    $("#enable-long-form").on('click', function(e) {
+      console.log('opopopenene');
+      $("#long-form-compose").addClass("open");
+    });
+
+    $("#disable-long-form").on('click', function(e) {
+      $("#long-form-compose").removeClass("open");
+    })
   };
 
   $(function() {
