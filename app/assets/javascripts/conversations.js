@@ -84,10 +84,5 @@
     $('#column-list').css('left', $('#column-navigation').outerWidth() + 1);
     $('#column-conversation').css('left',
       $('#column-navigation').outerWidth() + $('#column-list').outerWidth() + 2);
-
-    $('.enable-long-form').on('click', function() {
-      var compose = $("#compose");
-      compose.addClass('long-form-compose');
-    })
   });
 })();

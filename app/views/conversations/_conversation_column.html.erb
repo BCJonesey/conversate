@@ -34,9 +34,6 @@
     </div>
     <div id="compose" class="clearfix">
       <%= form_tag write_message_path, :method => 'put' do %>
-        <div class="pull-left enable-long-form">
-          <span class="btn">Long</span>
-        </div>
         <div class="pull-right">
           <%= submit_tag "Send", :id => 'send', :class => 'btn btn-primary' %>
         </div>
