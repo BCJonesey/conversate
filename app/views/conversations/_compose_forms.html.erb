@@ -1,6 +1,6 @@
 <div id="short-form-compose" class="clearfix">
-  <div id="enable-long-form" class="btn">
-    Long
+  <div class='btn-toolbar pull-left'>
+    <a id="enable-long-form" class="btn">Long</a>
   </div>
   <%= form_tag write_message_path, :method => 'put' do %>
     <div class="pull-right">
@@ -13,13 +13,19 @@
 </div>
 
 <div id="long-form-compose">
-  <%= form_tag write_message_path, :message => 'put' do %>
-    <div class="fill-width">
+  <div class='window'>
+    <%= form_tag write_message_path, :message => 'put' do %>
+    <div class='conv-info-title'>[Title Goes Here]</div>
+    <div class='section'>
       <%= text_area_tag :text %>
     </div>
-    <%= submit_tag "Send", :class => 'btn btn-primary' %>
-  <% end %>
-  <div id="disable-long-form" class="btn">
-    Short
+    <div class='btn-toolbar long-form-toolbar'>
+      <div class='btn-group pull-right'>
+        <%= submit_tag "Send", :class => 'btn btn-primary' %>
+      </div>
+      <div class='btn-group'>
+        <a id="disable-long-form" class="btn"> Short </a>
+      </div>
+    <% end %>
   </div>
 </div>

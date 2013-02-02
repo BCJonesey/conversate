@@ -1,12 +1,51 @@
-#long-form-compose {
-  display: none;
-  position: fixed;
-  top: 10%;
-  left: 10%;
-  bottom: 10%;
-  right: 10%;
+@import "variables.css.less";
+@import "mixins.css.less";
 
+#long-form-compose{
   &.open {
     display: block;
   }
+
+  background-color:rgba(255,255,255,0.4);
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
+
+#long-form-compose .window{
+
+  min-width:25rem;
+  max-width:40rem;
+
+  margin-top:5rem;
+  margin-left:auto;
+  margin-right:auto;
+
+  background-color: @backgroundDarkerColor;
+  border: 1px solid @borderColor;
+  padding: 0;
+  box-shadow: 0 1rem 4rem 1rem rgba(0,0,0,0.3);
+}
+
+
+.section{
+  padding:5px;
+}
+#text {
+  width: 100%;
+  resize: none;
+  height: 15em;
+  margin-bottom: 0;
+}
+
+.long-form-toolbar{
+  .usual-border(top);
+}
+
+
+
+
+

@@ -61,12 +61,17 @@
       left: @navigationWidth;
     }
   }
-
+  .conversations-list-toolbar{
+    background-color:@backgroundDarkColor;
+    .usual-border(bottom);
+  }
   #column-list {
     width: @listWidth;
     left: @navigationWidth + @dividerWidth;
     //overflow-y: scroll;
     background-color:white;
+
+
     &+ .divider-vertical {
       left: @navigationWidth + @listWidth + @dividerWidth;
     }
