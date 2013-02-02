@@ -1,6 +1,6 @@
 (function() {
   var imgify = function(match) {
-    return '<img src="' + match.trim() + '" class="user-image"></img>';
+    return '<div class="image-in-message"><img src="' + match.trim() + '"></img></div>';
   };
 
   var linkify = function(match) {
