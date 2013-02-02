@@ -25,7 +25,6 @@ class Conversation < ActiveRecord::Base
   def pieces
     # This will get slow on long conversations, but it's good enough for now
     conversation_pieces = []
-    piece_id = 0
     self.events.order('created_at ASC').each do |event|
       begin
         if event.event_type == 'message'
@@ -38,13 +37,10 @@ class Conversation < ActiveRecord::Base
         elsif event.event_type == 'user_update'
           conversation_pieces.append ConversationPiece.update_users(event.id, event.user, event.created_at, User.find(event.added), User.find(event.removed))
         end
-        rescue
-          raise "Error with #{event.data}: #{$!} (id: #{event.id})"
-        ensure
-          # We need to have ids for backbone collections. This ensures that they will at least be sequential.
-          piece_id += 1
-        end
+      rescue
+        raise "Error with #{event.data}: #{$!} (id: #{event.id})"\
       end
+    end
     conversation_pieces
   end
 
