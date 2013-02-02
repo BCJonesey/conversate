@@ -48,9 +48,9 @@
   };
 
   var setupCompose = function() {
-    $("#compose textarea").on("keydown", function(e) {
+    $("#short-form-compose textarea").on("keydown", function(e) {
       if (e.keyCode == 13) { // Enter
-        $("#compose form").submit();
+        $("#short-form-compose form").submit();
         return false;
       }
     });
@@ -73,7 +73,7 @@
       $('form.participants input[type="text"]').focus();
     }
     else {
-      $('#compose textarea').focus();
+      $('#short-form-compose textarea').focus();
     }
 
 
