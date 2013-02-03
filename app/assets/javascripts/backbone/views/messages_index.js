@@ -1,13 +1,15 @@
 ConversateApp.Views.MessagesIndex = Backbone.View.extend({
   render: function () {
-    this.$el.html(JST['backbone/templates/messages/index']({ messages: this.collection,
-                                                            helpers: this.helpers }));
-    return this;
+    var self = this;
+    self.collection.each(function (message) {
+      console.log(self.helpers);
+      self.$el.append(JST['backbone/templates/messages/index']({ message: message, helpers: self.helpers }))
+    });
+    return self;
   },
   initialize: function () {
         _.bindAll(this, 'render', 'add');
 
-        //this.collection.bind('all', this.render);
         this.collection.bind('add', this.add);
   },
   add: function (message) {
