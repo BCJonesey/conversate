@@ -7,7 +7,7 @@
       <%= submit_tag "Send", :id => 'send', :class => 'btn btn-primary' %>
     </div>
     <div class="fill-width">
-      <%= text_area_tag :text %>
+      <%= text_area_tag :text, "", :class => 'write' %>
     </div>
   <% end %>
 </div>
@@ -17,7 +17,7 @@
     <%= form_tag write_message_path, :message => 'put' do %>
     <div class='conv-info-title'>[Title Goes Here]</div>
     <div class='section'>
-      <%= text_area_tag :text %>
+      <%= text_area_tag :text, "", :class =>'write' %>
     </div>
     <div class='btn-toolbar long-form-toolbar'>
       <div class='btn-group pull-right'>
