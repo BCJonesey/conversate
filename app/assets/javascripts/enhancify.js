@@ -4,7 +4,7 @@
   };
 
   var linkify = function(match) {
-    return '<a href="' + match.trim() + '">' + match.trim() + '</a>';
+    return ' <a href="' + match.trim() + '">' + match.trim() + '</a>';
   };
 
   var enhancers = [
