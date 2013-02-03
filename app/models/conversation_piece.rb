@@ -1,16 +1,16 @@
 class ConversationPiece
   attr_accessor :type, :user, :timestamp, :count
 
-  def self.message(user, timestamp, message_id, text)
-    Message.new user, timestamp, message_id, text
+  def self.message(id, user, timestamp, message_id, text)
+    Message.new id, user, timestamp, message_id, text
   end
 
-  def self.set_title(user, timestamp, title)
-    Retitle.new user, timestamp, title
+  def self.set_title(id, user, timestamp, title)
+    Retitle.new id, user, timestamp, title
   end
 
-  def self.update_users(user, timestamp, added, removed)
-    UpdateUsers.new user, timestamp, added, removed
+  def self.update_users(id, user, timestamp, added, removed)
+    UpdateUsers.new id, user, timestamp, added, removed
   end
 
   private
@@ -23,43 +23,47 @@ class ConversationPiece
   end
 
   class Message < ConversationPiece
-    attr_accessor :message_id, :text
+    attr_accessor :id, :message_id, :text
 
-    def initialize(user, timestamp, message_id, text)
+    def initialize(id, user, timestamp, message_id, text)
       super :message, user, timestamp, 1
+      self.id = id
       self.message_id = message_id
       self.text = text
     end
 
-    def delete(user, timestamp)
-      Deletion.new user, timestamp, self
+    def delete(id, user, timestamp)
+      Deletion.new id, user, timestamp, self
     end
   end
 
   class Deletion < ConversationPiece
-    attr_accessor :original_message, :deletion_timestamp
+    attr_accessor :id, :original_message, :deletion_timestamp
 
-    def initialize(user, timestamp, message)
+    def initialize(id, user, timestamp, message)
       super :deletion, user, message.timestamp, 1
+      self.id = id
       self.original_message = message
       self.deletion_timestamp = timestamp
     end
   end
 
   class Retitle < ConversationPiece
-    attr_accessor :title
+    attr_accessor :id, :title
 
-    def initialize(user, timestamp, title)
+    def initialize(id, user, timestamp, title)
       super :retitle, user, timestamp, 1
+      self.id = id
       self.title = title
     end
   end
 
   class UpdateUsers < ConversationPiece
-    attr_accessor :added, :removed
+    attr_accessor :id, :added, :removed
 
-    def initialize(user, timestamp, added, removed)
+    def initialize(id, user, timestamp, added, removed)
       super :update_users, user, timestamp, 1
+      self.id = id
       self.added = added
       self.removed = removed
     end

@@ -22,7 +22,11 @@
 <%= content_for :javascript do -%>
   <%= javascript_tag do %>
     ConversateApp.initialize({conversations: <%= @conversations.to_json(:user => current_user,
-                  :opened_conversation => @opened_conversation).html_safe %>},
-              <%= @opened_conversation.id %>);
+                  :opened_conversation => @opened_conversation).html_safe %>
+                  <%if @opened_conversation %>
+                    , messages: <%= @opened_conversation.pieces.to_json.html_safe %>
+                  <% end %>
+                    },
+                  <%= @opened_conversation.id %>);
   <% end %>
 <% end -%>
