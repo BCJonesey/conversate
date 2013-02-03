@@ -13,8 +13,7 @@ ConversateApp.Views.MessagesIndex = Backbone.View.extend({
         this.collection.bind('add', this.add);
   },
   add: function (message) {
-    console.log('adding');
-    //$('#thread').append(message);
+    this.$el.append(JST['backbone/templates/messages/index']({ message: message, helpers: this.helpers }))
   },
   helpers: {
     name: function (name) {
