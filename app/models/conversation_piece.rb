@@ -6,7 +6,7 @@ class ConversationPiece
   end
 
   def self.set_title(id, user, timestamp, title)
-    Retitle.new id, ser, timestamp, title
+    Retitle.new id, user, timestamp, title
   end
 
   def self.update_users(id, user, timestamp, added, removed)
