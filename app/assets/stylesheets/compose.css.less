@@ -30,9 +30,12 @@
   box-shadow: 0 1rem 4rem 1rem rgba(0,0,0,0.3);
 }
 
-
+.toolbar-text{
+  font-size:1rem;
+}
 .section{
   padding:5px;
+  clear:both;
 }
 #text {
   width: 100%;
@@ -42,7 +45,7 @@
 }
 
 .long-form-toolbar{
-  .usual-border(top);
+  .usual-border(bottom);
 }
 
 textarea.write{
@@ -67,4 +70,22 @@ textarea.write{
   }
 }
 
+/* Utility Class */
+
+.rel{
+  position: relative;
+}
+
+.abs-right{
+  position:absolute;
+  right:.4rem;
+  top:.2rem;
+}
+
+.abs-left{
+  position:absolute;
+  left:.4rem;
+  top:.2rem;
+
+}
 
