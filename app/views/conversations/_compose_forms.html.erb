@@ -13,7 +13,7 @@
 </div>
 
 <div id="long-form-compose">
-  <div class='window'>
+  <div class='long-form-window'>
     <%= form_tag write_message_path, :message => 'put' do %>
 
     <div class='long-form-toolbar btn-toolbar clearfix'>
@@ -29,10 +29,16 @@
 
     </div>
 
-    <div class='section'>
-      <%= text_area_tag :text, "", :class =>'write' %>
+    <div class='long-form-contents'>
+      <div class='long-form-textarea'>
+        <%= text_area_tag :text, "", :class =>'write' %>
+      </div>
+      <div class="thread-reverse">
+        <% @opened_conversation.pieces.reverse.each do |piece| %>
+          <%= render_conversation_piece piece %>
+        <% end %>
+      </div>
     </div>
-
 
     <% end %>
   </div>
