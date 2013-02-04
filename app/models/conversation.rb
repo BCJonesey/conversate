@@ -28,17 +28,17 @@ class Conversation < ActiveRecord::Base
     self.events.order('created_at ASC').each do |event|
       begin
         if event.event_type == 'message'
-          conversation_pieces.append ConversationPiece.message(event.user, event.created_at, event.message_id, event.text)
+          conversation_pieces.append ConversationPiece.message(event.id, event.user, event.created_at, event.message_id, event.text)
         elsif event.event_type == 'retitle'
-          conversation_pieces.append ConversationPiece.set_title(event.user, event.created_at, event.title)
+          conversation_pieces.append ConversationPiece.set_title(event.id, event.user, event.created_at, event.title)
         elsif event.event_type == 'deletion'
           index = conversation_pieces.index { |cp| cp.type == :message && cp.message_id == event.message_id }
-          conversation_pieces[index] = conversation_pieces[index].delete(event.user, event.created_at)
+          conversation_pieces[index] = conversation_pieces[index].delete(event.id, event.user, event.created_at)
         elsif event.event_type == 'user_update'
-          conversation_pieces.append ConversationPiece.update_users(event.user, event.created_at, User.find(event.added), User.find(event.removed))
+          conversation_pieces.append ConversationPiece.update_users(event.id, event.user, event.created_at, User.find(event.added), User.find(event.removed))
         end
       rescue
-        raise "Error with #{event.data}: #{$!} (id: #{event.id})"
+        raise "Error with #{event.data}: #{$!} (id: #{event.id})"\
       end
     end
     conversation_pieces

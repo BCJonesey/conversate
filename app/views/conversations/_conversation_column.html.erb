@@ -32,16 +32,8 @@
         <%= render_conversation_piece piece %>
       <% end %>
     </div>
-    <div id="compose" class="clearfix">
-      <%= form_tag write_message_path, :method => 'put' do %>
-        <div class="pull-right">
-          <%= submit_tag "Send", :id => 'send', :class => 'btn btn-primary' %>
-        </div>
-        <div class="fill-width">
-            <%= text_area_tag :text %>
-        </div>
-      <% end %>
-    </div>
+
+    <%= render 'compose_forms' %>
   <% end %>
 </div>
 </div>

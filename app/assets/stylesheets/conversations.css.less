@@ -61,12 +61,17 @@
       left: @navigationWidth;
     }
   }
-
+  .conversations-list-toolbar{
+    background-color:@backgroundDarkColor;
+    .usual-border(bottom);
+  }
   #column-list {
     width: @listWidth;
     left: @navigationWidth + @dividerWidth;
     //overflow-y: scroll;
     background-color:white;
+
+
     &+ .divider-vertical {
       left: @navigationWidth + @listWidth + @dividerWidth;
     }
@@ -126,8 +131,9 @@
     right: 0;
     border-right: none;
 
-    #thread, #compose {
-      padding: 5px;
+    #thread,
+    #short-form-compose {
+      padding: .4rem;
     }
 
     #thread {
@@ -160,6 +166,13 @@
         .message-text {
           white-space: pre-wrap;
           clear: both;
+          a{
+            text-decoration: none;
+            color: #28D;
+            &:hover{
+              text-decoration: underline;
+            }
+          }
         }
         .message-actions {
           display: none;
@@ -178,19 +191,19 @@
       }
     }
 
-    .conversation-piece, textarea {
+    .conversation-piece {
       padding: 2px 5px;
       font-size: .9em;
       line-height: 1.5em;
     }
 
-    .conversation-piece.message, textarea {
+    .conversation-piece.message {
       min-height: 40px;
       background-color: @backgroundColor;
       border: 1px solid @borderDarkColor;
     }
 
-    #compose {
+    #short-form-compose {
       height: @composeHeight;
       .usual-border(top);
       background-color: @backgroundDarkerColor;
@@ -199,32 +212,17 @@
       left: 0;
       right: 0;
 
-      textarea {
-        box-sizing:border-box;
-        width: 100%;
-        height: 1em;
-        resize: none;
-        border-color: @borderColor;
-        color: @textColor;
-        outline: none;
-        display: block;
-        .body-font;
-        box-shadow:inset 0 0 5px rgba(0,0,0,0.2);
-        &:focus {
-          outline: none;
-          box-shadow:inset 0 0 5px rgba(0,0,255,0.2);
-          border-color: #ABC;
-        }
-      }
       .fill-width{
         overflow:hidden;
       }
-      #send{
+      .short-form-block{
         margin-top:5px;
         margin-left:10px;
         margin-right:5px;
       }
-
+      textarea{
+        height:40px;
+      }
     }
   }
 

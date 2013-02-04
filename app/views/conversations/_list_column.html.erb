@@ -1,9 +1,9 @@
 <div id="column-list">
-  <div id="list-header" class='btn-toolbar border-bottom clearfix'>
+  <div id="list-header" class='btn-toolbar conversations-list-toolbar clearfix'>
     <div class='btn-group pull-right'>
       <a href='<%= new_conversation_path %>' class='btn'>New</a>
+      </div>
     </div>
-  </div>
   <div id='conversations-list'>
     <% @conversations.each do |conversation| %>
       <div class="<%= list_item_classes(conversation, @opened_conversation, current_user) %>">
