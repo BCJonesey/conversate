@@ -1,5 +1,5 @@
 (function() {
   $(function() {
-    $('.container').css('top', $('.header').outerHeight());
+    $('.container').css('top', $('.nav-header').outerHeight());
   });
 })();
