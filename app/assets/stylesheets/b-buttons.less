@@ -1,15 +1,9 @@
 @import 'b-mixins.less';
 
-@main-font:"Helvetica Neue", Helvetica, Arial, sans-serif;
 @border-radius: 0;
-
-html, body, *{
-	font-family:@main-font;
-}
 
 .btn{
   border-radius: @border-radius;
-  font-family: @main-font;
 	font-size: 1rem;
 	font-weight: normal;
 	text-decoration:none;
@@ -27,7 +21,7 @@ html, body, *{
   &.hover{
   	background-color:#D8E8F8;
   }
-  
+
   &:active, &:focus, &.active{
   	box-shadow:none;
   	background-color:#D4E4F4;
@@ -47,8 +41,8 @@ html, body, *{
   &.hover{
 	   background-color:#8BE;
 	 }
-	 &:active, 
-	 &:focus, 
+	 &:active,
+	 &:focus,
 	 &.active{
   	 box-shadow:none;
   }
@@ -77,13 +71,13 @@ html, body, *{
   box-shadow:none;
   text-shadow: none;
   padding:2px 5px;
-  
+
   &:hover {
     color:@color-solid;
     -webkit-transition: color 0.5s;
 
   }
-  &:active, 
+  &:active,
   &.active {
     position:static;
     background-color:#DEF;
@@ -106,4 +100,19 @@ html, body, *{
             color:@color-solid;
         }
     }
+}
+
+.btn.btn-text {
+  background-color:transparent;
+  color:#444;
+  border-color: transparent;
+  box-shadow:none;
+  text-shadow: none;
+  font-weight:bold;
+  cursor:default;
+
+  &:active,
+  &.active {
+    position:static;
+  }
 }
