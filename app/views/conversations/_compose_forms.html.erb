@@ -1,0 +1,45 @@
+<div id="short-form-compose" class="clearfix">
+  <div class='btn-toolbar pull-left'>
+    <a id="enable-long-form" class="btn">Long</a>
+  </div>
+  <%= form_tag write_message_path, :method => 'put' do %>
+    <div class="short-form-block pull-right">
+      <%= submit_tag "Send", :id => 'send', :class => 'btn btn-primary' %>
+    </div>
+    <div class="fill-width">
+      <%= text_area_tag :text, "", :class => 'write' %>
+    </div>
+  <% end %>
+</div>
+
+<div id="long-form-compose">
+  <div class='long-form-window'>
+    <%= form_tag write_message_path, :message => 'put' do %>
+
+    <div class='long-form-toolbar btn-toolbar clearfix'>
+
+      <div class='btn-group pull-right'>
+        <a id="disable-long-form" class="btn"> Cancel </a>
+        <%= submit_tag "Send", :id => 'send-long-form', :class => 'btn btn-primary' %>
+      </div>
+
+      <div class='btn-group pull-left'>
+        <a class='btn btn-text'>[Title Goes Here]</a>
+      </div>
+
+    </div>
+
+    <div class='long-form-contents'>
+      <div class='long-form-textarea'>
+        <%= text_area_tag :text, "", :class =>'write' %>
+      </div>
+      <div class="thread-reverse">
+        <% @opened_conversation.pieces.reverse.each do |piece| %>
+          <%= render_conversation_piece piece %>
+        <% end %>
+      </div>
+    </div>
+
+    <% end %>
+  </div>
+</div>
