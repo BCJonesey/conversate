@@ -36,8 +36,6 @@
       if (target.closest('html').length > 0 &&
           target.closest('.token-container').length == 0) {
         var nowUsers = userIds();
-      console.log(currentUsers);
-      console.log(nowUsers);
         if (currentUsers.toString() !== nowUsers.toString()) {
           userEditor.hide();
           userEditor.val(nowUsers);
@@ -48,12 +46,20 @@
   };
 
   var setupCompose = function() {
-    $("#compose textarea").on("keydown", function(e) {
+    $("#short-form-compose textarea").on("keydown", function(e) {
       if (e.keyCode == 13) { // Enter
-        $("#compose form").submit();
+        $("#short-form-compose form").submit();
         return false;
       }
     });
+
+    $("#enable-long-form").on('click', function(e) {
+      $("#long-form-compose").addClass("open");
+    });
+
+    $("#disable-long-form").on('click', function(e) {
+      $("#long-form-compose").removeClass("open");
+    })
   };
 
   $(function() {
@@ -73,7 +79,7 @@
       $('form.participants input[type="text"]').focus();
     }
     else {
-      $('#compose textarea').focus();
+      $('#short-form-compose textarea').focus();
     }
 
 
