@@ -25,13 +25,23 @@
   };
 
   var youtubify = function(match, continuation) {
-    var videoId = match.match(/v=\w+/)
+    var videoId = match.match(/v=\w+/);
     if (!videoId) {
       continuation(match);
     }
 
     videoId = videoId[0].substring(2);
     continuation('<iframe width="420" height="315" src="http://www.youtube.com/embed/' + videoId + '" frameborder="0" allowfullscreen></iframe>');
+  }
+
+  var vimeofy = function(match, continuation) {
+    var videoId = match.match(/\/\d+/);
+    if (!videoId) {
+      continuation(match);
+    }
+
+    videoId = videoId[0].substring(1);
+    continuation('<iframe src="http://player.vimeo.com/video/' + videoId + '" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>');
   }
 
   var linkify = function(match, continuation) {
@@ -43,6 +53,7 @@
     {regex: /(\s+|^)https?:[^\s]+\.(jpg|jpeg|png|gif)/gi, enhance: imgify},
     {regex: /(\s+|^)https?:\/\/twitter\.com\/\S+\/status\/\d+/gi, enhance: tweetify},
     {regex: /(\s+|^)https?:\/\/www\.youtube\.com\/watch\?[^\s]+/gi, enhance: youtubify},
+    {regex: /(\s+|^)https?:\/\/vimeo.com\/\d+/gi, enhance: vimeofy},
     {regex: /(\s+|^)https?:[^\s]+/gi, enhance: linkify}
   ];
 
