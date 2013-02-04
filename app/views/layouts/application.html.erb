@@ -10,7 +10,7 @@
 <body>
   <% if logged_in? %>
     <div class="btn-toolbar nav-header clearfix">
-      <div class="btn-group pull-right">
+      <div class="btn-multipart pull-right">
         <a href="<%= edit_users_path %>" class='btn btn-gray'><%= current_user.name %></a>
         <a href="<%= destroy_sessions_path %>" class='btn btn-gray'>Logout</a>
       </div>

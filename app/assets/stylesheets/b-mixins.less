@@ -26,8 +26,8 @@
           box-shadow: @shadow;
 }
 
-.button-shadow(){
-  .box-shadow(~"0 3px 3px -3px rgba(0,0,0,0.2)")
+.button-shadow(@transparency: 0.2){
+  box-shadow:0 .2rem .2rem -.2rem rgba(0,0,0,@transparency);
 }
 
 // Box sizing
