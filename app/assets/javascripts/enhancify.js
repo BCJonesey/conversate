@@ -24,6 +24,16 @@
            });
   };
 
+  var youtubify = function(match, continuation) {
+    var videoId = match.match(/v=\w+/)
+    if (!videoId) {
+      continuation(match);
+    }
+
+    videoId = videoId[0].substring(2);
+    continuation('<iframe width="420" height="315" src="http://www.youtube.com/embed/' + videoId + '" frameborder="0" allowfullscreen></iframe>');
+  }
+
   var linkify = function(match, continuation) {
     var prefix = /^\s/.test(match) ? ' ' : '';
     continuation(prefix + '<a href="' + match.trim() + '" target="_blank">' + match.trim() + '</a>');
@@ -32,6 +42,7 @@
   var enhancers = [
     {regex: /(\s+|^)https?:[^\s]+\.(jpg|jpeg|png|gif)/gi, enhance: imgify},
     {regex: /(\s+|^)https?:\/\/twitter\.com\/\S+\/status\/\d+/gi, enhance: tweetify},
+    {regex: /(\s+|^)https?:\/\/www\.youtube\.com\/watch\?[^\s]+/gi, enhance: youtubify},
     {regex: /(\s+|^)https?:[^\s]+/gi, enhance: linkify}
   ];
 
