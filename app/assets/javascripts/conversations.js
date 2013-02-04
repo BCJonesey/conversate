@@ -54,7 +54,6 @@
     });
 
     $("#enable-long-form").on('click', function(e) {
-      console.log('opopopenene');
       $("#long-form-compose").addClass("open");
     });
 
