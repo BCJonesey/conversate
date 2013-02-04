@@ -1,6 +1,6 @@
 (function() {
   var imgify = function(match, continuation) {
-    continuation('<div class="image-in-message"><img src="' + match.trim() + '"></img></div>');
+    continuation('<div class="image-in-message"><a href="' + match.trim() + '"><img src="' + match.trim() + '"></img></a></div>');
   };
 
   var tweetify = function(match, continuation) {
