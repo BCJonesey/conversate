@@ -84,5 +84,6 @@
     $('#column-list').css('left', $('#column-navigation').outerWidth() + 1);
     $('#column-conversation').css('left',
       $('#column-navigation').outerWidth() + $('#column-list').outerWidth() + 2);
+    $('#column-list #conversations-list').css('top', $('#column-list #list-header').outerHeight());
   });
 })();
