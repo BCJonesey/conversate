@@ -1,7 +1,7 @@
 Conversate::Application.routes.draw do
   root :to => 'home#index'
 
-  get 'admin' => 'admin#index'
+  get 'admin' => 'admin#index', :as => 'admin'
   resource :users, :only => [:new, :create, :edit, :update]
   resource :sessions, :only => [:new, :create]
   get 'session/logout' => 'sessions#destroy', :as => 'destroy_sessions'
