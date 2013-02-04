@@ -45,16 +45,31 @@
   }
 
   var linkify = function(match, continuation) {
-    var prefix = /^\s/.test(match) ? ' ' : '';
-    continuation(prefix + '<a href="' + match.trim() + '" target="_blank">' + match.trim() + '</a>');
+    var prefix = "";
+    if (match.substring(0, 4) != "http") {
+      prefix = match[0];
+      match = match.substring(1);
+    }
+
+    var suffix = "";
+    if (match[match.length - 1] == ")") {
+      var openCount = (match.match(/\(/g) || []).length;
+      var closeCount = (match.match(/\)/g) || []).length;
+      if (closeCount == openCount + 1) {
+        suffix = ")";
+        match = match.substring(0, match.length - 1);
+      }
+    }
+
+    continuation(prefix + '<a href="' + match.trim() + '" target="_blank">' + match.trim() + '</a>' + suffix);
   };
 
   var enhancers = [
-    {regex: /(\s+|^)https?:[^\s]+\.(jpg|jpeg|png|gif)/gi, enhance: imgify},
-    {regex: /(\s+|^)https?:\/\/twitter\.com\/\S+\/status\/\d+/gi, enhance: tweetify},
-    {regex: /(\s+|^)https?:\/\/www\.youtube\.com\/watch\?[^\s]+/gi, enhance: youtubify},
-    {regex: /(\s+|^)https?:\/\/vimeo.com\/\d+/gi, enhance: vimeofy},
-    {regex: /(\s+|^)https?:[^\s]+/gi, enhance: linkify}
+    {regex: /(^|[^"])https?:[^\s]+\.(jpg|jpeg|png|gif)/gi, enhance: imgify},
+    {regex: /(^|[^"])https?:\/\/twitter\.com\/\S+\/status\/\d+/gi, enhance: tweetify},
+    {regex: /(^|[^"])https?:\/\/www\.youtube\.com\/watch\?[^\s,.!?()]+/gi, enhance: youtubify},
+    {regex: /(^|[^"])https?:\/\/vimeo\.com\/\d+/gi, enhance: vimeofy},
+    {regex: /(^|[^"])https?:[^\s]+[^.,!?\s]/gi, enhance: linkify}
   ];
 
   $('.conversation-piece.message .message-text').each(function(messageIndex, text) {
@@ -73,12 +88,19 @@
       }
 
       var splits = enhancedHTML.split(enhancer.regex);
+      console.log(matches);
+      console.log(splits);
+      console.log('----------------');
       var i = 0;
       var enhanced = splits[0];
       var continuation = function(replacement) {
         enhanced += replacement;
         i++;
-        enhanced += splits[i]
+        // There seems to be a problem with String.split that creates
+        // entries that are part of a match...
+        if (!(splits[i] == replacement.substring(0, splits[i].length))) {
+          enhanced += splits[i]
+        }
         if (i < matches.length) {
           enhancer.enhance(matches[i], continuation);
         }
