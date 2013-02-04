@@ -1,6 +1,6 @@
 (function() {
   var imgify = function(match, continuation) {
-    continuation('<div class="image-in-message"><a href="' + match.trim() + '"><img src="' + match.trim() + '"></img></a></div>');
+    continuation('<div class="image-in-message"><a href="' + match.trim() + '" target="_blank"><img src="' + match.trim() + '"></img></a></div>');
   };
 
   var tweetify = function(match, continuation) {
@@ -26,7 +26,7 @@
 
   var linkify = function(match, continuation) {
     var prefix = /^\s/.test(match) ? ' ' : '';
-    continuation(prefix + '<a href="' + match.trim() + '">' + match.trim() + '</a>');
+    continuation(prefix + '<a href="' + match.trim() + '" target="_blank">' + match.trim() + '</a>');
   };
 
   var enhancers = [
