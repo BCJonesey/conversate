@@ -88,9 +88,6 @@
       }
 
       var splits = enhancedHTML.split(enhancer.regex);
-      console.log(matches);
-      console.log(splits);
-      console.log('----------------');
       var i = 0;
       var enhanced = splits[0];
       var continuation = function(replacement) {
