@@ -72,41 +72,55 @@
     {regex: /(^|[^"])https?:[^\s]+[^.,!?\s]/gi, enhance: linkify}
   ];
 
-  $('.conversation-piece.message .message-text').each(function(messageIndex, text) {
-    var nextEnhancer = function(enhancerIndex, enhancedHTML) {
-      if (enhancerIndex >= enhancers.length) {
-        $(text).html($.parseHTML(enhancedHTML, document, true));
-        return;
-      }
+  var enhancify = function() {
+    console.log("enhancing");
+    $('.conversation-piece.message .message-text').each(function(messageIndex, text) {
+      var nextEnhancer = function(enhancerIndex, enhancedHTML) {
+        if (enhancerIndex >= enhancers.length) {
+          // Nick - I think the problem is with line 89 here.  When I look at the
+          // log output the elements don't seem to be matched with actual DOM
+          // elements, so when I replace their contents it doesn't update the
+          // actual page.  Is there something going on in the backbone rendering
+          // pipeline that's screwing me up?
+          // What's the right way to do this?  Should I just be returning the
+          // raw string to render?  If so, how do I make sure it doesn't get
+          // escaped?  If we do that, how do we make sure we don't get xsrf'd?
+          console.log($(text));
+          $(text).html($.parseHTML(enhancedHTML, document, true));
+          return;
+        }
 
-      var enhancer = enhancers[enhancerIndex];
-      // Note that |splits| == |matches| + 1.
-      var matches = enhancedHTML.match(enhancer.regex);
-      if (!matches) {
-        nextEnhancer(enhancerIndex + 1, enhancedHTML);
-        return;
-      }
+        var enhancer = enhancers[enhancerIndex];
+        // Note that |splits| == |matches| + 1.
+        var matches = enhancedHTML.match(enhancer.regex);
+        if (!matches) {
+          nextEnhancer(enhancerIndex + 1, enhancedHTML);
+          return;
+        }
 
-      var splits = enhancedHTML.split(enhancer.regex);
-      var i = 0;
-      var enhanced = splits[0];
-      var continuation = function(replacement) {
-        enhanced += replacement;
-        i++;
-        // There seems to be a problem with String.split that creates
-        // entries that are part of a match...
-        if (!(splits[i] == replacement.substring(0, splits[i].length))) {
-          enhanced += splits[i]
+        var splits = enhancedHTML.split(enhancer.regex);
+        var i = 0;
+        var enhanced = splits[0];
+        var continuation = function(replacement) {
+          enhanced += replacement;
+          i++;
+          // There seems to be a problem with String.split that creates
+          // entries that are part of a match...
+          if (!(splits[i] == replacement.substring(0, splits[i].length))) {
+            enhanced += splits[i]
+          }
+          if (i < matches.length) {
+            enhancer.enhance(matches[i], continuation);
+          }
+          else {
+            nextEnhancer(enhancerIndex + 1, enhanced);
+          }
         }
-        if (i < matches.length) {
-          enhancer.enhance(matches[i], continuation);
-        }
-        else {
-          nextEnhancer(enhancerIndex + 1, enhanced);
-        }
+        enhancer.enhance(matches[0], continuation);
       }
-      enhancer.enhance(matches[0], continuation);
-    }
-    nextEnhancer(0, text.innerHTML);
-  });
+      nextEnhancer(0, text.innerHTML);
+    });
+  }
+
+  window.Enhancer = {enhancify: enhancify};
 })();

@@ -3,8 +3,10 @@ ConversateApp.Views.MessagesIndex = Backbone.View.extend({
     var self = this;
     self.collection.each(function (message) {
       self.$el.append(JST['backbone/templates/messages/index']({ message: message,
-                                                                  helpers: self.helpers }))
+                                                                  helpers: self.helpers }));
     });
+
+    Enhancer.enhancify();
 
     // There's a consistent difference between scrollHeight
     // and scrollTop + height that we need to account for.
