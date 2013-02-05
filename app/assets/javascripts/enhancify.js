@@ -44,6 +44,25 @@
     continuation('<iframe src="http://player.vimeo.com/video/' + videoId + '" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>');
   }
 
+  // Sean registered Water Cooler with SoundCloud.  App page at
+  // https://soundcloud.com/you/apps/water-cooler/edit.  As far as he can tell,
+  // there isn't a way to share an app with other SoundCloud accounts.
+  var soundCloudClientId = "d68b4da268565a405c24695b94fb690d";
+  var soundcloudify = function(match, continuation) {
+    // JSONP requests don't have any error/complete callback.
+    var error = setTimeout(function() {
+      linkify(match, continuation);
+    }, 5000);
+
+    var url = 'http://api.soundcloud.com/resolve.json?url=' + match.trim() +
+              '&client_id=' + soundCloudClientId;
+    $.getJSON(url, function(track) {
+      clearTimeout(error);
+      var embed = '<iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F' + track.id + '"></iframe>';
+      continuation(embed);
+    })
+  }
+
   var linkify = function(match, continuation) {
     var prefix = "";
     if (match.substring(0, 4) != "http") {
@@ -69,11 +88,11 @@
     {regex: /(^|[^"])https?:\/\/twitter\.com\/\S+\/status\/\d+/gi, enhance: tweetify},
     {regex: /(^|[^"])https?:\/\/www\.youtube\.com\/watch\?[^\s,.!?()]+/gi, enhance: youtubify},
     {regex: /(^|[^"])https?:\/\/vimeo\.com\/\d+/gi, enhance: vimeofy},
+    {regex: /(^|[^"])https?:\/\/soundcloud\.com\/\S+\/\S+/gi, enhance: soundcloudify},
     {regex: /(^|[^"])https?:[^\s]+[^.,!?\s]/gi, enhance: linkify}
   ];
 
   var enhancify = function(target) {
-    console.log(target);
     target.find('.message-text').each(function(messageIndex, text) {
       var nextEnhancer = function(enhancerIndex, enhancedHTML) {
         if (enhancerIndex >= enhancers.length) {
