@@ -72,20 +72,11 @@
     {regex: /(^|[^"])https?:[^\s]+[^.,!?\s]/gi, enhance: linkify}
   ];
 
-  var enhancify = function() {
-    console.log("enhancing");
-    $('.conversation-piece.message .message-text').each(function(messageIndex, text) {
+  var enhancify = function(target) {
+    console.log(target);
+    target.find('.message-text').each(function(messageIndex, text) {
       var nextEnhancer = function(enhancerIndex, enhancedHTML) {
         if (enhancerIndex >= enhancers.length) {
-          // Nick - I think the problem is with line 89 here.  When I look at the
-          // log output the elements don't seem to be matched with actual DOM
-          // elements, so when I replace their contents it doesn't update the
-          // actual page.  Is there something going on in the backbone rendering
-          // pipeline that's screwing me up?
-          // What's the right way to do this?  Should I just be returning the
-          // raw string to render?  If so, how do I make sure it doesn't get
-          // escaped?  If we do that, how do we make sure we don't get xsrf'd?
-          console.log($(text));
           $(text).html($.parseHTML(enhancedHTML, document, true));
           return;
         }

@@ -6,7 +6,7 @@ ConversateApp.Views.MessagesIndex = Backbone.View.extend({
                                                                   helpers: self.helpers }));
     });
 
-    Enhancer.enhancify();
+    Enhancer.enhancify(self.$el);
 
     // There's a consistent difference between scrollHeight
     // and scrollTop + height that we need to account for.
