@@ -79,7 +79,7 @@
 
   var codepenify = function(match, continuation) {
     var id = match.substring(match.lastIndexOf('/') + 1);
-    var user = /^http:\/\/codepen.io\/(\S+?)\//.exec(match)[1];
+    var user = /^.?http:\/\/codepen.io\/(\S+?)\//.exec(match)[1];
     embed = '<pre class="codepen" data-height="300" data-type="result" data-href="' + id + '" data-user="' + user + '" data-safe="true"><code></code></pre><script async src="http://codepen.io/assets/embed/ei.js"></script>';
     continuation(embed);
   }
