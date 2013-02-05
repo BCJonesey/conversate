@@ -72,9 +72,9 @@
   };
 
   var colorify = function(match, continuation) {
-    var swatch = '<span class="color-swatch" style="background-color: ' + match +
+    var swatch = '<span class="color-swatch" style="background-color: ' + match.trim() +
                  '">&nbsp;</span>';
-    continuation(swatch + match);
+    continuation(' ' + swatch + match);
   }
 
   var codepenify = function(match, continuation) {
@@ -110,7 +110,7 @@
     {regex: /(?:^|[^"])https?:\/\/www\.youtube\.com\/watch\?[^\s,.!?()]+/gi, enhance: youtubify},
     {regex: /(?:^|[^"])https?:\/\/vimeo\.com\/\d+/gi, enhance: vimeofy},
     {regex: /(?:^|[^"])https?:\/\/soundcloud\.com\/\S+\/\S+/gi, enhance: soundcloudify},
-    {regex: /#[0-9A-fa-f]{6}|#[0-9A-Za-z]{3}|(?:rgb|hsl)a?\([,\d%\s\.]+\)/gi, enhance: colorify},
+    {regex: /(?:^|\s)(#[0-9A-fa-f]{6}|#[0-9A-Fa-f]{3}|(?:rgb|hsl)a?)\([,\d%\s\.]+\)/gi, enhance: colorify},
     {regex: /(?:^|[^"])http:\/\/codepen\.io\/\S+\/(?:pen|full)\/\S+/gi, enhance: codepenify},
     {regex: /(?:^|[^"])https?:[^\s]+[^.,!?\s]/gi, enhance: linkify}
   ];
