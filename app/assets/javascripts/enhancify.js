@@ -72,10 +72,16 @@
   };
 
   var colorify = function(match, continuation) {
-    console.log("coloring " + match);
     var swatch = '<span class="color-swatch" style="background-color: ' + match +
                  '">&nbsp;</span>';
     continuation(swatch + match);
+  }
+
+  var codepenify = function(match, continuation) {
+    var id = match.substring(match.lastIndexOf('/') + 1);
+    var user = /^http:\/\/codepen.io\/(\S+?)\//.exec(match)[1];
+    embed = '<pre class="codepen" data-height="300" data-type="result" data-href="' + id + '" data-user="' + user + '" data-safe="true"><code></code></pre><script async src="http://codepen.io/assets/embed/ei.js"></script>';
+    continuation(embed);
   }
 
   var linkify = function(match, continuation) {
@@ -105,6 +111,7 @@
     {regex: /(?:^|[^"])https?:\/\/vimeo\.com\/\d+/gi, enhance: vimeofy},
     {regex: /(?:^|[^"])https?:\/\/soundcloud\.com\/\S+\/\S+/gi, enhance: soundcloudify},
     {regex: /#[0-9A-fa-f]{6}|#[0-9A-Za-z]{3}|(?:rgb|hsl)a?\([,\d%\s\.]+\)/gi, enhance: colorify},
+    {regex: /(?:^|[^"])http:\/\/codepen\.io\/\S+\/(?:pen|full)\/\S+/gi, enhance: codepenify},
     {regex: /(?:^|[^"])https?:[^\s]+[^.,!?\s]/gi, enhance: linkify}
   ];
 
@@ -129,9 +136,6 @@
         }
 
         var splits = enhancedHTML.split(enhancer.regex);
-        console.log(matches);
-        console.log(splits);
-        console.log('----------------------');
         var i = 0;
         var enhanced = splits[0];
         var continuation = function(replacement) {
