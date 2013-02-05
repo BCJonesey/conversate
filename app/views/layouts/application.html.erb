@@ -7,10 +7,13 @@
   <%= favicon_tag %>
   <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Oswald' rel='stylesheet' type='text/css'>
 </head>
-<body>
+<body class="<%= logged_in? ? 'logged-in' : 'not-logged-in' %>">
   <% if logged_in? %>
     <div class="btn-toolbar nav-header clearfix">
       <div class="btn-multipart pull-right">
+        <% if current_user.is_admin %>
+          <a href="<%= admin_path %>" class="btn btn-gray">Admin</a>
+        <% end %>
         <a href="<%= edit_users_path %>" class='btn btn-gray'><%= current_user.name %></a>
         <a href="<%= destroy_sessions_path %>" class='btn btn-gray'>Logout</a>
       </div>

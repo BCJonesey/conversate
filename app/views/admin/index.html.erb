@@ -1,0 +1,35 @@
+<div class="admin-page">
+  <h3>Database Usage</h3>
+  <table>
+    <thead>
+      <tr>
+        <td>Table</td>
+        <td>Row Count</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Conversations</td>
+        <td><%= Conversation.all.count %></td>
+      </tr>
+      <tr>
+        <td>Events</td>
+        <td><%= Event.all.count %></td>
+      </tr>
+      <tr>
+        <td>Reading Logs</td>
+        <td><%= ReadingLog.all.count %></td>
+      </tr>
+      <tr>
+        <td>Users</td>
+        <td><%= User.all.count %></td>
+      </tr>
+      <tr>
+        <td>Total</td>
+        <td><%= Conversation.all.count +
+                Event.all.count +
+                ReadingLog.all.count +
+                User.all.count %></td>
+    </tbody>
+  </table>
+</div>
