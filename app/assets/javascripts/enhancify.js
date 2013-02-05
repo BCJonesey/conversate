@@ -113,6 +113,10 @@
       var nextEnhancer = function(enhancerIndex, enhancedHTML) {
         if (enhancerIndex >= enhancers.length) {
           $(text).html($.parseHTML(enhancedHTML, document, true));
+
+          // Wait until (hopefully) all the 3rd-party fancy js stuff is loaded
+          setTimeout(function() { Scroller.scrollToBottom($('#thread')); },
+                     1000);
           return;
         }
 
