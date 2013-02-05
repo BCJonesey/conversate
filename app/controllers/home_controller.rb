@@ -1,6 +1,9 @@
 class HomeController < ApplicationController
   def index
-    redirect_to(conversations_path) if logged_in?
-    render 'sessions/new'
+    if logged_in?
+      redirect_to(conversations_path)
+    else
+      render 'sessions/new'
+    end
   end
 end
