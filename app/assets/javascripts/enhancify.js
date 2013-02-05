@@ -61,6 +61,13 @@
       var embed = '<iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F' + track.id + '"></iframe>';
       continuation(embed);
     })
+  };
+
+  var colorify = function(match, continuation) {
+    console.log("coloring " + match);
+    var swatch = '<span class="color-swatch" style="background-color: ' + match +
+                 '">&nbsp;</span>';
+    continuation(swatch + match);
   }
 
   var linkify = function(match, continuation) {
@@ -86,10 +93,11 @@
   var enhancers = [
     {regex: /(^|[^"])https?:[^\s]+\.(jpg|jpeg|png|gif)/gi, enhance: imgify},
     {regex: /(^|[^"])https?:\/\/twitter\.com\/\S+\/status\/\d+/gi, enhance: tweetify},
-    {regex: /(^|[^"])https?:\/\/www\.youtube\.com\/watch\?[^\s,.!?()]+/gi, enhance: youtubify},
-    {regex: /(^|[^"])https?:\/\/vimeo\.com\/\d+/gi, enhance: vimeofy},
-    {regex: /(^|[^"])https?:\/\/soundcloud\.com\/\S+\/\S+/gi, enhance: soundcloudify},
-    {regex: /(^|[^"])https?:[^\s]+[^.,!?\s]/gi, enhance: linkify}
+    {regex: /(?:^|[^"])https?:\/\/www\.youtube\.com\/watch\?[^\s,.!?()]+/gi, enhance: youtubify},
+    {regex: /(?:^|[^"])https?:\/\/vimeo\.com\/\d+/gi, enhance: vimeofy},
+    {regex: /(?:^|[^"])https?:\/\/soundcloud\.com\/\S+\/\S+/gi, enhance: soundcloudify},
+    {regex: /#[0-9A-fa-f]{6}|#[0-9A-Za-z]{3}|(?:rgb|hsl)a?\([,\d%\s\.]+\)/gi, enhance: colorify},
+    {regex: /(?:^|[^"])https?:[^\s]+[^.,!?\s]/gi, enhance: linkify}
   ];
 
   var enhancify = function(target) {
@@ -109,6 +117,9 @@
         }
 
         var splits = enhancedHTML.split(enhancer.regex);
+        console.log(matches);
+        console.log(splits);
+        console.log('----------------------');
         var i = 0;
         var enhanced = splits[0];
         var continuation = function(replacement) {
