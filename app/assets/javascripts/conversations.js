@@ -1,6 +1,6 @@
 (function() {
   var setupConversationEditor = function() {
-    var header = $("#column-conversation .conversation-info");
+    var header = $("#column-conversation .cnv-info");
     var titleEditor = header.find("form.title input[type='text']");
     var userEditor = header.find("form.participants input[type='text']");
 
@@ -78,7 +78,7 @@
     // The page will only open in editing mode if it's a new conversation.
     // new_conversation is defined in index.html.erb.
     if (window.new_conversation) {
-      $('.conversation-info').click();
+      $('.cnv-info .cnv-info-title-input').click();
       $('form.participants input[type="text"]').focus();
     }
     else {
