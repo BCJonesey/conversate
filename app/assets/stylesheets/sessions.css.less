@@ -4,9 +4,42 @@
 @import "mixins.css.less";
 @import "variables.css.less";
 
+body.not-logged-in {
+  background-image: url('/assets/background-water.jpg');
+
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+}
+
 .login-form {
   .absolutely-centered(@soloHeroWidth / 3, @soloHeroHeight / 2);
   h1 {
     text-align: center;
+    font-size: 300%;
+    line-height: 0;
+  }
+}
+
+.attribution {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  a {
+    text-decoration: none;
+    color: lighten(@textColor, 25%);
+
+    &:hover {
+      text-decoration: underline;
+      color: @textColor;
+    }
   }
 }
