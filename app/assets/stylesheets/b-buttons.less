@@ -14,7 +14,7 @@
 	.button-shadow(0.2);
 	cursor:pointer;
 	.user-select(none);
-	margin-bottom:0;
+	margin:0;
   vertical-align: middle;
   height:1.8rem;
   //vertical-align: middle;
@@ -70,53 +70,18 @@
   }
 }
 
-@color-faint:#E0E0E0;
-@color-solid:#808080;
 
-.btn.btn-faint {
-  background-color:transparent;
-  color:transparent;
-  border-color: transparent;
-  box-shadow:none;
-  text-shadow: none;
-  padding:2px 5px;
-
-  &:hover {
-    color:@color-solid;
-    -webkit-transition: color 0.5s;
-
-  }
-  &:active,
-  &.active {
-    position:static;
-    background-color:#DEF;
-    color:@color-solid;
-    border-color:#CCC;
-  }
-}
-
-.btn-faint-container{
-    & .btn.btn-faint.active{
-      color:@color-solid;
-    }
-    &:hover a.btn{
-        color:@color-faint;
-        -webkit-transition: color 0.5s;
-        -webkit-transition-delay: color 0.25s;
-
-        &:hover,
-        &.active{
-            color:@color-solid;
-        }
-    }
+.btn.btn-thin{
+  padding-left:.1rem;
+  padding-right:.1rem;
 }
 
 // adjust spacing on buttons with icons.
 
-.btn > i {
-    position: relative;
-    right: .15em;
-}
+// .btn > i {
+//     position: relative;
+//     right: .15em;
+// }
 
 .btn-icon,
 .btn.btn-icon{
