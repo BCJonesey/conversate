@@ -1,6 +1,14 @@
 (function() {
   var imgify = function(match, continuation) {
-    continuation('<div class="image-in-message"><a href="' + match.trim() + '" target="_blank"><img src="' + match.trim() + '"></img></a></div>');
+    var url = match.trim();
+    var src = match.trim();
+
+    // Dropbox makes some funky links
+    if (/^https:\/\/www\.dropbox\.com/.test(src)) {
+      src = src.replace(/^https:\/\/www/, 'http://dl');
+    }
+
+    continuation('<div class="image-in-message"><a href="' + url + '" target="_blank"><img src="' + src + '"></img></a></div>');
   };
 
   var tweetify = function(match, continuation) {
