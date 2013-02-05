@@ -15,9 +15,7 @@
       <div class="btn-group cnv-info-title-save-actions hidden">
         <a href='#' class="btn-icon btn-faint cnv-info-title-save"><i class='icon-ok'></i></a>
       </div>
-
     </div>
-
     <div class='cnv-info-participants btn-faint-container'>
       <%= form_tag update_users_path,
                    :method => 'put',
@@ -33,21 +31,14 @@
       <div class="btn-group cnv-info-participants-save-actions hidden">
         <a href='#' class="btn-icon btn-faint cnv-info-participants-save"><i class='icon-check'></i><span class='icon-text'>Save</span></a>
       </div>
-
-
-
     </div>
-
-
   </div>
-
   <div id="thread">
     <% @opened_conversation.pieces.each do |piece| %>
       <%= render_conversation_piece piece %>
     <% end %>
   </div>
-
-    <%= render 'compose_forms' %>
+  <%= render 'compose_forms' %>
   <% end %>
 </div>
 </div>
