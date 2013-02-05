@@ -8,37 +8,3 @@
     <%= submit_tag 'Sign In', :class => 'btn'%>
   <% end %>
 </div>
-
-<!-- <div class="row">
-  <div class="span12">
-    <h1>
-      uuggh why aren't you signed in yet
-    </h1>
-  </div>
-</div>
-<div class="row">
-  <div class="span4 offset4">
-    <%= form_tag sessions_path do %>
-      <% if @login_error %>
-        <div class="error-messages">
-          <h3>You fucked up</h3>
-        </div>
-      <% end %>
-      <%= label_tag :email %>
-      <%= email_field_tag :email, params[:email] %>
-      <%= label_tag :password %>
-      <%= password_field_tag :password %>
-
-      Rails prefers labels with for attributes, bootstrap prefers labels
-           with nested input.  Everywhere but checkboxes renders fine the rails
-           way.  At some point when we have more forms to deal with it'll be
-           worth finding/writing a form builder that can do just what we want.
-      <%= label_tag :remember_me, :class => 'checkbox' do %>
-        <%= check_box_tag :remember_me, 1, params[:remember_me] %>
-        Remember me
-      <% end %>
-      <%= submit_tag "Log in", :class => 'btn' %>
-    <% end %>
-  </div>
-</div>
- -->
