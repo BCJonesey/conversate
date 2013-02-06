@@ -1,0 +1,82 @@
+@import "mixins.css.less";
+@import "variables.css.less";
+
+// Dropdown menu in the conversation info section
+
+.cnv-info{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: @backgroundDarkColor;
+  margin: 0;
+  .usual-border(bottom)
+}
+
+.cnv-info-title{
+  cursor:default;
+  padding:0;
+  margin:0;
+  position:relative;
+  .usual-border(bottom);
+  &.editing{
+    background-color:white;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+  }
+}
+
+.cnv-info-title-input{
+      background-color: transparent;
+      border:none;
+      margin:0;
+      padding:0;
+      width:100%;
+      box-sizing:border-box;
+      .title-font();
+      .text-black();
+
+      padding:0.5rem;
+      outline:none;
+
+}
+
+.cnv-info-title-actions,
+.cnv-info-title-save-actions{
+  position:absolute;
+  top:.25rem;
+  right:.25rem;
+  background-color: inherit;
+}
+
+// Participants List
+
+.cnv-info-participants{
+  & form{padding:0; margin:0;border:none;}
+  height:auto;
+  overflow: visible;
+  padding:0;
+  margin:0;
+  position:relative;
+  .body-font();
+  & div.token-container{
+    //overflow: visible;
+    //width: 100%;
+    margin:0;
+    font-family: sans-serif;
+    //border:none;
+    cursor: default;
+    //font-size: 1rem;
+    //padding: .2rem;
+    outline: none
+  }
+  &.editing{
+    background-color:white;
+  }
+}
+
+.cnv-info-participants-actions,
+.cnv-info-participants-save-actions{
+  position:absolute;
+  top:.25rem;
+  right:.25rem;
+}

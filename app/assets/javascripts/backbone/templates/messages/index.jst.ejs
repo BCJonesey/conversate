@@ -1,38 +1,37 @@
 <% if (message.escape('type') == 'message') { %>
 <div class="conversation-piece message btn-faint-container">
-  <div class="message-info clearfix">
-    <div class="pull-right">
-      <span class='time unfilled-timestamp'
+  <div class="msg-info clearfix">
+
+    <div class="msg-info-group pull-right">
+      <a href='#' class="msg-delete msg-action btn-faint" data-message-id="<%= message.escape('message_id') %>" title='Delete Message'><i class='icon-trash'></i></a>
+      <span class='icon-text msg-time unfilled-timestamp'
             data-timestamp="<%= message.escape('timestamp') %>"></span>
-      <div class="btn-group btn-group-dropdown">
-        <a href='#' class="btn btn-faint dropdown-toggle">&#9660;</a>
-        <div class="dropdown-menu dropdown-menu-left hidden">
-          <span class="menu-title">Edit Message</span>
-          <ul>
-            <li><a href="#">Move to...</a> </li>
-            <li><a href="#">Send to Sidebar</a> </li>
-            <li>
-              <form accept-charset="UTF-8"
-                action="/conversations/<%= ConversateApp.opened_conversation %>/delete"
-                class="hidden-form" method="post">
-                <div style="margin:0;padding:0;display:inline">
-                  <input name="utf8" type="hidden" value="&#x2713;" />
-                  <input name="_method" type="hidden" value="put" />
-                  <input name="authenticity_token" type="hidden"
-                    value="<%= $('meta[name="csrf-token"]').attr('content') %>" />
-                </div>
-                <input id="message" name="message" type="hidden"
-                  value="<%= message.escape('message_id')%>" />
-                <input class="dropdown-menu-item" name="commit" type="submit" value="Delete" />
-              </form>
-            </li>
-          </ul>
-        </div>
-      </div>
     </div>
-    <div class="sender"><%= helpers.name(message.get('user')) %></div>
+
+    <div class='msg-info-group pull-left'>
+      <span class="msg-sender"><%= helpers.name(message.get('user')) %></span>
+    </div>
   </div>
-  <span class="message-text"><%= message.escape('text') %></span>
+
+  <div class="msg-text"><%= message.escape('text') %></div>
+
+  <div class='hidden'>
+    <form accept-charset="UTF-8"
+    action="/conversations/<%= ConversateApp.opened_conversation %>/delete"
+    class="hidden-form" method="post"
+    id="form-delete-<%= message.escape('message_id') %>">
+      <div style="margin:0;padding:0;display:inline">
+        <input name="utf8" type="hidden" value="&#x2713;" />
+        <input name="_method" type="hidden" value="put" />
+        <input name="authenticity_token" type="hidden"
+    value="<%= $('meta[name="csrf-token"]').attr('content') %>" />
+      </div>
+      <input id="message" name="message" type="hidden"
+    value="<%= message.escape('message_id')%>" />
+      <input name="commit" type="submit" value="Delete" />
+    </form>
+  </div>
+
 </div>
 <% } %>
 

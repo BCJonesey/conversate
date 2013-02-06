@@ -1,39 +1,45 @@
 <div id="column-conversation">
   <% if @opened_conversation %>
-    <div class="conversation-info btn-faint-container">
+  <div class='cnv-info'>
+    <div class="cnv-info-title btn-faint-container">
       <%= form_tag retitle_conversation_path,
                    :method => 'put' do %>
-        <%= text_field_tag :title, @opened_conversation.title, :id => nil, :class => "conv-info-title" %>
-        <%= submit_tag 'Retitle' %>
+        <%= text_field_tag :title, @opened_conversation.title, :id => nil, :autocomplete => 'off', :class => "cnv-info-title-input", :readonly => true %>
+        <%= submit_tag 'Retitle', :class => 'hidden' %>
       <% end %>
+
+      <div class="btn-group cnv-info-title-actions">
+        <a href='#' class="btn-icon btn-faint cnv-info-title-edit" title='Edit Title'><i class='icon-pencil'></i></a>
+      </div>
+
+      <div class="btn-group cnv-info-title-save-actions hidden">
+        <a href='#' class="btn-icon btn-faint cnv-info-title-save"><i class='icon-ok'></i></a>
+      </div>
+    </div>
+    <div class='cnv-info-participants btn-faint-container'>
       <%= form_tag update_users_path,
                    :method => 'put',
                    :class => 'participants' do %>
-        <%= text_field_tag :users, '', :autocomplete => 'off', :class => "participant-input"%>
-        <%= submit_tag 'Change Users' %>
+        <%= text_field_tag :users, '', :autocomplete => 'off', :class => "participant-input",
+                           :readonly => 'readonly' %>
+        <%= submit_tag 'Change Users', :class => 'hidden' %>
       <% end %>
-      <div class="btn-group btn-group-dropdown pull-right conv-menu">
-        <a href='#' class="btn btn-faint dropdown-toggle">&#9660;</a>
-        <div class="dropdown-menu hidden">
-          <span class="menu-title">Conversation</span>
-          <ul>
-            <li><a href="#">Change Title</a> </li>
-            <li><a href="#">Edit Participants</a> </li>
-            <li><a href="#">Edit Messages</a> </li>
-            <li><a href="#">Move to...</a> </li>
-            <li><a href="#">Delete Conversation</a> </li>
-          </ul>
-        </div>
+
+      <div class="btn-group cnv-info-participants-actions">
+        <a href='#' class="btn-icon btn-faint btn-small cnv-info-participants-edit"><i class='icon-plus'></i></a>
+      </div>
+
+      <div class="btn-group cnv-info-participants-save-actions hidden">
+        <a href='#' class="btn-icon btn-small btn-faint cnv-info-participants-save"><i class='icon-ok'></i></a>
       </div>
     </div>
-
-    <div id="thread">
-      <% @opened_conversation.pieces.each do |piece| %>
-        <%= render_conversation_piece piece %>
-      <% end %>
-    </div>
-
-    <%= render 'compose_forms' %>
+  </div>
+  <div id="thread">
+    <% @opened_conversation.pieces.each do |piece| %>
+      <%= render_conversation_piece piece %>
+    <% end %>
+  </div>
+  <%= render 'compose_forms' %>
   <% end %>
 </div>
 </div>
