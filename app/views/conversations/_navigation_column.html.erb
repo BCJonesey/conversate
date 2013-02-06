@@ -1,6 +1,6 @@
 <div id="column-navigation">
   <% current_user.topics.uniq.each do |topic| %>
-    <div class="topic">
+    <div class="topic <%= 'selected' if topic.in? @opened_conversation.topics %>">
       <a href="<%= topic_path(topic.id) %>">
         <%= topic.name %>
       </a>
