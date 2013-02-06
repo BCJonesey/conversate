@@ -79,9 +79,15 @@
     container.append(options);
 
     var tokens = container.find('.tokens');
-    prefill.forEach(function(tok) {
-      tokens.prepend(token(option(tok)));
-    });
+
+    var prefillTokens = function() {
+      var inputWrap = container.find('.token-input-wrap');
+      prefill.forEach(function(tok) {
+        inputWrap.before(token(option(tok)));
+      });
+    }
+
+    prefillTokens();
     tokens.prepend('<li class="user-reminder">You, and...</li>');
 
     $('.cnv-info-participants-edit').on('click', function() {
@@ -92,10 +98,27 @@
       $('.cnv-info-participants-actions').addClass('hidden');
     });
 
-    $('.cnv-info-participants-save').on('click', function() {
+    var closeParticipants = function() {
       input.blur();
       input.attr('readonly', 'readonly');
       container.removeClass('focus');
+      $('.cnv-info-participants-save-actions').addClass('hidden');
+      $('.cnv-info-participants-actions').removeClass('hidden');
+    }
+
+    $('.cnv-info-participants-save').on('click', function() {
+      closeParticipants();
+    })
+
+    $('html').on('click', function(e) {
+      var target = $(e.target);
+      console.log(target.parents());
+      if (target.closest('html').length > 0 &&
+          target.closest('.cnv-info-participants').length == 0) {
+        $('.token').remove();
+        prefillTokens();
+        closeParticipants();
+      }
     })
 
     input.on('keyup', function(e) {
@@ -139,6 +162,7 @@
 
     $('.token .participant-remove').live('click', function(e) {
       $(e.target).parents('.token').first().remove();
+      input.focus();
     });
   };
 })();
