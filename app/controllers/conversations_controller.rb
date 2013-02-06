@@ -7,7 +7,6 @@ class ConversationsController < ApplicationController
       format.html {
         conversations = user_conversations
         redirect_to conversation_path(conversations.first.id) and return unless conversations.length == 0
-        render_conversation_view
       }
       format.json {
 
@@ -16,7 +15,7 @@ class ConversationsController < ApplicationController
           opened_conversation = Conversation.find(params[:id])
         end
 
-        render :json => user_conversations.to_json(:user => current_user,
+        render :json => user_conversations(opened_conversation).to_json(:user => current_user,
                                     :opened_conversation => opened_conversation)
       }
     end
@@ -110,12 +109,20 @@ class ConversationsController < ApplicationController
   end
 
   private
-  def user_conversations
-    return current_user.conversations.order('updated_at DESC')
+  def user_conversations(topic = nil)
+    if topic
+      topic.conversations.order('updated_at DESC')
+    else
+      current_user.conversations.order('updated_at DESC')
+    end
   end
 
   def render_conversation_view(conversation=nil)
-    @conversations = user_conversations
+    topic = nil
+    if conversation
+      topic = Topic.find(conversation.reading_logs.where(:user_id => current_user.id).first.topic_id)
+    end
+    @conversations = user_conversations(topic)
     @opened_conversation = conversation
     @new_conversation = session[:new_conversation].nil? ? false : session[:new_conversation]
     session[:new_conversation] = false

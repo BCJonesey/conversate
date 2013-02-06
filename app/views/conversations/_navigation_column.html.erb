@@ -1,2 +1,9 @@
 <div id="column-navigation">
+  <% current_user.topics.uniq.each do |topic| %>
+    <div class="topic">
+      <a href="<%= topic_path(topic.id) %>">
+        <%= topic.name %>
+      </a>
+    </div>
+  <% end %>
 </div>
