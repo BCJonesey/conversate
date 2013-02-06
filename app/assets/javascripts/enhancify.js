@@ -116,7 +116,7 @@
   ];
 
   var enhancify = function(target) {
-    target.find('.message-text').each(function(messageIndex, text) {
+    target.find('.msg-text').each(function(messageIndex, text) {
       var nextEnhancer = function(enhancerIndex, enhancedHTML) {
         if (enhancerIndex >= enhancers.length) {
           $(text).html($.parseHTML(enhancedHTML, document, true));
