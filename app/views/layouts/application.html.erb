@@ -12,7 +12,7 @@
 
     <div class="btn-toolbar nav-header clearfix">
       <div class="btn-group tabs pull-left">
-        <a href="<%= conversations_path %>" class='btn-icon is-selected'>
+        <a href="<%= conversations_path %>" class='btn-icon <%= selected_if_path '/conversations' %>'>
           <i class='icon-home'></i>
           <span class='icon-text'>Water Cooler</span>
         </a>
@@ -22,6 +22,10 @@
           <span class='icon-text'>People</span>
         </a>
 
+        <a href="<%= admin_path %>" class="btn-icon <%= selected_if_path '/admin' %>">
+          <i class="icon-dashboard"></i>
+          <span class="icon-text">Admin</spa>
+        </a>
       </div>
       <div class='btn-group pull-right'>
         <span class='text'><%= current_user.name %></span>
