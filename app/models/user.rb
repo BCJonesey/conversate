@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 
   has_many :reading_logs
   has_many :conversations, :through => :reading_logs
+  has_many :topics, :through => :reading_logs
   has_many :events, :inverse_of => :user
 
   attr_accessible :email, :password, :password_confirmation

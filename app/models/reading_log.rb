@@ -1,6 +1,7 @@
 class ReadingLog < ActiveRecord::Base
   belongs_to :conversation
   belongs_to :user
+  belongs_to :topic
 
-  attr_accessible :conversation_id, :user_id
+  attr_accessible :conversation_id, :user_id, :topic_id
 end
