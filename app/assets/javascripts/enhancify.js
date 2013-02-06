@@ -110,7 +110,8 @@
     {regex: /(?:^|[^"])https?:\/\/www\.youtube\.com\/watch\?[^\s,.!?()]+/gi, enhance: youtubify},
     {regex: /(?:^|[^"])https?:\/\/vimeo\.com\/\d+/gi, enhance: vimeofy},
     {regex: /(?:^|[^"])https?:\/\/soundcloud\.com\/\S+\/\S+/gi, enhance: soundcloudify},
-    {regex: /(?:^|\s)(#[0-9A-fa-f]{6}|#[0-9A-Fa-f]{3}|(?:rgb|hsl)a?)\([,\d%\s\.]+\)/gi, enhance: colorify},
+    // TODO: This color regex seems to cause lots of problems.  Fix it at some point.
+    //{regex: /(?:^|\s)(#[0-9A-fa-f]{6}|#[0-9A-Fa-f]{3}|(?:rgb|hsl)a?)\([,\d%\s\.]+\)/gi, enhance: colorify},
     {regex: /(?:^|[^"])http:\/\/codepen\.io\/\S+\/(?:pen|full)\/\S+/gi, enhance: codepenify},
     {regex: /(?:^|[^"])https?:[^\s]+[^.,!?\s]/gi, enhance: linkify}
   ];
