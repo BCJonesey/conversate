@@ -54,7 +54,7 @@
 
   #column-navigation {
     width: @navigationWidth;
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
 
     &+ .divider-vertical {
@@ -68,7 +68,7 @@
   #column-list {
     width: @listWidth;
     left: @navigationWidth + @dividerWidth;
-    //overflow-y: scroll;
+    overflow-y: auto;
     background-color:white;
 
 
@@ -82,8 +82,8 @@
       bottom: 0;
       left: 0;
       right: 0;
-      overflow-x:hidden;
-      overflow-y: scroll;
+      overflow-x: hidden;
+      overflow-y: auto;
     }
 
     .list-item {
