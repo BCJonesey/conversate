@@ -9,7 +9,6 @@
 </head>
 <body class="<%= logged_in? ? 'logged-in' : 'not-logged-in' %>">
   <% if logged_in? %>
-
     <div class="btn-toolbar nav-header clearfix">
       <div class="btn-group tabs pull-left">
         <a href="<%= conversations_path %>" class='btn-icon <%= selected_if_path '/conversations' %>'>
@@ -22,10 +21,12 @@
           <span class='icon-text'>People</span>
         </a>
 
-        <a href="<%= admin_path %>" class="btn-icon <%= selected_if_path '/admin' %>">
-          <i class="icon-dashboard"></i>
-          <span class="icon-text">Admin</spa>
-        </a>
+        <% if current_user.is_admin? %>
+          <a href="<%= admin_path %>" class="btn-icon <%= selected_if_path '/admin' %>">
+            <i class="icon-dashboard"></i>
+            <span class="icon-text">Admin</spa>
+          </a>
+        <% end %>
       </div>
       <div class='btn-group pull-right'>
         <span class='text'><%= current_user.name %></span>
