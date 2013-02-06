@@ -85,6 +85,7 @@
     tokens.prepend('<li class="user-reminder">You, and...</li>');
 
     $('.cnv-info-participants-edit').on('click', function() {
+      input.removeAttr('readonly');
       input.focus();
       container.addClass('focus');
       $('.cnv-info-participants-save-actions').removeClass('hidden');
@@ -93,6 +94,7 @@
 
     $('.cnv-info-participants-save').on('click', function() {
       input.blur();
+      input.attr('readonly', 'readonly');
       container.removeClass('focus');
     })
 

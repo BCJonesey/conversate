@@ -20,7 +20,8 @@
       <%= form_tag update_users_path,
                    :method => 'put',
                    :class => 'participants' do %>
-        <%= text_field_tag :users, '', :autocomplete => 'off', :class => "participant-input"%>
+        <%= text_field_tag :users, '', :autocomplete => 'off', :class => "participant-input",
+                           :readonly => 'readonly' %>
         <%= submit_tag 'Change Users', :class => 'hidden' %>
       <% end %>
 
