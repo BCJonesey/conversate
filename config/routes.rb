@@ -11,6 +11,7 @@ Conversate::Application.routes.draw do
   put 'conversations/:id/delete' => 'conversations#delete', :as => 'delete_message'
   put 'conversations/:id/updateusers' => 'conversations#update_users', :as => 'update_users'
   get 'topics/:id' => 'topics#show', :as => 'topic'
+  post 'topics' => 'topics#create', :as => 'topic'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

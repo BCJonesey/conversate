@@ -24,3 +24,34 @@
     text-decoration: none;
   }
 }
+
+.new-topic {
+  text-align: center;
+  .text-gray-dark();
+
+  .new-topic-edit {
+    cursor: pointer;
+  }
+
+  form {
+    display: none;
+
+    input[type="submit"] {
+      display: none;
+    }
+
+    input[type="text"] {
+      width: 100%;
+    }
+  }
+
+  &.focus {
+    .new-topic-edit {
+      display: none;
+    }
+
+    form {
+      display: block;
+    }
+  }
+}
