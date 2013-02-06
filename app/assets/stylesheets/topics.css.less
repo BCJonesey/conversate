@@ -1,1 +1,26 @@
+@import "variables.css.less";
+@import "mixins.css.less";
 
+.topic {
+  cursor: pointer;
+
+  &:hover {
+    background-color: @highlightColor;
+  }
+
+  &.selected {
+    background-color: @darkBlue;
+    cursor: default;
+
+    a {
+      color: white;
+      cursor: default;
+    }
+  }
+
+  a {
+    display: block;
+    padding: .5rem;
+    text-decoration: none;
+  }
+}
