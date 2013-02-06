@@ -3,7 +3,7 @@
   <div class="msg-info clearfix">
 
     <div class="msg-info-group pull-right">
-      <a href='#' class="msg-delete msg-action btn-faint" title='Delete Message'><i class='icon-trash'></i></a>
+      <a href='#' class="msg-delete msg-action btn-faint" data-message-id="<%= message.escape('message_id') %>" title='Delete Message'><i class='icon-trash'></i></a>
       <span class='icon-text msg-time unfilled-timestamp'
             data-timestamp="<%= message.escape('timestamp') %>"></span>
     </div>
@@ -18,7 +18,8 @@
   <div class='hidden'>
     <form accept-charset="UTF-8"
     action="/conversations/<%= ConversateApp.opened_conversation %>/delete"
-    class="hidden-form" method="post">
+    class="hidden-form" method="post"
+    id="form-delete-<%= message.escape('message_id') %>">
       <div style="margin:0;padding:0;display:inline">
         <input name="utf8" type="hidden" value="&#x2713;" />
         <input name="_method" type="hidden" value="put" />

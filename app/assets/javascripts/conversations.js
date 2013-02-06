@@ -65,10 +65,17 @@
     })
   };
 
+  var setupMessageActions = function() {
+    $('.msg-delete').live('click', function(e) {
+      var id = $(e.target).closest('.msg-delete').attr('data-message-id');
+      $('#form-delete-' + id).submit();
+    });
+  }
 
   $(function() {
     setupConversationEditor();
     setupCompose();
+    setupMessageActions();
 
     // Scroll the thread to the bottom when loading the page
     var thread = $('#thread');

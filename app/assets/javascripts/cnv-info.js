@@ -52,7 +52,6 @@ function cnvTitleSubmit (e){
 
 };
 
-
 $('.cnv-info-title-edit').on('click',cnvTitleEdit);
 // Bind the edit button to make the field editable
 
