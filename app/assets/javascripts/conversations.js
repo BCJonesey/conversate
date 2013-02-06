@@ -18,11 +18,6 @@
     };
     var currentUsers = userIds();
 
-    // Disabled to see if the check mark is all we need
-    // titleEditor.on("blur", function(e) {
-    //   titleEditor.parents("form").submit();
-    // });
-
     titleEditor.on("keydown", function(e) {
       if (e.keyCode == 13) { // Enter
         if (titleEditor.val() == currentTitle) {
@@ -32,19 +27,15 @@
       }
     });
 
-    $('html').on('click', function(e) {
-      var target = $(e.target);
-      if (target.closest('html').length > 0 &&
-          target.closest('.token-container').length == 0) {
-        var nowUsers = userIds();
-        if (currentUsers.toString() !== nowUsers.toString()) {
-          userEditor.hide();
-          userEditor.val(nowUsers);
-          userEditor.parents("form").submit();
-        }
+    $('.cnv-info-participants-save').on('click', function(e) {
+      var nowUsers = userIds();
+      if (currentUsers.toString() !== nowUsers.toString()) {
+        userEditor.hide();
+        userEditor.val(nowUsers);
+        userEditor.parents("form").submit();
       }
-    })
-  };
+    });
+  }
 
   var setupCompose = function() {
     $("#short-form-compose textarea").on("keydown", function(e) {

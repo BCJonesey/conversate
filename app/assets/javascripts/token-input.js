@@ -84,17 +84,16 @@
     });
     tokens.prepend('<li class="user-reminder">You, and...</li>');
 
-    container.on('click', function() {
+    $('.cnv-info-participants-edit').on('click', function() {
       input.focus();
       container.addClass('focus');
+      $('.cnv-info-participants-save-actions').removeClass('hidden');
+      $('.cnv-info-participants-actions').addClass('hidden');
     });
 
-    $('html').on('click', function(e) {
-      var target = $(e.target);
-      if (target.closest('html').length > 0 &&
-          target.closest('.token-container').length == 0) {
-        container.removeClass('focus');
-      }
+    $('.cnv-info-participants-save').on('click', function() {
+      input.blur();
+      container.removeClass('focus');
     })
 
     input.on('keyup', function(e) {
