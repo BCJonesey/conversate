@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130204223851) do
+ActiveRecord::Schema.define(:version => 20130206150003) do
 
   create_table "conversations", :force => true do |t|
     t.string   "title"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(:version => 20130204223851) do
     t.datetime "remember_me_token_expires_at"
     t.string   "full_name"
     t.boolean  "is_admin",                     :default => false
+    t.integer  "invited_by"
   end
 
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"
