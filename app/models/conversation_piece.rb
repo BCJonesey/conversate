@@ -13,6 +13,13 @@ class ConversationPiece
     UpdateUsers.new id, user, timestamp, added, removed
   end
 
+  def as_json(options={})
+    json = super(options)
+    # Javascript wants the timestamp to be in milliseconds.
+    json[:timestamp] = timestamp.to_i * 1000
+    json
+  end
+
   private
 
   def initialize(type, user, timestamp, count)
