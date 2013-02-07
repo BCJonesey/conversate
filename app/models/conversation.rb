@@ -2,8 +2,8 @@ class Conversation < ActiveRecord::Base
   include ConversationsHelper
   has_many :reading_logs
   has_many :users, :through => :reading_logs
-  has_many :topics, :through => :reading_logs
   has_many :events, :inverse_of => :conversation
+  has_and_belongs_to_many :topics
 
   attr_accessible :title, :users
 

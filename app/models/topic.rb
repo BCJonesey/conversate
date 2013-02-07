@@ -1,7 +1,6 @@
 class Topic < ActiveRecord::Base
-  has_many :reading_logs
-  has_many :users, :through => :reading_logs
-  has_many :conversations, :through => :reading_logs
+  has_and_belongs_to_many :users
+  has_and_belongs_to_many :conversations
 
   attr_accessible :name
 
