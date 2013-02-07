@@ -109,12 +109,21 @@ class ConversationsController < ApplicationController
   end
 
   private
-  def user_conversations()
-    current_user.conversations.order('updated_at DESC')
+  def user_conversations(topic=nil)
+    if topic
+      topic.conversations.order('updated_at DESC')
+    else
+      current_user.conversations.order('updated_at DESC')
+    end
   end
 
   def render_conversation_view(conversation=nil)
-    @conversations = user_conversations || []
+    topic = nil
+    if conversation
+      # Maybe there's a way to do this query in ActiveRecord?  Not sure.
+      topic = conversation.topics.keep_if {|t| current_user.in? t.users }.first
+    end
+    @conversations = user_conversations(topic) || []
     @opened_conversation = conversation
     @new_conversation = session[:new_conversation].nil? ? false : session[:new_conversation]
     session[:new_conversation] = false
