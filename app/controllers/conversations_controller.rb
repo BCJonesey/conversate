@@ -118,12 +118,12 @@ class ConversationsController < ApplicationController
   end
 
   def render_conversation_view(conversation=nil)
-    topic = nil
+    @opened_topic = nil
     if conversation
       # Maybe there's a way to do this query in ActiveRecord?  Not sure.
-      topic = conversation.topics.keep_if {|t| current_user.in? t.users }.first
+      @opened_topic = conversation.topics.keep_if {|t| current_user.in? t.users }.first
     end
-    @conversations = user_conversations(topic) || []
+    @conversations = user_conversations(@opened_topic) || []
     @opened_conversation = conversation
     @new_conversation = session[:new_conversation].nil? ? false : session[:new_conversation]
     session[:new_conversation] = false

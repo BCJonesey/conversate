@@ -1,16 +1,16 @@
 <div id="conversation-view">
 
-  <%= render 'navigation_column' %>
+  <%= render 'conversations/navigation_column' %>
   <div class="divider-vertical column-v">
   </div>
 
   <div class="divider-vertical column-v"></div>
 
-  <%= render 'list_column' %>
+  <%= render 'conversations/list_column' %>
 
   <div class="divider-vertical column-v"></div>
 
-  <%= render 'conversation_column' %>
+  <%= render 'conversations/conversation_column' %>
 </div>
 <%= javascript_tag do -%>
   <% if @opened_conversation %>
