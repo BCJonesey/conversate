@@ -3,16 +3,11 @@ ConversateApp.Views.MessagesIndex = Backbone.View.extend({
     var self = this;
     self.collection.each(function (message) {
       self.$el.append(JST['backbone/templates/messages/index']({ message: message,
-                                                                  helpers: self.helpers }))
+                                                                  helpers: self.helpers }));
     });
 
-    // There's a consistent difference between scrollHeight
-    // and scrollTop + height that we need to account for.
-    var scrollable = $('#thread');
-    scrollable.ready( function () {
-      self.scrollOffset = scrollable[0].scrollHeight -
-                          (scrollable.scrollTop() + scrollable.height());
-    });
+    Enhancer.enhancify(self.$el);
+    Scroller.scrollToBottom($('#thread'));
 
     return self;
   },
@@ -22,17 +17,15 @@ ConversateApp.Views.MessagesIndex = Backbone.View.extend({
         this.collection.bind('add', this.add);
   },
   add: function (message) {
-
-    var scrollable = $('#thread');
-    var autoscroll = ((scrollable.scrollTop() + scrollable.height() + this.scrollOffset)
-                        == scrollable[0].scrollHeight);
+    var autoscroll = Scroller.atBottom($('#thread'));
 
     this.$el.append(JST['backbone/templates/messages/index']({ message: message,
                                                                 helpers: this.helpers }))
+    Enhancer.enhancify(this.$el);
 
     // For unknown reasons, this.$el's scrollTop is broken.
     if (autoscroll) {
-      scrollable.scrollTop(scrollable[0].scrollHeight);
+      Scroller.scrollToBottom($('#thread'));
     }
   },
   helpers: {
