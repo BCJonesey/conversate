@@ -27,28 +27,42 @@ body.not-logged-in {
     //line-height: 0;
     margin-top:0;
     margin-bottom:1rem;
+    color:#7AD;
+    text-shadow:1px 1px 1px white;
   }
   //padding:1rem;
-  background-color:rgba(128,128,128,0.2);
+  background-color:rgba(64,64,64,0.2);
   .usual-border(all);
   height:auto;
+
+  input[type='email'],
+  input[type='password']{
+    color:#888;
+  }
 }
 
 .attribution {
   position: absolute;
-  bottom: 0;
-  left: 0;
+  bottom: .3rem;
+  right: .5rem;
 
   a {
+    font-size:.8rem;
+    font-style:italic;
     text-decoration: none;
-    color: lighten(@textColor, 25%);
+    color: #BBB;
+    text-shadow:1px 1px 1px white;
 
     &:hover {
       text-decoration: underline;
-      color: @textColor;
+      //color: @textColor;
     }
   }
 }
+
+
+
+// This is a utility function that should be integrated into the boots files
 
 .btn-group.pull-right .btn:last-child{
   margin-right:0;
