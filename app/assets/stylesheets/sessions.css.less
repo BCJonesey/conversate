@@ -24,8 +24,14 @@ body.not-logged-in {
   h1 {
     text-align: center;
     font-size: 300%;
-    line-height: 0;
+    //line-height: 0;
+    margin-top:0;
+    margin-bottom:1rem;
   }
+  //padding:1rem;
+  background-color:rgba(128,128,128,0.2);
+  .usual-border(all);
+  height:auto;
 }
 
 .attribution {
@@ -42,4 +48,8 @@ body.not-logged-in {
       color: @textColor;
     }
   }
+}
+
+.btn-group.pull-right .btn:last-child{
+  margin-right:0;
 }
