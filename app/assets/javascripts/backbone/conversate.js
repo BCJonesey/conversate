@@ -12,14 +12,25 @@ var ConversateApp = {
 	Routers: {},
 	initialize: function(data, opened_conversation) {
 		var self = this;
+
 		self.opened_conversation = opened_conversation;
+
 		self.conversations = new ConversateApp.Collections.Conversations(data.conversations);
+
+		if (self.opened_conversation) {
+			self.messages = new ConversateApp.Collections.Messages(data.messages);
+		}
+
 		new ConversateApp.Routers.Conversations({ conversations: self.conversations});
 		Backbone.history.start();
 
 		setInterval(function () {
 			console.log('fetch');
     		self.conversations.fetch();
+
+				if (self.opened_conversation) {
+					self.messages.fetch({update: true});
+				}
 
     		// This bit should mimic the behavior of unread_count_string + favicon stuff.
     		// Not ideal, but works for now.

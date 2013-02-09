@@ -90,5 +90,6 @@
     $('#column-list').css('left', $('#column-navigation').outerWidth() + 1);
     $('#column-conversation').css('left',
       $('#column-navigation').outerWidth() + $('#column-list').outerWidth() + 2);
+    $('#conversations-list').css('top', $('#column-list .conversations-list-toolbar').outerHeight());
   });
 })();
