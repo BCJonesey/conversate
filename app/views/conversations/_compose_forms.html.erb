@@ -3,16 +3,11 @@
     <a id="enable-long-form" class="btn">Long</a>
   </div>
   <div class="short-form-block pull-right">
-      <%= submit_tag "Send", :id => 'send', :class => 'btn btn-primary' %>
+      <%= button_tag "Send", :id => 'send', :class => 'btn btn-primary' %>
   </div>
   <div class="fill-width">
-    <%= text_area_tag :text, "", :class => 'write' %>
+    <%= text_area_tag :text, "", :class => 'write', :id => 'write-text' %>
   </div>
-  <!--
-  <%= form_tag write_message_path, :method => 'put' do %>
-
-  <% end %>
-  -->
 </div>
 
 <div id="long-form-compose">

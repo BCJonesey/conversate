@@ -92,4 +92,19 @@
       $('#column-navigation').outerWidth() + $('#column-list').outerWidth() + 2);
     $('#column-list #conversations-list').css('top', $('#column-list #list-header').outerHeight());
   });
+
+  // Writes a single messages from short form compose to our local collection
+  // and back to the server.
+  $('#send').live('click', function (e) {
+    var message = {
+      type: 'message',
+      // user: gotta grab the user.
+      user: {"email":"convo@example.com","full_name":null},
+      // timestamp: ts.
+      timestamp: "2013-02-08T21:57:35Z",
+      count: 1,
+      text: $('#write-text').val()
+    }
+    ConversateApp.messages.create(message);
+  });
 })();
