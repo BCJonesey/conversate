@@ -95,16 +95,31 @@
 
   // Writes a single messages from short form compose to our local collection
   // and back to the server.
-  $('#send').live('click', function (e) {
+  var send_message = function (e) {
     var message = {
       type: 'message',
-      // user: gotta grab the user.
+      // We can do this here for instant message population, but the server
+      // should pay no heed to it.
       user: ConversateApp.current_user,
-      // timestamp: ts.
-      timestamp: "2013-02-08T21:57:35Z",
+      timestamp: Date.now(),
       count: 1,
       text: $('#write-text').val()
     }
-    ConversateApp.messages.create(message);
+    if (ConversateApp.messages.create(message)) {
+      $('#write-text').val('');
+    }
+    else {
+      console.log('Error: There was problem sending the last mesage.')
+    }
+  };
+
+  $('#send').live('click', send_message);
+  $('#write-text').live('keyup', function (e) {
+    if (e.keyCode == 13) {
+      send_message();
+    }
   });
+
+
+
 })();
