@@ -99,7 +99,7 @@
     var message = {
       type: 'message',
       // user: gotta grab the user.
-      user: {"email":"convo@example.com","full_name":null},
+      user: ConversateApp.current_user,
       // timestamp: ts.
       timestamp: "2013-02-08T21:57:35Z",
       count: 1,
