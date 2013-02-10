@@ -43,12 +43,15 @@
   right:.25rem;
 }
 
+// Participants List
+
 .cnv-info-participants{
   & form{padding:0; margin:0;border:none;}
   height:auto;
   overflow: visible;
   padding:0;
   margin:0;
+  position:relative;
   .body-font();
   & div.token-container{
     //overflow: visible;
@@ -59,13 +62,19 @@
     cursor: default;
     //font-size: 1rem;
     //padding: .2rem;
-    outline: none;
+    outline: none
   }
   &.editing{
     background-color:white;
   }
 }
 
+.cnv-info-participants-actions,
+.cnv-info-participants-save-actions{
+  position:absolute;
+  top:.25rem;
+  right:.25rem;
+}
 
 .no-format{
   padding:0;
