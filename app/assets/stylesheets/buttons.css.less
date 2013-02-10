@@ -68,10 +68,6 @@
   // }
 }
 
-.text-gray-dark(){
-  color:rgba(0,0,0,0.3);
-  text-shadow:1px 1px 1px rgba(255,255,255,0.4);
-}
 
 .btn-icon{
   display: inline-block;
@@ -110,6 +106,10 @@
     vertical-align: middle;
     .body-font();
     font-size:.8rem;
+  }
+
+  > i + .icon-text{
+    margin-left:.35rem;
   }
 }
 
@@ -163,7 +163,7 @@ They are most useful for floating multiple buttons to one side.  */
   .title-text{
     .normal-size();
     .title-font();
-    color:#444;
+    .text-black();
     font-weight:bold;
     cursor:default;
     padding-left:0;
