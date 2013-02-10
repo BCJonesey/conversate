@@ -4,7 +4,7 @@
     <div class="cnv-info-title btn-faint-container">
       <%= form_tag retitle_conversation_path,
                    :method => 'put' do %>
-        <%= text_field_tag :title, @opened_conversation.title, :id => nil, :class => "cnv-info-title-input", :readonly => true %>
+        <%= text_field_tag :title, @opened_conversation.title, :id => nil, :autocomplete => 'off', :class => "cnv-info-title-input", :readonly => true %>
         <%= submit_tag 'Retitle', :class => 'hidden' %>
       <% end %>
 
