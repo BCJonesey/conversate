@@ -11,8 +11,17 @@
   <% if logged_in? %>
 
     <div class="btn-toolbar nav-header clearfix">
-      <div class="btn-group pull-left">
-        <a href="<%= conversations_path %>" class='btn btn-primary'>Water Cooler</a>
+      <div class="btn-group tabs pull-left">
+        <a href="<%= conversations_path %>" class='btn-icon is-selected'>
+          <i class='icon-home'></i>
+          <span class='icon-text'>Water Cooler</span>
+        </a>
+
+        <a href="#" class='btn-icon'>
+          <i class='icon-group'></i>
+          <span class='icon-text'>People</span>
+        </a>
+
       </div>
       <div class='btn-group pull-right'>
         <a href="#" class='btn-icon reflow'><i class='icon-leaf'></i></a>

@@ -2,6 +2,18 @@
 @import "mixins.css.less";
 
 .nav-header {
-  .usual-border(bottom);
-  background-color: @backgroundDarkestColor;
+  border-bottom:1px solid #888;
+  background-color: #BBB;
+
+  .tabs{
+    .icon-text{
+      font-size:1.25rem;
+      font-weight: bold;
+    }
+    .is-selected{
+      color:white;
+      position: static;
+      cursor: default;
+    }
+  }
 }

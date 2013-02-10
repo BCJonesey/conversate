@@ -1,48 +1,50 @@
 @import 'mixins.css.less';
 @import 'b-mixins.less';
 
-@border-radius: 0;
-
-.btn{
-	font-size: 1rem;
-	font-weight: normal;
-	text-decoration:none;
-	padding:.25rem .6rem;
-	border:1px solid #CCC;
-	background-color:#F0F0F0;
-	color:#444;
-	text-shadow:1px 1px 1px white;
-	.button-shadow(0.2);
-	cursor:pointer;
-	.user-select(none);
-	margin:0;
+.normal-size{
+  font-size: 1rem;
+  height:1.8rem;
+  line-height: 1.1rem;
+  padding:.25rem .6rem;
+  border:1px solid transparent;
+  margin:0;
   margin-left:.25rem;
   margin-right:.25rem;
   vertical-align: middle;
-  height:1.8rem;
-  //vertical-align: middle;
-  line-height: 1.1rem;
   display: inline-block;
+  font-weight: normal;
+  text-decoration:none;
+}
+
+.btn{
+  .normal-size();
+  border:1px solid #CCC;
+  background-color:#F0F0F0;
+  color:#444;
+  text-shadow:1px 1px 1px white;
+  .button-shadow(0.2);
+  cursor:pointer;
+  .user-select(none);
   &:hover,
   &.hover{
-  	background-color:#D8E8F8;
-  }
-
-  &:active,
-  &:focus,
-  &.active{
-  	box-shadow:none;
-  	background-color:#D4E4F4;
-  	position:relative;
-  	top:1px;
+     background-color:#D8E8F8;
+   }
+   &:active,
+   &:focus,
+   &.active{
+     box-shadow:none;
+      background-color:#D4E4F4;
+      position:relative;
+      top:1px;
   }
 }
 
-.btn.btn-primary{
-	color:white;
-	text-shadow:1px 1px 1px #888;
-	background-color:#7AD;
-	border-color:#AAA;
+.btn-primary{
+  .normal-size();
+	border-color: #AAA;
+  background-color:#7AD;
+  color:white;
+  text-shadow:1px 1px 1px #888;
 	.button-shadow(0.4);
   &:hover,
   &.hover{
@@ -55,44 +57,26 @@
   }
 }
 
-.btn.btn-gray{
-	color:#444;
-	text-shadow:1px 1px 1px #EEE;
-	background-color:#CCC;
-	border-color:#999;
-	.button-shadow(0.4);
 
-  &:hover,
-  &.hover{
-	   background-color:#C8D8E8;
-	 }
-  &:active,
-  &:focus,
-  &.active{
-    box-shadow:none;
-  }
-}
-
-
-.btn-icon,
-.btn.btn-icon{
+.btn-icon{
+  display: inline-block;
   background-color:transparent;
   border:1px solid transparent;
   font-size: 1rem;
   font-weight: normal;
   text-decoration:none;
-  padding:0.0rem .2rem;
-  color:#999;
-  text-shadow:1px 1px 1px #EEE;
+  padding:0 .25rem;
+  color:rgba(0,0,0,0.3);
+  text-shadow:1px 1px 1px rgba(255,255,255,0.4);
   cursor:pointer;
   .user-select(none);
+  //vertical-align: middle;
   margin:0;
-  vertical-align: middle;
   margin-left:.25rem;
   margin-right:.25rem;
   &:hover,
   &.hover{
-    color:#222;
+    color:rgba(0,0,0,0.7);
     //text-shadow:1px 1px 10px #ABC;
     -webkit-transition: color 0.35s;
   }
@@ -115,36 +99,114 @@
   }
 }
 
-.btn-icon-group{
+// .btn-icon-group{
+//   position: relative;
+//   display: inline-block;
+//   font-size: 0;
+//   vertical-align: middle;
+//   white-space: nowrap;
+//   .clearfix();
+
+//   > .btn-icon,
+//   .btn.btn-icon{
+//     display:inline-block;
+//     box-shadow:none;
+//     float:none;
+//   }
+// }
+
+
+
+
+// .btn.btn-text {
+//   background-color:transparent;
+//   color:#444;
+//   border-color: transparent;
+//   box-shadow:none;
+//   text-shadow: none;
+//   font-weight:bold;
+//   cursor:default;
+
+//   &:active,
+//   &.active {
+//     position:static;
+//   }
+// }
+
+
+
+
+
+
+/* Button Groups  are just groups of buttons. They do not change the appear ance of the buttons an do not affect the padding or margins.
+
+They are most useful for floating multiple buttons to one side.  */
+
+
+.btn-group{
   position: relative;
   display: inline-block;
-  font-size: 0;
   vertical-align: middle;
+  .ie7-inline-block();
+  font-size: 0;
   white-space: nowrap;
   .clearfix();
 
-  > .btn-icon,
-  .btn.btn-icon{
-    display:inline-block;
-    box-shadow:none;
-    float:none;
+  // > .btn,
+  // > .btn.btn-primary,
+  // > .btn.btn-gray,
+  // > .btn.btn-icon{
+  //   display:inline-block;
+  //   float:none;
+  //   clear:both;
+  // }
+}
+
+// The ends of a btn-group don't need margins
+
+
+.btn-group.pull-left{
+  .btn, .btn-icon, .text, .title-text{
+    &:first-child{
+      margin-left:0;
+    }
+  }
+}
+
+.btn-group.pull-right{
+  .btn, .btn-icon, .text,.title-text{
+    &:last-child{
+      margin-right:0;
+    }
   }
 }
 
 
+/* Button Toolbars are block level elements that contain buttons and button groups.  */
+
+.btn-toolbar{
+  font-size:0;
+  display: block;
+  vertical-align: middle;
+  padding:.5rem;
+}
 
 
-.btn.btn-text {
-  background-color:transparent;
-  color:#444;
-  border-color: transparent;
-  box-shadow:none;
-  text-shadow: none;
-  font-weight:bold;
-  cursor:default;
-
-  &:active,
-  &.active {
-    position:static;
+.btn-toolbar {
+  .text{
+    .normal-size();
+    .body-font();
+    color:#666;
+    font-weight:normal;
+    cursor:default;
+  }
+  .title-text{
+    .normal-size();
+    .title-font();
+    color:#444;
+    font-weight:bold;
+    cursor:default;
+    padding-left:0;
+    //margin-left:0;
   }
 }

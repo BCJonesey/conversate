@@ -54,13 +54,16 @@
     });
 
     $("#enable-long-form").on('click', function(e) {
+      //$('#text-long-form').val($('text').val());
       $("#long-form-compose").addClass("open");
+
     });
 
     $("#disable-long-form").on('click', function(e) {
       $("#long-form-compose").removeClass("open");
     })
   };
+
 
   $(function() {
     setupConversationEditor();
@@ -90,6 +93,5 @@
     $('#column-list').css('left', $('#column-navigation').outerWidth() + 1);
     $('#column-conversation').css('left',
       $('#column-navigation').outerWidth() + $('#column-list').outerWidth() + 2);
-    $('#conversations-list').css('top', $('#column-list .conversations-list-toolbar').outerHeight());
   });
 })();

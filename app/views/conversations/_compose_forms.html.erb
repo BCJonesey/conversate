@@ -1,13 +1,13 @@
 <div id="short-form-compose" class="clearfix">
   <%= form_tag write_message_path, :method => 'put' do %>
     <div class="short-form-block pull-right">
-      <div class='btn-multipart'>
-        <%= submit_tag "Send", :id => 'send', :class => 'btn btn-primary' %>
-        <a id="enable-long-form" class="btn btn-primary btn-thin"><i class='icon-angle-up'></i></a>
-      </div>
+        <%= submit_tag "Send", :id => 'send', :class => 'btn-primary' %>
     </div>
     <div class="fill-width">
+      <div class='cnv-compose-short-input'>
+      <a id="enable-long-form" class="btn-icon"><i class='icon-pencil'></i></a>
       <%= text_area_tag :text, "", :class => 'write' %>
+      </div>
     </div>
   <% end %>
 </div>
@@ -24,14 +24,14 @@
       </div>
 
       <div class='btn-group pull-left'>
-        <a class='btn btn-text'><%= @opened_conversation.title %></a>
+        <a class='title-text'><%= @opened_conversation.title %></a>
       </div>
 
     </div>
 
     <div class='long-form-contents'>
       <div class='long-form-textarea'>
-        <%= text_area_tag :text, "", :class =>'write' %>
+        <%= text_area_tag :text, "", :id => 'text-long-form', :class =>'write' %>
       </div>
       <div class="thread-reverse">
         <% @opened_conversation.pieces.reverse.each do |piece| %>
