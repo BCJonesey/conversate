@@ -16,12 +16,24 @@
   text-decoration:none;
 }
 
+.btn-actions(){
+  cursor:pointer;
+  &:active,
+  &:focus,
+  &.actve{
+    box-shadow: none;
+    position: relative;
+    top:1px;
+  }
+}
+
 .btn{
   .normal-size();
   border:1px solid #CCC;
   background-color:#F0F0F0;
   color:#444;
   text-shadow:1px 1px 1px white;
+  .btn-actions();
   .button-shadow(0.2);
   cursor:pointer;
   .user-select(none);
@@ -29,14 +41,12 @@
   &.hover{
      background-color:#D8E8F8;
    }
-   &:active,
-   &:focus,
-   &.active{
-     box-shadow:none;
-      background-color:#D4E4F4;
-      position:relative;
-      top:1px;
-  }
+  //  &:active,
+  //  &:focus,
+  //  &.active{
+  //   box-shadow:none;
+  //   background-color:#D4E4F4;
+  // }
 }
 
 .btn-primary{
@@ -46,17 +56,22 @@
   color:white;
   text-shadow:1px 1px 1px #888;
 	.button-shadow(0.4);
+  .btn-actions();
   &:hover,
   &.hover{
 	   background-color:#8BE;
 	 }
-	 &:active,
-	 &:focus,
-	 &.active{
-  	 box-shadow:none;
-  }
+	 // &:active,
+	 // &:focus,
+	 // &.active{
+  // 	 box-shadow:none;
+  // }
 }
 
+.text-gray-dark(){
+  color:rgba(0,0,0,0.3);
+  text-shadow:1px 1px 1px rgba(255,255,255,0.4);
+}
 
 .btn-icon{
   display: inline-block;
@@ -66,14 +81,14 @@
   font-weight: normal;
   text-decoration:none;
   padding:0 .25rem;
-  color:rgba(0,0,0,0.3);
-  text-shadow:1px 1px 1px rgba(255,255,255,0.4);
+  .text-gray-dark();
   cursor:pointer;
   .user-select(none);
   //vertical-align: middle;
   margin:0;
   margin-left:.25rem;
   margin-right:.25rem;
+  .btn-actions();
   &:hover,
   &.hover{
     color:rgba(0,0,0,0.7);
@@ -81,10 +96,10 @@
     -webkit-transition: color 0.35s;
   }
 
-  &:active, &:focus, &.active{
-    position:relative;
-    top:1px;
-  }
+  // &:active, &:focus, &.active{
+  //   position:relative;
+  //   top:1px;
+  // }
   > i{
     display:inline-block;
     vertical-align: middle;
@@ -97,44 +112,6 @@
     font-size:.8rem;
   }
 }
-
-// .btn-icon-group{
-//   position: relative;
-//   display: inline-block;
-//   font-size: 0;
-//   vertical-align: middle;
-//   white-space: nowrap;
-//   .clearfix();
-
-//   > .btn-icon,
-//   .btn.btn-icon{
-//     display:inline-block;
-//     box-shadow:none;
-//     float:none;
-//   }
-// }
-
-
-
-
-// .btn.btn-text {
-//   background-color:transparent;
-//   color:#444;
-//   border-color: transparent;
-//   box-shadow:none;
-//   text-shadow: none;
-//   font-weight:bold;
-//   cursor:default;
-
-//   &:active,
-//   &.active {
-//     position:static;
-//   }
-// }
-
-
-
-
 
 
 /* Button Groups  are just groups of buttons. They do not change the appear ance of the buttons an do not affect the padding or margins.
@@ -150,15 +127,6 @@ They are most useful for floating multiple buttons to one side.  */
   font-size: 0;
   white-space: nowrap;
   .clearfix();
-
-  // > .btn,
-  // > .btn.btn-primary,
-  // > .btn.btn-gray,
-  // > .btn.btn-icon{
-  //   display:inline-block;
-  //   float:none;
-  //   clear:both;
-  // }
 }
 
 // The ends of a btn-group don't need margins
@@ -187,6 +155,7 @@ They are most useful for floating multiple buttons to one side.  */
   .text{
     .normal-size();
     .body-font();
+    .text-gray-dark();
     color:#666;
     font-weight:normal;
     cursor:default;
