@@ -1,9 +1,10 @@
 @import 'variables.css.less';
 @import 'mixins.css.less';
 
-@color-faint:#EEE;
+@color-faint:rgba(0,0,0,0.1);
 @color-hover:#CCC;
 @color-solid:#444;
+
 .message{
   padding: 0;
 }
@@ -57,7 +58,7 @@
   box-shadow:none;
   text-shadow: none;
   margin-right:.5rem;
-  -webkit-transition: color 1.35s;
+  -webkit-transition: color 0.85s;
   &:hover {
     color:@color-solid;
     -webkit-transition: color 0.35s;
@@ -77,8 +78,8 @@
     }
     &:hover .btn-faint{
         color:@color-hover;
-        -webkit-transition: color 0.75s;
-        -webkit-transition-delay: color 0.75s;
+        -webkit-transition: color 0.5s;
+        -webkit-transition-delay: color 0.5s;
 
         &:hover,
         &.active{

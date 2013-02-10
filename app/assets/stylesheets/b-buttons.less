@@ -1,3 +1,4 @@
+@import 'mixins.css.less';
 @import 'b-mixins.less';
 
 @border-radius: 0;
@@ -15,6 +16,8 @@
 	cursor:pointer;
 	.user-select(none);
 	margin:0;
+  margin-left:.25rem;
+  margin-right:.25rem;
   vertical-align: middle;
   height:1.8rem;
   //vertical-align: middle;
@@ -71,18 +74,6 @@
 }
 
 
-.btn.btn-thin{
-  padding-left:.1rem;
-  padding-right:.1rem;
-}
-
-// adjust spacing on buttons with icons.
-
-// .btn > i {
-//     position: relative;
-//     right: .15em;
-// }
-
 .btn-icon,
 .btn.btn-icon{
   background-color:transparent;
@@ -97,7 +88,8 @@
   .user-select(none);
   margin:0;
   vertical-align: middle;
-  margin-left:.5rem;
+  margin-left:.25rem;
+  margin-right:.25rem;
   &:hover,
   &.hover{
     color:#222;
@@ -117,6 +109,7 @@
   > .icon-text{
     display:inline-block;
     vertical-align: middle;
+    .body-font();
     font-size:.8rem;
     margin-left:.5rem;
   }

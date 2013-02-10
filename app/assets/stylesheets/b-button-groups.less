@@ -12,10 +12,8 @@ They are most useful for floating multiple buttons to one side.  */
   position: relative;
   display: inline-block;
   .ie7-inline-block();
-  font-size: 0; // remove as part 1 of font-size inline-block hack
-  //vertical-align: middle; // match .btn alignment given font-size hack above
-  white-space: nowrap; // prevent buttons from wrapping when in tight spaces (e.g., the table on the tests page)
-  //.ie7-restore-left-whitespace();
+  font-size: 0;
+  white-space: nowrap;
   .clearfix();
 
   > .btn,
@@ -32,35 +30,15 @@ They are most useful for floating multiple buttons to one side.  */
 
 .btn-toolbar{
   font-size:0;
-  padding:.4rem;
+  padding:.5rem;
 }
 
-// .btn-multipart makes button elements contiguous and mergest their button shadows
-
-.btn-multipart{
-  position: relative;
-  display: inline-block;
-  font-size: 0;
-  .button-shadow(1);
-  > .btn,
-  > .btn.btn-primary,
-  > .btn.btn-gray,
-  > .btn.btn-text{
-    margin-left:-1px;
-    box-shadow:none;
-    //vertical-align: middle;
-  }
+// The ends of a btn-group don't need margins
+.btn-group.pull-left .btn:first-child{
+  margin-left:0;
 }
 
+.btn-group.pull-right .btn:last-child{
+  margin-right:0;
+}
 
-
-
-
-// Buttons next to Buttons
-
-.btn + .btn,
-.btn + .btn-multipart,
-.btn-mulitpart + .btn,
-.btn-mulitpart + .btn-multipart{
-    margin-left:.5em;
-  }

@@ -1,0 +1,74 @@
+@import "mixins.css.less";
+@import "variables.css.less";
+
+// Dropdown menu in the conversation info section
+
+.cnv-info{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: @backgroundDarkColor;
+  margin: 0;
+  border-bottom:1px solid #CCC;
+}
+
+.cnv-info-title{
+  cursor:default;
+  padding:0;
+  margin:0;
+  position:relative;
+  border-bottom:1px solid #CCC;
+}
+
+.cnv-info-title-input{
+      background-color: transparent;
+      border:none;
+      margin:0;
+      padding:0;
+      width:100%;
+      box-sizing:border-box;
+      .title-font();
+      padding:0.5rem;
+      outline:none;
+      &.editing{
+        background-color:white;
+      }
+}
+
+.cnv-info-title-actions,
+.cnv-info-title-save-actions{
+  position:absolute;
+  top:.25rem;
+  right:.25rem;
+}
+
+.cnv-info-participants{
+  & form{padding:0; margin:0;border:none;}
+  height:auto;
+  overflow: visible;
+  padding:0;
+  margin:0;
+  .body-font();
+  & div.token-container{
+    //overflow: visible;
+    //width: 100%;
+    margin:0;
+    font-family: sans-serif;
+    //border:none;
+    cursor: default;
+    //font-size: 1rem;
+    //padding: .2rem;
+    outline: none;
+  }
+  &.editing{
+    background-color:white;
+  }
+}
+
+
+.no-format{
+  padding:0;
+  margin:0;
+  border:none;
+}
