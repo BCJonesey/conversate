@@ -19,6 +19,11 @@
   margin:0;
   position:relative;
   border-bottom:1px solid #CCC;
+  background-color:#EEE;
+  &.editing{
+    background-color:white;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+  }
 }
 
 .cnv-info-title-input{
@@ -33,10 +38,7 @@
 
       padding:0.5rem;
       outline:none;
-      &.editing{
-        background-color:white;
-        box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-      }
+
 }
 
 .cnv-info-title-actions,
@@ -44,6 +46,7 @@
   position:absolute;
   top:.25rem;
   right:.25rem;
+  background-color: inherit;
 }
 
 // Participants List

@@ -1,11 +1,13 @@
 function editCnvTitle(){
-  $('.cnv-info-title-input').removeAttr('readonly').addClass('editing');
+  $('.cnv-info-title').addClass('editing');
+  $('.cnv-info-title-input').removeAttr('readonly');
   $('.cnv-info-title-actions').addClass('hidden');
   $('.cnv-info-title-save-actions').removeClass('hidden');
 };
 
 function saveCnvTitle (){
-  $('.cnv-info-title-input').attr('readonly','readonly').removeClass('editing');
+  $('.cnv-info-title').removeClass('editing');
+  $('.cnv-info-title-input').attr('readonly','readonly');
   $('.cnv-info-title-actions').removeClass('hidden');
   $('.cnv-info-title-save-actions').addClass('hidden');
 };
