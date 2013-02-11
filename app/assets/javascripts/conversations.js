@@ -18,9 +18,10 @@
     };
     var currentUsers = userIds();
 
-    titleEditor.on("blur", function(e) {
-      titleEditor.parents("form").submit();
-    });
+    // Disabled to see if the check mark is all we need
+    // titleEditor.on("blur", function(e) {
+    //   titleEditor.parents("form").submit();
+    // });
 
     titleEditor.on("keydown", function(e) {
       if (e.keyCode == 13) { // Enter
