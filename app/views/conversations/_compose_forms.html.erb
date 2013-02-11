@@ -33,11 +33,6 @@
       <div class='long-form-textarea'>
         <%= text_area_tag :text, "", :id => 'text-long-form', :class =>'write' %>
       </div>
-      <div class="thread-reverse">
-        <% @opened_conversation.pieces.reverse.each do |piece| %>
-          <%= render_conversation_piece piece %>
-        <% end %>
-      </div>
     </div>
 
     <% end %>
