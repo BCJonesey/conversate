@@ -1,34 +1,39 @@
 // Editing the title
+function cnvTitleFoucs(e){
+  e.preventDefault();
+  e.stopPropagation();
+  $('.cnv-info-title-input').focus();
 
-function editCnvTitle(e){
+};
+
+function cnvTitleEdit(e){
   currentTitle = $('.cnv-info-title-input').val();
   $('.cnv-info-title').addClass('editing');
   $('.cnv-info-title-input').removeAttr('readonly');
   $('.cnv-info-title-actions').addClass('hidden');
   $('.cnv-info-title-save-actions').removeClass('hidden');
 
-  $('.cnv-info-title').on('click',function(e){
-    e.preventDefault();
-    e.stopPropagation();
-    $('.cnv-info-title-input').focus();
-  });
+  $('.cnv-info-title').on('click',cnvTitleFoucs);
+
   // Bind a click away to cancel the operation
-  $(document).on('click',cancelCnvTitle);
-  $('.cnv-info-title-input').focus();
+  $(document).on('click',cnvTitleLock);
+  $('.cnv-info-title-input').focus().val(currentTitle);
 
   return(currentTitle);
 };
 
 
 
-function cancelCnvTitle(){
+function cnvTitleLock(){
   $('.cnv-info-title').removeClass('editing');
   $('.cnv-info-title-input').attr('readonly','readonly');
   $('.cnv-info-title-actions').removeClass('hidden');
   $('.cnv-info-title-save-actions').addClass('hidden');
 
   // unbind the click away
-  $(document).off('click',cancelCnvTitle);
+  $(document).off('click',cnvTitleLock);
+  $('.cnv-info-title').off('click',cnvTitleFoucs);
+
 
   $('.cnv-info-title-input').val(currentTitle);
 
@@ -36,23 +41,22 @@ function cancelCnvTitle(){
 
 
 
-function saveCnvTitle (){
+function cnvTitleSubmit (e){
+
+  e.preventDefault();
+  e.stopPropagation();
 
   $('.cnv-info-title form').submit();
 
-  cancelCnvTitle();
+  cnvTitleLock();
 
 };
 
 
-$('.cnv-info-title-edit').on('click',editCnvTitle);
+$('.cnv-info-title-edit').on('click',cnvTitleEdit);
 // Bind the edit button to make the field editable
 
-$('.cnv-info-title-save').on('click',function(e){
-  e.preventDefault();
-  e.stopPropagation();
-  saveCnvTitle();
-});
+$('.cnv-info-title-save').on('click',cnvTitleSubmit);
 
 // Bind the checkmark to save the info
 
