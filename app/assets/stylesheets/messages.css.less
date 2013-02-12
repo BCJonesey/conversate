@@ -1,10 +1,6 @@
 @import 'variables.css.less';
 @import 'mixins.css.less';
 
-@color-faint:rgba(0,0,0,0.05);
-@color-hover:#CCC;
-@color-solid:#444;
-
 .message{
   padding: 0;
 }
@@ -21,25 +17,32 @@
   line-height: 1rem;
   display: inline-block;
 }
-.msg-sender{
+
+.msg-sender, .msg-time, .msg-action{
   display: inline-block;
-  overflow: hidden;
+  height: 1rem;
+  line-height: 1rem;
+  vertical-align: middle;
+}
+.msg-sender{
+  overflow: ellipsis;
   font-weight: bold;
   font-size:1rem;
-  line-height: 1.25rem;
-  vertical-align: middle;
 }
 
 .msg-time{
   color:#CCC;
   font-size:.75rem;
-  display: inline-block;
-  vertical-align: middle;
 }
 .msg-action{
-  display: inline-block;
-  vertical-align: middle;
+  font-size: .75rem;
+  margin-right:.5rem;
+  i{
+    font-size: 1rem;
+  }
 }
+
+
 .msg-text {
   padding:0.5rem 0.75rem;
   padding-top:0;
@@ -51,43 +54,4 @@
       text-decoration: underline;
     }
   }
-}
-
-.btn-faint{
-  text-decoration: none;
-  font-size:1.25rem;
-  background-color:transparent;
-  color:@color-faint;
-  border-color: transparent;
-  box-shadow:none;
-  text-shadow: none;
-  margin-right:.5rem;
-  -webkit-transition: color 0.85s;
-  &:hover {
-    color:@color-solid;
-    -webkit-transition: color 0.35s;
-
-  }
-  &:active,
-  &.active {
-    position:relative;
-    top:1px;
-    color:@color-solid;
-  }
-}
-
-.btn-faint-container{
-    & .btn-faint.active{
-      color:@color-solid;
-    }
-    &:hover .btn-faint{
-        color:@color-hover;
-        -webkit-transition: color 0.5s;
-        -webkit-transition-delay: color 0.5s;
-
-        &:hover,
-        &.active{
-            color:@color-solid;
-        }
-    }
 }

@@ -132,6 +132,56 @@
 }
 
 
+/* btn-faint is a modifer on buttons for how much the button is show when it is not being hovered */
+
+@color-faint:rgba(0,0,0,0.05);
+@color-hover:#CCC;
+@color-solid:#444;
+
+.btn-faint{
+  text-decoration: none;
+  background-color:transparent;
+  color:@color-faint;
+  border-color: transparent;
+  box-shadow:none;
+  text-shadow: none;
+  -webkit-transition: color 0.85s;
+  &:hover {
+    color:@color-solid;
+    -webkit-transition: color 0.35s;
+
+  }
+  &:active,
+  &.active {
+    position:relative;
+    top:1px;
+    color:@color-solid;
+  }
+}
+.btn-faint-container{
+  & .btn-faint.active{
+    color:@color-solid;
+  }
+  &:hover .btn-faint{
+    color:@color-hover;
+    -webkit-transition: color 0.5s;
+    -webkit-transition-delay: color 0.5s;
+
+    &:hover,
+    &.active{
+        color:@color-solid;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
 /* Button Groups  are just groups of buttons. They do not change the appear ance of the buttons an do not affect the padding or margins.
 
 They are most useful for floating multiple buttons to one side.  */
