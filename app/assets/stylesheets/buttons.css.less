@@ -15,6 +15,24 @@
   font-weight: normal;
   text-decoration:none;
 }
+.small-size{
+  font-size: 0.75rem;
+  height: 1.0rem;
+  line-height: 0.75rem;
+  margin-left:0.15rem;
+  margin-right:0.15rem;
+  padding:.15rem 0.4rem;
+}
+
+.btn-small{
+  &.btn,&.btn-primary,&.btn-small{
+    .small-size();
+  }
+  &.btn-icon > i{
+    font-size: 0.7rem;
+  }
+}
+
 
 .btn-actions(){
   cursor:pointer;
