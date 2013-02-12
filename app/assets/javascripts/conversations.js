@@ -55,12 +55,13 @@
     });
 
     $("#enable-long-form").on('click', function(e) {
-      $('#long-form-compose textarea').val($('#short-form-compose textarea').val());
       $("#long-form-compose").addClass("open");
+      $('#long-form-compose textarea').focus().val($('#short-form-compose textarea').val());
+
     });
 
     $("#disable-long-form").on('click', function(e) {
-      $('#short-form-compose textarea').val($('#long-form-compose textarea').val());
+      $('#short-form-compose textarea').focus().val($('#long-form-compose textarea').val());
       $("#long-form-compose").removeClass("open");
     })
   };
