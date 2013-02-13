@@ -109,7 +109,7 @@
       $('#write-text').val('');
     }
     else {
-      console.log('Error: There was problem sending the last mesage.')
+      console.log('Error: There was problem sending the last message.')
     }
   };
 
