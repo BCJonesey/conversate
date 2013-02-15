@@ -1,0 +1,240 @@
+@import 'variables.css.less';
+@import 'mixins.css.less';
+
+.normal-size{
+  font-size: 1rem;
+  height:1.8rem;
+  line-height: 1.0rem;
+  padding:.25rem .6rem;
+  border:1px solid transparent;
+  margin:0;
+  margin-left:.25rem;
+  margin-right:.25rem;
+  vertical-align: middle;
+  display: inline-block;
+  font-weight: normal;
+  text-decoration:none;
+}
+.small-size{
+  font-size: 0.75rem;
+  height: 1.0rem;
+  line-height: 0.75rem;
+  margin-left:0.15rem;
+  margin-right:0.15rem;
+  padding:.15rem 0.4rem;
+}
+
+.btn-small{
+  &.btn,&.btn-primary,&.btn-small{
+    .small-size();
+  }
+  &.btn-icon > i{
+    font-size: 0.7rem;
+  }
+}
+
+
+.btn-actions(){
+  cursor:pointer;
+  &:active,
+  &:focus,
+  &.actve{
+    box-shadow: none;
+    position: relative;
+    top:1px;
+  }
+}
+
+.btn{
+  .normal-size();
+  border:1px solid #CCC;
+  background-color:#F0F0F0;
+  color:#444;
+  text-shadow:1px 1px 1px white;
+  .btn-actions();
+  .button-shadow(0.2);
+  cursor:pointer;
+  .user-select(none);
+  &:hover,
+  &.hover{
+     background-color:#D8E8F8;
+   }
+  //  &:active,
+  //  &:focus,
+  //  &.active{
+  //   box-shadow:none;
+  //   background-color:#D4E4F4;
+  // }
+}
+
+.btn-primary{
+  .normal-size();
+	border-color: #AAA;
+  background-color:#7AD;
+  color:white;
+  text-shadow:1px 1px 1px #888;
+	.button-shadow(0.4);
+  .btn-actions();
+  &:hover,
+  &.hover{
+	   background-color:#8BE;
+	 }
+	 // &:active,
+	 // &:focus,
+	 // &.active{
+  // 	 box-shadow:none;
+  // }
+}
+
+
+.btn-icon{
+  display: inline-block;
+  background-color:transparent;
+  border:1px solid transparent;
+  font-size: 1rem;
+  font-weight: normal;
+  text-decoration:none;
+  padding:0 .25rem;
+  .text-gray-dark();
+  cursor:pointer;
+  .user-select(none);
+  //vertical-align: middle;
+  margin:0;
+  margin-left:.25rem;
+  margin-right:.25rem;
+  .btn-actions();
+  &:hover,
+  &.hover{
+    color:rgba(0,0,0,0.7);
+    //text-shadow:1px 1px 10px #ABC;
+    -webkit-transition: color 0.35s;
+  }
+
+  // &:active, &:focus, &.active{
+  //   position:relative;
+  //   top:1px;
+  // }
+  > i{
+    display:inline-block;
+    vertical-align: middle;
+    font-size:1.5rem;
+  }
+  > .icon-text{
+    display:inline-block;
+    vertical-align: middle;
+    .body-font();
+    font-size:.8rem;
+  }
+
+  > i + .icon-text{
+    margin-left:.35rem;
+  }
+}
+
+
+/* btn-faint is a modifer on buttons for how much the button is show when it is not being hovered */
+
+@color-faint:rgba(0,0,0,0.05);
+@color-hover:#CCC;
+@color-solid:#444;
+
+.btn-faint{
+  text-decoration: none;
+  background-color:transparent;
+  color:@color-faint;
+  border-color: transparent;
+  box-shadow:none;
+  text-shadow: none;
+  -webkit-transition: color 0.85s;
+  &:hover {
+    color:@color-solid;
+    -webkit-transition: color 0.35s;
+
+  }
+  &:active,
+  &.active {
+    position:relative;
+    top:1px;
+    color:@color-solid;
+  }
+}
+.btn-faint-container{
+  & .btn-faint.active{
+    color:@color-solid;
+  }
+  &:hover .btn-faint{
+    color:@color-hover;
+    -webkit-transition: color 0.5s;
+    -webkit-transition-delay: color 0.5s;
+
+    &:hover,
+    &.active{
+        color:@color-solid;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+/* Button Groups  are just groups of buttons. They do not change the appear ance of the buttons an do not affect the padding or margins.
+
+They are most useful for floating multiple buttons to one side.  */
+
+
+.btn-group{
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  .ie7-inline-block();
+  font-size: 0;
+  white-space: nowrap;
+  .clearfix();
+}
+
+// The ends of a btn-group don't need margins
+
+
+.btn-group.pull-left > *:first-child{
+  margin-left:0;
+}
+
+.btn-group.pull-right > *:last-child{
+  margin-right:0;
+}
+
+
+/* Button Toolbars are block level elements that contain buttons and button groups.  */
+
+.btn-toolbar{
+  font-size:0;
+  display: block;
+  vertical-align: middle;
+  padding:.4rem;
+}
+
+
+.btn-toolbar {
+  .text{
+    .normal-size();
+    .body-font();
+    .text-gray-dark();
+    color:#666;
+    font-weight:normal;
+    cursor:default;
+  }
+  .title-text{
+    .normal-size();
+    .title-font();
+    .text-black();
+    font-weight:bold;
+    cursor:default;
+    padding-left:0;
+    //margin-left:0;
+  }
+}

@@ -1,6 +1,6 @@
 (function() {
   var setupConversationEditor = function() {
-    var header = $("#column-conversation .conversation-info");
+    var header = $("#column-conversation .cnv-info");
     var titleEditor = header.find("form.title input[type='text']");
     var userEditor = header.find("form.participants input[type='text']");
 
@@ -18,10 +18,6 @@
     };
     var currentUsers = userIds();
 
-    titleEditor.on("blur", function(e) {
-      titleEditor.parents("form").submit();
-    });
-
     titleEditor.on("keydown", function(e) {
       if (e.keyCode == 13) { // Enter
         if (titleEditor.val() == currentTitle) {
@@ -31,19 +27,15 @@
       }
     });
 
-    $('html').on('click', function(e) {
-      var target = $(e.target);
-      if (target.closest('html').length > 0 &&
-          target.closest('.token-container').length == 0) {
-        var nowUsers = userIds();
-        if (currentUsers.toString() !== nowUsers.toString()) {
-          userEditor.hide();
-          userEditor.val(nowUsers);
-          userEditor.parents("form").submit();
-        }
+    $('.cnv-info-participants-save').on('click', function(e) {
+      var nowUsers = userIds();
+      if (currentUsers.toString() !== nowUsers.toString()) {
+        userEditor.hide();
+        userEditor.val(nowUsers);
+        userEditor.parents("form").submit();
       }
-    })
-  };
+    });
+  }
 
   var setupCompose = function() {
     $("#short-form-compose textarea").on("keydown", function(e) {
@@ -55,16 +47,27 @@
 
     $("#enable-long-form").on('click', function(e) {
       $("#long-form-compose").addClass("open");
+      $('#long-form-compose textarea').focus().val($('#short-form-compose textarea').val());
+
     });
 
     $("#disable-long-form").on('click', function(e) {
+      $('#short-form-compose textarea').focus().val($('#long-form-compose textarea').val());
       $("#long-form-compose").removeClass("open");
     })
   };
 
+  var setupMessageActions = function() {
+    $('.msg-delete').live('click', function(e) {
+      var id = $(e.target).closest('.msg-delete').attr('data-message-id');
+      $('#form-delete-' + id).submit();
+    });
+  }
+
   $(function() {
     setupConversationEditor();
     setupCompose();
+    setupMessageActions();
 
     // Scroll the thread to the bottom when loading the page
     var thread = $('#thread');
@@ -75,7 +78,7 @@
     // The page will only open in editing mode if it's a new conversation.
     // new_conversation is defined in index.html.erb.
     if (window.new_conversation) {
-      $('.conversation-info').click();
+      $('.cnv-info .cnv-info-title-input').click();
       $('form.participants input[type="text"]').focus();
     }
     else {
@@ -90,6 +93,5 @@
     $('#column-list').css('left', $('#column-navigation').outerWidth() + 1);
     $('#column-conversation').css('left',
       $('#column-navigation').outerWidth() + $('#column-list').outerWidth() + 2);
-    $('#column-list #conversations-list').css('top', $('#column-list #list-header').outerHeight());
   });
 })();

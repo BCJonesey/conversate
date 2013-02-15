@@ -9,16 +9,24 @@
 </head>
 <body class="<%= logged_in? ? 'logged-in' : 'not-logged-in' %>">
   <% if logged_in? %>
+
     <div class="btn-toolbar nav-header clearfix">
-      <div class="btn-multipart pull-right">
-        <% if current_user.is_admin %>
-          <a href="<%= admin_path %>" class="btn btn-gray">Admin</a>
-        <% end %>
-        <a href="<%= edit_users_path %>" class='btn btn-gray'><%= current_user.name %></a>
-        <a href="<%= destroy_sessions_path %>" class='btn btn-gray'>Logout</a>
+      <div class="btn-group tabs pull-left">
+        <a href="<%= conversations_path %>" class='btn-icon is-selected'>
+          <i class='icon-home'></i>
+          <span class='icon-text'>Water Cooler</span>
+        </a>
+
+        <a href="#" class='btn-icon'>
+          <i class='icon-group'></i>
+          <span class='icon-text'>People</span>
+        </a>
+
       </div>
-      <div class="btn-group">
-        <a href="<%= conversations_path %>" class='btn btn-primary'>Water Cooler</a>
+      <div class='btn-group pull-right'>
+        <span class='text'><%= current_user.name %></span>
+        <a href="<%= edit_users_path %>" class='btn-icon' title='Settings'><i class='icon-user'></i></a>
+        <a href="<%= destroy_sessions_path %>" class='btn-icon' title='Sign Out'><i class='icon-signout'></i></a>
       </div>
     </div>
     <div class="container">

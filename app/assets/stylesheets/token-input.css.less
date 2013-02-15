@@ -2,39 +2,6 @@
 @import "variables.css.less";
 
 
-.conversation-info{
-    background-color: @backgroundDarkColor;
-    margin: 0;
-    border-bottom: 1px solid #CCC;
-    .title-font();
-    form {
-          input[type="submit"] {
-              display: none;
-          }
-          input{
-              background-color: transparent;
-          }
-    }
-
-    & form{padding:0; margin:0;border:none;}
-    height:auto;
-    overflow: visible;
-    padding:0;
-    margin:0;
-    & .conv-info-title{
-    }
-    & div.token-container{
-        //overflow: visible;
-        //width: 100%;
-        margin:0;
-        font-family: sans-serif;
-        //border:none;
-        cursor: default;
-        //font-size: 1rem;
-        //padding: .2rem;
-        outline: none;
-    }
-}
 .token-container {
   //position: relative;
 //      text-align: center;
@@ -115,27 +82,6 @@ li.user-reminder {
         <div.conv-info-participants>
             <input>*/
 
-.conv-info{
-    background-color: @backgroundDarkColor;
-}
-
-.conv-info-title{
-    border:none;
-    border-bottom: 1px solid #CCC;
-    cursor:default;
-    padding:.4rem;
-    margin:0;
-    width:100%;
-    outline:none;
-    font-weight: bold;
-    .body-font();
-
-    &:focus{
-            background-color: white;
-//            border-bottom-color: #CCC;
-            cursor:text;
-    }
-}
 
 .participants-list{
 //    border-top: 1px solid transparent;

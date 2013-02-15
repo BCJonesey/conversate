@@ -78,6 +78,7 @@
 
     #conversations-list {
       position: absolute;
+      top:0;
       bottom: 0;
       left: 0;
       right: 0;
@@ -150,31 +151,9 @@
 
       .conversation-piece {
         margin-top:.5rem;
+        margin-bottom:.5rem;
         border-color:#9AC;
 
-        .message-info {
-            .sender{
-              display: block;
-              overflow: hidden;
-              font-weight: bold;
-              }
-              .time{
-                color:#CCC;
-                font-size:.75rem;
-                font-style:italic;
-              }
-        }
-        .message-text {
-          white-space: pre-wrap;
-          clear: both;
-          a{
-            text-decoration: none;
-            color: #28D;
-            &:hover{
-              text-decoration: underline;
-            }
-          }
-        }
         .message-actions {
           display: none;
           margin: 5px;
@@ -184,17 +163,16 @@
         }
 
         &.retitle, &.deletion, &.update-users {
-          color:#999;
-          font-size: .8em;
+          color:#BBB;
+          font-size: .8rem;
           text-align: center;
-          margin-top:0;
         }
       }
     }
 
     .conversation-piece {
-      padding: 2px 5px;
-      font-size: .9em;
+      //padding: .1rem .3rem;
+      //font-size: .9em;
       line-height: 1.5em;
     }
 
@@ -203,28 +181,6 @@
       background-color: @backgroundColor;
       border: 1px solid @borderDarkColor;
     }
-
-    #short-form-compose {
-      height: @composeHeight;
-      .usual-border(top);
-      background-color: @backgroundDarkerColor;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-
-      .fill-width{
-        overflow:hidden;
-      }
-      .short-form-block{
-        margin-top:5px;
-        margin-left:10px;
-        margin-right:5px;
-      }
-      textarea{
-        height:40px;
-      }
-    }
   }
 
   .divider-vertical {
@@ -232,18 +188,3 @@
     background-color: @borderColor;
   }
 }
-
-// Dropdown menu in the conversation info section
-
-.conversation-info{
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-}
-.conv-menu{
-  position: absolute;
-  top:3px;
-  right:2px;
-}
-

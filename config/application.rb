@@ -54,6 +54,8 @@ module Conversate
     config.assets.enabled = true
     # Play nice with Heroku's slug compilation
     config.assets.initialize_on_precompile = false
+    # Let us serve up fonts too.
+    config.assets.paths << Rails.root.join("app", "assets", "fonts")
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
