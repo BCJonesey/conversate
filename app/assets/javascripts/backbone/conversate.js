@@ -10,9 +10,10 @@ var ConversateApp = {
 	Collections: {},
 	Views: {},
 	Routers: {},
-	initialize: function(data, opened_conversation) {
+	initialize: function(data, current_user, opened_conversation) {
 		var self = this;
 
+		self.current_user = current_user;
 		self.opened_conversation = opened_conversation;
 
 		self.conversations = new ConversateApp.Collections.Conversations(data.conversations);

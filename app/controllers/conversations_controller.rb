@@ -58,17 +58,24 @@ class ConversationsController < ApplicationController
   end
 
   def write
-    conversation = Conversation.find(params[:id])
-    render_conversation_view(conversation) and return if params[:text].empty?
+    respond_to do |format|
+      format.html {
+        conversation = Conversation.find(params[:id])
+        render_conversation_view(conversation) and return if params[:text].empty?
 
-    message_event = Event.new({:conversation_id => conversation.id,
-                               :user_id => current_user.id,
-                               :event_type => 'message',
-                               :data => {:message_id => conversation.next_message_id,
-                                         :text => params[:text]}.to_json})
-    message_event.save
-    current_user.mark_as_read(conversation)
-    render_conversation_view conversation
+        message_event = Event.new({:conversation_id => conversation.id,
+                                   :user_id => current_user.id,
+                                   :event_type => 'message',
+                                   :data => {:message_id => conversation.next_message_id,
+                                             :text => params[:text]}.to_json})
+        message_event.save
+        current_user.mark_as_read(conversation)
+        render_conversation_view conversation
+      }
+      format.json {
+
+      }
+    end
   end
 
   def delete
