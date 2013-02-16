@@ -3,6 +3,8 @@
 .topics{
   padding-top:.3rem;
 }
+
+
 .topic{
   margin:0.4rem 0.4rem;
   a{
@@ -27,33 +29,41 @@
   border-color:#DDD;
   cursor: default;
 }
-.new-topic {
-  text-align: center;
-  .text-gray-dark();
 
-  .new-topic-edit {
-    cursor: pointer;
+/* New Topic button */
+
+.topic-new{
+    margin:0.4rem 0.4rem;
+}
+
+.topic-new-input{
+  .body-font();
+  outline:none;
+  box-sizing:border-box;
+  width:100%;
+  border:1px solid transparent;
+  background-color:transparent;
+  display: block;
+  font-size:1rem;
+  padding: .5rem;
+  text-decoration: none;
+  cursor:pointer;
+  text-align:middle;
+  color:#CCC;
+  text-shadow:1px 1px 1px #EEE;
+  &:hover{
+    //background-color:#FAFAFA;
+    //border-color:#DDD;
+    color:#888;
   }
-
-  form {
-    display: none;
-
-    input[type="submit"] {
-      display: none;
-    }
-
-    input[type="text"] {
-      width: 100%;
-    }
-  }
-
-  &.focus {
-    .new-topic-edit {
-      display: none;
-    }
-
-    form {
-      display: block;
-    }
+  &:focus{
+    border-color:#DDD;
+    background-color: white;
+    box-shadow:inset 0 0 5px rgba(0,0,255,0.2);
+    border-color: #ABC;
+    color:#888;
   }
 }
+
+
+

@@ -1,8 +1,15 @@
 (function() {
+
+  function topicEditStart(){
+    $('.topic-new-input').val('');
+  }
+
+  function topicEditStop(){
+    $('.topic-new-input').val('New Topic');
+  }
+
   $(function() {
-    $('.new-topic .new-topic-edit').on('click', function() {
-      $('.new-topic').addClass('focus');
-      $('.new-topic input').focus();
-    })
-  })
+    $('.topic-new-input').on('focus', topicEditStart);
+    $('.topic-new-input').on('blur', topicEditStop);
+  });
 })();
