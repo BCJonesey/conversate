@@ -105,7 +105,8 @@
       user: ConversateApp.current_user,
       timestamp: Date.now(),
       count: 1,
-      text: $('#write-text').val()
+      text: $('#write-text').val(),
+      conversation_id: ConversateApp.opened_conversation
     }
     if (ConversateApp.messages.create(message)) {
       $('#write-text').val('');

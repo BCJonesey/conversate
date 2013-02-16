@@ -10,8 +10,8 @@ class EventsController < ApplicationController
   end
 
   def create
-    if !!params[:id]
-      conversation = Conversation.find(params[:id])
+    if !!params[:conversation_id]
+      conversation = Conversation.find(params[:conversation_id])
 
       message_event = Event.new({:conversation_id => conversation.id,
                                  :user_id => current_user.id,
@@ -20,7 +20,6 @@ class EventsController < ApplicationController
                                            :text => params[:text]}.to_json})
       message_event.save
       current_user.mark_as_read(conversation)
-      render_conversation_view conversation
       render :json => message_event.to_json
     else
       render :json => ''
