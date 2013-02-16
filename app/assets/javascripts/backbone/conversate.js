@@ -29,7 +29,7 @@ var ConversateApp = {
     		self.conversations.fetch();
 
 				if (self.opened_conversation) {
-					self.messages.fetch({update: true});
+					self.messages.fetch({update: true, data: { id: opened_conversation } });
 				}
 
     		// This bit should mimic the behavior of unread_count_string + favicon stuff.
