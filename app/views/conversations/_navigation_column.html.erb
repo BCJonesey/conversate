@@ -1,17 +1,19 @@
 <div id="column-navigation">
-  <% current_user.topics.uniq.each do |topic| %>
-    <div class="topic <%= 'selected' if topic.in? @opened_conversation.topics %>">
-      <a href="<%= topic_path(topic.id) %>">
-        <%= topic.name %>
-      </a>
-    </div>
-  <% end %>
-
-  <div class="new-topic">
-    <span class="new-topic-edit">New Topic</span>
-    <%= form_tag topic_path, :method => 'post' do %>
-      <%= text_field_tag :name, '' %>
-      <%= submit_tag 'New Topic' %>
+  <div class='topics'>
+    <% current_user.topics.uniq.each do |topic| %>
+      <div class="topic <%= 'selected' if topic.in? @opened_conversation.topics %>">
+        <a href="<%= topic_path(topic.id) %>">
+          <%= topic.name %>
+        </a>
+      </div>
     <% end %>
+
+    <div class="new-topic">
+      <span class="new-topic-edit">New Topic</span>
+      <%= form_tag topic_path, :method => 'post' do %>
+        <%= text_field_tag :name, '' %>
+        <%= submit_tag 'New Topic' %>
+      <% end %>
+    </div>
   </div>
 </div>

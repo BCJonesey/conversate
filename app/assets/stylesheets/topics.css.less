@@ -1,29 +1,31 @@
 @import "variables.css.less";
 @import "mixins.css.less";
-
-.topic {
-  cursor: pointer;
-
-  &:hover {
-    background-color: @highlightColor;
-  }
-
-  &.selected {
-    background-color: @darkBlue;
-    cursor: default;
-
-    a {
-      color: white;
-      cursor: default;
-    }
-  }
-
-  a {
+.topics{
+  padding-top:.3rem;
+}
+.topic{
+  margin:0.4rem 0.4rem;
+  a{
+    border:1px solid transparent;
     display: block;
     padding: .5rem;
     text-decoration: none;
+    cursor:pointer;
+    text-align:middle;
+    color:#888;
+    text-shadow:1px 1px 1px #EEE;
+    &:hover{
+    // -webkit-transition:border-color 0.2s,background-color 0.2s;
+      background-color:#F8F8F8;
+      border-color:#DDD;
+    }
   }
 }
+
+.topic.current a{
+  background-color: @highlightColor;
+  border-color:#DDD;
+  cursor: default;
 
 .new-topic {
   text-align: center;
