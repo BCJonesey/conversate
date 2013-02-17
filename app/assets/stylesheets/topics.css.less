@@ -23,15 +23,15 @@
     text-shadow:1px 1px 1px #EEE;
     &:hover{
     // -webkit-transition:border-color 0.2s,background-color 0.2s;
-      background-color:#F8F8F8;
-      border-color:#DDD;
+      //background-color:rgba(255,255,255,0.4);
+      //border-color:#E8E8E8;
     }
   }
 }
 
 .topic.current a{
   background-color: @highlightColor;
-  border-color:#DDD;
+  border-color:#E0E0E0;
   cursor: default;
 }
 
@@ -55,10 +55,12 @@
   text-align:middle;
   color:#CCC;
   text-shadow:1px 1px 1px #EEE;
+  -webkit-transition:color 0.2s;
   &:hover{
-    background-color:#F4F4F4;
-    border-color:#DDD;
-    //color:#888;
+    //background-color:#F4F4F4;
+    //border-color:#DDD;
+    color:#AAA;
+    -webkit-transition:color 0.4s;
   }
   &:focus{
     border-color:#DDD;
