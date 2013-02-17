@@ -124,6 +124,9 @@
     }
   });
 
-
+  $('#send-long-form').live('click', {text: $('#text-long-form')}, function (e) {
+    send_message(e);
+    $("#long-form-compose").removeClass("open");
+  });
 
 })();

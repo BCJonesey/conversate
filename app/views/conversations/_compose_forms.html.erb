@@ -12,13 +12,12 @@
 
 <div id="long-form-compose">
   <div class='long-form-window'>
-    <%= form_tag write_message_path, :message => 'put' do %>
 
     <div class='long-form-toolbar btn-toolbar clearfix'>
 
       <div class='btn-group pull-right'>
         <a id="disable-long-form" class="btn"> Cancel </a>
-        <%= submit_tag "Send", :id => 'send-long-form', :class => 'btn btn-primary' %>
+        <%= button_tag "Send", :id => 'send-long-form', :class => 'btn btn-primary' %>
       </div>
 
       <div class='btn-group pull-left'>
@@ -33,6 +32,5 @@
       </div>
     </div>
 
-    <% end %>
   </div>
 </div>
