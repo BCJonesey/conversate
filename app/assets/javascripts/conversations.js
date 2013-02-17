@@ -109,7 +109,7 @@
       text: text.val(),
       conversation_id: ConversateApp.opened_conversation
     }
-    if (ConversateApp.messages.create(message)) {
+    if (ConversateApp.messages.create(message, {wait: true})) {
       text.val('');
     }
     else {
