@@ -8,7 +8,7 @@
       src = src.replace(/^https:\/\/www/, 'http://dl');
     }
 
-    continuation('<div class="image-in-message"><img src="' + src + '"></img><div><a href="' + url + '" target="_blank">'+url+'</a></div></div>');
+    continuation('<div class="image-in-message"><a href="' + url + '" target="_blank"><img src="' + src + '"></img></a></div>');
   };
 
   var tweetify = function(match, continuation) {

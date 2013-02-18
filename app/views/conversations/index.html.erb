@@ -28,7 +28,6 @@
                     , messages: <%= @opened_conversation.pieces.to_json.html_safe %>
                   <% end %>
                     },
-                  <%= current_user.to_json.html_safe %>,
                   <%= @opened_conversation.id %>);
   <% end %>
 <% end -%>

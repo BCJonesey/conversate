@@ -10,10 +10,9 @@ var ConversateApp = {
 	Collections: {},
 	Views: {},
 	Routers: {},
-	initialize: function(data, current_user, opened_conversation) {
+	initialize: function(data, opened_conversation) {
 		var self = this;
 
-		self.current_user = current_user;
 		self.opened_conversation = opened_conversation;
 
 		self.conversations = new ConversateApp.Collections.Conversations(data.conversations);
@@ -30,7 +29,7 @@ var ConversateApp = {
     		self.conversations.fetch();
 
 				if (self.opened_conversation) {
-					self.messages.fetch({update: true, data: $.param({ id: opened_conversation }) });
+					self.messages.fetch({update: true});
 				}
 
     		// This bit should mimic the behavior of unread_count_string + favicon stuff.
