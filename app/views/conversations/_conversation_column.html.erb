@@ -35,9 +35,6 @@
     </div>
   </div>
   <div id="thread">
-    <% @opened_conversation.pieces.each do |piece| %>
-      <%= render_conversation_piece piece %>
-    <% end %>
   </div>
   <%= render 'compose_forms' %>
   <% end %>
