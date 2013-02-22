@@ -1,4 +1,13 @@
 <div id="column-navigation">
+
+  <div class='btn-toolbar topics-toolbar clearfix'>
+    <div class='btn-group pull-right'>
+      <a href="#" class="btn-icon topic-new-button">
+        <i class="icon-plus"></i>
+      </a>
+    </div>
+  </div>
+
   <div class='topics'>
     <% current_user.topics.uniq.each do |topic| %>
       <div class="topic <%= 'current' if topic.in? @opened_conversation.topics %>">
@@ -8,11 +17,12 @@
       </div>
     <% end %>
 
-    <div class="topic-new">
+    <div class="topic-new hidden">
       <%= form_tag topic_path, :class => 'topic-new-from', :method => 'post' do%>
         <%= text_field_tag :name, 'New Topic', :class => 'topic-new-input',  :autocomplete => 'off'%>
         <%= submit_tag 'Create New Topic', :class =>'hidden  topic-new-submit'%>
       <% end %>
     </div>
   </div>
+
 </div>

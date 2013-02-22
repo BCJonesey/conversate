@@ -1,15 +1,16 @@
 (function() {
 
-  function topicEditStart(){
-    $('.topic-new-input').val('');
+  function topicNew(){
+    $('.topic-new').removeClass('hidden')
+    $('.topic-new-input').focus().val('');
   }
 
-  function topicEditStop(){
-    $('.topic-new-input').val('New Topic');
-  }
+  // function topicEditStop(){
+  //   $('.topic-new-input').val('New Topic');
+  // }
 
   $(function() {
-    $('.topic-new-input').on('focus', topicEditStart);
-    $('.topic-new-input').on('blur', topicEditStop);
+    $('.topic-new-button').on('click', topicNew);
+    //$('.topic-new-input').on('blur', topicEditStop);
   });
 })();
