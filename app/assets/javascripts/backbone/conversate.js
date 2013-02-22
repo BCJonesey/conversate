@@ -50,6 +50,6 @@ var ConversateApp = {
 					self.messages.fetch({update: true, data: $.param({ id: opened_conversation }) });
 				}
 
-		}, 5000);
+		}, 10000);
 	}
 }
