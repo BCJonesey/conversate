@@ -21,6 +21,8 @@ class EventsController < ApplicationController
       message_event.save
       current_user.mark_as_read(conversation)
       render :json => message_event.to_json
+
+      conversation.update_most_recent_event
     else
       render :json => ''
     end

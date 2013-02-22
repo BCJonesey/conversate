@@ -4,10 +4,11 @@ class Conversation < ActiveRecord::Base
   has_many :users, :through => :reading_logs
   has_many :events, :inverse_of => :conversation
 
-  attr_accessible :title, :users
+  attr_accessible :title, :users, :most_recent_event
 
   after_initialize do |convo|
     convo.title = convo.default_conversation_title if (convo.title.nil? || convo.title.empty?)
+    convo.most_recent_event = Time.now
   end
 
   # Public: Stitch together the events on a conversation into "conversation
@@ -68,6 +69,11 @@ class Conversation < ActiveRecord::Base
     return true if last_read_event_id == nil
 
     messages.order('created_at DESC').first.created_at > Event.find(last_read_event_id).created_at
+  end
+
+  def update_most_recent_event
+    most_recent_event = Time.now
+    save
   end
 
   def as_json(options)
