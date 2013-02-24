@@ -6,7 +6,11 @@ class ConversationsController < ApplicationController
     respond_to do |format|
       format.html {
         @conversations = user_conversations
-        redirect_to conversation_path(@conversations.first.id) and return unless @conversations.length == 0
+        if @conversations.length == 0
+          redirect_to topic_path(current_user.topics.first.id)
+        else
+          redirect_to conversation_path(@conversations.first.id)
+        end
       }
       format.json {
 
@@ -123,13 +127,13 @@ class ConversationsController < ApplicationController
     if conversation
       # Maybe there's a way to do this query in ActiveRecord?  Not sure.
       @opened_topic = conversation.topics.keep_if {|t| current_user.in? t.users }.first
-    end
 
-    # Conversation has no topic.  This shouldn't ever happen.  Put it in a default
-    # conversation.
-    if @opened_topic.nil?
-      @opened_topic = current_user.topics.order('created_at ASC').first
-      conversation.topics << @opened_topic
+      # Conversation has no topic.  This shouldn't ever happen.  Put it in a default
+      # conversation.
+      if @opened_topic.nil?
+        @opened_topic = current_user.topics.order('created_at ASC').first
+        conversation.topics << @opened_topic
+      end
     end
 
     @conversations = user_conversations(@opened_topic) || []
