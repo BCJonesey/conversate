@@ -1,6 +1,6 @@
 class ConversationsController < ApplicationController
   before_filter :require_login
-  before_filter :require_participation, :except => [:index, :new]
+  before_filter :require_participation, :except => [:index, :create]
 
   def index
     respond_to do |format|
@@ -21,9 +21,10 @@ class ConversationsController < ApplicationController
     end
   end
 
-  def new
+  def create
     conversation = Conversation.new
-    conversation.users.push current_user
+    conversation.users << current_user
+    conversation.topics << Topic.find(params[:topic])
     conversation.save!
 
     session[:new_conversation] = true

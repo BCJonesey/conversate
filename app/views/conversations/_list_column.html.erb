@@ -1,7 +1,11 @@
 <div id="column-list">
   <div class='btn-toolbar conversations-list-toolbar clearfix'>
     <div class='btn-group pull-right'>
-      <a href='<%= new_conversation_path %>' class='btn-icon'><i class='icon-edit'></i></a>
+      <%= form_tag conversations_path, :id => 'new-conversation-form' do %>
+        <%= hidden_field_tag :topic, @opened_topic.id %>
+        <%= submit_tag '' %>
+      <% end %>
+      <a href='#' id="new-conversation-btn" class='btn-icon'><i class='icon-edit'></i></a>
     </div>
   </div>
   <div id='conversations-list'>

@@ -112,7 +112,6 @@
 
     $('html').on('click', function(e) {
       var target = $(e.target);
-      console.log(target.parents());
       if (target.closest('html').length > 0 &&
           target.closest('.cnv-info-participants').length == 0) {
         $('.token').remove();

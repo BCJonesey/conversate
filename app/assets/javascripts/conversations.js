@@ -85,6 +85,10 @@
       $('#short-form-compose textarea').focus();
     }
 
+    $('#new-conversation-btn').on('click', function(e) {
+      e.preventDefault();
+      $('#new-conversation-form').submit();
+    });
 
     $('.topics-group .topics-title').click(function(){
       $(this).parent().toggleClass('collapsed');
