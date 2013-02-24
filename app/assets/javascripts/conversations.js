@@ -129,4 +129,10 @@
     $("#long-form-compose").removeClass("open");
   });
 
+  $('.list-item a').live('click', function (e) {
+    e.preventDefault();
+    var conversation = $(this).attr("href");
+    ConversateApp.router.navigate(conversation, {trigger: true});
+  })
+
 })();

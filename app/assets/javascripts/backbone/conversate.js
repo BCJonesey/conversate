@@ -22,7 +22,7 @@ var ConversateApp = {
 			self.messages = new ConversateApp.Collections.Messages(data.messages);
 		}
 
-		new ConversateApp.Routers.Conversations({ conversations: self.conversations });
+		self.router = new ConversateApp.Routers.Conversations({ conversations: self.conversations });
 		Backbone.history.start(
 			{
 				pushState: true,
@@ -51,7 +51,7 @@ var ConversateApp = {
 			console.log('fetch messages');
 
 				if (self.opened_conversation) {
-					self.messages.fetch({update: true, data: $.param({ id: opened_conversation }) });
+					self.messages.fetch({update: true, data: $.param({ id: self.opened_conversation }) });
 				}
 
 		}, 10000);
