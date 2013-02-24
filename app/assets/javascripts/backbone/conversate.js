@@ -23,7 +23,11 @@ var ConversateApp = {
 		}
 
 		new ConversateApp.Routers.Conversations({ conversations: self.conversations });
-		Backbone.history.start({ pushState: true });
+		Backbone.history.start(
+			{
+				pushState: true,
+				root: '/'
+			});
 
 		setInterval(function () {
 			console.log('fetch convos');

@@ -1,6 +1,6 @@
 ConversateApp.Routers.Conversations = Backbone.Router.extend({
 	routes: {
-		"": "index"
+    'conversations/:id': 'index'
 	},
 	index: function() {
 		var conversationView = new ConversateApp.Views.ConversationsIndex(
