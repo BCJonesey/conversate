@@ -124,6 +124,14 @@ class ConversationsController < ApplicationController
       # Maybe there's a way to do this query in ActiveRecord?  Not sure.
       @opened_topic = conversation.topics.keep_if {|t| current_user.in? t.users }.first
     end
+
+    # Conversation has no topic.  This shouldn't ever happen.  Put it in a default
+    # conversation.
+    if @opened_topic.nil?
+      @opened_topic = current_user.topics.order('created_at ASC').first
+      conversation.topics << @opened_topic
+    end
+
     @conversations = user_conversations(@opened_topic) || []
     @opened_conversation = conversation
     @new_conversation = session[:new_conversation].nil? ? false : session[:new_conversation]
