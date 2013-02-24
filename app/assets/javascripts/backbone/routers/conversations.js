@@ -10,6 +10,7 @@ ConversateApp.Routers.Conversations = Backbone.Router.extend({
 		$('#conversations-list').html(conversationView.render().$el);
 
     if (ConversateApp.opened_conversation) {
+      ConversateApp.messages.reset({});
       ConversateApp.messages.fetch({
                                   update: true,
                                   data: $.param({
