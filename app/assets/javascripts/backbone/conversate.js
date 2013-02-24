@@ -22,8 +22,8 @@ var ConversateApp = {
 			self.messages = new ConversateApp.Collections.Messages(data.messages);
 		}
 
-		new ConversateApp.Routers.Conversations({ conversations: self.conversations});
-		Backbone.history.start();
+		new ConversateApp.Routers.Conversations({ conversations: self.conversations });
+		Backbone.history.start({ pushState: true });
 
 		setInterval(function () {
 			console.log('fetch convos');
