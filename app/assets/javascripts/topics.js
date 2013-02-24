@@ -1,8 +1,16 @@
 (function() {
+
+  function topicNew(){
+    $('.topic-new').removeClass('hidden')
+    $('.topic-new-input').focus().val('');
+  }
+
+  // function topicEditStop(){
+  //   $('.topic-new-input').val('New Topic');
+  // }
+
   $(function() {
-    $('.new-topic .new-topic-edit').on('click', function() {
-      $('.new-topic').addClass('focus');
-      $('.new-topic input').focus();
-    })
-  })
+    $('.topic-new-button').on('click', topicNew);
+    //$('.topic-new-input').on('blur', topicEditStop);
+  });
 })();

@@ -6,6 +6,8 @@ function reflow () {
 
     var cnvListHeaderHeight = $('#column-list .conversations-list-toolbar').outerHeight();
     $('#conversations-list').css('top', cnvListHeaderHeight + 'px');
+
+    $('.topics').css('top',$('.topics-toolbar').outerHeight() + 'px');
 };
 
 $('.reflow').click(reflow);

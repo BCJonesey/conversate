@@ -1,57 +1,86 @@
 @import "variables.css.less";
 @import "mixins.css.less";
+.topics{
+  padding-top:.3rem;
+  overflow-y:auto;
+  background-color: #E8E8E8;
+  top:41px;
+  bottom:0;
+  left:0;
+  right:0;
+  position: absolute;
+}
 
-.topic {
-  cursor: pointer;
+.topics-toolbar{
+  .usual-border(bottom);
+}
 
-  &:hover {
-    background-color: @highlightColor;
-  }
-
-  &.selected {
-    background-color: @darkBlue;
-    cursor: default;
-
-    a {
-      color: white;
-      cursor: default;
-    }
-  }
-
-  a {
+.topic-margin{
+  margin:0.2rem 0.4rem;
+}
+.topic-formatting{
+  padding: 0.4rem;
+  border:1px solid transparent;
+}
+.topic{
+  .topic-margin();
+  a{
+    .topic-formatting();
     display: block;
-    padding: .5rem;
     text-decoration: none;
-  }
-}
-
-.new-topic {
-  text-align: center;
-  .text-gray-dark();
-
-  .new-topic-edit {
-    cursor: pointer;
-  }
-
-  form {
-    display: none;
-
-    input[type="submit"] {
-      display: none;
-    }
-
-    input[type="text"] {
-      width: 100%;
-    }
-  }
-
-  &.focus {
-    .new-topic-edit {
-      display: none;
-    }
-
-    form {
-      display: block;
+    cursor:pointer;
+    text-align:middle;
+    color:#888;
+    text-shadow:1px 1px 1px #EEE;
+    &:hover{
+    // -webkit-transition:border-color 0.2s,background-color 0.2s;
+      //background-color:rgba(255,255,255,0.4);
+      //border-color:#E8E8E8;
     }
   }
 }
+
+.topic.current a{
+  background-color: @highlightColor;
+  border-color:#E0E0E0;
+  cursor: default;
+}
+
+/* New Topic button */
+
+.topic-new{
+    .topic-margin();
+}
+
+.topic-new-input{
+  .body-font();
+  .topic-formatting();
+  outline:none;
+  box-sizing:border-box;
+  width:100%;
+  background-color:transparent;
+  display: block;
+  font-size:1rem;
+  text-decoration: none;
+  cursor:pointer;
+  text-align:middle;
+  color:#CCC;
+  text-shadow:1px 1px 1px #EEE;
+  -webkit-transition:color 0.2s;
+  &:hover{
+    //background-color:#F4F4F4;
+    //border-color:#DDD;
+    color:#AAA;
+    -webkit-transition:color 0.4s;
+  }
+  &:focus{
+    border-color:#DDD;
+    background-color: white;
+    box-shadow:inset 0 0 5px rgba(0,0,255,0.2);
+    border-color: #ABC;
+    color:#888;
+  }
+}
+
+
+
