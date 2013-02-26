@@ -94,8 +94,8 @@
       $(this).parent().toggleClass('collapsed');
     });
 
-    $('#column-list').css('left', $('#column-navigation').outerWidth() + 1);
+    $('#column-list').css('left', $('#column-navigation').outerWidth() + 0);
     $('#column-conversation').css('left',
-      $('#column-navigation').outerWidth() + $('#column-list').outerWidth() + 2);
+      $('#column-navigation').outerWidth() + $('#column-list').outerWidth() + 0);
   });
 })();
