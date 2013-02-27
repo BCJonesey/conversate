@@ -103,6 +103,10 @@ class ConversationsController < ApplicationController
       rl = ReadingLog.new({:conversation_id => conversation.id,
                            :user_id => u.id})
       rl.save!
+      if topic_for_user(conversation, u).nil?
+        default_topic = u.topics.order('created_at ASC').first
+        conversation.topics << default_topic
+      end
     end
     user_event.save!
     render_conversation_view conversation.reload
