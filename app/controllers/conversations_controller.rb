@@ -93,11 +93,6 @@ class ConversationsController < ApplicationController
     removed_users = conversation.users - updated_users - [current_user]
     added_users = updated_users - conversation.users
 
-    puts "original #{conversation.users.map{|u| u.name}.join(',')}"
-    puts "update   #{updated_users.map{|u| u.name}.join(',')}"
-    puts "remove   #{removed_users.map{|u| u.name}.join(',')}"
-    puts "added    #{added_users.map{|u| u.name}.join(',')}"
-
     user_event = Event.new({:conversation_id => conversation.id,
                             :user_id => current_user.id,
                             :event_type => 'user_update',
