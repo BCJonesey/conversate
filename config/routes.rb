@@ -10,6 +10,7 @@ Conversate::Application.routes.draw do
   put 'conversations/:id/write' => 'conversations#write', :as => 'write_message'
   put 'conversations/:id/delete' => 'conversations#delete', :as => 'delete_message'
   put 'conversations/:id/updateusers' => 'conversations#update_users', :as => 'update_users'
+  put 'conversations/:id/changetopic' => 'conversations#change_topic', :as => 'change_topic'
   resources :topics, :only => [:create, :show]
 
   # The priority is based upon order of creation:

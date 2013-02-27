@@ -21,6 +21,13 @@
         <a href='#' class="btn-icon btn-faint cnv-info-title-save"><i class='icon-ok'></i></a>
       </div>
     </div>
+
+    <div class="hidden">
+      <%= form_tag change_topic_path, :method => 'put', :id => 'change-topic' do %>
+        <%= hidden_field_tag :topic, '' %>
+      <% end %>
+    </div>
+
     <div class='cnv-info-participants btn-faint-container'>
       <%= form_tag update_users_path,
                    :method => 'put',

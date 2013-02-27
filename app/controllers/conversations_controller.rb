@@ -113,6 +113,17 @@ class ConversationsController < ApplicationController
     render_conversation_view conversation.reload
   end
 
+  def change_topic
+    conversation = Conversation.find(params[:id])
+    current_topic = topic_for_user(conversation, current_user)
+    new_topic = Topic.find(params[:topic])
+    conversation.topics.delete current_topic
+    conversation.topics << new_topic
+    conversation.save
+
+    render_conversation_view conversation.reload
+  end
+
   private
   def user_conversations(topic=nil)
     if topic
@@ -122,11 +133,15 @@ class ConversationsController < ApplicationController
     end
   end
 
+  def topic_for_user(conversation, user)
+    # Maybe there's a way to do this query in ActiveRecord?  Not sure.
+    conversation.topics.keep_if {|t| user.in? t.users}.first
+  end
+
   def render_conversation_view(conversation=nil)
     @opened_topic = nil
     if conversation
-      # Maybe there's a way to do this query in ActiveRecord?  Not sure.
-      @opened_topic = conversation.topics.keep_if {|t| current_user.in? t.users }.first
+      @opened_topic = topic_for_user(conversation, current_user)
 
       # Conversation has no topic.  This shouldn't ever happen.  Put it in a default
       # conversation.

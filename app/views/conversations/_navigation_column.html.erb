@@ -9,7 +9,8 @@
 
   <div class='topics'>
     <% current_user.topics.uniq.each do |topic| %>
-      <div class="topic <%= 'current' if topic == @opened_topic %>">
+      <div class="topic <%= 'current' if topic == @opened_topic %>"
+           data-topic-id="<%= topic.id %>">
         <a href="<%= topic_path(topic.id) %>">
           <%= topic.name %>
         </a>
