@@ -1,12 +1,12 @@
 <div class="cnv-info-title btn-faint-container">
-  <form accept-charset="UTF-8" action="/conversations/58/retitle" method="post">
+  <form accept-charset="UTF-8" action="/conversations/<%= conversation.get('id') %>/retitle" method="post">
     <div style="margin:0;padding:0;display:inline">
       <input name="utf8" type="hidden" value="✓">
       <input name="_method" type="hidden" value="put">
-      <input name="authenticity_token" type="hidden" value="Omt7IJe2Eyr3gmUbL4owvrZIKjKBOK9ubvykk9IR5lA=">
+      <input name="authenticity_token" type="hidden" value="<%= $('meta[name="csrf-token"]').attr('content') %>">
     </div>
     <input autocomplete="off" class="cnv-info-title-input" name="title"
-    readonly="readonly" type="text" value="Structural Lobby">
+    readonly="readonly" type="text" value="<%= conversation.get('title') %>">
     <input class="hidden" name="commit" type="submit" value="Retitle">
   </form>
   <div class="btn-group cnv-info-title-actions">
