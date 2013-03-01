@@ -22,6 +22,8 @@ ConversateApp.Routers.Conversations = Backbone.Router.extend({
       var conversationInfoView = new ConversateApp.Views.ConversationInfo({conversation: conversation});
       $('#conversation-info').html(conversationInfoView.render().$el);
 
+      setupConversationEditor(conversation.get('participant_tokens'));
+
       // Message rendering.
       ConversateApp.messages.reset({});
       ConversateApp.messages.fetch({

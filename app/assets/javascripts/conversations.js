@@ -1,11 +1,11 @@
 (function() {
-  var setupConversationEditor = function() {
+  window.setupConversationEditor = function(participants) {
     var header = $("#column-conversation .cnv-info");
     var titleEditor = header.find("form.title input[type='text']");
     var userEditor = header.find("form.participants input[type='text']");
 
     // addressBook defined in index.html.erb.
-    if (window.addressBook && window.participants) {
+    if (window.addressBook) {
       tokenize(userEditor, addressBook, participants);
     }
 
@@ -65,7 +65,7 @@
   }
 
   $(function() {
-    setupConversationEditor();
+    //setupConversationEditor();
     setupCompose();
     setupMessageActions();
 
