@@ -28,12 +28,11 @@
     <div class="token-container participants-list">
       <ul class="tokens"><li class="user-reminder">You, and...</li>
         <!-- participant tokens go here -->
-        <li class="token participant" data-token-id="2">William Lubelski
-          <span class="participant-remove">x</span>
-        </li>
-        <li class="token participant" data-token-id="1">Sean Kermes
-          <span class="participant-remove">x</span>
-        </li>
+        <% _.each(conversation.get('participant_tokens'), function(participant) { %>
+          <li class="token participant" data-token-id="<%= participant.id %>"><%= helpers.name(participant) %>
+            <span class="participant-remove">x</span>
+          </li>
+        <% }) %>
         <li class="token-input-wrap">
           <input autocomplete="off" class="participant-input token-input"
           id="users" name="users" readonly="readonly" type="text" value="">
