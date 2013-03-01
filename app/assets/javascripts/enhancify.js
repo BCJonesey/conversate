@@ -117,10 +117,11 @@
   ];
 
   var enhancify = function(target) {
-    target.find('.msg-text').each(function(messageIndex, text) {
+    target.find('.unenhanced .msg-text').each(function(messageIndex, text) {
       var nextEnhancer = function(enhancerIndex, enhancedHTML) {
         if (enhancerIndex >= enhancers.length) {
           $(text).html($.parseHTML(enhancedHTML, document, true));
+          $(text).closest('.unenhanced').removeClass('unenhanced');
 
           // Wait until (hopefully) all the 3rd-party fancy js stuff is loaded
           setTimeout(function() { Scroller.scrollToBottom($('#thread')); },
