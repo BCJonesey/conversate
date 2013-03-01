@@ -52,10 +52,10 @@ function cnvTitleSubmit (e){
 
 };
 
-$('.cnv-info-title-edit').on('click',cnvTitleEdit);
+$('.cnv-info-title-edit').live('click',cnvTitleEdit);
 // Bind the edit button to make the field editable
 
-$('.cnv-info-title-save').on('click',cnvTitleSubmit);
+$('.cnv-info-title-save').live('click',cnvTitleSubmit);
 
 // Bind the checkmark to save the info
 
