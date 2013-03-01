@@ -3,7 +3,11 @@ class EventsController < ApplicationController
     if !!params[:id]
       conversation = Conversation.find(params[:id])
       current_user.mark_as_read(conversation)
+
+    if stale?(:last_modified => conversation.updated_at.utc, :etag => conversation)
       render :json => conversation.pieces.to_json
+    end
+
     else
       render :json => ''
     end
