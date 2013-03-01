@@ -129,9 +129,10 @@
     $("#long-form-compose").removeClass("open");
   });
 
-  $('.list-item a').live('click', function (e) {
+  $('#conversations-list').on('click', '.list-item', function (e) {
     e.preventDefault();
-    var conversation = $(this).attr("href");
+    var conversation = $(this).children('a').attr("href");
+    ConversateApp.opened_conversation = conversation;
     ConversateApp.router.navigate(conversation, {trigger: true});
   })
 

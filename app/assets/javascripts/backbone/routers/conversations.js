@@ -4,6 +4,12 @@ ConversateApp.Routers.Conversations = Backbone.Router.extend({
 	},
 	index: function(id) {
     ConversateApp.opened_conversation = id;
+    ConversateApp.conversations.fetch({
+                                  update: true,
+                                  data: $.param({
+                                    id: ConversateApp.opened_conversation
+                                  })
+                                });
 
 		var conversationView = new ConversateApp.Views.ConversationsIndex(
                                                         {collection: ConversateApp.conversations });
