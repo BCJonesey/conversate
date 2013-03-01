@@ -1,6 +1,7 @@
 ConversateApp.Routers.Conversations = Backbone.Router.extend({
 	routes: {
-    'conversations/:id': 'index'
+    'conversations/:id': 'index',
+    'conversations/:id/:action': 'index'
 	},
 	index: function(id) {
     ConversateApp.opened_conversation = id;
