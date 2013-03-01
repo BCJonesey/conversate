@@ -37,6 +37,6 @@ class User < ActiveRecord::Base
 
   # This avoids us writing out passwords, salts, etc. when rendering json.
   def as_json(options={})
-    super(:only => [:email, :full_name])
+    super(:only => [:email, :full_name, :id])
   end
 end

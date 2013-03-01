@@ -78,10 +78,12 @@ class Conversation < ActiveRecord::Base
 
   def as_json(options)
     json = super(options)
+    # TODO: DRY.
     json[:participants] = (users.length > 1) ?
       participants(options[:user]).map {|u| u.name}.join(', ') : " ";
     json[:class] = list_item_classes(self, options[:opened_conversation],
                                       options[:user])
+    json[:participant_tokens] = participants(options[:user])
     return json
   end
 
