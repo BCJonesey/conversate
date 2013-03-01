@@ -18,14 +18,16 @@
 </div>
 
 <div class="cnv-info-participants btn-faint-container">
-  <form accept-charset="UTF-8" action="/conversations/58/updateusers" class="participants" method="post">
+  <form accept-charset="UTF-8" action="/conversations/<%= conversation.get('id') %>/updateusers"
+    class="participants" method="post">
     <div style="margin:0;padding:0;display:inline">
       <input name="utf8" type="hidden" value="✓">
       <input name="_method" type="hidden" value="put">
-      <input name="authenticity_token" type="hidden" value="Omt7IJe2Eyr3gmUbL4owvrZIKjKBOK9ubvykk9IR5lA=">
+      <input name="authenticity_token" type="hidden" value="<%= $('meta[name="csrf-token"]').attr('content') %>">
     </div>
     <div class="token-container participants-list">
       <ul class="tokens"><li class="user-reminder">You, and...</li>
+        <!-- participant tokens go here -->
         <li class="token participant" data-token-id="2">William Lubelski
           <span class="participant-remove">x</span>
         </li>
