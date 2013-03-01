@@ -16,6 +16,13 @@ ConversateApp.Routers.Conversations = Backbone.Router.extend({
 		$('#conversations-list').html(conversationView.render().$el);
 
     if (ConversateApp.opened_conversation) {
+
+      // Conversation info rendering.
+      var conversation = ConversateApp.conversations.get(ConversateApp.opened_conversation);
+      var conversationInfoView = new ConversateApp.Views.ConversationInfo({conversation: conversation});
+      $('#conversation-info').html(conversationInfoView.render().$el);
+
+      // Message rendering.
       ConversateApp.messages.reset({});
       ConversateApp.messages.fetch({
                                   update: true,
