@@ -2,9 +2,9 @@
 @import "mixins.css.less";
 .topics{
   padding-top:.3rem;
+  padding-bottom:.3rem;
   overflow-y:auto;
-  //background-color: #E8E8E8;
-  background-color: white;
+  background-color: #E8E8E8;
   top:41px;
   bottom:0;
   left:0;
@@ -17,13 +17,29 @@
   .usual-border(bottom);
 }
 
+.topics-hint{
+  display:none;
+}
+
+// --- Mixins ---
+
 .topic-margin{
-  margin:0.2rem 0.4rem;
+  //margin:0.2rem 0.4rem;
+  margin-top:-1px;
 }
 .topic-formatting{
   padding: 0.4rem;
   border:1px solid transparent;
 }
+
+.topic-highlight{
+  background-color: @highlightColor;
+  border-top-color:#DDD;
+  border-bottom-color:#DDD;
+}
+
+// --- Formatting of topic links ---
+
 .topic{
   .topic-margin();
   a{
@@ -37,24 +53,18 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    &:hover{
-    // -webkit-transition:border-color 0.2s,background-color 0.2s;
-      //background-color:rgba(255,255,255,0.4);
-      //border-color:#E8E8E8;
-    }
   }
 }
 
 .topic.current a{
-  background-color: @highlightColor;
-  border-color:#E0E0E0;
+  .topic-highlight();
   cursor: default;
 }
 
 /* New Topic button */
 
 .topic-new{
-    .topic-margin();
+    margin:.4rem;
 }
 
 .topic-new-input{
@@ -88,8 +98,30 @@
 }
 
 .topics.move-targets {
+  background-color: #F8F8F8;
+  .topics-hint{
+    display:block;
+    text-align: center;
+    color:#AAA;
+    font-size:.8rem;
+    font-style:italic;
+    margin:0.2rem 0.5rem 0.5rem;
+    padding:0.3rem;
+    border:1px solid #CCC;
+    background-color: #FFE;
+  }
   .topic {
-    background-color: #ff0000;
+    a{
+      padding:0.5rem;
+      &:hover{
+        .topic-highlight();
+      }
+    }
+    &.current a{
+      border-color:transparent;
+      background-color:transparent;
+      box-shadow: none;
+      color:#CCC;
+    }
   }
 }
-

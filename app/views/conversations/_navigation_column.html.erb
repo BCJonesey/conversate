@@ -8,6 +8,7 @@
   </div>
 
   <div class='topics'>
+    <div class='topics-hint'>Move conversation to...</div>
     <% current_user.topics.uniq.each do |topic| %>
       <div class="topic <%= 'current' if topic == @opened_topic %>"
            data-topic-id="<%= topic.id %>">
