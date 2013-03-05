@@ -1,10 +1,10 @@
 <% if (message.escape('type') == 'message') { %>
-<div class="conversation-piece message btn-faint-container">
+<div class="conversation-piece message unenhanced btn-faint-container">
   <div class="msg-info clearfix">
 
     <div class="msg-info-group pull-right">
       <a href='#' class="msg-delete msg-action btn-faint" data-message-id="<%= message.escape('message_id') %>" title='Delete Message'><i class='icon-trash'></i></a>
-      <span class='icon-text msg-time unfilled-timestamp'
+      <span class='i-text msg-time unfilled-timestamp'
             data-timestamp="<%= message.escape('timestamp') %>"></span>
     </div>
 

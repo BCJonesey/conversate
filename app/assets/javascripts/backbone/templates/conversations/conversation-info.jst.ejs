@@ -1,0 +1,47 @@
+<div class="cnv-info-title btn-faint-container">
+  <form accept-charset="UTF-8" action="/conversations/<%= conversation.get('id') %>/retitle" method="post">
+    <div style="margin:0;padding:0;display:inline">
+      <input name="utf8" type="hidden" value="✓">
+      <input name="_method" type="hidden" value="put">
+      <input name="authenticity_token" type="hidden" value="<%= $('meta[name="csrf-token"]').attr('content') %>">
+    </div>
+    <input autocomplete="off" class="cnv-info-title-input" name="title"
+    readonly="readonly" type="text" value="<%= conversation.get('title') %>">
+    <input class="hidden" name="commit" type="submit" value="Retitle">
+  </form>
+  <div class="btn-group cnv-info-title-actions">
+    <a href="#" class="btn-icon btn-faint cnv-info-title-edit" title="Edit Title"><i class="icon-pencil"></i></a>
+  </div>
+  <div class="btn-group cnv-info-title-save-actions hidden">
+    <a href="#" class="btn-icon btn-faint cnv-info-title-save"><i class="icon-ok"></i></a>
+  </div>
+</div>
+
+<div class="cnv-info-participants btn-faint-container">
+  <form accept-charset="UTF-8" action="/conversations/<%= conversation.get('id') %>/updateusers"
+    class="participants" method="post">
+    <div style="margin:0;padding:0;display:inline">
+      <input name="utf8" type="hidden" value="✓">
+      <input name="_method" type="hidden" value="put">
+      <input name="authenticity_token" type="hidden" value="<%= $('meta[name="csrf-token"]').attr('content') %>">
+    </div>
+
+
+          <input autocomplete="off" class="participant-input token-input"
+          id="users" name="users" readonly="readonly" type="text" value="">
+
+
+    <input class="hidden" name="commit" type="submit" value="Change Users">
+  </form>
+  <div class="btn-group cnv-info-participants-actions">
+    <a href="#" class="btn-icon btn-faint btn-small cnv-info-participants-edit">
+      <i class="icon-plus"></i>
+    </a>
+  </div>
+
+  <div class="btn-group cnv-info-participants-save-actions hidden">
+    <a href="#" class="btn-icon btn-small btn-faint cnv-info-participants-save">
+      <i class="icon-ok"></i>
+    </a>
+  </div>
+</div>

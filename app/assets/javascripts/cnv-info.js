@@ -14,6 +14,7 @@ function cnvTitleEdit(e){
   $('.cnv-info-title-save-actions').removeClass('hidden');
 
   $('.cnv-info-title').on('click',cnvTitleFoucs);
+  $('.cnv-info-title-save').on('click', cnvTitleSubmit);
 
   // Bind a click away to cancel the operation
   $(document).on('click',cnvTitleLock);
@@ -42,7 +43,6 @@ function cnvTitleLock(){
 
 
 function cnvTitleSubmit (e){
-
   e.preventDefault();
   e.stopPropagation();
 
@@ -52,10 +52,10 @@ function cnvTitleSubmit (e){
 
 };
 
-$('.cnv-info-title-edit').on('click',cnvTitleEdit);
+$('.cnv-info-title-edit').live('click', cnvTitleEdit);
 // Bind the edit button to make the field editable
 
-$('.cnv-info-title-save').on('click',cnvTitleSubmit);
+
 
 // Bind the checkmark to save the info
 

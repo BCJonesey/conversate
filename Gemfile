@@ -29,8 +29,9 @@ gem 'sorcery'	# For login and security.
 gem 'thin'	# A minimalist web server. Heroku likes it.
 gem 'rails-backbone'	# Used for including the backbone.js files and general integration.
 gem 'ejs'	# Required for the .ejs templates.
-
+gem 'newrelic_rpm' # For New Relic analytics.
 gem 'quiet_assets'
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

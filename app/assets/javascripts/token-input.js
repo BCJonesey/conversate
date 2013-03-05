@@ -1,6 +1,8 @@
 (function() {
   var option = function(token) {
-    return $('<li class="token-option" data-token-id="' + token.id + '">' + token.name + '</li>');
+    // TODO: DRY this name function.
+    var name = token.name || token.full_name || token.email;
+    return $('<li class="token-option" data-token-id="' + token.id + '">' + name + '</li>');
   }
 
   var token = function(option) {

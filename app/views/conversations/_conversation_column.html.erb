@@ -1,6 +1,6 @@
 <div id="column-conversation">
   <% if @opened_conversation %>
-  <div class='cnv-info'>
+  <div id='conversation-info' class='cnv-info'>
     <div class="cnv-info-title btn-faint-container">
       <%= form_tag retitle_conversation_path,
                    :method => 'put' do %>
@@ -47,9 +47,6 @@
     </div>
   </div>
   <div id="thread">
-    <% @opened_conversation.pieces.each do |piece| %>
-      <%= render_conversation_piece piece %>
-    <% end %>
   </div>
   <%= render 'compose_forms' %>
   <% end %>

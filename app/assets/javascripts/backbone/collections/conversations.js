@@ -5,6 +5,9 @@ ConversateApp.Collections.Conversations = Backbone.Collection.extend({
       return '/conversations?id=' + ConversateApp.opened_conversation
     }
     return '/conversations'
+  },
+  comparator: function (conversation) {
+    return conversation.most_recent_event;
   }
 });
 

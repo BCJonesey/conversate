@@ -5,10 +5,11 @@ class Conversation < ActiveRecord::Base
   has_many :events, :inverse_of => :conversation
   has_and_belongs_to_many :topics
 
-  attr_accessible :title, :users
+  attr_accessible :title, :users, :most_recent_event
 
   after_initialize do |convo|
     convo.title = convo.default_conversation_title if (convo.title.nil? || convo.title.empty?)
+    convo.most_recent_event = Time.now
   end
 
   # Public: Stitch together the events on a conversation into "conversation
@@ -71,12 +72,19 @@ class Conversation < ActiveRecord::Base
     messages.order('created_at DESC').first.created_at > Event.find(last_read_event_id).created_at
   end
 
+  def update_most_recent_event
+    most_recent_event = Time.now
+    save
+  end
+
   def as_json(options)
     json = super(options)
+    # TODO: DRY.
     json[:participants] = (users.length > 1) ?
       participants(options[:user]).map {|u| u.name}.join(', ') : " ";
     json[:class] = list_item_classes(self, options[:opened_conversation],
                                       options[:user])
+    json[:participant_tokens] = participants(options[:user])
     return json
   end
 
