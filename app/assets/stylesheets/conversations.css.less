@@ -155,8 +155,6 @@
       padding: 0.75rem;
 
       .conversation-piece {
-        margin-top:.5rem;
-        margin-bottom:.5rem;
         //border-color:#9AC;
 
 
@@ -173,6 +171,7 @@
           color:#BBB;
           font-size: .8rem;
           text-align: center;
+          margin:.5rem;
         }
       }
     }
@@ -186,23 +185,23 @@
     .conversation-piece.message {
       min-height: 3.0rem;
       background-color: transparent;
-      border: none;
-      border-top: 1px solid #E8E8E8;
-      border-bottom: 1px solid #E8E8E8;
+      border: 1px solid transparent;
+      border-top-color:#E8E8E8;
+      border-bottom-color: #E8E8E8;
       margin: 0;
-      padding-top: 0.75rem;
-      padding-bottom: 0.75rem;
+      padding: 0.75rem;
+      margin-top:-1px;
       //background-color: @backgroundColor;
       //border: 1px solid @borderDarkColor;
 
       &.my-message {
-        background-color: #ff0000;
+        background-color: #F8F8F8;
+        border-color:#E8E8E8;
+        & + .my-message{
+          margin-top:1rem;
+        }
       }
     }
-    .message + .message {
-      border-top: none;
-    }
-
     .msg-text, .msg-info {
       padding: 0.35rem 0rem;
     }
