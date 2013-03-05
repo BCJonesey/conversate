@@ -10,11 +10,27 @@
     <input class="hidden" name="commit" type="submit" value="Retitle">
   </form>
   <div class="btn-group cnv-info-title-actions">
-    <a href="#" class="btn-icon btn-faint cnv-info-title-edit" title="Edit Title"><i class="icon-pencil"></i></a>
+    <a href='#' class="btn-icon btn-faint cnv-info-move-cnv" title="Move Conversation">
+      <i class="icon-folder-open-alt"></i>
+    </a>
+    <a href="#" class="btn-icon btn-faint cnv-info-title-edit" title="Edit Title">
+      <i class="icon-pencil"></i>
+    </a>
   </div>
   <div class="btn-group cnv-info-title-save-actions hidden">
     <a href="#" class="btn-icon btn-faint cnv-info-title-save"><i class="icon-ok"></i></a>
   </div>
+</div>
+
+<div class="hidden">
+  <form accept-charset="UTF-8" action="/conversations/<%= conversation.get('id') %>/changetopic" method="post" id="change-topic">
+    <div style="margin:0;padding:0;display:inline">
+      <input name="utf8" type="hidden" value="✓">
+      <input name="_method" tpye="hidden" value="put">
+      <input name="authenticity_token" type="hidden" value="<%= $('meta[name="csrf-topic"]').attr('content') %>">
+    </div>
+    <input autocomplete="off" name="topic" type="hidden" value="">
+  </form>
 </div>
 
 <div class="cnv-info-participants btn-faint-container">

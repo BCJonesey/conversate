@@ -24,7 +24,6 @@ class TopicsController < ApplicationController
         render :json => topic.conversations.to_json(:user => current_user, :opened_conversation => opened_conversation)
       }
     end
-
   end
 
   def create
