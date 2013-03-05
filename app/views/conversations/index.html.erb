@@ -26,10 +26,11 @@
       :opened_conversation => @opened_conversation).html_safe %>;
     var messages = <%= @opened_conversation ? @opened_conversation.pieces.to_json.html_safe : 'null' %>;
     var opened_conversation_id = <%= @opened_conversation ? @opened_conversation.id : 'null' %>;
+    var opened_topic_id = <%= @opened_topic ? @opened_topic.id : 'null' %>;
     var data = {
       conversations: conversations,
       messages: messages
     };
-    ConversateApp.initialize(data, opened_conversation_id);
+    ConversateApp.initialize(data, opened_conversation_id, opened_topic_id);
   <% end %>
 <% end -%>
