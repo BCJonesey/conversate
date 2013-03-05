@@ -36,6 +36,9 @@ ConversateApp.Views.MessagesIndex = Backbone.View.extend({
       return _.map(names, function(name) {
         return name.full_name || name.email;
       }).join(', ');
+    },
+    ownMessageClass: function(message) {
+      return (message.get('user').id == ConversateApp.current_user) ? ' my-message' : '';
     }
   }
 });
