@@ -56,7 +56,7 @@
     width: @navigationWidth;
     overflow-y: hidden;
     overflow-x: hidden;
-
+    .usual-border(right);
     &+ .divider-vertical {
       left: @navigationWidth;
     }
@@ -70,6 +70,7 @@
     left: @navigationWidth + @dividerWidth;
     overflow-y: auto;
     background-color:white;
+    .usual-border(right);
 
     #new-conversation-form {
       display: none;
@@ -136,14 +137,14 @@
     right: 0;
     border-right: none;
 
-    #thread,
     #short-form-compose {
       padding: .4rem;
     }
 
     #thread {
       //background-color: @backgroundDarkColor;
-      .gradient-ltr(#E0F0FF,#F4FAFF, 40%);
+      //.gradient-ltr(#E0F0FF,#F4FAFF, 40%);
+      background-color: white;
       overflow-y: scroll;
       border: none;
       position: absolute;
@@ -151,19 +152,22 @@
       bottom: @composeHeight;
       left: 0;
       right: 0;
+      padding: 0.75rem;
 
       .conversation-piece {
         margin-top:.5rem;
         margin-bottom:.5rem;
-        border-color:#9AC;
+        //border-color:#9AC;
 
-        .message-actions {
-          display: none;
-          margin: 5px;
-          margin-bottom: none;
-          padding-top: 5px;
-          border-top: 1px solid @borderDarkColor;
-        }
+
+        //I think this can be removed / testing now
+        // .message-actions {
+        //   display: none;
+        //   margin: 5px;
+        //   margin-bottom: none;
+        //   padding-top: 5px;
+        //   border-top: 1px solid @borderDarkColor;
+        // }
 
         &.retitle, &.deletion, &.update-users {
           color:#BBB;
@@ -180,14 +184,29 @@
     }
 
     .conversation-piece.message {
-      min-height: 40px;
-      background-color: @backgroundColor;
-      border: 1px solid @borderDarkColor;
+      min-height: 3.0rem;
+      background-color: transparent;
+      border: none;
+      border-top: 1px solid #E8E8E8;
+      border-bottom: 1px solid #E8E8E8;
+      margin: 0;
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
+      //background-color: @backgroundColor;
+      //border: 1px solid @borderDarkColor;
+    }
+    .message + .message {
+      border-top: none;
+    }
+
+    .msg-text, .msg-info {
+      padding: 0.35rem 0rem;
     }
   }
 
   .divider-vertical {
     width: @dividerWidth;
+    width:0;
     background-color: @borderColor;
   }
 }
