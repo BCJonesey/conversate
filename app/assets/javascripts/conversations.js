@@ -132,7 +132,6 @@
   $('#conversations-list').on('click', '.list-item', function (e) {
     e.preventDefault();
     var conversation = $(this).children('a').attr("href");
-    ConversateApp.opened_conversation = conversation;
     ConversateApp.router.navigate(conversation, {trigger: true});
   })
 
