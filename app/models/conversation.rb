@@ -34,7 +34,10 @@ class Conversation < ActiveRecord::Base
           conversation_pieces.append ConversationPiece.set_title(event.id, event.user, event.created_at, event.title)
         elsif event.event_type == 'deletion'
           index = conversation_pieces.index { |cp| cp.type == :message && cp.message_id == event.message_id }
-          conversation_pieces[index] = conversation_pieces[index].delete(event.id, event.user, event.created_at)
+          # We should track down how this might be nil.
+          unless index.nil?
+            conversation_pieces[index] = conversation_pieces[index].delete(event.id, event.user, event.created_at)
+          end
         elsif event.event_type == 'user_update'
           conversation_pieces.append ConversationPiece.update_users(event.id, event.user, event.created_at, User.find(event.added), User.find(event.removed))
         end
