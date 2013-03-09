@@ -35,7 +35,10 @@ class Conversation < ActiveRecord::Base
           conversation_pieces.append ConversationPiece.set_title(event.id, event.user, event.created_at, event.title)
         elsif event.event_type == 'deletion'
           index = conversation_pieces.index { |cp| cp.type == :message && cp.message_id == event.message_id }
-          conversation_pieces[index] = conversation_pieces[index].delete(event.id, event.user, event.created_at)
+          # We should track down how this might be nil.
+          unless index.nil?
+            conversation_pieces[index] = conversation_pieces[index].delete(event.id, event.user, event.created_at)
+          end
         elsif event.event_type == 'user_update'
           conversation_pieces.append ConversationPiece.update_users(event.id, event.user, event.created_at, User.find(event.added), User.find(event.removed))
         end
@@ -47,8 +50,10 @@ class Conversation < ActiveRecord::Base
   end
 
   def participants(current_user)
-    active = self.events.order('created_at DESC').collect {|e| e.user}.uniq
-    (active + (self.users - active) - [current_user]) - (active - self.users)
+    # active = self.events.order('created_at DESC').collect {|e| e.user}.uniq
+    # (active + (self.users - active) - [current_user]) - (active - self.users)
+    # The above call is very expensive.
+    self.users - [current_user]
   end
 
   # Public: Gets the next id for a message in this conversation.
@@ -80,11 +85,12 @@ class Conversation < ActiveRecord::Base
   def as_json(options)
     json = super(options)
     # TODO: DRY.
+    participants = participants(options[:user])
     json[:participants] = (users.length > 1) ?
-      participants(options[:user]).map {|u| u.name}.join(', ') : " ";
+    participants.map {|u| u.name}.join(', ') : " ";
     json[:class] = list_item_classes(self, options[:opened_conversation],
-                                      options[:user])
-    json[:participant_tokens] = participants(options[:user])
+                                     options[:user])
+    json[:participant_tokens] = participants
     return json
   end
 
