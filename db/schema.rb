@@ -17,12 +17,17 @@ ActiveRecord::Schema.define(:version => 20130222051526) do
     t.string   "title"
     t.datetime "created_at",                                           :null => false
     t.datetime "updated_at",                                           :null => false
-    t.time     "most_recent_event", :default => '2000-01-01 14:36:00'
+    t.time     "most_recent_event", :default => '2000-01-01 01:07:19'
   end
 
   create_table "conversations_topics", :force => true do |t|
     t.integer "conversation_id"
     t.integer "topic_id"
+  end
+
+  create_table "conversations_users", :id => false, :force => true do |t|
+    t.integer "conversation_id"
+    t.integer "user_id"
   end
 
   create_table "events", :force => true do |t|
