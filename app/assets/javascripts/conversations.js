@@ -136,6 +136,9 @@
   $('#conversations-list').on('click', '.list-item', function (e) {
     e.preventDefault();
     var conversation = $(this).children('a').attr("href");
+    var conversationId = conversation.substring(conversation.lastIndexOf('/'));
+    ConversateApp.opened_conversation = conversationId;
+    $('#short-form-compose form, #long-form-compose form').attr('action', conversation + '/write');
     ConversateApp.router.navigate(conversation, {trigger: true});
   })
 
