@@ -24,6 +24,6 @@
 
   $(function() {
     $('.topic-new-button').on('click', topicNew);
-    $('.cnv-info-move-cnv').on('click', enterMoveConversationMode);
+    $('.cnv-info-move-cnv').live('click', enterMoveConversationMode);
   });
 })();
