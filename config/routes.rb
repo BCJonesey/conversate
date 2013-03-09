@@ -3,7 +3,7 @@ Conversate::Application.routes.draw do
 
   get 'admin' => 'admin#index', :as => 'admin'
   resource :users, :only => [:new, :create, :edit, :update]
-  resource :sessions, :only => [:new, :create]
+  resource :session, :only => [:new, :create]
   get 'session/logout' => 'sessions#destroy', :as => 'destroy_sessions'
   resources :conversations, :only => [:index, :create, :show]
   put 'conversations/:id/retitle' => 'conversations#retitle', :as => 'retitle_conversation'
