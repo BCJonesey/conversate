@@ -21,7 +21,7 @@ class TopicsController < ApplicationController
           opened_conversation = Conversation.find(params[:conversation])
         end
 
-        render :json => topic.conversations.to_json(:user => current_user, :opened_conversation => opened_conversation)
+        render :json => topic.conversations.order('updated_at DESC').to_json(:user => current_user, :opened_conversation => opened_conversation)
       }
     end
   end
