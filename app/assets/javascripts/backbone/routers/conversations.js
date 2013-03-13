@@ -43,9 +43,13 @@ ConversateApp.Routers.Conversations = Backbone.Router.extend({
                                                   id: ConversateApp.opened_conversation
                                                 })
                                   });
-      var messagesView = new ConversateApp.Views.MessagesIndex(
+      if (!ConversateApp.messagesView) {
+        ConversateApp.messagesView = new ConversateApp.Views.MessagesIndex(
                                                       {collection: ConversateApp.messages});
-      $('#thread').html(messagesView.render().$el);
+      } else {
+        ConversateApp.messagesView.collection = ConversateApp.messages;
+      }
+      $('#thread').html(ConversateApp.messagesView.render().$el);
     }
 	}
 });
