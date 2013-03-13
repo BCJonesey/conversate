@@ -25,8 +25,13 @@ ConversateApp.Routers.Conversations = Backbone.Router.extend({
 
       // Conversation info rendering.
       var conversation = ConversateApp.conversations.get(ConversateApp.opened_conversation);
-      var conversationInfoView = new ConversateApp.Views.ConversationInfo({conversation: conversation});
-      $('#conversation-info').html(conversationInfoView.render().$el);
+      if (!ConversateApp.conversationInfoView) {
+        ConversateApp.conversationInfoView = new ConversateApp.Views.ConversationInfo({conversation: conversation});
+      } else {
+        ConversateApp.conversationInfoView.options.conversation = conversation;
+      }
+
+      $('#conversation-info').html(ConversateApp.conversationInfoView.render().$el);
 
       setupConversationEditor(conversation.get('participant_tokens'));
 
