@@ -4,6 +4,8 @@ ConversateApp.Routers.Conversations = Backbone.Router.extend({
     'conversations/:id/:action': 'index'
 	},
 	index: function(id) {
+
+    // Conversation list rendering.
     ConversateApp.opened_conversation = id;
     ConversateApp.conversations.fetch({
                                   update: true,
@@ -14,9 +16,10 @@ ConversateApp.Routers.Conversations = Backbone.Router.extend({
 
     if (!ConversateApp.conversationView) {
       ConversateApp.conversationView = new ConversateApp.Views.ConversationsIndex(
-                                  {collection: ConversateApp.conversations } );
+                                            {collection: ConversateApp.conversations} );
+    } else {
+      ConversateApp.conversationView.collection = ConversateApp.conversations;
     }
-    ConversateApp.conversationView.collection = ConversateApp.conversations;
 
 
 		$('#conversations-list').html(ConversateApp.conversationView.render().$el);

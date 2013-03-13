@@ -4,8 +4,7 @@ ConversateApp.Views.ConversationsIndex = Backbone.View.extend({
 		return this;
 	},
 	initialize: function () {
-        _.bindAll(this, 'render');
-
-        this.collection.bind('all', this.render);
-    }
+    _.bindAll(this, 'render');
+    this.collection.bind('all', this.render);
+  }
 });
