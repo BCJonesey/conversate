@@ -12,9 +12,14 @@ ConversateApp.Routers.Conversations = Backbone.Router.extend({
                                   })
                                 });
 
-		var conversationView = new ConversateApp.Views.ConversationsIndex(
-                                                        {collection: ConversateApp.conversations });
-		$('#conversations-list').html(conversationView.render().$el);
+    if (!ConversateApp.conversationView) {
+      ConversateApp.conversationView = new ConversateApp.Views.ConversationsIndex(
+                                  {collection: ConversateApp.conversations } );
+    }
+    ConversateApp.conversationView.collection = ConversateApp.conversations;
+
+
+		$('#conversations-list').html(ConversateApp.conversationView.render().$el);
 
     if (ConversateApp.opened_conversation) {
 
