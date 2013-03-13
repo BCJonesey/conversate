@@ -1,6 +1,7 @@
 ConversateApp.Views.MessagesIndex = Backbone.View.extend({
   render: function () {
     var self = this;
+    self.$el.html('');
     self.collection.each(function (message) {
       self.$el.append(JST['backbone/templates/messages/index']({ message: message,
                                                                   helpers: self.helpers }));
@@ -15,6 +16,7 @@ ConversateApp.Views.MessagesIndex = Backbone.View.extend({
         _.bindAll(this, 'render', 'add');
 
         this.collection.bind('add', this.add);
+        this.collection.bind('all', this.render);
   },
   add: function (message) {
     var autoscroll = Scroller.atBottom($('#thread'));
