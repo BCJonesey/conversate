@@ -1,1 +1,1 @@
-ConversateApp.Models.Conversation = Backbone.Model.extend({});
+Structural.Models.Conversation = Backbone.Model.extend({});

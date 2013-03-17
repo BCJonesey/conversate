@@ -1,27 +1,12 @@
-ConversateApp.Collections.Conversations = Backbone.Collection.extend({
-	model: ConversateApp.Models.Conversation,
-  url: function() {
-    if (ConversateApp.opened_topic) {
-      var root = '/topics/' + ConversateApp.opened_topic;
-      if (ConversateApp.opened_conversation) {
-        return root + '?conversation=' + ConversateApp.opened_conversation;
-      }
-      else {
-        return root;
-      }
+Structural.Collections.Conversations = Backbone.Collection.extend({
+	model: Structural.Models.Conversation,
+  initialize: function(data, options) {
+    if (options.topic) {
+      this.url = Structural.apiPrefix + '/topics/' + options.topic + '/conversations';
     }
-    else {
-      var root = '/conversations'
-      if (ConversateApp.opened_conversation) {
-        return root + '?id=' + ConversateApp.opened_conversation;
-      }
-      return root;
-    }
-
-
   },
   comparator: function (conversation) {
-    return conversation.most_recent_event;
+    return conversation.most_recent_message;
   }
 });
 
