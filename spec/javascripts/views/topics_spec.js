@@ -20,5 +20,9 @@ describe("Topic list", function() {
     expect(view.$('.tpc')[0].innerText.trim()).toEqual(topics[0].name);
     expect(view.$('.tpc')[1].innerText.trim()).toEqual(topics[1].name);
     expect(view.$('.tpc')[2].innerText.trim()).toEqual(topics[2].name);
-  })
+  });
+
+  it("has a top-level class", function() {
+    expect(view.el.className).toEqual("tpc-list");
+  });
 });
