@@ -30,3 +30,16 @@ describe("Topic list", function() {
     expect(view.$('.tpc-hint').length).toEqual(1);
   })
 });
+
+describe("Topic toolbar", function() {
+  var view;
+
+  beforeEach(function() {
+    view = new Structural.Views.TopicToolbar();
+    view.render();
+  });
+
+  it("has a new topic button", function() {
+    expect(view.$('.tpc-new-button').length).toEqual(1);
+  });
+});
