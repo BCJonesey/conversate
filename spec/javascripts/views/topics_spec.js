@@ -43,3 +43,16 @@ describe("Topic toolbar", function() {
     expect(view.$('.tpc-new-button').length).toEqual(1);
   });
 });
+
+describe("New topic input", function() {
+  var view;
+
+  beforeEach(function() {
+    view = new Structural.Views.NewTopic();
+    view.render();
+  });
+
+  it("has an input for the new topic name", function() {
+    expect(view.$('input[name="name"].tpc-new-input').length).toEqual(1);
+  });
+})
