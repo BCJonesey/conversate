@@ -4,7 +4,7 @@ Structural.Views.Topic = Backbone.View.extend({
     // TODO: Check for opened topic, update className.
   },
   render: function() {
-    this.$el.html(JST['topics/topic'], { topic: this.model });
+    this.$el.html(JST['backbone/templates/topics/topic']({ topic: this.model }));
     return this;
   },
   events: {

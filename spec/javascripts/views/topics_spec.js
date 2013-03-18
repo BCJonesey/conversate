@@ -1,14 +1,24 @@
 describe("Topic list", function() {
-  it("has an entry for each topic", function() {
-    var topics = [
+  var topics, collection, view;
+
+  beforeEach(function() {
+    topics = [
       { name: "Conversations", id: 1 },
       { name: "Structural", id: 2 },
       { name: "Chatter", id: 3 }
     ];
-    var tpcCollection = new Structural.Collections.Topics(topics);
-    var view = new Structural.Views.Topics({collection: tpcCollection});
+    collection = new Structural.Collections.Topics(topics);
+    view = new Structural.Views.Topics({collection: collection});
     view.render();
+  });
 
+  it("has an entry for each topic", function() {
     expect(view.$('.tpc').length).toEqual(3);
   });
+
+  it("has each topic's name", function() {
+    expect(view.$('.tpc')[0].innerText.trim()).toEqual(topics[0].name);
+    expect(view.$('.tpc')[1].innerText.trim()).toEqual(topics[1].name);
+    expect(view.$('.tpc')[2].innerText.trim()).toEqual(topics[2].name);
+  })
 });
