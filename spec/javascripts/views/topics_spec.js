@@ -25,4 +25,8 @@ describe("Topic list", function() {
   it("has a top-level class", function() {
     expect(view.el.className).toEqual("tpc-list");
   });
+
+  it("has a topic hint tag", function() {
+    expect(view.$('.tpc-hint').length).toEqual(1);
+  })
 });
