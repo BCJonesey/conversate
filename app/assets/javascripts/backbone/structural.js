@@ -4,7 +4,7 @@
 #= require_tree ./collections
 #= require_tree ./views
 #= require_tree ./routers
-#= require_tree ./support
+#= require ./support/support
 
 var Structural = new (Backbone.View.extend({
   Models: {},

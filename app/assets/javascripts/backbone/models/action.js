@@ -1,1 +1,1 @@
-Structural.Models.Action = Backbone.model.extend({});
+Structural.Models.Action = Backbone.Model.extend({});
