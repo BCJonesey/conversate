@@ -4,6 +4,7 @@ Structural.Views.Topics = Backbone.View.extend({
   render: function() {
     this.$el.append(this.topicHint);
     this.collection.forEach(this.renderTopic, this);
+    return this;
   },
   renderTopic: function(topic) {
     var topicView = new Structural.Views.Topic({model: topic});

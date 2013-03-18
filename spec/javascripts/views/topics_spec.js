@@ -55,4 +55,25 @@ describe("New topic input", function() {
   it("has an input for the new topic name", function() {
     expect(view.$('input[name="name"].tpc-new-input').length).toEqual(1);
   });
-})
+});
+
+describe("Topic container", function() {
+  var topics, collection, view;
+
+  beforeEach(function() {
+    topics = [
+      { name: "Conversations", id: 1 },
+      { name: "Structural", id: 2 },
+      { name: "Chatter", id: 3 }
+    ];
+    collection = new Structural.Collections.Topics(topics);
+    view = new Structural.Views.TopicContainer({topics: collection});
+    view.render();
+  });
+
+  it("has each of its sub-views", function() {
+    expect(view.$('.tpc-toolbar').length).toEqual(1);
+    expect(view.$('.tpc-list .tpc').length).toEqual(3);
+    expect(view.$('.tpc-new-input').length).toEqual(1);
+  })
+});
