@@ -74,3 +74,16 @@ describe("Conversation list view", function() {
     expect(view.$('.cnv .cnv-title')[3].innerText).toEqual('Fourth');
   });
 });
+
+describe("Conversation toolbar view", function() {
+  var view;
+
+  beforeEach(function() {
+    view = new Structural.Views.ConversationToolbar();
+    view.render();
+  });
+
+  it("has a new conversation button", function() {
+    expect(view.$('.cnv-new-button').length).toEqual(1);
+  });
+});
