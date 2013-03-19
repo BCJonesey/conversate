@@ -1,6 +1,7 @@
 Structural.Views.TopicContainer = Support.CompositeView.extend({
   className: 'tpc-container',
   initialize: function(options) {
+    options = options || {};
     this.topics = options.topics;
   },
   render: function() {

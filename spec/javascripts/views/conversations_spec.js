@@ -87,3 +87,46 @@ describe("Conversation toolbar view", function() {
     expect(view.$('.cnv-new-button').length).toEqual(1);
   });
 });
+
+describe("Conversation container view", function() {
+  var conversations, view;
+
+  beforeEach(function() {
+    conversations = [
+      { title: "First",
+        most_recent_message: 1,
+        participants: []
+      },
+      { title: "Third",
+        most_recent_message: 3,
+        participants: []
+      },
+      { title: "Fourth",
+        most_recent_message: 4,
+        participants: []
+      },
+      { title: "Second",
+        most_recent_message: 2,
+        participants: []
+      }
+    ];
+    var collection = new Structural.Collections.Conversations(conversations);
+    view = new Structural.Views.ConversationContainer({conversations: collection});
+    view.render();
+  });
+
+  it("has all the conversations", function() {
+    expect(view.$el.text()).toMatch(/First/);
+    expect(view.$el.text()).toMatch(/Second/);
+    expect(view.$el.text()).toMatch(/Third/);
+    expect(view.$el.text()).toMatch(/Fourth/);
+  });
+
+  it("has a toolbar", function() {
+    expect(view.$('.cnv-toolbar').length).toEqual(1);
+  });
+
+  it("has a list", function() {
+    expect(view.$('.cnv-list').length).toEqual(1);
+  });
+});
