@@ -1,11 +1,8 @@
 <a href="#">
   <div class="cnv-title"><%= conversation.escape('title') %></div>
   <div class="cnv-participants">
-    <% conversation.get('participants').forEach(function(participant) { %>
-      <!-- TODO: This is problematic.  `participant` here is no longer a model,
-           so we can't use Backbone's `escape` method with it.  Figure out
-           the right way to make this XSS-safe. -->
-      <span class="cnv-participant"><%= participant.name %></span>
+    <% conversation.get('participants').each(function(participant) { %>
+      <span class="cnv-participant"><%= participant.escape('name') %></span>
     <% }); %>
   </div>
 </a>
