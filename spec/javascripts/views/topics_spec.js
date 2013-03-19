@@ -1,4 +1,4 @@
-describe("Topic list", function() {
+describe("Topic list view", function() {
   var topics, collection, view;
 
   beforeEach(function() {
@@ -31,7 +31,7 @@ describe("Topic list", function() {
   })
 });
 
-describe("Topic toolbar", function() {
+describe("Topic toolbar view", function() {
   var view;
 
   beforeEach(function() {
@@ -44,7 +44,7 @@ describe("Topic toolbar", function() {
   });
 });
 
-describe("New topic input", function() {
+describe("New topic input view", function() {
   var view;
 
   beforeEach(function() {
@@ -57,7 +57,7 @@ describe("New topic input", function() {
   });
 });
 
-describe("Topic container", function() {
+describe("Topic container view", function() {
   var topics, collection, view;
 
   beforeEach(function() {
