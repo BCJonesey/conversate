@@ -1,5 +1,5 @@
-#= require_self
 #= require ./support/support
+#= require_self
 #= require_tree ./templates
 #= require_tree ./models
 #= require_tree ./collections

@@ -35,3 +35,42 @@ describe("Conversation view", function() {
     expect(view.$('.cnv-participant')[1].innerText).toEqual('Paul Revere');
   });
 });
+
+describe("Conversation list view", function() {
+  var conversations, view;
+
+  beforeEach(function() {
+    conversations = [
+      { title: "First",
+        most_recent_message: 1,
+        participants: []
+      },
+      { title: "Third",
+        most_recent_message: 3,
+        participants: []
+      },
+      { title: "Fourth",
+        most_recent_message: 4,
+        participants: []
+      },
+      { title: "Second",
+        most_recent_message: 2,
+        participants: []
+      }
+    ];
+    var collection = new Structural.Collections.Conversations(conversations);
+    view = new Structural.Views.Conversations({collection: collection});
+    view.render();
+  });
+
+  it("has a tag for each conversation", function() {
+    expect(view.$('.cnv').length).toEqual(4);
+  });
+
+  it("has the conversations in order", function() {
+    expect(view.$('.cnv .cnv-title')[0].innerText).toEqual('First');
+    expect(view.$('.cnv .cnv-title')[1].innerText).toEqual('Second');
+    expect(view.$('.cnv .cnv-title')[2].innerText).toEqual('Third');
+    expect(view.$('.cnv .cnv-title')[3].innerText).toEqual('Fourth');
+  });
+});
