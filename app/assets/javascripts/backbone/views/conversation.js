@@ -1,4 +1,4 @@
-Structural.Views.Conversation = Backbone.View.extend({
+Structural.Views.Conversation = Support.CompositeView.extend({
   className: 'cnv',
   initialize: function(options) {
     if (this.model.attributes.most_recent_message > this.model.attributes.most_recent_viewed) {

@@ -1,4 +1,4 @@
-Structural.Views.NewTopic = Backbone.View.extend({
+Structural.Views.NewTopic = Support.CompositeView.extend({
   className: 'tpc-new hidden',
   render: function() {
     this.$el.html(JST['backbone/templates/topics/new_topic_input']());

@@ -1,4 +1,4 @@
-Structural.Views.TopicToolbar = Backbone.View.extend({
+Structural.Views.TopicToolbar = Support.CompositeView.extend({
   className: 'btn-toolbar tpc-toolbar clearfix',
   render: function() {
     this.$el.html(JST['backbone/templates/topics/toolbar']());

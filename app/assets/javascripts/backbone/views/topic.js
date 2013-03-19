@@ -1,4 +1,4 @@
-Structural.Views.Topic = Backbone.View.extend({
+Structural.Views.Topic = Support.CompositeView.extend({
   className: 'tpc',
   initialize: function(options) {
     // TODO: Check for opened topic, update className.

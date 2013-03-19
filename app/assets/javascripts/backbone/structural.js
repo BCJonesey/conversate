@@ -6,7 +6,7 @@
 #= require_tree ./views
 #= require_tree ./routers
 
-var Structural = new (Backbone.View.extend({
+var Structural = new (Support.CompositeView.extend({
   Models: {},
   Collections: {},
   Views: {},

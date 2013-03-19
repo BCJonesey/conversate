@@ -1,4 +1,4 @@
-ConversateApp.Views.ConversationInfo = Backbone.View.extend({
+ConversateApp.Views.ConversationInfo = Support.CompositeView.extend({
   render: function () {
     this.$el.html(JST['backbone/templates/conversations/conversation-info'](
       {
