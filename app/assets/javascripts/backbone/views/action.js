@@ -9,8 +9,8 @@ Structural.Views.Action = Support.CompositeView.extend({
   initialize: function(options) {
     this.className += ' act-' + this.model.get('type').replace('_', '-');
 
-    if (this.model.isOwnMessage) {
-      this.className += ' act-my-message';
+    if (this.model.isOwnAction) {
+      this.className += ' act-my-action';
     }
   },
   render: function() {
