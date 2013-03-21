@@ -1,5 +1,12 @@
 Structural.Views.Action = Support.CompositeView.extend({
-  className: 'act btn-faint-container',
+  className: function() {
+    var classes = 'act btn-faint-container';
+    classes += ' act-' + this.model.get('type').replace('_', '-');
+    if (this.model.isOwnAction) {
+      classes += ' act-my-action';
+    }
+    return classes;
+  },
 
   messageTemplate: JST['backbone/templates/actions/message'],
   updateUsersTemplate: JST['backbone/templates/actions/update_users'],
@@ -7,11 +14,6 @@ Structural.Views.Action = Support.CompositeView.extend({
   deletionTemplate: JST['backbone/templates/actions/deletion'],
 
   initialize: function(options) {
-    this.className += ' act-' + this.model.get('type').replace('_', '-');
-
-    if (this.model.isOwnAction) {
-      this.className += ' act-my-action';
-    }
   },
   render: function() {
     var template;
