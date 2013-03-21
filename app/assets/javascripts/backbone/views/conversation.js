@@ -1,14 +1,17 @@
 Structural.Views.Conversation = Support.CompositeView.extend({
-  className: 'cnv',
-  template: JST['backbone/templates/conversations/conversation'],
-  initialize: function(options) {
+  className: function() {
+    var classes = 'cnv';
     if (this.model.is_unread) {
-      this.className += ' cnv-unread';
+      classes += ' cnv-unread';
     }
 
     if (this.model.is_current) {
-      this.className += ' cnv-current';
+      classes += ' cnv-current';
     }
+    return classes;
+  },
+  template: JST['backbone/templates/conversations/conversation'],
+  initialize: function(options) {
   },
   render: function() {
     this.$el.html(this.template({conversation: this.model}));

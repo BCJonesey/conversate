@@ -1,10 +1,14 @@
 Structural.Views.Topic = Support.CompositeView.extend({
-  className: 'tpc',
+  className: function() {
+    var classes = 'tpc';
+    if (this.model.is_current) {
+      classes += ' tpc-current';
+    }
+
+    return classes;
+  },
   template: JST['backbone/templates/topics/topic'],
   initialize: function(options) {
-    if (this.model.is_current) {
-      this.className += ' tpc-current';
-    }
   },
   render: function() {
     this.$el.html(this.template({ topic: this.model }));
