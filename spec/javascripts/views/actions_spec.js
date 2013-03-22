@@ -4,14 +4,20 @@ describe("Action view", function() {
   beforeEach(function() {
     var messageAction = {
       type: "message",
-      user: 2,
+      user: {
+        name: "Ethan Allen",
+        id: 2
+      },
       timestamp: 1363802638003,
       id: 123,
       text: "This is a message"
     };
     var updateUserAction = {
       type: "update_users",
-      user: 2,
+      user: {
+        name: "Ethan Allen",
+        id: 2
+      },
       timestamp: 1363802638003,
       id: 456,
       added: [1, 3],
@@ -19,14 +25,20 @@ describe("Action view", function() {
     };
     var retitleAction = {
       type: "retitle",
-      user: 2,
+      user: {
+        name: "Ethan Allen",
+        id: 2
+      },
       id: 878,
       timestamp: 1363802638003,
       title: "Conversation Title"
     };
     var deletionAction = {
       type: "deletion",
-      user: 2,
+      user: {
+        name: "Ethan Allen",
+        id: 2
+      },
       id: 788,
       timestamp: 1363802638003,
       action_id: 123
@@ -71,7 +83,7 @@ describe("Action view", function() {
 
   it("has the right content for its type", function() {
     expect(messageView.$('.act-text').length).toEqual(1);
-    expect(retitleView.$el.text()).toMatch(/titled the conversation "Conversation Title"/);
+    expect(retitleView.$el.text()).toMatch(/Ethan Allen titled the conversation "Conversation Title"/);
     // TODO: Fill this in once the user thing is sorted out.
     expect(updateUsersView.$el.text()).toMatch(/.*/);
     expect(deletionView.$el.text()).toMatch(/deleted a message/);

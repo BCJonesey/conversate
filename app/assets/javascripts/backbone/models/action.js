@@ -2,6 +2,10 @@ Structural.Models.Action = Backbone.Model.extend({
   initialize: function(attributes, options) {
     // TODO: Figure out where the current user is stored, update this.isOwnAction.
     this.isOwnAction = false;
+
+    if (this.attributes.user) {
+      this.attributes.user = new Structural.Models.Participant(this.attributes.user);
+    }
   },
   humanizedTimestamp: (function() {
     var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug',
