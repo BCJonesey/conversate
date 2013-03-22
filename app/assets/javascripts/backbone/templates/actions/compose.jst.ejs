@@ -1,0 +1,36 @@
+<div class="short-form-compose clearfix">
+  <form>
+    <div class="short-form-block pull-right">
+      <input type="submit" value="Send", class="btn-primary">
+    </div>
+    <div class="fill-width">
+      <div class="act-compose-short-input">
+        <a class="enable-long-form btn-icon">
+          <i class="icon-edit"></i>
+        </a>
+        <textarea class="write" name="text"></textarea>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="long-form-compose">
+  <div class="long-form-window">
+    <form>
+      <div class="long-form-toolbar btn-toolbar clearfix">
+        <div class="btn-group pull-right">
+          <a class="disable-long-form btn">Cancel</a>
+          <input type="submit" value="Send" class="send-long-form btn btn-primary">
+        </div>
+        <div class="btn-group pull-left">
+          <a class="title-text"><%= conversation.escape('title') %></a>
+        </div>
+      </div>
+      <div class="long-form-contents">
+        <div class="long-form-textarea">
+          <textarea name="text" class="text-long-form write"></textarea>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

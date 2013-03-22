@@ -118,4 +118,23 @@ describe("Action", function() {
       expect(view.$('.act')[3].innerText).toMatch(/deleted a message/);
     });
   });
+
+  describe("compose view", function() {
+    var view;
+
+    beforeEach(function() {
+      var conversation = new Structural.Models.Conversation({ title: "My Conversation" });
+      view = new Structural.Views.Compose({conversation: conversation});
+      view.render();
+    })
+
+    it("has two text areas", function() {
+      expect(view.$('.short-form-compose textarea').length).toEqual(1);
+      expect(view.$('.long-form-compose textarea').length).toEqual(1);
+    });
+
+    it("shows the title in the long form", function() {
+      expect(view.$('.long-form-compose .title-text').text()).toMatch(/My Conversation/);
+    });
+  });
 });
