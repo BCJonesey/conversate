@@ -1,0 +1,14 @@
+<%= action.get('user').escape('name') %>
+<% if (action.get('added').length > 0) { %>
+  added
+  <%= action.get('added').map(function(p) { return p.escape('name'); }).join(', ') %>
+  to the conversation
+  <% if (action.get('removed').length > 0) { %>
+    and
+  <% } %>
+<% } %>
+<% if (action.get('removed').length > 0) { %>
+  removed
+  <%= action.get('removed').map(function(p) { return p.escape('name'); }).join(', ') %>
+  from the conversation
+<% } %>
