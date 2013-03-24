@@ -5,6 +5,10 @@ Structural.Views.Topic = Support.CompositeView.extend({
       classes += ' tpc-current';
     }
 
+    if (this.model.is_unread) {
+      classes += ' tpc-unread';
+    }
+
     return classes;
   },
   template: JST['backbone/templates/topics/topic'],
