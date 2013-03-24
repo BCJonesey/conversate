@@ -138,3 +138,14 @@ describe("Action", function() {
     });
   });
 });
+
+describe("Title editor view", function() {
+  it("has a title input", function() {
+    var conversation = { title: "The conversation" };
+    var model = new Structural.Models.Conversation(conversation);
+    var view = new Structural.Views.TitleEditor({conversation: model});
+    view.render();
+
+    expect(view.$('input[type="text"]').val()).toEqual(conversation.title);
+  });
+});
