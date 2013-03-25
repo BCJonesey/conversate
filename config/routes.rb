@@ -13,6 +13,15 @@ Conversate::Application.routes.draw do
   put 'conversations/:id/changetopic' => 'conversations#change_topic', :as => 'change_topic'
   resources :topics, :only => [:create, :show]
 
+  namespace :api do
+    namespace :v0 do
+      resources :topics
+      resources :conversations
+      resources :users
+      resources :admin
+    end
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
