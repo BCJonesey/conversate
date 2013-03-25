@@ -15,8 +15,13 @@ Conversate::Application.routes.draw do
 
   namespace :api do
     namespace :v0 do
-      resources :topics
-      resources :conversations
+      resources :topics do
+        resources :conversations
+      end
+      resources :conversations do
+        resources :actions
+        resources :participants
+      end
       resources :users
       resources :admin
     end
