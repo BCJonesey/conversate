@@ -39,5 +39,15 @@ describe("Participants", function() {
     it("has an input at the end", function() {
       expect(view.$('li:last').hasClass('token-input-wrap')).toBeTruthy();
     });
+  });
+
+  describe("option view", function() {
+    it("has a name", function() {
+      var model = new Structural.Models.Participant(participants[0]);
+      var view = new Structural.Views.ParticipantOption({model: model});
+      view.render();
+
+      expect(view.$el.text()).toMatch(/Sharon Jones/);
+    })
   })
 });
