@@ -64,4 +64,24 @@ describe("Participants", function() {
       expect(view.$('.token-option').length).toEqual(2);
     });
   });
+
+  describe("editor view", function() {
+    var view;
+
+    beforeEach(function() {
+      var collection = new Structural.Collections.Participants(participants);
+      view = new Structural.Views.ParticipantEditor({participants: collection});
+      view.render();
+    });
+
+    it("has edit and save buttons", function() {
+      expect(view.$('.act-participants-edit').length).toEqual(1);
+      expect(view.$('.act-participants-save').length).toEqual(1);
+    });
+
+    it("has a participants list", function() {
+      expect(view.$('.tokens').length).toEqual(1);
+      expect(view.$('.token').length).toEqual(2);
+    });
+  });
 });
