@@ -22,4 +22,22 @@ describe("Participants", function() {
       expect(view.$('.participant-remove').length).toEqual(1);
     })
   });
+
+  describe("token list view", function() {
+    var view;
+
+    beforeEach(function() {
+      var collection = new Structural.Collections.Participants(participants);
+      view = new Structural.Views.Participants({collection: collection});
+      view.render();
+    })
+
+    it("has each participant's token", function() {
+      expect(view.$('.token').length).toEqual(2);
+    });
+
+    it("has an input at the end", function() {
+      expect(view.$('li:last').hasClass('token-input-wrap')).toBeTruthy();
+    });
+  })
 });
