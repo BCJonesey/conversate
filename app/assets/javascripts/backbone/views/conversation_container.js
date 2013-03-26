@@ -1,5 +1,5 @@
 Structural.Views.ConversationContainer = Support.CompositeView.extend({
-  className: '.cnv-container',
+  className: 'cnv-container',
   initialize: function(options) {
     options = options || {};
     this.conversations = options.conversations;
