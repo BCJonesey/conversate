@@ -7,5 +7,11 @@ Structural.Views.ParticipantOption = Support.CompositeView.extend({
   render: function() {
     this.$el.text(this.model.escape('name'));
     return this;
+  },
+  events: {
+    'click': 'selectOption'
+  },
+  selectOption: function(e) {
+    // TODO: Select this option.
   }
 });
