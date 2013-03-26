@@ -39,6 +39,10 @@ describe("Participants", function() {
     it("has an input at the end", function() {
       expect(view.$('li:last').hasClass('token-input-wrap')).toBeTruthy();
     });
+
+    it("has a user reminder at the start", function() {
+      expect(view.$('li:first').hasClass('user-reminder')).toBeTruthy();
+    });
   });
 
   describe("option view", function() {
