@@ -52,6 +52,16 @@ describe("Participants", function() {
       view.render();
 
       expect(view.$el.text()).toMatch(/Sharon Jones/);
-    })
-  })
+    });
+  });
+
+  describe("option list view", function() {
+    it("has an entry for each option", function() {
+      var collection = new Structural.Collections.Participants(participants);
+      var view = new Structural.Views.ParticipantOptions({collection: collection});
+      view.render();
+
+      expect(view.$('.token-option').length).toEqual(2);
+    });
+  });
 });
