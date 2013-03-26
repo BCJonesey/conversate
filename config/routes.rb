@@ -15,15 +15,15 @@ Conversate::Application.routes.draw do
 
   namespace :api do
     namespace :v0 do
-      resources :topics do
-        resources :conversations
+      resources :topics, :only => [:index, :create] do
+        resources :conversations, :only => [:index, :create]
       end
-      resources :conversations do
-        resources :actions
-        resources :participants
+      resources :conversations, :only => [:show] do
+        resources :actions, :only => [:index, :create]
+        resources :participants, :only => [:index, :create, :destroy]
       end
-      resources :users
-      resources :admin
+      resources :users, :only => [:index, :create, :update]
+      resources :admin, :only => [:index]
     end
   end
 
