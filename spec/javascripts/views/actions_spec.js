@@ -137,6 +137,50 @@ describe("Action", function() {
       expect(view.$('.long-form-compose .title-text').text()).toMatch(/My Conversation/);
     });
   });
+
+  describe("container view", function() {
+    var view;
+
+    beforeEach(function() {
+      var actions = [messageAction, updateUserAction, retitleAction, deletionAction];
+      var actionCollection = new Structural.Collections.Actions(actions);
+      var conversation = new Structural.Models.Conversation({ title: "My Conversation" });
+      var participants = [
+        { name: "Sharon Jones",
+          id: 1
+        },
+        { name: "The Dap Kings",
+          id: 2
+        }
+      ];
+      var participantsCollection = new Structural.Collections.Participants(participants);
+
+      view = new Structural.Views.ActionContainer({
+        actions: actionCollection,
+        conversation: conversation,
+        participants: participantsCollection
+      });
+      view.render();
+    });
+
+    it("has an action list", function() {
+      expect(view.$('.act-list').length).toEqual(1);
+      expect(view.$('.act').length).toEqual(4);
+    });
+
+    it("has a title editor", function() {
+      expect(view.$('.act-title').length).toEqual(1);
+    });
+
+    it("has a participant editor", function() {
+      expect(view.$('.act-participants').length).toEqual(1);
+      expect(view.$('.token').length).toEqual(2);
+    });
+
+    it("has a compose input", function() {
+      expect(view.$('.act-compose').length).toEqual(1);
+    })
+  });
 });
 
 describe("Title editor view", function() {
