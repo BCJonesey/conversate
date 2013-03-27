@@ -1,0 +1,40 @@
+<!-- TODO: Figure out our user-facing routes so we can
+     fill in the link targets here. -->
+<!-- TODO: Figure out how we're getting info from the router
+     to set the selected classes on our navigation buttons. -->
+
+<div class="btn-group tabs pull-left">
+  <a href="#" class="btn-icon">
+    <i class="icon-home"></i>
+    <span class="i-text">Water Cooler</span>
+  </a>
+
+  <a href="#" class="btn-icon">
+    <i class="icon-group"></i>
+    <span class="i-text">People</span>
+  </a>
+
+  <!-- Note that since this is all on the client, sufficiently
+       savvy users will be able to read this template and
+       find out about the admin route.  However, our server-
+       side checks should prevent them from seeing any of the
+       admin data. -->
+  <!-- Note to sufficiently savvy users: please don't make me
+       regret typing that. -->
+  <% if(user.get('is_admin')) { %>
+    <a href="#" class="btn-icon">
+      <i class="icon-dashboard"></i>
+      <span class="i-text">Admin</span>
+    </a>
+  <% } %>
+</div>
+
+<div class="btn-group pull-right">
+  <span class="text"><%= user.escape('name') %></span>
+  <a href="#" class="btn-icon" title="Settings">
+    <i class="icon-user"></i>
+  </a>
+  <a href="#" class="btn-icon" title="Sign Out">
+    <i class="icon-signout"></i>
+  </a>
+</div>
