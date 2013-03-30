@@ -25,6 +25,7 @@ describe Api::V0::ConversationsController do
     end
     it 'responds successfully with the correct timestamp and last message'
     it 'responds successfully with the correct participants'
+    it 'responds unsuccessfully when the topic does not exist'
   end
 
   describe 'GET #show' do
@@ -36,6 +37,7 @@ describe Api::V0::ConversationsController do
       expect(body['id']).to eq(1)
       expect(body['title']).to eq('Wobbly Wobble')
     end
+    it 'responds unsuccessfully when the topic does not exist'
   end
 
   describe 'POST #create' do
@@ -47,7 +49,8 @@ describe Api::V0::ConversationsController do
       expect(body['id']).to eq(3)
       expect(body['title']).to eq('New Conversation')
     end
-    it 'successfully creates a nw conversation in this topic with parameters'
+    it 'successfully creates a new conversation in this topic with parameters'
+    it 'responds unsuccessfully when the topic does not exist'
   end
 
 end
