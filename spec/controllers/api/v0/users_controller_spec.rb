@@ -37,4 +37,10 @@ describe Api::V0::UsersController do
     end
   end
 
+  describe 'PUT #update' do
+    it 'successfully updates non-password settings for an existing user'
+    it 'fails to update an existing user because the password is wrong'
+    it 'successfully changes a user password'
+  end
+
 end
