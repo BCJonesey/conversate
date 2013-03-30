@@ -13,7 +13,8 @@ Conversate::Application.routes.draw do
   put 'conversations/:id/changetopic' => 'conversations#change_topic', :as => 'change_topic'
   resources :topics, :only => [:create, :show]
 
-  get 'ux/testbed/:view' => 'testbed#test_view'
+  get 'ux/testbed' => 'testbed#index'
+  get 'ux/testbed/:view' => 'testbed#test_view', :as  =>'test_view'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

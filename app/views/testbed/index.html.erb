@@ -1,0 +1,7 @@
+<ul class="view-list">
+  <% @views.each do |view| %>
+    <li>
+      <a href="<%= test_view_path(view) %>"><%= view %></a>
+    </li>
+  <% end %>
+</ul>
