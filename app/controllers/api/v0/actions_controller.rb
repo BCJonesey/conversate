@@ -7,6 +7,11 @@ class Api::V0::ActionsController < ApplicationController
   end
 
   def create
+    conversation = current_user.conversations.find_by_id(params[:conversation_id])
+    action = conversation.actions.create!(:event_type => params[:event_type],
+                                          :data => params[:data],
+                                          :user_id => current_user.id)
+    render :json => action.to_json, :status => 201
   end
 
 end
