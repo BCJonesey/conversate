@@ -51,6 +51,20 @@ describe Api::V0::UsersController do
       expect(body['full_name']).to eq('Nuevo Nombre')
       expect(body['id']).to eq(1)
     end
+    it 'successfully changes a user password' do
+      put :update,
+            :email => 'newEmail@example.com',
+            :full_name => 'Nuevo Nombre',
+            :old_password => 'newPassword',
+            :new_password => 'newestPassword',
+            :id => 1
+      expect(response).to be_success
+      expect(response.code).to eq('200')
+      body = JSON.parse(response.body)
+      expect(body['email']).to eq('newEmail@example.com')
+      expect(body['full_name']).to eq('Nuevo Nombre')
+      expect(body['id']).to eq(1)
+    end
     it 'fails to update an existing user because the password is wrong' do
       put :update,
             :email => 'newEmail@example.com',
@@ -60,7 +74,6 @@ describe Api::V0::UsersController do
       expect(response).not_to be_success
       expect(response.code).to eq('401')
     end
-    it 'successfully changes a user password'
   end
 
 end
