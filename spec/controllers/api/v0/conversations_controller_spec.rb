@@ -29,7 +29,7 @@ describe Api::V0::ConversationsController do
 
   describe 'GET #show' do
     it 'responds successfully with this conversation' do
-      get :show, :conversation_id => 1
+      get :show, :id => 1
       expect(response).to be_success
       expect(response.code).to eq("200")
       body = JSON.parse(response.body)

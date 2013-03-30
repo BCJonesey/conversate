@@ -10,6 +10,8 @@ class Api::V0::ConversationsController < ApplicationController
   end
 
   def show
+    conversation = Conversation.find(params[:id])
+    render :json => conversation.to_json
   end
 
 end
