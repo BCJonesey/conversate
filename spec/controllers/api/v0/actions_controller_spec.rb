@@ -46,7 +46,11 @@ describe Api::V0::ActionsController do
       expect(body['event_type']).to eq('message')
       expect(body['data']).to eq('{"text":"Hi"}')
     end
-    it 'responds unsuccessfully when the conversation does not exist'
+    it 'responds unsuccessfully when the conversation does not exist' do
+      post :create, :conversation_id => 100, :event_type => 'message', :data => '{"text":"Bye"}'
+      expect(response).not_to be_success
+      expect(response.code).to eq("404")
+    end
   end
 
 end

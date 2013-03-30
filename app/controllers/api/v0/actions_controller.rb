@@ -8,6 +8,7 @@ class Api::V0::ActionsController < ApplicationController
 
   def create
     conversation = current_user.conversations.find_by_id(params[:conversation_id])
+    head :status => 404 and return unless conversation
     action = conversation.actions.create!(:event_type => params[:event_type],
                                           :data => params[:data],
                                           :user_id => current_user.id)
