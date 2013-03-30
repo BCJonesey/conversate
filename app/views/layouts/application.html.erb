@@ -8,38 +8,7 @@
   <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Oswald' rel='stylesheet' type='text/css'>
 </head>
 <body class="<%= logged_in? ? 'logged-in' : 'not-logged-in' %>">
-  <% if logged_in? %>
-    <div class="btn-toolbar nav-header clearfix">
-      <div class="btn-group tabs pull-left">
-        <a href="<%= conversations_path %>" class='btn-icon <%= selected_if_path '/conversations' %>'>
-          <i class='icon-home'></i>
-          <span class='i-text'>Water Cooler</span>
-        </a>
-
-        <a href="#" class='btn-icon'>
-          <i class='icon-group'></i>
-          <span class='i-text'>People</span>
-        </a>
-
-        <% if current_user.is_admin? %>
-          <a href="<%= admin_path %>" class="btn-icon <%= selected_if_path '/admin' %>">
-            <i class="icon-dashboard"></i>
-            <span class="icon-text">Admin</spa>
-          </a>
-        <% end %>
-      </div>
-      <div class='btn-group pull-right'>
-        <span class='text'><%= current_user.name %></span>
-        <a href="<%= edit_users_path %>" class='btn-icon' title='Settings'><i class='icon-user'></i></a>
-        <a href="<%= destroy_sessions_path %>" class='btn-icon' title='Sign Out'><i class='icon-signout'></i></a>
-      </div>
-    </div>
-    <div class="container">
-      <%= yield %>
-    </div>
-  <% else %>
-    <%= yield %>
-  <% end %>
+  <%= yield %>
   <%= javascript_include_tag "application" %>
   <%= yield :javascript %>
 </body>
