@@ -37,7 +37,15 @@ describe Api::V0::ActionsController do
   end
 
   describe 'POST #create' do
-    it 'successfully creates a new action in the specified conversation'
+    it 'successfully creates a new action in the specified conversation' do
+      post :create, :conversation_id => 1, :event_type => 'message', :data => '{"text":"Hi"}'
+      expect(response).to be_success
+      expect(response.code).to eq("201")
+      body = JSON.parse(response.body)
+      expect(body['id']).to eq(3)
+      expect(body['event_type']).to eq('message')
+      expect(body['data']).to eq('{"text":"Hi"}')
+    end
     it 'responds unsuccessfully when the conversation does not exist'
   end
 
