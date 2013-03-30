@@ -7,6 +7,9 @@ class Api::V0::ConversationsController < ApplicationController
   end
 
   def create
+    topic = current_user.topics.find(params[:topic_id])
+    conversation = topic.conversations.create()
+    render :json => conversation
   end
 
   def show
