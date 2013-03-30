@@ -38,6 +38,7 @@ describe Api::V0::ActionsController do
 
   describe 'POST #create' do
     it 'successfully creates a new action in the specified conversation'
+    it 'responds unsuccessfully when the conversation does not exist'
   end
 
 end
