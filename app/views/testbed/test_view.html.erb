@@ -5,6 +5,28 @@
   <%= javascript_tag do %>
 
 data = {
+  topics: [
+    { "id": 1,
+      "name": "Conversations",
+      "unread_conversations": 3
+    },
+    { "id": 4,
+      "name": "Structural",
+      "unread_conversations": 0
+    },
+    { "id": 6,
+      "name": "Chit Chat",
+      "unread_conversations": 0
+    },
+    { "id": 2,
+      "name": "Water Cooler Dev",
+      "unread_conversations": 2
+    },
+    { "id": 9,
+      "name": "Testing stuff",
+      "unread_conversations": 0
+    }
+  ],
   conversations: [
     { "id": 3,
       "title": "Talk about stuff",
