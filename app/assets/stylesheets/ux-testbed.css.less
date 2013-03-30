@@ -99,6 +99,57 @@
 }
 
 
+
+.act-participants{
+  position: relative;
+  height:1.5rem;
+  background-color: #EEE;
+  border-bottom:1px solid @wc-toolbar-border-color;
+  padding:0 .5rem;
+  ul{
+    margin:0;
+    padding:0;
+  }
+  li{
+    list-style: none;
+    display: inline-block;
+  }
+  li.user-reminder{
+    display:none;
+  }
+  input{
+    border:none;
+    background-color: transparent;
+    outline:none;
+  }
+}
+
+.participant{
+  font-size:.8rem;
+  color:#888;
+}
+.participant + .participant:before{
+  content:", ";
+}
+
+.act-participants-actions{
+  position:relative;
+  right:0;
+  top:0;
+  position: absolute;
+  padding:.25rem;
+}
+
+.participant-remove{
+  display: none;
+}
+
+
+
+
+
+
+
 .act-list{
   padding:.5rem;
 }
@@ -143,4 +194,33 @@
 .long-form-compose{
   display:none;
 }
+
+
+
+
+
+
+
+
+// Compose //
+
+.short-form-compose{
+  background-color: #EEE;
+  border-top:1px solid #AAA;
+}
+
+.act-compose-short-input{
+  position: relative;
+}
+
+.enable-long-form{
+  position: absolute;
+  top:0;
+  left:0;
+}
+
+
+
+
+
 
