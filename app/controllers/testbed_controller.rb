@@ -12,7 +12,8 @@ class TestbedController < ApplicationController
       'topic-container',
       'action',
       'action-list',
-      'action-container'
+      'action-container',
+      'structural-bar'
     ]
   end
 

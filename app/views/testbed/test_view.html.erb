@@ -131,7 +131,23 @@ data = {
     { name: "The Dap Kings",
       id: 2
     }
-  ]
+  ],
+  user: {
+    "email": "george.washington@usa.gov",
+    "full_name": "George Washington",
+    "id": 1,
+    "address_book": [
+      { "name": "Paul Revere",
+        "id": 2
+      },
+      { "name": "Ethan Allen",
+        "id": 4
+      },
+      { "name": "Benjamin Franklin",
+        "id": 4
+      }
+    ]
+  }
 }
 
 var name = '<%= @view_name %>';
@@ -178,6 +194,10 @@ switch(name) {
       participants: participants,
       conversation: conversation
     });
+    break;
+  case 'structural-bar':
+    var model = new Structural.Models.User(data.user);
+    view = new Structural.Views.StructuralBar({model: model});
     break;
   default:
     console.log('Unknown view name!!');
