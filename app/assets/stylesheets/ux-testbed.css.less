@@ -1,0 +1,45 @@
+.ux-testbed-container{
+    width:500px;
+    margin:10px auto;
+    border:1px solid blue;
+    min-height: 500px;
+
+}
+
+@cnv-participant-gray:#AAA;
+
+@cnv-border-color:#CCC;
+
+.cnv{
+  a{
+    text-decoration: none;
+  }
+  padding:.3rem;
+  border-bottom:1px solid @cnv-border-color;
+}
+.cnv-title{
+  font-weight: bold;
+}
+
+.cnv-participants{
+  font-size:.8rem;
+  color:@cnv-participant-gray;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cnv-participant + .cnv-participant:before{
+  content:",  ";
+}
+
+
+// Toolbars //
+
+@wc-toolbar-color: #EEE;
+@wc-toolbar-border-color: #AAA;
+.btn-toolbar{
+  background-color:@wc-toolbar-color;
+  border-bottom:1px solid @wc-toolbar-border-color;
+}
