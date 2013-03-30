@@ -1,0 +1,41 @@
+<div class="ux-testbed-container ux-testbed-container-<%= @view_name %>">
+</div>
+
+<%= content_for :javascript do -%>
+  <%= javascript_tag do %>
+
+data = {
+  conversation: {
+    "id": 3,
+    "title": "Talk about stuff",
+    "most_recent_message": 1734512345,
+    "most_recent_viewed": 1722345134,
+    "participants": [
+      { "id": 2,
+        "name": "Paul Revere",
+        "last_updated_time": 1235123423,
+      },
+      { "id": 4,
+        "name": "Thomas Paine",
+        "last_updated_time": 1613423423,
+      }
+    ]
+  }
+}
+
+var name = '<%= @view_name %>';
+var view;
+switch(name) {
+  case 'conversation':
+    var model = new Structural.Models.Conversation(data.conversation);
+    view = new Structural.Views.Conversation({model: model});
+    break;
+  default:
+    console.log('Unknown view name!!');
+    break;
+}
+view.render();
+$('.ux-testbed-container').html(view.el);
+
+  <% end %>
+<% end %>
