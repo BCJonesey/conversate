@@ -25,7 +25,11 @@ describe Api::V0::ConversationsController do
     end
     it 'responds successfully with the correct timestamp and last message'
     it 'responds successfully with the correct participants'
-    it 'responds unsuccessfully when the topic does not exist'
+    it 'responds unsuccessfully when the topic does not exist' do
+      get :index, :topic_id => 100
+      expect(response).not_to be_success
+      expect(response.code).to eq("404")
+    end
   end
 
   describe 'GET #show' do
@@ -37,7 +41,11 @@ describe Api::V0::ConversationsController do
       expect(body['id']).to eq(1)
       expect(body['title']).to eq('Wobbly Wobble')
     end
-    it 'responds unsuccessfully when the topic does not exist'
+    it 'responds unsuccessfully when the conversation does not exist' do
+      get :show, :id => 100
+      expect(response).not_to be_success
+      expect(response.code).to eq("404")
+    end
   end
 
   describe 'POST #create' do
@@ -50,7 +58,11 @@ describe Api::V0::ConversationsController do
       expect(body['title']).to eq('New Conversation')
     end
     it 'successfully creates a new conversation in this topic with parameters'
-    it 'responds unsuccessfully when the topic does not exist'
+    it 'responds unsuccessfully when the topic does not exist' do
+      post :create, :topic_id => 100
+      expect(response).not_to be_success
+      expect(response.code).to eq("404")
+    end
   end
 
 end
