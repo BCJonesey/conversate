@@ -10,7 +10,7 @@ var Structural = new (Support.CompositeView.extend({
   Models: {},
   Collections: {},
   Views: {},
-  Routers: {},
+  Router: {},
 
   initialize: function(options) {
     this.apiPrefix = options.apiPrefix;
