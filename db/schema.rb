@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130330170203) do
+ActiveRecord::Schema.define(:version => 20130330193906) do
+
+  create_table "actions", :force => true do |t|
+    t.integer  "conversation_id"
+    t.integer  "user_id"
+    t.string   "event_type"
+    t.text     "data"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "actions", ["conversation_id"], :name => "index_events_on_conversation_id"
 
   create_table "conversations", :force => true do |t|
     t.string   "title"
@@ -29,17 +40,6 @@ ActiveRecord::Schema.define(:version => 20130330170203) do
     t.integer "conversation_id"
     t.integer "user_id"
   end
-
-  create_table "events", :force => true do |t|
-    t.integer  "conversation_id"
-    t.integer  "user_id"
-    t.string   "event_type"
-    t.text     "data"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
-
-  add_index "events", ["conversation_id"], :name => "index_events_on_conversation_id"
 
   create_table "reading_logs", :force => true do |t|
     t.integer "conversation_id"
