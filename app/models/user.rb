@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :events, :inverse_of => :user
   has_and_belongs_to_many :topics
 
-  attr_accessible :email, :password, :password_confirmation
+  attr_accessible :email, :full_name, :password, :password_confirmation
 
   validates_confirmation_of :password
   validates_presence_of :password, :on => :create
