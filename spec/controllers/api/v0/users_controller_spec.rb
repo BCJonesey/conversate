@@ -42,7 +42,7 @@ describe Api::V0::UsersController do
       put :update,
             :email => 'newEmail@example.com',
             :full_name => 'Nuevo Nombre',
-            :old_password => 'newPassword',
+            :password => 'newPassword',
             :id => 1
       expect(response).to be_success
       expect(response.code).to eq('200')
@@ -55,7 +55,7 @@ describe Api::V0::UsersController do
       put :update,
             :email => 'newEmail@example.com',
             :full_name => 'Nuevo Nombre',
-            :old_password => 'newPassword',
+            :password => 'newPassword',
             :new_password => 'newestPassword',
             :id => 1
       expect(response).to be_success
@@ -69,7 +69,7 @@ describe Api::V0::UsersController do
       put :update,
             :email => 'newEmail@example.com',
             :full_name => 'Nuevo Nombre',
-            :old_password => 'completelyWrongPassword',
+            :password => 'completelyWrongPassword',
             :id => 1
       expect(response).not_to be_success
       expect(response.code).to eq('401')

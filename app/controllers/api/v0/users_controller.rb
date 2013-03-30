@@ -15,7 +15,7 @@ class Api::V0::UsersController < ApplicationController
   end
 
   def update
-    if (current_user.password != params['old_password'])
+    if (current_user.password != params['password'])
       head :unauthorized
     end
   end
