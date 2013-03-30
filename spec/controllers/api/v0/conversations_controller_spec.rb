@@ -39,7 +39,15 @@ describe Api::V0::ConversationsController do
   end
 
   describe 'POST #create' do
-    it 'successfully creates a new conversation in this topic'
+    it 'successfully creates a new default conversation in this topic' do
+      post :create, :topic_id => 1
+      expect(response).to be_success
+      expect(response.code).to eq("200")
+      body = JSON.parse(response.body)
+      expect(body['id']).to eq(3)
+      expect(body['title']).to eq('New Conversation')
+    end
+    it 'successfully creates a nw conversation in this topic with parameters'
   end
 
 end
