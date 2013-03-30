@@ -199,6 +199,10 @@ switch(name) {
     var model = new Structural.Models.User(data.user);
     view = new Structural.Views.StructuralBar({model: model});
     break;
+  case 'the-whole-app':
+    var bootstrap = _.clone(data);
+    Structural.start(bootstrap);
+    break;
   default:
     console.log('Unknown view name!!');
     break;
