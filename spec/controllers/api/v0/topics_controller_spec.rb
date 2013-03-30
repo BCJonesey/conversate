@@ -25,4 +25,15 @@ describe Api::V0::TopicsController do
     it "successfully returns topics with correct unread counts"
   end
 
+  describe 'POST #create' do
+    it "successfully creates a new topic" do
+      post :create, :name => 'Huzzah!'
+      expect(response).to be_success
+      expect(response.code).to eq("201")
+      body = JSON.parse(response.body)
+      expect(body['id']).to eq(3)
+      expect(body['name']).to eq('Huzzah!')
+    end
+  end
+
 end
