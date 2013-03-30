@@ -15,9 +15,18 @@ class Api::V0::UsersController < ApplicationController
   end
 
   def update
-    if (current_user.password != params['password'])
-      head :unauthorized
+    if !login(current_user.email, params[:password])
+      head :unauthorized and return
     end
+    user = User.find(params[:id])
+    updates = params.slice(:email, :full_name)
+    if params[:new_password]
+      user.password = params[:new_password]
+    end
+    if user.update_attributes(updates)
+      user.save!
+    end
+    render :json => user.to_json and return
   end
 
 end
