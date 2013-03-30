@@ -6,7 +6,10 @@ class TestbedController < ApplicationController
     @views = [
       'conversation',
       'conversation-list',
-      'conversation-container'
+      'conversation-container',
+      'topic',
+      'topic-list',
+      'topic-container'
     ]
   end
 

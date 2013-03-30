@@ -91,6 +91,18 @@ switch(name) {
     var collection = new Structural.Collections.Conversations(data.conversations);
     view = new Structural.Views.ConversationContainer({conversations: collection});
     break;
+  case 'topic':
+    var model = new Structural.Models.Topic(data.topics[0]);
+    view = new Structural.Views.Topic({model: model});
+    break;
+  case 'topic-list':
+    var collection = new Structural.Collections.Topics(data.topics);
+    view = new Structural.Views.Topics({collection: collection});
+    break;
+  case 'topic-container':
+    var collection = new Structural.Collections.Topics(data.topics);
+    view = new Structural.Views.TopicContainer({topics: collection});
+    break;
   default:
     console.log('Unknown view name!!');
     break;
