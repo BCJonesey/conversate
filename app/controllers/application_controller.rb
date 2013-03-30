@@ -5,4 +5,8 @@ class ApplicationController < ActionController::Base
   def not_authenticated
     redirect_to new_session_url
   end
+
+  def require_admin
+    redirect_to root_url unless current_user.is_admin
+  end
 end
