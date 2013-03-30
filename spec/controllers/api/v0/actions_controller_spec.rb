@@ -29,7 +29,11 @@ describe Api::V0::ActionsController do
       expect(body[1]['event_type']).to eq('retitle')
       expect(body[1]['data']).to eq('{"title":"There comes a yes?"}')
     end
-    it 'responds unsuccessfully when the conversation does not exist'
+    it 'responds unsuccessfully when the conversation does not exist' do
+      get :index, :conversation_id => 100
+      expect(response).not_to be_success
+      expect(response.code).to eq("404")
+    end
   end
 
   describe 'POST #create' do
