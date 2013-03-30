@@ -73,6 +73,64 @@ data = {
         }
       ]
     }
+  ],
+  actions: [
+    { type: "message",
+      user: {
+        name: "Ethan Allen",
+        id: 2
+      },
+      timestamp: 1363802638003,
+      id: 123,
+      text: "This is a message"
+    },
+    { type: "update_users",
+      user: {
+        name: "Ethan Allen",
+        id: 2
+      },
+      timestamp: 1363802638003,
+      id: 456,
+      added: [
+        { name: "George Washington",
+          id: 1
+        },
+        { name: "Benjamin Franklin",
+          id: 5
+        }
+      ],
+      removed: [
+        { name: "John Adams",
+          id: 4
+        }
+      ]
+    },
+    { type: "retitle",
+      user: {
+        name: "Ethan Allen",
+        id: 2
+      },
+      id: 878,
+      timestamp: 1363802638003,
+      title: "Conversation Title"
+    },
+    { type: "deletion",
+      user: {
+        name: "Ethan Allen",
+        id: 2
+      },
+      id: 788,
+      timestamp: 1363802638003,
+      action_id: 123
+    }
+  ],
+  participants: [
+    { name: "Sharon Jones",
+      id: 1
+    },
+    { name: "The Dap Kings",
+      id: 2
+    }
   ]
 }
 
@@ -102,6 +160,24 @@ switch(name) {
   case 'topic-container':
     var collection = new Structural.Collections.Topics(data.topics);
     view = new Structural.Views.TopicContainer({topics: collection});
+    break;
+  case 'action':
+    var model = new Structural.Models.Action(data.actions[0]);
+    view = new Structural.Views.Action({model: model});
+    break;
+  case 'action-list':
+    var collection = new Structural.Collections.Actions(data.actions);
+    view = new Structural.Views.Actions({collection: collection});
+    break;
+  case 'action-container':
+    var actions = new Structural.Collections.Actions(data.actions);
+    var participants = new Structural.Collections.Participants(data.participants);
+    var conversation = new Structural.Models.Conversation(data.conversations[0]);
+    var view = new Structural.Views.ActionContainer({
+      actions: actions,
+      participants: participants,
+      conversation: conversation
+    });
     break;
   default:
     console.log('Unknown view name!!');

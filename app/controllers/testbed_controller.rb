@@ -9,7 +9,10 @@ class TestbedController < ApplicationController
       'conversation-container',
       'topic',
       'topic-list',
-      'topic-container'
+      'topic-container',
+      'action',
+      'action-list',
+      'action-container'
     ]
   end
 
