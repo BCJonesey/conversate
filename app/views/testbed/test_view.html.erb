@@ -212,6 +212,7 @@ switch(name) {
     view = new Structural.Views.StructuralBar({model: model});
     break;
   case 'the-whole-app':
+    $('.ux-testbed-container').detach();
     var bootstrap = _.clone(data);
     Structural.start(bootstrap);
     break;
@@ -219,8 +220,11 @@ switch(name) {
     console.log('Unknown view name!!');
     break;
 }
-view.render();
-$('.ux-testbed-container').html(view.el);
+
+if (name != 'the-whole-app') {
+  view.render();
+  $('.ux-testbed-container').html(view.el);
+}
 
   <% end %>
 <% end %>
