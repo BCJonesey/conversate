@@ -28,7 +28,14 @@ describe Api::V0::ConversationsController do
   end
 
   describe 'GET #show' do
-    it 'responds successfully with this conversation'
+    it 'responds successfully with this conversation' do
+      get :show, :conversation_id => 1
+      expect(response).to be_success
+      expect(response.code).to eq("200")
+      body = JSON.parse(response.body)
+      expect(body['id']).to eq(1)
+      expect(body['title']).to eq('Wobbly Wobble')
+    end
   end
 
   describe 'POST #create' do
