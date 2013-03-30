@@ -4,7 +4,9 @@ class TestbedController < ApplicationController
 
   def index
     @views = [
-      'conversation'
+      'conversation',
+      'conversation-list',
+      'conversation-container'
     ]
   end
 
