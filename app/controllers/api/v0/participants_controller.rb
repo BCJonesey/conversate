@@ -19,6 +19,11 @@ class Api::V0::ParticipantsController < ApplicationController
   end
 
   def destroy
+    # Any user can remove someone from any conversation.
+    conversation = Conversation.find_by_id(params[:conversation_id])
+    user = User.find_by_id(params[:id])
+    conversation.users.delete(user)
+    render :json => user.to_json, :status => 204
   end
 
 end

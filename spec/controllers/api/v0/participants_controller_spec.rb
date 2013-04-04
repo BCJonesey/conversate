@@ -74,7 +74,7 @@ describe Api::V0::ParticipantsController do
       expect(body['full_name']).to eq('Hurdle Turtle')
       expect(body['email']).to eq('hurdleturtle@example.com')
       conversation = Conversation.find_by_id(1)
-      expect(conversation.participants.count).to eq(1)
+      expect(conversation.participants(@user).count).to eq(1)
     end
     it 'unsuccessfully removes a participant when the conversation does not exist'
     it 'unsuccessfully removes a participant when the participant does not exist.'
