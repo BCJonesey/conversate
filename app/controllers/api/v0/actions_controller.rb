@@ -1,4 +1,5 @@
 class Api::V0::ActionsController < ApplicationController
+  before_filter :require_login
 
   def index
     conversation = current_user.conversations.find_by_id(params[:conversation_id])

@@ -1,4 +1,5 @@
 class Api::V0::ConversationsController < ApplicationController
+  before_filter :require_login
 
   # Note that this is always on a url like /topics/1/conversations.
   def index
