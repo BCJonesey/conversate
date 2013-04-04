@@ -8,6 +8,7 @@ class Api::V0::ConversationsController < ApplicationController
     render :json => topic.conversations.to_json
   end
 
+  # Note that this is always on a url like /topics/1/conversations.
   def create
     topic = current_user.topics.find_by_id(params[:topic_id])
     head :status => :not_found and return unless topic

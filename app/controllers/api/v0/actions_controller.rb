@@ -1,12 +1,14 @@
 class Api::V0::ActionsController < ApplicationController
   before_filter :require_login
 
+  # Note that this will always be on urls like /conversations/1/participants.
   def index
     conversation = current_user.conversations.find_by_id(params[:conversation_id])
     head :status => 404 and return unless conversation
     render :json => conversation.actions.to_json
   end
 
+  # Note that this will always be on urls like /conversations/1/participants.
   def create
     conversation = current_user.conversations.find_by_id(params[:conversation_id])
     head :status => 404 and return unless conversation

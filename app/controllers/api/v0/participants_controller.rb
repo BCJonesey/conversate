@@ -1,6 +1,7 @@
 class Api::V0::ParticipantsController < ApplicationController
   before_filter :require_login
 
+  # Note that this is always on urls like /conversation/1/participants.
   def index
     conversation = Conversation.find_by_id(params[:conversation_id])
     head :status => 404 and return unless conversation
