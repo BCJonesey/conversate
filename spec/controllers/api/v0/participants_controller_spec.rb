@@ -51,7 +51,9 @@ describe Api::V0::ParticipantsController do
       expect(body['full_name']).to eq('Added by Example')
       expect(body['email']).to eq('added@example.com')
     end
+    it 'successfully creates a participant with the correct last_updated_time'
     it 'unsuccessfully creates when the conversation does not exist'
+    it 'unsuccessfully creates when the user does not exist'
   end
 
   describe 'DELETE #destroy' do
