@@ -1,7 +1,8 @@
 class Api::V0::ParticipantsController < ApplicationController
 
   def index
-    conversation = Conversation.find(params[:conversation_id])
+    conversation = Conversation.find_by_id(params[:conversation_id])
+    head :status => 404 and return unless conversation
     render :json => conversation.participants(current_user).to_json
   end
 

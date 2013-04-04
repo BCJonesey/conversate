@@ -30,7 +30,11 @@ describe Api::V0::ParticipantsController do
       expect(body[1]['email']).to eq('hurdleturtle@example.com')
     end
     it 'successfully responds with the correct last_updated_time'
-    it 'unsuccessfully responds when the conversation does not exist'
+    it 'unsuccessfully responds when the conversation does not exist' do
+      get :index, :conversation_id => 100
+      expect(response).not_to be_success
+      expect(response.code).to eq("404")
+    end
   end
 
   describe 'POST #create' do
