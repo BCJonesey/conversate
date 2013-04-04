@@ -29,6 +29,7 @@ describe Api::V0::ParticipantsController do
       expect(body[1]['full_name']).to eq('Hurdle Turtle')
       expect(body[1]['email']).to eq('hurdleturtle@example.com')
     end
+    it 'successfully responds with the correct last_updated_time'
     it 'unsuccessfully responds when the conversation does not exist'
   end
 
