@@ -65,7 +65,17 @@ describe Api::V0::ParticipantsController do
   end
 
   describe 'DELETE #destroy' do
-    it 'successfully removes a specified participant from a specified conversation'
+    it 'successfully removes a specified participant from a specified conversation' do
+      delete :destroy, :conversation_id => 1, :id => 3
+      expect(response).to be_success
+      expect(response.code).to eq("204")
+      body = JSON.parse(response.body)
+      expect(body['id']).to eq(3)
+      expect(body['full_name']).to eq('Hurdle Turtle')
+      expect(body['email']).to eq('hurdleturtle@example.com')
+      conversation = Conversation.find_by_id(1)
+      expect(conversation.participants.count).to eq(1)
+    end
     it 'unsuccessfully removes a participant when the conversation does not exist'
     it 'unsuccessfully removes a participant when the participant does not exist.'
   end
