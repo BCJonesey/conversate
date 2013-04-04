@@ -1,27 +1,6 @@
-<div id="conversation-view">
-
-  <%= render 'conversations/navigation_column' %>
-  <div class="divider-vertical column-v">
-  </div>
-
-  <div class="divider-vertical column-v"></div>
-
-  <%= render 'conversations/list_column' %>
-
-  <div class="divider-vertical column-v"></div>
-
-  <%= render 'conversations/conversation_column' %>
-</div>
-<%= javascript_tag do -%>
-  <% if @opened_conversation %>
-    window.addressBook = <%= user_tokens_json(current_user.address_book) %>;
-    window.participants = <%= user_tokens_json(@opened_conversation.participants(current_user)) %>;
-
-    window.new_conversation = <%= @new_conversation.to_s %>;
-  <% end %>
-<% end -%>
-<%= content_for :javascript do -%>
-  <%= javascript_tag do %>
+describe("Structural router", function() {
+  var bootstrap;
+  beforeEach(function() {
     var topics = [
       { name: "Conversations", id: 1 },
       { name: "Structural", id: 2 },
@@ -68,8 +47,7 @@
     ];
     var conversation = {
       name: "Conversation",
-      id: 1,
-      topic_id: 15
+      id: 1
     };
     var participants = [
       { name: "Sharon Jones",
@@ -81,7 +59,7 @@
     ];
     var user = { full_name: "Jack Kennedy" };
 
-    var bootstrap = {
+    bootstrap = {
       topics: topics,
       conversations: conversations,
       actions: actions,
@@ -89,7 +67,16 @@
       conversation: conversation,
       user: user
     };
+    // So that the router can access it.
+    window.bootstrap = bootstrap;
+    Backbone.history.start();
+  });
 
-    Structural.start(bootstrap);
-  <% end %>
-<% end -%>
+  describe("knows the current topic", function() {
+    it("at the index", function() {
+      Backbone.history.navigate('/');
+
+      expect(Structural.Router.currentTopicId).toEqual(1);
+    })
+  })
+})
