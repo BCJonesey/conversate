@@ -11,6 +11,7 @@ class Api::V0::ParticipantsController < ApplicationController
     # organizations.
     conversation = Conversation.find_by_id(params[:conversation_id])
     user = User.find_by_id(params[:user_id])
+    head :status => 404 and return unless conversation && user
     conversation.users << user
     render :json => user.to_json, :status => 201
   end
