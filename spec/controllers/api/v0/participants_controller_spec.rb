@@ -38,7 +38,19 @@ describe Api::V0::ParticipantsController do
   end
 
   describe 'POST #create' do
-    it 'successfully creates a participants in a specified conversation'
+    it 'successfully creates a participants in a specified conversation' do
+      conversation = Conversation.find_by_id(1)
+      user = User.create!(:email => 'added@example.com',
+                          :full_name => 'Added by Example',
+                          :password => 'gobbledegook')
+      post :create, :conversation_id => 1, :user_id => user.id
+      expect(response).to be_success
+      expect(response.code).to eq("201")
+      body = JSON.parse(response.body)
+      expect(body['id']).to eq(4)
+      expect(body['full_name']).to eq('Added by Example')
+      expect(body['email']).to eq('added@example.com')
+    end
     it 'unsuccessfully creates when the conversation does not exist'
   end
 
