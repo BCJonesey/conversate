@@ -29,6 +29,7 @@ describe Api::V0::ActionsController do
       expect(body[1]['event_type']).to eq('retitle')
       expect(body[1]['data']).to eq('{"title":"There comes a yes?"}')
     end
+    it 'responds successfully for each type of action'
     it 'responds unsuccessfully when the conversation does not exist' do
       get :index, :conversation_id => 100
       expect(response).not_to be_success
@@ -46,6 +47,7 @@ describe Api::V0::ActionsController do
       expect(body['event_type']).to eq('message')
       expect(body['data']).to eq('{"text":"Hi"}')
     end
+    it 'responds successfully for each type of action'
     it 'responds unsuccessfully when the conversation does not exist' do
       post :create, :conversation_id => 100, :event_type => 'message', :data => '{"text":"Bye"}'
       expect(response).not_to be_success
