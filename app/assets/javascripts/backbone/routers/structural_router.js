@@ -31,6 +31,5 @@ Structural.Router = new (Backbone.Router.extend({
   },
 
   initialize: function(options) {
-    console.log("router!");
   }
 }))();

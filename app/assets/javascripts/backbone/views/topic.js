@@ -13,9 +13,7 @@ Structural.Views.Topic = Support.CompositeView.extend({
   },
   template: JST['backbone/templates/topics/topic'],
   initialize: function(options) {
-    this.model.on('change', function() {
-      // Change class name somehow?
-    })
+    this.model.on('change', this.reRender, this);
   },
   render: function() {
     this.$el.html(this.template({ topic: this.model }));
@@ -27,5 +25,12 @@ Structural.Views.Topic = Support.CompositeView.extend({
   changeTopic: function(e) {
     // TODO: move to new topic via Backbone.history.navigate.
     // TODO: Figure out our user-facing routes so we know what goes here.
+  },
+  reClass: function() {
+    this.el.className = this.className();
+  },
+  reRender: function() {
+    this.reClass();
+    this.render();
   }
 });

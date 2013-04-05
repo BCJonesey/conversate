@@ -47,7 +47,8 @@ describe("Structural router", function() {
     ];
     var conversation = {
       name: "Conversation",
-      id: 1
+      id: 1,
+      topic_id: 2
     };
     var participants = [
       { name: "Sharon Jones",
@@ -69,14 +70,39 @@ describe("Structural router", function() {
     };
     // So that the router can access it.
     window.bootstrap = bootstrap;
-    Backbone.history.start();
   });
 
-  describe("knows the current topic", function() {
-    it("at the index", function() {
-      Backbone.history.navigate('/');
+  // We don't want to start the history here, because we get errors if we
+  // try to start the history twice (and there's no way to stop if).  We'll
+  // have to settle for calling the router methods directly instead of
+  // testing what happens when you hit a particular url.  C'est la vie.
 
-      expect(Structural.Router.currentTopicId).toEqual(1);
+  describe("calls focus appropriately", function() {
+    beforeEach(function() {
+      spyOn(Structural, 'focus');
+    });
+
+    it("from the index page", function() {
+      Structural.Router.index();
+      expect(Structural.focus).toHaveBeenCalledWith({topic: 1});
+    });
+
+    it("from the conversation page", function() {
+      Structural.Router.conversation('the-awesome-conversation', 1);
+      expect(Structural.focus).toHaveBeenCalledWith({topic: 2,
+                                                     conversation: 1});
+    });
+
+    it("from the message page", function() {
+      Structural.Router.message('the-awesome-conversation', 1, 543);
+      expect(Structural.focus).toHaveBeenCalledWith({topic: 2,
+                                                     conversation: 1,
+                                                     message: 543});
+    });
+
+    it("from the topic page", function() {
+      Structural.Router.topic('look-a-topic', 3);
+      expect(Structural.focus).toHaveBeenCalledWith({topic: 3});
     })
-  })
-})
+  });
+});

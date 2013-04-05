@@ -16,8 +16,6 @@ var Structural = new (Support.CompositeView.extend({
     this.apiPrefix = options.apiPrefix;
   },
   start: function(bootstrap) {
-    Backbone.history.start({pushState: true});
-
     // TODO: Does any fetching stuff need to go here? I kind of think it might
     //       all fit in the models/collections.
 
@@ -28,7 +26,7 @@ var Structural = new (Support.CompositeView.extend({
     this._conversation = new Structural.Models.Conversation(bootstrap.conversation);
     this._user = new Structural.Models.User(bootstrap.user);
 
-    var bar = new Structural.Views.StructuralBar({model: user});
+    var bar = new Structural.Views.StructuralBar({model: this._user});
     var watercooler = new Structural.Views.WaterCooler({
       topics: this._topics,
       conversations: this._conversations,
@@ -40,6 +38,7 @@ var Structural = new (Support.CompositeView.extend({
     this.appendChild(bar);
     this.appendChild(watercooler);
 
+    Backbone.history.start({pushState: true});
     return this;
   },
 
