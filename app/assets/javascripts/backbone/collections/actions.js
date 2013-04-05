@@ -6,5 +6,13 @@ Structural.Collections.Actions = Backbone.Collection.extend({
       this.url = Structural.apiPrefix + '/conversations/' + options.conversation + '/actions';
     }
   },
-  comparator: 'timestamp'
+  comparator: 'timestamp',
+
+  focus: function(id) {
+    // findWhere is coming in backbone 1.0.0.
+    var action = this.where({id: id}).pop();
+    if(action) {
+      action.focus();
+    }
+  }
 });

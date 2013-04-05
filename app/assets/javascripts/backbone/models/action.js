@@ -1,7 +1,7 @@
 Structural.Models.Action = Backbone.Model.extend({
   initialize: function(attributes, options) {
     // TODO: Figure out where the current user is stored, update this.isOwnAction.
-    this.isOwnAction = false;
+    this.set('isOwnAction', false);
 
     if (this.get('user')) {
       this.set('user', new Structural.Models.Participant(this.get('user')));
@@ -13,6 +13,9 @@ Structural.Models.Action = Backbone.Model.extend({
       this.set('added', new Structural.Collections.Participants(this.get('added')));
       this.set('removed', new Structural.Collections.Participants(this.get('removed')));
     }
+  },
+  focus: function() {
+    this.set('is_current', true);
   },
   humanizedTimestamp: (function() {
     var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug',
