@@ -14,5 +14,9 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     if(action) {
       action.focus();
     }
+
+    this.filter(function(act) { return act.id != id; }).forEach(function(act) {
+      act.unfocus();
+    });
   }
 });

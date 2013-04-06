@@ -106,17 +106,32 @@ describe("Action", function() {
   });
 
   describe("list view", function() {
-    it("has each of the items in it", function() {
-      var actions = [messageAction, updateUserAction, retitleAction, deletionAction];
-      var collection = new Structural.Collections.Actions(actions);
-      var view = new Structural.Views.Actions({collection: collection});
+    var actions, collection, view;
+    beforeEach(function() {
+      actions = [messageAction, updateUserAction, retitleAction, deletionAction];
+      collection = new Structural.Collections.Actions(actions);
+      view = new Structural.Views.Actions({collection: collection});
       view.render();
+    });
 
+    it("has each of the items in it", function() {
       expect(view.$('.act')[0].innerText).toMatch(/This is a message/);
       expect(view.$('.act')[1].innerText).toMatch(/George Washington/);
       expect(view.$('.act')[2].innerText).toMatch(/titled the conversation/);
       expect(view.$('.act')[3].innerText).toMatch(/deleted a message/);
     });
+
+    it("can be focused", function() {
+      expect(view.$('.act-current').length).toEqual(0);
+
+      collection.focus(123);
+      expect(view.$('.act-current').length).toEqual(1);
+      expect(view.$('.act-current').text()).toMatch(/This is a message/);
+
+      collection.focus(456);
+      expect(view.$('.act-current').length).toEqual(1);
+      expect(view.$('.act-current').text()).toMatch(/George Washington/);
+    })
   });
 
   describe("compose view", function() {

@@ -5,6 +5,9 @@ Structural.Views.Action = Support.CompositeView.extend({
     if (this.model.get('isOwnAction')) {
       classes += ' act-my-action';
     }
+    if(this.model.get('is_current')) {
+      classes += ' act-current';
+    }
     return classes;
   },
 
