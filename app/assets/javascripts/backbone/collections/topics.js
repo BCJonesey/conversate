@@ -1,3 +1,4 @@
+
 Structural.Collections.Topics = Backbone.Collection.extend({
   model: Structural.Models.Topic,
   url: Structural.apiPrefix + '/topics',
@@ -8,5 +9,9 @@ Structural.Collections.Topics = Backbone.Collection.extend({
     if(topic) {
       topic.focus();
     }
+
+    this.filter(function(tpc) { return tpc.id != id; }).forEach(function(tpc) {
+      tpc.unfocus();
+    });
   }
 });
