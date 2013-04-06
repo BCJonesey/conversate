@@ -14,6 +14,10 @@ Structural.Collections.Conversations = Backbone.Collection.extend({
     if(conversation) {
       conversation.focus();
     }
+
+    this.filter(function(cnv) { return cnv.id != id; }).forEach(function(cnv) {
+      cnv.unfocus();
+    })
   }
 });
 
