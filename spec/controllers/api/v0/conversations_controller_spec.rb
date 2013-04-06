@@ -7,9 +7,9 @@ describe Api::V0::ConversationsController do
                           :full_name => 'Rufio Pan',
                           :password => 'superDUPERsecretPassword')
     login_user
-    topic = @user.topics.create(:name => 'The Wobbles')
-    topic.conversations.create(:title => 'Wobbly Wobble')
-    topic.conversations.create(:title => 'Pretty Damn Solid')
+    @topic = @user.topics.create(:name => 'The Wobbles')
+    @topic.conversations.create(:title => 'Wobbly Wobble')
+    @topic.conversations.create(:title => 'Pretty Damn Solid')
   end
 
   describe 'GET #index' do
@@ -20,8 +20,10 @@ describe Api::V0::ConversationsController do
       body = JSON.parse(response.body)
       expect(body[0]['id']).to eq(1)
       expect(body[0]['title']).to eq('Wobbly Wobble')
+      expect(body[0]['most_recent_event']).to eq @topic.conversations[0].most_recent_event.msec
       expect(body[1]['id']).to eq(2)
       expect(body[1]['title']).to eq('Pretty Damn Solid')
+      expect(body[1]['most_recent_event']).to eq @topic.conversations[0].most_recent_event.msec
     end
     it 'responds successfully with the correct timestamp and last message'
     it 'responds successfully with the correct participants'
