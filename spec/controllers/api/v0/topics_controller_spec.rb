@@ -22,7 +22,21 @@ describe Api::V0::TopicsController do
       expect(body[1]['id']).to eq(2)
       expect(body[1]['name']).to eq('Plebians')
     end
-    it "successfully returns topics with correct unread counts"
+    it "successfully returns topics with correct unread counts" do
+      check_unread_count = lambda do |count|
+        get :index
+        expect(response).to be_success
+        expect(response.code).to eq("200")
+        body = JSON.parse(response.body)
+        expect(body[0]['unread_conversations']).to eq count
+      end
+      check_unread_count[0]
+      topic = Topic.find_by_id(1)
+      conversation = topic.conversations.create(:title => 'A conversation')
+      check_unread_count[1]
+      conversation.update_most_recent_action
+      check_unread_count[0]
+    end
   end
 
   describe 'POST #create' do
