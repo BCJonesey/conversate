@@ -34,6 +34,7 @@ describe Api::V0::TopicsController do
       expect(body['id']).to eq(3)
       expect(body['name']).to eq('Huzzah!')
     end
+    it "successfully creates a new topic with the correct unread counts"
   end
 
 end
