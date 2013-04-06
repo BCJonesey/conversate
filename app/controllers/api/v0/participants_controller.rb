@@ -22,6 +22,7 @@ class Api::V0::ParticipantsController < ApplicationController
     # Any user can remove someone from any conversation.
     conversation = Conversation.find_by_id(params[:conversation_id])
     user = User.find_by_id(params[:id])
+    head :status => 404 and return unless conversation && user
     conversation.users.delete(user)
     render :json => user.to_json, :status => 204
   end
