@@ -9,7 +9,7 @@ describe("Conversation model", function() {
       most_recent_viewed: 100
     };
 
-    expect((new Structural.Models.Conversation(unreadAttributes)).is_unread).toBeTruthy();
-    expect((new Structural.Models.Conversation(readAttributes)).is_unread).toBeFalsy();
+    expect((new Structural.Models.Conversation(unreadAttributes)).get('is_unread')).toBeTruthy();
+    expect((new Structural.Models.Conversation(readAttributes)).get('is_unread')).toBeFalsy();
   });
 });
