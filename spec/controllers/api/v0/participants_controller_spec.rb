@@ -76,7 +76,15 @@ describe Api::V0::ParticipantsController do
       conversation = Conversation.find_by_id(1)
       expect(conversation.participants(@user).count).to eq(1)
     end
-    it 'unsuccessfully removes a participant when the conversation does not exist'
-    it 'unsuccessfully removes a participant when the participant does not exist.'
+    it 'unsuccessfully removes a participant when the conversation does not exist' do
+      delete :destroy, :conversation_id => 100, :id => 3
+      expect(response).not_to be_success
+      expect(response.code).to eq("404")
+    end
+    it 'unsuccessfully removes a participant when the participant does not exist.' do
+      delete :destroy, :conversation_id => 1, :id => 100
+      expect(response).not_to be_success
+      expect(response.code).to eq("404")
+    end
   end
 end
