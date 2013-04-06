@@ -37,28 +37,32 @@ describe("Conversation view", function() {
 });
 
 describe("Conversation list view", function() {
-  var conversations, view;
+  var conversations, collection, view;
 
   beforeEach(function() {
     conversations = [
       { title: "First",
         most_recent_message: 1,
-        participants: []
+        participants: [],
+        id: 53
       },
       { title: "Third",
         most_recent_message: 3,
-        participants: []
+        participants: [],
+        id: 19
       },
       { title: "Fourth",
         most_recent_message: 4,
-        participants: []
+        participants: [],
+        id: 99
       },
       { title: "Second",
         most_recent_message: 2,
-        participants: []
+        participants: [],
+        id: 3
       }
     ];
-    var collection = new Structural.Collections.Conversations(conversations);
+    collection = new Structural.Collections.Conversations(conversations);
     view = new Structural.Views.Conversations({collection: collection});
     view.render();
   });
@@ -73,6 +77,18 @@ describe("Conversation list view", function() {
     expect(view.$('.cnv .cnv-title')[2].innerText).toEqual('Third');
     expect(view.$('.cnv .cnv-title')[3].innerText).toEqual('Fourth');
   });
+
+  it("can be focused", function() {
+    expect(view.$('.cnv-current').length).toEqual(0);
+
+    collection.focus(53);
+    expect(view.$('.cnv-current').length).toEqual(1);
+    expect(view.$('.cnv-current').text()).toMatch(/First/);
+
+    collection.focus(19);
+    expect(view.$('.cnv-current').length).toEqual(1);
+    expect(view.$('.cnv-current').text()).toMatch(/Third/);
+  })
 });
 
 describe("Conversation toolbar view", function() {

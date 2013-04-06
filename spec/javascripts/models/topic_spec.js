@@ -3,16 +3,15 @@ describe("Topic model", function() {
     var read = new Structural.Models.Topic({unread_conversations: 0});
     var unread = new Structural.Models.Topic({unread_conversations: 12});
 
-    expect(read.is_unread).toBeFalsy();
-    expect(unread.is_unread).toBeTruthy();
+    expect(read.get('is_unread')).toBeFalsy();
+    expect(unread.get('is_unread')).toBeTruthy();
   });
 
-  it("can be the current conversation", function() {
-    Structural.Router.currentTopicId = 10;
+  it("can be the current conversation", function() {;
     var topic = new Structural.Models.Topic({id: 10});
-    expect(topic.is_current).toBeTruthy();
+    expect(topic.get('is_current')).toBeFalsy();
 
-    var topic = new Structural.Models.Topic({id: 12});
-    expect(topic.is_current).toBeFalsy();
+    topic.focus();
+    expect(topic.get('is_current')).toBeTruthy();
   })
 });

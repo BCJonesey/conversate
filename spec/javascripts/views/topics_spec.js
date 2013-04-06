@@ -28,7 +28,19 @@ describe("Topic list view", function() {
 
   it("has a topic hint tag", function() {
     expect(view.$('.tpc-hint').length).toEqual(1);
-  })
+  });
+
+  it("can be focused", function() {
+    expect(view.$('.tpc-current').length).toEqual(0);
+
+    collection.focus(1);
+    expect(view.$('.tpc-current').length).toEqual(1);
+    expect(view.$('.tpc-current').text()).toMatch(/Conversations/);
+
+    collection.focus(2);
+    expect(view.$('.tpc-current').length).toEqual(1);
+    expect(view.$('.tpc-current').text()).toMatch(/Structural/);
+  });
 });
 
 describe("Topic toolbar view", function() {
