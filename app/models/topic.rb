@@ -5,4 +5,23 @@ class Topic < ActiveRecord::Base
   attr_accessible :name
 
   validates_presence_of :name
+
+  def as_json(options)
+    json = super(options)
+    json['unread_conversations'] = unread_conversations(options[:user])
+    return json
+  end
+
+  private
+
+  def unread_conversations(user)
+    unread_conversation_count = 0
+    user.conversations.each do |conversation|
+      if conversation.unread_for?(user)
+        unread_conversation_count += 1
+      end
+    end
+    return unread_conversation_count
+  end
+
 end

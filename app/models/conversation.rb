@@ -71,10 +71,10 @@ class Conversation < ActiveRecord::Base
     messages = self.actions.where(:event_type => 'message')
     return false if messages.length == 0
 
-    last_read_action_id = self.reading_logs.where({:user_id => user.id}).first.last_read_action
+    last_read_action_id = self.reading_logs.where({:user_id => user.id}).first.last_read_event
     return true if last_read_action_id == nil
 
-    messages.order('created_at DESC').first.created_at > action.find(last_read_action_id).created_at
+    messages.order('created_at DESC').first.created_at > Action.find(last_read_action_id).created_at
   end
 
   def update_most_recent_action

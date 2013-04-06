@@ -33,8 +33,12 @@ describe Api::V0::TopicsController do
       check_unread_count[0]
       topic = Topic.find_by_id(1)
       conversation = topic.conversations.create(:title => 'A conversation')
+      @user.conversations << conversation
+      conversation.actions.create!(:event_type => 'message',
+                                    :data => '{"text":"Just a random message."}',
+                                    :user_id => 2)
       check_unread_count[1]
-      conversation.update_most_recent_action
+      @user.mark_as_read(conversation)
       check_unread_count[0]
     end
   end
