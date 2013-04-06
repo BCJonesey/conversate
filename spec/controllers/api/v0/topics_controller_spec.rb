@@ -51,8 +51,8 @@ describe Api::V0::TopicsController do
       body = JSON.parse(response.body)
       expect(body['id']).to eq(3)
       expect(body['name']).to eq('Huzzah!')
+      expect(body['unread_conversations']).to eq 0
     end
-    it "successfully creates a new topic with the correct unread counts"
   end
 
 end
