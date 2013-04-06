@@ -20,7 +20,7 @@ Structural.Views.Conversation = Support.CompositeView.extend({
   },
   reClass: function() {
     this.el.className = this.className();
-  }
+  },
   reRender: function() {
     this.reClass();
     this.render();

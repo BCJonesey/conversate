@@ -1,7 +1,7 @@
 Structural.Collections.Conversations = Backbone.Collection.extend({
 	model: Structural.Models.Conversation,
   initialize: function(data, options) {
-    options conversation options || {};
+    options = options || {};
     if (options.conversation) {
       this.url = Structural.apiPrefix + '/topics/' + options.topic + '/conversations';
     }
