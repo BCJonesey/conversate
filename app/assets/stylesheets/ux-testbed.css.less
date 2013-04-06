@@ -6,6 +6,19 @@
 
 }
 
+
+// Toolbars //
+
+@wc-toolbar-color: #EEE;
+@wc-toolbar-border-color: #AAA;
+.btn-toolbar{
+  background-color:@wc-toolbar-color;
+  border-bottom:1px solid @wc-toolbar-border-color;
+}
+
+
+
+
 @cnv-participant-gray:#AAA;
 
 @cnv-border-color:#CCC;
@@ -34,12 +47,180 @@
   content:",  ";
 }
 
+// Topics
 
-// Toolbars //
+.tpc-list{
+  background-color:#F8F8F8;
+}
 
-@wc-toolbar-color: #EEE;
-@wc-toolbar-border-color: #AAA;
-.btn-toolbar{
-  background-color:@wc-toolbar-color;
+.tpc-hint{
+  padding:.3rem;
+  margin:.3rem;
+  border:1px solid #DDD;
+  background-color:#FFF8E8;
+  color:#888;
+  font-size:.8rem;
+}
+
+.tpc{
+  a{
+    text-decoration: none;
+    display: inline-block;
+    padding:.3rem;
+    color:#888;
+  }
+}
+
+// Actions //
+
+.act-title{
+  position: relative;
+  height:2rem;
+  background-color:#EEE;
   border-bottom:1px solid @wc-toolbar-border-color;
 }
+
+.act-title-input{
+  background-color:transparent;
+  border:none;
+  width:100%;
+  height:2rem;
+  padding:.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  //overflow:hidden;
+  //display:block;
+}
+.act-title-actions{
+  position: absolute;
+  top:0;
+  right:0;
+  padding:.1rem;
+}
+
+
+
+.act-participants{
+  position: relative;
+  height:1.5rem;
+  background-color: #EEE;
+  border-bottom:1px solid @wc-toolbar-border-color;
+  padding:0 .5rem;
+  ul{
+    margin:0;
+    padding:0;
+  }
+  li{
+    list-style: none;
+    display: inline-block;
+  }
+  li.user-reminder{
+    display:none;
+  }
+  input{
+    border:none;
+    background-color: transparent;
+    outline:none;
+  }
+}
+
+.participant{
+  font-size:.8rem;
+  color:#888;
+}
+.participant + .participant:before{
+  content:", ";
+}
+
+.act-participants-actions{
+  position:relative;
+  right:0;
+  top:0;
+  position: absolute;
+  padding:.25rem;
+}
+
+.participant-remove{
+  display: none;
+}
+
+
+
+
+
+
+
+.act-list{
+  padding:.5rem;
+}
+
+.act{
+  padding:.3rem;
+}
+
+.act-message{
+  border-bottom:1px solid #CCC;
+  border-top:1px solid #CCC;
+  margin-top:1px;
+}
+
+.act-sender{
+  font-weight: bold;
+}
+
+.act-info-group{
+  display:inline-block;
+}
+
+.act-time{
+  color:#DDD;
+  font-size: .75rem;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.act-text{
+  padding:0.3rem 0;
+}
+
+.act-update-users,
+.act-retitle,
+.act-deletion{
+  font-size:.75rem;
+  color:#CCC;
+  text-align: center;
+}
+
+.long-form-compose{
+  display:none;
+}
+
+
+
+
+
+
+
+
+// Compose //
+
+.short-form-compose{
+  background-color: #EEE;
+  border-top:1px solid #AAA;
+}
+
+.act-compose-short-input{
+  position: relative;
+}
+
+.enable-long-form{
+  position: absolute;
+  top:0;
+  left:0;
+}
+
+
+
+
+
+
