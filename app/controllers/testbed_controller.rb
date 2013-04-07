@@ -10,8 +10,11 @@ class TestbedController < ApplicationController
       'topic',
       'topic-list',
       'topic-container',
+      'title-editor',
+      'participant-editor',
       'action',
       'action-list',
+      'compose',
       'action-container',
       'structural-bar',
       'the-whole-app'

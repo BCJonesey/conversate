@@ -198,6 +198,14 @@ switch(name) {
     var collection = new Structural.Collections.Topics(data.topics);
     view = new Structural.Views.TopicContainer({topics: collection});
     break;
+  case 'title-editor':
+    var model = new Structural.Models.Conversation(data.conversations[0]);
+    view = new Structural.Views.TitleEditor({conversation: model});
+    break;
+  case 'participant-editor':
+    var collection = new Structural.Collections.Participants(data.participants);
+    view = new Structural.Views.ParticipantEditor({participants: collection});
+    break;
   case 'action':
     var model = new Structural.Models.Action(data.actions[0]);
     view = new Structural.Views.Action({model: model});
@@ -206,11 +214,15 @@ switch(name) {
     var collection = new Structural.Collections.Actions(data.actions);
     view = new Structural.Views.Actions({collection: collection});
     break;
+  case 'compose':
+    var model = new Structural.Models.Conversation(data.conversations[0]);
+    view = new Structural.Views.Compose({conversation: model});
+    break;
   case 'action-container':
     var actions = new Structural.Collections.Actions(data.actions);
     var participants = new Structural.Collections.Participants(data.participants);
     var conversation = new Structural.Models.Conversation(data.conversations[0]);
-    var view = new Structural.Views.ActionContainer({
+    view = new Structural.Views.ActionContainer({
       actions: actions,
       participants: participants,
       conversation: conversation

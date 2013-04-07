@@ -22,16 +22,74 @@
 <% end -%>
 <%= content_for :javascript do -%>
   <%= javascript_tag do %>
-    var conversations = <%= @conversations.to_json(:user => current_user,
-      :opened_conversation => @opened_conversation).html_safe %>;
-    var messages = <%= @opened_conversation ? @opened_conversation.pieces.to_json.html_safe : 'null' %>;
-    var opened_conversation_id = <%= @opened_conversation ? @opened_conversation.id : 'null' %>;
-    var opened_topic_id = <%= @opened_topic ? @opened_topic.id : 'null' %>;
-    var current_user_id = <%= current_user.id %>;
-    var data = {
-      conversations: conversations,
-      messages: messages
+    var topics = [
+      { name: "Conversations", id: 1 },
+      { name: "Structural", id: 2 },
+      { name: "Chatter", id: 3 }
+    ];
+    var conversations = [
+      { title: "First",
+        most_recent_message: 1,
+        participants: []
+      },
+      { title: "Third",
+        most_recent_message: 3,
+        participants: []
+      }
+    ];
+    var actions = [
+      { type: "message",
+        user: {
+          name: "Ethan Allen",
+          id: 2
+        },
+        timestamp: 1363802638003,
+        id: 123,
+        text: "This is a message"
+      },
+      { type: "retitle",
+        user: {
+          name: "Ethan Allen",
+          id: 2
+        },
+        id: 878,
+        timestamp: 1363802638003,
+        title: "Conversation Title"
+      },
+      { type: "deletion",
+        user: {
+          name: "Ethan Allen",
+          id: 2
+        },
+        id: 788,
+        timestamp: 1363802638003,
+        action_id: 123
+      }
+    ];
+    var conversation = {
+      name: "Conversation",
+      id: 1,
+      topic_id: 15
     };
-    ConversateApp.initialize(data, opened_conversation_id, opened_topic_id, current_user_id);
+    var participants = [
+      { name: "Sharon Jones",
+        id: 1
+      },
+      { name: "The Dap Kings",
+        id: 2
+      }
+    ];
+    var user = { full_name: "Jack Kennedy" };
+
+    var bootstrap = {
+      topics: topics,
+      conversations: conversations,
+      actions: actions,
+      participants: participants,
+      conversation: conversation,
+      user: user
+    };
+
+    Structural.start(bootstrap);
   <% end %>
 <% end -%>
