@@ -33,7 +33,6 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
     Structural.on('clickAnywhere', this.closeTitleEditor, this);
   },
   closeTitleEditor: function(e) {
-    console.log("closing!");
     this.$('.act-title-actions').removeClass('hidden');
     this.$('.act-title-save-actions').addClass('hidden');
     this.$('input[type="text"]').attr('readonly', 'readonly');

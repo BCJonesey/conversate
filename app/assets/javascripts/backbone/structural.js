@@ -46,7 +46,6 @@ var Structural = new (Support.CompositeView.extend({
     'click': 'clickAnywhere'
   },
   clickAnywhere: function(e) {
-    console.log("clicked!");
     this.trigger('clickAnywhere', e);
   },
 
