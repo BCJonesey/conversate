@@ -1,0 +1,67 @@
+@import 'variables.css.less';
+@import 'mixins.css.less';
+
+
+
+// --- Layout --- //
+
+.water-cooler {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: @toolbar-height;
+
+& > .tpc-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 15rem;
+  border-right: 1px solid #AAA;
+}
+
+  & > .cnv-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 15rem;
+    width: 20rem;
+    border-right: 1px solid #AAA;
+  }
+
+  & > .act-container {
+    position: absolute;
+    left: 35rem;
+    top: 0;
+    bottom: 0;
+    right: 0;
+  }
+}
+.short-form-compose {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+// --- Structural Bar --- //
+
+.btn-toolbar.structural-bar{
+  background-color: #BBB;
+  border-bottom-color:#888;
+  border-top-color:#DDD;
+
+  .btn-icon{
+    color:#777;
+    text-shadow:1px 1px 0 #AAA;
+    &:hover,
+    &.hover{
+      color:rgba(0,0,0,0.7);
+      //text-shadow:1px 1px 10px #ABC;
+      -webkit-transition: color 0.35s;
+    }
+  }
+}
+
+

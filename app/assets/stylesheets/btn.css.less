@@ -15,6 +15,7 @@
   font-weight: normal;
   text-decoration:none;
 }
+
 .small-size{
   font-size: 0.75rem;
   height: 1.0rem;
@@ -46,7 +47,7 @@
 }
 
 .btn{
-  .normal-size();
+
   border:1px solid #CCC;
   background-color:#F0F0F0;
   color:#444;
@@ -87,51 +88,6 @@
 }
 
 
-.btn-icon{
-  display: inline-block;
-  background-color:transparent;
-  border:1px solid transparent;
-  font-size: 1rem;
-  font-weight: normal;
-  text-decoration:none;
-  padding:0 .25rem;
-  .text-gray-dark();
-  cursor:pointer;
-  .user-select(none);
-  //vertical-align: middle;
-  margin:0;
-  margin-left:.25rem;
-  margin-right:.25rem;
-  .btn-actions();
-  &:hover,
-  &.hover{
-    color:rgba(0,0,0,0.7);
-    //text-shadow:1px 1px 10px #ABC;
-    -webkit-transition: color 0.35s;
-  }
-
-  // &:active, &:focus, &.active{
-  //   position:relative;
-  //   top:1px;
-  // }
-  > i{
-    display:inline-block;
-    vertical-align: middle;
-    font-size:1.5rem;
-  }
-  > .i-text{
-    display:inline-block;
-    vertical-align: middle;
-    .body-font();
-    font-size:.8rem;
-  }
-
-  > i + .i-text{
-    margin-left:.35rem;
-  }
-}
-
-
 /* btn-faint is a modifer on buttons for how much the button is show when it is not being hovered */
 
 @color-faint:rgba(0,0,0,0.05);
@@ -139,6 +95,7 @@
 @color-solid:#444;
 
 .btn-faint{
+
   text-decoration: none;
   background-color:transparent;
   color:@color-faint;
@@ -176,26 +133,11 @@
 
 
 
-
-
-
-
-
-
 /* Button Groups  are just groups of buttons. They do not change the appear ance of the buttons an do not affect the padding or margins.
 
 They are most useful for floating multiple buttons to one side.  */
 
 
-.btn-group{
-  position: relative;
-  display: inline-block;
-  vertical-align: middle;
-  .ie7-inline-block();
-  font-size: 0;
-  white-space: nowrap;
-  .clearfix();
-}
 
 // The ends of a btn-group don't need margins
 
@@ -208,33 +150,3 @@ They are most useful for floating multiple buttons to one side.  */
   margin-right:0;
 }
 
-
-/* Button Toolbars are block level elements that contain buttons and button groups.  */
-
-.btn-toolbar{
-  font-size:0;
-  display: block;
-  vertical-align: middle;
-  padding:.4rem;
-}
-
-
-.btn-toolbar {
-  .text{
-    .normal-size();
-    .body-font();
-    .text-gray-dark();
-    color:#666;
-    font-weight:normal;
-    cursor:default;
-  }
-  .title-text{
-    .normal-size();
-    .title-font();
-    .text-black();
-    //font-weight:bold;
-    cursor:default;
-    padding-left:0;
-    //margin-left:0;
-  }
-}

@@ -1,0 +1,56 @@
+
+
+// --- Conversations List --- //
+
+// This does not include styles that control the position, of the converstion list column.  those are with the water-cooler.css.less file and other general layout stuff
+
+
+.cnv-list {
+    position: absolute;
+    top: 2.5rem;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    overflow-y: scroll;
+}
+
+.cnv {
+    padding: 0;
+    border: none;
+    background-image: -webkit-linear-gradient(left, #CCC 0%, #FFF 100%);
+    padding-bottom: 1px;
+}
+
+.cnv-link {
+    padding: .25rem;
+    background-color: white;
+}
+
+
+@cnv-participant-gray:#AAA;
+
+@cnv-border-color:#CCC;
+
+// .cnv{
+//   a{
+//     text-decoration: none;
+//   }
+//   padding:.3rem;
+//   border-bottom:1px solid @cnv-border-color;
+// }
+.cnv-title{
+  font-weight: bold;
+}
+
+.cnv-participants{
+  font-size:.8rem;
+  color:@cnv-participant-gray;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cnv-participant + .cnv-participant:before{
+  content:",  ";
+}

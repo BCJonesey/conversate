@@ -60,7 +60,7 @@ textarea.write{
   line-height: 1.5em;
   box-sizing:border-box;
   width: 100%;
-  height: 1em;
+  //height: 1em;
   resize: none;
   border: 1px solid #CCC;
   color: @textColor;
@@ -76,66 +76,71 @@ textarea.write{
   }
 }
 
-.thread-reverse{
-  //background-color: @backgroundDarkColor;
-  //.gradient-ltr(#E0F0FF,#F4FAFF, 40%);
-   border: none;
-   padding-left:1rem;
-   padding-right:1rem;
 
-  .conversation-piece {
-    margin:.5rem;
-    border-color:#9AC;
-    .message-info {
-      .sender{
-        display: block;
-        overflow: hidden;
-        font-weight: bold;
-        }
-      .time{
-                color:#CCC;
-                font-size:.75rem;
-                font-style:italic;
-              }
-        }
-        .btn-group-dropdown{
-          display:none;
-        }
-        .message-text {
-          white-space: pre-wrap;
-          clear: both;
-          a{
-            text-decoration: none;
-            color: #28D;
-            &:hover{
-              text-decoration: underline;
-            }
-          }
-        }
-        .message-actions {
-          display: none;
-          margin: 5px;
-          margin-bottom: none;
-          padding-top: 5px;
-          border-top: 1px solid @borderDarkColor;
-        }
-
-        &.retitle, &.deletion, &.update-users {
-          color:#999;
-          font-size: .8em;
-          text-align: center;
-          margin-top:0;
-        }
-      }
- }
 
 .cnv-compose-short-input{
   position: relative;
 }
 
-#enable-long-form{
-  position:absolute;
-  top:50%;
-  left:0rem;
-  margin-top:-0.8rem;
+// Compose //
+
+.short-form-compose {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
+
+.short-form-compose{
+  background-color: #EEE;
+  border-top:1px solid #AAA;
+
+  padding:0.35rem;
+  & form{
+    position:relative;
+    & textarea{
+      height:2.0rem;
+    }
+  }
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit; /* 1 */
+    font-size: 100%; /* 2 */
+    margin: 0; /* 3 */
+}
+
+.act-compose-short-input{
+  position: relative;
+  margin-right:4rem;
+  margin-left:2.5rem;
+  textarea{
+    //padding-left:2.5rem;
+    resize:vertical;
+    max-height:10rem;
+    min-height: 2.0rem;
+  }
+}
+
+.enable-long-form{
+  position: absolute;
+  top:50%;
+  left:0.15rem;
+  margin-top:-0.85rem;
+}
+
+.act-short-form-send{
+  position: absolute;
+  height:1.8rem;
+  line-height: 1.0;
+  font-size: 1rem;
+  right:0;
+  top:50%;
+  margin-top:-0.9rem;
+  margin-left:0;
+  margin-right:0;
+}
+

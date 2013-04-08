@@ -1,0 +1,117 @@
+@import 'variables.css.less';
+@import 'mixins.css.less';
+@import 'btn.css.less';
+
+/* Button Toolbars are block level elements that contain buttons and button groups.  */
+
+// --- Mixins for setting borders on toolbars --- //
+
+.btn-toolbar-border-bottom{
+  box-sizing:border-box;
+  border-bottom:1px solid @wc-toolbar-border-color;
+  border-top: 1px solid white;
+  //position: relative;
+}
+
+// --- Actual Classes --- //
+
+@btn-toolbar-height:2.5rem;
+
+@btn-font-size: 1.0rem;
+@btn-padding-vertical:0.35rem;
+@btn-height: @btn-font-size + 2 * @btn-padding-vertical;
+
+
+.btn-toolbar {
+  .btn-toolbar-border-bottom();
+  padding:0.3rem .45rem;
+  background-color:@wc-toolbar-color;
+  display: block;
+  height:@btn-toolbar-height;  // 2.5rem
+  display: relative;
+}
+
+
+.btn-group{
+  //font-size: 0;
+  //line-height:@btn-toolbar-height;
+  white-space: nowrap;
+  .clearfix();
+  padding:0;
+  & * {
+    display:inline-block;
+    line-height: 1.0;
+    font-size:@btn-font-size;
+    vertical-align: top;
+  }
+}
+
+.btn-icon{
+  border:none;
+  padding:0;
+  height:@btn-height;
+  //font-size:0;
+  //line-height: 1.0;
+  font-weight: normal;
+  text-decoration:none;
+  cursor:pointer;
+  margin:0;
+  margin-left:.25rem;
+  margin-right:.25rem;
+  //background-color:rgba(0,0,0,0.25);
+
+  color:#AAA;
+  text-shadow:1px 1px 0 #CCC;
+
+  &:hover,
+  &.hover{
+    color:rgba(0,0,0,0.7);
+    //text-shadow:1px 1px 10px #ABC;
+    -webkit-transition: color 0.35s;
+  }
+
+  &.disabled:hover,
+  &.disabled.hover{
+  }
+
+  i{
+    font-size:@btn-height;
+  }
+
+  .i-text{
+    display:inline-block;
+    //vertical-align: middle;
+    font-size:@btn-font-size;
+    line-height: 1.0;
+    height:@btn-height;
+    padding-top: @btn-padding-vertical;
+    //background-color:red;
+  }
+
+  i + .i-text{
+    margin-left:.35rem;
+  }
+}
+
+
+// .text{
+//   .normal-size();
+//   .body-font();
+//   .text-gray-dark();
+//   color:red;
+//   font-weight:normal;
+//   cursor:default;
+// }
+
+// .title-text{
+//   .normal-size();
+//   .title-font();
+//   .text-black();
+//   //font-weight:bold;
+//   cursor:default;
+//   padding-left:0;
+//   //margin-left:0;
+// }
+
+
+
