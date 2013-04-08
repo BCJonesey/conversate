@@ -21,10 +21,10 @@ var Structural = new (Support.CompositeView.extend({
 
     this._topics = new Structural.Collections.Topics(bootstrap.topics);
     this._conversations = new Structural.Collections.Conversations(bootstrap.conversations);
-    this._actions = new Structural.Collections.Actions(bootstrap.actions);
     this._participants = new Structural.Collections.Participants(bootstrap.participants);
     this._conversation = new Structural.Models.Conversation(bootstrap.conversation);
     this._user = new Structural.Models.User(bootstrap.user);
+    this._actions = new Structural.Collections.Actions(bootstrap.actions, {conversation: this._conversation.id});
 
     var bar = new Structural.Views.StructuralBar({model: this._user});
     var watercooler = new Structural.Views.WaterCooler({
@@ -42,6 +42,14 @@ var Structural = new (Support.CompositeView.extend({
     return this;
   },
 
+  events: {
+    'click': 'clickAnywhere'
+  },
+  clickAnywhere: function(e) {
+    console.log("clicked!");
+    this.trigger('clickAnywhere', e);
+  },
+
   focus: function(targets) {
     if (targets.topic) {
       this._topics.focus(targets.topic);
@@ -54,5 +62,9 @@ var Structural = new (Support.CompositeView.extend({
     if (targets.message) {
       this._actions.focus(targets.message);
     }
+  },
+
+  createRetitleAction: function(title) {
+    this._actions.createRetitleAction(title, this._user);
   }
 }))({el: $('body'), apiPrefix: '/api/v0'});

@@ -16,12 +16,28 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
     'click .act-title-save': 'retitleConversation'
   },
   retitleConversation: function(e) {
-    // TODO: Close title editor, change conversation title.
+    e.preventDefault();
+    this.conversation.changeTitle(this.$('input').val());
+    this.closeTitleEditor();
   },
   moveConversation: function(e) {
     // TODO: Enter move conversation mode.  This has to affect the topics view.
+    e.preventDefault();
   },
   openTitleEditor: function(e) {
-    // TODO: Make title input editable, show save button.
+    e.preventDefault();
+    this.$('.act-title-actions').addClass('hidden');
+    this.$('.act-title-save-actions').removeClass('hidden');
+    this.$('input[type="text"]').removeAttr('readonly');
+
+    Structural.on('clickAnywhere', this.closeTitleEditor, this);
+  },
+  closeTitleEditor: function(e) {
+    console.log("closing!");
+    this.$('.act-title-actions').removeClass('hidden');
+    this.$('.act-title-save-actions').addClass('hidden');
+    this.$('input[type="text"]').attr('readonly', 'readonly');
+
+    Structural.off('clickAnywhere', this.closeTitleEditor, this);
   }
 });

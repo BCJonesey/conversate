@@ -1,10 +1,11 @@
 Structural.Collections.Actions = Backbone.Collection.extend({
   model: Structural.Models.Action,
+  url: function() {
+    return Structural.apiPrefix + '/conversations/' + this.conversationId + '/actions';
+  },
   initialize: function(data, options) {
     options = options || {};
-    if (options.conversation) {
-      this.url = Structural.apiPrefix + '/conversations/' + options.conversation + '/actions';
-    }
+    this.conversationId = options.conversation;
   },
   comparator: 'timestamp',
 
@@ -18,5 +19,18 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     this.filter(function(act) { return act.id != id; }).forEach(function(act) {
       act.unfocus();
     });
+  },
+
+  createRetitleAction: function(title, user) {
+    var model = new Structural.Models.Action({
+      type: 'retitle',
+      title: title,
+      user: {
+        name: user.get('name'),
+        id: user.id
+      }
+    });
+    this.add(model);
+    model.save();
   }
 });

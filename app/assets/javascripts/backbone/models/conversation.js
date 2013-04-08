@@ -13,5 +13,10 @@ Structural.Models.Conversation = Backbone.Model.extend({
   },
   unfocus: function() {
     this.set('is_current', false);
+  },
+
+  changeTitle: function(title) {
+    this.set('title', title);
+    Structural.createRetitleAction(title);
   }
 });
