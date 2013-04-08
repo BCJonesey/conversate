@@ -235,6 +235,7 @@ switch(name) {
   case 'the-whole-app':
     $('.ux-testbed-container').detach();
     var bootstrap = _.clone(data);
+    bootstrap.conversation = bootstrap.conversations[0];
     Structural.start(bootstrap);
     break;
   default:

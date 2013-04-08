@@ -29,14 +29,17 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
     this.$('.act-title-actions').addClass('hidden');
     this.$('.act-title-save-actions').removeClass('hidden');
     this.$('input[type="text"]').removeAttr('readonly');
+    this.$('input[type="text"]').focus();
 
     Structural.on('clickAnywhere', this.closeTitleEditor, this);
   },
   closeTitleEditor: function(e) {
-    this.$('.act-title-actions').removeClass('hidden');
-    this.$('.act-title-save-actions').addClass('hidden');
-    this.$('input[type="text"]').attr('readonly', 'readonly');
+    if ($(e.target).closest('.act-title').length == 0) {
+      this.$('.act-title-actions').removeClass('hidden');
+      this.$('.act-title-save-actions').addClass('hidden');
+      this.$('input[type="text"]').attr('readonly', 'readonly');
 
-    Structural.off('clickAnywhere', this.closeTitleEditor, this);
+      Structural.off('clickAnywhere', this.closeTitleEditor, this);
+    }
   }
 });
