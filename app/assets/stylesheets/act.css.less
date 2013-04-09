@@ -7,26 +7,36 @@
 
 .act-title{
   position: relative;
+  padding-left:0;
 }
 
 .act-title-input{
+  box-sizing:border-box;
   background-color:transparent;
   border:none;
   width:100%;
-  height:2rem;
-  padding:.5rem;
+  //height:2rem;
+  padding:.25rem 0;
   font-size: 1rem;
   font-weight: bold;
   //overflow:hidden;
   //display:block;
+  outline:none;
 }
 
-.act-title-actions,
-.btn-toolbar.act-title-actions{
+.act-title.editing{
+  background-color:white !important;
+  box-shadow:inset 0 0 0.5rem rgba(0,0,255,0.3);
+  border-top-color:#ACE;
+  border-bottom-color:#9AB;
+}
+
+
+
+.act-title-actions{
   position: absolute;
-  top:0;
-  right:0;
-  padding:.25rem !important;
+  top:.25rem;
+  right:.25rem;
 }
 
 
@@ -68,11 +78,9 @@
 }
 
 .act-participants-actions{
-  position:relative;
-  right:0;
-  top:0;
+  right:.1rem;
+  top:.2rem;
   position: absolute;
-  padding:.25rem;
 }
 
 .participant-remove{
