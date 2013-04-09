@@ -23,12 +23,14 @@ describe("Title editor", function() {
 
   it("can be flipped out of editing mode", function() {
     view.$('.act-title-edit').click();
+    view.$('input[type="text"]').val('New Title!');
     // Can't use $('body') here because Jasmin co-opts it.
     Structural.$el.click();
 
     expect(view.$('.act-title-actions.hidden').length).toEqual(0);
     expect(view.$('.act-title-save-actions.hidden').length).toEqual(1);
     expect(view.$('input[readonly]').length).toEqual(1);
+    expect(view.$('input[type="text"]').val()).toEqual('News on the March!');
   });
 
   it("does not flip out of editing mode when clicking on itself", function() {

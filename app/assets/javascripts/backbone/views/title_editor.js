@@ -31,7 +31,7 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
     this.$('input[type="text"]').removeAttr('readonly');
     this.$('input[type="text"]').focus();
 
-    Structural.on('clickAnywhere', this.closeTitleEditor, this);
+    Structural.on('clickAnywhere', this.cancelRetitle, this);
   },
   closeTitleEditor: function(e) {
     if (!e || $(e.target).closest('.act-title').length == 0) {
@@ -40,6 +40,13 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
       this.$('input[type="text"]').attr('readonly', 'readonly');
 
       Structural.off('clickAnywhere', this.closeTitleEditor, this);
+      return true;
+    }
+    return false;
+  },
+  cancelRetitle: function(e) {
+    if(this.closeTitleEditor(e)) {
+      this.$('input[type="text"]').val(this.conversation.get('title'));
     }
   }
 });
