@@ -28,6 +28,7 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
     e.preventDefault();
     this.$('.act-title-actions').addClass('hidden');
     this.$('.act-title-save-actions').removeClass('hidden');
+    this.$el.addClass('editing');
     this.$('input[type="text"]').removeAttr('readonly');
     this.$('input[type="text"]').focus();
 
@@ -37,6 +38,7 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
     if (!e || $(e.target).closest('.act-title').length == 0) {
       this.$('.act-title-actions').removeClass('hidden');
       this.$('.act-title-save-actions').addClass('hidden');
+      this.$el.removeClass('editing');
       this.$('input[type="text"]').attr('readonly', 'readonly');
 
       Structural.off('clickAnywhere', this.closeTitleEditor, this);
