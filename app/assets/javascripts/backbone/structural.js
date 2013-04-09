@@ -22,7 +22,7 @@ var Structural = new (Support.CompositeView.extend({
     this._topics = new Structural.Collections.Topics(bootstrap.topics);
     this._conversations = new Structural.Collections.Conversations(bootstrap.conversations);
     this._participants = new Structural.Collections.Participants(bootstrap.participants);
-    this._conversation = new Structural.Models.Conversation(bootstrap.conversation);
+    this._conversation = this._conversations.where({id: bootstrap.conversation.id})[0];
     this._user = new Structural.Models.User(bootstrap.user);
     this._actions = new Structural.Collections.Actions(bootstrap.actions, {conversation: this._conversation.id});
 

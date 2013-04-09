@@ -36,11 +36,13 @@ describe("Structural", function() {
       var conversations = [
         { title: "First",
           most_recent_message: 1,
-          participants: []
+          participants: [],
+          id: 1
         },
         { title: "Third",
           most_recent_message: 3,
-          participants: []
+          participants: [],
+          id: 2
         }
       ];
       var actions = [
