@@ -23,7 +23,7 @@ describe Api::V0::ConversationsController do
       expect(body[1]['id']).to eq(2)
       expect(body[1]['title']).to eq('Pretty Damn Solid')
     end
-    it 'responds successfully with the correct timestamp and last message' do
+    it 'responds successfully with the correct most_recent_event' do
       check_most_recent_event = lambda do |mre|
         get :index, :topic_id => 1
         expect(response).to be_success
