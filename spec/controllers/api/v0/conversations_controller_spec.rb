@@ -41,6 +41,7 @@ describe Api::V0::ConversationsController do
                                   :user_id => @user.id)
       check_most_recent_event[conversation.most_recent_event.msec]
     end
+    it 'responds successfully with the correct most_recent_view'
     it 'responds successfully with the correct participants'
     it 'responds unsuccessfully when the topic does not exist' do
       get :index, :topic_id => 100
