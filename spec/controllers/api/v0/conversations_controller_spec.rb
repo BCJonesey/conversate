@@ -53,6 +53,12 @@ describe Api::V0::ConversationsController do
         expect(body[0]['most_recent_viewed']).to be_a(Integer)
       end
       check_most_recent_viewed[946688839000] # Default value.
+      conversation.actions.create!(:event_type => 'message',
+                                  :data => '{"text":"You forgot the i, GIII"}',
+                                  :user_id => @user.id)
+      conversation.users << @user
+      @user.mark_as_read(conversation)
+      check_most_recent_viewed[conversation.most_recent_viewed_for_user(@user).msec]
     end
     it 'responds successfully with the correct participants'
     it 'responds unsuccessfully when the topic does not exist' do
