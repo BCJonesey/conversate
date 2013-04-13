@@ -83,7 +83,7 @@ class Conversation < ActiveRecord::Base
 
   def most_recent_viewed_for_user(user)
     action = last_read_action_for_user(user)
-    return Time.parse('2000-01-01 01:07:19') unless action
+    return Time.parse('2000-01-01 01:07:19 UTC') unless action
     return last_read_action_for_user(user).created_at
   end
 
