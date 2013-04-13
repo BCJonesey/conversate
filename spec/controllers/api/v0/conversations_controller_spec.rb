@@ -24,15 +24,22 @@ describe Api::V0::ConversationsController do
       expect(body[1]['title']).to eq('Pretty Damn Solid')
     end
     it 'responds successfully with the correct timestamp and last message' do
-      # There's a wacky behavior here where the before_filter conversations have
-      # lazy loaded timestamps that will not match what they actually are.
+      check_most_recent_event = lambda do |mre|
+        get :index, :topic_id => 1
+        expect(response).to be_success
+        expect(response.code).to eq("200")
+        body = JSON.parse(response.body)
+        expect(body[2]['title']).to eq('Timestamp Convo')
+        expect(body[2]['most_recent_event']).to eq(mre)
+        expect(body[2]['most_recent_event']).to be_a(Integer)
+      end
       conversation = @topic.conversations.create(:title => 'Timestamp Convo')
-      get :index, :topic_id => 1
-      expect(response).to be_success
-      expect(response.code).to eq("200")
-      body = JSON.parse(response.body)
-      expect(body[2]['most_recent_event']).to eq(conversation.most_recent_event)
-      expect(body[2]['most_recent_event']).to be_a(Integer)
+      conversation.users << @user
+      check_most_recent_event[946688839000] # Default value.
+      conversation.actions.create!(:event_type => 'message',
+                                  :data => '{"text":"You forgot the i, GIII"}',
+                                  :user_id => @user.id)
+      check_most_recent_event[conversation.most_recent_event.msec]
     end
     it 'responds successfully with the correct participants'
     it 'responds unsuccessfully when the topic does not exist' do

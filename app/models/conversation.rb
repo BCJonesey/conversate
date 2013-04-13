@@ -9,7 +9,6 @@ class Conversation < ActiveRecord::Base
 
   after_initialize do |convo|
     convo.title = convo.default_conversation_title if (convo.title.nil? || convo.title.empty?)
-    convo.most_recent_event = Time.now
   end
 
   # Public: Stitch together the actions on a conversation into "conversation
@@ -91,6 +90,7 @@ class Conversation < ActiveRecord::Base
     json[:class] = list_item_classes(self, options[:opened_conversation],
                                      options[:user])
     json[:participant_tokens] = participants
+    json[:most_recent_event] = most_recent_event.msec
     return json
   end
 
