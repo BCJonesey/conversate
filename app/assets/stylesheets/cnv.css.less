@@ -1,4 +1,5 @@
-
+@import 'variables.css.less';
+@import 'mixins.css.less';
 
 // --- Conversations List --- //
 
@@ -11,13 +12,14 @@
     right: 0;
     left: 0;
     bottom: 0;
-    overflow-y: scroll;
+    overflow-y: auto;
+    overflow-x:hidden;
 }
 
 .cnv {
     padding: 0;
     border: none;
-    background-image: -webkit-linear-gradient(left, #CCC 0%, #FFF 100%);
+    .gradient-ltr(#CCC,#FFF,90%);
     padding-bottom: 1px;
 }
 
