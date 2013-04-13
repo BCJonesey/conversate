@@ -41,7 +41,7 @@ describe Api::V0::ConversationsController do
                                   :user_id => @user.id)
       check_most_recent_event[conversation.most_recent_event.msec - 1]
     end
-    it 'responds successfully with the correct most_recent_viewed', :t => true do
+    it 'responds successfully with the correct most_recent_viewed' do
       conversation = Conversation.find_by_id(1)
       check_most_recent_viewed = lambda do |mve|
         get :index, :topic_id => 1
@@ -52,9 +52,7 @@ describe Api::V0::ConversationsController do
         expect(body[0]['most_recent_viewed']).to eq(mve)
         expect(body[0]['most_recent_viewed']).to be_a(Integer)
       end
-      check_most_recent_viewed[946688839000] # Default value.
-      @user.mark_as_read(conversation)
-      check_most_recent_viewed[conversation.most_recent_viewed_for_user(@user).msec - 1]
+      check_most_recent_viewed[conversation.most_recent_viewed_for_user(@user).msec]
     end
     it 'responds successfully with the correct participants'
     it 'responds unsuccessfully when the topic does not exist' do
