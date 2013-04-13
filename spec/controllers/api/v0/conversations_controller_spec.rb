@@ -20,12 +20,20 @@ describe Api::V0::ConversationsController do
       body = JSON.parse(response.body)
       expect(body[0]['id']).to eq(1)
       expect(body[0]['title']).to eq('Wobbly Wobble')
-      expect(body[0]['most_recent_event']).to eq @topic.conversations[0].most_recent_event.msec
       expect(body[1]['id']).to eq(2)
       expect(body[1]['title']).to eq('Pretty Damn Solid')
-      expect(body[1]['most_recent_event']).to eq @topic.conversations[0].most_recent_event.msec
     end
-    it 'responds successfully with the correct timestamp and last message'
+    it 'responds successfully with the correct timestamp and last message' do
+      # There's a wacky behavior here where the before_filter conversations have
+      # lazy loaded timestamps that will not match what they actually are.
+      conversation = @topic.conversations.create(:title => 'Timestamp Convo')
+      get :index, :topic_id => 1
+      expect(response).to be_success
+      expect(response.code).to eq("200")
+      body = JSON.parse(response.body)
+      expect(body[2]['most_recent_event']).to eq(conversation.most_recent_event)
+      expect(body[2]['most_recent_event']).to be_a(Integer)
+    end
     it 'responds successfully with the correct participants'
     it 'responds unsuccessfully when the topic does not exist' do
       get :index, :topic_id => 100
