@@ -81,6 +81,12 @@ class Conversation < ActiveRecord::Base
     save
   end
 
+  def most_recent_viewed_for_user(user)
+    action = last_read_action_for_user(user)
+    return Time.parse('2000-01-01 01:07:19') unless action
+    return last_read_action_for_user(user).created_at
+  end
+
   def as_json(options)
     json = super(options)
     # TODO: DRY.
@@ -91,6 +97,7 @@ class Conversation < ActiveRecord::Base
                                      options[:user])
     json[:participant_tokens] = participants
     json[:most_recent_event] = most_recent_event.msec
+    json[:most_recent_viewed] = most_recent_viewed_for_user(options[:user]).msec
     return json
   end
 
@@ -108,8 +115,10 @@ class Conversation < ActiveRecord::Base
   private
 
   def last_read_action_for_user(user)
-    last_read_action_id = self.reading_logs.where({:user_id => user.id}).first.last_read_event
+    log = self.reading_logs.where({:user_id => user.id}).first
+    return nil unless log
+    last_read_action_id = log.last_read_event
     return nil unless last_read_action_id
-    Action.find(last_read_action_id)
+    return Action.find(last_read_action_id)
   end
 end
