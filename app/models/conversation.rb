@@ -70,10 +70,10 @@ class Conversation < ActiveRecord::Base
     messages = self.actions.where(:event_type => 'message')
     return false if messages.length == 0
 
-    last_read_action_id = self.reading_logs.where({:user_id => user.id}).first.last_read_event
-    return true if last_read_action_id == nil
+    action = last_read_action_for_user(user)
+    return true if action == nil
 
-    messages.order('created_at DESC').first.created_at > Action.find(last_read_action_id).created_at
+    return messages.order('created_at DESC').first.created_at > action.created_at
   end
 
   def update_most_recent_action
@@ -103,5 +103,13 @@ class Conversation < ActiveRecord::Base
   def default_conversation_title()
     return 'New Conversation' if self.users.length <= 1
     "A conversation with #{self.users.map {|u| u.name}.join(', ')}"
+  end
+
+  private
+
+  def last_read_action_for_user(user)
+    last_read_action_id = self.reading_logs.where({:user_id => user.id}).first.last_read_event
+    return nil unless last_read_action_id
+    Action.find(last_read_action_id)
   end
 end
