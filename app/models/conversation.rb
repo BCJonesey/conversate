@@ -91,11 +91,9 @@ class Conversation < ActiveRecord::Base
     json = super(options)
     # TODO: DRY.
     participants = participants(options[:user])
-    json[:participants] = (users.length > 1) ?
-    participants.map {|u| u.name}.join(', ') : " ";
+    json[:participants] = participants;
     json[:class] = list_item_classes(self, options[:opened_conversation],
                                      options[:user])
-    json[:participant_tokens] = participants
     json[:most_recent_event] = most_recent_event.msec
     json[:most_recent_viewed] = most_recent_viewed_for_user(options[:user]).msec
     return json

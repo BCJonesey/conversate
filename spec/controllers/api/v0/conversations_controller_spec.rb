@@ -61,7 +61,23 @@ describe Api::V0::ConversationsController do
       @user.mark_as_read(conversation)
       check_most_recent_viewed[conversation.most_recent_viewed_for_user(@user).msec]
     end
-    it 'responds successfully with the correct participants'
+    it 'responds successfully with the correct participants' do
+      user2 = User.create!(:email => 'someuser@example.com',
+                          :full_name => 'Usegi Userio',
+                          :password => 'superDUPERsecretPassword')
+      user3 = User.create!(:email => 'anotheruser@example.com',
+                          :full_name => 'Bob the Builder',
+                          :password => 'superDUPERsecretPassword')
+      conversation = Conversation.find_by_id(1)
+      conversation.users << user2
+      conversation.users << user3
+      get :index, :topic_id => 1
+      expect(response).to be_success
+      expect(response.code).to eq("200")
+      body = JSON.parse(response.body)
+      expect(body[0]['participants'][0]['email']).to eq('someuser@example.com')
+      expect(body[0]['participants'][1]['email']).to eq('anotheruser@example.com')
+    end
     it 'responds unsuccessfully when the topic does not exist' do
       get :index, :topic_id => 100
       expect(response).not_to be_success
