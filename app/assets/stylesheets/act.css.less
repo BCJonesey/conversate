@@ -5,6 +5,14 @@
 
 // --- Actions --- //
 
+.editing-style{
+  background-color:white !important;
+  box-shadow:inset 0 0 5px rgba(0,0,255,0.2);
+  border-top-color:#ACE;
+  border-bottom-color:#9AB;
+  z-index:1;
+}
+
 .act-title{
   position: relative;
   padding-left:0;
@@ -25,10 +33,7 @@
 }
 
 .act-title.editing{
-  background-color:white !important;
-  box-shadow:inset 0 0 5px rgba(0,0,255,0.2);
-  border-top-color:#ACE;
-  border-bottom-color:#9AB;
+  .editing-style();
 }
 
 .act-title-actions,
@@ -45,15 +50,15 @@
   border-bottom:1px solid @wc-toolbar-border-color;
   padding:0 .5rem;
 
+  &.editing{
+    .editing-style();
+  }
+
   ul{
     margin:0;
     padding:0;
   }
 
-  li{
-    list-style: none;
-    display: inline-block;
-  }
 
   li.user-reminder{
     display:none;
@@ -69,10 +74,40 @@
 .participant{
   font-size:.8rem;
   color:#888;
+  list-style: none;
+  display: inline-block;
 }
 .participant + .participant:before{
   content:", ";
 }
+
+.editing .participant{
+    background-color:#DEF;
+    border:1px solid #ABC;
+    padding-left:0.2rem;
+    padding-right:0.1rem;
+    margin-right:.4rem;
+    display:inline-block;
+    &:before{
+      content:none;
+    }
+}
+.editing .participant-remove{
+    color:#CCC;
+    position:relative;
+    bottom:.05rem;
+    padding:0.1rem;
+}
+x
+.editing .participant-remove:hover{
+    color:#888;
+}
+
+
+.token-input-wrap{
+  display:inline-block;
+}
+
 
 .act-participants-actions,
 .act-participants-save-actions{
@@ -144,10 +179,37 @@
   display:none;
 }
 
-.token-option {
-  width: 100%;
+.tokens{
+  list-style: none;
+}
+.token-options{
+  display:none;
+}
 
-  &.target {
-    background-color: #ff0000;
+.editing .token-options{
+  display:block;
+  width: auto;
+  min-width: 5rem;
+  max-width: 15rem;
+  max-height:10rem;
+  overflow-y:auto;
+  border:1px solid #CCC;
+  background-color:#FAFAFA;
+  position:relative;
+  top:.3rem;
+  box-shadow:0 0.1rem .4rem rgba(0,0,0,0.2);
+}
+
+.token-option{
+  display:block;
+  padding:0.25rem;
+  font-size:0.8rem;
+  color:#888;
+  cursor:pointer;
+  & + .token-option{
+    border-top:1px solid #CCC;
+  }
+  &.target{
+    background-color:#EAEAEA;
   }
 }
