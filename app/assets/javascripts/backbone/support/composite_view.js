@@ -13,7 +13,7 @@ _.extend(Support.CompositeView.prototype, Backbone.View.prototype, {
     this.unbindFromAll();
     this.remove();
     this._leaveChildren();
-    this._leaveFromParent();
+    this._removeFromParent();
   },
 
   bindTo: function(source, event, callback) {
@@ -57,6 +57,14 @@ _.extend(Support.CompositeView.prototype, Backbone.View.prototype, {
   prependChildTo: function(view, container) {
     this.renderChild(view);
     $(container).prepend(view.el);
+  },
+
+  // TODO: Fill this class out with full complement of insertion methods
+  // (before, after, around, etc) either as you need them or when you get bored.
+
+  insertChildBefore: function(view, sibling) {
+    this.renderChild(view);
+    $(sibling).before(view.el);
   },
 
   _leaveChildren: function() {

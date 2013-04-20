@@ -30,6 +30,8 @@ Structural.Views.Action = Support.CompositeView.extend({
         break;
       case 'update_users':
         template = this.updateUsersTemplate;
+        console.log('removed', this.model.get('removed').length);
+        console.log('added', this.model.get('added').length);
         break;
       case 'retitle':
         template = this.retitleTemplate;

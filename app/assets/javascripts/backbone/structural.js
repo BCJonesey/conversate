@@ -32,7 +32,8 @@ var Structural = new (Support.CompositeView.extend({
       conversations: this._conversations,
       actions: this._actions,
       participants: this._participants,
-      conversation: this._conversation
+      conversation: this._conversation,
+      addressBook: this._user.get('address_book')
     });
 
     this.appendChild(bar);
@@ -65,5 +66,8 @@ var Structural = new (Support.CompositeView.extend({
 
   createRetitleAction: function(title) {
     this._actions.createRetitleAction(title, this._user);
+  },
+  createUpdateUserAction: function(added, removed) {
+    this._actions.createUpdateUserAction(added, removed, this._user);
   }
 }))({el: $('body'), apiPrefix: '/api/v0'});

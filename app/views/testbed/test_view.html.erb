@@ -165,7 +165,7 @@ data = {
         "id": 4
       },
       { "name": "Benjamin Franklin",
-        "id": 4
+        "id": 6
       }
     ]
   }
@@ -204,7 +204,11 @@ switch(name) {
     break;
   case 'participant-editor':
     var collection = new Structural.Collections.Participants(data.participants);
-    view = new Structural.Views.ParticipantEditor({participants: collection});
+    var addresses = new Structural.Collections.Participants(data.user.address_book);
+    view = new Structural.Views.ParticipantEditor({
+      participants: collection,
+      addressBook: addresses
+    });
     break;
   case 'action':
     var model = new Structural.Models.Action(data.actions[0]);
@@ -222,10 +226,12 @@ switch(name) {
     var actions = new Structural.Collections.Actions(data.actions);
     var participants = new Structural.Collections.Participants(data.participants);
     var conversation = new Structural.Models.Conversation(data.conversations[0]);
+    var addresses = new Structural.Collections.Participants(data.user.address_book);
     view = new Structural.Views.ActionContainer({
       actions: actions,
       participants: participants,
-      conversation: conversation
+      conversation: conversation,
+      addresses: addresses
     });
     break;
   case 'structural-bar':

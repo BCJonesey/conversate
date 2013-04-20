@@ -12,6 +12,6 @@ Structural.Views.Participant = Support.CompositeView.extend({
     'click .participant-remove': 'removeParticipant'
   },
   removeParticipant: function(e) {
-    // TODO: Remove participant.
+    this.trigger('remove', this);
   }
 });

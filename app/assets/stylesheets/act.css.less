@@ -31,15 +31,11 @@
   border-bottom-color:#9AB;
 }
 
-
-
 .act-title-actions{
   position: absolute;
   top:.25rem;
   right:.25rem;
 }
-
-
 
 .act-participants{
   position: relative;
@@ -87,11 +83,12 @@
   display: none;
 }
 
-
-
-
-
-
+.act-participants.editing {
+  .participant-remove {
+    display: inline;
+    cursor: pointer;
+  }
+}
 
 .act-list{
   padding:.5rem;
@@ -136,4 +133,12 @@
 
 .long-form-compose{
   display:none;
+}
+
+.token-option {
+  width: 100%;
+
+  &.target {
+    background-color: #ff0000;
+  }
 }

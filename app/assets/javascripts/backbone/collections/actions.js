@@ -32,5 +32,21 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     });
     this.add(model);
     model.save();
+  },
+  createUpdateUserAction: function(added, removed, user) {
+    console.log('added', added);
+    console.log('removed', removed);
+    var model = new Structural.Models.Action({
+      type: 'update_users',
+      user: {
+        name: user.get('name'),
+        id: user.id
+      },
+      added: new Structural.Collections.Participants(added).toJSON(),
+      removed: new Structural.Collections.Participants(removed).toJSON()
+    });
+    console.log(model);
+    this.add(model);
+    model.save();
   }
 });
