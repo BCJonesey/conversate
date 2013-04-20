@@ -76,14 +76,14 @@ class Conversation < ActiveRecord::Base
     return messages.order('created_at DESC').first.created_at > action.created_at
   end
 
-  def update_most_recent_action
-    most_recent_action = Time.now
-    save
+  def update_most_recent_event
+    self.most_recent_event = Time.now
+    self.save
   end
 
   def most_recent_viewed_for_user(user)
     action = last_read_action_for_user(user)
-    return Time.parse('2000-01-01 01:07:19 UTC') unless action
+    return DateTime.parse('2000-01-01 01:07:19 UTC') unless action
     return last_read_action_for_user(user).created_at
   end
 

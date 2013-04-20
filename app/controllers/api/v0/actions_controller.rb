@@ -15,6 +15,7 @@ class Api::V0::ActionsController < ApplicationController
     action = conversation.actions.create!(:event_type => params[:event_type],
                                           :data => params[:data],
                                           :user_id => current_user.id)
+    conversation.update_most_recent_event
     render :json => action.to_json, :status => 201
   end
 

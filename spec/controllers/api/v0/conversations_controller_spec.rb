@@ -33,13 +33,14 @@ describe Api::V0::ConversationsController do
         expect(body[2]['most_recent_event']).to eq(mre)
         expect(body[2]['most_recent_event']).to be_a(Integer)
       end
-      conversation = @topic.conversations.create(:title => 'Timestamp Convo')
+      conversation = @topic.conversations.create!(:title => 'Timestamp Convo')
       conversation.users << @user
       check_most_recent_event[946688839000] # Default value.
       conversation.actions.create!(:event_type => 'message',
                                   :data => '{"text":"You forgot the i, GIII"}',
                                   :user_id => @user.id)
-      check_most_recent_event[conversation.most_recent_event.msec - 1]
+      conversation.update_most_recent_event
+      check_most_recent_event[conversation.most_recent_event.msec]
     end
     it 'responds successfully with the correct most_recent_viewed' do
       conversation = Conversation.find_by_id(1)
