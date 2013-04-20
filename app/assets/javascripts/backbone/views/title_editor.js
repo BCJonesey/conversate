@@ -35,7 +35,7 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
     Structural.on('clickAnywhere', this.cancelRetitle, this);
   },
   closeTitleEditor: function(e) {
-    if (!e || $(e.target).closest('.act-title').length == 0) {
+    if (!e || $(e.target).closest('.act-title').length === 0) {
       this.$('.act-title-actions').removeClass('hidden');
       this.$('.act-title-save-actions').addClass('hidden');
       this.$el.removeClass('editing');

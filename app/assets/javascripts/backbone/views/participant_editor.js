@@ -29,6 +29,8 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
       .toggleClass('hidden');
     this.tokens.edit();
     this.$el.addClass('editing');
+
+    Structural.on('clickAnywhere', this.cancel, this);
   },
   saveParticipants: function(e) {
     e.preventDefault();
@@ -36,10 +38,23 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
       .toggleClass('hidden');
     this.tokens.save();
     this.$el.removeClass('editing');
+
+    Structural.off('clickAnywhere', this.cancel, this);
   },
   selectParticipant: function() {
     this.tokens.addToken(this.tokenOptions.currentOption());
     this.tokenOptions.clear();
     this.tokens.focus();
+  },
+  cancel: function(e) {
+    if (!e || ($(e.target).closest('.act-participants').length === 0 &&
+               $(e.target).closest('body').length > 0)) {
+      this.tokens.cancel();
+      this.$el.removeClass('editing');
+      this.$('.act-participants-actions, .act-participants-save-actions')
+        .toggleClass('hidden');
+
+      Structural.off('clickAnywhere', this.cancel, this);
+    }
   }
 });
