@@ -76,7 +76,9 @@ describe Api::V0::ConversationsController do
       expect(response.code).to eq("200")
       body = JSON.parse(response.body)
       expect(body[0]['participants'][0]['email']).to eq('someuser@example.com')
+      expect(body[0]['participants'][0]['full_name']).to eq('Usegi Userio')
       expect(body[0]['participants'][1]['email']).to eq('anotheruser@example.com')
+      expect(body[0]['participants'][1]['full_name']).to eq('Bob the Builder')
     end
     it 'responds unsuccessfully when the topic does not exist' do
       get :index, :topic_id => 100
