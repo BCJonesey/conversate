@@ -22,7 +22,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
   },
 
   createRetitleAction: function(title, user) {
-    var model = new Structural.Models.Action({
+    this._newAction({
       type: 'retitle',
       title: title,
       user: {
@@ -30,13 +30,9 @@ Structural.Collections.Actions = Backbone.Collection.extend({
         id: user.id
       }
     });
-    this.add(model);
-    model.save();
   },
   createUpdateUserAction: function(added, removed, user) {
-    console.log('added', added);
-    console.log('removed', removed);
-    var model = new Structural.Models.Action({
+    this._newAction({
       type: 'update_users',
       user: {
         name: user.get('name'),
@@ -45,7 +41,20 @@ Structural.Collections.Actions = Backbone.Collection.extend({
       added: new Structural.Collections.Participants(added).toJSON(),
       removed: new Structural.Collections.Participants(removed).toJSON()
     });
-    console.log(model);
+  },
+  createMessageAction: function(text, user) {
+    this._newAction({
+      type: 'message',
+      text: text,
+      user: {
+        name: user.get('name'),
+        id: user.id
+      }
+    });
+  },
+
+  _newAction: function(data) {
+    var model = new Structural.Models.Action(data);
     this.add(model);
     model.save();
   }

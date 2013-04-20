@@ -69,5 +69,8 @@ var Structural = new (Support.CompositeView.extend({
   },
   createUpdateUserAction: function(added, removed) {
     this._actions.createUpdateUserAction(added, removed, this._user);
+  },
+  createMessageAction: function(text) {
+    this._actions.createMessageAction(text, this._user);
   }
 }))({el: $('body'), apiPrefix: '/api/v0'});
