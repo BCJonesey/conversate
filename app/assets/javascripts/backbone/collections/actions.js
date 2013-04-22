@@ -49,7 +49,8 @@ Structural.Collections.Actions = Backbone.Collection.extend({
       user: {
         name: user.get('name'),
         id: user.id
-      }
+      },
+      timestamp: Date.now()
     });
   },
 
