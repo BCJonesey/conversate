@@ -20,22 +20,25 @@ Structural.Views.Compose = Support.CompositeView.extend({
     'keydown .short-form-compose textarea': 'shortFormType'
   },
   newMessageAction: function(e) {
+    if (e) { e.preventDefault(); }
     var input = this._long.hasClass('hidden') ? this._short : this._long;
     Structural.createMessageAction(input.find('textarea').val());
     input.find('textarea').val('');
+    this.disableLongForm();
   },
   enableLongForm: function(e) {
+    if (e) { e.preventDefault(); }
     this._long.find('textarea').val(this._short.find('textarea').val());
     this._long.removeClass('hidden');
   },
   disableLongForm: function(e) {
+    if (e) { e.preventDefault(); }
     this._short.find('textarea').val(this._long.find('textarea').val());
     this._long.addClass('hidden');
   },
   shortFormType: function(e) {
     if (e.which == 13) { // Enter
-      e.preventDefault();
-      this.newMessageAction();
+      this.newMessageAction(e);
     }
   }
 });
