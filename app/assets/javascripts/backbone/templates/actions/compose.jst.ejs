@@ -6,7 +6,8 @@
     <div class="act-compose-short-input">
       <textarea class="write" name="text"></textarea>
     </div>
-    <input type="submit" value="Send", class="act-short-form-send btn-primary">
+    <a class="act-short-form-send btn-primary">Send</a>
+    <input type="submit" value="Send", class="hidden">
   </form>
 </div>
 
@@ -16,15 +17,16 @@
       <div class="long-form-toolbar btn-toolbar clearfix">
         <div class="btn-group pull-right">
           <a class="disable-long-form btn">Cancel</a>
-          <input type="submit" value="Send" class="send-long-form btn btn-primary">
+          <a class="send-long-form btn btn-primary">Send</a>
         </div>
         <div class="btn-group pull-left">
-          <a class="title-text"><%= conversation.escape('title') %></a>
+          <a class="long-form-title"><%= conversation.escape('title') %></a>
         </div>
       </div>
       <div class="long-form-contents">
         <div class="long-form-textarea">
           <textarea name="text" class="text-long-form write"></textarea>
+          <input type="submit" value="Send" class="hidden">
         </div>
       </div>
     </form>
