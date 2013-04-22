@@ -1,43 +1,32 @@
 @import 'variables.css.less';
 @import 'mixins.css.less';
 
-.normal-size{
+
+
+.btn{
   font-size: 1rem;
-  height:1.8rem;
-  // Normalize for the firefox line-heihgt "feature"
-  line-height: normal !important;
-  padding:.3rem .6rem;
+  height:1.7rem;
+  line-height: 1.0;
+  padding:0.25rem 0.6rem;
   border:1px solid transparent;
   margin:0;
   margin-left:.25rem;
   margin-right:.25rem;
+  text-align: center;
   vertical-align: middle;
   display: inline-block;
   font-weight: normal;
-  text-decoration:none;
-}
-
-.small-size{
-  font-size: 0.75rem;
-  height: 1.0rem;
-  line-height: 0.75rem;
-  margin-left:0.15rem;
-  margin-right:0.15rem;
-  padding:.15rem 0.4rem;
-}
-
-.btn-small{
-  &.btn,&.btn-primary,&.btn-small{
-    .small-size();
-  }
-  &.btn-icon > i{
-    font-size: 0.7rem;
-  }
-}
-
-
-.btn-actions(){
+  text-decoration:none;  border:1px solid #CCC;
+  background-color:#F0F0F0;
+  color:#444;
+  text-shadow:1px 1px 1px white;
+  .button-shadow(0.2);
   cursor:pointer;
+  .user-select(none);
+  &:hover,
+  &.hover{
+     background-color:#D8E8F8;
+   }
   &:active,
   &:focus,
   &.actve{
@@ -47,28 +36,6 @@
   }
 }
 
-.btn{
-  .normal-size();
-  border:1px solid #CCC;
-  background-color:#F0F0F0;
-  color:#444;
-  text-shadow:1px 1px 1px white;
-  .btn-actions();
-  .button-shadow(0.2);
-  cursor:pointer;
-  .user-select(none);
-  &:hover,
-  &.hover{
-     background-color:#D8E8F8;
-   }
-  //  &:active,
-  //  &:focus,
-  //  &.active{
-  //   box-shadow:none;
-  //   background-color:#D4E4F4;
-  // }
-}
-
 .btn-primary{
   .btn();
 	border-color: #AAA;
@@ -76,16 +43,26 @@
   color:white;
   text-shadow:1px 1px 1px #888;
 	.button-shadow(0.4);
-  .btn-actions();
   &:hover,
   &.hover{
 	   background-color:#8BE;
 	 }
-	 // &:active,
-	 // &:focus,
-	 // &.active{
-  // 	 box-shadow:none;
-  // }
+}
+
+
+
+.btn-small{
+  &.btn,&.btn-primary,&.btn-small{
+    font-size: 0.75rem;
+    height: 1.0rem;
+    line-height: 0.75rem;
+    margin-left:0.15rem;
+    margin-right:0.15rem;
+    padding:.15rem 0.4rem;
+      }
+  &.btn-icon > i{
+    font-size: 0.7rem;
+  }
 }
 
 
