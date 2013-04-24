@@ -14,6 +14,7 @@ Structural.Models.Action = Backbone.Model.extend({
       this.set('removed', new Structural.Collections.Participants(this.get('removed')));
     }
   },
+
   focus: function() {
     this.set('is_current', true);
   },
@@ -54,5 +55,9 @@ Structural.Models.Action = Backbone.Model.extend({
         return (stamp.getMonth() + 1) + '/' + stamp.getDate() + '/' + (stamp.getFullYear() + '').substring(2);
       }
     };
-  })()
+  })(),
+  delete: function(user) {
+    this.set('type', 'deletion');
+    this.set('user', user);
+  }
 });

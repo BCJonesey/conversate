@@ -52,6 +52,7 @@ Structural.Views.Action = Support.CompositeView.extend({
     'click .act-delete': 'deleteMessage'
   },
   deleteMessage: function(e) {
-    // TODO: Delete the message.
+    e.preventDefault();
+    Structural.createDeleteAction(this.model);
   }
 });

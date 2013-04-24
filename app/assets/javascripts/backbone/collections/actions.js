@@ -53,6 +53,19 @@ Structural.Collections.Actions = Backbone.Collection.extend({
       timestamp: Date.now()
     });
   },
+  createDeleteAction: function(action, user) {
+    var model = new Structural.Models.Action({
+      type: 'deletion',
+      msg_id: action.id,
+      user: {
+        name: user.get('name'),
+        id: user.id
+      }
+    });
+    model.url = this.url();
+    model.save();
+    action.delete(user);
+  },
 
   _newAction: function(data) {
     var model = new Structural.Models.Action(data);
