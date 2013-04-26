@@ -1,0 +1,58 @@
+// --- Structural Bar --- //
+
+@stb-background-color:#BBB;
+@stb-border-bottom-color:#888;
+@stb-color: rgba(0, 0, 0, 0.3);
+
+.structural-bar{
+  box-sizing:border-box;
+  background-color: #BBB;
+  border-bottom:1px solid @stb-border-bottom-color;
+  height:2.5rem;
+}
+
+
+.stb-group{
+}
+.stb-link,
+.stb-name{
+  display: inline-block;
+  color:@stb-color;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.4);
+  text-decoration: none;
+  vertical-align: top;
+  padding:0.45rem;
+  margin:0 0.1rem;
+}
+
+.stb-link{
+  cursor:pointer;
+  &:hover,
+  &.hover{
+    color:rgba(0,0,0,0.7);
+    -webkit-transition: color 0.35s;
+  }
+}
+
+@link-size:1.5rem;
+
+.stb-icon{
+  font-size:@link-size;
+}
+
+.stb-link-text,
+.stb-name-text{
+  display:inline-block;
+  padding-top:1px;
+  line-height: @link-size;
+  vertical-align: top;
+}
+
+.stb-link-text{
+  font-size:1.25rem;
+  font-weight: bold;
+}
+.stb-name-text{
+  font-size:1.0rem;
+  color:#777;
+}
