@@ -2,55 +2,54 @@ class Conversation < ActiveRecord::Base
   include ConversationsHelper
   has_many :reading_logs
   has_many :users, :through => :reading_logs
-  has_many :events, :inverse_of => :conversation
+  has_many :actions, :inverse_of => :conversation
   has_and_belongs_to_many :topics
 
   attr_accessible :title, :users, :most_recent_event
 
   after_initialize do |convo|
     convo.title = convo.default_conversation_title if (convo.title.nil? || convo.title.empty?)
-    convo.most_recent_event = Time.now
   end
 
-  # Public: Stitch together the events on a conversation into "conversation
+  # Public: Stitch together the actions on a conversation into "conversation
   # pieces" that represent the current state of the conversation.  The current
   # state of a conversation consists of the latest version of the text of any
-  # "wrote" events that haven't been deleted or moved into a different
-  # conversation or sidebar, plus notices of any non-text events, such as
+  # "wrote" actions that haven't been deleted or moved into a different
+  # conversation or sidebar, plus notices of any non-text actions, such as
   # retitling the conversation or changing who has access to the conversation.
   #
-  # In the future, consecutive conversation pieces that represent the same type of event -
-  # deleting, sidebaring, etc (with the exception of "wrote" events) will be
+  # In the future, consecutive conversation pieces that represent the same type of action -
+  # deleting, sidebaring, etc (with the exception of "wrote" actions) will be
   # collapsed into a single conversation piece.
   #
   # Returns an array of conversation pieces, in chronological order.
   def pieces
     # This will get slow on long conversations, but it's good enough for now
     conversation_pieces = []
-    self.events.order('created_at ASC').each do |event|
+    self.actions.order('created_at ASC').each do |action|
       begin
-        if event.event_type == 'message'
-          conversation_pieces.append ConversationPiece.message(event.id, event.user, event.created_at, event.message_id, event.text)
-        elsif event.event_type == 'retitle'
-          conversation_pieces.append ConversationPiece.set_title(event.id, event.user, event.created_at, event.title)
-        elsif event.event_type == 'deletion'
-          index = conversation_pieces.index { |cp| cp.type == :message && cp.message_id == event.message_id }
+        if action.event_type == 'message'
+          conversation_pieces.append ConversationPiece.message(action.id, action.user, action.created_at, action.message_id, action.text)
+        elsif action.event_type == 'retitle'
+          conversation_pieces.append ConversationPiece.set_title(action.id, action.user, action.created_at, action.title)
+        elsif action.event_type == 'deletion'
+          index = conversation_pieces.index { |cp| cp.type == :message && cp.message_id == action.message_id }
           # We should track down how this might be nil.
           unless index.nil?
-            conversation_pieces[index] = conversation_pieces[index].delete(event.id, event.user, event.created_at)
+            conversation_pieces[index] = conversation_pieces[index].delete(action.id, action.user, action.created_at)
           end
-        elsif event.event_type == 'user_update'
-          conversation_pieces.append ConversationPiece.update_users(event.id, event.user, event.created_at, User.find(event.added), User.find(event.removed))
+        elsif action.event_type == 'user_update'
+          conversation_pieces.append ConversationPiece.update_users(action.id, action.user, action.created_at, User.find(action.added), User.find(action.removed))
         end
       rescue
-        raise "Error with #{event.data}: #{$!} (id: #{event.id})"\
+        raise "Error with #{action.data}: #{$!} (id: #{action.id})"\
       end
     end
     conversation_pieces
   end
 
   def participants(current_user)
-    # active = self.events.order('created_at DESC').collect {|e| e.user}.uniq
+    # active = self.actions.order('created_at DESC').collect {|e| e.user}.uniq
     # (active + (self.users - active) - [current_user]) - (active - self.users)
     # The above call is very expensive.
     self.users - [current_user]
@@ -65,32 +64,38 @@ class Conversation < ActiveRecord::Base
   end
 
   # Public: Determines if this conversation is unread for the given user.
-  # A conversation is unread if (and only if) it contains a message event more
-  # recent than the last event a user has seen.
+  # A conversation is unread if (and only if) it contains a message action more
+  # recent than the last action a user has seen.
   def unread_for?(user)
-    messages = self.events.where(:event_type => 'message')
+    messages = self.actions.where(:event_type => 'message')
     return false if messages.length == 0
 
-    last_read_event_id = self.reading_logs.where({:user_id => user.id}).first.last_read_event
-    return true if last_read_event_id == nil
+    action = last_read_action_for_user(user)
+    return true if action == nil
 
-    messages.order('created_at DESC').first.created_at > Event.find(last_read_event_id).created_at
+    return messages.order('created_at DESC').first.created_at > action.created_at
   end
 
   def update_most_recent_event
-    most_recent_event = Time.now
-    save
+    self.most_recent_event = Time.now
+    self.save
+  end
+
+  def most_recent_viewed_for_user(user)
+    action = last_read_action_for_user(user)
+    return DateTime.parse('2000-01-01 01:07:19 UTC') unless action
+    return last_read_action_for_user(user).created_at
   end
 
   def as_json(options)
     json = super(options)
     # TODO: DRY.
     participants = participants(options[:user])
-    json[:participants] = (users.length > 1) ?
-    participants.map {|u| u.name}.join(', ') : " ";
+    json[:participants] = participants;
     json[:class] = list_item_classes(self, options[:opened_conversation],
                                      options[:user])
-    json[:participant_tokens] = participants
+    json[:most_recent_event] = most_recent_event.msec
+    json[:most_recent_viewed] = most_recent_viewed_for_user(options[:user]).msec
     return json
   end
 
@@ -103,5 +108,15 @@ class Conversation < ActiveRecord::Base
   def default_conversation_title()
     return 'New Conversation' if self.users.length <= 1
     "A conversation with #{self.users.map {|u| u.name}.join(', ')}"
+  end
+
+  private
+
+  def last_read_action_for_user(user)
+    log = self.reading_logs.where({:user_id => user.id}).first
+    return nil unless log
+    last_read_action_id = log.last_read_event
+    return nil unless last_read_action_id
+    return Action.find(last_read_action_id)
   end
 end

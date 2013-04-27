@@ -16,6 +16,20 @@ Conversate::Application.routes.draw do
   get 'ux/testbed' => 'testbed#index'
   get 'ux/testbed/:view' => 'testbed#test_view', :as  =>'test_view'
 
+  namespace :api do
+    namespace :v0 do
+      resources :topics, :only => [:index, :create] do
+        resources :conversations, :only => [:index, :create]
+      end
+      resources :conversations, :only => [:show] do
+        resources :actions, :only => [:index, :create]
+        resources :participants, :only => [:index, :create, :destroy]
+      end
+      resources :users, :only => [:index, :create, :update]
+      resources :admin, :only => [:index]
+    end
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

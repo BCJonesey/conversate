@@ -3,5 +3,5 @@ class ReadingLog < ActiveRecord::Base
   belongs_to :user
   belongs_to :topic
 
-  attr_accessible :conversation_id, :user_id, :topic_id
+  attr_accessible :conversation_id, :user_id, :last_read_event
 end

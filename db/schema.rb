@@ -11,13 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130222051526) do
+ActiveRecord::Schema.define(:version => 20130420181945) do
+
+  create_table "actions", :force => true do |t|
+    t.integer  "conversation_id"
+    t.integer  "user_id"
+    t.string   "event_type"
+    t.text     "data"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "actions", ["conversation_id"], :name => "index_events_on_conversation_id"
 
   create_table "conversations", :force => true do |t|
     t.string   "title"
     t.datetime "created_at",                                           :null => false
     t.datetime "updated_at",                                           :null => false
-    t.time     "most_recent_event", :default => '2000-01-01 01:07:19'
+    t.datetime "most_recent_event", :default => '2000-01-01 01:07:19'
   end
 
   create_table "conversations_topics", :force => true do |t|
@@ -29,17 +40,6 @@ ActiveRecord::Schema.define(:version => 20130222051526) do
     t.integer "conversation_id"
     t.integer "user_id"
   end
-
-  create_table "events", :force => true do |t|
-    t.integer  "conversation_id"
-    t.integer  "user_id"
-    t.string   "event_type"
-    t.text     "data"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
-
-  add_index "events", ["conversation_id"], :name => "index_events_on_conversation_id"
 
   create_table "reading_logs", :force => true do |t|
     t.integer "conversation_id"
@@ -59,18 +59,22 @@ ActiveRecord::Schema.define(:version => 20130222051526) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                                           :null => false
+    t.string   "email",                                              :null => false
     t.string   "crypted_password"
     t.string   "salt"
-    t.datetime "created_at",                                      :null => false
-    t.datetime "updated_at",                                      :null => false
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
     t.string   "remember_me_token"
     t.datetime "remember_me_token_expires_at"
     t.string   "full_name"
-    t.boolean  "is_admin",                     :default => false
+    t.boolean  "is_admin",                        :default => false
     t.integer  "invited_by"
+    t.string   "reset_password_token"
+    t.datetime "reset_password_token_expires_at"
+    t.datetime "reset_password_email_sent_at"
   end
 
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token"
 
 end

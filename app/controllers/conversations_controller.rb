@@ -123,8 +123,9 @@ class ConversationsController < ApplicationController
     render_conversation_view conversation.reload
   end
 
-  private
-  def user_conversations(topic=nil)
+private
+
+ def user_conversations(topic=nil)
     if topic
       topic.conversations.order('updated_at DESC')
     else
@@ -132,7 +133,7 @@ class ConversationsController < ApplicationController
     end
   end
 
-  def topic_for_user(conversation, user)
+    def topic_for_user(conversation, user)
     # Maybe there's a way to do this query in ActiveRecord?  Not sure.
     conversation.topics.keep_if {|t| user.in? t.users}.first
   end
@@ -166,4 +167,5 @@ class ConversationsController < ApplicationController
       render :not_participating
     end
   end
+
 end

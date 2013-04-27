@@ -36,6 +36,9 @@ gem 'ejs'	# Required for the .ejs templates.
 gem 'newrelic_rpm' # For New Relic analytics.
 gem 'quiet_assets'
 
+group :test, :development do
+  gem "rspec-rails", "~> 2.0"
+end
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

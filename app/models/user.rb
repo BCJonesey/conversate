@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :events, :inverse_of => :user
   has_and_belongs_to_many :topics
 
-  attr_accessible :email, :password, :password_confirmation
+  attr_accessible :email, :full_name, :password, :password_confirmation
 
   validates_confirmation_of :password
   validates_presence_of :password, :on => :create
@@ -18,9 +18,9 @@ class User < ActiveRecord::Base
   end
 
   def mark_as_read(conversation)
-    if conversation.events.length > 0
+    if conversation.actions.length > 0
       reading_log = conversation.reading_logs.where({:user_id => self.id}).first
-      reading_log.last_read_event = conversation.events.order('created_at DESC').first.id
+      reading_log.last_read_event = conversation.actions.order('created_at DESC').first.id
       reading_log.save!
     end
   end
