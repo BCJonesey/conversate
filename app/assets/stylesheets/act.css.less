@@ -143,9 +143,40 @@ x
 }
 
 .act-message{
-  border-bottom:1px solid #CCC;
-  border-top:1px solid #CCC;
-  margin-top:-1px;
+  padding:0.65rem;
+  z-index:1;
+}
+
+@message-border: 1px solid #CCC;
+@message-border-mine: 1px solid #DDD;
+@message-border-pending: 1px dashed #DDD;
+
+.act-message + .act-message,
+.act + .act-message,
+.act-message + .act,
+.act-list .act:first-child{
+  border-top:@message-border;
+}
+.act-list .act:last-child{
+  border-bottom:@message-border;
+}
+
+.act-message.my-message{
+  background-color:#F8F8F8;
+  border:@message-border-mine;
+}
+
+.act-message.my-message + .my-message{
+  margin-top:1.0rem;
+}
+.act-message.my-message + .act-message{
+  border-top:none;
+}
+
+.act-message.my-message.pending{
+  background-color:#FAFAFA;
+  border: @message-border-pending;
+  color:#AAA;
 }
 
 .act-sender{
