@@ -139,7 +139,21 @@ x
 }
 
 .act{
-  padding:.3rem;
+  padding:0.25rem;
+}
+
+// These are some real bullshit to adjust the spacing of update messages in relation to regular messages
+
+.act-message + .act-update-users,
+.act-message + .act-deletion,
+.act-message + .act-retitle {
+  padding-top:0.5rem;
+}
+
+.act-update-users + .act-message,
+.act-deletion + .act-message,
+.act-retitle + .act-message {
+  margin-top:0.25rem;
 }
 
 .act-message{
@@ -154,10 +168,10 @@ x
 .act-message + .act-message,
 .act + .act-message,
 .act-message + .act,
-.act-list .act:first-child{
+.act-list .act-message:first-child{
   border-top:@message-border;
 }
-.act-list .act:last-child{
+.act-list .act-message:last-child{
   border-bottom:@message-border;
 }
 
