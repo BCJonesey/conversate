@@ -12,6 +12,9 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
     this.tokens.on('changeAutocompleteOptions', this.tokenOptions.changeAutocompleteOptions, this.tokenOptions);
     this.tokens.on('selectAutocompleteTarget', this.selectParticipant, this);
     this.tokenOptions.on('selectAutocompleteTarget', this.selectParticipant, this);
+    this.tokens.on('update_users', function(added, removed) {
+      this.trigger('update_users', added, removed);
+    }, this);
   },
   render: function() {
     this.$el.html(this.template());

@@ -21,6 +21,9 @@ Structural.Views.ActionContainer = Support.CompositeView.extend({
     this.appendChild(actions);
     this.appendChild(compose);
 
+    title.on('change_title', Structural.createRetitleAction, Structural);
+    participants.on('update_users', Structural.createUpdateUserAction, Structural);
+
     return this;
   }
 });

@@ -29,7 +29,7 @@ Structural.Views.Participants = Support.CompositeView.extend({
   save: function() {
     var added   = this._difference(this.collection, this.originalCollection);
     var removed = this._difference(this.originalCollection, this.collection);
-    Structural.createUpdateUserAction(added, removed);
+    this.trigger('update_users', added, removed);
     this.originalCollection = this.collection.clone();
     this.$('.token-input').attr('readonly', 'readonly');
   },

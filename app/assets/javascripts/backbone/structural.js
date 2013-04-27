@@ -68,6 +68,9 @@ var Structural = new (Support.CompositeView.extend({
     this._actions.createRetitleAction(title, this._user);
   },
   createUpdateUserAction: function(added, removed) {
+    console.log(added);
+    console.log(removed);
+
     this._actions.createUpdateUserAction(added, removed, this._user);
   },
   createMessageAction: function(text) {
