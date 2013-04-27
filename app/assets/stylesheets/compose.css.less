@@ -1,6 +1,175 @@
 @import "variables.css.less";
 @import "mixins.css.less";
 
+
+// --- Foucus mixin --- //
+
+
+
+// --- New message compose window --- //
+
+.new-cnv-compose{
+  background-color:rgba(128,128,128,0.4);
+  position: fixed;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+}
+
+.new-cnv-window{
+
+  min-width:25rem;
+  max-width:45rem;
+
+  margin-top:4rem;
+  margin-left:auto;
+  margin-right:auto;
+
+  background-color: #EEE;
+  border: 1px solid #888;
+  padding: 0;
+  box-shadow: 0 1rem 4rem 1rem rgba(0,0,0,0.3);
+}
+
+.new-cnv-toolbar{
+  border-bottom:1px solid #CCC;
+  position:relative;
+}
+
+.new-cnv-toolbar-group-left{
+  position:absolute;
+  left:0.3rem;
+  top:0.3rem;
+}
+.new-cnv-toolbar-group-right{
+  position:absolute;
+  right:0.3rem;
+  top:0.3rem;
+}
+
+.new-cnv-toolbar-text{
+  display:block;
+  text-align: center;
+  padding:0.15rem;
+  color:#BBB;
+  text-shadow:1px 1px 1px white;
+}
+
+.focus-style{
+  outline: none;
+  box-shadow:inset 0 0 .4rem rgba(0,128,255,0.3);
+  border-color: #ABC;
+  background-color:white;
+}
+
+.new-cnv-topic{
+  position:absolute;
+  right:0.25rem;
+  top:0.25rem;
+}
+
+.new-cnv-topic-icon{
+  color:#AAA;
+  font-size:1rem;
+  position:absolute;
+  left:0.45rem;
+  top:0.25rem;
+}
+
+.new-cnv-topic-text{
+  font-size:0.75rem;
+  padding:0.25rem;
+  padding-left:0.95rem;
+  min-width:10rem;
+  border:1px solid #DDD;
+  background-color: #F8F8F8;
+  color:#AAA;
+  &:focus{
+    .focus-style();
+  }
+}
+
+.new-cnv-title-toolbar,
+.new-cnv-participants-toolbar,
+.new-cnv-contents {
+  position:relative;
+  border-bottom:1px solid #CCC;
+}
+
+
+.new-cnv-input-style{
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 0.5rem;
+    color:#666;
+    background-color: #EEE;
+    &:focus,
+    &.focus{
+      .focus-style();
+    }
+}
+
+.new-cnv-title-input{
+  .new-cnv-input-style();
+  color:#444;
+  font-weight: bold;
+  font-size:1rem;
+  letter-spacing: normal;
+  line-height: normal;
+  padding-right:11rem;
+  text-overflow:;
+}
+
+.new-cnv-participants-input{
+  .new-cnv-input-style();
+  font-size:0.75rem;
+  color:#AAA;
+  padding:0.25rem 0.5rem;
+}
+
+.new-cnv-permissions{
+  i{
+    font-size:1.0rem;
+  }
+  position:absolute;
+  right:0.25rem;
+  top:0.05rem;
+}
+.new-cnv-contents{
+  padding:0.4rem;
+}
+
+.new-cnv-body{
+  .new-cnv-input-style();
+  background-color: white;
+  resize: vertical;
+  min-height: 15rem;
+  max-height:25rem;
+  height:15rem;
+  margin:0;
+  border:1px solid #CCC;
+  display:block;
+}
+
+.placeholder-style{
+  color:#CCC;
+  font-style: italic;
+  font-weight: normal;
+  //line-height: 1.8;
+  //font-size:0.75rem;
+}
+::-webkit-input-placeholder {.placeholder-style();}
+:-moz-placeholder { .placeholder-style();}
+::-moz-placeholder { .placeholder-style();}
+:-ms-input-placeholder {.placeholder-style();}
+
+
+
+
+// -- Long Form -- //
+
 .long-form-compose{
   background-color:rgba(128,128,128,0.4);
   position: fixed;
