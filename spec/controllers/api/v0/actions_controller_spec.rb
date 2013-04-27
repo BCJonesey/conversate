@@ -8,10 +8,10 @@ describe Api::V0::ActionsController do
                           :password => 'superDUPERsecretPassword')
     login_user
     conversation = @user.conversations.create!()
-    conversation.actions.create!(:event_type => 'message',
+    conversation.actions.create!(:type => 'message',
                                   :data => '{"text":"After the final no"}',
                                   :user_id => @user.id)
-    conversation.actions.create!(:event_type => 'retitle',
+    conversation.actions.create!(:type => 'retitle',
                                   :data => '{"title":"There comes a yes?"}',
                                   :user_id => @user.id)
   end
@@ -23,10 +23,10 @@ describe Api::V0::ActionsController do
       expect(response.code).to eq("200")
       body = JSON.parse(response.body)
       expect(body[0]['id']).to eq(1)
-      expect(body[0]['event_type']).to eq('message')
+      expect(body[0]['type']).to eq('message')
       expect(body[0]['data']).to eq('{"text":"After the final no"}')
       expect(body[1]['id']).to eq(2)
-      expect(body[1]['event_type']).to eq('retitle')
+      expect(body[1]['type']).to eq('retitle')
       expect(body[1]['data']).to eq('{"title":"There comes a yes?"}')
     end
     it 'responds successfully for each type of action'
@@ -39,17 +39,17 @@ describe Api::V0::ActionsController do
 
   describe 'POST #create' do
     it 'successfully creates a new action in the specified conversation' do
-      post :create, :conversation_id => 1, :event_type => 'message', :data => '{"text":"Hi"}'
+      post :create, :conversation_id => 1, :type => 'message', :data => '{"text":"Hi"}'
       expect(response).to be_success
       expect(response.code).to eq("201")
       body = JSON.parse(response.body)
       expect(body['id']).to eq(3)
-      expect(body['event_type']).to eq('message')
+      expect(body['type']).to eq('message')
       expect(body['data']).to eq('{"text":"Hi"}')
     end
     it 'responds successfully for each type of action'
     it 'responds unsuccessfully when the conversation does not exist' do
-      post :create, :conversation_id => 100, :event_type => 'message', :data => '{"text":"Bye"}'
+      post :create, :conversation_id => 100, :type => 'message', :data => '{"text":"Bye"}'
       expect(response).not_to be_success
       expect(response.code).to eq("404")
     end

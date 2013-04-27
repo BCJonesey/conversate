@@ -11,12 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130420181945) do
+ActiveRecord::Schema.define(:version => 20130427174233) do
 
   create_table "actions", :force => true do |t|
     t.integer  "conversation_id"
     t.integer  "user_id"
-    t.string   "event_type"
+    t.string   "type"
     t.text     "data"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false

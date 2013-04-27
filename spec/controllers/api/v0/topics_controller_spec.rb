@@ -34,7 +34,7 @@ describe Api::V0::TopicsController do
       topic = Topic.find_by_id(1)
       conversation = topic.conversations.create(:title => 'A conversation')
       @user.conversations << conversation
-      conversation.actions.create!(:event_type => 'message',
+      conversation.actions.create!(:type => 'message',
                                     :data => '{"text":"Just a random message."}',
                                     :user_id => 2)
       check_unread_count[1]

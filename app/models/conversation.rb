@@ -28,17 +28,17 @@ class Conversation < ActiveRecord::Base
     conversation_pieces = []
     self.actions.order('created_at ASC').each do |action|
       begin
-        if action.event_type == 'message'
+        if action.type == 'message'
           conversation_pieces.append ConversationPiece.message(action.id, action.user, action.created_at, action.message_id, action.text)
-        elsif action.event_type == 'retitle'
+        elsif action.type == 'retitle'
           conversation_pieces.append ConversationPiece.set_title(action.id, action.user, action.created_at, action.title)
-        elsif action.event_type == 'deletion'
+        elsif action.type == 'deletion'
           index = conversation_pieces.index { |cp| cp.type == :message && cp.message_id == action.message_id }
           # We should track down how this might be nil.
           unless index.nil?
             conversation_pieces[index] = conversation_pieces[index].delete(action.id, action.user, action.created_at)
           end
-        elsif action.event_type == 'user_update'
+        elsif action.type == 'user_update'
           conversation_pieces.append ConversationPiece.update_users(action.id, action.user, action.created_at, User.find(action.added), User.find(action.removed))
         end
       rescue
@@ -67,7 +67,7 @@ class Conversation < ActiveRecord::Base
   # A conversation is unread if (and only if) it contains a message action more
   # recent than the last action a user has seen.
   def unread_for?(user)
-    messages = self.actions.where(:event_type => 'message')
+    messages = self.actions.where(:type => 'message')
     return false if messages.length == 0
 
     action = last_read_action_for_user(user)

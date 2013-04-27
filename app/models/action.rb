@@ -1,13 +1,14 @@
 class Action < ActiveRecord::Base
+  set_inheritance_column :type_rails
   belongs_to :conversation, :inverse_of => :actions
   belongs_to :user, :inverse_of => :actions
 
-  attr_accessible :conversation_id, :user_id, :event_type, :data
+  attr_accessible :conversation_id, :user_id, :type, :data
 
   validates_presence_of :conversation_id
   validates_presence_of :user_id
-  validates_presence_of :event_type
-  validates :event_type, :inclusion => { :in => %w(message deletion retitle user_update)}
+  validates_presence_of :type
+  validates :type, :inclusion => { :in => %w(message deletion retitle user_update)}
 
   after_initialize do |action|
     action.json = JSON::load data || {}

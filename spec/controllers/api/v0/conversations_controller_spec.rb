@@ -36,7 +36,7 @@ describe Api::V0::ConversationsController do
       conversation = @topic.conversations.create!(:title => 'Timestamp Convo')
       conversation.users << @user
       check_most_recent_event[946688839000] # Default value.
-      conversation.actions.create!(:event_type => 'message',
+      conversation.actions.create!(:type => 'message',
                                   :data => '{"text":"You forgot the i, GIII"}',
                                   :user_id => @user.id)
       conversation.update_most_recent_event
@@ -54,7 +54,7 @@ describe Api::V0::ConversationsController do
         expect(body[0]['most_recent_viewed']).to be_a(Integer)
       end
       check_most_recent_viewed[946688839000] # Default value.
-      conversation.actions.create!(:event_type => 'message',
+      conversation.actions.create!(:type => 'message',
                                   :data => '{"text":"You forgot the i, GIII"}',
                                   :user_id => @user.id)
       conversation.users << @user
