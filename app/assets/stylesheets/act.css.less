@@ -161,36 +161,52 @@ x
   z-index:1;
 }
 
-@message-border: 1px solid #CCC;
-@message-border-mine: 1px solid #DDD;
-@message-border-pending: 1px dashed #DDD;
+// --- Messages --- //
+@border-color-message: #D0D0D0;
+
+// --- My Messages --- //
+@border-color-my-message: #E0E0E0;
+@background-color-my-message:#F8F8F8;
+
+// --- Pending Messages --- //
+@color-pending:#CCC;
+@border-color-pending: #E8E8E8;
+@background-color-pending:#FBFBFB;
+
+
+@border-message: 1px solid @border-color-message;
+@border-my-message: 1px solid @border-color-my-message;
+@border-pending: 1px solid @border-color-pending;
 
 .act-message + .act-message,
 .act + .act-message,
 .act-message + .act,
-.act-list .act-message:first-child{
-  border-top:@message-border;
+.act-list .act-message:not(.my-message):first-child{
+  border-top:@border-message;
 }
-.act-list .act-message:last-child{
-  border-bottom:@message-border;
+.act-list .act-message:not(.my-message):last-child{
+  border-bottom:@border-message;
 }
 
 .act-message.my-message{
-  background-color:#F8F8F8;
-  border:@message-border-mine;
+  background-color:@background-color-my-message;
+  border:@border-my-message;
+  -webkit-transition:0.35s;
+  -moz-transition: 0.35s;
+  transition: 0.35s;
 }
 
 .act-message.my-message + .my-message{
   margin-top:1.0rem;
 }
-.act-message.my-message + .act-message{
+.act-message.my-message + .act{
   border-top:none;
 }
 
 .act-message.my-message.pending{
-  background-color:#FAFAFA;
-  border: @message-border-pending;
-  color:#AAA;
+  background-color:@background-color-pending;
+  border: @border-pending;
+  color:@color-pending;
 }
 
 .act-sender{
