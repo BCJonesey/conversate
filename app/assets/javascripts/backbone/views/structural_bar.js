@@ -1,5 +1,5 @@
 Structural.Views.StructuralBar = Support.CompositeView.extend({
-  className: 'btn-toolbar structural-bar clearfix',
+  className: 'structural-bar clearfix',
   template: JST['backbone/templates/structural/structural_bar'],
   initialize: function(options) {
     options = options || {};
