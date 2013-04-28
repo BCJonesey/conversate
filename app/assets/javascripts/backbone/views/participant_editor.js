@@ -27,7 +27,7 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
     'click .act-participants-save': 'saveParticipants',
   },
   enterEditingMode: function(e) {
-    e.preventDefault();
+    if (e) { e.preventDefault(); }
     this.$('.act-participants-actions, .act-participants-save-actions')
       .toggleClass('hidden');
     this.tokens.edit();
@@ -59,5 +59,8 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
 
       Structural.off('clickAnywhere', this.cancel, this);
     }
+  },
+  currentParticipants: function() {
+    return this.tokens.currentParticipants();
   }
 });

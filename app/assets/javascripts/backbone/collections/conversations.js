@@ -1,10 +1,10 @@
 Structural.Collections.Conversations = Backbone.Collection.extend({
 	model: Structural.Models.Conversation,
+  url: function() {
+    return Structural.apiPrefix + '/topics/' + this.topicId + '/conversations';
+  },
   initialize: function(data, options) {
     options = options || {};
-    if (options.conversation) {
-      this.url = Structural.apiPrefix + '/topics/' + options.topic + '/conversations';
-    }
   },
   comparator: 'most_recent_message',
 
@@ -18,6 +18,9 @@ Structural.Collections.Conversations = Backbone.Collection.extend({
     this.filter(function(cnv) { return cnv.id != id; }).forEach(function(cnv) {
       cnv.unfocus();
     })
+  },
+  setTopic: function(id) {
+    this.topicId = id;
   }
 });
 

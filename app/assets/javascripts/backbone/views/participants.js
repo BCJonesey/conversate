@@ -69,6 +69,9 @@ Structural.Views.Participants = Support.CompositeView.extend({
     this.collection.remove(participant.model);
     this.focus();
   },
+  currentParticipants: function() {
+    return this.collection.clone();
+  },
 
   // This should be identical to _.difference, but I can't get that to work
   // for me.  It keeps giving me garbage or not existing, depending on how

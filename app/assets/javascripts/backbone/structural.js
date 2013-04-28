@@ -53,6 +53,7 @@ var Structural = new (Support.CompositeView.extend({
   focus: function(targets) {
     if (targets.topic) {
       this._topics.focus(targets.topic);
+      this._conversations.setTopic(targets.topic);
     }
 
     if (targets.conversation) {
@@ -62,6 +63,13 @@ var Structural = new (Support.CompositeView.extend({
     if (targets.message) {
       this._actions.focus(targets.message);
     }
+  },
+
+  newConversationMode: function() {
+    var view = new Structural.Views.NewConversation({
+      addressBook: this._user.get('address_book')
+    });
+    this.appendChild(view);
   },
 
   createRetitleAction: function(title) {
@@ -78,5 +86,27 @@ var Structural = new (Support.CompositeView.extend({
   },
   createDeleteAction: function(action) {
     this._actions.createDeleteAction(action, this._user);
+  },
+  createNewConversation: function(title, participants, message) {
+    var data = {};
+    data.title = title;
+    data.participants = participants.map(function(p) {
+      return {
+        id: p.id,
+        name: p.get('name')
+      }
+    });
+    if (message.length > 0) {
+      data.actions = [
+        { type: 'message',
+          user: { id: this._user.id },
+          text: message
+        }
+      ]
+    }
+    var conversation = new Structural.Models.Conversation(data);
+    this._conversations.add(conversation);
+    conversation.save();
+    // TODO: navigate to conversation
   }
 }))({el: $('body'), apiPrefix: '/api/v0'});
