@@ -15,12 +15,18 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
     this.tokens.on('update_users', function(added, removed) {
       this.trigger('update_users', added, removed);
     }, this);
+
+    this.participants.on('reset', this.reRender, this);
   },
   render: function() {
     this.$el.html(this.template());
     this.prependChild(this.tokens);
     this.appendChild(this.tokenOptions);
     return this;
+  },
+  reRender: function() {
+    this.$el.empty();
+    this.render();
   },
   events: {
     'click .act-participants-edit': 'enterEditingMode',

@@ -67,6 +67,11 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     action.delete(user);
   },
 
+  changeConversation: function(id) {
+    this.conversationId = id;
+    this.fetch({reset: true});
+  },
+
   _newAction: function(data) {
     var model = new Structural.Models.Action(data);
     this.add(model);

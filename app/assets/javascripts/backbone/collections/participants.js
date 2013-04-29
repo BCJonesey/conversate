@@ -1,10 +1,16 @@
 Structural.Collections.Participants = Backbone.Collection.extend({
   model: Structural.Models.Participant,
+  url: function() {
+    return Structural.apiPrefix + '/conversations/' + this.conversationId + '/participants';
+  },
   intialize: function(data, options) {
     options = options || {};
-    if (options.conversation) {
-      this.url = '/conversations/' + options.conversation + '/participants';
-    }
+    this.conversationId = options.conversation;
   },
-  comparator: 'last_updated_time'
+  comparator: 'last_updated_time',
+
+  changeConversation: function(conversationId) {
+    this.conversationId = conversationId;
+    this.fetch({reset: true});
+  }
 })

@@ -52,5 +52,10 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
     if(this.closeTitleEditor(e)) {
       this.$('input[type="text"]').val(this.conversation.get('title'));
     }
+  },
+  changeConversation: function(conversation) {
+    this.conversation = conversation;
+    this.$el.empty();
+    this.render();
   }
 });

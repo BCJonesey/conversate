@@ -24,5 +24,13 @@ Structural.Views.Conversation = Support.CompositeView.extend({
   reRender: function() {
     this.reClass();
     this.render();
+  },
+  events: {
+    'click': 'view'
+  },
+
+  view: function(e) {
+    e.preventDefault();
+    Structural.viewConversation(this.model);
   }
 });
