@@ -25,6 +25,8 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
     return this;
   },
   reRender: function() {
+    this.tokens.leave();
+    this.tokenOptions.leave();
     this.$el.empty();
     this.render();
   },

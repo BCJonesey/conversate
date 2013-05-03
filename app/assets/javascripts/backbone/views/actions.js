@@ -13,6 +13,9 @@ Structural.Views.Actions = Support.CompositeView.extend({
     this.appendChild(view);
   },
   reRender: function() {
+    this.children.each(function(view) {
+      view.leave();
+    })
     this.$el.empty();
     this.render();
   }
