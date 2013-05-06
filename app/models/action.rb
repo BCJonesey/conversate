@@ -52,6 +52,14 @@ class Action < ActiveRecord::Base
     end
   end
 
+  def as_json(options)
+    json = super(:only => [:id, :type])
+    if self.json
+      json.merge(self.json)
+    end
+    return json
+  end
+
   protected
   attr_accessor :json
 end

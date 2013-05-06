@@ -24,10 +24,10 @@ describe Api::V0::ActionsController do
       body = JSON.parse(response.body)
       expect(body[0]['id']).to eq(1)
       expect(body[0]['type']).to eq('message')
-      expect(body[0]['data']).to eq('{"text":"After the final no"}')
+      expect(body[0]['text']).to eq('After the final no')
       expect(body[1]['id']).to eq(2)
       expect(body[1]['type']).to eq('retitle')
-      expect(body[1]['data']).to eq('{"title":"There comes a yes?"}')
+      expect(body[1]['title']).to eq('There comes a yes?')
     end
     it 'responds successfully for each type of action'
     it 'responds unsuccessfully when the conversation does not exist' do
@@ -39,17 +39,17 @@ describe Api::V0::ActionsController do
 
   describe 'POST #create' do
     it 'successfully creates a new action in the specified conversation' do
-      post :create, :conversation_id => 1, :type => 'message', :data => '{"text":"Hi"}'
+      post :create, :conversation_id => 1, :type => 'message', :text => 'Hi'
       expect(response).to be_success
       expect(response.code).to eq("201")
       body = JSON.parse(response.body)
       expect(body['id']).to eq(3)
       expect(body['type']).to eq('message')
-      expect(body['data']).to eq('{"text":"Hi"}')
+      expect(body['text']).to eq('Hi')
     end
     it 'responds successfully for each type of action'
     it 'responds unsuccessfully when the conversation does not exist' do
-      post :create, :conversation_id => 100, :type => 'message', :data => '{"text":"Bye"}'
+      post :create, :conversation_id => 100, :type => 'message', :text => 'Bye'
       expect(response).not_to be_success
       expect(response.code).to eq("404")
     end
