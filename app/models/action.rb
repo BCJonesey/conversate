@@ -55,7 +55,7 @@ class Action < ActiveRecord::Base
   def as_json(options)
     json = super(:only => [:id, :type])
     if self.json
-      json.merge(self.json)
+      json.merge!(self.json)
     end
     return json
   end
