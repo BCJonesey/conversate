@@ -5,12 +5,25 @@ Structural.Views.TopicContainer = Support.CompositeView.extend({
     this.topics = options.topics;
   },
   render: function() {
-    var toolbar = new Structural.Views.TopicToolbar();
-    var list = new Structural.Views.Topics({collection: this.topics});
-    var input = new Structural.Views.NewTopic();
+    this.toolbarView = new Structural.Views.TopicToolbar();
+    this.listView = new Structural.Views.Topics({collection: this.topics});
+    this.inputView = new Structural.Views.NewTopic();
 
-    this.appendChild(toolbar);
-    this.appendChild(list);
-    this.appendChild(input);
+    this.appendChild(this.toolbarView);
+    this.appendChild(this.listView);
+    this.appendChild(this.inputView);
+
+    this.toolbarView.on('new_topic', this.newTopic, this);
+    this.inputView.on('create_topic', this.createTopic, this);
+  },
+
+  newTopic: function() {
+    this.inputView.edit();
+  },
+
+  createTopic: function(name) {
+    var model = new Structural.Models.Topic({name: name});
+    this.topics.add(model);
+    model.save();
   }
 });

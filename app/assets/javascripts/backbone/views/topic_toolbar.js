@@ -8,7 +8,8 @@ Structural.Views.TopicToolbar = Support.CompositeView.extend({
   events: {
     'click a.tpc-new-button': 'newTopic'
   },
-  newTopic: function() {
-    // TODO: Create new topic.
+  newTopic: function(e) {
+    e.preventDefault();
+    this.trigger('new_topic');
   }
 });

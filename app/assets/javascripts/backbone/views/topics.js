@@ -1,6 +1,9 @@
 Structural.Views.Topics = Support.CompositeView.extend({
   className: 'tpc-list',
   topicHint: $('<div class="tpc-hint">Move conversation to...</div>'),
+  initialize: function(options) {
+    this.collection.on('add', this.renderTopic, this);
+  },
   render: function() {
     this.$el.append(this.topicHint);
     this.collection.forEach(this.renderTopic, this);
