@@ -21,6 +21,10 @@ Structural.Collections.Conversations = Backbone.Collection.extend({
   },
   setTopic: function(id) {
     this.topicId = id;
+  },
+  changeTopic: function(id, success) {
+    this.setTopic(id);
+    this.fetch({reset: true, success: success});
   }
 });
 

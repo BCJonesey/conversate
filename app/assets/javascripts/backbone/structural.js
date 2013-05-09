@@ -73,15 +73,35 @@ var Structural = new (Support.CompositeView.extend({
   },
   viewConversation: function(conversation) {
     if (conversation.id !== this._conversation.id) {
-      this._conversation = conversation;
-      this._actions.changeConversation(conversation.id);
-      this._participants.changeConversation(conversation.id);
-      this._watercooler.changeConversation(conversation);
-      Structural.Router.navigate('conversation/' +
-                                 this._slugify(conversation.get('title')) +
-                                 '/' + conversation.id,
+      this._changeConversationView(conversation);
+      this._changeConversationUrl(conversation);
+    }
+  },
+  viewTopic: function(topic) {
+    if (this._conversation && topic.id !== this._conversation.topid_id) {
+      this._conversations.changeTopic(topic.id, function(collection) {
+        if (collection.length > 0) {
+          this._changeConversationView(collection.at(0));
+        }
+      });
+      Structural.Router.navigate('topic/' +
+                                 this._slugify(topic.get('name')) +
+                                 '/' + topic.id,
                                  {trigger: true});
     }
+  },
+
+  _changeConversationView: function(conversation) {
+    this._conversation = conversation;
+    this._actions.changeConversation(conversation.id);
+    this._participants.changeConversation(conversation.id);
+    this._watercooler.changeConversation(conversation);
+  },
+  _changeConversationUrl: function(conversation) {
+    Structural.Router.navigate('conversation/' +
+                               this._slugify(conversation.get('title')) +
+                               '/' + conversation.id,
+                               {trigger: true});
   },
 
   createRetitleAction: function(title) {
@@ -123,7 +143,7 @@ var Structural = new (Support.CompositeView.extend({
   },
 
   _slugify: function(s) {
-    s.toLowerCase()
-     .replace('/[ _]/g', '-');
+    return encodeURIComponent(s.toLowerCase()
+                               .replace(/[ _]/g, '-'));
   }
 }))({el: $('body'), apiPrefix: '/api/v0'});
