@@ -125,7 +125,7 @@ describe Api::V0::ActionsController do
       expect(body['user']['id']).to eq(1)
       expect(body['timestamp']).to eq(timestamp(7))
     end
-    it 'successfully retitles a conversation', :t => true do
+    it 'successfully retitles a conversation' do
       post :create, :conversation_id => 1, :type => 'retitle', :title => 'My new title'
       expect(response).to be_success
       expect(response.code).to eq("201")
@@ -139,6 +139,18 @@ describe Api::V0::ActionsController do
       conversation = Conversation.find(1)
       expect(conversation.title).to eq('My new title')
     end
+    it 'successfully deletes a message' do
+      post :create, :conversation_id => 1, :type => 'deletion', :msg_id => 1
+      expect(response).to be_success
+      expect(response.code).to eq("201")
+      body = JSON.parse(response.body)
+      expect(body['id']).to eq(7)
+      expect(body['type']).to eq('deletion')
+      expect(body['user']['name']).to eq('Rufio Pan')
+      expect(body['user']['id']).to eq(1)
+      expect(body['timestamp']).to eq(timestamp(7))
+    end
+    it 'fails when deleting a non-message action'
     it 'responds successfully for each type of action'
     it 'responds unsuccessfully when the conversation does not exist' do
       post :create, :conversation_id => 100, :type => 'message', :text => 'Bye'
