@@ -123,6 +123,20 @@ describe Api::V0::ActionsController do
       expect(body['user']['id']).to eq(1)
       expect(body['timestamp']).to eq(timestamp(7))
     end
+    it 'successfully retitles a conversation', :t => true do
+      post :create, :conversation_id => 1, :type => 'retitle', :title => 'My new title'
+      expect(response).to be_success
+      expect(response.code).to eq("201")
+      body = JSON.parse(response.body)
+      expect(body['id']).to eq(7)
+      expect(body['type']).to eq('retitle')
+      expect(body['title']).to eq('My new title')
+      expect(body['user']['name']).to eq('Rufio Pan')
+      expect(body['user']['id']).to eq(1)
+      expect(body['timestamp']).to eq(timestamp(1))
+      conversation = Conversation.find(1)
+      expect(conversation.title).to eq('My new title')
+    end
     it 'responds successfully for each type of action'
     it 'responds unsuccessfully when the conversation does not exist' do
       post :create, :conversation_id => 100, :type => 'message', :text => 'Bye'
