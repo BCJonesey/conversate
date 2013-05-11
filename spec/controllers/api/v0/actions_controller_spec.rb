@@ -102,7 +102,7 @@ describe Api::V0::ActionsController do
       expect(response).to be_success
       expect(response.code).to eq("201")
       body = JSON.parse(response.body)
-      expect(body['id']).to eq(3)
+      expect(body['id']).to eq(6)
       expect(body['type']).to eq('message')
       expect(body['text']).to eq('Hi')
     end
