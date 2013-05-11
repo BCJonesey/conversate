@@ -61,6 +61,7 @@ class Action < ActiveRecord::Base
     json['user'] = Hash.new
     json['user']['id'] = user.id
     json['user']['name'] = user.name
+    json['timestamp'] = created_at.msec
     return json
   end
 
