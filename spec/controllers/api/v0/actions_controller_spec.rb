@@ -17,6 +17,12 @@ describe Api::V0::ActionsController do
     conversation.actions.create!(:type => 'deletion',
                                   :data => '{"msg_id":1}',
                                   :user_id => @user.id)
+    addedUser = User.create!(:email => 'harry@example.com',
+                              :full_name => 'Harry Houdini',
+                              :password => 'allakhazam')
+    conversation.actions.create!(:type => 'update_users',
+                                  :data => '{"added":[{"id":2,"name":"Harry Houdini"}],"removed":[]}',
+                                  :user_id => @user.id)
   end
 
   describe 'GET #index' do
@@ -54,6 +60,18 @@ describe Api::V0::ActionsController do
       expect(body[2]['user']['name']).to eq('Rufio Pan')
       expect(body[2]['user']['id']).to eq(1)
       expect(body[2]['timestamp']).to eq(timestamp[3])
+
+      #Update users
+      expect(body[3]['id']).to eq(4)
+      expect(body[3]['type']).to eq('update_users')
+      added = Hash.new
+      added['id'] = 2
+      added['name'] = 'Harry Houdini'
+      expect(body[3]['added']).to eq([added])
+      expect(body[3]['removed']).to eq([])
+      expect(body[3]['user']['name']).to eq('Rufio Pan')
+      expect(body[3]['user']['id']).to eq(1)
+      expect(body[3]['timestamp']).to eq(timestamp[4])
 
     end
     it 'responds successfully for each type of action'
