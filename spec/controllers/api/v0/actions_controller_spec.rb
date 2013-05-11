@@ -25,9 +25,13 @@ describe Api::V0::ActionsController do
       expect(body[0]['id']).to eq(1)
       expect(body[0]['type']).to eq('message')
       expect(body[0]['text']).to eq('After the final no')
+      expect(body[0]['user']['name']).to eq('Rufio Pan')
+      expect(body[0]['user'][id]).to eq(1)
       expect(body[1]['id']).to eq(2)
       expect(body[1]['type']).to eq('retitle')
       expect(body[1]['title']).to eq('There comes a yes?')
+      expect(body[0]['user']['name']).to eq('Rufio Pan')
+      expect(body[0]['user'][id]).to eq(1)
     end
     it 'responds successfully for each type of action'
     it 'responds unsuccessfully when the conversation does not exist' do
