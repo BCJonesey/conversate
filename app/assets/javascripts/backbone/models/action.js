@@ -13,6 +13,16 @@ Structural.Models.Action = Backbone.Model.extend({
       this.set('added', new Structural.Collections.Participants(this.get('added')));
       this.set('removed', new Structural.Collections.Participants(this.get('removed')));
     }
+
+    if (this.get('type') == 'move_conversation') {
+      this.set('from', new Structural.Models.Topic(this.get('from')));
+      this.set('to', new Structural.Models.Topic(this.get('to')));
+    }
+
+    if (this.get('type') == 'move_message') {
+      this.set('from', new Structural.Models.Conversation(this.get('from')));
+      this.set('to', new Structrual.Models.Conversation(this.get('to')));
+    }
   },
 
   focus: function() {

@@ -66,6 +66,20 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     model.save();
     action.delete(user);
   },
+  createMoveConversationAction: function(topic, user) {
+    this._newAction({
+      type: 'move_conversation',
+      user: {
+        name: user.get('name'),
+        id: user.id
+      },
+      conversation_id: this.conversationId,
+      to: {
+        name: topic.get('name'),
+        id: topic.id
+      }
+    });
+  },
 
   changeConversation: function(id) {
     this.conversationId = id;

@@ -25,5 +25,9 @@ Structural.Views.TopicContainer = Support.CompositeView.extend({
     var model = new Structural.Models.Topic({name: name});
     this.topics.add(model);
     model.save();
+  },
+
+  moveConversationMode: function() {
+    this.listView.moveConversationMode();
   }
 });

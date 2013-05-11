@@ -24,7 +24,7 @@ Structural.Views.Topic = Support.CompositeView.extend({
   },
   changeTopic: function(e) {
     e.preventDefault();
-    Structural.viewTopic(this.model);
+    this.trigger('click', this.model);
   },
   reClass: function() {
     this.el.className = this.className();

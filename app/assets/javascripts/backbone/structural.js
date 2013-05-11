@@ -65,12 +65,16 @@ var Structural = new (Support.CompositeView.extend({
     }
   },
 
+  moveConversationMode: function() {
+    this._watercooler.moveConversationMode();
+  },
   newConversationMode: function() {
     var view = new Structural.Views.NewConversation({
       addressBook: this._user.get('address_book')
     });
     this.appendChild(view);
   },
+
   viewConversation: function(conversation) {
     if (conversation.id !== this._conversation.id) {
       this._changeConversationView(conversation);
@@ -140,6 +144,11 @@ var Structural = new (Support.CompositeView.extend({
     this._conversations.add(conversation);
     conversation.save();
     // TODO: navigate to conversation
+  },
+  moveConversation: function(topic) {
+    this._actions.createMoveConversationAction(topic, this._user);
+    // TOOD: Do we want to change topic views here?
+    // If not, should we still be looking at the conversation?
   },
 
   _slugify: function(s) {
