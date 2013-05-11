@@ -1,5 +1,5 @@
 class Action < ActiveRecord::Base
-  set_inheritance_column :type_rails
+  self.inheritance_column = :type_rails
   belongs_to :conversation, :inverse_of => :actions
   belongs_to :user, :inverse_of => :actions
 
