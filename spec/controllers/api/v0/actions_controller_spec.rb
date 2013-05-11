@@ -26,6 +26,9 @@ describe Api::V0::ActionsController do
     conversation.actions.create!(:type => 'move_message',
                                   :data => '{"from":{"title":"Whatever","id":1},"to":{"title":"Wherever","id":2}}',
                                   :user_id => @user.id)
+    conversation.actions.create!(:type => 'move_conversation',
+                                  :data => '{"from":{"name":"Whatevercee","id":1},"to":{"name":"Wherevercee","id":2}}',
+                                  :user_id => @user.id)
   end
 
   describe 'GET #index' do
@@ -87,6 +90,17 @@ describe Api::V0::ActionsController do
       expect(body[4]['user']['id']).to eq(1)
       expect(body[4]['timestamp']).to eq(timestamp[5])
 
+      #Move Conversation
+      expect(body[5]['id']).to eq(6)
+      expect(body[5]['type']).to eq('move_conversation')
+      from = {'name' => 'Whatevercee', 'id' => 1}
+      to = {'name' => 'Wherevercee', 'id' => 2}
+      expect(body[5]['from']).to eq(from)
+      expect(body[5]['to']).to eq(to)
+      expect(body[5]['user']['name']).to eq('Rufio Pan')
+      expect(body[5]['user']['id']).to eq(1)
+      expect(body[5]['timestamp']).to eq(timestamp[6])
+
     end
     it 'responds successfully for each type of action'
     it 'responds unsuccessfully when the conversation does not exist' do
@@ -102,7 +116,7 @@ describe Api::V0::ActionsController do
       expect(response).to be_success
       expect(response.code).to eq("201")
       body = JSON.parse(response.body)
-      expect(body['id']).to eq(6)
+      expect(body['id']).to eq(7)
       expect(body['type']).to eq('message')
       expect(body['text']).to eq('Hi')
     end
