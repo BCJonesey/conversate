@@ -43,18 +43,13 @@ describe Api::V0::ActionsController do
       expect(response.code).to eq("200")
       body = JSON.parse(response.body)
 
-      timestamp = lambda do |id|
-        action = Action.find(id)
-        return action.created_at.msec
-      end
-
       # Message
       expect(body[0]['id']).to eq(1)
       expect(body[0]['type']).to eq('message')
       expect(body[0]['text']).to eq('After the final no')
       expect(body[0]['user']['name']).to eq('Rufio Pan')
       expect(body[0]['user']['id']).to eq(1)
-      expect(body[0]['timestamp']).to eq(timestamp[1])
+      expect(body[0]['timestamp']).to eq(timestamp(1))
 
       # Retitle
       expect(body[1]['id']).to eq(2)
@@ -62,7 +57,7 @@ describe Api::V0::ActionsController do
       expect(body[1]['title']).to eq('There comes a yes?')
       expect(body[1]['user']['name']).to eq('Rufio Pan')
       expect(body[1]['user']['id']).to eq(1)
-      expect(body[1]['timestamp']).to eq(timestamp[2])
+      expect(body[1]['timestamp']).to eq(timestamp(2))
 
       #Deletion
       expect(body[2]['id']).to eq(3)
@@ -70,7 +65,7 @@ describe Api::V0::ActionsController do
       expect(body[2]['msg_id']).to eq(1)
       expect(body[2]['user']['name']).to eq('Rufio Pan')
       expect(body[2]['user']['id']).to eq(1)
-      expect(body[2]['timestamp']).to eq(timestamp[3])
+      expect(body[2]['timestamp']).to eq(timestamp(3))
 
       #Update users
       expect(body[3]['id']).to eq(4)
@@ -82,7 +77,7 @@ describe Api::V0::ActionsController do
       expect(body[3]['removed']).to eq([])
       expect(body[3]['user']['name']).to eq('Rufio Pan')
       expect(body[3]['user']['id']).to eq(1)
-      expect(body[3]['timestamp']).to eq(timestamp[4])
+      expect(body[3]['timestamp']).to eq(timestamp(4))
 
       #Move message
       expect(body[4]['id']).to eq(5)
@@ -93,7 +88,7 @@ describe Api::V0::ActionsController do
       expect(body[4]['to']).to eq(to)
       expect(body[4]['user']['name']).to eq('Rufio Pan')
       expect(body[4]['user']['id']).to eq(1)
-      expect(body[4]['timestamp']).to eq(timestamp[5])
+      expect(body[4]['timestamp']).to eq(timestamp(5))
 
       #Move Conversation
       expect(body[5]['id']).to eq(6)
@@ -104,7 +99,7 @@ describe Api::V0::ActionsController do
       expect(body[5]['to']).to eq(to)
       expect(body[5]['user']['name']).to eq('Rufio Pan')
       expect(body[5]['user']['id']).to eq(1)
-      expect(body[5]['timestamp']).to eq(timestamp[6])
+      expect(body[5]['timestamp']).to eq(timestamp(6))
 
     end
     it 'responds successfully for each type of action'
