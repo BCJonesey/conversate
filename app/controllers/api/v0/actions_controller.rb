@@ -13,21 +13,10 @@ class Api::V0::ActionsController < ApplicationController
     conversation = current_user.conversations.find_by_id(params[:conversation_id])
     head :status => 404 and return unless conversation
     action = conversation.actions.create!(:type => params[:type],
-                                          :data => parse_action_data(params),
+                                          :data => Action::data_for_params(params),
                                           :user_id => current_user.id)
     conversation.update_most_recent_event
     render :json => action.to_json, :status => 201
-  end
-
-  private
-
-  def parse_action_data(params)
-    case params['type']
-    when 'message'
-      return {
-        'text' => params['text']
-      }.to_json
-    end
   end
 
 end

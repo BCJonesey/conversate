@@ -60,6 +60,15 @@ class Action < ActiveRecord::Base
     return json
   end
 
+  def self.data_for_params(params)
+    case params['type']
+    when 'message'
+      return {
+        'text' => params['text']
+      }.to_json
+    end
+  end
+
   protected
   attr_accessor :json
 end
