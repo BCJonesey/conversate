@@ -14,6 +14,9 @@ describe Api::V0::ActionsController do
     conversation.actions.create!(:type => 'retitle',
                                   :data => '{"title":"There comes a yes?"}',
                                   :user_id => @user.id)
+    conversation.actions.create!(:type => 'deletion',
+                                  :data => '{"msg_id":1}',
+                                  :user_id => @user.id)
   end
 
   describe 'GET #index' do
@@ -43,6 +46,15 @@ describe Api::V0::ActionsController do
       expect(body[1]['user']['name']).to eq('Rufio Pan')
       expect(body[1]['user']['id']).to eq(1)
       expect(body[1]['timestamp']).to eq(timestamp[2])
+
+      #Deletion
+      expect(body[2]['id']).to eq(3)
+      expect(body[2]['type']).to eq('deletion')
+      expect(body[2]['msg_id']).to eq(1)
+      expect(body[2]['user']['name']).to eq('Rufio Pan')
+      expect(body[2]['user']['id']).to eq(1)
+      expect(body[2]['timestamp']).to eq(timestamp[3])
+
     end
     it 'responds successfully for each type of action'
     it 'responds unsuccessfully when the conversation does not exist' do
