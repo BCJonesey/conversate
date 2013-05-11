@@ -57,6 +57,10 @@ class Action < ActiveRecord::Base
     if self.json
       json.merge!(self.json)
     end
+    user = User.find(user_id)
+    json['user'] = Hash.new
+    json['user']['id'] = user.id
+    json['user']['name'] = user.name
     return json
   end
 
