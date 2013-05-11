@@ -31,6 +31,11 @@ describe Api::V0::ActionsController do
                                   :user_id => @user.id)
   end
 
+  def timestamp(id)
+    action = Action.find(id)
+    return action.created_at.msec
+  end
+
   describe 'GET #index' do
     it 'successfully responds with a list of actions for a specified conversation' do
       get :index, :conversation_id => 1
@@ -119,6 +124,9 @@ describe Api::V0::ActionsController do
       expect(body['id']).to eq(7)
       expect(body['type']).to eq('message')
       expect(body['text']).to eq('Hi')
+      expect(body['user']['name']).to eq('Rufio Pan')
+      expect(body['user']['id']).to eq(1)
+      expect(body['timestamp']).to eq(timestamp(7))
     end
     it 'responds successfully for each type of action'
     it 'responds unsuccessfully when the conversation does not exist' do
