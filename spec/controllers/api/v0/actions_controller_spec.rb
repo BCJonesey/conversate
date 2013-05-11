@@ -23,6 +23,9 @@ describe Api::V0::ActionsController do
     conversation.actions.create!(:type => 'update_users',
                                   :data => '{"added":[{"id":2,"name":"Harry Houdini"}],"removed":[]}',
                                   :user_id => @user.id)
+    conversation.actions.create!(:type => 'move_message',
+                                  :data => '{"from":{"title":"Whatever","id":1},"to":{"title":"Wherever","id":2}}',
+                                  :user_id => @user.id)
   end
 
   describe 'GET #index' do
@@ -32,7 +35,7 @@ describe Api::V0::ActionsController do
       expect(response.code).to eq("200")
       body = JSON.parse(response.body)
 
-      timestamp = lambda do |id| 
+      timestamp = lambda do |id|
         action = Action.find(id)
         return action.created_at.msec
       end
@@ -72,6 +75,17 @@ describe Api::V0::ActionsController do
       expect(body[3]['user']['name']).to eq('Rufio Pan')
       expect(body[3]['user']['id']).to eq(1)
       expect(body[3]['timestamp']).to eq(timestamp[4])
+
+      #Move message
+      expect(body[4]['id']).to eq(5)
+      expect(body[4]['type']).to eq('move_message')
+      from = {'title' => 'Whatever', 'id' => 1}
+      to = {'title' => 'Wherever', 'id' => 2}
+      expect(body[4]['from']).to eq(from)
+      expect(body[4]['to']).to eq(to)
+      expect(body[4]['user']['name']).to eq('Rufio Pan')
+      expect(body[4]['user']['id']).to eq(1)
+      expect(body[4]['timestamp']).to eq(timestamp[5])
 
     end
     it 'responds successfully for each type of action'
