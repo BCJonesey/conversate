@@ -99,6 +99,14 @@ class Conversation < ActiveRecord::Base
     return json
   end
 
+  def handle(action)
+    case action.type
+    when 'retitle'
+      self.title = action.title
+      save
+    end
+  end
+
   protected
   # Internal: Creates a default conversation title based on who the participants
   # are.

@@ -71,6 +71,10 @@ class Action < ActiveRecord::Base
       return {
         'text' => params['text']
       }.to_json
+    when 'retitle'
+      return {
+        'title' => params['title']
+      }.to_json
     end
   end
 

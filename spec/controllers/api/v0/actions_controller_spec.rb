@@ -24,10 +24,10 @@ describe Api::V0::ActionsController do
                                   :data => '{"added":[{"id":2,"name":"Harry Houdini"}],"removed":[]}',
                                   :user_id => @user.id)
     conversation.actions.create!(:type => 'move_message',
-                                  :data => '{"from":{"title":"Whatever","id":1},"to":{"title":"Wherever","id":2}}',
+                                  :data => '{"message_id":1,"from":{"title":"Whatever","id":1},"to":{"title":"Wherever","id":2}}',
                                   :user_id => @user.id)
     conversation.actions.create!(:type => 'move_conversation',
-                                  :data => '{"from":{"name":"Whatevercee","id":1},"to":{"name":"Wherevercee","id":2}}',
+                                  :data => '{"conversation_id":1,"from":{"name":"Whatevercee","id":1},"to":{"name":"Wherevercee","id":2}}',
                                   :user_id => @user.id)
   end
 
@@ -86,6 +86,7 @@ describe Api::V0::ActionsController do
       to = {'title' => 'Wherever', 'id' => 2}
       expect(body[4]['from']).to eq(from)
       expect(body[4]['to']).to eq(to)
+      expect(body[4]['message_id']).to eq(1)
       expect(body[4]['user']['name']).to eq('Rufio Pan')
       expect(body[4]['user']['id']).to eq(1)
       expect(body[4]['timestamp']).to eq(timestamp(5))
@@ -97,6 +98,7 @@ describe Api::V0::ActionsController do
       to = {'name' => 'Wherevercee', 'id' => 2}
       expect(body[5]['from']).to eq(from)
       expect(body[5]['to']).to eq(to)
+      expect(body[5]['conversation_id']).to eq(1)
       expect(body[5]['user']['name']).to eq('Rufio Pan')
       expect(body[5]['user']['id']).to eq(1)
       expect(body[5]['timestamp']).to eq(timestamp(6))
@@ -133,7 +135,7 @@ describe Api::V0::ActionsController do
       expect(body['title']).to eq('My new title')
       expect(body['user']['name']).to eq('Rufio Pan')
       expect(body['user']['id']).to eq(1)
-      expect(body['timestamp']).to eq(timestamp(1))
+      expect(body['timestamp']).to eq(timestamp(7))
       conversation = Conversation.find(1)
       expect(conversation.title).to eq('My new title')
     end
