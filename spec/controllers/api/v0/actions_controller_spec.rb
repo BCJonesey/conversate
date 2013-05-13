@@ -150,7 +150,11 @@ describe Api::V0::ActionsController do
       expect(body['user']['id']).to eq(1)
       expect(body['timestamp']).to eq(timestamp(7))
     end
-    it 'fails when deleting a non-message action'
+    it 'fails when deleting a non-message action', :t => true do
+      post :create, :conversation_id => 1, :type => 'deletion', :msg_id => 2
+      expect(response).not_to be_success
+      expect(response.code).to eq("409")
+    end
     it 'responds successfully for each type of action'
     it 'responds unsuccessfully when the conversation does not exist' do
       post :create, :conversation_id => 100, :type => 'message', :text => 'Bye'
