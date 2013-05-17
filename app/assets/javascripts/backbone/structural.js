@@ -89,7 +89,7 @@ var Structural = new (Support.CompositeView.extend({
         }
       });
       Structural.Router.navigate('topic/' +
-                                 this._slugify(topic.get('name')) +
+                                 this.Router.slugify(topic.get('name')) +
                                  '/' + topic.id,
                                  {trigger: true});
     }
@@ -103,7 +103,7 @@ var Structural = new (Support.CompositeView.extend({
   },
   _changeConversationUrl: function(conversation) {
     Structural.Router.navigate('conversation/' +
-                               this._slugify(conversation.get('title')) +
+                               this.Router.slugify(conversation.get('title')) +
                                '/' + conversation.id,
                                {trigger: true});
   },
@@ -149,10 +149,5 @@ var Structural = new (Support.CompositeView.extend({
     this._actions.createMoveConversationAction(topic, this._user);
     // TOOD: Do we want to change topic views here?
     // If not, should we still be looking at the conversation?
-  },
-
-  _slugify: function(s) {
-    return encodeURIComponent(s.toLowerCase()
-                               .replace(/[ _]/g, '-'));
   }
 }))({el: $('body'), apiPrefix: '/api/v0'});
