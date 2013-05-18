@@ -20,7 +20,7 @@ Structural.Views.Topic = Support.CompositeView.extend({
     return this;
   },
   events: {
-    'click a': 'changeTopic'
+    'click': 'changeTopic'
   },
   changeTopic: function(e) {
     e.preventDefault();

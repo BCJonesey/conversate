@@ -5,7 +5,7 @@ Structural.Models.Conversation = Backbone.Model.extend({
     }
 
     this.set('is_unread', this.get('unread_count') > 0);
-    this.set('is_current', false);
+    //this.set('is_current', false);
   },
 
   focus: function() {

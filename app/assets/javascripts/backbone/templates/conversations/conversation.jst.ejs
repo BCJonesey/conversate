@@ -1,5 +1,10 @@
 <div class='cnv-right'>
-  <span class='cnv-time'>6:34pm</span><span class='cnv-count'>2</span>
+  <span class='cnv-time'>6:34pm</span>
+  <% if (conversation.get("unread_count") > 0) { %>
+  <span class='cnv-count'>
+    <%=conversation.get('unread_count')%>
+  </span>
+  <% } %>
 </div>
 
 <div class='cnv-left'>

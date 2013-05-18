@@ -11,6 +11,7 @@
   bottom:0;
   overflow-y:auto;
   overflow-x:hidden;
+  padding:0.25rem;
 }
 
 .tpc-hint{
@@ -23,13 +24,29 @@
 }
 
 .tpc{
-  a{
-    text-decoration: none;
-    display: inline-block;
-    padding:.3rem;
-    color:#888;
+  padding:0.35rem;
+  color:#888;
+  cursor: pointer;
+  border:1px solid transparent;
+  &.tpc-current{
+    border-color:#DDD;
+    background-color:#F0F8FF;
   }
 }
+
+.tpc-label{
+  text-decoration: none;
+}
+
+.tpc-right{
+  float:right;
+}
+.tpc-count{
+  color:#4AF;
+  font-size:0.8rem;
+
+}
+
 
 .tpc-new {
   position: fixed;

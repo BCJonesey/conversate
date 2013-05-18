@@ -1,3 +1,8 @@
-<a structural-internal="true" href="#">
-  <%= topic.escape('name') %>
-</a>
+<div class='tpc-right'>
+  <% if (topic.get('unread_conversations') > 0) { %>
+    <span class='tpc-count'><%= topic.escape('unread_conversations')%></span>
+  <% } %>
+</div>
+
+<span class='tpc-label'> <%= topic.escape('name') %> </span>
+

@@ -17,16 +17,21 @@
 }
 
 .cnv {
-    padding: 0;
-    border: none;
-    .gradient-ltr(#CCC,#FFF,90%);
-    padding-bottom: 1px;
+  padding: 0;
+  border: none;
+  padding-bottom: 1px;
+  .gradient-ltr(#CCC,white,90%)
 }
 
 .cnv-left {
-    padding: .25rem;
-    background-color: white;
-    cursor: pointer;
+  background-color:white;
+  padding: .25rem;
+  background-color: white;
+  cursor: pointer;
+}
+
+.cnv.cnv-current .cnv-left{
+  .gradient-ltr(#F0F8FF,white,90%)
 }
 .cnv-right{
   float:right;
