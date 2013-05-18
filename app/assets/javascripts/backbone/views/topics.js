@@ -25,7 +25,7 @@ Structural.Views.Topics = Support.CompositeView.extend({
     if (!e || $(e.target).closest('.tpc-container, .act-title').length == 0) {
       this.$('.tpc-hint').addClass('hidden');
       this.moveMode = false;
-      Structural.off('lcickAnywhere', this.leaveMoveConversationMode, this);
+      Structural.off('clickAnywhere', this.leaveMoveConversationMode, this);
     }
   },
   topicClicked: function(model) {
