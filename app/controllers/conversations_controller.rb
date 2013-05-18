@@ -162,10 +162,10 @@ private
   # Internal: Verifies that the current user is a participant to the given
   # conversation.
   def require_participation
-    unless current_user.in? Conversation.find(params[:id]).users
-      @conversations = current_user.conversations.order('updated_at DESC')
-      render :not_participating
-    end
+    # unless current_user.in? Conversation.find(params[:id]).users
+    #   @conversations = current_user.conversations.order('updated_at DESC')
+    #   render :not_participating
+    # end
   end
 
 end
