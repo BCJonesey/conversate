@@ -9,6 +9,9 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     this.on('reset', this._lieAboutActionsSoItLooksNiceToHumans, this);
   },
   comparator: 'timestamp',
+  parse: function(response) {
+    return response.actions;
+  },
 
   _lieAboutActionsSoItLooksNiceToHumans: function() {
     this.each(function(action) {

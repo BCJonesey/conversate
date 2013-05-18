@@ -86,92 +86,95 @@ data = {
       ]
     }
   ],
-  actions: [
-    { type: "message",
-      user: {
-        name: "Ethan Allen",
-        id: 2
-      },
-      timestamp: 1363802638003,
-      id: 123,
-      text: "This is a message"
-    },
-    { type: "message",
-      user: {
-        name: "Bonerz MaGee",
-        id: 3
-      },
-      timestamp: 1363802638004,
-      id: 124,
-      text: "Yo Dawg, that was a message!"
-    },
-    { type: "update_users",
-      user: {
-        name: "Ethan Allen",
-        id: 2
-      },
-      timestamp: 1363802638003,
-      id: 456,
-      added: [
-        { name: "George Washington",
-          id: 1
+  actions: {
+    "most_recent_viewed": 124352165123,
+    "actions": [
+      { type: "message",
+        user: {
+          name: "Ethan Allen",
+          id: 2
         },
-        { name: "Benjamin Franklin",
-          id: 5
-        }
-      ],
-      removed: [
-        { name: "John Adams",
-          id: 4
-        }
-      ]
-    },
-    { type: "retitle",
-      user: {
-        name: "Ethan Allen",
-        id: 2
+        timestamp: 1363802638003,
+        id: 123,
+        text: "This is a message"
       },
-      id: 878,
-      timestamp: 1363802638003,
-      title: "Conversation Title"
-    },
-    { type: "deletion",
-      user: {
-        name: "David Bowie",
-        id: 2
+      { type: "message",
+        user: {
+          name: "Bonerz MaGee",
+          id: 3
+        },
+        timestamp: 1363802638004,
+        id: 124,
+        text: "Yo Dawg, that was a message!"
       },
-      id: 788,
-      timestamp: 1363802638003,
-      msg_id: 789
-    },
-    { type: "message",
-      user: {
-        name: "Ground Control",
-        id: 6
+      { type: "update_users",
+        user: {
+          name: "Ethan Allen",
+          id: 2
+        },
+        timestamp: 1363802638003,
+        id: 456,
+        added: [
+          { name: "George Washington",
+            id: 1
+          },
+          { name: "Benjamin Franklin",
+            id: 5
+          }
+        ],
+        removed: [
+          { name: "John Adams",
+            id: 4
+          }
+        ]
       },
-      timestamp: 1363812638004,
-      id: 785,
-      text: "Ground Control to Major Tom, your circuit's dead is there something wrong?"
-    },
-    { type: "message",
-      user: {
-        name: "Major Tom",
-        id: 9
+      { type: "retitle",
+        user: {
+          name: "Ethan Allen",
+          id: 2
+        },
+        id: 878,
+        timestamp: 1363802638003,
+        title: "Conversation Title"
       },
-      timestamp: 1363812638104,
-      id: 789,
-      text: "I aaaammm floating 'round my tin can, faaaarrr above the moon.  Planet Earth is blue and there's nothing I can do..."
-    },
-    { type: "message",
-      user: {
-        name: "Ground Control",
-        id: 6
+      { type: "deletion",
+        user: {
+          name: "David Bowie",
+          id: 2
+        },
+        id: 788,
+        timestamp: 1363802638003,
+        msg_id: 789
       },
-      timestamp: 1363812638204,
-      id: 790,
-      text: "Can you hear me Major Tom?  Can you hear me Major Tom?"
-    },
-  ],
+      { type: "message",
+        user: {
+          name: "Ground Control",
+          id: 6
+        },
+        timestamp: 1363812638004,
+        id: 785,
+        text: "Ground Control to Major Tom, your circuit's dead is there something wrong?"
+      },
+      { type: "message",
+        user: {
+          name: "Major Tom",
+          id: 9
+        },
+        timestamp: 1363812638104,
+        id: 789,
+        text: "I aaaammm floating 'round my tin can, faaaarrr above the moon.  Planet Earth is blue and there's nothing I can do..."
+      },
+      { type: "message",
+        user: {
+          name: "Ground Control",
+          id: 6
+        },
+        timestamp: 1363812638204,
+        id: 790,
+        text: "Can you hear me Major Tom?  Can you hear me Major Tom?"
+      },
+    ]
+  },
   participants: [
     { name: "Sharon Jones",
       id: 1
