@@ -124,6 +124,8 @@ describe Api::V0::ActionsController do
       expect(body['user']['name']).to eq('Rufio Pan')
       expect(body['user']['id']).to eq(1)
       expect(body['timestamp']).to eq(timestamp(7))
+      action = Action.find(7)
+      expect(action.text).to eq('Hi')
     end
     it 'successfully retitles a conversation' do
       post :create, :conversation_id => 1, :type => 'retitle', :title => 'My new title'
@@ -138,6 +140,8 @@ describe Api::V0::ActionsController do
       expect(body['timestamp']).to eq(timestamp(7))
       conversation = Conversation.find(1)
       expect(conversation.title).to eq('My new title')
+      action = Action.find(7)
+      expect(action.title).to eq('My new title')
     end
     it 'successfully deletes a message' do
       post :create, :conversation_id => 1, :type => 'deletion', :msg_id => 1
@@ -146,9 +150,12 @@ describe Api::V0::ActionsController do
       body = JSON.parse(response.body)
       expect(body['id']).to eq(7)
       expect(body['type']).to eq('deletion')
+      expect(body['msg_id']).to eq('1')
       expect(body['user']['name']).to eq('Rufio Pan')
       expect(body['user']['id']).to eq(1)
       expect(body['timestamp']).to eq(timestamp(7))
+      action = Action.find(7)
+      expect(action.msg_id).to eq('1')
     end
     it 'fails when deleting a non-message action', :t => true do
       post :create, :conversation_id => 1, :type => 'deletion', :msg_id => 2

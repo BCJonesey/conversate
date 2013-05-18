@@ -75,6 +75,10 @@ class Action < ActiveRecord::Base
       return {
         'title' => params['title']
       }.to_json
+    when 'deletion'
+      return {
+        'msg_id' => params['msg_id']
+      }.to_json
     end
   end
 
