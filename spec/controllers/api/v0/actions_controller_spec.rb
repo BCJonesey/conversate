@@ -162,7 +162,9 @@ describe Api::V0::ActionsController do
       expect(response).not_to be_success
       expect(response.code).to eq("409")
     end
-    it 'responds successfully for each type of action'
+    it 'successfully updates users'
+    it 'successfully moves a message'
+    it 'successfully moves a conversation'
     it 'responds unsuccessfully when the conversation does not exist' do
       post :create, :conversation_id => 100, :type => 'message', :text => 'Bye'
       expect(response).not_to be_success
