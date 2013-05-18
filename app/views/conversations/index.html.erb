@@ -2,35 +2,7 @@
   <%= javascript_tag do %>
     var topics = <%= current_user.topics.to_json(:user => current_user).html_safe %>;
     var conversations = <%= @opened_topic.conversations.to_json(:user => current_user).html_safe %>;
-    var actions = [
-      { type: "message",
-        user: {
-          name: "Ethan Allen",
-          id: 2
-        },
-        timestamp: 1363802638003,
-        id: 123,
-        text: "This is a message"
-      },
-      { type: "retitle",
-        user: {
-          name: "Ethan Allen",
-          id: 2
-        },
-        id: 878,
-        timestamp: 1363802638003,
-        title: "Conversation Title"
-      },
-      { type: "deletion",
-        user: {
-          name: "Ethan Allen",
-          id: 2
-        },
-        id: 788,
-        timestamp: 1363802638003,
-        action_id: 123
-      }
-    ];
+    var actions = <%= @opened_conversation.actions.to_json(:user => current_user).html_safe %>;
     var conversation = <%= @opened_conversation.to_json(:user => current_user).html_safe %>;
     var participants = [
       { name: "Sharon Jones",
