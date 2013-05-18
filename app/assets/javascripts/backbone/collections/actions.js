@@ -6,8 +6,22 @@ Structural.Collections.Actions = Backbone.Collection.extend({
   initialize: function(data, options) {
     options = options || {};
     this.conversationId = options.conversation;
+    this.on('reset', this._lieAboutActionsSoItLooksNiceToHumans, this);
   },
   comparator: 'timestamp',
+
+  _lieAboutActionsSoItLooksNiceToHumans: function() {
+    this.each(function(action) {
+      if (action.get('type') === 'deletion') {
+        var target = this.where({id: action.get('msg_id')})[0];
+        if(target) {
+          target.delete(action.get('user'));
+          this.remove(action);
+        }
+      }
+      // TODO: Do something similar for moved messages.
+    }, this);
+  },
 
   focus: function(id) {
     // findWhere is coming in backbone 1.0.0.

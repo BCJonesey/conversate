@@ -25,6 +25,7 @@ var Structural = new (Support.CompositeView.extend({
     this._conversation = this._conversations.where({id: bootstrap.conversation.id})[0];
     this._user = new Structural.Models.User(bootstrap.user);
     this._actions = new Structural.Collections.Actions(bootstrap.actions, {conversation: this._conversation.id});
+    this._actions._lieAboutActionsSoItLooksNiceToHumans();
 
     this._bar = new Structural.Views.StructuralBar({model: this._user});
     this._watercooler = new Structural.Views.WaterCooler({
@@ -112,9 +113,6 @@ var Structural = new (Support.CompositeView.extend({
     this._actions.createRetitleAction(title, this._user);
   },
   createUpdateUserAction: function(added, removed) {
-    console.log(added);
-    console.log(removed);
-
     this._actions.createUpdateUserAction(added, removed, this._user);
   },
   createMessageAction: function(text) {
