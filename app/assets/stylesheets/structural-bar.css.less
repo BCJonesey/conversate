@@ -30,7 +30,16 @@
   &:hover,
   &.hover{
     color:rgba(0,0,0,0.7);
+    transition: color 0.35s;
+    -moz-transition:color 0.35s;
     -webkit-transition: color 0.35s;
+  }
+  &:active,
+  &.active,
+  &:focus{
+    position: relative;
+    top:1px;
+    text-shadow:none;
   }
 }
 

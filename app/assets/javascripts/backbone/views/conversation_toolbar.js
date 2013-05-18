@@ -6,9 +6,10 @@ Structural.Views.ConversationToolbar = Support.CompositeView.extend({
     return this;
   },
   events: {
-    '.cnv-new-button': 'newConversation'
+    'click .cnv-new-button': 'newConversation'
   },
-  newConversation: function() {
-    // TODO: Create a new conversation
+  newConversation: function(e) {
+    e.preventDefault();
+    Structural.newConversationMode();
   }
 });

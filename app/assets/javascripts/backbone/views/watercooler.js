@@ -10,21 +10,28 @@ Structural.Views.WaterCooler = Support.CompositeView.extend({
     this.addressBook = options.addressBook;
   },
   render: function() {
-    var topics = new Structural.Views.TopicContainer({
+    this.topicsView = new Structural.Views.TopicContainer({
       topics: this.topics
     });
-    var conversations = new Structural.Views.ConversationContainer({
+    this.conversationsView = new Structural.Views.ConversationContainer({
       conversations: this.conversations
     });
-    var actions = new Structural.Views.ActionContainer({
+    this.actionsView = new Structural.Views.ActionContainer({
       actions: this.actions,
       conversation: this.conversation,
       participants: this.participants,
       addressBook: this.addressBook
     });
 
-    this.appendChild(topics);
-    this.appendChild(conversations);
-    this.appendChild(actions);
+    this.appendChild(this.topicsView);
+    this.appendChild(this.conversationsView);
+    this.appendChild(this.actionsView);
+  },
+
+  changeConversation: function(conversation) {
+    this.actionsView.changeConversation(conversation);
+  },
+  moveConversationMode: function() {
+    this.topicsView.moveConversationMode();
   }
 });

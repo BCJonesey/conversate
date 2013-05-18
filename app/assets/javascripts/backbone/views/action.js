@@ -15,6 +15,8 @@ Structural.Views.Action = Support.CompositeView.extend({
   updateUsersTemplate: JST['backbone/templates/actions/update_users'],
   retitleTemplate: JST['backbone/templates/actions/retitle'],
   deletionTemplate: JST['backbone/templates/actions/deletion'],
+  moveConversationTemplate: JST['backbone/templates/actions/move_conversation'],
+  moveMessageTemplate: JST['backbone/templates/actions/move_message'],
 
   initialize: function(options) {
     this.model.on('change', function() {
@@ -36,6 +38,12 @@ Structural.Views.Action = Support.CompositeView.extend({
         break;
       case 'deletion':
         template = this.deletionTemplate;
+        break;
+      case 'move_message':
+        template = this.moveMessageTemplate;
+        break;
+      case 'move_conversation':
+        template = this.moveConversationTemplate;
         break;
     }
     this.$el.html(template({action: this.model}));

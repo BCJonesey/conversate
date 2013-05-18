@@ -40,5 +40,10 @@ Structural.Views.Compose = Support.CompositeView.extend({
     if (e.which == 13) { // Enter
       this.newMessageAction(e);
     }
+  },
+  changeConversation: function(conversation) {
+    this.conversation = conversation;
+    this.$el.empty();
+    this.render();
   }
 });

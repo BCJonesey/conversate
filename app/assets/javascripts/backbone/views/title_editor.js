@@ -17,12 +17,14 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
   },
   retitleConversation: function(e) {
     e.preventDefault();
-    this.conversation.changeTitle(this.$('input').val());
+    var title = this.$('input').val();
+    this.conversation.changeTitle(title);
+    this.trigger('change_title', title);
     this.closeTitleEditor();
   },
   moveConversation: function(e) {
-    // TODO: Enter move conversation mode.  This has to affect the topics view.
     e.preventDefault();
+    Structural.moveConversationMode();
   },
   openTitleEditor: function(e) {
     e.preventDefault();
@@ -50,5 +52,10 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
     if(this.closeTitleEditor(e)) {
       this.$('input[type="text"]').val(this.conversation.get('title'));
     }
+  },
+  changeConversation: function(conversation) {
+    this.conversation = conversation;
+    this.$el.empty();
+    this.render();
   }
 });

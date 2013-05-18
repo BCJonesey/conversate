@@ -33,3 +33,40 @@
     }
   }
 }
+.form-btn{
+  font-size:1.0rem;
+  padding:0.25rem 0.6rem;
+  border: 1px solid #CCC;
+  margin:0 .25rem;
+  text-align: center;
+  font-weight: normal;
+  background-color:#F0F0F0;
+  color:#444;
+  text-shadow:1px 1px 1px white;
+  cursor:pointer;
+  .button-shadow(0.2);
+  .user-select(none);
+  &:hover,
+  &.hover{
+     background-color:#D8E8F8;
+   }
+  &:active,
+  &:focus,
+  &.actve{
+    box-shadow: none;
+    position: relative;
+    top:1px;
+  }
+}
+
+.form-btn.form-btn-primary{
+  border-color: #AAA;
+  background-color:#7AD;
+  color:white;
+  text-shadow:1px 1px 1px #888;
+  .button-shadow(0.4);
+  &:hover,
+  &.hover{
+    background-color:#8BE;
+  }
+}

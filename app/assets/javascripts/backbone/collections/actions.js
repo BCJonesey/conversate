@@ -6,8 +6,22 @@ Structural.Collections.Actions = Backbone.Collection.extend({
   initialize: function(data, options) {
     options = options || {};
     this.conversationId = options.conversation;
+    this.on('reset', this._lieAboutActionsSoItLooksNiceToHumans, this);
   },
   comparator: 'timestamp',
+
+  _lieAboutActionsSoItLooksNiceToHumans: function() {
+    this.each(function(action) {
+      if (action.get('type') === 'deletion') {
+        var target = this.where({id: action.get('msg_id')})[0];
+        if(target) {
+          target.delete(action.get('user'));
+          this.remove(action);
+        }
+      }
+      // TODO: Do something similar for moved messages.
+    }, this);
+  },
 
   focus: function(id) {
     // findWhere is coming in backbone 1.0.0.
@@ -65,6 +79,25 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     model.url = this.url();
     model.save();
     action.delete(user);
+  },
+  createMoveConversationAction: function(topic, user) {
+    this._newAction({
+      type: 'move_conversation',
+      user: {
+        name: user.get('name'),
+        id: user.id
+      },
+      conversation_id: this.conversationId,
+      to: {
+        name: topic.get('name'),
+        id: topic.id
+      }
+    });
+  },
+
+  changeConversation: function(id) {
+    this.conversationId = id;
+    this.fetch({reset: true});
   },
 
   _newAction: function(data) {

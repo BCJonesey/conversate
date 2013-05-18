@@ -23,8 +23,8 @@ Structural.Views.Topic = Support.CompositeView.extend({
     'click a': 'changeTopic'
   },
   changeTopic: function(e) {
-    // TODO: move to new topic via Backbone.history.navigate.
-    // TODO: Figure out our user-facing routes so we know what goes here.
+    e.preventDefault();
+    this.trigger('click', this.model);
   },
   reClass: function() {
     this.el.className = this.className();

@@ -12,6 +12,11 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
     this.tokens.on('changeAutocompleteOptions', this.tokenOptions.changeAutocompleteOptions, this.tokenOptions);
     this.tokens.on('selectAutocompleteTarget', this.selectParticipant, this);
     this.tokenOptions.on('selectAutocompleteTarget', this.selectParticipant, this);
+    this.tokens.on('update_users', function(added, removed) {
+      this.trigger('update_users', added, removed);
+    }, this);
+
+    this.participants.on('reset', this.reRender, this);
   },
   render: function() {
     this.$el.html(this.template());
@@ -19,12 +24,18 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
     this.appendChild(this.tokenOptions);
     return this;
   },
+  reRender: function() {
+    this.tokens.leave();
+    this.tokenOptions.leave();
+    this.$el.empty();
+    this.render();
+  },
   events: {
     'click .act-participants-edit': 'enterEditingMode',
     'click .act-participants-save': 'saveParticipants',
   },
   enterEditingMode: function(e) {
-    e.preventDefault();
+    if (e) { e.preventDefault(); }
     this.$('.act-participants-actions, .act-participants-save-actions')
       .toggleClass('hidden');
     this.tokens.edit();
@@ -56,5 +67,8 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
 
       Structural.off('clickAnywhere', this.cancel, this);
     }
+  },
+  currentParticipants: function() {
+    return this.tokens.currentParticipants();
   }
 });

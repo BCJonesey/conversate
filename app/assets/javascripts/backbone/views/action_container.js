@@ -8,19 +8,27 @@ Structural.Views.ActionContainer = Support.CompositeView.extend({
     this.addressBook = options.addressBook;
   },
   render: function() {
-    var title = new Structural.Views.TitleEditor({conversation: this.conversation});
-    var participants = new Structural.Views.ParticipantEditor({
+    this.titleView = new Structural.Views.TitleEditor({conversation: this.conversation});
+    this.participantsView = new Structural.Views.ParticipantEditor({
       participants: this.participants,
       addressBook: this.addressBook
     });
-    var actions = new Structural.Views.Actions({collection: this.actions});
-    var compose = new Structural.Views.Compose({conversation: this.conversation});
+    this.actionsView = new Structural.Views.Actions({collection: this.actions});
+    this.composeView = new Structural.Views.Compose({conversation: this.conversation});
 
-    this.appendChild(title);
-    this.appendChild(participants);
-    this.appendChild(actions);
-    this.appendChild(compose);
+    this.appendChild(this.titleView);
+    this.appendChild(this.participantsView);
+    this.appendChild(this.actionsView);
+    this.appendChild(this.composeView);
+
+    this.titleView.on('change_title', Structural.createRetitleAction, Structural);
+    this.participantsView.on('update_users', Structural.createUpdateUserAction, Structural);
 
     return this;
+  },
+
+  changeConversation: function(conversation) {
+    this.titleView.changeConversation(conversation);
+    this.composeView.changeConversation(conversation);
   }
 });
