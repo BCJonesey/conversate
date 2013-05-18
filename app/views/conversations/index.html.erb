@@ -1,18 +1,7 @@
 <%= content_for :javascript do -%>
   <%= javascript_tag do %>
     var topics = <%= current_user.topics.to_json(:user => current_user).html_safe %>;
-    var conversations = [
-      { title: "First",
-        most_recent_message: 1,
-        participants: [],
-        id: 60
-      },
-      { title: "Third",
-        most_recent_message: 3,
-        participants: [],
-        id: 3
-      }
-    ];
+    var conversations = <%= @opened_topic.conversations.to_json(:user => current_user).html_safe %>;
     var actions = [
       { type: "message",
         user: {
@@ -42,11 +31,7 @@
         action_id: 123
       }
     ];
-    var conversation = {
-      name: "Conversation",
-      id: 60,
-      topic_id: 15
-    };
+    var conversation = <%= @opened_conversation.to_json(:user => current_user).html_safe %>;
     var participants = [
       { name: "Sharon Jones",
         id: 1
