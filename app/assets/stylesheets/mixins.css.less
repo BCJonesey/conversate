@@ -57,10 +57,12 @@
   user-select: none;
 }
 
-.truncate(){
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+.ellipsis(){
+  display:block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-wrap:break;
 }
 
 .gradient-ltr(@left-color:#E0F0FF,@right-color:#F4FAFF, @right-finish:90%){

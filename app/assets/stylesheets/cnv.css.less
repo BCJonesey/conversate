@@ -20,14 +20,14 @@
   padding: 0;
   border: none;
   padding-bottom: 1px;
-  .gradient-ltr(#CCC,white,90%)
+  .gradient-ltr(#CCC,white,90%);
+  cursor:pointer;
 }
 
 .cnv-left {
   background-color:white;
   padding: .25rem;
   background-color: white;
-  cursor: pointer;
 }
 
 .cnv.cnv-current .cnv-left{
@@ -42,12 +42,16 @@
 }
 .cnv-count{
   display:inline-block;
-  font-size:1.0rem;
-  padding:0.25rem 0.25rem;
-  color:#4AF;
-  vertical-align:middle;
-  border:1px solid transparent;
-  border-left-color:#E8E8E8;
+  font-weight: normal;
+  color:#DDD;
+  padding:0.05rem 0.2rem;
+  margin-left:0.25rem;
+  border:1px solid #F0F0F0;
+  background-color: #FCFCFC;
+  margin-right:0.25rem;
+  vertical-align: top;
+  margin-top:0.65rem;
+  font-size:0.80rem;
 }
 .cnv-time{
   display:inline-block;
@@ -76,16 +80,18 @@
 //   border-bottom:1px solid @cnv-border-color;
 // }
 .cnv-title{
-  font-weight: bold;
+  .title-font();
+  .ellipsis();
 }
 
 .cnv-participants{
   font-size:.8rem;
   color:@cnv-participant-gray;
 
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  // white-space: nowrap;
+  // overflow: hidden;
+  // text-overflow: ellipsis;
+  .ellipsis();
 }
 
 .cnv-participant + .cnv-participant:before{

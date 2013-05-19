@@ -1,6 +1,6 @@
 Structural.Views.Topic = Support.CompositeView.extend({
   className: function() {
-    var classes = 'tpc';
+    var classes = 'tpc btn-faint-container';
     if (this.model.get('is_current')) {
       classes += ' tpc-current';
     }

@@ -1,4 +1,5 @@
 @import 'variables.css.less';
+@import 'mixins.css.less';
 
 // --- Topics --- //
 
@@ -24,7 +25,7 @@
 }
 
 .tpc{
-  padding:0.35rem;
+  padding:0.5rem;
   color:#888;
   cursor: pointer;
   border:1px solid transparent;
@@ -36,15 +37,47 @@
 
 .tpc-label{
   text-decoration: none;
+  .ellipsis();
+  line-height: 1.0;
 }
 
 .tpc-right{
   float:right;
+  display:inline-block;
+  margin-top:-0.1rem;
+  padding-left:0.25rem;
 }
-.tpc-count{
-  color:#4AF;
-  font-size:0.8rem;
 
+.tpc-details-toggle{
+ display:none;
+ line-height: 1.0;
+}
+
+.tpc.tpc-current .tpc-details-toggle{
+  display:inline;
+}
+
+.tpc-count{
+  display:inline-block;
+  font-weight: normal;
+  color:#DDD;
+  padding:0.05rem 0.2rem;
+  margin-left:0.25rem;
+  border:1px solid #F0F0F0;
+  background-color: #FCFCFC;
+  vertical-align: top;
+  //margin-top:0.1rem;
+  font-size:0.80rem;
+  // box-sizing:border-box;
+  // display: inline-block;
+  // color:#4AF;
+  // font-size:0.75rem;
+  // padding:0.125rem 0.25rem;
+  // color:white;
+  // background-color:#E0E0E0;
+  // border:1px solid #D0D0D0;
+  // vertical-align: top;
+  // margin-top:-0.05rem;
 }
 
 
