@@ -1,4 +1,13 @@
-<div class='cnv-link'>
+<div class='cnv-right'>
+  <span class='cnv-time'>6:34pm</span>
+  <% if (conversation.get("unread_count") > 0) { %>
+  <span class='cnv-count'>
+    <%=conversation.get('unread_count')%>
+  </span>
+  <% } %>
+</div>
+
+<div class='cnv-left'>
   <div class="cnv-title"><%= conversation.escape('title') %></div>
   <div class="cnv-participants">
     <% conversation.get('participants').each(function(participant) { %>
@@ -6,3 +15,4 @@
     <% }); %>
   </div>
 </div>
+
