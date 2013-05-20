@@ -12,7 +12,7 @@
         id: 2
       }
     ];
-    var user = { full_name: "Jack Kennedy" };
+    var user = <%= current_user.to_json().html_safe %>;
 
     var bootstrap = {
       topics: topics,
