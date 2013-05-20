@@ -49,8 +49,8 @@ class Conversation < ActiveRecord::Base
   end
 
   def participants(current_user)
-    # active = self.actions.order('created_at DESC').collect {|e| e.user}.uniq
-    # (active + (self.users - active) - [current_user]) - (active - self.users)
+    #active = self.actions.order('created_at DESC').collect {|e| e.user}.uniq
+    #(active + (self.users - active) - [current_user]) - (active - self.users)
     # The above call is very expensive.
     self.users - [current_user]
   end

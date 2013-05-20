@@ -4,14 +4,7 @@
     var conversations = <%= @opened_topic.conversations.to_json(:user => current_user).html_safe %>;
     var actions = <%= @opened_conversation.actions.to_json(:user => current_user).html_safe %>;
     var conversation = <%= @opened_conversation.to_json(:user => current_user).html_safe %>;
-    var participants = [
-      { name: "Sharon Jones",
-        id: 1
-      },
-      { name: "The Dap Kings",
-        id: 2
-      }
-    ];
+    var participants = <%= @opened_conversation.participants(current_user).to_json().html_safe %> ;
     var user = <%= current_user.to_json().html_safe %>;
 
     var bootstrap = {
