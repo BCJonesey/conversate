@@ -2,11 +2,15 @@
   <%= javascript_tag do %>
     var topics = <%= current_user.topics.to_json(:user => current_user).html_safe %>;
     var conversations = <%= @opened_topic.conversations.to_json(:user => current_user).html_safe %>;
+    var user = <%= current_user.to_json().html_safe %>;
     <% if @opened_conversation %>
       var actions = <%= @opened_conversation.actions.to_json(:user => current_user).html_safe %>;
       var conversation = <%= @opened_conversation.to_json(:user => current_user).html_safe %>;
       var participants = <%= @opened_conversation.participants(current_user).to_json().html_safe %> ;
-      var user = <%= current_user.to_json().html_safe %>;
+    <% else %>
+      actions = [];
+      conversation = {};
+      participants = [];
     <% end %>
 
     var bootstrap = {
