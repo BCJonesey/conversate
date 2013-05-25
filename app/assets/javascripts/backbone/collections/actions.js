@@ -6,7 +6,9 @@ Structural.Collections.Actions = Backbone.Collection.extend({
   initialize: function(data, options) {
     options = options || {};
     this.conversationId = options.conversation;
+    this.userId = options.user;
     this.on('reset', this._lieAboutActionsSoItLooksNiceToHumans, this);
+    this.on('reset', this.calculateUnreadedness, this);
   },
   comparator: 'timestamp',
 
@@ -98,6 +100,28 @@ Structural.Collections.Actions = Backbone.Collection.extend({
   changeConversation: function(id) {
     this.conversationId = id;
     this.fetch({reset: true});
+  },
+
+  calculateUnreadedness: function(participants) {
+    if (participants) {
+      this.cachedParticipants = participants;
+    }
+    else if (this.cachedParticipants) {
+      participants = this.cachedParticipants;
+    }
+    else {
+      return;
+    }
+
+    var me = participants.where({id: this.userId})[0];
+    if (!me) { return; }
+
+    var cutoff = me.get('most_recent_viewed');
+    this.filter(function(action) {
+      return action.get('timestamp') > cutoff;
+    }).forEach(function(action) {
+      action.markUnread();
+    });
   },
 
   _newAction: function(data) {

@@ -31,6 +31,9 @@ Structural.Models.Action = Backbone.Model.extend({
   unfocus: function() {
     this.set('is_current', false);
   },
+  markUnread: function() {
+    this.set('is_unread', true);
+  },
   humanizedTimestamp: (function() {
     var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug',
                   'Sep', 'Oct', 'Nov', 'Dec'];
