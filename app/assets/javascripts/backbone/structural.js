@@ -149,8 +149,7 @@ var Structural = new (Support.CompositeView.extend({
   },
   moveConversation: function(topic) {
     this._actions.createMoveConversationAction(topic, this._user);
-    // TOOD: Do we want to change topic views here?
-    // If not, should we still be looking at the conversation?
+    this.viewTopic(this._topics.current());
   },
   updateReadTimestamp: function(action) {
     this._participants.get(this._user.id).updateReadTimestamp(action.get('timestamp'));

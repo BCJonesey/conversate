@@ -12,5 +12,8 @@ Structural.Collections.Topics = Backbone.Collection.extend({
     this.filter(function(tpc) { return tpc.id != id; }).forEach(function(tpc) {
       tpc.unfocus();
     });
+  },
+  current: function() {
+    return this.where({is_current: true}).pop();
   }
 });
