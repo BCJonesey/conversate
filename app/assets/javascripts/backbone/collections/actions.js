@@ -9,6 +9,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     this.userId = options.user;
     this.on('reset', this._lieAboutActionsSoItLooksNiceToHumans, this);
     this.on('reset', this.calculateUnreadedness, this);
+    this.on('reset', this._daisyChainUnreadCascade, this);
   },
   comparator: 'timestamp',
 
@@ -22,6 +23,18 @@ Structural.Collections.Actions = Backbone.Collection.extend({
         }
       }
       // TODO: Do something similar for moved messages.
+    }, this);
+  },
+  _daisyChainUnreadCascade: function() {
+    this.forEach(function(action, index) {
+      var next = this.at(index + 1);
+      if (next) {
+        next.on('change:is_unread', function() {
+          if (!next.get('is_unread')) {
+            action.markRead();
+          }
+        })
+      }
     }, this);
   },
 

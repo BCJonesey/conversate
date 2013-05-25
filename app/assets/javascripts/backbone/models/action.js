@@ -31,6 +31,9 @@ Structural.Models.Action = Backbone.Model.extend({
   unfocus: function() {
     this.set('is_current', false);
   },
+  markRead: function() {
+    this.set('is_unread', false);
+  },
   markUnread: function() {
     this.set('is_unread', true);
   },

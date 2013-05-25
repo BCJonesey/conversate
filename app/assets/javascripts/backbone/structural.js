@@ -26,6 +26,7 @@ var Structural = new (Support.CompositeView.extend({
     this._user = new Structural.Models.User(bootstrap.user);
     this._actions = new Structural.Collections.Actions(bootstrap.actions, {conversation: this._conversation.id, user:this._user.id});
     this._actions._lieAboutActionsSoItLooksNiceToHumans();
+    this._actions._daisyChainUnreadCascade();
 
     this._bar = new Structural.Views.StructuralBar({model: this._user});
     this._watercooler = new Structural.Views.WaterCooler({
