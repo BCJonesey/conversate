@@ -70,6 +70,7 @@ Structural.Views.Action = Support.CompositeView.extend({
   markRead: function(e) {
     if (this.model.get('is_unread')) {
       this.model.markRead();
+      Structural.updateReadTimestamp(this.model);
     }
   }
 });
