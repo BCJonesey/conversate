@@ -4,8 +4,7 @@ Structural.Collections.Topics = Backbone.Collection.extend({
   url: Structural.apiPrefix + '/topics',
 
   focus: function(id) {
-    // findWhere is coming in backbone 1.0.0.
-    var topic = this.where({id: id}).pop();
+    var topic = this.get(id);
     if(topic) {
       topic.focus();
     }
