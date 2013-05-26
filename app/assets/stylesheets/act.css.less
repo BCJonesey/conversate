@@ -5,6 +5,8 @@
 
 // --- Actions --- //
 
+
+
 .editing-style{
   background-color:white !important;
   box-shadow:inset 0 0 5px rgba(0,0,255,0.2);
@@ -98,7 +100,7 @@
     bottom:.05rem;
     padding:0.1rem;
 }
-x
+
 .editing .participant-remove:hover{
     color:#888;
 }
@@ -209,8 +211,19 @@ x
   color:@color-pending;
 }
 
-.act-message.act-unread {
-  color: #FF0000;
+.act-unread {
+  position:relative;
+  &:after{
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #BBB;
+    width: 0.15rem;
+    margin: 0.25rem 0.15rem;
+    transition:background-color 1s;
+  }
 }
 
 .act-sender{
