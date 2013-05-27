@@ -19,3 +19,6 @@ Structural.Models.Conversation = Backbone.Model.extend({
     this.set('title', title);
   }
 });
+
+_.extend(Structural.Models.Conversation.prototype,
+         Support.HumanizedTimestamp('most_recent_message'));
