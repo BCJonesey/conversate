@@ -36,7 +36,8 @@ Structural.Router = new (Backbone.Router.extend({
   },
   slugify: function(s) {
     return encodeURIComponent(s.toLowerCase()
-                               .replace(/[ _]/g, '-'));
+                               .replace(/[ _]/g, '-')
+                               .replace(/[^a-zA-Z0-9-]/g, ''));
   },
 
   _fixSlug: function(prefix, slug, suffix, correct) {
