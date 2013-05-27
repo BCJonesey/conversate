@@ -93,9 +93,7 @@ var Structural = new (Support.CompositeView.extend({
           this._changeConversationView(collection.at(0));
         }
       });
-      Structural.Router.navigate('topic/' +
-                                 this.Router.slugify(topic.get('name')) +
-                                 '/' + topic.id,
+      Structural.Router.navigate(Structural.Router.topicPath(topic),
                                  {trigger: true});
     }
   },
@@ -107,9 +105,7 @@ var Structural = new (Support.CompositeView.extend({
     this._watercooler.changeConversation(conversation);
   },
   _changeConversationUrl: function(conversation) {
-    Structural.Router.navigate('conversation/' +
-                               this.Router.slugify(conversation.get('title')) +
-                               '/' + conversation.id,
+    Structural.Router.navigate(Structural.Router.conversationPath(conversation),
                                {trigger: true});
   },
 
