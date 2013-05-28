@@ -214,8 +214,9 @@
 
 .act-unread {
   position:relative;
-  &:after{
-    content: "";
+  z-index: 0;
+  &:before{
+    content: " ";
     position: absolute;
     right: 0;
     top: 0;
@@ -223,7 +224,6 @@
     background-color: #BBB;
     width: 0.15rem;
     margin: 0.25rem 0.15rem;
-    transition:background-color 1s;
   }
 }
 
