@@ -23,10 +23,17 @@ var Structural = new (Support.CompositeView.extend({
     this._conversations = new Structural.Collections.Conversations(bootstrap.conversations);
     this._participants = new Structural.Collections.Participants(bootstrap.participants);
     this._conversation = this._conversations.where({id: bootstrap.conversation.id})[0];
+    if (!this._conversation) {
+      this._conversation = new Structural.Models.Conversation();
+    }
     this._user = new Structural.Models.User(bootstrap.user);
-    this._actions = new Structural.Collections.Actions(bootstrap.actions, {conversation: this._conversation.id, user:this._user.id});
-    this._actions._lieAboutActionsSoItLooksNiceToHumans();
-    this._actions._daisyChainUnreadCascade();
+    if (this._conversation && this._conversation.id) {
+      this._actions = new Structural.Collections.Actions(bootstrap.actions, {conversation: this._conversation.id, user:this._user.id});
+      this._actions._lieAboutActionsSoItLooksNiceToHumans();
+      this._actions._daisyChainUnreadCascade();
+    } else {
+      this._actions = new Structural.Collections.Actions();
+    }
 
     this._bar = new Structural.Views.StructuralBar({model: this._user});
     this._watercooler = new Structural.Views.WaterCooler({
@@ -38,8 +45,10 @@ var Structural = new (Support.CompositeView.extend({
       addressBook: this._user.get('address_book')
     });
 
-    this._participants.on('reset', this._actions.calculateUnreadedness, this._actions);
-    this._actions.calculateUnreadedness(this._participants);
+    if (this._actions) {
+      this._participants.on('reset', this._actions.calculateUnreadedness, this._actions);
+      this._actions.calculateUnreadedness(this._participants);
+    }
 
     this.appendChild(this._bar);
     this.appendChild(this._watercooler);

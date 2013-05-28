@@ -10,7 +10,7 @@
 <div class='cnv-left'>
   <div class="cnv-title"><%= conversation.escape('title') %></div>
   <div class="cnv-participants">
-    <% conversation.get('participants').each(function(participant) { %>
+    <% conversation.get('participants').forEach(function(participant) { %>
       <span class="cnv-participant"><%= participant.escape('name') %></span>
     <% }); %>
   </div>
