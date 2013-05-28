@@ -43,19 +43,19 @@ Structural.Views.Participants = Support.CompositeView.extend({
     this.$('.token-input').focus();
   },
   tokenInput: function(e) {
-    if (e.which === 38) { // Up
+    if (e.which === Support.Keys.up) {
       this.trigger('moveAutocompleteTarget', 'up');
-    } else if (e.which === 40) { // Down
+    } else if (e.which === Support.Keys.down) {
       this.trigger('moveAutocompleteTarget', 'down');
-    } else if (e.which === 13 || // Enter
-               e.which === 9) {  // Tab
+    } else if (e.which === Supprt.Keys.enter ||
+               e.which === Support.Keys.tab) {
       this.trigger('selectAutocompleteTarget');
     } else {
       this.trigger('changeAutocompleteOptions', this.$('.token-input').val())
     }
   },
   preventSubmit: function(e) {
-    if (e.which === 13) { // Enter
+    if (e.which === Support.Keys.enter) {
       e.preventDefault();
     }
   },

@@ -55,7 +55,7 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
     }
   },
   cancelOnEscape: function(e) {
-    if (e.which === 27) { // Escape
+    if (e.which === Support.Keys.escape) {
       this.cancelRetitle();
     }
   },
