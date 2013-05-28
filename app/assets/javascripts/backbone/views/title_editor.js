@@ -13,7 +13,8 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
     submit: 'retitleConversation',
     'click .act-move-cnv': 'moveConversation',
     'click .act-title-edit': 'openTitleEditor',
-    'click .act-title-save': 'retitleConversation'
+    'click .act-title-save': 'retitleConversation',
+    'keyup': 'cancelOnEscape'
   },
   retitleConversation: function(e) {
     e.preventDefault();
@@ -51,6 +52,11 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
   cancelRetitle: function(e) {
     if(this.closeTitleEditor(e)) {
       this.$('input[type="text"]').val(this.conversation.get('title'));
+    }
+  },
+  cancelOnEscape: function(e) {
+    if (e.which === 27) { // Escape
+      this.cancelRetitle();
     }
   },
   changeConversation: function(conversation) {
