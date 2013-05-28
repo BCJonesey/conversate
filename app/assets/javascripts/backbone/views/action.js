@@ -8,6 +8,9 @@ Structural.Views.Action = Support.CompositeView.extend({
     if(this.model.get('is_current')) {
       classes += ' act-current';
     }
+    if(this.model.get('is_unread')) {
+      classes += ' act-unread';
+    }
     return classes;
   },
 
@@ -57,10 +60,17 @@ Structural.Views.Action = Support.CompositeView.extend({
     this.render();
   },
   events: {
-    'click .act-delete': 'deleteMessage'
+    'click .act-delete': 'deleteMessage',
+    'mouseover': 'markRead'
   },
   deleteMessage: function(e) {
     e.preventDefault();
     Structural.createDeleteAction(this.model);
+  },
+  markRead: function(e) {
+    if (this.model.get('is_unread')) {
+      this.model.markRead();
+      Structural.updateReadTimestamp(this.model);
+    }
   }
 });

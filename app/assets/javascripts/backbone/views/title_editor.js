@@ -7,17 +7,25 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
   },
   render: function() {
     this.$el.html(this.template({conversation: this.conversation}));
+    this._input = this.$('input[type="text"]');
     return this;
   },
   events: {
     submit: 'retitleConversation',
     'click .act-move-cnv': 'moveConversation',
     'click .act-title-edit': 'openTitleEditor',
-    'click .act-title-save': 'retitleConversation'
+    'click .act-title-save': 'retitleConversation',
+    'keyup': 'cancelOnEscape'
   },
   retitleConversation: function(e) {
     e.preventDefault();
-    var title = this.$('input').val();
+    var title = this.$('input').val().trim();
+
+    if (title === this.conversation.get('title').trim()) {
+      this.cancelRetitle();
+      return;
+    }
+
     this.conversation.changeTitle(title);
     this.trigger('change_title', title);
     this.closeTitleEditor();
@@ -31,8 +39,12 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
     this.$('.act-title-actions').addClass('hidden');
     this.$('.act-title-save-actions').removeClass('hidden');
     this.$el.addClass('editing');
-    this.$('input[type="text"]').removeAttr('readonly');
-    this.$('input[type="text"]').focus();
+    this._input.removeAttr('readonly');
+    this._input.focus();
+    // JQuery's focus() method selects all the text in the input which we don't
+    // want; this should clear it.
+    this._input.get(0).setSelectionRange(this._input.val().length + 1,
+                                         this._input.val().length + 2);
 
     Structural.on('clickAnywhere', this.cancelRetitle, this);
   },
@@ -51,6 +63,11 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
   cancelRetitle: function(e) {
     if(this.closeTitleEditor(e)) {
       this.$('input[type="text"]').val(this.conversation.get('title'));
+    }
+  },
+  cancelOnEscape: function(e) {
+    if (e.which === Support.Keys.escape) {
+      this.cancelRetitle();
     }
   },
   changeConversation: function(conversation) {

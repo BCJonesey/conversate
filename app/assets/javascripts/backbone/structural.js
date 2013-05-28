@@ -24,8 +24,9 @@ var Structural = new (Support.CompositeView.extend({
     this._participants = new Structural.Collections.Participants(bootstrap.participants);
     this._conversation = this._conversations.where({id: bootstrap.conversation.id})[0];
     this._user = new Structural.Models.User(bootstrap.user);
-    this._actions = new Structural.Collections.Actions(bootstrap.actions.actions, {conversation: this._conversation.id});
+    this._actions = new Structural.Collections.Actions(bootstrap.actions, {conversation: this._conversation.id, user:this._user.id});
     this._actions._lieAboutActionsSoItLooksNiceToHumans();
+    this._actions._daisyChainUnreadCascade();
 
     this._bar = new Structural.Views.StructuralBar({model: this._user});
     this._watercooler = new Structural.Views.WaterCooler({
@@ -36,6 +37,9 @@ var Structural = new (Support.CompositeView.extend({
       conversation: this._conversation,
       addressBook: this._user.get('address_book')
     });
+
+    this._participants.on('reset', this._actions.calculateUnreadedness, this._actions);
+    this._actions.calculateUnreadedness(this._participants);
 
     this.appendChild(this._bar);
     this.appendChild(this._watercooler);
@@ -89,9 +93,7 @@ var Structural = new (Support.CompositeView.extend({
           this._changeConversationView(collection.at(0));
         }
       });
-      Structural.Router.navigate('topic/' +
-                                 this.Router.slugify(topic.get('name')) +
-                                 '/' + topic.id,
+      Structural.Router.navigate(Structural.Router.topicPath(topic),
                                  {trigger: true});
     }
   },
@@ -103,9 +105,7 @@ var Structural = new (Support.CompositeView.extend({
     this._watercooler.changeConversation(conversation);
   },
   _changeConversationUrl: function(conversation) {
-    Structural.Router.navigate('conversation/' +
-                               this.Router.slugify(conversation.get('title')) +
-                               '/' + conversation.id,
+    Structural.Router.navigate(Structural.Router.conversationPath(conversation),
                                {trigger: true});
   },
 
@@ -145,7 +145,9 @@ var Structural = new (Support.CompositeView.extend({
   },
   moveConversation: function(topic) {
     this._actions.createMoveConversationAction(topic, this._user);
-    // TOOD: Do we want to change topic views here?
-    // If not, should we still be looking at the conversation?
+    this.viewTopic(this._topics.current());
+  },
+  updateReadTimestamp: function(action) {
+    this._participants.get(this._user.id).updateReadTimestamp(action.get('timestamp'));
   }
 }))({el: $('body'), apiPrefix: '/api/v0'});

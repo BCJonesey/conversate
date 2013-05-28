@@ -10,6 +10,12 @@ Structural.Views.AutocompleteOptions = Support.CompositeView.extend({
   render: function() {
     this.$el.empty();
     this.$el.html(this.template({users: this.matches}));
+    if (this.matches.length === 0) {
+      this.$el.addClass('hidden');
+    }
+    else {
+      this.$el.removeClass('hidden');
+    }
     this._changeTargetIndex(this.targetIndex);
   },
   events: {

@@ -37,7 +37,7 @@ Structural.Views.Compose = Support.CompositeView.extend({
     this._long.addClass('hidden');
   },
   shortFormType: function(e) {
-    if (e.which == 13) { // Enter
+    if (e.which === Support.Keys.enter) {
       this.newMessageAction(e);
     }
   },

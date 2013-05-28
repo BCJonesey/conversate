@@ -36,7 +36,58 @@ Structural.Router = new (Backbone.Router.extend({
   },
   slugify: function(s) {
     return encodeURIComponent(s.toLowerCase()
-                               .replace(/[ _]/g, '-'));
+                               .replace(/[ _]/g, '-')
+                               .replace(/[^a-zA-Z0-9-]/g, ''));
+  },
+
+  /* *Path functions are suitable for passing to Structural.Router.navigate,
+     while *Href functions are suitable for including in href attributes. */
+  indexPath: function() {
+    return '';
+  },
+  conversationPath: function(conversation) {
+    return 'conversation/' +
+           this.slugify(conversation.get('title')) +
+           '/' + conversation.id;
+  },
+  messagePath: function(conversation, message) {
+    return this.conversationPath(conversation) +
+           '#message' + message.id;
+  },
+  topicPath: function(topic) {
+    return 'topic/' +
+           this.slugify(topic.get('name')) +
+           '/' + topic.id;
+  },
+  adminPath: function() {
+    return 'admin';
+  },
+  profilePath: function() {
+    return 'profile';
+  },
+  logoutPath: function() {
+    return 'session/logout';
+  },
+  indexHref: function() {
+    return '/' + this.indexPath();
+  },
+  conversationHref: function(conversation) {
+    return '/' + this.conversationPath();
+  },
+  messageHref: function(conversation, message) {
+    return '/' + this.messagePath(conversation, message);
+  },
+  topicHref: function(topic) {
+    return '/' + this.topicPath(topic);
+  },
+  adminHref: function() {
+    return '/' + this.adminPath();
+  },
+  profileHref: function() {
+    return '/' + this.profilePath();
+  },
+  logoutHref: function() {
+    return '/' + this.logoutPath();
   },
 
   _fixSlug: function(prefix, slug, suffix, correct) {

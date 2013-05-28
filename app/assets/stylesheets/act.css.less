@@ -5,6 +5,8 @@
 
 // --- Actions --- //
 
+
+
 .editing-style{
   background-color:white !important;
   box-shadow:inset 0 0 5px rgba(0,0,255,0.2);
@@ -98,7 +100,7 @@
     bottom:.05rem;
     padding:0.1rem;
 }
-x
+
 .editing .participant-remove:hover{
     color:#888;
 }
@@ -106,6 +108,7 @@ x
 
 .token-input-wrap{
   display:inline-block;
+  position:relative;
 }
 
 
@@ -209,6 +212,21 @@ x
   color:@color-pending;
 }
 
+.act-unread {
+  position:relative;
+  &:after{
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #BBB;
+    width: 0.15rem;
+    margin: 0.25rem 0.15rem;
+    transition:background-color 1s;
+  }
+}
+
 .act-sender{
   font-weight: bold;
 }
@@ -226,6 +244,10 @@ x
 
 .act-text{
   padding:0.3rem 0;
+  color:#444444;
+  line-height: 1.5;
+  white-space:pre-wrap;
+  margin-top:0.25rem;
 }
 
 .act-update-users,
@@ -240,7 +262,10 @@ x
   list-style: none;
 }
 .token-options{
-  display:none;
+  position:absolute;
+  top:100%;
+  left:0;
+  min-width:10rem;
 }
 
 .editing .token-options{

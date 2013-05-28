@@ -1,10 +1,8 @@
-<!-- TODO: Figure out our user-facing routes so we can
-     fill in the link targets here. -->
 <!-- TODO: Figure out how we're getting info from the router
      to set the selected classes on our navigation buttons. -->
 
 <div class="tabs stb-group pull-left">
-  <a href="#" class="stb-link">
+  <a href="<%= Structural.Router.indexHref() %>" class="stb-link">
     <i class="stb-icon icon-home"></i>
     <span class="stb-link-text">Water Cooler</span>
   </a>
@@ -23,9 +21,14 @@
        regret typing that. -->
 
   <% if(user.get('is_admin')) { %>
-    <a href="#" class="stb-link">
+    <a href="<%= Structural.Router.adminHref() %>" class="stb-link">
       <i class="stb-icon icon-dashboard"></i>
       <span class="stb-link-text">Admin</span>
+    </a>
+    <!-- This isn't a real app link so it doesn't get a router function. -->
+    <a href="/ux/testbed" class="stb-link">
+      <i class="stb-icon icon-fighter-jet icon-rotate-270"></i>
+      <span class="stb-link-text">UX Testbed</span>
     </a>
   <% } %>
 </div>
@@ -34,10 +37,10 @@
   <span class='stb-name'>
     <span class="stb-name-text"><%= user.escape('name') %></span>
   </span>
-  <span href="#" class="stb-link" title="Settings">
+  <a href="<%= Structural.Router.profileHref() %>" class="stb-link" title="Settings">
     <i class="stb-icon icon-user"></i>
-  </span>
-  <a href="#" class="stb-link" title="Sign Out">
+  </a>
+  <a href="<%= Structural.Router.logoutHref() %>" class="stb-link" title="Sign Out">
     <i class="stb-icon icon-signout"></i>
   </a>
 </div>

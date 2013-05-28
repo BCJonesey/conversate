@@ -6,11 +6,12 @@ Structural.Collections.Conversations = Backbone.Collection.extend({
   initialize: function(data, options) {
     options = options || {};
   },
-  comparator: 'most_recent_message',
+  comparator: function(conversation) {
+    return -(conversation.get('most_recent_message'));
+  },
 
   focus: function(id) {
-    // findWhere is coming in backbone 1.0.0.
-    var conversation = this.where({id: id}).pop();
+    var conversation = this.get(id);
     if(conversation) {
       conversation.focus();
     }

@@ -6,12 +6,12 @@ Structural.Collections.Actions = Backbone.Collection.extend({
   initialize: function(data, options) {
     options = options || {};
     this.conversationId = options.conversation;
+    this.userId = options.user;
     this.on('reset', this._lieAboutActionsSoItLooksNiceToHumans, this);
+    this.on('reset', this.calculateUnreadedness, this);
+    this.on('reset', this._daisyChainUnreadCascade, this);
   },
   comparator: 'timestamp',
-  parse: function(response) {
-    return response.actions;
-  },
 
   _lieAboutActionsSoItLooksNiceToHumans: function() {
     this.each(function(action) {
@@ -23,6 +23,18 @@ Structural.Collections.Actions = Backbone.Collection.extend({
         }
       }
       // TODO: Do something similar for moved messages.
+    }, this);
+  },
+  _daisyChainUnreadCascade: function() {
+    this.forEach(function(action, index) {
+      var next = this.at(index + 1);
+      if (next) {
+        next.on('change:is_unread', function() {
+          if (!next.get('is_unread')) {
+            action.markRead();
+          }
+        })
+      }
     }, this);
   },
 
@@ -101,6 +113,28 @@ Structural.Collections.Actions = Backbone.Collection.extend({
   changeConversation: function(id) {
     this.conversationId = id;
     this.fetch({reset: true});
+  },
+
+  calculateUnreadedness: function(participants) {
+    if (participants) {
+      this.cachedParticipants = participants;
+    }
+    else if (this.cachedParticipants) {
+      participants = this.cachedParticipants;
+    }
+    else {
+      return;
+    }
+
+    var me = participants.where({id: this.userId})[0];
+    if (!me) { return; }
+
+    var cutoff = me.get('most_recent_viewed');
+    this.filter(function(action) {
+      return action.get('timestamp') > cutoff;
+    }).forEach(function(action) {
+      action.markUnread();
+    });
   },
 
   _newAction: function(data) {

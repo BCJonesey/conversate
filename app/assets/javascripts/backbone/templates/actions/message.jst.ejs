@@ -3,7 +3,7 @@
     <a href="#" class="act-delete act-action btn-faint" title="Delete Message">
       <i class="icon-trash"></i>
     </a>
-    <span class="i-text act-time"><%= action.humanizedTimestamp(new Date()) %></span>
+    <span class="i-text act-time"><%= action.humanizedTimestamp() %></span>
   </div>
   <div class="act-info-group pull-left">
     <span class="act-sender"><%= action.get('user').escape('name') %></span>

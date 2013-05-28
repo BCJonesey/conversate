@@ -35,8 +35,9 @@ data = {
   conversations: [
     { "id": 3,
       "title": "Talk about stuff",
-      "most_recent_message": 1734512345,
+      "most_recent_message": 1334512345000,
       "unread_count": 14,
+      "is_current": true,
       "participants": [
         { "id": 2,
           "name": "Paul Revere",
@@ -50,7 +51,7 @@ data = {
     },
     { "id": 2,
       "title": "Meeting Notes",
-      "most_recent_message": 1734512325,
+      "most_recent_message": 1334512325000,
       "unread_count": 0,
       "participants": [
         { "id": 7,
@@ -65,9 +66,8 @@ data = {
     },
     { "id": 5,
       "title": "What's for lunch?",
-      "most_recent_message": 1734512545,
+      "most_recent_message": 1334512545000,
       "unread_count": 5,
-      "is_current":true,
       "participants": [
         { "id": 1,
           "name": "George Washington",
@@ -93,7 +93,7 @@ data = {
     },
     { "id": 12312,
       "title": "This convo title is intentionally entirely too long",
-      "most_recent_message": 1734512545,
+      "most_recent_message": 1334512545000,
       "unread_count": 0,
       "participants": [
         { "id": 1,
@@ -120,7 +120,7 @@ data = {
     },
     { "id": 101,
       "title": "Peanut Butters",
-      "most_recent_message": 1734512545,
+      "most_recent_message": 1334512545000,
       "unread_count": 22,
       "participants": [
         { "id": 1,
@@ -147,7 +147,7 @@ data = {
     },
     { "id": 122,
       "title": "Hosted Distribution Lists",
-      "most_recent_message": 1734512545,
+      "most_recent_message": 1334512545000,
       "unread_count": 0,
       "participants": [
         { "id": 1,
@@ -174,7 +174,7 @@ data = {
     },
     { "id": 1231214,
       "title": "Important things to keep in mind",
-      "most_recent_message": 1734512545,
+      "most_recent_message": 1334512545000,
       "unread_count": 2,
       "participants": [
         { "id": 1,
@@ -201,7 +201,7 @@ data = {
     },
     { "id": 12311,
       "title": "Javascript",
-      "most_recent_message": 1734512545,
+      "most_recent_message": 1333512545000,
       "unread_count": 1,
       "participants": [
         { "id": 1,
@@ -227,107 +227,107 @@ data = {
       ]
     }
   ],
-  actions: {
-    "most_recent_viewed": 124352165123,
-    "actions": [
-      { type: "message",
-        user: {
-          name: "Ethan Allen",
-          id: 2
-        },
-        timestamp: 1363802638003,
-        id: 123,
-        text: "This is a message"
+  actions: [
+    { type: "message",
+      user: {
+        name: "Ethan Allen",
+        id: 2
       },
-      { type: "message",
-        user: {
-          name: "Bonerz MaGee",
-          id: 3
-        },
-        timestamp: 1363802638004,
-        id: 124,
-        text: "Yo Dawg, that was a message!"
+      timestamp: 1322512633004,
+      id: 123,
+      text: "This is a message"
+    },
+    { type: "message",
+      user: {
+        name: "Bonerz MaGee",
+        id: 3
       },
-      { type: "update_users",
-        user: {
-          name: "Ethan Allen",
-          id: 2
-        },
-        timestamp: 1363802638003,
-        id: 456,
-        added: [
-          { name: "George Washington",
-            id: 1
-          },
-          { name: "Benjamin Franklin",
-            id: 5
-          }
-        ],
-        removed: [
-          { name: "John Adams",
-            id: 4
-          }
-        ]
+      timestamp: 1363812634004,
+      id: 124,
+      text: "Yo Dawg, that was a message!"
+    },
+    { type: "update_users",
+      user: {
+        name: "Ethan Allen",
+        id: 2
       },
-      { type: "retitle",
-        user: {
-          name: "Ethan Allen",
-          id: 2
+      timestamp: 1363812635004,
+      id: 456,
+      added: [
+        { name: "George Washington",
+          id: 1
         },
-        id: 878,
-        timestamp: 1363802638003,
-        title: "Conversation Title"
+        { name: "Benjamin Franklin",
+          id: 5
+        }
+      ],
+      removed: [
+        { name: "John Adams",
+          id: 4
+        }
+      ]
+    },
+    { type: "retitle",
+      user: {
+        name: "Ethan Allen",
+        id: 2
       },
-      { type: "deletion",
-        user: {
-          name: "David Bowie",
-          id: 2
-        },
-        id: 788,
-        timestamp: 1363802638003,
-        msg_id: 789
+      id: 878,
+      timestamp: 1363812637004,
+      title: "Conversation Title"
+    },
+    { type: "deletion",
+      user: {
+        name: "David Bowie",
+        id: 2
       },
-      { type: "message",
-        user: {
-          name: "Ground Control",
-          id: 6
-        },
-        timestamp: 1363812638004,
-        id: 785,
-        text: "Ground Control to Major Tom, your circuit's dead is there something wrong?"
+      id: 788,
+      timestamp: 1363802638110,
+      msg_id: 789
+    },
+    { type: "message",
+      user: {
+        name: "Ground Control",
+        id: 6
       },
-      { type: "message",
-        user: {
-          name: "Major Tom",
-          id: 9
-        },
-        timestamp: 1363812638104,
-        id: 789,
-        text: "I aaaammm floating 'round my tin can, faaaarrr above the moon.  Planet Earth is blue and there's nothing I can do..."
+      timestamp: 1363812638004,
+      id: 785,
+      text: "Ground Control to Major Tom, your circuit's dead is there something wrong?"
+    },
+    { type: "message",
+      user: {
+        name: "Major Tom",
+        id: 9
       },
-      { type: "message",
-        user: {
-          name: "Ground Control",
-          id: 6
-        },
-        timestamp: 1363812638204,
-        id: 790,
-        text: "Can you hear me Major Tom?  Can you hear me Major Tom?"
+      timestamp: 1363812638104,
+      id: 789,
+      text: "I aaaammm floating 'round my tin can, faaaarrr above the moon.  Planet Earth is blue and there's nothing I can do..."
+    },
+    { type: "message",
+      user: {
+        name: "Ground Control",
+        id: 6
       },
-    ]
-  },
+      timestamp: 1369681679894,
+      id: 790,
+      text: "Can you hear me Major Tom?  Can you hear me Major Tom?"
+    },
+  ],
   participants: [
     { name: "Sharon Jones",
-      id: 1
+      id: 1,
+      most_recent_viewed: 1363812638003
     },
     { name: "The Dap Kings",
-      id: 2
+      id: 2,
+      most_recent_viewed: 1363812638003
     }
   ],
   user: {
     "email": "george.washington@usa.gov",
     "full_name": "George Washington",
     "id": 1,
+    "is_admin": true,
     "address_book": [
       { "name": "Paul Revere",
         "id": 3
