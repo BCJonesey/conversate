@@ -21,7 +21,7 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
   render: function() {
     this.$el.html(this.template());
     this.prependChild(this.tokens);
-    this.appendChild(this.tokenOptions);
+    this.appendChildTo(this.tokenOptions, this.$('.token-input-wrap'));
     return this;
   },
   reRender: function() {
