@@ -96,10 +96,11 @@ var Structural = new (Support.CompositeView.extend({
     }
   },
   viewTopic: function(topic) {
-    if (this._conversation && topic.id !== this._conversation.topid_id) {
-      this._conversations.changeTopic(topic.id, function(collection) {
+    var self = this;
+    if (self._conversation && topic.id !== self._conversation.topid_id) {
+      self._conversations.changeTopic(topic.id, function(collection) {
         if (collection.length > 0) {
-          this._changeConversationView(collection.at(0));
+          self._changeConversationView(collection.at(0));
         }
       });
       Structural.Router.navigate(Structural.Router.topicPath(topic),
