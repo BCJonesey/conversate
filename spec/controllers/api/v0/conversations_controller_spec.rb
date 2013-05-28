@@ -107,12 +107,27 @@ describe Api::V0::ConversationsController do
     it 'successfully creates a new default conversation in this topic' do
       post :create, :topic_id => 1
       expect(response).to be_success
-      expect(response.code).to eq("200")
+      expect(response.code).to eq("201")
       body = JSON.parse(response.body)
       expect(body['id']).to eq(3)
       expect(body['title']).to eq('New Conversation')
     end
-    it 'successfully creates a new conversation in this topic with parameters'
+    it 'successfully creates a new conversation in this topic with parameters' do
+      User.create!(:email => 'dummyUser2@example.com',
+                          :full_name => 'Huffle Puff',
+                          :password => 'superDUPERsecretPassword')
+      post :create, :topic_id => 1, :title => 'Hufflepuff',
+        :participants => '[{"id":1,"name":"Rufio Pan"},{"id":2,"name":"Huffle Puff"}]',
+        :actions => '[{"type":"message","user":{"id":1},"text":"Hiyoo"}]'
+      expect(response).to be_success
+      expect(response.code).to eq("201")
+      body = JSON.parse(response.body)
+      expect(body['id']).to eq(3)
+      expect(body['title']).to eq('Hufflepuff')
+      conversation = Conversation.find_by_id(3)
+      expect(conversation.title).to eq('Hufflepuff')
+    end
+    it 'has the correct participants and actions'
     it 'responds unsuccessfully when the topic does not exist' do
       post :create, :topic_id => 100
       expect(response).not_to be_success

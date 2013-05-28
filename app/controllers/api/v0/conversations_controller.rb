@@ -13,8 +13,12 @@ class Api::V0::ConversationsController < ApplicationController
     topic = current_user.topics.find_by_id(params[:topic_id])
     head :status => :not_found and return unless topic
     conversation = topic.conversations.create()
+    if (params[:title])
+      conversation.title = params[:title]
+    end
     conversation.users << current_user
-    render :json => conversation.to_json(:user => current_user)
+    conversation.save
+    render :json => conversation.to_json(:user => current_user), :status => 201
   end
 
   def show
