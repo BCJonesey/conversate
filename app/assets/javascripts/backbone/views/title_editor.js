@@ -7,6 +7,7 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
   },
   render: function() {
     this.$el.html(this.template({conversation: this.conversation}));
+    this._input = this.$('input[type="text"]');
     return this;
   },
   events: {
@@ -32,8 +33,12 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
     this.$('.act-title-actions').addClass('hidden');
     this.$('.act-title-save-actions').removeClass('hidden');
     this.$el.addClass('editing');
-    this.$('input[type="text"]').removeAttr('readonly');
-    this.$('input[type="text"]').focus();
+    this._input.removeAttr('readonly');
+    this._input.focus();
+    // JQuery's focus() method selects all the text in the input which we don't
+    // want; this should clear it.
+    this._input.get(0).setSelectionRange(this._input.val().length + 1,
+                                         this._input.val().length + 2);
 
     Structural.on('clickAnywhere', this.cancelRetitle, this);
   },
