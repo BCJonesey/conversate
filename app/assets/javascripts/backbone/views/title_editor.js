@@ -19,7 +19,13 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
   },
   retitleConversation: function(e) {
     e.preventDefault();
-    var title = this.$('input').val();
+    var title = this.$('input').val().trim();
+
+    if (title === this.conversation.get('title').trim()) {
+      this.cancelRetitle();
+      return;
+    }
+
     this.conversation.changeTitle(title);
     this.trigger('change_title', title);
     this.closeTitleEditor();
