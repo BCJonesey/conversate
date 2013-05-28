@@ -47,7 +47,7 @@ Structural.Views.Participants = Support.CompositeView.extend({
       this.trigger('moveAutocompleteTarget', 'up');
     } else if (e.which === Support.Keys.down) {
       this.trigger('moveAutocompleteTarget', 'down');
-    } else if (e.which === Supprt.Keys.enter ||
+    } else if (e.which === Support.Keys.enter ||
                e.which === Support.Keys.tab) {
       this.trigger('selectAutocompleteTarget');
     } else {
