@@ -4,6 +4,7 @@ Structural.Views.AutocompleteOptions = Support.CompositeView.extend({
   template: JST['backbone/templates/participants/options'],
   initialize: function(options) {
     options = options || {};
+    this.participants = options.participants;
     this.matches = [];
     this.targetIndex = 0;
   },
@@ -38,8 +39,9 @@ Structural.Views.AutocompleteOptions = Support.CompositeView.extend({
     } else {
       var regex = new RegExp(pattern, 'gi');
       this.matches = this.collection.filter(function(u) {
-        return regex.test(u.get('name'));
-      });
+        return regex.test(u.get('name')) &&
+               this.participants.get(u.id) === undefined;
+      }, this);
     }
     this.targetIndex = 0;
     this.render();
