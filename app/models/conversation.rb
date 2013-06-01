@@ -103,8 +103,21 @@ class Conversation < ActiveRecord::Base
     case action.type
     when 'retitle'
       self.title = action.title
-      save
+    when 'update_users'
+      if action.added
+        action.added.map do |action_user|
+          user = User.find_by_id(action_user['id'])
+          self.users << user
+        end
+      end
+      if action.removed
+        action.removed.map do |action_user|
+          user = User.find_by_id(action_user['id'])
+          self.users - user
+        end
+      end
     end
+    save
   end
 
   protected
