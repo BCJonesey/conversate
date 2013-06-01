@@ -108,6 +108,7 @@
 
 .token-input-wrap{
   display:inline-block;
+  position:relative;
 }
 
 
@@ -213,8 +214,9 @@
 
 .act-unread {
   position:relative;
-  &:after{
-    content: "";
+  z-index: 0;
+  &:before{
+    content: " ";
     position: absolute;
     right: 0;
     top: 0;
@@ -222,7 +224,6 @@
     background-color: #BBB;
     width: 0.15rem;
     margin: 0.25rem 0.15rem;
-    transition:background-color 1s;
   }
 }
 
@@ -260,21 +261,19 @@
 .tokens{
   list-style: none;
 }
-.token-options{
-  display:none;
-}
 
-.editing .token-options{
+.token-options{
+  position:absolute;
+  top:100%;
+  left:0;
   display:block;
   width: auto;
-  min-width: 5rem;
+  min-width: 10rem;
   max-width: 15rem;
   max-height:10rem;
   overflow-y:auto;
   border:1px solid #CCC;
   background-color:#FAFAFA;
-  position:relative;
-  top:.3rem;
   box-shadow:0 0.1rem .4rem rgba(0,0,0,0.2);
 }
 
