@@ -33,11 +33,22 @@ class User < ActiveRecord::Base
   # Note - currently everyone is assumed to know everyone else.  Fix this at
   # some future date.
   def address_book
-    return User.all - [self]
+    users = User.all - [self]
+    address_book = Array.new
+    users.map do |user|
+      addressee = Hash.new
+      addressee['id'] = user.id
+      addressee['full_name'] = user.full_name
+      addressee['email'] = user.email
+      address_book.push(addressee)
+    end
+    return address_book
   end
 
   # This avoids us writing out passwords, salts, etc. when rendering json.
   def as_json(options={})
-    super(:only => [:email, :full_name, :id])
+    json = super(:only => [:email, :full_name, :id])
+    json['address_book'] = address_book
+    return json
   end
 end
