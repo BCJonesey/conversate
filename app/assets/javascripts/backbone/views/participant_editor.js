@@ -7,7 +7,10 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
     this.addressBook = options.addressBook;
 
     this.tokens = new Structural.Views.Participants({collection: this.participants});
-    this.tokenOptions = new Structural.Views.AutocompleteOptions({collection: this.addressBook});
+    this.tokenOptions = new Structural.Views.AutocompleteOptions({
+      collection: this.addressBook,
+      participants: this.participants
+    });
     this.tokens.on('moveAutocompleteTarget', this.tokenOptions.moveAutocompleteTarget, this.tokenOptions);
     this.tokens.on('changeAutocompleteOptions', this.tokenOptions.changeAutocompleteOptions, this.tokenOptions);
     this.tokens.on('selectAutocompleteTarget', this.selectParticipant, this);
