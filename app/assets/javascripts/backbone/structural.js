@@ -16,9 +16,6 @@ var Structural = new (Support.CompositeView.extend({
     this.apiPrefix = options.apiPrefix;
   },
   start: function(bootstrap) {
-    // TODO: Does any fetching stuff need to go here? I kind of think it might
-    //       all fit in the models/collections.
-
     this._topics = new Structural.Collections.Topics(bootstrap.topics);
     this._conversations = new Structural.Collections.Conversations(bootstrap.conversations);
     this._participants = new Structural.Collections.Participants(bootstrap.participants);

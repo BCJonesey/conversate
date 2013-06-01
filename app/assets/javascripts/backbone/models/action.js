@@ -25,6 +25,12 @@ Structural.Models.Action = Backbone.Model.extend({
     }
   },
 
+  // This seems to make things better than having no validate functions, which
+  // should be the case.
+  validate: function() {
+    return true;
+  },
+
   focus: function() {
     this.set('is_current', true);
   },
