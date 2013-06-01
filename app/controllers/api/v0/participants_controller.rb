@@ -15,6 +15,12 @@ class Api::V0::ParticipantsController < ApplicationController
     user = User.find_by_id(params[:user_id])
     head :status => 404 and return unless conversation && user
     conversation.users << user
+
+    # Let's add this conversation to the user's first topic for now. TODO: Don't do this.
+    binding.pry
+    topic = user.topics.first
+    topic.conversations << conversation
+
     render :json => user.to_json, :status => 201
   end
 

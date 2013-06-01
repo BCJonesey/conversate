@@ -52,6 +52,7 @@ describe Api::V0::ParticipantsController do
       expect(body['email']).to eq('added@example.com')
     end
     it 'successfully creates a participant with the correct last_updated_time'
+    it 'adds the participant to the conversation and puts it into the correct topic for that user'
     it 'unsuccessfully creates when the conversation does not exist' do
       post :create, :conversation_id => 100, :user_id => 1
       expect(response).not_to be_success

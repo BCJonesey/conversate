@@ -10,6 +10,8 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     this.on('reset', this._lieAboutActionsSoItLooksNiceToHumans, this);
     this.on('reset', this.calculateUnreadedness, this);
     this.on('reset', this._daisyChainUnreadCascade, this);
+
+    this.startUpdate();
   },
   comparator: 'timestamp',
 
@@ -143,3 +145,5 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     model.save();
   }
 });
+
+_.extend(Structural.Collections.Actions.prototype, Support.FetchTimer(5000));

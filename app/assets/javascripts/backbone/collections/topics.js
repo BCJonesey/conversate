@@ -1,7 +1,11 @@
-
 Structural.Collections.Topics = Backbone.Collection.extend({
   model: Structural.Models.Topic,
   url: Structural.apiPrefix + '/topics',
+
+  initialize: function(options) {
+    options = options || {};
+    this.startUpdate();
+  },
 
   focus: function(id) {
     var topic = this.get(id);
@@ -17,3 +21,5 @@ Structural.Collections.Topics = Backbone.Collection.extend({
     return this.where({is_current: true}).pop();
   }
 });
+
+_.extend(Structural.Collections.Topics.prototype, Support.FetchTimer(30000));
