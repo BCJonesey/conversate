@@ -8,6 +8,16 @@ Structural.Models.Action = Backbone.Model.extend({
     }
 
     if (this.get('type') == 'update_users' &&
+        (!this.get('added') || this.get('added').length === 0)) {
+      this.set('added', []);
+    }
+
+    if (this.get('type') == 'update_users' &&
+        (!this.get('removed') || this.get('removed').length === 0)) {
+      this.set('removed', []);
+    }
+
+    if (this.get('type') == 'update_users' &&
         this.get('added') &&
         this.get('removed')) {
       this.set('added', new Structural.Collections.Participants(this.get('added')));
