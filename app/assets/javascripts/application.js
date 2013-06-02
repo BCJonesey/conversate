@@ -14,8 +14,6 @@
 //= require jquery_ujs
 //= require underscore
 //= require backbone
-//= require backbone_rails_sync
-//= require backbone_datalink
 // TODO: Remove conversate once all the pieces of it are gone.
 //= require backbone/conversate
 //= require backbone/structural
