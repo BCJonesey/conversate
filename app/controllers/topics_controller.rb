@@ -3,33 +3,12 @@ class TopicsController < ApplicationController
 
   def show
     topic = Topic.find(params[:id])
-    respond_to do |format|
-      format.html {
-        conversation = topic.conversations.order('updated_at DESC').first
-        if conversation
-          redirect_to conversation_path(conversation.id)
-        else
-          @conversations = []
-          @opened_conversation = nil
-          @opened_topic = topic
-          @new_conversation = false
-          render 'conversations/index'
-        end
-      }
-      format.json {
-        if (params[:conversation])
-          opened_conversation = Conversation.find(params[:conversation])
-        end
+    @topics = current_user.topics
+    @conversations = topic.conversations
+    @conversation = topic.conversations.first
+    @actions = @conversation ? @conversation.actions : nil
+    @participants = @conversation ? @conversation.participants : nil
 
-        render :json => topic.conversations.order('updated_at DESC').to_json(:user => current_user, :opened_conversation => opened_conversation)
-      }
-    end
-  end
-
-  def create
-    topic = Topic.new(:name => params[:name])
-    topic.save
-    current_user.topics << topic
-    redirect_to :back
+    render 'structural/show'
   end
 end

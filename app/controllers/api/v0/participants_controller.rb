@@ -17,7 +17,6 @@ class Api::V0::ParticipantsController < ApplicationController
     conversation.users << user
 
     # Let's add this conversation to the user's first topic for now. TODO: Don't do this.
-    binding.pry
     topic = user.topics.first
     topic.conversations << conversation
 

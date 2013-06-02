@@ -1,0 +1,26 @@
+<%= content_for :javascript do -%>
+
+(function() {
+  var topics = <%= json_with_user(@topics) %>;
+  var conversations = <%= json_with_user(@conversations) %>;
+  var user = <%= current_user.to_json.html_safe %>;
+
+  /* I'd like to transition the null-case of these three to 'undefined', but
+     that's a refactor for another day. */
+  var conversation = <%= @conversation ? json_with_user(@conversation) : '{}' %>;
+  var actions = <%= @conversation ? json_with_user(@actions) : '[]' %>;
+  var participants = <%= @conversation ? json_with_user(@participants) : '[]' %>;
+
+  window.bootstrap = {
+    topics: topics,
+    conversations: conversations,
+    actions: actions,
+    conversation: conversations,
+    participants: participants,
+    user: user
+  };
+})();
+
+Structural.start(bootstrap);
+
+<% end -%>

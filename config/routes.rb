@@ -6,6 +6,10 @@ Conversate::Application.routes.draw do
   resource :session, :only => [:new, :create]
   get 'session/logout' => 'sessions#destroy', :as => 'destroy_sessions'
 
+  get 'conversation/:slug/:id(#message:message_id)' => 'conversations#show',
+    :as => 'conversation'
+  get 'topic/:slug/:id' => 'topics#show', :as => 'topic'
+
   get 'ux/testbed' => 'testbed#index'
   get 'ux/testbed/:view' => 'testbed#test_view', :as  =>'test_view'
 

@@ -2,7 +2,6 @@
 </div>
 
 <%= content_for :javascript do -%>
-  <%= javascript_tag do %>
 
 data = {
   topics: [
@@ -425,5 +424,4 @@ if (name != 'the-whole-app') {
   $('.ux-testbed-container').html(view.el);
 }
 
-  <% end %>
 <% end %>

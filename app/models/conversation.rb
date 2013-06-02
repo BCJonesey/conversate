@@ -48,11 +48,8 @@ class Conversation < ActiveRecord::Base
     conversation_pieces
   end
 
-  def participants(current_user)
-    #active = self.actions.order('created_at DESC').collect {|e| e.user}.uniq
-    #(active + (self.users - active) - [current_user]) - (active - self.users)
-    # The above call is very expensive.
-    self.users - [current_user]
+  def participants
+    self.users
   end
 
   # Public: Gets the next id for a message in this conversation.
@@ -90,7 +87,6 @@ class Conversation < ActiveRecord::Base
   def as_json(options)
     json = super(options)
     # TODO: DRY.
-    participants = participants(options[:user])
     json[:participants] = participants;
     json[:class] = list_item_classes(self, options[:opened_conversation],
                                      options[:user])
