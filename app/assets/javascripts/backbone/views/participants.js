@@ -7,6 +7,7 @@ Structural.Views.Participants = Support.CompositeView.extend({
     this.originalCollection = this.collection.clone();
   },
   render: function() {
+    this.$el.empty();
     this.$el.append($(this.userReminder));
     this.$el.append($(this.inputElement));
     this.collection.each(this.renderParticipant, this);
