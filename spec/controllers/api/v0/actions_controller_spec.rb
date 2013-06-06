@@ -157,7 +157,7 @@ describe Api::V0::ActionsController do
       action = Action.find(7)
       expect(action.msg_id).to eq('1')
     end
-    it 'fails when deleting a non-message action', :t => true do
+    it 'fails when deleting a non-message action' do
       post :create, :conversation_id => 1, :type => 'deletion', :msg_id => 2
       expect(response).not_to be_success
       expect(response.code).to eq("409")
