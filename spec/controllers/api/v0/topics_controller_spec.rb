@@ -7,12 +7,12 @@ describe Api::V0::TopicsController do
                           :full_name => 'Rufio Pan',
                           :password => 'superDUPERsecretPassword')
     login_user
-    @user.topics.create(:name => 'Terror Time')
-    @user.topics.create(:name => 'Plebians')
+    Topic.create(:name => 'Terror Time')
+    Topic.create(:name => 'Plebians')
   end
 
   describe 'GET #index' do
-    it "successfully returns a list of all of the user's topics" do
+    it "successfully returns a list of all topics" do
       get :index
       expect(response).to be_success
       expect(response.code).to eq("200")
