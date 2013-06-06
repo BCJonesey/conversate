@@ -3,7 +3,7 @@ class TopicsController < ApplicationController
 
   def show
     topic = Topic.find(params[:id])
-    @topics = current_user.topics
+    @topics = Topic.all
     @conversations = topic.conversations
     @conversation = topic.conversations.first
     @actions = @conversation ? @conversation.actions : nil
