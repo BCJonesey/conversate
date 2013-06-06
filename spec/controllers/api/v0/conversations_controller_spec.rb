@@ -7,7 +7,7 @@ describe Api::V0::ConversationsController do
                           :full_name => 'Rufio Pan',
                           :password => 'superDUPERsecretPassword')
     login_user
-    @topic = @user.topics.create(:name => 'The Wobbles')
+    @topic = Topic.create(:name => 'The Wobbles')
     @topic.conversations.create(:title => 'Wobbly Wobble')
     @topic.conversations.create(:title => 'Pretty Damn Solid')
   end

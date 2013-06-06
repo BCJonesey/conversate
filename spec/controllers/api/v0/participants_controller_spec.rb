@@ -7,6 +7,7 @@ describe Api::V0::ParticipantsController do
                           :full_name => 'Rufio Pan',
                           :password => 'superDUPERsecretPassword')
     login_user
+    Topic.create!(:name => 'Herp Derp Topic Werp')
     conversation = @user.conversations.create!()
     conversation.users.create(:email => 'ragnar@example.com',
                                   :full_name => 'Ragnar the Red',
@@ -22,12 +23,15 @@ describe Api::V0::ParticipantsController do
       expect(response).to be_success
       expect(response.code).to eq("200")
       body = JSON.parse(response.body)
-      expect(body[0]['id']).to eq(2)
-      expect(body[0]['full_name']).to eq('Ragnar the Red')
-      expect(body[0]['email']).to eq('ragnar@example.com')
-      expect(body[1]['id']).to eq(3)
-      expect(body[1]['full_name']).to eq('Hurdle Turtle')
-      expect(body[1]['email']).to eq('hurdleturtle@example.com')
+      expect(body[0]['id']).to eq(1)
+      expect(body[0]['full_name']).to eq('Rufio Pan')
+      expect(body[0]['email']).to eq('dummyUser@example.com')
+      expect(body[1]['id']).to eq(2)
+      expect(body[1]['full_name']).to eq('Ragnar the Red')
+      expect(body[1]['email']).to eq('ragnar@example.com')
+      expect(body[2]['id']).to eq(3)
+      expect(body[2]['full_name']).to eq('Hurdle Turtle')
+      expect(body[2]['email']).to eq('hurdleturtle@example.com')
     end
     it 'successfully responds with the correct last_updated_time'
     it 'unsuccessfully responds when the conversation does not exist' do
@@ -75,7 +79,7 @@ describe Api::V0::ParticipantsController do
       expect(body['full_name']).to eq('Hurdle Turtle')
       expect(body['email']).to eq('hurdleturtle@example.com')
       conversation = Conversation.find_by_id(1)
-      expect(conversation.participants(@user).count).to eq(1)
+      expect(conversation.participants.count).to eq(2)
     end
     it 'unsuccessfully removes a participant when the conversation does not exist' do
       delete :destroy, :conversation_id => 100, :id => 3
