@@ -74,7 +74,7 @@ class Conversation < ActiveRecord::Base
   end
 
   def update_most_recent_event
-    self.most_recent_event = DateTime.now
+    self.most_recent_event = Time.now
     self.save
   end
 
