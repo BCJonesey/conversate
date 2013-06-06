@@ -32,11 +32,6 @@ ActiveRecord::Schema.define(:version => 20130606004634) do
     t.integer  "topic_id",          :default => 1
   end
 
-  create_table "conversations_topics", :force => true do |t|
-    t.integer "conversation_id"
-    t.integer "topic_id"
-  end
-
   create_table "reading_logs", :force => true do |t|
     t.integer "conversation_id"
     t.integer "user_id"
@@ -47,11 +42,6 @@ ActiveRecord::Schema.define(:version => 20130606004634) do
     t.string   "name",       :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-  end
-
-  create_table "topics_users", :force => true do |t|
-    t.integer "user_id"
-    t.integer "topic_id"
   end
 
   create_table "users", :force => true do |t|
