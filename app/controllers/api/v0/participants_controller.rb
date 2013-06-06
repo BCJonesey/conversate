@@ -5,7 +5,7 @@ class Api::V0::ParticipantsController < ApplicationController
   def index
     conversation = Conversation.find_by_id(params[:conversation_id])
     head :status => 404 and return unless conversation
-    render :json => conversation.participants(current_user).to_json
+    render :json => conversation.participants.to_json
   end
 
   def create
@@ -16,8 +16,8 @@ class Api::V0::ParticipantsController < ApplicationController
     head :status => 404 and return unless conversation && user
     conversation.users << user
 
-    # Let's add this conversation to the user's first topic for now. TODO: Don't do this.
-    topic = user.topics.first
+    # Let's add this conversation to the first topic for now.
+    topic = Topic.first
     topic.conversations << conversation
 
     render :json => user.to_json, :status => 201
