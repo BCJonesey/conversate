@@ -23,7 +23,7 @@ Structural.Router = new (Backbone.Router.extend({
   },
   topic: function(slug, id) {
     Structural.focus({ topic: id });
-    this._fixSlug('topic/', slug, '/' + id, Structural._topics.where({id: id|0})[0].get('name'));
+    this._fixSlug('topic/', slug, '/' + id, Structural._topics.get(id|0).get('name'));
   },
   profile: function() {
 
