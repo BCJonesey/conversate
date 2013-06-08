@@ -3,7 +3,7 @@ class Conversation < ActiveRecord::Base
   has_many :reading_logs
   has_many :users, :through => :reading_logs
   has_many :actions, :inverse_of => :conversation
-  has_and_belongs_to_many :topics
+  belongs_to :topic
 
   attr_accessible :title, :users, :most_recent_event
 
