@@ -3,7 +3,7 @@ class ConversationsController < ApplicationController
   before_filter :require_participation
 
   def show
-    @topics = current_user.topics
+    @topics = Topic.all
     @conversation = Conversation.find(params[:id])
     @conversations = @conversation.topic.conversations
     @actions = @conversation.actions

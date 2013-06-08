@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   def create
     user = login params[:email], params[:password], params[:remember_me]
     if user
-      redirect_back_or_to conversations_url
+      redirect_back_or_to root_url
     else
       @login_error = true
       render :new
