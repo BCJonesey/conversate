@@ -5,7 +5,8 @@ class ConversationsController < ApplicationController
   def show
     @topics = Topic.all
     @conversation = Conversation.find(params[:id])
-    @conversations = @conversation.topic.conversations
+    topic = @conversation.topic
+    @conversations = current_user.conversations.where(:topic_id => topic.id)
     @actions = @conversation.actions
     @participants = @conversation.participants
 

@@ -5,7 +5,7 @@ class Api::V0::ConversationsController < ApplicationController
   def index
     topic = Topic.find_by_id(params[:topic_id])
     head :status => :not_found and return unless topic
-    render :json => topic.conversations.to_json(:user => current_user)
+    render :json => current_user.conversations.where(:topic_id => topic.id).to_json(:user => current_user)
   end
 
   # Note that this is always on a url like /topics/1/conversations.

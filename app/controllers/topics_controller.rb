@@ -4,8 +4,8 @@ class TopicsController < ApplicationController
   def show
     topic = Topic.find(params[:id])
     @topics = Topic.all
-    @conversations = topic.conversations
-    @conversation = topic.conversations.first
+    @conversations = current_user.conversations.where(:topic_id => topic.id)
+    @conversation = @conversations.first
     @actions = @conversation ? @conversation.actions : nil
     @participants = @conversation ? @conversation.participants : nil
 
