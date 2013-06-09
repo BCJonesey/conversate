@@ -2,7 +2,7 @@ Conversate::Application.routes.draw do
   root :to => 'home#index'
 
   get 'admin' => 'admin#index', :as => 'admin'
-  resource :users, :only => [:new, :create, :edit, :update]
+  resource :users, :only => [:new, :create, :update]
   resource :session, :only => [:new, :create]
   get 'session/logout' => 'sessions#destroy', :as => 'destroy_sessions'
 
@@ -12,6 +12,7 @@ Conversate::Application.routes.draw do
 
   get 'ux/testbed' => 'testbed#index'
   get 'ux/testbed/:view' => 'testbed#test_view', :as  =>'test_view'
+  get 'profile' => 'users#edit'
 
   namespace :api do
     namespace :v0 do
