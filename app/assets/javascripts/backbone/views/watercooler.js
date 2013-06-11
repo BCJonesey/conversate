@@ -31,6 +31,9 @@ Structural.Views.WaterCooler = Support.CompositeView.extend({
   changeConversation: function(conversation) {
     this.actionsView.changeConversation(conversation);
   },
+  clearConversation: function() {
+    this.actionsView.clearConversation();
+  },
   moveConversationMode: function() {
     this.topicsView.moveConversationMode();
   }

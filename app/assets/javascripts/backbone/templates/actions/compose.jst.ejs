@@ -24,7 +24,7 @@
           <a class="send-long-form btn btn-primary">Send</a>
         </div>
         <div class="btn-group pull-left">
-          <a class="long-form-title"><%= conversation.escape('title') %></a>
+          <a class="long-form-title"><%= conversation ? conversation.escape('title') : '' %></a>
         </div>
       </div>
       <div class="long-form-contents">

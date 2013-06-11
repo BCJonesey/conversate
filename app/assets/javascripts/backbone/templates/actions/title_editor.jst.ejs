@@ -1,6 +1,6 @@
 <form>
   <input autocomplete="off" class="act-title-input" name="title" readonly="readonly"
-         type="text" value="<%= conversation.escape('title') %>">
+         type="text" value="<%= conversation ? conversation.escape('title') : '' %>">
   <input class="hidden" name="commit" type="submit" value="Retitle">
 </form>
 <div class="btn-group act-title-actions">
