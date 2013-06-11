@@ -116,6 +116,10 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     this.conversationId = id;
     this.fetch({reset: true});
   },
+  clearConversation: function() {
+    this.conversationId = undefined;
+    this.reset();
+  },
 
   calculateUnreadedness: function(participants) {
     if (participants) {

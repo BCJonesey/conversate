@@ -13,5 +13,9 @@ Structural.Collections.Participants = Backbone.Collection.extend({
     this.conversationId = conversationId;
     this.reset();
     this.fetch({reset: true});
+  },
+  clearConversation: function() {
+    this.conversationId = undefined;
+    this.reset();
   }
 })

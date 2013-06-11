@@ -30,5 +30,9 @@ Structural.Views.ActionContainer = Support.CompositeView.extend({
   changeConversation: function(conversation) {
     this.titleView.changeConversation(conversation);
     this.composeView.changeConversation(conversation);
+  },
+  clearConversation: function() {
+    this.titleView.clearConversation();
+    this.composeView.clearConversation();
   }
 });
