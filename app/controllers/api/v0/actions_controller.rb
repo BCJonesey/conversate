@@ -13,8 +13,8 @@ class Api::V0::ActionsController < ApplicationController
     conversation = current_user.conversations.find_by_id(params[:conversation_id])
     head :status => 404 and return unless conversation
     action = conversation.actions.new(:type => params[:type],
-                                          :data => Action::data_for_params(params),
-                                          :user_id => current_user.id)
+                                      :data => Action::data_for_params(params),
+                                      :user_id => current_user.id)
     if (action.type == 'deletion')
       deleted = Action.find(action.msg_id)
       head :status => 409 and return unless (deleted.type == 'message')
@@ -23,6 +23,7 @@ class Api::V0::ActionsController < ApplicationController
     conversation.handle(action)
     action.save
     conversation.update_most_recent_event
+    current_user.update_most_recent_viewed conversation
     render :json => action.to_json, :status => 201
   end
 

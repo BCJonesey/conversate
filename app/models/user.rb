@@ -17,12 +17,10 @@ class User < ActiveRecord::Base
     full_name || email
   end
 
-  def mark_as_read(conversation)
-    if conversation.actions.length > 0
-      reading_log = conversation.reading_logs.where({:user_id => self.id}).first
-      reading_log.last_read_event = conversation.actions.order('created_at DESC').first.id
-      reading_log.save!
-    end
+  def update_most_recent_viewed(conversation)
+    log = self.reading_logs.where(:conversation_id => conversation.id).first
+    log.most_recent_viewed = Time.now.to_datetime
+    log.save!
   end
 
   def unread_count
