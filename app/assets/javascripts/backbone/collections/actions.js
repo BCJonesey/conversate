@@ -10,6 +10,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     this.on('reset', this._lieAboutActionsSoItLooksNiceToHumans, this);
     this.on('reset', this.calculateUnreadedness, this);
     this.on('reset', this._daisyChainUnreadCascade, this);
+    this.on('add', this.setStateOnNewAction, this);
 
     this.startUpdate();
   },
@@ -144,6 +145,12 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     }).forEach(function(action) {
       action.markUnread();
     });
+  },
+  setStateOnNewAction: function(model) {
+    if (model.get('user').id !== this.userId) {
+      // All new messages from other users are unread.
+      model.markUnread();
+    }
   },
 
   _newAction: function(data) {
