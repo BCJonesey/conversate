@@ -3,7 +3,7 @@ Structural.Collections.Participants = Backbone.Collection.extend({
   url: function() {
     return Structural.apiPrefix + '/conversations/' + this.conversationId + '/participants';
   },
-  intialize: function(data, options) {
+  initialize: function(data, options) {
     options = options || {};
     this.conversationId = options.conversation;
   },

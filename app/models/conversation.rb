@@ -67,10 +67,10 @@ class Conversation < ActiveRecord::Base
     messages = self.actions.where(:type => 'message')
     return false if messages.length == 0
 
-    action = last_read_action_for_user(user)
-    return true if action == nil
-
-    return messages.order('created_at DESC').first.created_at > action.created_at
+    most_recent_viewed = most_recent_viewed_for_user(user)
+    # Fudge the timestamp here because actions sometimes have timestamps in the middle
+    # of seconds.
+    return messages.order('created_at DESC').first.created_at > most_recent_viewed.in(1)
   end
 
   def update_most_recent_event
@@ -79,19 +79,21 @@ class Conversation < ActiveRecord::Base
   end
 
   def most_recent_viewed_for_user(user)
-    action = last_read_action_for_user(user)
-    return DateTime.parse('2000-01-01 01:07:19 UTC') unless action
-    return last_read_action_for_user(user).created_at
+    most_recent_viewed = user.reading_logs.where(:conversation_id => self.id).first.most_recent_viewed
+    return DateTime.parse('2000-01-01 01:07:19 UTC') unless most_recent_viewed
+    return most_recent_viewed
   end
 
   def as_json(options)
     json = super(options)
     # TODO: DRY.
+    most_recent_viewed = most_recent_viewed_for_user(options[:user])
     json[:participants] = participants;
-    json[:class] = list_item_classes(self, options[:opened_conversation],
-                                     options[:user])
+    # Fudge the timestamp here because actions sometimes have timestamps in the middle
+    # of seconds.
+    json[:unread_count] = self.actions.where('created_at > ?', most_recent_viewed.in(1)).length
     json[:most_recent_event] = most_recent_event.msec
-    json[:most_recent_viewed] = most_recent_viewed_for_user(options[:user]).msec
+    json[:most_recent_viewed] = most_recent_viewed.msec
     return json
   end
 
@@ -125,15 +127,5 @@ class Conversation < ActiveRecord::Base
   def default_conversation_title()
     return 'New Conversation' if self.users.length <= 1
     "A conversation with #{self.users.map {|u| u.name}.join(', ')}"
-  end
-
-  private
-
-  def last_read_action_for_user(user)
-    log = self.reading_logs.where({:user_id => user.id}).first
-    return nil unless log
-    last_read_action_id = log.last_read_event
-    return nil unless last_read_action_id
-    return Action.find(last_read_action_id)
   end
 end

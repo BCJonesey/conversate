@@ -136,6 +136,9 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     if (!me) { return; }
 
     var cutoff = me.get('most_recent_viewed');
+    // The server loses millisecond information, so we have to move the cutoff
+    // up to the nearest full second in the future.
+    cutoff = cutoff + 1000;
     this.filter(function(action) {
       return action.get('timestamp') > cutoff;
     }).forEach(function(action) {

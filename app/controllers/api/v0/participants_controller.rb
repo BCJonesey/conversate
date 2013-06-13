@@ -5,7 +5,7 @@ class Api::V0::ParticipantsController < ApplicationController
   def index
     conversation = Conversation.find_by_id(params[:conversation_id])
     head :status => 404 and return unless conversation
-    render :json => conversation.participants.to_json
+    render :json => conversation.participants.to_json(:conversation => conversation)
   end
 
   def create
@@ -32,4 +32,14 @@ class Api::V0::ParticipantsController < ApplicationController
     render :json => user.to_json, :status => 204
   end
 
+  def update
+    conversation = Conversation.find_by_id(params[:conversation_id])
+    user = User.find_by_id(params[:id])
+    head :status => 404 and return unless conversation && user
+    log = user.reading_logs.where(:conversation_id => conversation.id).first
+    # API sends milliseconds
+    log.most_recent_viewed = DateTime.strptime((params[:most_recent_viewed] / 1000).to_s, "%s")
+    log.save
+    render :json => user.to_json, :status => 204
+  end
 end

@@ -49,6 +49,11 @@ class User < ActiveRecord::Base
   def as_json(options={})
     json = super(:only => [:email, :full_name, :id])
     json['address_book'] = address_book
+
+    if options[:conversation]
+      json['most_recent_viewed'] = options[:conversation].most_recent_viewed_for_user(self).msec
+    end
+
     return json
   end
 end

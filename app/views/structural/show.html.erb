@@ -9,7 +9,7 @@
      that's a refactor for another day. */
   var conversation = <%= @conversation ? json_with_user(@conversation) : '{}' %>;
   var actions = <%= @conversation ? json_with_user(@actions) : '[]' %>;
-  var participants = <%= @conversation ? json_with_user(@participants) : '[]' %>;
+  var participants = <%= @conversation ? json_with_user(@participants, :conversation => @conversation) : '[]' %>;
 
   window.bootstrap = {
     topics: topics,
