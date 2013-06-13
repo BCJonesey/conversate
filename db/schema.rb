@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130606010159) do
+ActiveRecord::Schema.define(:version => 20130611204131) do
 
   create_table "actions", :force => true do |t|
     t.integer  "conversation_id"
@@ -33,9 +33,9 @@ ActiveRecord::Schema.define(:version => 20130606010159) do
   end
 
   create_table "reading_logs", :force => true do |t|
-    t.integer "conversation_id"
-    t.integer "user_id"
-    t.integer "last_read_event"
+    t.integer  "conversation_id"
+    t.integer  "user_id"
+    t.datetime "most_recent_viewed"
   end
 
   create_table "topics", :force => true do |t|
