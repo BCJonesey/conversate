@@ -146,8 +146,18 @@ Structural.Collections.Actions = Backbone.Collection.extend({
       action.markUnread();
     });
   },
-  setStateOnNewAction: function(model) {
-    if (model.get('user').id !== this.userId) {
+  setStateOnNewAction: function(model, collection) {
+    var prev = collection.at(collection.indexOf(model) - 1);
+    model.on('change:is_unread', function() {
+      if (!model.get('is_unread')) {
+        prev.markRead();
+      }
+    });
+
+    if (model.get('user').id === this.userId) {
+      model.markRead();
+    }
+    else {
       // All new messages from other users are unread.
       model.markUnread();
     }

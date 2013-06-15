@@ -5,6 +5,20 @@ Structural.Models.Action = Backbone.Model.extend({
 
     if (this.get('user')) {
       this.set('user', new Structural.Models.Participant(this.get('user')));
+
+      // When syncing with the server, the user property has a habit of
+      // being overwritten and not replaced with a model.
+      this.on('change:user', function() {
+        // I swear to god, when I inverted this condition it was executing the
+        // wrong path.  The next time you read this comment try re-doing this
+        // and maybe the stars will be in a better alignment.
+        if (this.get('user') instanceof Structural.Models.Participant) {
+          // No-op
+        }
+        else {
+          this.set('user', new Structural.Models.Participant(this.get('user')));
+        }
+      }, this);
     }
 
     if (this.get('type') == 'update_users' &&
@@ -34,10 +48,6 @@ Structural.Models.Action = Backbone.Model.extend({
       this.set('to', new Structrual.Models.Conversation(this.get('to')));
     }
   },
-
-  // This seems to make things better than having no validate functions, which
-  // should be the case.
-  validate: function() {},
 
   focus: function() {
     this.set('is_current', true);
