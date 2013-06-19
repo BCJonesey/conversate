@@ -11,7 +11,7 @@ class ConvertLastReadEventToTimestamp < ActiveRecord::Migration
     ReadingLog.all.each do |log|
       if (log.last_read_event)
         action = Action.find(log.last_read_event)
-        log.most_recent_viewed = action.timestamp
+        log.most_recent_viewed = action.created_at
       else
         log.most_recent_viewed = nil
       end
