@@ -2,6 +2,7 @@ class ConvertLastReadEventToTimestamp < ActiveRecord::Migration
   class ReadingLog < ActiveRecord::Base
   end
   class Action < ActiveRecord::Base
+    self.inheritance_column = :type_rails
   end
 
   def up
