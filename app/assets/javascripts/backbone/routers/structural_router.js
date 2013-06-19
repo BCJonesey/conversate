@@ -11,12 +11,12 @@ Structural.Router = new (Backbone.Router.extend({
     Structural.focus({ topic: Structural._topics.at(0).id });
   },
   conversation: function(slug, id) {
-    Structural.focus({ topic: Structural._conversation.topic_id,
+    Structural.focus({ topic: Structural._conversation.get('topic_id'),
                        conversation: id });
     this._fixSlug('conversation/', slug, '/' + id, Structural._conversation.get('title'));
   },
   message: function(slug, id, messageId) {
-    Structural.focus({ topic: Structural._conversation.topic_id,
+    Structural.focus({ topic: Structural._conversation.get('topic_id'),
                        conversation: id,
                        message: messageId });
     this._fixSlug('conversation/', slug, '/' + id + '#message' + messageId, Structural._conversation.get('title'));

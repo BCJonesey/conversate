@@ -9,5 +9,11 @@ Structural.Models.Topic = Backbone.Model.extend({
   },
   unfocus: function() {
     this.set('is_current', false);
+  },
+
+  updateUnreadCount: function(conversations) {
+    this.set('unread_conversations', conversations.filter(function(conversation) {
+      return conversation.get('unread_count') > 0;
+    }).length);
   }
 });

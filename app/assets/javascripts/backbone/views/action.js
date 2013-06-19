@@ -71,6 +71,7 @@ Structural.Views.Action = Support.CompositeView.extend({
     if (this.model.get('is_unread')) {
       this.model.markRead();
       Structural.updateReadTimestamp(this.model);
+      Structural.updateUnreadCounts();
     }
   }
 });

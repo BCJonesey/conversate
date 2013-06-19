@@ -168,5 +168,10 @@ var Structural = new (Support.CompositeView.extend({
   },
   updateReadTimestamp: function(action) {
     this._participants.get(this._user.id).updateReadTimestamp(action.get('timestamp'));
+  },
+  updateUnreadCounts: function() {
+    this._conversation.updateUnreadCount(this._actions);
+    var topic = this._topics.get(this._conversation.get('topic_id'));
+    topic.updateUnreadCount(this._conversations);
   }
 }))({el: $('body'), apiPrefix: '/api/v0'});

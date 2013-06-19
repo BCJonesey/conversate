@@ -156,11 +156,12 @@ Structural.Collections.Actions = Backbone.Collection.extend({
 
     if (model.get('user').id === this.userId) {
       model.markRead();
+      Structural.updateReadTimestamp(model);
     }
     else {
-      // All new messages from other users are unread.
       model.markUnread();
     }
+    Structural.updateUnreadCounts();
   },
 
   _newAction: function(data) {
