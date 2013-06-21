@@ -1,7 +1,7 @@
 Structural.Models.Topic = Backbone.Model.extend({
   initialize: function(attributes, options) {
-    //this.set('is_current', false);
     this.set('is_unread', this.get('unread_conversations') > 0);
+    this.on('change:unread_conversations', Structural.updateTitleAndFavicon, Structural);
   },
 
   focus: function() {

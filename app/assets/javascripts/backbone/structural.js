@@ -176,6 +176,9 @@ var Structural = new (Support.CompositeView.extend({
     this._conversation.updateUnreadCount(this._actions);
     var topic = this._topics.get(this._conversation.get('topic_id'));
     topic.updateUnreadCount(this._conversations);
+    this.updateTitleAndFavicon();
+  },
+  updateTitleAndFavicon: function() {
     this._faviconAndTitle.render();
   }
 }))({el: $('body'), apiPrefix: '/api/v0'});
