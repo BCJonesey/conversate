@@ -21,7 +21,7 @@ var Structural = new (Support.CompositeView.extend({
     this._conversation =  this._conversations.where({id: bootstrap.conversation.id})[0];
     this._participants = new Structural.Collections.Participants(
       bootstrap.participants,
-      {conversation: this._conversation.id}
+      {conversation: this._conversation ? this._conversation.id : undefined}
     );
     if (!this._conversation) {
       this._conversation = new Structural.Models.Conversation();
