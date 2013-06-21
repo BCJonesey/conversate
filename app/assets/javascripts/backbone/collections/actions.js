@@ -148,11 +148,13 @@ Structural.Collections.Actions = Backbone.Collection.extend({
   },
   setStateOnNewAction: function(model, collection) {
     var prev = collection.at(collection.indexOf(model) - 1);
-    model.on('change:is_unread', function() {
-      if (!model.get('is_unread')) {
-        prev.markRead();
-      }
-    });
+    if (prev) {
+      model.on('change:is_unread', function() {
+        if (!model.get('is_unread')) {
+          prev.markRead();
+        }
+      });
+    }
 
     if (model.get('user').id === this.userId) {
       model.markRead();
