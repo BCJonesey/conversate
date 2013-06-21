@@ -44,6 +44,9 @@ var Structural = new (Support.CompositeView.extend({
       conversation: this._conversation,
       addressBook: this._user.get('address_book')
     });
+    this._faviconAndTitle = new Structural.Views.FaviconAndTitle({
+      topics: this._topics
+    });
 
     if (this._actions) {
       this._participants.on('reset', this._actions.calculateUnreadedness, this._actions);
@@ -173,5 +176,6 @@ var Structural = new (Support.CompositeView.extend({
     this._conversation.updateUnreadCount(this._actions);
     var topic = this._topics.get(this._conversation.get('topic_id'));
     topic.updateUnreadCount(this._conversations);
+    this._faviconAndTitle.render();
   }
 }))({el: $('body'), apiPrefix: '/api/v0'});
