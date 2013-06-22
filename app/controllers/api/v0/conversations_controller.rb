@@ -23,6 +23,21 @@ class Api::V0::ConversationsController < ApplicationController
         conversation.users << user
       end
     end
+    if (params[:actions])
+      params[:actions].each do |a|
+        action = conversation.actions.new(:type => a[:type],
+                                          :data => Action::data_for_params(a),
+                                          :user_id => current_user.id)
+
+        # I'm ignoring deletion actions here, because why would you.  If it turns
+        # up, do what Nick did in Api::V0::ActionsController::create
+
+        conversation.handle(action)
+        action.save
+        conversation.update_most_recent_event
+        current_user.update_most_recent_viewed conversation
+      end
+    end
     conversation.save
     render :json => conversation.to_json(:user => current_user), :status => 201
   end
