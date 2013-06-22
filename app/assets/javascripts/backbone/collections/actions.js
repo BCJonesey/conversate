@@ -10,6 +10,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     this.on('reset', this._lieAboutActionsSoItLooksNiceToHumans, this);
     this.on('reset', this.calculateUnreadedness, this);
     this.on('reset', this._daisyChainUnreadCascade, this);
+    this.on('reset', this._findMyMessages, this);
     this.on('add', this.setStateOnNewAction, this);
 
     this.startUpdate();
@@ -37,6 +38,13 @@ Structural.Collections.Actions = Backbone.Collection.extend({
             action.markRead();
           }
         })
+      }
+    }, this);
+  },
+  _findMyMessages: function() {
+    this.forEach(function(action) {
+      if (action.get('user').id === this.userId) {
+        action.isMine();
       }
     }, this);
   },

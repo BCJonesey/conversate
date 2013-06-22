@@ -31,6 +31,7 @@ var Structural = new (Support.CompositeView.extend({
       this._actions = new Structural.Collections.Actions(bootstrap.actions, {conversation: this._conversation.id, user:this._user.id});
       this._actions._lieAboutActionsSoItLooksNiceToHumans();
       this._actions._daisyChainUnreadCascade();
+      this._actions._findMyMessages();
     } else {
       this._actions = new Structural.Collections.Actions();
     }
