@@ -55,6 +55,7 @@ var Structural = new (Support.CompositeView.extend({
 
     this.appendChild(this._bar);
     this.appendChild(this._watercooler);
+    this._faviconAndTitle.render();
 
     Backbone.history.start({pushState: true});
     return this;

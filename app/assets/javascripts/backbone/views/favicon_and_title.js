@@ -11,6 +11,14 @@ Structural.Views.FaviconAndTitle = Support.CompositeView.extend({
     }, 0);
     var iconName = 'watercooler';
     var title = 'Water Cooler';
+
+    if (/localhost/.test(window.location.host)) {
+      title = 'meo aquam frigideorem';
+    }
+    else if (/kuhltank/.test(window.location.host)) {
+      title = 'Kuhltank';
+    }
+
     if (totalUnreadConversations > 0) {
       iconName = 'watercooler-unread';
       title = totalUnreadConversations + ' - ' + title;
