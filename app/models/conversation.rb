@@ -70,7 +70,9 @@ class Conversation < ActiveRecord::Base
     most_recent_viewed = most_recent_viewed_for_user(user)
     # Fudge the timestamp here because actions sometimes have timestamps in the middle
     # of seconds.
-    return messages.order('created_at DESC').first.created_at > most_recent_viewed.in(1)
+    # TODO: Figure out this Ruby timestamp bullshit.  We shouldn't have to fudge
+    # this much.
+    return messages.order('created_at DESC').first.created_at > most_recent_viewed.in(2)
   end
 
   def update_most_recent_event
@@ -91,7 +93,9 @@ class Conversation < ActiveRecord::Base
     json[:participants] = participants;
     # Fudge the timestamp here because actions sometimes have timestamps in the middle
     # of seconds.
-    json[:unread_count] = self.actions.where('created_at > ?', most_recent_viewed.in(1)).length
+    # TODO: Figure out this Ruby timestamp bullshit.  We shouldn't have to fudge
+    # this much.
+    json[:unread_count] = self.actions.where('created_at > ?', most_recent_viewed.in(2)).length
     json[:most_recent_event] = most_recent_event.msec
     json[:most_recent_viewed] = most_recent_viewed.msec
     return json

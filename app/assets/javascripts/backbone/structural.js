@@ -30,7 +30,7 @@ var Structural = new (Support.CompositeView.extend({
     if (this._conversation && this._conversation.id) {
       this._actions = new Structural.Collections.Actions(bootstrap.actions, {conversation: this._conversation.id, user:this._user.id});
       this._actions._lieAboutActionsSoItLooksNiceToHumans();
-      this._actions._daisyChainUnreadCascade();
+      this._actions._captureReadEvents();
     } else {
       this._actions = new Structural.Collections.Actions();
     }
