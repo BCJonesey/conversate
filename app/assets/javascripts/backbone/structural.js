@@ -163,6 +163,7 @@ var Structural = new (Support.CompositeView.extend({
       ]
     }
     var conversation = new Structural.Models.Conversation(data);
+    conversation.get('participants').add([this._user], {at: 0})
     this._conversations.add(conversation);
     conversation.save();
     // TODO: navigate to conversation
