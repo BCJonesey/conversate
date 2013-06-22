@@ -17,6 +17,12 @@ class Api::V0::ConversationsController < ApplicationController
       conversation.title = params[:title]
     end
     conversation.users << current_user
+    if (params[:participants])
+      params[:participants].each do |p|
+        user = User.find(p[:id])
+        conversation.users << user
+      end
+    end
     conversation.save
     render :json => conversation.to_json(:user => current_user), :status => 201
   end
