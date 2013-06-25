@@ -28,6 +28,7 @@ var Structural = new (Support.CompositeView.extend({
     }
     this._user = new Structural.Models.User(bootstrap.user);
     if (this._conversation && this._conversation.id) {
+      this._conversation.set('is_current', true);
       this._actions = new Structural.Collections.Actions(bootstrap.actions, {conversation: this._conversation.id, user:this._user.id});
       this._actions._lieAboutActionsSoItLooksNiceToHumans();
       this._actions._daisyChainUnreadCascade();
