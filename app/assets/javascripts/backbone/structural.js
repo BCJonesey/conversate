@@ -105,6 +105,7 @@ var Structural = new (Support.CompositeView.extend({
     if (!self._conversation || topic.id !== self._conversation.topid_id) {
       self._conversations.changeTopic(topic.id, function(collection) {
         if (collection.length > 0) {
+          collection.at(0).set('is_current', true);
           self._changeConversationView(collection.at(0));
         }
         else {
