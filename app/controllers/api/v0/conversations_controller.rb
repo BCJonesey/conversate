@@ -22,8 +22,6 @@ class Api::V0::ConversationsController < ApplicationController
     conversation.actions.new(:type => 'retitle',
                              :data => {'title' => conversation.title}.to_json,
                              :user_id => current_user.id)
-
-    conversation.users << current_user
     if (params[:participants])
       params[:participants].each do |p|
         user = User.find(p[:id])
