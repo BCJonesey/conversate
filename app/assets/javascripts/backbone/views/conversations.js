@@ -5,6 +5,7 @@ Structural.Views.Conversations = Support.CompositeView.extend({
     this.collection.on('reset', this.reRender, this);
   },
   render: function() {
+    this.$el.empty();
     this.collection.forEach(this.renderConversation, this);
     return this;
   },
