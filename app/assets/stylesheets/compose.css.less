@@ -256,32 +256,13 @@ textarea.write{
 // Compose //
 
 .short-form-compose {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-}
-
-.short-form-compose{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   background-color: #EEE;
   border-top:1px solid #AAA;
-
   padding:0.35rem;
-  & form{
-    position:relative;
-    & textarea{
-      height:2.0rem;
-    }
-  }
-}
-
-button,
-input,
-select,
-textarea {
-    font-family: inherit; /* 1 */
-    font-size: 100%; /* 2 */
-    margin: 0; /* 3 */
 }
 
 .act-compose-short-input{
@@ -289,17 +270,16 @@ textarea {
   margin-right:4rem;
   margin-left:2.5rem;
   textarea{
-    //padding-left:2.5rem;
-    //resize:vertical;
     max-height:10rem;
     min-height: 2.0rem;
+    height:2.0rem;
   }
 }
 
 .enable-long-form-group{
   position: absolute;
   top:50%;
-  left:0.15rem;
+  left:0.35rem;
   margin-top:-0.85rem;
 }
 
