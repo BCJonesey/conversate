@@ -52,9 +52,6 @@ module Conversate
 
     # Enable the asset pipeline
     config.assets.enabled = true
-
-    config.assets.debug = true
-
     # Play nice with Heroku's slug compilation
     config.assets.initialize_on_precompile = false
     # Let us serve up fonts too.
