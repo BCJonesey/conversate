@@ -9,6 +9,11 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
+class NoCompression
+  def compress(string)
+  end
+end
+
 module Conversate
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -56,6 +61,9 @@ module Conversate
     config.assets.initialize_on_precompile = false
     # Let us serve up fonts too.
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
+
+    config.assets.compress = true
+    config.assets.js_compressor = NoCompression.new
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
