@@ -14,7 +14,7 @@ Structural.Views.Compose = Support.CompositeView.extend({
     return this;
   },
   events: {
-    submit: 'newMessageAction',
+    'click .act-short-form-send-group': 'newMessageAction',
     'click a.enable-long-form': 'enableLongForm',
     'click a.disable-long-form': 'disableLongForm',
     'keydown .short-form-compose textarea': 'shortFormType'
