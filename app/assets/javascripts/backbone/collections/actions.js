@@ -9,7 +9,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     this.userId = options.user;
     this.on('reset', this._lieAboutActionsSoItLooksNiceToHumans, this);
     this.on('reset', this.calculateUnreadedness, this);
-    this.on('reset', this._daisyChainUnreadCascade, this);
+    this.on('reset', this._captureReadEvents, this);
     this.on('reset', this._findMyMessages, this);
     this.on('add', this.setStateOnNewAction, this);
 
@@ -29,16 +29,9 @@ Structural.Collections.Actions = Backbone.Collection.extend({
       // TODO: Do something similar for moved messages.
     }, this);
   },
-  _daisyChainUnreadCascade: function() {
-    this.forEach(function(action, index) {
-      var next = this.at(index + 1);
-      if (next) {
-        next.on('change:is_unread', function() {
-          if (!next.get('is_unread')) {
-            action.markRead();
-          }
-        })
-      }
+  _captureReadEvents: function() {
+    this.each(function(action) {
+      action.on('change:is_unread', this._updateReadStatuses, this);
     }, this);
   },
   _findMyMessages: function() {
@@ -51,7 +44,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
 
   focus: function(id) {
     // findWhere is coming in backbone 1.0.0.
-    var action = this.where({id: id}).pop();
+    var action = this.get(id);
     if(action) {
       action.focus();
     }
@@ -155,15 +148,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     });
   },
   setStateOnNewAction: function(model, collection) {
-    var prev = collection.at(collection.indexOf(model) - 1);
-    if (prev) {
-      model.on('change:is_unread', function() {
-        if (!model.get('is_unread')) {
-          prev.markRead();
-        }
-      });
-    }
-
+    model.on('change:is_unread', this._updateReadStatuses, this);
     if (model.get('user').id === this.userId) {
       model.markRead();
       model.isMine();
@@ -175,6 +160,15 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     Structural.updateUnreadCounts();
   },
 
+  _updateReadStatuses: function(mostRecentRead) {
+    var targets = this.filter(function(action) {
+      return action.get('timestamp') < mostRecentRead.get('timestamp') &&
+             action.get('is_unread');
+    });
+    targets.forEach(function(action) {
+      action.markRead({silent:true});
+    });
+  },
   _newAction: function(data) {
     var model = new Structural.Models.Action(data);
     this.add(model);

@@ -1,7 +1,7 @@
 Structural.Views.Conversations = Support.CompositeView.extend({
   className: 'cnv-list',
   initialize: function(options) {
-    this.collection.on('add', this.renderConversation, this);
+    this.collection.on('add', this.reRender, this);
     this.collection.on('reset', this.reRender, this);
   },
   render: function() {

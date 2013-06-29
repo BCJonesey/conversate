@@ -31,7 +31,7 @@ var Structural = new (Support.CompositeView.extend({
       this._conversation.set('is_current', true);
       this._actions = new Structural.Collections.Actions(bootstrap.actions, {conversation: this._conversation.id, user:this._user.id});
       this._actions._lieAboutActionsSoItLooksNiceToHumans();
-      this._actions._daisyChainUnreadCascade();
+      this._actions._captureReadEvents();
       this._actions._findMyMessages();
     } else {
       this._actions = new Structural.Collections.Actions();
@@ -164,8 +164,10 @@ var Structural = new (Support.CompositeView.extend({
         }
       ]
     }
+    data.most_recent_event = (new Date()).valueOf();
+
     var conversation = new Structural.Models.Conversation(data);
-    conversation.get('participants').add([this._user], {at: 0})
+    conversation.get('participants').add([this._user], {at: 0});
     this._conversations.add(conversation);
     conversation.save(null, {
       success: function (conversation, response) {
@@ -173,7 +175,6 @@ var Structural = new (Support.CompositeView.extend({
         Structural.viewConversation(conversation);
       }
     });
-    // TODO: navigate to conversation
   },
   moveConversation: function(topic) {
     this._actions.createMoveConversationAction(topic, this._user);
