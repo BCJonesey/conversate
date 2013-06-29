@@ -172,6 +172,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
   },
   _newAction: function(data) {
     var model = new Structural.Models.Action(data);
+    model.set('timestamp', (new Date()).valueOf());
     this.add(model);
     model.save();
   }
