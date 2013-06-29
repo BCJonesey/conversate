@@ -14,6 +14,5 @@
 //= require jquery_ujs
 //= require underscore
 //= require backbone
-// TODO: Remove conversate once all the pieces of it are gone.
 //= require backbone/structural
 //= require_tree .
