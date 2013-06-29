@@ -183,9 +183,11 @@
 @border-act-my-message: 1px solid @border-color-act-my-message;
 @border-pending: 1px solid @border-color-pending;
 
-// .act-message + .act-message,
-// .act + .act-message,
-// .act-message + .act,
+.act-message + .act-message,
+.act + .act-message,
+.act-message + .act{
+  border-top:@border-message;
+}
 
 .act-list .act-message:not(.act-my-message):first-child{
   border-top:@border-message;
