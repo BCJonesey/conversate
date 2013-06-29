@@ -96,8 +96,8 @@ class Conversation < ActiveRecord::Base
     # TODO: Figure out this Ruby timestamp bullshit.  We shouldn't have to fudge
     # this much.
     json[:unread_count] = self.actions.where('created_at > ?', most_recent_viewed.in(2)).length
-    json[:most_recent_event] = most_recent_event.msec
-    json[:most_recent_viewed] = most_recent_viewed.msec
+    json[:most_recent_event] = most_recent_event ? most_recent_event.msec : nil
+    json[:most_recent_viewed] = most_recent_viewed ? most_recent_viewed.msec : nil
     return json
   end
 
