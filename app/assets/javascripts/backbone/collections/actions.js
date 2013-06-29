@@ -32,7 +32,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
   _captureReadEvents: function() {
     this.each(function(action) {
       action.on('change:is_unread', this._updateReadStatuses, this);
-    });
+    }, this);
   },
   _findMyMessages: function() {
     this.forEach(function(action) {
