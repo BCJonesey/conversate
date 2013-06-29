@@ -38,7 +38,7 @@ class Conversation < ActiveRecord::Base
           unless index.nil?
             conversation_pieces[index] = conversation_pieces[index].delete(action.id, action.user, action.created_at)
           end
-        elsif action.type == 'user_update'
+        elsif action.type == 'update_users'
           conversation_pieces.append ConversationPiece.update_users(action.id, action.user, action.created_at, User.find(action.added), User.find(action.removed))
         end
       rescue
