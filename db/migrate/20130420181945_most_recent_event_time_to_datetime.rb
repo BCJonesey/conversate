@@ -11,7 +11,7 @@ class MostRecentEventTimeToDatetime < ActiveRecord::Migration
     add_column :conversations, 'most_recent_event', :datetime
 
     Conversation.all.each do |conversation|
-      most_recent = conversation.actions.order_by('created_at DESC').first
+      most_recent = conversation.actions.order('created_at DESC').first
       conversation.most_recent_event = most_recent.created_at
       conversation.save
     end
