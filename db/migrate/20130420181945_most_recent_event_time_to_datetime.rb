@@ -1,6 +1,20 @@
 class MostRecentEventTimeToDatetime < ActiveRecord::Migration
+  class Conversation < ActiveRecord::Base
+    has_many :actions, :inverse_of => :conversation
+  end
+  class Action < ActiveRecord::Base
+    belongs_to :conversation, :inverse_of => :actions
+  end
+
   def up
-    change_column :conversations, "most_recent_event", :datetime
+    remove_column :conversations, 'most_recent_event'
+    add_column :conversations, 'most_recent_event', :datetime
+
+    Conversation.each do |conversation|
+      most_recent = conversation.actions.order_by('created_at DESC').first
+      conversation.most_recent_event = most_recent.created_at
+      conversation.save
+    end
   end
 
   def down
