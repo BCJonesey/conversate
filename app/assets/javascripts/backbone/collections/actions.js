@@ -151,6 +151,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     model.on('change:is_unread', this._updateReadStatuses, this);
     if (model.get('user').id === this.userId) {
       model.markRead();
+      this._updateReadStatuses(model);
       model.isMine();
       Structural.updateReadTimestamp(model);
     }
