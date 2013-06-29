@@ -6,6 +6,14 @@ Structural.Models.Conversation = Backbone.Model.extend({
 
     this.set('is_unread', this.get('unread_count') > 0);
   },
+  parse: function (response, options) {
+
+    // This gets used later in a template so we need real models from our response.
+    response.participants = _.map(response.participants, function (p) {
+      return new Structural.Models.Participant(p);
+    });
+    return response;
+  },
 
   focus: function() {
     this.set('is_current', true);
