@@ -38,7 +38,7 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
     'click .act-participants-save': 'saveParticipants',
   },
   enterEditingMode: function(e) {
-    if (e) { e.preventDefault(); }
+    if (e) { e.stopPropagation(); }
     this.$('.act-participants-actions, .act-participants-save-actions')
       .toggleClass('hidden');
     this.tokens.edit();

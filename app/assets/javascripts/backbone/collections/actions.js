@@ -10,6 +10,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     this.on('reset', this._lieAboutActionsSoItLooksNiceToHumans, this);
     this.on('reset', this.calculateUnreadedness, this);
     this.on('reset', this._captureReadEvents, this);
+    this.on('reset', this._findMyMessages, this);
     this.on('add', this.setStateOnNewAction, this);
 
     this.startUpdate();
@@ -32,6 +33,13 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     this.each(function(action) {
       action.on('change:is_unread', this._updateReadStatuses, this);
     });
+  },
+  _findMyMessages: function() {
+    this.forEach(function(action) {
+      if (action.get('user').id === this.userId) {
+        action.isMine();
+      }
+    }, this);
   },
 
   focus: function(id) {
@@ -143,7 +151,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     model.on('change:is_unread', this._updateReadStatuses, this);
     if (model.get('user').id === this.userId) {
       model.markRead();
-      this._updateReadStatuses(model);
+      model.isMine();
       Structural.updateReadTimestamp(model);
     }
     else {

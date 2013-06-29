@@ -149,11 +149,13 @@
 
 .act-message + .act-update-users,
 .act-message + .act-deletion,
+.act-message + .act-move-conversation,
 .act-message + .act-retitle {
   padding-top:0.5rem;
 }
 
 .act-update-users + .act-message,
+.act-move-conversation + .act-message,
 .act-deletion + .act-message,
 .act-retitle + .act-message {
   margin-top:0.25rem;
@@ -168,8 +170,8 @@
 @border-color-message: #D8D8D8;
 
 // --- My Messages --- //
-@border-color-my-message: #E0E0E0;
-@background-color-my-message:#F8F8F8;
+@border-color-act-my-message: #E0E0E0;
+@background-color-act-my-message:#F8F8F8;
 
 // --- Pending Messages --- //
 @color-pending:#CCC;
@@ -178,35 +180,35 @@
 
 
 @border-message: 1px solid @border-color-message;
-@border-my-message: 1px solid @border-color-my-message;
+@border-act-my-message: 1px solid @border-color-act-my-message;
 @border-pending: 1px solid @border-color-pending;
 
 .act-message + .act-message,
 .act + .act-message,
 .act-message + .act,
-.act-list .act-message:not(.my-message):first-child{
+.act-list .act-message:not(.act-my-message):first-child{
   border-top:@border-message;
 }
-.act-list .act-message:not(.my-message):last-child{
+.act-list .act-message:not(.act-my-message):last-child{
   border-bottom:@border-message;
 }
 
-.act-message.my-message{
-  background-color:@background-color-my-message;
-  border:@border-my-message;
+.act-message.act-my-message{
+  background-color:@background-color-act-my-message;
+  border:@border-act-my-message;
   -webkit-transition:0.35s;
   -moz-transition: 0.35s;
   transition: 0.35s;
 }
 
-.act-message.my-message + .my-message{
+.act-message.act-my-message + .act-my-message{
   margin-top:1.0rem;
 }
-.act-message.my-message + .act{
+.act-message.act-my-message + .act:not(.act-my-message){
   border-top:none;
 }
 
-.act-message.my-message.pending{
+.act-message.act-my-message.pending{
   background-color:@background-color-pending;
   border: @border-pending;
   color:@color-pending;
@@ -252,7 +254,8 @@
 
 .act-update-users,
 .act-retitle,
-.act-deletion{
+.act-deletion,
+.act-move-conversation{
   font-size:.75rem;
   color:#CCC;
   text-align: center;

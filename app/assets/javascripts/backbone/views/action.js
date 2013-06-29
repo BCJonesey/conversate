@@ -3,7 +3,7 @@ Structural.Views.Action = Support.CompositeView.extend({
     var classes = 'act btn-faint-container';
     classes += ' act-' + this.model.get('type').replace('_', '-');
     if (this.model.get('isOwnAction')) {
-      classes += ' act-my-action';
+      classes += ' act-my-message';
     }
     if(this.model.get('is_current')) {
       classes += ' act-current';

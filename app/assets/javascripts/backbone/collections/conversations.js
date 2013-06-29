@@ -8,7 +8,7 @@ Structural.Collections.Conversations = Backbone.Collection.extend({
     this.startUpdate();
   },
   comparator: function(conversation) {
-    return -(conversation.get('most_recent_message'));
+    return -(conversation.get('most_recent_event'));
   },
 
   focus: function(id) {

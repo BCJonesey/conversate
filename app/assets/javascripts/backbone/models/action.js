@@ -1,8 +1,5 @@
 Structural.Models.Action = Backbone.Model.extend({
   initialize: function(attributes, options) {
-    // TODO: Figure out where the current user is stored, update this.isOwnAction.
-    this.set('isOwnAction', false);
-
     if (this.get('user')) {
       this.set('user', new Structural.Models.Participant(this.get('user')));
 
@@ -65,6 +62,9 @@ Structural.Models.Action = Backbone.Model.extend({
   delete: function(user) {
     this.set('type', 'deletion');
     this.set('user', user);
+  },
+  isMine: function(){
+    this.set('isOwnAction', true);
   }
 });
 
