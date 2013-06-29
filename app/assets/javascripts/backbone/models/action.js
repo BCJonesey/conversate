@@ -45,6 +45,22 @@ Structural.Models.Action = Backbone.Model.extend({
       this.set('to', new Structrual.Models.Conversation(this.get('to')));
     }
   },
+  parse: function (response, options) {
+
+    // Special parsing for update_users actions.
+    if (response.added) {
+      response.added = _.map(response.added, function (p) {
+        return new Structural.Models.Participant(p);
+      });
+    }
+    if (response.removed) {
+      response.removed = _.map(response.removed, function (p) {
+        return new Structural.Models.Participant(p);
+      });
+    }
+
+    return response;
+  },
 
   focus: function() {
     this.set('is_current', true);

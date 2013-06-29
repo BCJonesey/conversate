@@ -113,9 +113,9 @@ class Conversation < ActiveRecord::Base
         end
       end
       if action.removed
-        action.removed.map do |action_user|
+        action.removed.each do |action_user|
           user = User.find_by_id(action_user['id'])
-          self.users - user
+          self.users.delete(user)
         end
       end
     end
