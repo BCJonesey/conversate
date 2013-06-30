@@ -36,6 +36,8 @@ Structural.Views.Participants = Support.CompositeView.extend({
   },
   reset: function() {
     $('.token').remove();
+    $('.token-input').val('');
+    this.trigger('changeAutocompleteOptions', this.$('.token-input').val())
     this.collection.each(this.renderParticipant, this);
     return this;
   },
