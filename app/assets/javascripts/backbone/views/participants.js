@@ -7,14 +7,10 @@ Structural.Views.Participants = Support.CompositeView.extend({
     this.originalCollection = this.collection.clone();
   },
   render: function() {
-    if ($('.token-input').count > 0) {
-      this.reset();
-    } else {
-      this.$el.empty();
-      this.$el.append($(this.userReminder));
-      this.$el.append($(this.inputElement));
-      this.collection.each(this.renderParticipant, this);
-    }
+    this.$el.empty();
+    this.$el.append($(this.userReminder));
+    this.$el.append($(this.inputElement));
+    this.collection.each(this.renderParticipant, this);
     return this;
   },
   renderParticipant: function(participant) {
