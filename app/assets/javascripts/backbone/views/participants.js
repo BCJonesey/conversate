@@ -36,7 +36,6 @@ Structural.Views.Participants = Support.CompositeView.extend({
   },
   cancel: function() {
     this.collection = this.originalCollection.clone();
-    this.$el.empty();
     this.render();
     this.$('.token-input').attr('readonly', 'readonly');
   },
