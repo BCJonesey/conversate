@@ -28,10 +28,8 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
     return this;
   },
   reRender: function() {
-    this.tokens.leave();
-    this.tokenOptions.leave();
-    this.$el.empty();
-    this.render();
+    this.tokens.collection = this.participants;
+    this.tokens.reset();
   },
   events: {
     'click .act-participants-edit': 'enterEditingMode',
