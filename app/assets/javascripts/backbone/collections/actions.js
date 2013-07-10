@@ -7,7 +7,6 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     options = options || {};
     this.conversationId = options.conversation;
     this.userId = options.user;
-    this.on('reset', this._lieAboutActionsSoItLooksNiceToHumans, this);
     this.on('reset', this.calculateUnreadedness, this);
     this.on('reset', this._captureReadEvents, this);
     this.on('reset', this._findMyMessages, this);
@@ -17,18 +16,6 @@ Structural.Collections.Actions = Backbone.Collection.extend({
   },
   comparator: 'timestamp',
 
-  _lieAboutActionsSoItLooksNiceToHumans: function() {
-    this.each(function(action) {
-      if (action.get('type') === 'deletion') {
-        var target = this.where({id: action.get('msg_id')})[0];
-        if(target) {
-          target.delete(action.get('user'));
-          this.remove(action);
-        }
-      }
-      // TODO: Do something similar for moved messages.
-    }, this);
-  },
   _captureReadEvents: function() {
     this.each(function(action) {
       action.on('change:is_unread', this._updateReadStatuses, this);
