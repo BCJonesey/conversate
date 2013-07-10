@@ -30,7 +30,6 @@ var Structural = new (Support.CompositeView.extend({
     if (this._conversation && this._conversation.id) {
       this._conversation.set('is_current', true);
       this._actions = new Structural.Collections.Actions(bootstrap.actions, {conversation: this._conversation.id, user:this._user.id});
-      this._actions._lieAboutActionsSoItLooksNiceToHumans();
       this._actions._captureReadEvents();
       this._actions._findMyMessages();
     } else {
