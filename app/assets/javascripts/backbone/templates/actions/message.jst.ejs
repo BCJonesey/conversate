@@ -6,4 +6,7 @@
     <span class="act-sender"><%= action.get('user').escape('name') %></span>
   </div>
 </div>
-<div class="act-text"><%= action.escape('text') %></div>
+<% /* The enhanced_text property includes link tags and such, so it needs
+      to be escaped when it's created.  If it isn't html safe at this point,
+      it's gone horribly wrong. */ %>
+<div class="act-text"><%= action.get('enhanced_text') %></div>

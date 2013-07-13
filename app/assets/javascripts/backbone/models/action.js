@@ -44,6 +44,10 @@ Structural.Models.Action = Backbone.Model.extend({
       this.set('from', new Structural.Models.Conversation(this.get('from')));
       this.set('to', new Structrual.Models.Conversation(this.get('to')));
     }
+
+    if (this.get('text')) {
+      this.set('enhanced_text', Support.TextEnhancer.enhance(_.escape(this.get('text'))));
+    }
   },
   parse: function (response, options) {
 
@@ -57,6 +61,10 @@ Structural.Models.Action = Backbone.Model.extend({
       response.removed = _.map(response.removed, function (p) {
         return new Structural.Models.Participant(p);
       });
+    }
+
+    if (response.text) {
+      response.enhanced_text = Support.TextEnhancer.enhance(_.escape(response.text));
     }
 
     return response;
