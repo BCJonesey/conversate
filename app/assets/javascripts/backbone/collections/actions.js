@@ -110,16 +110,8 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     this.reset();
   },
 
-  calculateUnreadedness: function(participants) {
-    if (participants) {
-      this.cachedParticipants = participants;
-    }
-    else if (this.cachedParticipants) {
-      participants = this.cachedParticipants;
-    }
-    else {
-      return;
-    }
+  calculateUnreadedness: function() {
+    var participants = Structural._participants;
 
     var me = participants.where({id: this.userId})[0];
     if (!me) { return; }
