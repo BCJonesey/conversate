@@ -8,7 +8,6 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     this.conversationId = options.conversation;
     this.userId = options.user;
     this.on('reset', this.calculateUnreadedness, this);
-    this.on('reset', this._captureReadEvents, this);
     this.on('reset', this._findMyMessages, this);
     this.on('add', this.setStateOnNewAction, this);
 
@@ -16,11 +15,6 @@ Structural.Collections.Actions = Backbone.Collection.extend({
   },
   comparator: 'timestamp',
 
-  _captureReadEvents: function() {
-    this.each(function(action) {
-      action.on('change:is_unread', this._updateReadStatuses, this);
-    }, this);
-  },
   _findMyMessages: function() {
     this.forEach(function(action) {
       if (action.get('user').id === this.userId) {
