@@ -86,16 +86,22 @@ class Conversation < ActiveRecord::Base
     return most_recent_viewed
   end
 
+  def unread_count(user)
+    most_recent_viewed = most_recent_viewed_for_user(user)
+    # Fudge the timestamp here because actions sometimes have timestamps in the middle
+    # of seconds.
+    # TODO: Figure out this Ruby timestamp bullshit.  We shouldn't have to fudge
+    # this much.
+    self.actions.where('created_at > ?', most_recent_viewed.in(2)).length
+  end
+
   def as_json(options)
     json = super(options)
     # TODO: DRY.
     most_recent_viewed = most_recent_viewed_for_user(options[:user])
     json[:participants] = participants;
-    # Fudge the timestamp here because actions sometimes have timestamps in the middle
-    # of seconds.
-    # TODO: Figure out this Ruby timestamp bullshit.  We shouldn't have to fudge
-    # this much.
-    json[:unread_count] = self.actions.where('created_at > ?', most_recent_viewed.in(2)).length
+
+    json[:unread_count] = unread_count(options[:user]);
     json[:most_recent_event] = most_recent_event ? most_recent_event.msec : nil
     json[:most_recent_viewed] = most_recent_viewed ? most_recent_viewed.msec : nil
     return json
