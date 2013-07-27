@@ -1,5 +1,6 @@
 class Topic < ActiveRecord::Base
-  has_many :conversations
+  has_and_belongs_to_many :conersations
+  has_and_belongs_to_many :users
 
   attr_accessible :name
 
