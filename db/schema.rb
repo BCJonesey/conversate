@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130727204350) do
+ActiveRecord::Schema.define(:version => 20130727230924) do
 
   create_table "actions", :force => true do |t|
     t.integer  "conversation_id"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(:version => 20130727204350) do
     t.string   "full_name"
     t.boolean  "is_admin",                     :default => false
     t.integer  "invited_by"
+    t.integer  "default_topic_id"
   end
 
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"
