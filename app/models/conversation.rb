@@ -11,43 +11,6 @@ class Conversation < ActiveRecord::Base
     convo.title = convo.default_conversation_title if (convo.title.nil? || convo.title.empty?)
   end
 
-  # Public: Stitch together the actions on a conversation into "conversation
-  # pieces" that represent the current state of the conversation.  The current
-  # state of a conversation consists of the latest version of the text of any
-  # "wrote" actions that haven't been deleted or moved into a different
-  # conversation or sidebar, plus notices of any non-text actions, such as
-  # retitling the conversation or changing who has access to the conversation.
-  #
-  # In the future, consecutive conversation pieces that represent the same type of action -
-  # deleting, sidebaring, etc (with the exception of "wrote" actions) will be
-  # collapsed into a single conversation piece.
-  #
-  # Returns an array of conversation pieces, in chronological order.
-  def pieces
-    # This will get slow on long conversations, but it's good enough for now
-    conversation_pieces = []
-    self.actions.order('created_at ASC').each do |action|
-      begin
-        if action.type == 'message'
-          conversation_pieces.append ConversationPiece.message(action.id, action.user, action.created_at, action.message_id, action.text)
-        elsif action.type == 'retitle'
-          conversation_pieces.append ConversationPiece.set_title(action.id, action.user, action.created_at, action.title)
-        elsif action.type == 'deletion'
-          index = conversation_pieces.index { |cp| cp.type == :message && cp.message_id == action.message_id }
-          # We should track down how this might be nil.
-          unless index.nil?
-            conversation_pieces[index] = conversation_pieces[index].delete(action.id, action.user, action.created_at)
-          end
-        elsif action.type == 'update_users'
-          conversation_pieces.append ConversationPiece.update_users(action.id, action.user, action.created_at, User.find(action.added), User.find(action.removed))
-        end
-      rescue
-        raise "Error with #{action.data}: #{$!} (id: #{action.id})"\
-      end
-    end
-    conversation_pieces
-  end
-
   def participants
     self.users
   end

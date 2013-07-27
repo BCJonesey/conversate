@@ -26,5 +26,4 @@ class Topic < ActiveRecord::Base
     end
     return unread_conversation_count
   end
-
 end
