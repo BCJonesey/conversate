@@ -170,6 +170,15 @@
 .act-message{
   padding:0.65rem;
   z-index:1;
+  a{
+    text-decoration: none;
+    color: #28D;
+    word-wrap: break-word;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+
 }
 
 // --- Messages --- //
@@ -217,6 +226,10 @@
 .act-message.act-my-message + .act:not(.act-my-message){
   border-top:none;
 }
+.act-message.act-my-message + .act.act-my-message:not(.act-message){
+  border-top:none;
+}
+
 
 .act-message.act-my-message.pending{
   background-color:@background-color-pending;
