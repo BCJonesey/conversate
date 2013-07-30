@@ -6,9 +6,7 @@ class ConversationsController < ApplicationController
     @topics = current_user.topics
     @conversation = Conversation.find(params[:id])
     topic = @conversation.topics.keep_if {|t| current_user.topics.include? t }.first
-    @conversations = Conversation.joins(:users, :topics)
-                                 .where(users: {id: current_user.id},
-                                        topics: {id: topic.id})
+    @conversations = topic.conversations
     @actions = @conversation.actions
     @participants = @conversation.participants
 
