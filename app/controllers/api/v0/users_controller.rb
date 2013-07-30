@@ -1,3 +1,7 @@
+# TODO: This is not up to date, and not currently used by the application.  If
+# you write any code against this controller, make sure to bring it up to spec
+# with the UsersController in the app.
+
 class Api::V0::UsersController < ApplicationController
   before_filter :require_login, :except => [:create]
 
