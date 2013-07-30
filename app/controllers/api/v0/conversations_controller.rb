@@ -5,7 +5,12 @@ class Api::V0::ConversationsController < ApplicationController
   def index
     topic = Topic.find_by_id(params[:topic_id])
     head :status => :not_found and return unless topic
-    render :json => current_user.conversations.where(:topic_id => topic.id).to_json(:user => current_user)
+
+    conversations = Conversation.joins(:users, :topics)
+                                .where(users: {id: current_user.id},
+                                       topics: {id: topic.id})
+
+    render :json => conversations.to_json(:user => current_user)
   end
 
   # Note that this is always on a url like /topics/1/conversations.
@@ -26,6 +31,10 @@ class Api::V0::ConversationsController < ApplicationController
       params[:participants].each do |p|
         user = User.find(p[:id])
         conversation.users << user
+        unless topic.users.include? user
+          users_default = Topic.find(user.default_topic_id)
+          conversation.topics << users_default
+        end
       end
 
       conversation.actions.new(:type => 'update_users',

@@ -3,10 +3,12 @@ class ConversationsController < ApplicationController
   before_filter :require_participation
 
   def show
-    @topics = Topic.all
+    @topics = current_user.topics
     @conversation = Conversation.find(params[:id])
-    topic = @conversation.topic
-    @conversations = current_user.conversations.where(:topic_id => topic.id)
+    topic = @conversation.topics.keep_if {|t| current_user.topics.include? t }.first
+    @conversations = Conversation.joins(:users, :topics)
+                                 .where(users: {id: current_user.id},
+                                        topics: {id: topic.id})
     @actions = @conversation.actions
     @participants = @conversation.participants
 

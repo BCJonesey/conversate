@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   def index
     if logged_in?
-      topic = Topic.first
+      topic = current_user.topics.first
       if topic
         redirect_to topic_path(topic.slug, topic.id);
       else
