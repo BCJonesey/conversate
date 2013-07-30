@@ -8,6 +8,7 @@ namespace :topic do
           default_topic.name = 'My Conversations'
           default_topic.save
           user.default_topic_id = default_topic.id
+          user.topics << default_topic
           user.save
         end
       end
