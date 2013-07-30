@@ -44,7 +44,9 @@ class Conversation < ActiveRecord::Base
   end
 
   def most_recent_viewed_for_user(user)
-    most_recent_viewed = user.reading_logs.where(:conversation_id => self.id).first.most_recent_viewed
+    reading_log = user.reading_logs.where(:conversation_id => self.id).first
+    return nil unless reading_log
+    most_recent_viewed = reading_log.most_recent_viewed
     return DateTime.parse('2000-01-01 01:07:19 UTC') unless most_recent_viewed
     return most_recent_viewed
   end
@@ -55,6 +57,7 @@ class Conversation < ActiveRecord::Base
     # of seconds.
     # TODO: Figure out this Ruby timestamp bullshit.  We shouldn't have to fudge
     # this much.
+    return 0 unless most_recent_viewed
     self.actions.where('created_at > ?', most_recent_viewed.in(2)).length
   end
 
