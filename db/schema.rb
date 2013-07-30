@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(:version => 20130727230924) do
   end
 
   create_table "topics_users", :force => true do |t|
-    t.integer "conversation_id"
+    t.integer "topic_id"
     t.integer "user_id"
   end
 

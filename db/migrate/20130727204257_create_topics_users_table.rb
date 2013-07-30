@@ -1,7 +1,7 @@
 class CreateTopicsUsersTable < ActiveRecord::Migration
   def up
     create_table :topics_users do |t|
-      t.integer :conversation_id
+      t.integer :topic_id
       t.integer :user_id
     end
   end
