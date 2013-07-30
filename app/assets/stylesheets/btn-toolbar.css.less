@@ -78,8 +78,15 @@
     text-shadow: none;
     top:1px;
   }
-  &.disabled:hover,
-  &.disabled.hover{
+  &.disabled,
+  &.disabled{
+    color:rgba(64,64,64,0.1) !important;
+    text-shadow:none !important;
+    &.active,
+    &:active,
+    &:focus{
+      top:0 !important;
+    }
   }
 
   i{
