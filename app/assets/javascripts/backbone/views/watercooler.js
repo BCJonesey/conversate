@@ -8,6 +8,7 @@ Structural.Views.WaterCooler = Support.CompositeView.extend({
     this.conversation = options.conversation;
     this.participants = options.participants;
     this.addressBook = options.addressBook;
+    this.user = options.user;
   },
   render: function() {
     this.topicsView = new Structural.Views.TopicContainer({
@@ -20,7 +21,8 @@ Structural.Views.WaterCooler = Support.CompositeView.extend({
       actions: this.actions,
       conversation: this.conversation,
       participants: this.participants,
-      addressBook: this.addressBook
+      addressBook: this.addressBook,
+      user: this.user
     });
 
     this.appendChild(this.topicsView);

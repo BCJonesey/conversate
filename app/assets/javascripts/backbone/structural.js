@@ -42,7 +42,8 @@ var Structural = new (Support.CompositeView.extend({
       actions: this._actions,
       participants: this._participants,
       conversation: this._conversation,
-      addressBook: this._user.get('address_book')
+      addressBook: this._user.get('address_book'),
+      user: this._user
     });
     this._faviconAndTitle = new Structural.Views.FaviconAndTitle({
       topics: this._topics

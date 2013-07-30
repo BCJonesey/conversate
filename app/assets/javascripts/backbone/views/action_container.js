@@ -1,11 +1,21 @@
 Structural.Views.ActionContainer = Support.CompositeView.extend({
-  className: 'act-container',
+  className: function() {
+    var classes = 'act-container';
+
+    if (this.participants &&
+        !_(this.participants.map(function(p) { return p.id; })).contains(this.user.id)) {
+      classes += ' not-participating-in';
+    }
+
+    return classes;
+  },
   initialize: function(options) {
     options = options || {};
     this.conversation = options.conversation;
     this.participants = options.participants;
     this.actions = options.actions;
     this.addressBook = options.addressBook;
+    this.user = options.user;
   },
   render: function() {
     this.titleView = new Structural.Views.TitleEditor({conversation: this.conversation});
@@ -24,15 +34,23 @@ Structural.Views.ActionContainer = Support.CompositeView.extend({
     this.titleView.on('change_title', Structural.createRetitleAction, Structural);
     this.participantsView.on('update_users', Structural.createUpdateUserAction, Structural);
 
+    // The first time backbone calls className we don't have some data?
+    this.reClass();
+
     return this;
   },
 
   changeConversation: function(conversation) {
     this.titleView.changeConversation(conversation);
     this.composeView.changeConversation(conversation);
+    this.reClass();
   },
   clearConversation: function() {
     this.titleView.clearConversation();
     this.composeView.clearConversation();
+  },
+
+  reClass: function() {
+    this.el.className = this.className();
   }
 });
