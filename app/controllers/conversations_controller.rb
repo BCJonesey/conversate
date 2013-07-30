@@ -18,9 +18,14 @@ class ConversationsController < ApplicationController
   # Internal: Verifies that the current user is a participant to the given
   # conversation.
   def require_participation
-    unless current_user.in? Conversation.find(params[:id]).users
-      render :not_participating
+    conversation = Conversation.find(params[:id])
+    return if current_user.in? conversation.users
+
+    conversation.topics.each do |t|
+      return if t.in? current_user.topics
     end
+
+    render :not_participating
   end
 
 end
