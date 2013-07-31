@@ -1,6 +1,9 @@
 Structural.Views.Conversations = Support.CompositeView.extend({
   className: 'cnv-list',
   initialize: function(options) {
+    options = options || {};
+    this.user = options.user;
+
     this.collection.on('add', this.reRender, this);
     this.collection.on('reset', this.reRender, this);
   },
@@ -10,7 +13,10 @@ Structural.Views.Conversations = Support.CompositeView.extend({
     return this;
   },
   renderConversation: function(conversation) {
-    var view = new Structural.Views.Conversation({model: conversation});
+    var view = new Structural.Views.Conversation({
+      model: conversation,
+      user: this.user
+    });
     this.appendChild(view);
   },
   reRender: function() {

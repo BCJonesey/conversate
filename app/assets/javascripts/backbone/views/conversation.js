@@ -8,14 +8,27 @@ Structural.Views.Conversation = Support.CompositeView.extend({
     if (this.model.get('is_current')) {
       classes += ' cnv-current';
     }
+
+    if (this.model.get('participants') && this.user &&
+        !_(this.model.get('participants').map(function(p) { return p.id; })).contains(this.user.id)) {
+      classes += ' not-participating';
+    }
+
     return classes;
   },
   template: JST['backbone/templates/conversations/conversation'],
   initialize: function(options) {
+    options = options || {};
+    this.user = options.user;
+
     this.model.on('change', this.reRender, this);
   },
   render: function() {
     this.$el.html(this.template({conversation: this.model}));
+
+    // The first time backbone calls className we don't have some data?
+    this.reClass();
+
     return this;
   },
   reClass: function() {
