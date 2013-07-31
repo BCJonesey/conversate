@@ -25,6 +25,7 @@
   padding-left:0.5rem;
   padding-right:5rem;
 }
+@act-title-color:#444444;
 
 .act-title-input{
   box-sizing:border-box;
@@ -38,6 +39,11 @@
   //display:block;
   outline:none;
   .title-font();
+  color:@act-title-color;
+}
+
+.act-container.not-participating-in .act-title-input{
+  color:mix(@act-title-color,white);
 }
 
 .act-title.editing{

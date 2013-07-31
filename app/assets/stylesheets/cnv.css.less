@@ -52,14 +52,20 @@
   margin-top:0.65rem;
   font-size:0.80rem;
 }
+
+@cnv-time-gray:#CCC;
+
 .cnv-time{
   display:inline-block;
   padding:0.25rem;
   font-size:0.65rem;
-  color:#CCC;
+  color:@cnv-time-gray;
   vertical-align:middle;
 }
 
+.cnv.cnv-not-participating .cnv-time{
+  color:mix(@cnv-time-gray,white);
+}
 
 
 
@@ -74,21 +80,27 @@
 //   padding:.3rem;
 //   border-bottom:1px solid @cnv-border-color;
 // }
+@cnv-title-color:#444444;
+
 .cnv-title{
   .title-font();
   .ellipsis();
+  color:@cnv-title-color;
+}
+.cnv.cnv-not-participating .cnv-title{
+  color:mix(@cnv-title-color,white);
 }
 
 .cnv-participants{
   font-size:.8rem;
   min-height:1.0rem;
   color:@cnv-participant-gray;
-
-  // white-space: nowrap;
-  // overflow: hidden;
-  // text-overflow: ellipsis;
   .ellipsis();
 }
+.cnv.cnv-not-participating .cnv-participants{
+  color:mix(@cnv-participant-gray,white);
+}
+
 .cnv-participant{
   display:inline-block;
 }
