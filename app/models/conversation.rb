@@ -84,6 +84,12 @@ class Conversation < ActiveRecord::Base
         action.added.map do |action_user|
           user = User.find_by_id(action_user['id'])
           self.users << user
+
+          if Set.new(action.conversation.topics)
+                  .intersection(Set.new(user.topics)).length == 0
+            action.conversation.topics << Topic.find(user.default_topic_id)
+            action.conversation.save
+          end
         end
       end
       if action.removed
