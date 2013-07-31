@@ -15,7 +15,7 @@ class Topic < ActiveRecord::Base
   def slug
     name.downcase
         .gsub(/[ _]/, '-')
-        .gsub(/[^a-zA-Z0-9]/, '')
+        .gsub(/[^a-zA-Z0-9-]/, '')
   end
 
   def unread_conversations(user)
