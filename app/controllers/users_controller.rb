@@ -6,13 +6,8 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(params[:user])
-    if @user.save
-      default_topic = Topic.new
-      default_topic.name = 'My Conversations'
-      default_topic.users << @user
-      default_topic.save
-
+    @user = User.build params[:user]
+    if @user
       login @user.email, params[:user][:password], false
       redirect_to root_url
     else

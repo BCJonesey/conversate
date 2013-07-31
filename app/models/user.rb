@@ -13,6 +13,18 @@ class User < ActiveRecord::Base
   validates_presence_of :email
   validates_uniqueness_of :email
 
+  def self.build(params)
+    user = User.new(params)
+    return false if user.save == false
+
+    default_topic = Topic.new
+    default_topic.name = 'My Conversations'
+    default_topic.users << user
+    default_topic.save
+
+    user
+  end
+
   def name
     full_name || email
   end
