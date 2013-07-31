@@ -8,8 +8,11 @@ describe Api::V0::ConversationsController do
                           :password => 'superDUPERsecretPassword')
     login_user
     @topic = Topic.create(:name => 'The Wobbles')
+    @user.topics << @topic
     @topic.conversations.create(:title => 'Wobbly Wobble')
     @topic.conversations.create(:title => 'Pretty Damn Solid')
+    @user.conversations << Conversation.find(1)
+    @user.conversations << Conversation.find(2)
   end
 
   describe 'GET #index' do
@@ -58,7 +61,7 @@ describe Api::V0::ConversationsController do
                                   :data => '{"text":"You forgot the i, GIII"}',
                                   :user_id => @user.id)
       conversation.users << @user
-      @user.mark_as_read(conversation)
+      @user.update_most_recent_viewed(conversation)
       check_most_recent_viewed[conversation.most_recent_viewed_for_user(@user).msec]
     end
     it 'responds successfully with the correct participants' do
@@ -75,10 +78,13 @@ describe Api::V0::ConversationsController do
       expect(response).to be_success
       expect(response.code).to eq("200")
       body = JSON.parse(response.body)
-      expect(body[0]['participants'][0]['email']).to eq('someuser@example.com')
-      expect(body[0]['participants'][0]['full_name']).to eq('Usegi Userio')
-      expect(body[0]['participants'][1]['email']).to eq('anotheruser@example.com')
-      expect(body[0]['participants'][1]['full_name']).to eq('Bob the Builder')
+
+      expect(body[0]['participants'][0]['email']).to eq('dummyUser@example.com')
+      expect(body[0]['participants'][0]['full_name']).to eq('Rufio Pan')
+      expect(body[0]['participants'][1]['email']).to eq('someuser@example.com')
+      expect(body[0]['participants'][1]['full_name']).to eq('Usegi Userio')
+      expect(body[0]['participants'][2]['email']).to eq('anotheruser@example.com')
+      expect(body[0]['participants'][2]['full_name']).to eq('Bob the Builder')
     end
     it 'responds unsuccessfully when the topic does not exist' do
       get :index, :topic_id => 100
@@ -113,12 +119,13 @@ describe Api::V0::ConversationsController do
       expect(body['title']).to eq('New Conversation')
     end
     it 'successfully creates a new conversation in this topic with parameters' do
-      User.create!(:email => 'dummyUser2@example.com',
+      user2 = User.create!(:email => 'dummyUser2@example.com',
                           :full_name => 'Huffle Puff',
                           :password => 'superDUPERsecretPassword')
+      user2.topics << Topic.find(1)
       post :create, :topic_id => 1, :title => 'Hufflepuff',
-        :participants => '[{"id":1,"name":"Rufio Pan"},{"id":2,"name":"Huffle Puff"}]',
-        :actions => '[{"type":"message","user":{"id":1},"text":"Hiyoo"}]'
+        :participants => [{:id => 1,:name => "Rufio Pan"},{:id => 2, :name => "Huffle Puff"}],
+        :actions => [{:type => "message",:user => {:id => 1}, :text => "Hiyoo"}]
       expect(response).to be_success
       expect(response.code).to eq("201")
       body = JSON.parse(response.body)

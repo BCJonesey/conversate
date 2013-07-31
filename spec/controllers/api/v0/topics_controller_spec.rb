@@ -7,8 +7,10 @@ describe Api::V0::TopicsController do
                           :full_name => 'Rufio Pan',
                           :password => 'superDUPERsecretPassword')
     login_user
-    Topic.create(:name => 'Terror Time')
-    Topic.create(:name => 'Plebians')
+    tt = Topic.create(:name => 'Terror Time')
+    p = Topic.create(:name => 'Plebians')
+    @user.topics << tt
+    @user.topics << p
   end
 
   describe 'GET #index' do
@@ -37,8 +39,12 @@ describe Api::V0::TopicsController do
       conversation.actions.create!(:type => 'message',
                                     :data => '{"text":"Just a random message."}',
                                     :user_id => 2)
+      # We have to make sure all our models and things get fresh data from the
+      # database instead of keeping cached values around.
+      @user.reload
+
       check_unread_count[1]
-      @user.mark_as_read(conversation)
+      @user.update_most_recent_viewed(conversation)
       check_unread_count[0]
     end
   end
