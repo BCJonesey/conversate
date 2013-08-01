@@ -9,6 +9,9 @@ Structural.Models.Action = Backbone.Model.extend({
         // I swear to god, when I inverted this condition it was executing the
         // wrong path.  The next time you read this comment try re-doing this
         // and maybe the stars will be in a better alignment.
+
+        // It's probably because it's a sub part of the json and needs to be parsed out
+        // Nas a real model. Not interested right now. - Nick
         if (this.get('user') instanceof Structural.Models.Participant) {
           // No-op
         }
