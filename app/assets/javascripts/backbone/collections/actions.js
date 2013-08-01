@@ -57,7 +57,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     });
   },
   createMessageAction: function(text, user) {
-    this._newAction({
+    var model = this._newAction({
       type: 'message',
       text: text,
       user: {
@@ -66,6 +66,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
       },
       timestamp: Date.now()
     });
+    model.markRead();
   },
   createDeleteAction: function(action, user) {
     var model = new Structural.Models.Action({
@@ -148,6 +149,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     model.set('timestamp', (new Date()).valueOf());
     this.add(model);
     model.save();
+    return model;
   }
 });
 
