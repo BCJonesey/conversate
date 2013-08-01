@@ -7,7 +7,6 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     options = options || {};
     this.conversationId = options.conversation;
     this.userId = options.user;
-    this.on('reset', this.calculateUnreadedness, this);
     this.on('reset', this._findMyMessages, this);
     this.on('add', this.setStateOnNewAction, this);
 
@@ -66,7 +65,6 @@ Structural.Collections.Actions = Backbone.Collection.extend({
       },
       timestamp: Date.now()
     });
-    model.markRead();
   },
   createDeleteAction: function(action, user) {
     var model = new Structural.Models.Action({
@@ -105,45 +103,12 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     this.reset();
   },
 
-  calculateUnreadedness: function() {
-    var participants = Structural._participants;
-
-    var me = participants.where({id: this.userId})[0];
-    if (!me) { return; }
-
-    var cutoff = me.get('most_recent_viewed');
-    // The server loses millisecond information, so we have to move the cutoff
-    // up to the nearest full second in the future.
-    cutoff = cutoff + 1000;
-    this.filter(function(action) {
-      return action.get('timestamp') > cutoff;
-    }).forEach(function(action) {
-      action.markUnread();
-    });
-  },
   setStateOnNewAction: function(model, collection) {
-    model.on('change:is_unread', this._updateReadStatuses, this);
     if (model.get('user').id === this.userId) {
-      model.markRead();
-      this._updateReadStatuses(model);
       model.isMine();
-      Structural.updateReadTimestamp(model);
     }
-    else {
-      model.markUnread();
-    }
-    Structural.updateUnreadCounts();
   },
 
-  _updateReadStatuses: function(mostRecentRead) {
-    var targets = this.filter(function(action) {
-      return action.get('timestamp') < mostRecentRead.get('timestamp') &&
-             action.get('is_unread');
-    });
-    targets.forEach(function(action) {
-      action.markRead({silent:true});
-    });
-  },
   _newAction: function(data) {
     var model = new Structural.Models.Action(data);
     model.set('timestamp', (new Date()).valueOf());

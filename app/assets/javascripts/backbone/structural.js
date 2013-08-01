@@ -48,11 +48,6 @@ var Structural = new (Support.CompositeView.extend({
       topics: this._topics
     });
 
-    if (this._actions) {
-      this._participants.on('reset', this._actions.calculateUnreadedness, this._actions);
-      this._actions.calculateUnreadedness(this._participants);
-    }
-
     this.appendChild(this._bar);
     this.appendChild(this._watercooler);
     this._faviconAndTitle.render();
@@ -177,15 +172,6 @@ var Structural = new (Support.CompositeView.extend({
   moveConversation: function(topic) {
     this._actions.createMoveConversationAction(topic, this._user);
     this.viewTopic(this._topics.current());
-  },
-  updateReadTimestamp: function(action) {
-    this._participants.get(this._user.id).updateReadTimestamp(action.get('timestamp'));
-  },
-  updateUnreadCounts: function() {
-    this._conversation.updateUnreadCount(this._actions);
-    var topic = this._topics.get(this._conversation.get('topic_id'));
-    topic.updateUnreadCount(this._conversations);
-    this.updateTitleAndFavicon();
   },
   updateTitleAndFavicon: function() {
     this._faviconAndTitle.render();

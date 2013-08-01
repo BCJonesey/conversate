@@ -79,13 +79,6 @@ Structural.Models.Action = Backbone.Model.extend({
   unfocus: function() {
     this.set('is_current', false);
   },
-  markRead: function(options) {
-    options = options || {};
-    this.set({'is_unread': false}, options);
-  },
-  markUnread: function() {
-    this.set('is_unread', true);
-  },
   delete: function(user) {
     this.set('type', 'deletion');
     this.set('user', user);

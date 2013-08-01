@@ -24,11 +24,6 @@ Structural.Models.Conversation = Backbone.Model.extend({
 
   changeTitle: function(title) {
     this.set('title', title);
-  },
-  updateUnreadCount: function(actions) {
-    this.set('unread_count', actions.filter(function(action) {
-      return action.get('is_unread');
-    }).length)
   }
 });
 
