@@ -19,11 +19,6 @@ Structural.Views.FaviconAndTitle = Support.CompositeView.extend({
       title = 'Kuhltank';
     }
 
-    if (totalUnreadConversations > 0) {
-      iconName = 'watercooler-unread';
-      title = totalUnreadConversations + ' - ' + title;
-    }
-
     this._favicon.attr('href', '/assets/' + iconName + '.png');
     this._title.text(title);
   }

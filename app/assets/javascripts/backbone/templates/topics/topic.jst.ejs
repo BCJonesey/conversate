@@ -1,12 +1,5 @@
-
-
-
 <div class='tpc-right'>
   <a class='btn-faint tpc-details-toggle'href='#'><i class='icon-info-sign'></i></a>
-  <% if (topic.get('unread_conversations') > 0) { %>
-    <span class='tpc-count'><%= topic.escape('unread_conversations')%></span>
-  <% } %>
 </div>
 
 <span class='tpc-label'> <%= topic.escape('name') %> </span>
-
