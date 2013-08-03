@@ -11,7 +11,7 @@ Structural.Views.Conversation = Support.CompositeView.extend({
 
     if (this.model.get('participants') && this.user &&
         !_(this.model.get('participants').map(function(p) { return p.id; })).contains(this.user.id)) {
-      classes += ' not-participating';
+      classes += ' cnv-not-participating';
     }
 
     return classes;
