@@ -18,12 +18,7 @@ class Api::V0::ConversationsController < ApplicationController
     head :status => :not_found and return unless topic
     conversation = topic.conversations.create()
 
-    if (params[:title])
-      conversation.title = params[:title]
-    end
-    conversation.actions.new(:type => 'retitle',
-                             :data => {'title' => conversation.title}.to_json,
-                             :user_id => current_user.id)
+    conversation.set_title params[:title] || 'New Conversation', current_user
 
     conversation.users << current_user
     if (params[:participants])

@@ -11,6 +11,15 @@ class Conversation < ActiveRecord::Base
     convo.title = convo.default_conversation_title if (convo.title.nil? || convo.title.empty?)
   end
 
+  def set_title(title, user)
+    if title
+      self.title = title
+      self.actions.new(type: 'retitle',
+                       data: {title: title}.to_json,
+                       user_id: user.id)
+    end
+  end
+
   def participants
     self.users
   end
