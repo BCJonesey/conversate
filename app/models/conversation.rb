@@ -21,8 +21,8 @@ class Conversation < ActiveRecord::Base
   end
 
   def add_participants(participants, user)
-    topic_set = Set.new(self.topics)
     if participants
+      topic_set = Set.new(self.topics)
       participants.each do |p|
         u = User.find(p[:id])
         self.users << u
@@ -35,6 +35,18 @@ class Conversation < ActiveRecord::Base
       self.actions.new(type: 'update_users',
                        data: {added: participants}.to_json,
                        user_id: user.id)
+    end
+  end
+
+  def add_actions(actions, user)
+    if actions
+      actions.each do |a|
+        action = self.actions.new(type: a[:type],
+                                  data: Action::data_for_params(a),
+                                  user_id: user.id)
+        self.handle(action)
+        action.save
+      end
     end
   end
 
