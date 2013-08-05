@@ -27,7 +27,7 @@ class Conversation < ActiveRecord::Base
         u = User.find(p[:id])
         self.users << u
         if topic_set.intersection(Set.new(u.topics)).length == 0
-          u_default = Topic.find(u.default_topic)
+          u_default = Topic.find(u.default_topic_id)
           self.topics << u_default
         end
       end

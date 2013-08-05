@@ -21,6 +21,8 @@ class User < ActiveRecord::Base
     default_topic.name = 'My Conversations'
     default_topic.users << user
     default_topic.save
+    user.default_topic_id = default_topic.id
+    user.save
 
     user
   end

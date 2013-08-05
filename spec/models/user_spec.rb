@@ -10,6 +10,7 @@ describe User do
 
       expect(user).to be_a(User)
       expect(user.topics.length).to eq(1)
+      expect(user.topics.first.id).to eq(user.default_topic_id)
       expect(Topic.all.length).to eq(topic_count + 1)
     end
   end
