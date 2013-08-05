@@ -20,6 +20,24 @@ class Conversation < ActiveRecord::Base
     end
   end
 
+  def add_participants(participants, user)
+    topic_set = Set.new(self.topics)
+    if participants
+      participants.each do |p|
+        u = User.find(p[:id])
+        self.users << u
+        if topic_set.intersection(Set.new(u.topics)).length == 0
+          u_default = Topic.find(u.default_topic)
+          self.topics << u_default
+        end
+      end
+
+      self.actions.new(type: 'update_users',
+                       data: {added: participants}.to_json,
+                       user_id: user.id)
+    end
+  end
+
   def participants
     self.users
   end

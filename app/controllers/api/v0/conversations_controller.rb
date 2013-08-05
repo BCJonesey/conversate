@@ -21,20 +21,7 @@ class Api::V0::ConversationsController < ApplicationController
     conversation.set_title params[:title] || 'New Conversation', current_user
 
     conversation.users << current_user
-    if (params[:participants])
-      params[:participants].each do |p|
-        user = User.find(p[:id])
-        conversation.users << user
-        unless topic.users.include? user
-          users_default = Topic.find(user.default_topic_id)
-          conversation.topics << users_default
-        end
-      end
-
-      conversation.actions.new(:type => 'update_users',
-                               :data => {'added' => params[:participants]}.to_json,
-                               :user_id => current_user.id)
-    end
+    conversation.add_participants params[:participants], current_user
 
     if (params[:actions])
       params[:actions].each do |a|
