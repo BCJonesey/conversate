@@ -8,9 +8,7 @@ class Topic < ActiveRecord::Base
 
   def as_json(options)
     json = super(options)
-    # TODO: Figure out if unread_conversations is actually the performance
-    # problem, and if so, make it performant.
-    json['unread_conversations'] = 0
+    json['unread_conversations'] = unread_conversations(options[:user])
     return json
   end
 
