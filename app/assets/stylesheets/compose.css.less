@@ -116,7 +116,7 @@
 .new-cnv-title-input{
   .new-cnv-input-style();
   .title-font();
-  color:#444;
+  color:@textColor;
   font-size:1rem;
   //letter-spacing: normal;
   //line-height: 1.0;
@@ -145,6 +145,8 @@
 
 .new-cnv-body{
   .new-cnv-input-style();
+  .body-font();
+  color:@textColor;
   background-color: white;
   resize: vertical;
   min-height: 15rem;
@@ -238,7 +240,7 @@ textarea.write{
   background-color: @backgroundColor;
   outline: none;
   display: block;
-  .body-font;
+  .body-font();
   box-shadow:inset 0 0 5px rgba(0,0,0,0.2);
   &:focus {
     outline: none;
