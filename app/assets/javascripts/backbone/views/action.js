@@ -66,12 +66,5 @@ Structural.Views.Action = Support.CompositeView.extend({
   deleteMessage: function(e) {
     e.preventDefault();
     Structural.createDeleteAction(this.model);
-  },
-  markRead: function(e) {
-    if (this.model.get('is_unread')) {
-      this.model.markRead();
-      Structural.updateReadTimestamp(this.model);
-      Structural.updateUnreadCounts();
-    }
   }
 });

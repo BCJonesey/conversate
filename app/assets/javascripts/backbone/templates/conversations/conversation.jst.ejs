@@ -1,10 +1,5 @@
 <div class='cnv-right'>
   <span class='cnv-time'><%= conversation.humanizedTimestamp() %></span>
-  <% if (conversation.get("unread_count") > 0) { %>
-  <span class='cnv-count'>
-    <%=conversation.get('unread_count')%>
-  </span>
-  <% } %>
 </div>
 
 <div class='cnv-left'>

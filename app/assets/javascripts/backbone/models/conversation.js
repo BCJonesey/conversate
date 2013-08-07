@@ -3,8 +3,6 @@ Structural.Models.Conversation = Backbone.Model.extend({
     if (this.get('participants')) {
       this.set('participants', new Structural.Collections.Participants(this.get('participants')));
     }
-
-    this.set('is_unread', this.get('unread_count') > 0);
   },
   parse: function (response, options) {
 
@@ -24,11 +22,6 @@ Structural.Models.Conversation = Backbone.Model.extend({
 
   changeTitle: function(title) {
     this.set('title', title);
-  },
-  updateUnreadCount: function(actions) {
-    this.set('unread_count', actions.filter(function(action) {
-      return action.get('is_unread');
-    }).length)
   }
 });
 
