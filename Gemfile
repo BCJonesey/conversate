@@ -40,6 +40,8 @@ group :test, :development do
   gem "rspec-rails", "~> 2.0"
 end
 
+gem 'rack-perftools_profiler', :require => 'rack/perftools_profiler'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
