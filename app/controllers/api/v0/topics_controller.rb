@@ -11,5 +11,4 @@ class Api::V0::TopicsController < ApplicationController
     current_user.save
     render :json => topic.to_json(:user => current_user), :status => 201
   end
-
 end
