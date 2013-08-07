@@ -32,7 +32,8 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
   },
   moveConversation: function(e) {
     e.preventDefault();
-    Structural.moveConversationMode();
+    // Moving conversations is currently disabled.
+    // TODO: Call Structural.moveConversationMode().
   },
   openTitleEditor: function(e) {
     e.preventDefault();
