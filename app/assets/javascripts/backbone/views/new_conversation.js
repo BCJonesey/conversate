@@ -31,7 +31,7 @@ Structural.Views.NewConversation = Support.CompositeView.extend({
 
     var title = this.$('.new-cnv-title-input').val();
     if (title.length === 0) {
-      title = 'New Converation';
+      title = 'New Conversation';
     }
     var participants = this.participantEditor.currentParticipants();
     var firstMessage = this.$('.new-cnv-body').val();
