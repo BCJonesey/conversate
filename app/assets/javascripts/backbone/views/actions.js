@@ -6,7 +6,7 @@ Structural.Views.Actions = Support.CompositeView.extend({
   },
   render: function() {
     this.collection.forEach(this.renderAction, this);
-    this.scrollToBottom();
+    this.scrollDownAtEarliestOpportunity();
     return this;
   },
   renderAction: function(action) {
@@ -19,6 +19,21 @@ Structural.Views.Actions = Support.CompositeView.extend({
     })
     this.$el.empty();
     this.render();
+  },
+
+  // Sometimes when we want to scroll down the actions list hasn't actually been
+  // added to the DOM yet, and you can't scroll things that aren't in the DOM.
+  scrollDownAtEarliestOpportunity: function() {
+    var self = this;
+    var scrollUnlessAtBottom = function() {
+      if (self.isAtBottom()) {
+        clearInterval(self._scrollerIntervalId);
+      } else {
+        self.scrollToBottom();
+      }
+    };
+    scrollUnlessAtBottom();
+    this._scrollerIntervalId = setInterval(scrollUnlessAtBottom, 300);
   }
 });
 
