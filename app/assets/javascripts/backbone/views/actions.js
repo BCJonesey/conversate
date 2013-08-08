@@ -6,6 +6,7 @@ Structural.Views.Actions = Support.CompositeView.extend({
   },
   render: function() {
     this.collection.forEach(this.renderAction, this);
+    this.scrollToBottom();
     return this;
   },
   renderAction: function(action) {
@@ -20,3 +21,5 @@ Structural.Views.Actions = Support.CompositeView.extend({
     this.render();
   }
 });
+
+_.extend(Structural.Views.Actions.prototype, Support.Scroller);
