@@ -105,3 +105,42 @@
 .cnv-participant + .cnv-participant:before{
   content:",  ";
 }
+
+
+
+.loading-placeholder{
+  display:none;
+}
+
+.is-loading .loading-placeholder{
+  margin:4rem 1rem;
+  padding:1rem;
+  color:#CCC;
+  border-top:1px solid #E0E0E0;
+  border-bottom:1px solid #E0E0E0;
+  text-align:center;
+}
+
+.loading-text{
+  font-style:italic;
+  //text-shadow:1px 1px 1px rgba(0,0,0,0.1);
+  display:inline-block;
+  -webkit-animation-name: pulse;
+  -webkit-animation-duration: 2.5s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in;
+}
+
+@-webkit-keyframes pulse {
+  0% {
+    color:#EEE;
+    //text-shadow:1px 1px 1px rgba(0,0,0,0.1);
+  }
+  50%{
+    color:#AAA;
+    //text-shadow:1px 1px 1px rgba(0,0,0,0.3);
+  }
+  100% {
+    color:#EEE;
+  }
+}
