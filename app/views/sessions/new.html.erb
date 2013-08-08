@@ -1,14 +1,56 @@
-<div class="login-form form">
-  <h1>
-    Water Cooler
-  </h1>
-  <%= form_tag session_path do %>
-    <%= email_field_tag :email, params[:email], :placeholder => 'Email' %>
-    <%= password_field_tag :password, nil, :placeholder => 'Password' %>
-    <div class='clearfix'>
-      <div class='btn-group pull-right'>
-        <%= submit_tag 'Sign In', :class => 'form-btn form-btn-primary'%>
-      </div>
-    </div>
-  <% end %>
+<header>
+  <a href="#">Water Cooler</a>
+  <a href="#">Tour</a>
+  <a href="#">Pricing</a>
+
+  <a href="#">Sign In</a>
+</header>
+<div class="main">
+  <div class="hero">
+    <img src="http://placehold.it/533x300&text=screenshot">
+    <h1>Water Cooler</h1>
+    <h2>Collaborative communication for creative teams</h2>
+    <a href="#">Sign Up</a>
+  </div>
 </div>
+<div class="copy">
+  <h4>Less Stressful</h4>
+  <p>
+    Disclaimer: We can't actually reduce the stress of your job, that's your
+    problem. What we can help you with is the little things about communicating
+    with your team.
+  </p>
+  <p>Read more about <a href="#">Stress Free* Communication</a></p>
+  <hr>
+  <h4>Web Native</h4>
+  <p>
+    You can access Water Cooler from any browser, but even cooler is that Water
+    Cooler's data is build with the web in mind. Stop sending email chains and
+    just send a link to a thread.
+  <p>
+  <p>More on <a href="#">Web Native Data.</a></p>
+  <hr>
+  <h4>Built For Teams</h4>
+  <p>
+    We've built Water Cooler from the ground up with small creative teams in
+    mind. Open ended discussion, brainstorming, deciding where to go to lunch;
+    creative teams deal with these things constantly, so we built Water Cooler
+    to be great at them.
+  <p>
+  <p>See how Water Cooler can <a href="#">work for your team.</a></p>
+  <hr>
+  <h4>Respects Privacy</h4>
+  <p>
+    Collaboration is about sharing information, but sometimes you still need to
+    be able to have a private conversation.
+  </p>
+  <p>
+    Water Cooler has a simple set of controls that let you have restrict your
+    conversations to 1-on-1, just your team, your whole organizaiton, or any
+    ad-hoc group in between  (great for planning a surprise party).
+  </p>
+  <p><a href="#">Never cc: the wrong person again</a></p>
+</div>
+<footer>
+  Built by <a href="#">Structural</a> in Boston, MA
+</footer>
