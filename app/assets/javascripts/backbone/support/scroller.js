@@ -1,9 +1,7 @@
 Support.Scroller = {
   scrollToBottom: function() {
     var height = this.el.scrollHeight;
-    this.$el.animate({
-      scrollTop: height
-    }, 500);
+    this.$el.scrollTop(height);
   },
   isAtBottom: function() {
     var belowScrollbar = this.el.scrollHeight -
