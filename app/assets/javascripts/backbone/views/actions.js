@@ -1,4 +1,4 @@
-w/Structural.Views.Actions = Support.CompositeView.extend({
+Structural.Views.Actions = Support.CompositeView.extend({
   className: 'act-list',
   initialize: function(options) {
     this.collection.on('add', this.renderAction, this);
