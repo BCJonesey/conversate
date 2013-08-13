@@ -1,4 +1,4 @@
-Structural.Views.Actions = Support.CompositeView.extend({
+w/Structural.Views.Actions = Support.CompositeView.extend({
   className: 'act-list',
   initialize: function(options) {
     this.collection.on('add', this.renderAction, this);
@@ -33,6 +33,10 @@ Structural.Views.Actions = Support.CompositeView.extend({
       }
     };
     scrollUnlessAtBottom();
+
+    if (this._scrollerIntervalId) {
+      clearInterval(this._scrollerIntervalId);
+    }
     this._scrollerIntervalId = setInterval(scrollUnlessAtBottom, 300);
   }
 });
