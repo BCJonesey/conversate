@@ -3,7 +3,20 @@
   <a href="#">Tour</a>
   <a href="#">Pricing</a>
 
-  <a href="#">Sign In</a>
+  <a href="#" class="login-modal-trigger">Sign In</a>
+  <div class="login-modal hidden">
+    <div class="login-form form">
+      <%= form_tag session_path do %>
+        <%= email_field_tag :email, params[:email], placeholder: 'Email' %>
+        <%= password_field_tag :password, nil, placeholder: 'Password' %>
+        <div class="clearfix">
+          <div class="btn-group pull-right">
+            <%= submit_tag 'Sign In', :class => 'form-btn form-btn-primary' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </header>
 <div class="main">
   <div class="hero">
