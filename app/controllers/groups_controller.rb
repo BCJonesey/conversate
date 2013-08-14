@@ -50,6 +50,20 @@ class GroupsController < ApplicationController
     render :index
   end
 
+  def new_user
+    group = Group.find(params[:group])
+
+    user = User.build(params[:user])
+    if user
+      user.groups << group
+      user.save
+    else
+      # TODO: error
+    end
+
+    render :index
+  end
+
   private
 
   def require_group_admin

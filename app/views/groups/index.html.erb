@@ -75,6 +75,24 @@
           </div>
         <% end %>
       <% end %>
+
+      <div class="modal-background hidden grp-new-user-form">
+        <div class="modal-message">
+          <h3>New User</h3>
+          <h4>Add a new user to <%= group.name %></h4>
+          <%= form_tag people_path, method: 'post', :class => 'form' do %>
+            <%= label_tag 'user[full_name]', 'Name' %>
+            <%= text_field_tag 'user[full_name]' %>
+            <%= label_tag 'user[email]', 'Email Address' %>
+            <%= email_field_tag 'user[email]' %>
+            <%= label_tag 'user[password]', 'Initial Password' %>
+            <%= text_field_tag 'user[password]' %>
+            <%= hidden_field_tag :group, group.id %>
+            <%= submit_tag 'Create Account', :class => 'btn btn-primary' %>
+          <% end %>
+          <a href="#" class="modal-message-dismiss"><i class="icon-remove"></i>Cancel</a>
+        </div>
+      </div>
     </div>
   <% end %>
 </div>
