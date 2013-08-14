@@ -1,5 +1,26 @@
 <%= render 'shared/hacky_top_bar' %>
 
+<% unless @removed_users_with_more_groups.empty? %>
+<div class="modal modal-message">
+  <h4>We couldn't automatically remove some users.</h4>
+  <p>
+    The following users were in more than one group, so we couldn't clean up all
+    their data correctly.
+  <p>
+  <ul>
+    <% @removed_users_with_more_groups.each do |u| %>
+      <li><%= u.name %></li>
+    <% end %>
+  </ul>
+  <p>
+    They're not part of your group anymore, but they still have access to some
+    of your conversations.  If you contact us with the list of topics they
+    should be removed from, we'll take care of the rest.
+  </p>
+  <a href="#" class="btn btn-primary modal-dismiss">OK</a>
+</div>
+<% end %>
+
 <div class="grp-page">
   <% current_user.groups.each do |group| %>
     <div class="grp">

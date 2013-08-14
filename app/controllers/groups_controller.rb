@@ -1,6 +1,7 @@
 class GroupsController < ApplicationController
   before_filter :require_login
   before_filter :require_group_admin, :except => :index
+  before_filter :removed_users_list
 
   def index
   end
@@ -25,6 +26,27 @@ class GroupsController < ApplicationController
       end
     end
 
+    params[:remove].each do |id|
+      user = User.find(id.to_i)
+
+      if user.groups.length == 1
+        user.removed = true
+        user.topics.each do |topic|
+          topic.users.delete user
+          topic.save
+        end
+        user.conversations.each do |conversation|
+          conversation.users.delete user
+          conversation.save
+        end
+      else
+        @removed_users_with_more_groups << user
+      end
+
+      user.groups.delete group
+      user.save
+    end
+
     render :index
   end
 
@@ -35,5 +57,9 @@ class GroupsController < ApplicationController
     unless current_user.group_admin?(group)
       render status: :forbidden
     end
+  end
+
+  def removed_users_list
+    @removed_users_with_more_groups = []
   end
 end
