@@ -20,7 +20,7 @@
   <!-- Note to sufficiently savvy users: please don't make me
        regret typing that. -->
 
-  <% if(user.get('is_admin')) { %>
+  <% if(user.get('site_admin')) { %>
     <a href="<%= Structural.Router.adminHref() %>" class="stb-link">
       <i class="stb-icon icon-dashboard"></i>
       <span class="stb-link-text">Admin</span>
