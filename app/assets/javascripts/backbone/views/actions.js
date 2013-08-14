@@ -3,6 +3,7 @@ Structural.Views.Actions = Support.CompositeView.extend({
   initialize: function(options) {
     this.collection.on('add', this.renderAction, this);
     this.collection.on('reset', this.reRender, this);
+    this.collection.on('addedSomeoneElsesMessage', this.scrollDownIfAtBottom, this);
   },
   render: function() {
     this.collection.forEach(this.renderAction, this);
@@ -38,6 +39,13 @@ Structural.Views.Actions = Support.CompositeView.extend({
       clearInterval(this._scrollerIntervalId);
     }
     this._scrollerIntervalId = setInterval(scrollUnlessAtBottom, 300);
+  },
+  scrollDownIfAtBottom: function() {
+    console.log('caught');
+    if (this.isAtBottom()) {
+      console.log('scrolled');
+      this.scrollDownAtEarliestOpportunity();
+    }
   }
 });
 

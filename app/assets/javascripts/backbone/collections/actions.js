@@ -9,6 +9,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     this.userId = options.user;
     this.on('reset', this._findMyMessages, this);
     this.on('add', this.setStateOnNewAction, this);
+    this.on('add', this.triggerNewMessage, this);
 
     this.startUpdate();
   },
@@ -106,6 +107,14 @@ Structural.Collections.Actions = Backbone.Collection.extend({
   setStateOnNewAction: function(model, collection) {
     if (model.get('user').id === this.userId) {
       model.isMine();
+    }
+  },
+  triggerNewMessage: function(model) {
+    console.log('added');
+    if (model.get('type') === 'message' &&
+        model.get('user').id !== this.userId) {
+      console.log('triggered');
+      this.trigger('addedSomeoneElsesMessage')
     }
   },
 
