@@ -1,4 +1,7 @@
 class GroupsController < ApplicationController
+  before_filter :require_login
+  before_filter :require_group_admin, :except => :index
+
   def index
   end
 
@@ -23,5 +26,14 @@ class GroupsController < ApplicationController
     end
 
     render :index
+  end
+
+  private
+
+  def require_group_admin
+    group = Group.find(params[:group])
+    unless current_user.group_admin?(group)
+      render status: :forbidden
+    end
   end
 end
