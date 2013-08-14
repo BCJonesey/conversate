@@ -8,28 +8,16 @@
       </tr>
     </thead>
     <tbody>
+      <% all_models.each do |model| %>
+        <tr>
+          <td><%= model.name %></td>
+          <td><%= model.count %></td>
+        </tr>
+      <% end %>
       <tr>
-        <td>Conversations</td>
-        <td><%= Conversation.all.count %></td>
-      </tr>
-      <tr>
-        <td>Actions</td>
-        <td><%= Action.all.count %></td>
-      </tr>
-      <tr>
-        <td>Reading Logs</td>
-        <td><%= ReadingLog.all.count %></td>
-      </tr>
-      <tr>
-        <td>Users</td>
-        <td><%= User.all.count %></td>
-      </tr>
       <tr>
         <td>Total</td>
-        <td><%= Conversation.all.count +
-                Action.all.count +
-                ReadingLog.all.count +
-                User.all.count %></td>
+        <td><%= all_models.collect {|m| m.count }.sum %></td>
     </tbody>
   </table>
 </div>
