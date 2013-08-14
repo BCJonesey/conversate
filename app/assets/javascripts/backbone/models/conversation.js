@@ -22,6 +22,11 @@ Structural.Models.Conversation = Backbone.Model.extend({
 
   changeTitle: function(title) {
     this.set('title', title);
+  },
+
+  unreadCount: function() {
+    // TODO: Change this so that each conversation actually has its own actions collection.
+    return Structural._actions.unreadCount();
   }
 });
 

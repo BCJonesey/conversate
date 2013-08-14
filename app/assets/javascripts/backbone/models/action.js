@@ -85,6 +85,9 @@ Structural.Models.Action = Backbone.Model.extend({
   },
   isMine: function(){
     this.set('isOwnAction', true);
+  },
+  isUnread: function() {
+    return true;
   }
 });
 

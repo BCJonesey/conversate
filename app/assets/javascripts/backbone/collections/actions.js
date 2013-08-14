@@ -115,6 +115,14 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     this.add(model);
     model.save();
     return model;
+  },
+
+  unreadCount: function() {
+    var count = 0;
+    this.forEach(function(action) {
+      count += action.isUnread() ? 1 : 0;
+    });
+    return count;
   }
 });
 
