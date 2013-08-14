@@ -1,12 +1,13 @@
 Structural.Models.Conversation = Backbone.Model.extend({
   initialize: function(attributes, options) {
+    var self = this;
     if (this.get('participants')) {
       this.set('participants', new Structural.Collections.Participants(this.get('participants')));
     }
 
     this.actions = new Structural.Collections.Actions({}, {conversation: this.id, user:Structural._user.id});
     this.actions.on('unreadCountChanged', function() {
-      this.trigger('updated');
+      self.trigger('updated');
       console.log('change in convo');
     });
 

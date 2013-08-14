@@ -33,8 +33,6 @@ var Structural = new (Support.CompositeView.extend({
       // TODO: Refactor.
       this._conversation.actions.set(bootstrap.actions);
       this._conversation.actions._findMyMessages();
-    } else {
-      this._conversation.actions = new Structural.Collections.Actions();
     }
 
     this._bar = new Structural.Views.StructuralBar({model: this._user});
