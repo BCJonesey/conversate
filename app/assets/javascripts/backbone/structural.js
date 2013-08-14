@@ -118,6 +118,8 @@ var Structural = new (Support.CompositeView.extend({
     this._conversation = conversation;
     this._conversation.actions.changeConversation(conversation.id);
     this._participants.changeConversation(conversation.id);
+    // TODO: Refactor.
+    this._watercooler.actions = this._conversation.actions;
     this._watercooler.changeConversation(conversation);
   },
   _changeConversationUrl: function(conversation) {
