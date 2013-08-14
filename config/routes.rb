@@ -1,6 +1,9 @@
 Conversate::Application.routes.draw do
   root :to => 'home#index'
 
+  get '/tour' => 'home#tour', :as => 'tour'
+  get '/pricing' => 'home#pricing', :as => 'pricing'
+
   get 'admin' => 'admin#index', :as => 'admin'
   resource :users, :only => [:new, :create, :update]
   resource :session, :only => [:new, :create]

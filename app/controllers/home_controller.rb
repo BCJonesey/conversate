@@ -17,4 +17,10 @@ class HomeController < ApplicationController
       render 'sessions/new'
     end
   end
+
+  def tour
+  end
+
+  def pricing
+  end
 end
