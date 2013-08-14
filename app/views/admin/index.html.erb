@@ -32,24 +32,4 @@
                 User.all.count %></td>
     </tbody>
   </table>
-
-  <h3>Invitations</h3>
-  <table>
-    <thead>
-      <tr>
-        <td>User</td>
-        <td>Invite Count</td>
-      </tr>
-    </thead>
-    <tbody>
-      <% User.where(:site_admin => true).each do |user| %>
-        <tr>
-          <td><%= user.name %></td>
-          <td>
-            <%= User.where(:invited_by => user.id).count %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
 </div>
