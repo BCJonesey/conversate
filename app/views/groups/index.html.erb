@@ -59,10 +59,7 @@
                 </td>
                 <% if current_user.group_admin?(group) %>
                   <td>
-                    <a href="#" class="grp-remove-user-trigger">Remove</a>
-                    <i class="icon-remove hidden grp-unremove-user-trigger"></i>
-                    <%= check_box_tag 'remove[]', user.id, false,
-                                      :class => 'hidden grp-remove-user-input' %>
+                    <%= check_box_tag 'remove[]', user.id, false %>
                   </td>
                 <% end %>
               </tr>
