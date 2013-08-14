@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130814011749) do
+ActiveRecord::Schema.define(:version => 20130814214058) do
 
   create_table "actions", :force => true do |t|
     t.integer  "conversation_id"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(:version => 20130814011749) do
   create_table "group_participations", :force => true do |t|
     t.integer "group_id"
     t.integer "user_id"
-    t.boolean "group_admin", :default => false
+    t.boolean "group_admin"
   end
 
   create_table "groups", :force => true do |t|
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(:version => 20130814011749) do
     t.boolean  "site_admin",                   :default => false
     t.integer  "invited_by"
     t.integer  "default_topic_id"
+    t.boolean  "removed",                      :default => false
   end
 
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"
