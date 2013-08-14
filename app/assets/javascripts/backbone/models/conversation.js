@@ -8,7 +8,6 @@ Structural.Models.Conversation = Backbone.Model.extend({
     this.actions = new Structural.Collections.Actions({}, {conversation: this.id, user:Structural._user.id});
     this.actions.on('unreadCountChanged', function() {
       self.trigger('updated');
-      console.log('change in convo');
     });
 
   },
