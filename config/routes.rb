@@ -16,6 +16,7 @@ Conversate::Application.routes.draw do
   get 'profile' => 'users#edit'
 
   get 'people' => 'groups#index'
+  put 'people' => 'groups#edit'
 
   namespace :api do
     namespace :v0 do
