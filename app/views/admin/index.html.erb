@@ -13,8 +13,8 @@
         <td><%= Conversation.all.count %></td>
       </tr>
       <tr>
-        <td>Events</td>
-        <td><%= Event.all.count %></td>
+        <td>Actions</td>
+        <td><%= Action.all.count %></td>
       </tr>
       <tr>
         <td>Reading Logs</td>
@@ -27,7 +27,7 @@
       <tr>
         <td>Total</td>
         <td><%= Conversation.all.count +
-                Event.all.count +
+                Action.all.count +
                 ReadingLog.all.count +
                 User.all.count %></td>
     </tbody>
@@ -42,7 +42,7 @@
       </tr>
     </thead>
     <tbody>
-      <% User.where(:is_admin => true).each do |user| %>
+      <% User.where(:site_admin => true).each do |user| %>
         <tr>
           <td><%= user.name %></td>
           <td>
