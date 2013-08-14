@@ -16,6 +16,7 @@ var Structural = new (Support.CompositeView.extend({
     this.apiPrefix = options.apiPrefix;
   },
   start: function(bootstrap) {
+    this._user = new Structural.Models.User(bootstrap.user);
     this._topics = new Structural.Collections.Topics(bootstrap.topics);
     this._conversations = new Structural.Collections.Conversations(bootstrap.conversations);
     this._conversation =  this._conversations.where({id: bootstrap.conversation.id})[0];
@@ -26,20 +27,21 @@ var Structural = new (Support.CompositeView.extend({
     if (!this._conversation) {
       this._conversation = new Structural.Models.Conversation();
     }
-    this._user = new Structural.Models.User(bootstrap.user);
+
     if (this._conversation && this._conversation.id) {
       this._conversation.set('is_current', true);
-      this._actions = new Structural.Collections.Actions(bootstrap.actions, {conversation: this._conversation.id, user:this._user.id});
-      this._actions._findMyMessages();
+      // TODO: Refactor.
+      this._conversation.actions.set(bootstrap.actions);
+      this._conversation.actions._findMyMessages();
     } else {
-      this._actions = new Structural.Collections.Actions();
+      this._conversation.actions = new Structural.Collections.Actions();
     }
 
     this._bar = new Structural.Views.StructuralBar({model: this._user});
     this._watercooler = new Structural.Views.WaterCooler({
       topics: this._topics,
       conversations: this._conversations,
-      actions: this._actions,
+      actions: this._conversation.actions,
       participants: this._participants,
       conversation: this._conversation,
       addressBook: this._user.get('address_book'),
@@ -75,7 +77,7 @@ var Structural = new (Support.CompositeView.extend({
     }
 
     if (targets.message) {
-      this._actions.focus(targets.message);
+      this._conversation.actions.focus(targets.message);
     }
   },
 
@@ -116,7 +118,7 @@ var Structural = new (Support.CompositeView.extend({
   _changeConversationView: function(conversation) {
     this._clearConversationView();
     this._conversation = conversation;
-    this._actions.changeConversation(conversation.id);
+    this._conversation.actions.changeConversation(conversation.id);
     this._participants.changeConversation(conversation.id);
     this._watercooler.changeConversation(conversation);
   },
@@ -126,22 +128,22 @@ var Structural = new (Support.CompositeView.extend({
   },
   _clearConversationView: function() {
     this._conversation = undefined;
-    this._actions.clearConversation();
+    this._conversation.actions.clearConversation();
     this._participants.clearConversation();
     this._watercooler.clearConversation();
   },
 
   createRetitleAction: function(title) {
-    this._actions.createRetitleAction(title, this._user);
+    this._conversation.actions.createRetitleAction(title, this._user);
   },
   createUpdateUserAction: function(added, removed) {
-    this._actions.createUpdateUserAction(added, removed, this._user);
+    this._conversation.actions.createUpdateUserAction(added, removed, this._user);
   },
   createMessageAction: function(text) {
-    this._actions.createMessageAction(text, this._user);
+    this._conversation.actions.createMessageAction(text, this._user);
   },
   createDeleteAction: function(action) {
-    this._actions.createDeleteAction(action, this._user);
+    this._conversation.actions.createDeleteAction(action, this._user);
   },
   createNewConversation: function(title, participants, message) {
     var data = {};
@@ -173,7 +175,7 @@ var Structural = new (Support.CompositeView.extend({
     });
   },
   moveConversation: function(topic) {
-    this._actions.createMoveConversationAction(topic, this._user);
+    this._conversation.actions.createMoveConversationAction(topic, this._user);
     this.viewTopic(this._topics.current());
   },
   updateTitleAndFavicon: function() {

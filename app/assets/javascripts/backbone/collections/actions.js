@@ -9,7 +9,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     this.userId = options.user;
     this.on('reset', this._findMyMessages, this);
     this.on('add', this.setStateOnNewAction, this);
-
+    this.unread = this.unreadCount();
     this.startUpdate();
   },
   comparator: 'timestamp',
@@ -122,6 +122,9 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     this.forEach(function(action) {
       count += action.isUnread() ? 1 : 0;
     });
+
+    // We're using this value for an observer.
+    this.unread = count;
     return count;
   }
 });

@@ -3,6 +3,15 @@ Structural.Models.Conversation = Backbone.Model.extend({
     if (this.get('participants')) {
       this.set('participants', new Structural.Collections.Participants(this.get('participants')));
     }
+
+    // TODO: Refactor.
+    this.actions = new Structural.Collections.Actions({}, {conversation: this.id, user:Structural._user.id});
+    //this.actions._findMyMessages();
+    this.actions.on('change:unread', function(model, value, options) {
+      console.log(value);
+      console.log('Unread count changed');
+    });
+
   },
   parse: function (response, options) {
 
@@ -25,8 +34,7 @@ Structural.Models.Conversation = Backbone.Model.extend({
   },
 
   unreadCount: function() {
-    // TODO: Change this so that each conversation actually has its own actions collection.
-    return Structural._actions.unreadCount();
+    return this.actions.unreadCount();
   }
 });
 
