@@ -33,6 +33,9 @@
           <% end %>
         </tbody>
       </table>
+      <% if current_user.group_admin?(group) %>
+        <%= submit_tag 'Save', class: 'btn-primary' %>
+      <% end %>
     </div>
   <% end %>
 </div>
