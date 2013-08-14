@@ -1,11 +1,17 @@
-<header>
-  <a href="#">Water Cooler</a>
-  <a href="#">Tour</a>
-  <a href="#">Pricing</a>
+<div class='page-wrapper'>
+  <header>
+  <div class='nav clearfix'>
+    <div class='btn-group pull-left'>
+  <a href="#" class='nav-item active'>Water Cooler</a>
+  <a href="#" class='nav-item'>Tour</a>
+  <a href="#" class='nav-item'>Pricing</a>
+</div>
 
-  <a href="#" class="login-modal-trigger">Sign In</a>
-  <div class="login-modal hidden">
-    <div class="login-form form">
+<div class='btn-group pull-right'>
+  <a href="#" class="nav-item nav-item-link login-modal-trigger">Sign In</a>
+</div>
+  <div class="login-modal form hidden">
+      <div class='login-form-title'>Authenticate</div>
       <%= form_tag session_path do %>
         <%= email_field_tag :email, params[:email], placeholder: 'Email' %>
         <%= password_field_tag :password, nil, placeholder: 'Password' %>
@@ -18,15 +24,19 @@
     </div>
   </div>
 </header>
+
 <div class="main">
   <div class="hero">
-    <img src="http://placehold.it/533x300&text=screenshot">
+<!--     <img src="http://placehold.it/533x300&text=screenshot">
+ -->
     <h1>Water Cooler</h1>
     <h2>Collaborative communication for creative teams</h2>
-    <a href="#">Sign Up</a>
+    <a href="#" class='btn-primary'>Sign Up</a>
   </div>
 </div>
-<div class="copy">
+<div class="copy-wrapper">
+  <ul class='copy clearfix'>
+    <li>
   <h4>Less Stressful</h4>
   <p>
     Disclaimer: We can't actually reduce the stress of your job, that's your
@@ -34,24 +44,29 @@
     with your team.
   </p>
   <p>Read more about <a href="#">Stress Free* Communication</a></p>
-  <hr>
+</li>
+
+<li>
   <h4>Web Native</h4>
   <p>
     You can access Water Cooler from any browser, but even cooler is that Water
     Cooler's data is build with the web in mind. Stop sending email chains and
     just send a link to a thread.
-  <p>
+  </p>
   <p>More on <a href="#">Web Native Data.</a></p>
-  <hr>
+ </li>
+ <li>
   <h4>Built For Teams</h4>
   <p>
     We've built Water Cooler from the ground up with small creative teams in
     mind. Open ended discussion, brainstorming, deciding where to go to lunch;
     creative teams deal with these things constantly, so we built Water Cooler
     to be great at them.
-  <p>
+  </p>
   <p>See how Water Cooler can <a href="#">work for your team.</a></p>
-  <hr>
+
+</li><li>
+
   <h4>Respects Privacy</h4>
   <p>
     Collaboration is about sharing information, but sometimes you still need to
@@ -63,7 +78,10 @@
     ad-hoc group in between  (great for planning a surprise party).
   </p>
   <p><a href="#">Never cc: the wrong person again</a></p>
+</li>
+</ul>
 </div>
 <footer>
   Built by <a href="#">Structural</a> in Boston, MA
 </footer>
+</div>
