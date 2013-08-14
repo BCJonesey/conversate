@@ -5,7 +5,8 @@ Structural.Router = new (Backbone.Router.extend({
     'conversation/:slug/:id#message:messageId': 'message',
     'topic/:slug/:id': 'topic',
     'profile': 'profile',
-    'admin': 'admin'
+    'admin': 'admin',
+    'people': 'people'
   },
   index: function() {
     Structural.focus({ topic: Structural._topics.at(0).id });
@@ -25,12 +26,9 @@ Structural.Router = new (Backbone.Router.extend({
     Structural.focus({ topic: id });
     this._fixSlug('topic/', slug, '/' + id, Structural._topics.get(id|0).get('name'));
   },
-  profile: function() {
-
-  },
-  admin: function() {
-
-  },
+  profile: function() { },
+  admin: function() { },
+  people: function() { },
 
   initialize: function(options) {
   },
@@ -65,6 +63,9 @@ Structural.Router = new (Backbone.Router.extend({
   profilePath: function() {
     return 'profile';
   },
+  peoplePath: function() {
+    return 'people';
+  },
   logoutPath: function() {
     return 'session/logout';
   },
@@ -85,6 +86,9 @@ Structural.Router = new (Backbone.Router.extend({
   },
   profileHref: function() {
     return '/' + this.profilePath();
+  },
+  peopleHref: function() {
+    return '/' + this.peoplePath();
   },
   logoutHref: function() {
     return '/' + this.logoutPath();

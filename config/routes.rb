@@ -12,7 +12,10 @@ Conversate::Application.routes.draw do
 
   get 'ux/testbed' => 'testbed#index'
   get 'ux/testbed/:view' => 'testbed#test_view', :as  =>'test_view'
+
   get 'profile' => 'users#edit'
+
+  get 'people' => 'groups#index'
 
   namespace :api do
     namespace :v0 do
