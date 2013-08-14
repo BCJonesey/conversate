@@ -41,6 +41,7 @@
           </tbody>
         </table>
         <% if current_user.group_admin?(group) %>
+          <%= hidden_field_tag 'group', group.id %>
           <%= submit_tag 'Save', class: 'btn-primary' %>
         <% end %>
       <% end %>

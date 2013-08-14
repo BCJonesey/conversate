@@ -3,6 +3,25 @@ class GroupsController < ApplicationController
   end
 
   def edit
+    group = Group.find(params[:group])
+
+    params[:admin].each do |id|
+      user = User.find(id.to_i)
+      unless user.group_admin?(group)
+        gp = GroupParticipation.where(user_id: user.id, group_id: group.id).first
+        gp.group_admin = true
+        gp.save
+      end
+    end
+
+    group.admins.each do |admin|
+      unless params[:admin].include? admin.id.to_s
+        gp = GroupParticipation.where(user_id: admin.id, group_id: group.id).first
+        gp.group_admin = false
+        gp.save
+      end
+    end
+
     render :index
   end
 end
