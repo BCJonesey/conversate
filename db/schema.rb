@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(:version => 20130814011749) do
   create_table "group_participations", :force => true do |t|
     t.integer "group_id"
     t.integer "user_id"
-    t.boolean "group_admin"
+    t.boolean "group_admin", :default => false
   end
 
   create_table "groups", :force => true do |t|

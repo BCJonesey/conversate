@@ -3,7 +3,7 @@ class CreateGroupParticipation < ActiveRecord::Migration
     create_table :group_participations do |t|
       t.integer :group_id
       t.integer :user_id
-      t.boolean :group_admin
+      t.boolean :group_admin, default: false
     end
   end
 
