@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130727230924) do
+ActiveRecord::Schema.define(:version => 20130814003900) do
 
   create_table "actions", :force => true do |t|
     t.integer  "conversation_id"
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(:version => 20130727230924) do
     t.string   "remember_me_token"
     t.datetime "remember_me_token_expires_at"
     t.string   "full_name"
-    t.boolean  "is_admin",                     :default => false
+    t.boolean  "site_admin",                   :default => false
     t.integer  "invited_by"
     t.integer  "default_topic_id"
   end
