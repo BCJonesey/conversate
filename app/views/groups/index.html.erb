@@ -31,6 +31,8 @@
                 <td>
                   <a href="#" class="grp-remove-user-trigger">Remove</a>
                   <i class="icon-remove hidden grp-unremove-user-trigger"></i>
+                  <%= check_box_tag "remove_#{user.id}", 'remove', false,
+                                    :class => 'hidden grp-remove-user-input' %>
                 </td>
               <% end %>
             </tr>
