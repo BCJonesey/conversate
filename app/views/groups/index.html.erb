@@ -25,14 +25,14 @@
                 <td><%= user.full_name %></td>
                 <td><%= user.email %></td>
                 <td>
-                  <%= check_box_tag "admin_#{user.id}", 'admin', user.group_admin?(group),
+                  <%= check_box_tag 'admin[]', user.id, user.group_admin?(group),
                                     disabled: !current_user.group_admin?(group) %>
                 </td>
                 <% if current_user.group_admin?(group) %>
                   <td>
                     <a href="#" class="grp-remove-user-trigger">Remove</a>
                     <i class="icon-remove hidden grp-unremove-user-trigger"></i>
-                    <%= check_box_tag "remove_#{user.id}", 'remove', false,
+                    <%= check_box_tag 'remove[]', user.id, false,
                                       :class => 'hidden grp-remove-user-input' %>
                   </td>
                 <% end %>
