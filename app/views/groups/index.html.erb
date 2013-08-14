@@ -1,10 +1,33 @@
 <%= render 'shared/hacky_top_bar' %>
 
-<% current_user.groups.each do |group| %>
-  <h4><%= group.name %></h4>
-  <ul>
-    <% group.users.each do |user| %>
-      <li><%= user.name %></li>
+<div class="grp">
+  <% current_user.groups.each do |group| %>
+    <h4><%= group.name %></h4>
+    <% if current_user.group_admin?(group) %>
+      <a href="#" class="new-user-trigger">New User</a>
     <% end %>
-  </ul>
-<% end %>
+    <table>
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>Email Address</td>
+          <td>Admin</td>
+          <% if current_user.group_admin?(group) %>
+            <td>Remove</td>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% group.users.each do |user| %>
+          <tr>
+            <td><%= user.full_name %></td>
+            <td><%= user.email %></td>
+            <td><%= check_box_tag :admin, 'admin', user.group_admin?(group), disabled: current_user.group_admin?(group) %></td>
+            <% if current_user.group_admin?(group) %>
+              <td><a href="#" class="remove-user-trigger">Remove</a></td>
+            <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>
