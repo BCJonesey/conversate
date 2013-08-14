@@ -28,7 +28,10 @@
                                   disabled: !current_user.group_admin?(group) %>
               </td>
               <% if current_user.group_admin?(group) %>
-                <td><a href="#" class="remove-user-trigger">Remove</a></td>
+                <td>
+                  <a href="#" class="grp-remove-user-trigger">Remove</a>
+                  <i class="icon-remove hidden grp-unremove-user-trigger"></i>
+                </td>
               <% end %>
           <% end %>
         </tbody>
