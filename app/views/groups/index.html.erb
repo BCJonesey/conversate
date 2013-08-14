@@ -1,36 +1,38 @@
 <%= render 'shared/hacky_top_bar' %>
 
-<div class="grp">
+<div class="grp-page">
   <% current_user.groups.each do |group| %>
-    <h4><%= group.name %></h4>
-    <% if current_user.group_admin?(group) %>
-      <a href="#" class="new-user-trigger">New User</a>
-    <% end %>
-    <table>
-      <thead>
-        <tr>
-          <td>Name</td>
-          <td>Email Address</td>
-          <td>Admin</td>
-          <% if current_user.group_admin?(group) %>
-            <td>Remove</td>
-          <% end %>
-        </tr>
-      </thead>
-      <tbody>
-        <% group.users.each do |user| %>
+    <div class="grp">
+      <span class="grp-name"><%= group.name %></span>
+      <% if current_user.group_admin?(group) %>
+        <a href="#" class="grp-new-user-trigger">New User</a>
+      <% end %>
+      <table>
+        <thead>
           <tr>
-            <td><%= user.full_name %></td>
-            <td><%= user.email %></td>
-            <td>
-              <%= check_box_tag :admin, 'admin', user.group_admin?(group),
-                                disabled: !current_user.group_admin?(group) %>
-            </td>
+            <td>Name</td>
+            <td>Email Address</td>
+            <td>Admin</td>
             <% if current_user.group_admin?(group) %>
-              <td><a href="#" class="remove-user-trigger">Remove</a></td>
+              <td>Remove</td>
             <% end %>
-        <% end %>
-      </tbody>
-    </table>
+          </tr>
+        </thead>
+        <tbody>
+          <% group.users.each do |user| %>
+            <tr>
+              <td><%= user.full_name %></td>
+              <td><%= user.email %></td>
+              <td>
+                <%= check_box_tag :admin, 'admin', user.group_admin?(group),
+                                  disabled: !current_user.group_admin?(group) %>
+              </td>
+              <% if current_user.group_admin?(group) %>
+                <td><a href="#" class="remove-user-trigger">Remove</a></td>
+              <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   <% end %>
 </div>

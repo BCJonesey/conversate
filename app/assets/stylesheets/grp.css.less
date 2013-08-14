@@ -1,13 +1,28 @@
 @import 'variables.css.less';
 @import 'mixins.css.less';
 
-.grp {
+.grp-page {
   width: 50rem;
   max-width: 100%;
   margin: auto;
 
+  .grp {
+    margin-top: 2rem;
+
+    .grp-name {
+      .title-font(2rem);
+    }
+
+    .grp-new-user-trigger {
+      float: right;
+      position: relative;
+      top: 1.5rem;
+    }
+  }
+
   table {
-    .stripey-table
+    .stripey-table;
+    width: 100%;
   }
 
   /* We set -webkit-apperance to `none` for all inputs in our root.css, which
