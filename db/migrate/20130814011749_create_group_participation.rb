@@ -1,6 +1,6 @@
 class CreateGroupParticipation < ActiveRecord::Migration
   def up
-    create_table :group_participation do |t|
+    create_table :group_participations do |t|
       t.integer :group_id
       t.integer :user_id
       t.boolean :group_admin

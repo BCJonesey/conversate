@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(:version => 20130814011749) do
     t.integer "topic_id"
   end
 
-  create_table "group_participation", :force => true do |t|
+  create_table "group_participations", :force => true do |t|
     t.integer "group_id"
     t.integer "user_id"
     t.boolean "group_admin"
