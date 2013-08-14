@@ -7,32 +7,30 @@
   margin: auto;
 
   .grp {
-    margin-top: 2rem;
-
+    border:1px solid #AAA;
+    margin:2rem 1rem;
     .grp-name {
-      .title-font(2rem);
+      .title-font();
     }
 
-    .grp-new-user-trigger {
-      float: right;
-      position: relative;
-      top: 1.5rem;
-    }
 
     .grp-unremove-user-trigger {
-      margin-left: 1.3rem;
+      //margin-left: 1.3rem;
       color: #DC471A;
       cursor: pointer;
     }
 
-    input[type="submit"] {
-      float: right;
-    }
-  }
+}
 
   table {
     .stripey-table;
+    border-collapse: collapse;
     width: 100%;
+    tbody{
+      a{
+        .link-blue();
+      }
+    }
   }
 
   /* We set -webkit-apperance to `none` for all inputs in our root.css, which

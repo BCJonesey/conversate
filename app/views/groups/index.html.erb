@@ -26,10 +26,16 @@
 <div class="grp-page">
   <% current_user.groups.each do |group| %>
     <div class="grp">
-      <span class="grp-name"><%= group.name %></span>
-      <% if current_user.group_admin?(group) %>
-        <a href="#" class="grp-new-user-trigger">New User</a>
-      <% end %>
+      <div class='btn-toolbar clearfix'>
+        <div class='btn-group pull-left'>
+          <span class="grp-name "><%= group.name %></span>
+        </div>
+        <% if current_user.group_admin?(group) %>
+        <div class='btn-group pull-right'>
+          <a href="#" class="grp-new-user-trigger btn">New User</a>
+        </div>
+        <% end %>
+      </div>
       <%= form_tag people_path, method: 'put' do %>
         <table>
           <thead>
@@ -64,8 +70,12 @@
           </tbody>
         </table>
         <% if current_user.group_admin?(group) %>
-          <%= hidden_field_tag 'group', group.id %>
-          <%= submit_tag 'Save', class: 'btn-primary' %>
+          <div class='btn-toolbar-below grb-bar clearfix'>
+            <div class='btn-group pull-right'>
+              <%= hidden_field_tag 'group', group.id %>
+              <%= submit_tag 'Save', class: 'btn-primary' %>
+            </div>
+          </div>
         <% end %>
       <% end %>
     </div>
