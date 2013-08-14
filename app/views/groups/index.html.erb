@@ -22,7 +22,10 @@
           <tr>
             <td><%= user.full_name %></td>
             <td><%= user.email %></td>
-            <td><%= check_box_tag :admin, 'admin', user.group_admin?(group), disabled: current_user.group_admin?(group) %></td>
+            <td>
+              <%= check_box_tag :admin, 'admin', user.group_admin?(group),
+                                disabled: !current_user.group_admin?(group) %>
+            </td>
             <% if current_user.group_admin?(group) %>
               <td><a href="#" class="remove-user-trigger">Remove</a></td>
             <% end %>

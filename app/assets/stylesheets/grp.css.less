@@ -9,4 +9,11 @@
   table {
     .stripey-table
   }
+
+  /* We set -webkit-apperance to `none` for all inputs in our root.css, which
+     makes the checkboxes here disappear.  I don't want to screw with every
+     other form we've got going on, so I'll just change it here. */
+  input[type="checkbox"] {
+    -webkit-appearance: checkbox;
+  }
 }
