@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   has_many :reading_logs
   has_many :conversations, :through => :reading_logs
   has_many :actions, :inverse_of => :user
+  has_many :group_participations
+  has_many :groups, :through => :group_participations
   has_and_belongs_to_many :topics
 
   attr_accessible :email, :full_name, :password, :password_confirmation
