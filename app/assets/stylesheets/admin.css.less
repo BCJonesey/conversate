@@ -1,24 +1,10 @@
-// Place all the styles related to the Admin controller here.
-// They will automatically be included in application.css.
-// You can use Less here: http://lesscss.org/
+@import 'variables.css.less';
+@import 'mixins.css.less';
+
 .admin-page {
   padding: 1em;
 
   table {
-    thead {
-      font-weight: bold;
-    }
-
-    tbody {
-      tr {
-        &:nth-child(2n) {
-          background-color: rgba(0, 0, 0, 0.1);
-        }
-      }
-    }
-
-    td {
-      min-width: 10em;
-    }
+    .stripey-table
   }
 }
