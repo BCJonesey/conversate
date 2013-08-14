@@ -9,7 +9,9 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     this.userId = options.user;
     this.on('reset', this._findMyMessages, this);
     this.on('add', this.setStateOnNewAction, this);
-    this.unread = this.unreadCount();
+    this.on('add', function(model, collection, options) {
+      this.trigger('unreadCountChanged');
+    });
     this.startUpdate();
   },
   comparator: 'timestamp',

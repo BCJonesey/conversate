@@ -21,7 +21,9 @@ Structural.Views.Conversation = Support.CompositeView.extend({
     options = options || {};
     this.user = options.user;
 
-    this.model.on('change', this.reRender, this);
+    console.log(this.model);
+
+    this.model.on('updated', this.reRender, this);
   },
   render: function() {
     this.$el.html(this.template({conversation: this.model}));
@@ -35,6 +37,7 @@ Structural.Views.Conversation = Support.CompositeView.extend({
     this.el.className = this.className();
   },
   reRender: function() {
+    console.log('render');
     this.reClass();
     this.render();
   },
