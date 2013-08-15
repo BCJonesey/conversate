@@ -1,7 +1,7 @@
 class GroupsController < ApplicationController
   before_filter :require_login
   before_filter :require_group_admin, :except => :index
-  before_filter :removed_users_list
+  before_filter :initial_state
 
   def index
   end
@@ -58,7 +58,7 @@ class GroupsController < ApplicationController
       user.groups << group
       user.save
     else
-      # TODO: error
+      @error = "There was an error setting up a new user account."
     end
 
     render :index
@@ -73,7 +73,8 @@ class GroupsController < ApplicationController
     end
   end
 
-  def removed_users_list
+  def initial_state
     @removed_users_with_more_groups = []
+    @error = false
   end
 end

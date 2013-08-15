@@ -23,6 +23,19 @@
 </div>
 <% end %>
 
+<% if @error %>
+<div class="modal-background">
+  <div class="modal-message">
+    <p><%= @error %></p>
+    <p>
+      If you try again and it still doesn't work, contact us and we'll get it
+      sorted out.
+    </p>
+    <a class="btn modal-message-dismiss">Sorry!</a>
+  </div>
+</div>
+<% end %>
+
 <div class="grp-page">
   <% current_user.groups.each do |group| %>
     <div class="grp">
