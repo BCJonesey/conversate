@@ -44,10 +44,9 @@ class User < ActiveRecord::Base
   end
 
   # Public: returns the users this user knows.
-  # Note - currently everyone is assumed to know everyone else.  Fix this at
-  # some future date.
   def address_book
-    users = User.all - [self]
+    users = self.groups.map { |g| g.users }.flatten.uniq - [self]
+
     address_book = Array.new
     users.map do |user|
       addressee = Hash.new
