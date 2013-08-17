@@ -11,8 +11,12 @@ Structural.Models.Conversation = Backbone.Model.extend({
     });
     Structural.on('changeConversation', function(conversation) {
       if (conversation === self) {
-        // TODO: Update most recent event here.
+        self.set('most_recent_viewed', new Date());
+
+        // TODO: Might want to consider remove this, but how?
+        self.set('unread_count', 0);
       }
+      self.trigger('updated');
     });
 
   },
@@ -38,7 +42,7 @@ Structural.Models.Conversation = Backbone.Model.extend({
   },
 
   unreadCount: function() {
-    var countByActions = this.actions.unreadCount(this.get('most_recent_event'));
+    var countByActions = this.actions.unreadCount(this.get('most_recent_viewed'));
     var countByConversation = this.get('unread_count');
     return countByConversation > countByActions ? countByConversation : countByActions;
   }
