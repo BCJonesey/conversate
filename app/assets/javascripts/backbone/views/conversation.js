@@ -5,7 +5,7 @@ Structural.Views.Conversation = Support.CompositeView.extend({
       classes += ' cnv-unread';
     }
 
-    if (this.model.get('is_current')) {
+    if (this.model === Structural._conversation) {
       classes += ' cnv-current';
     }
 
