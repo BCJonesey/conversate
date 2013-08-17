@@ -12,7 +12,7 @@ Support.FetchTimer = function(interval) {
       clearInterval(fetchHandler);
     },
     update: function() {
-      this.fetch({cache: false});
+      //this.fetch({cache: false});
     }
   };
 }

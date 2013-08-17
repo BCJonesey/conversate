@@ -98,7 +98,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
 
   changeConversation: function(id) {
     // this.conversationId = id;
-    // this.fetch({reset: true});
+    this.fetch({cache: false});
   },
   clearConversation: function() {
     // this.conversationId = undefined;
