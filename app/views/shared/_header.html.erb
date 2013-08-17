@@ -11,8 +11,10 @@
 </div>
   <div class="login-modal hidden">
       <%= form_tag session_path, :class => 'form' do %>
-        <%= email_field_tag :email, params[:email], placeholder: 'Email' %>
-        <%= password_field_tag :password, nil, placeholder: 'Password' %>
+        <%= label_tag(:email, "Email Address") %>
+        <%= email_field_tag :email, params[:email], placeholder: 'joe@joes-crab-shack.net' %>
+        <%= label_tag(:email, "Password") %>
+        <%= password_field_tag :password, nil, placeholder: 'lobster roll' %>
         <div class="clearfix">
           <div class="btn-group pull-right">
             <%= submit_tag 'Sign In', :class => 'form-btn form-btn-primary' %>
