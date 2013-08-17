@@ -275,19 +275,40 @@ background-image: linear-gradient(to right, @left-color 0%, @right-color @right-
 }
 
 .stripey-table() {
-  thead {
+  border-width:0;
+  thead{
+    td{
     font-weight: bold;
+    font-size:0.75rem;
+    color:#888;
+    background-color:#F8F8F8;
+    border-bottom:1px solid #CCC;
+    padding:0.25rem 0.5rem;
+    }
   }
 
   tbody {
     tr {
-      &:nth-child(2n+1) {
-        background-color: rgba(0, 0, 0, 0.1);
+       &:nth-child(2n) {
+        background-color: #FAFAFA;
       }
     }
+    td {
+      min-width: 10em;
+      padding:0.5rem;
+      border-bottom:1px solid #EEE;
+    }
+    tr:last-child td{
+        border-bottom:none;
+    }
   }
+}
 
-  td {
-    min-width: 10em;
+.link-blue(){
+  text-decoration: none;
+  color: #28D;
+  word-wrap: break-word;
+  &:hover{
+    text-decoration: underline;
   }
 }

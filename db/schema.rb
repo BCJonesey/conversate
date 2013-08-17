@@ -26,9 +26,9 @@ ActiveRecord::Schema.define(:version => 20130814011749) do
 
   create_table "conversations", :force => true do |t|
     t.string   "title"
-    t.datetime "created_at",                                           :null => false
-    t.datetime "updated_at",                                           :null => false
-    t.datetime "most_recent_event", :default => '2000-01-01 01:07:19'
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.datetime "most_recent_event"
   end
 
   create_table "conversations_topics", :force => true do |t|

@@ -3,10 +3,17 @@
 <div class="grp-page">
   <% current_user.groups.each do |group| %>
     <div class="grp">
-      <span class="grp-name"><%= group.name %></span>
-      <% if current_user.group_admin?(group) %>
-        <a href="#" class="grp-new-user-trigger">New User</a>
+      <div class='btn-toolbar clearfix'>
+
+        <div class='btn-group pull-left'>
+          <span class="grp-name "><%= group.name %></span>
+        </div>
+        <% if current_user.group_admin?(group) %>
+        <div class='btn-group pull-right'>
+          <a href="#" class="grp-new-user-trigger btn">New User</a>
+        </div>
       <% end %>
+    </div>
       <table>
         <thead>
           <tr>
@@ -38,7 +45,11 @@
         </tbody>
       </table>
       <% if current_user.group_admin?(group) %>
-        <%= submit_tag 'Save', class: 'btn-primary' %>
+      <div class='btn-toolbar-below grb-bar clearfix'>
+        <div class='btn-group pull-right'>
+          <%= submit_tag 'Save', class: 'btn-primary' %>
+        </div>
+      </div>
       <% end %>
     </div>
   <% end %>
