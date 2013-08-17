@@ -5,7 +5,7 @@ Structural.Models.Conversation = Backbone.Model.extend({
       this.set('participants', new Structural.Collections.Participants(this.get('participants')));
     }
 
-    this.actions = new Structural.Collections.Actions({}, {conversation: this.id, user:Structural._user.id});
+    this.actions = new Structural.Collections.Actions([], {conversation: this.id, user:Structural._user.id});
     this.actions.on('unreadCountChanged', function() {
       self.trigger('updated');
     });
