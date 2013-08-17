@@ -5,7 +5,6 @@ Structural.Collections.Conversations = Backbone.Collection.extend({
   },
   initialize: function(data, options) {
     options = options || {};
-    this.startUpdate();
   },
   comparator: function(conversation) {
     return -(conversation.get('most_recent_event'));
@@ -34,5 +33,3 @@ Structural.Collections.Conversations = Backbone.Collection.extend({
     });
   }
 });
-
-_.extend(Structural.Collections.Conversations.prototype, Support.FetchTimer(30000));

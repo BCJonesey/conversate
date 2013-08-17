@@ -4,7 +4,6 @@ Structural.Collections.Topics = Backbone.Collection.extend({
 
   initialize: function(options) {
     options = options || {};
-    this.startUpdate();
   },
 
   focus: function(id) {
@@ -21,5 +20,3 @@ Structural.Collections.Topics = Backbone.Collection.extend({
     return this.where({is_current: true}).pop();
   }
 });
-
-_.extend(Structural.Collections.Topics.prototype, Support.FetchTimer(30000));

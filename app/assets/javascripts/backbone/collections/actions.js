@@ -12,7 +12,6 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     this.on('add', function(model, collection, options) {
       this.trigger('unreadCountChanged');
     });
-    this.startUpdate();
   },
   comparator: 'timestamp',
 
@@ -124,11 +123,6 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     this.forEach(function(action) {
       count += action.isUnread() ? 1 : 0;
     });
-
-    // We're using this value for an observer.
-    this.unread = count;
     return count;
   }
 });
-
-_.extend(Structural.Collections.Actions.prototype, Support.FetchTimer(5000));
