@@ -11,6 +11,9 @@ Structural.Models.Conversation = Backbone.Model.extend({
     }
 
     this.actions = new Structural.Collections.Actions([], {conversation: this.id, user:Structural._user.id});
+    this.actions.on('add', function() {
+      self.trigger('updated');
+    })
     Structural.on('changeConversation', function(conversation) {
       if (conversation === self) {
         // This has the side effect that we'll also redraw for free.

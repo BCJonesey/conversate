@@ -54,6 +54,9 @@ var Structural = new (Support.CompositeView.extend({
     this._faviconAndTitle.render();
 
     Backbone.history.start({pushState: true});
+
+    this.conversationFetcher = new conversationFetcher(this._conversation, 5000);
+
     return this;
   },
 
