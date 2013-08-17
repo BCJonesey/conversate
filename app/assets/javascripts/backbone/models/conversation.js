@@ -14,6 +14,9 @@ Structural.Models.Conversation = Backbone.Model.extend({
     this.actions.on('add', function() {
       self.trigger('updated');
     })
+    this.on('change:unread_count', function() {
+      self.trigger('updated');
+    });
     Structural.on('changeConversation', function(conversation) {
       if (conversation === self) {
         // This has the side effect that we'll also redraw for free.
