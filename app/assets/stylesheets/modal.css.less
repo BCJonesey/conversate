@@ -1,3 +1,6 @@
+@import 'variables.css.less';
+@import 'mixins.css.less';
+
 .modal-background {
   position: fixed;
   top: 0;
@@ -5,14 +8,28 @@
   left: 0;
   right: 0;
   background-color: rgba(0,0,0,.5);
+  overflow-y:auto;
 }
 
+.modal-window{
+  margin:5rem auto;
+  width:30rem;
+  background-color:#EEE;
+  border:1px solid #AAA;
+  box-shadow: 0 1rem 2rem rgba(0,0,0,0.2);
+}
+
+
 .modal-message {
-  position: fixed;
-  top: 10rem;
-  left: 50%;
-  width: 15em;
-  margin-left: -7.5em;
-  background-color: white;
-  padding: 1rem;
+  .modal-window;
+
+  //
+}
+
+.modal-content{
+  padding:0.5rem;
+}
+
+.modal-title{
+  .title-font();
 }
