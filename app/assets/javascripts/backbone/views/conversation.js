@@ -1,7 +1,8 @@
 Structural.Views.Conversation = Support.CompositeView.extend({
   className: function() {
     var classes = 'cnv';
-    if (this.model.get('is_unread')) {
+
+    if (this.model.unreadCount() > 0) {
       classes += ' cnv-unread';
     }
 
