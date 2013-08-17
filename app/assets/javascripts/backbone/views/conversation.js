@@ -22,6 +22,7 @@ Structural.Views.Conversation = Support.CompositeView.extend({
     this.user = options.user;
 
     this.model.on('updated', this.reRender, this);
+    Structural.on('changeConversation', this.reRender, this);
   },
   render: function() {
     this.$el.html(this.template({conversation: this.model}));

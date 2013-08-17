@@ -93,6 +93,7 @@ var Structural = new (Support.CompositeView.extend({
     if (conversation.id !== this._conversation.id) {
       this._changeConversationView(conversation);
       this._changeConversationUrl(conversation);
+      this.trigger('changeConversation');
     }
   },
   viewTopic: function(topic) {
