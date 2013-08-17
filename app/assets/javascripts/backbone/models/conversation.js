@@ -6,15 +6,16 @@ Structural.Models.Conversation = Backbone.Model.extend({
     }
 
     this.actions = new Structural.Collections.Actions([], {conversation: this.id, user:Structural._user.id});
-    this.actions.on('unreadCountChanged', function() {
+    this.actions.on('add', function(action) {
+      if (action.get('user').id === Structural._user.id) {
+        // The user has done something, like creating an action, that warrants this.
+        self.updateMostRecentViewedToNow();
+      }
       self.trigger('updated');
     });
     Structural.on('changeConversation', function(conversation) {
       if (conversation === self) {
-        self.set('most_recent_viewed', (new Date()).valueOf());
-
-        // TODO: Might want to consider remove this, but how?
-        self.set('unread_count', 0);
+        self.updateMostRecentViewedToNow();
       }
       self.trigger('updated');
     });
@@ -45,6 +46,13 @@ Structural.Models.Conversation = Backbone.Model.extend({
     var countByActions = this.actions.unreadCount(this.get('most_recent_viewed'));
     var countByConversation = this.get('unread_count');
     return countByConversation > countByActions ? countByConversation : countByActions;
+  },
+
+  updateMostRecentViewedToNow: function() {
+    this.set('most_recent_viewed', (new Date()).valueOf());
+
+    // TODO: Might want to consider remove this, but how?
+    this.set('unread_count', 0);
   }
 });
 
