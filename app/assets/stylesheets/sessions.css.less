@@ -111,7 +111,7 @@ box-shadow: 0 1rem 2rem rgba(0,0,0,0.2);
   height:auto;
 }
 .copy-wrapper{
-  background-color:#F8F8F8;
+  background-color:white;
   border-top:1px solid #CCC;
   a{
     text-decoration:none;
@@ -176,6 +176,55 @@ footer{
     line-height: 1.75;
     & + p{
       margin-top:0.5rem;
+    }
+  }
+}
+
+.tour-page{
+  .sub-nav{
+    margin:0 auto;
+    width:@width;
+    text-align: center;
+    padding:0;
+  }
+  .sub-nav-item{
+    display:inline-block;
+    text-align: center;
+    margin:0;
+    border:1px solid #CCC;
+    margin:0 0.5rem;
+    font-size: 1.25rem;
+    margin-bottom: -1px;
+    a{
+      display:inline-block;
+      text-decoration: none;
+      color:#888;
+      background-color: #EEE;
+      padding:0.5rem 1.0rem;
+
+    }
+    &.is-selected{
+      border-bottom:none;
+      padding-bottom:1px;
+      background-color: white;
+      a{
+        background-color:white;
+      }
+    }
+  }
+  .copy{
+    border:1px solid #CCC;
+    font-size:1.0rem;
+    width:@width;
+    margin:0 auto;
+    padding:1.0rem;
+    background-color: white;
+  }
+  .section{
+    padding:1.0rem;
+    &:nth-child(2n){
+      border:1px solid #DDD;
+      background-color:#FAFAFA;
     }
   }
 }
