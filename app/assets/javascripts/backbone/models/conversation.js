@@ -9,6 +9,11 @@ Structural.Models.Conversation = Backbone.Model.extend({
     this.actions.on('unreadCountChanged', function() {
       self.trigger('updated');
     });
+    Structural.on('changeConversation', function(conversation) {
+      if (conversation === self) {
+        // TODO: Update most recent event here.
+      }
+    });
 
   },
   parse: function (response, options) {
