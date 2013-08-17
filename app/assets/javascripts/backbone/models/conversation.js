@@ -33,6 +33,10 @@ Structural.Models.Conversation = Backbone.Model.extend({
   },
 
   unreadCount: function() {
+    var count = this.actions.unreadCount();
+    if (count == 0) {
+      return this.get('unread_count');
+    }
     return this.actions.unreadCount();
   }
 });
