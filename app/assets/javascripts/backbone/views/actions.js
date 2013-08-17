@@ -20,7 +20,7 @@ Structural.Views.Actions = Support.CompositeView.extend({
     this.render();
   },
   changeConversation: function(actions) {
-    this.collection.off();
+    this.collection.off(null, null, this);
     this.collection = actions;
     this.collection.on('add', this.renderAction, this);
     this.collection.on('reset', this.reRender, this);
