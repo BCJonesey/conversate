@@ -11,7 +11,7 @@ Structural.Models.Conversation = Backbone.Model.extend({
     });
     Structural.on('changeConversation', function(conversation) {
       if (conversation === self) {
-        self.set('most_recent_viewed', new Date());
+        self.set('most_recent_viewed', (new Date()).valueOf());
 
         // TODO: Might want to consider remove this, but how?
         self.set('unread_count', 0);
