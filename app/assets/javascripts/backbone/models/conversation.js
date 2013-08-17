@@ -38,7 +38,7 @@ Structural.Models.Conversation = Backbone.Model.extend({
   },
 
   unreadCount: function() {
-    var countByActions = this.actions.unreadCount();
+    var countByActions = this.actions.unreadCount(this.get('most_recent_event'));
     var countByConversation = this.get('unread_count');
     return countByConversation > countByActions ? countByConversation : countByActions;
   }

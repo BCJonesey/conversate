@@ -118,10 +118,10 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     return model;
   },
 
-  unreadCount: function() {
+  unreadCount: function(mostRecentEventViewed) {
     var count = 0;
     this.forEach(function(action) {
-      count += action.isUnread() ? 1 : 0;
+      count += action.isUnread(mostRecentEventViewed) ? 1 : 0;
     });
     return count;
   }
