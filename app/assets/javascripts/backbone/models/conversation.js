@@ -2,22 +2,20 @@ Structural.Models.Conversation = Backbone.Model.extend({
   initialize: function(attributes, options) {
     var self = this;
     if (this.get('participants')) {
-      this.set('participants', new Structural.Collections.Participants(this.get('participants')));
+      this.set('participants', new Structural.Collections.Participants(
+        this.get('participants'),
+        {
+          conversation: self.id
+        })
+      );
     }
 
     this.actions = new Structural.Collections.Actions([], {conversation: this.id, user:Structural._user.id});
-    this.actions.on('add', function(action) {
-      if (action.get('user').id === Structural._user.id) {
-        // The user has done something, like creating an action, that warrants this.
-        self.updateMostRecentViewedToNow();
-      }
-      self.trigger('updated');
-    });
     Structural.on('changeConversation', function(conversation) {
       if (conversation === self) {
+        // This has the side effect that we'll also redraw for free.
         self.updateMostRecentViewedToNow();
       }
-      self.trigger('updated');
     });
 
   },
@@ -48,11 +46,26 @@ Structural.Models.Conversation = Backbone.Model.extend({
     return countByConversation > countByActions ? countByConversation : countByActions;
   },
 
+  // Sets our local values immediately and lets the server side participants collection know
+  // for persistence. TODO: Most recent viewed is funky enough that it will probably require
+  // a refactor at some point.
   updateMostRecentViewedToNow: function() {
-    this.set('most_recent_viewed', (new Date()).valueOf());
+    var self = this;
+    self.set('most_recent_viewed', (new Date()).valueOf());
+    self.set('unread_count', 0);
 
-    // TODO: Might want to consider remove this, but how?
-    this.set('unread_count', 0);
+    self.get('participants').each( function(participant) {
+      if (Structural._user.id === participant.id) {
+        // The server-side function has a side effect in that it will update most recent viewed
+        // for this conversation and user, which will be close enough to the time we want.
+        participant.save(
+          {
+            most_recent_viewed: self.get('most_recent_viewed')
+          }
+        );
+      }
+    })
+    self.trigger('updated');
   }
 });
 
