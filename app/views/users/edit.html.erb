@@ -1,16 +1,19 @@
 <%= render 'shared/hacky_top_bar' %>
 
-<div class='form profile-update-form'>
-      <h1> Update yo' info, fool</h1>
-
+<div class='profile-update-form'>
+      <div class='btn-toolbar'><div class='btn-group pull-left'>
+        <span class='toolbar-title'>User Profile Information</span>
+      </div>
+    </div>
+<div class='form'>
     <%= form_tag users_path, :method => 'put' do %>
       <% if @edit_status == :failure %>
         <div class="error-messages">
-          <h3>You fucked up</h3>
+          <span>Something went wrong...</span>
         </div>
       <% elsif @edit_status == :success %>
         <div class="success-messages">
-          <h3>Edit successful</h3>
+          <span>Profile information successfully updated</span>
         </div>
       <% end %>
       <%= label_tag :password do %>
@@ -25,6 +28,10 @@
       <%= password_field_tag :new_password_confirmation %>
       <%= label_tag :full_name %>
       <%= text_field_tag :full_name, @user.full_name %>
+    </div>
+      <div class='btn-toolbar-below'><div class='btn-group pull-right'>
       <%= submit_tag "Update", :class => "btn btn-primary" %>
     <% end %>
+      </div>
+    </div>
 </div>
