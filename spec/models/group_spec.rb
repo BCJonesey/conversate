@@ -3,7 +3,21 @@ require 'spec_helper'
 describe Group do
   describe 'admins can' do
     it 'add users' do
-      false.should be_true
+      group = Group.new(name: 'My Group')
+      group.save
+
+      user = group.new_user({full_name: 'Alice',
+                             email: 'alice@example.com',
+                             password: 'a'})
+
+      user.id.should_not be_nil
+      user.full_name.should eq('Alice')
+      user.email.should eq('alice@example.com')
+      user.groups.include?(group).should be_true
+
+      user = group.new_user({full_name: 'Bob'})
+
+      user.should be_false
     end
 
     it 'remove users' do
