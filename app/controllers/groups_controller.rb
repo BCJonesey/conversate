@@ -18,11 +18,8 @@ class GroupsController < ApplicationController
   def new_user
     group = Group.find(params[:group])
 
-    user = User.build(params[:user])
-    if user
-      user.groups << group
-      user.save
-    else
+    user = group.new_user(params[:user])
+    unless user
       @error = "There was an error setting up a new user account."
     end
 

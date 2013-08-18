@@ -63,4 +63,13 @@ class Group < ActiveRecord::Base
 
     users_not_fully_removed
   end
+
+  def new_user(params)
+    user = User.build(params)
+    if user
+      user.groups << self
+      user.save
+    end
+    user
+  end
 end
