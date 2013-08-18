@@ -3,25 +3,22 @@
 <% unless false && @removed_users_with_more_groups.empty? %>
 <div class="modal-background">
   <div class="modal-window">
-    <div class='btn-toolbar modal-title'>A note about removed users</div>
+    <div class='btn-toolbar modal-title'>A Note About Removed Users</div>
       <div class='modal-content'>
       <p>We couldn't automatically remove some users.</p>
-      <p>The following users were in more than one group, so we couldn't clean up all
-        their data correctly.<p>
-      <ul>
+      <p>The following users are in other groups, so we couldn't fully remove them:<p>
+      <ul class='grp-user-list'>
         <% @removed_users_with_more_groups.each do |u| %>
           <li><%= u.name %></li>
         <% end %>
       </ul>
-      <p>
-        They're not part of your group anymore, but they still have access to some
-        of your conversations.  If you contact us with the list of topics they
-        should be removed from, we'll take care of the rest.
-      </p>
+      <p>They're not part of your group anymore, but they still have access the conversations they were previously on.  </p>
+
+        <p>Please contact support and we'll make sure that user is removed from the right conversations. </p>
     </div>
     <div class='btn-toolbar-below'>
     <div class='btn-group pull-right'>
-      <a href="#" class="btn btn-primary modal-message-dismiss">OK</a>
+      <a href="#" class="btn btn-primary modal-message-dismiss">Continue</a>
     </div>
   </div>
   </div>
@@ -30,7 +27,7 @@
 
 <% if @error %>
 <div class="modal-background">
-  <div class="modal-message">
+  <div class="modal-window">
     <p><%= @error %></p>
     <p>
       If you try again and it still doesn't work, contact us and we'll get it
@@ -46,7 +43,7 @@
     <div class="grp">
       <div class='btn-toolbar clearfix'>
         <div class='btn-group pull-left'>
-          <span class="grp-name "><%= group.name %></span>
+          <span class="grp-name"><%= group.name %></span>
         </div>
         <% if current_user.group_admin?(group) %>
         <div class='btn-group pull-right'>
@@ -88,7 +85,7 @@
           <div class='btn-toolbar-below grb-bar clearfix'>
             <div class='btn-group pull-right'>
               <%= hidden_field_tag 'group', group.id %>
-              <%= submit_tag 'Save', class: 'btn-primary' %>
+              <%= submit_tag 'Save Changes', class: 'btn-primary' %>
             </div>
           </div>
         <% end %>
@@ -97,7 +94,9 @@
       <div class="modal-background hidden grp-new-user-form">
         <div class="modal-window">
           <div class='btn-toolbar'>
-            <div class=' btn-group pull-left grp-new-user-title'>Add a new user to <strong><%= group.name %></strong></div>
+            <div class=' btn-group pull-left grp-new-user-title'>
+              <span class='toolbar-title'>Add a new user to "<strong><%= group.name %></strong>"</span>
+              </div>
           </div>
           <%= form_tag people_path, method: 'post' do %>
           <div class='form'>
