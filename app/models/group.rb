@@ -58,6 +58,9 @@ class Group < ActiveRecord::Base
       end
 
       user.groups.delete self
+      # Always force the user to log out and back in, to make sure that any
+      # old copies of convos, etc. that they have in javascript are gone.
+      user.forget_me!
       user.save
     end
 
