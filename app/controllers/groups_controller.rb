@@ -10,27 +10,7 @@ class GroupsController < ApplicationController
     group = Group.find(params[:group])
 
     group.change_admins(params[:admin])
-
-    params[:remove].each do |id|
-      user = User.find(id.to_i)
-
-      if user.groups.length == 1
-        user.removed = true
-        user.topics.each do |topic|
-          topic.users.delete user
-          topic.save
-        end
-        user.conversations.each do |conversation|
-          conversation.users.delete user
-          conversation.save
-        end
-      else
-        @removed_users_with_more_groups << user
-      end
-
-      user.groups.delete group
-      user.save
-    end
+    @users_not_fully_removed += group.remove_users(params[:remove])
 
     render :index
   end
@@ -59,7 +39,7 @@ class GroupsController < ApplicationController
   end
 
   def initial_state
-    @removed_users_with_more_groups = []
+    @users_not_fully_removed = []
     @error = false
   end
 end

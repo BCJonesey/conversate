@@ -1,6 +1,6 @@
 <%= render 'shared/hacky_top_bar' %>
 
-<% unless @removed_users_with_more_groups.empty? %>
+<% unless @users_not_fully_removed.empty? %>
 <div class="modal-background">
   <div class="modal-window">
     <div class='btn-toolbar modal-title'>A Note About Removed Users</div>
@@ -8,7 +8,7 @@
       <p>We couldn't automatically remove some users.</p>
       <p>The following users are in other groups, so we couldn't fully remove them:<p>
       <ul class='grp-user-list'>
-        <% @removed_users_with_more_groups.each do |u| %>
+        <% @users_not_fully_removed.each do |u| %>
           <li><%= u.name %></li>
         <% end %>
       </ul>
