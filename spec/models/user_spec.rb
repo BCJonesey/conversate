@@ -15,12 +15,6 @@ describe User do
     end
   end
 
-  def build_user(name)
-    User.build(full_name: name,
-               email: "#{name}@example.com",
-               password: 'a')
-  end
-
   describe 'address books' do
     it 'only contains users that share a group' do
       alice = build_user 'Alice'
