@@ -1,36 +1,5 @@
-<div class="carousel">
-  <div class="horse">
-    <a href="http://www.flickr.com/photos/ishmaelo/282012816/">
-      <img alt="Geometry and forms" src="http://farm1.staticflickr.com/96/282012816_2dfb34d13b_b.jpg"></img>
-    </a>
-  </div>
-  <div class="horse">
-    <a href="http://www.flickr.com/photos/patdavid/4620035808/">
-      <img alt="In the subway" src="http://farm5.staticflickr.com/4048/4620035808_67a9b85004_b.jpg"></img>
-    </a>
-  </div>
-  <div class="horse">
-    <a href="http://www.flickr.com/photos/joestpierre/8105330981/">
-      <img alt="Untitled" src="http://farm9.staticflickr.com/8328/8105330981_61058775d5_b.jpg"></img>
-    </a>
-  </div>
-  <div class="horse">
-    <a href="http://www.flickr.com/photos/nostri-imago/4428685664/">
-      <img alt="Blizzard Rams New England" src="http://farm5.staticflickr.com/4045/4428685664_b1b1348ee7_b.jpg"></img>
-    </a>
-  </div>
-  <div class="horse">
-    <a href="http://www.flickr.com/photos/leecullivan/469326468/">
-      <img alt="the earth is not a cold dead place" src="http://farm1.staticflickr.com/195/469326468_6e96944877_b.jpg"></img>
-    </a>
-  </div>
-  <div class="horse">
-    <a href="http://www.flickr.com/photos/pinksherbet/2110766472/">
-      <img alt="Bokeh Snow tree branches in Massachusetts blizzard" src="http://farm3.staticflickr.com/2066/2110766472_e35920a500_b.jpg"></img>
-    </a>
-  </div>
-</div>
-
-<div class="watercooler">
-  <a href="<%= new_sessions_path %>">watercooler</a>
-</div>
+<%= form_tag speakeasy_path do %>
+  <%= label_tag :code_word, 'Passcode' %>
+  <%= text_field_tag :code_word, '' %>
+  <%= submit_tag 'Check it out' %>
+<% end %>

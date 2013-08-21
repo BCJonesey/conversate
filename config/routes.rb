@@ -1,8 +1,12 @@
 Conversate::Application.routes.draw do
-  root :to => 'home#index'
+  # The docs say that the root matcher here only grabs GET, but I swear it was
+  # eating my POSTs too.
+  get '/' => 'home#index', :as => 'root'
 
-  get '/tour' => 'home#tour', :as => 'tour'
-  get '/pricing' => 'home#pricing', :as => 'pricing'
+  post '/' => 'home#speakeasy', :as => 'speakeasy'
+  get '/intro' => 'marketing#index', :as => 'marketing'
+  get '/tour' => 'marketing#tour', :as => 'tour'
+  get '/pricing' => 'marketing#pricing', :as => 'pricing'
 
   get 'admin' => 'admin#index', :as => 'admin'
   resource :users, :only => [:update]

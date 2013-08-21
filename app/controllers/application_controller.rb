@@ -9,4 +9,6 @@ class ApplicationController < ActionController::Base
   def require_site_admin
     redirect_to root_url unless current_user.site_admin
   end
+
+  SpeakeasyCode = 'blue spigot'
 end
