@@ -1,6 +1,6 @@
 class TestbedController < ApplicationController
   before_filter :require_login
-  before_filter :require_admin
+  before_filter :require_site_admin
 
   def index
     @views = [

@@ -3,7 +3,9 @@ class User < ActiveRecord::Base
 
   has_many :reading_logs
   has_many :conversations, :through => :reading_logs
-  has_many :events, :inverse_of => :user
+  has_many :actions, :inverse_of => :user
+  has_many :group_participations
+  has_many :groups, :through => :group_participations
   has_and_belongs_to_many :topics
 
   attr_accessible :email, :full_name, :password, :password_confirmation
@@ -42,10 +44,9 @@ class User < ActiveRecord::Base
   end
 
   # Public: returns the users this user knows.
-  # Note - currently everyone is assumed to know everyone else.  Fix this at
-  # some future date.
   def address_book
-    users = User.all - [self]
+    users = self.groups.map { |g| g.users }.flatten.uniq - [self]
+
     address_book = Array.new
     users.map do |user|
       addressee = Hash.new
@@ -57,10 +58,16 @@ class User < ActiveRecord::Base
     return address_book
   end
 
+  def group_admin?(group)
+    self.group_participations.where(group_id: group.id).first.group_admin
+  end
+
   # This avoids us writing out passwords, salts, etc. when rendering json.
   def as_json(options={})
-    json = super(:only => [:email, :full_name, :id])
-    json['address_book'] = address_book
+    json = super(:only => [:email, :full_name, :id, :site_admin])
+    if options[:include_address_book]
+      json['address_book'] = address_book
+    end
 
     if options[:conversation]
       json['most_recent_viewed'] = options[:conversation].most_recent_viewed_for_user(self).msec

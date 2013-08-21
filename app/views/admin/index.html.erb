@@ -1,55 +1,31 @@
-<div class="admin-page">
-  <h3>Database Usage</h3>
-  <table>
-    <thead>
-      <tr>
-        <td>Table</td>
-        <td>Row Count</td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Conversations</td>
-        <td><%= Conversation.all.count %></td>
-      </tr>
-      <tr>
-        <td>Events</td>
-        <td><%= Event.all.count %></td>
-      </tr>
-      <tr>
-        <td>Reading Logs</td>
-        <td><%= ReadingLog.all.count %></td>
-      </tr>
-      <tr>
-        <td>Users</td>
-        <td><%= User.all.count %></td>
-      </tr>
-      <tr>
-        <td>Total</td>
-        <td><%= Conversation.all.count +
-                Event.all.count +
-                ReadingLog.all.count +
-                User.all.count %></td>
-    </tbody>
-  </table>
+<%= render 'shared/hacky_top_bar' %>
 
-  <h3>Invitations</h3>
-  <table>
-    <thead>
-      <tr>
-        <td>User</td>
-        <td>Invite Count</td>
-      </tr>
-    </thead>
-    <tbody>
-      <% User.where(:is_admin => true).each do |user| %>
+<div class="admin-page">
+  <div class='admin-table'>
+    <div class='btn-toolbar'>
+      <div class='btn-group'>
+        <span class='toolbar-title'>Database Usage</span>
+      </div>
+    </div>
+    <table>
+      <thead>
         <tr>
-          <td><%= user.name %></td>
-          <td>
-            <%= User.where(:invited_by => user.id).count %>
-          </td>
+          <td>Table</td>
+          <td>Row Count</td>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% all_models.each do |model| %>
+          <tr>
+            <td><%= model.name %></td>
+            <td><%= model.count %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <td>Total</td>
+          <td><%= all_models.collect {|m| m.count }.sum %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

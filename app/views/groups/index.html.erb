@@ -1,0 +1,124 @@
+<%= render 'shared/hacky_top_bar' %>
+
+<% unless @users_not_fully_removed.empty? %>
+<div class="modal-background">
+  <div class="modal-window">
+    <div class='btn-toolbar modal-title'>A Note About Removed Users</div>
+      <div class='modal-content'>
+      <p>We couldn't automatically remove some users.</p>
+      <p>The following users are in other groups, so we couldn't fully remove them:<p>
+      <ul class='grp-user-list'>
+        <% @users_not_fully_removed.each do |u| %>
+          <li><%= u.name %></li>
+        <% end %>
+      </ul>
+      <p>They're not part of your group anymore, but they still have access the conversations they were previously on.  </p>
+
+        <p>Please contact support and we'll make sure that user is removed from the right conversations. </p>
+    </div>
+    <div class='btn-toolbar-below'>
+    <div class='btn-group pull-right'>
+      <a href="#" class="btn btn-primary modal-message-dismiss">Continue</a>
+    </div>
+  </div>
+  </div>
+</div>
+<% end %>
+
+<% if @error %>
+<div class="modal-background">
+  <div class="modal-window">
+    <p><%= @error %></p>
+    <p>
+      If you try again and it still doesn't work, contact us and we'll get it
+      sorted out.
+    </p>
+    <a class="btn modal-message-dismiss">Sorry!</a>
+  </div>
+</div>
+<% end %>
+
+<div class="grp-page">
+  <% current_user.groups.each do |group| %>
+    <div class="grp">
+      <div class='btn-toolbar clearfix'>
+        <div class='btn-group pull-left'>
+          <span class="grp-name"><%= group.name %></span>
+        </div>
+        <% if current_user.group_admin?(group) %>
+        <div class='btn-group pull-right'>
+          <a href="#" class="grp-new-user-trigger btn">New User</a>
+        </div>
+        <% end %>
+      </div>
+      <%= form_tag people_path, method: 'put' do %>
+        <table>
+          <thead>
+            <tr>
+              <td>Name</td>
+              <td>Email Address</td>
+              <td>Admin</td>
+              <% if current_user.group_admin?(group) %>
+                <td>Remove</td>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody>
+            <% group.users.each do |user| %>
+              <tr>
+                <td><%= user.full_name %></td>
+                <td><%= user.email %></td>
+                <td>
+                  <%= check_box_tag 'admin[]', user.id, user.group_admin?(group),
+                                    disabled: !current_user.group_admin?(group) %>
+                </td>
+                <% if current_user.group_admin?(group) %>
+                  <td>
+                    <%= check_box_tag 'remove[]', user.id, false %>
+                  </td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <% if current_user.group_admin?(group) %>
+          <div class='btn-toolbar-below grb-bar clearfix'>
+            <div class='btn-group pull-right'>
+              <%= hidden_field_tag 'group', group.id %>
+              <%= submit_tag 'Save Changes', class: 'btn-primary' %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+
+      <div class="modal-background hidden grp-new-user-form">
+        <div class="modal-window">
+          <div class='btn-toolbar'>
+            <div class=' btn-group pull-left grp-new-user-title'>
+              <span class='toolbar-title'>Add a new user to "<strong><%= group.name %></strong>"</span>
+              </div>
+          </div>
+          <%= form_tag people_path, method: 'post' do %>
+          <div class='form'>
+            <%= label_tag 'user[full_name]', 'Name' %>
+            <%= text_field_tag 'user[full_name]' %>
+            <%= label_tag 'user[email]', 'Email Address' %>
+            <%= email_field_tag 'user[email]' %>
+            <%= label_tag 'user[password]', 'Initial Password' %>
+            <%= text_field_tag 'user[password]' %>
+            <%= hidden_field_tag :group, group.id %>
+          </div>
+            <div class='btn-toolbar-below'>
+              <div class='btn-group pull-left'>
+                <a href="#" class="btn modal-message-dismiss">Cancel</a>
+              </div>
+              <div class='btn-group pull-right'>
+            <%= submit_tag 'Add User', :class => 'btn btn-primary' %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

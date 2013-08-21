@@ -8,7 +8,7 @@ class MostRecentEventTimeToDatetime < ActiveRecord::Migration
 
   def up
     remove_column :conversations, 'most_recent_event'
-    add_column :conversations, 'most_recent_event', :datetime
+    add_column :conversations, 'most_recent_event', :datetime, :default => '2000-01-01 01:07:19'
 
     Conversation.all.each do |conversation|
       most_recent = conversation.actions.order('created_at DESC').first

@@ -1,0 +1,46 @@
+@import 'variables.css.less';
+@import 'mixins.css.less';
+
+.modal-background {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0,0,0,.5);
+  overflow-y:auto;
+}
+
+.modal-window{
+  margin:5rem auto 1.0rem;
+  width:30rem;
+  background-color:white;
+  border:1px solid #AAA;
+  box-shadow: 0 1rem 2rem rgba(0,0,0,0.2);
+}
+
+
+.modal-message {
+  .modal-window;
+
+  //
+}
+
+.modal-content{
+  padding:0.5rem;
+  overflow-x:hidden;
+  overflow-y:auto;
+  color:#666;
+  max-height: 20rem;
+  p{
+    margin:0;
+    margin-top:1.0rem;
+    &:first-child{
+      margin-top:0;
+    }
+  }
+}
+
+.modal-title{
+  .title-font();
+}

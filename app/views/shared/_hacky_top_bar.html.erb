@@ -1,0 +1,34 @@
+<div class="structural-bar clearfix">
+  <div class="tabs stb-group pull-left">
+    <a class="stb-link" href='<%= root_path %>'>
+      <i class="stb-icon icon-home"></i>
+      <span class="stb-link-text">Water Cooler</span>
+    </a>
+    <a href="<%= people_path %>" class="stb-link <%= selected_on_path(people_path) %>">
+      <i class="stb-icon icon-group"></i>
+      <span class="stb-link-text">People</span>
+    </a>
+    <% if current_user.site_admin %>
+      <a class="stb-link <%= selected_on_path(admin_path) %>" href="<%= admin_path %>">
+        <i class="stb-icon icon-dashboard"></i>
+        <span class="stb-link-text">Admin</span>
+      </a>
+      <a href="<%= testbed_path %>" class="stb-link selected_on_path(testbed_path) %>">
+        <i class="stb-icon icon-fighter-jet icon-rotate-270"></i>
+        <span class="stb-link-text">UX Testbed</span>
+      </a>
+    <% end %>
+</div>
+
+<div class="stb-group pull-right">
+  <span class="stb-name">
+    <span class="stb-name-text"><%= current_user.name %></span>
+  </span>
+  <a href="<%= profile_path %>" class="stb-link" title="Settings">
+    <i class="stb-icon icon-user"></i>
+  </a>
+  <a href="/session/logout" class="stb-link" title="Sign Out">
+    <i class="stb-icon icon-signout"></i>
+  </a>
+</div>
+</div>

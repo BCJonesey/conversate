@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
     redirect_to new_session_url
   end
 
-  def require_admin
-    redirect_to root_url unless current_user.is_admin
+  def require_site_admin
+    redirect_to root_url unless current_user.site_admin
   end
 end

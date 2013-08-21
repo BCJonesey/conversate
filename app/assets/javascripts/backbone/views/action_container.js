@@ -51,6 +51,12 @@ Structural.Views.ActionContainer = Support.CompositeView.extend({
     this.titleView.clearConversation();
     this.composeView.clearConversation();
   },
+  scrollToBottom: function() {
+    this.actionsView.scrollToBottom();
+  },
+  isAtBottom: function() {
+    return this.actionsView.isAtBottom();
+  },
 
   reClass: function() {
     this.el.className = this.className();
