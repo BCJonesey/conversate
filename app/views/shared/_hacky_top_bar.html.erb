@@ -4,16 +4,16 @@
       <i class="stb-icon icon-home"></i>
       <span class="stb-link-text">Water Cooler</span>
     </a>
-    <a href="<%= people_path %>" class="stb-link stb-selected">
+    <a href="<%= people_path %>" class="stb-link <%= selected_on_path(people_path) %>">
       <i class="stb-icon icon-group"></i>
       <span class="stb-link-text">People</span>
     </a>
     <% if current_user.site_admin %>
-      <a class="stb-link" href="<%= admin_path %>">
+      <a class="stb-link <%= selected_on_path(admin_path) %>" href="<%= admin_path %>">
         <i class="stb-icon icon-dashboard"></i>
         <span class="stb-link-text">Admin</span>
       </a>
-      <a href="<%= testbed_path %>" class="stb-link">
+      <a href="<%= testbed_path %>" class="stb-link selected_on_path(testbed_path) %>">
         <i class="stb-icon icon-fighter-jet icon-rotate-270"></i>
         <span class="stb-link-text">UX Testbed</span>
       </a>
