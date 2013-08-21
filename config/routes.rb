@@ -10,7 +10,7 @@ Conversate::Application.routes.draw do
     :as => 'conversation'
   get 'topic/:slug/:id' => 'topics#show', :as => 'topic'
 
-  get 'ux/testbed' => 'testbed#index'
+  get 'ux/testbed' => 'testbed#index', :as => 'testbed'
   get 'ux/testbed/:view' => 'testbed#test_view', :as  =>'test_view'
 
   get 'profile' => 'users#edit'

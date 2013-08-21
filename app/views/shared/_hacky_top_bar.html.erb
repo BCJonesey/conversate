@@ -1,30 +1,30 @@
 <div class="structural-bar clearfix">
   <div class="tabs stb-group pull-left">
-    <a class='stb-link' href='<%= root_path %>'>
+    <a class="stb-link" href='<%= root_path %>'>
       <i class="stb-icon icon-home"></i>
       <span class="stb-link-text">Water Cooler</span>
     </a>
-    <a href="/people" class="stb-link stb-selected">
+    <a href="<%= people_path %>" class="stb-link stb-selected">
       <i class="stb-icon icon-group"></i>
       <span class="stb-link-text">People</span>
     </a>
-
-  <!-- Note that since this is all on the client, sufficiently
-       savvy users will be able to read this template and
-       find out about the admin route.  However, our server-
-       side checks should prevent them from seeing any of the
-       admin data. -->
-  <!-- Note to sufficiently savvy users: please don't make me
-       regret typing that. -->
-
-
+    <% if current_user.site_admin %>
+      <a class="stb-link" href="<%= admin_path %>">
+        <i class="stb-icon icon-dashboard"></i>
+        <span class="stb-link-text">Admin</span>
+      </a>
+      <a href="<%= testbed_path %>" class="stb-link">
+        <i class="stb-icon icon-fighter-jet icon-rotate-270"></i>
+        <span class="stb-link-text">UX Testbed</span>
+      </a>
+    <% end %>
 </div>
 
 <div class="stb-group pull-right">
   <span class="stb-name">
-    <span class="stb-name-text">Abigail Adams </span>
+    <span class="stb-name-text"><%= current_user.name %></span>
   </span>
-  <a href="/profile" class="stb-link" title="Settings">
+  <a href="<%= profile_path %>" class="stb-link" title="Settings">
     <i class="stb-icon icon-user"></i>
   </a>
   <a href="/session/logout" class="stb-link" title="Sign Out">
