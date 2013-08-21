@@ -16,8 +16,15 @@ var Structural = new (Support.CompositeView.extend({
     this.apiPrefix = options.apiPrefix;
   },
   start: function(bootstrap) {
+
     this._user = new Structural.Models.User(bootstrap.user);
     this._topics = new Structural.Collections.Topics(bootstrap.topics);
+
+    // TODO: This is pretty fucked, but basically, we never know which topic we have selected,
+    // except from our bootstrap data's conversation which includes the topicId of said topic.
+    this._topic = this._topics.where({id: bootstrap.conversation.topic_id})[0];
+    this._topic.conversations.set(bootstrap.conversations);
+
     this._conversations = new Structural.Collections.Conversations(bootstrap.conversations);
     this._conversation =  this._conversations.where({id: bootstrap.conversation.id})[0];
     this._participants = new Structural.Collections.Participants(
