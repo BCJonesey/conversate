@@ -1,10 +1,10 @@
 // Place all the styles related to the sessions controller here.
 // They will automatically be included in application.css.
 // You can use Less here: http://lesscss.org/
-@import "mixins.css.less";
 @import "variables.css.less";
+@import "mixins.css.less";
 
-@width:45rem;
+@width:50rem;
 
 body.not-logged-in {
   overflow: auto;
@@ -41,32 +41,36 @@ header{
 .nav-item.active{
   color:#444;
   border-bottom-color:#08F;
-  //background-color:rgba(0,128,255,0.1);
+}
+.nav-item-toggle.is-toggled{
+  border-color:#AAA;
+  border-bottom:none;
+  position:relative;
+  z-index:10;
+  background-color: white;
 }
 
 .login-modal{
   position:absolute;
   width:20rem;
-  top:110%;
+  top:95%;
   right:0;
-  background-color:#EEE;
+  background-color:white;
   border:1px solid #AAA;
   height:auto;
-
+box-shadow: 0 1rem 2rem rgba(0,0,0,0.2);
   input[type='email'],
   input[type='password']{
     color:#666;
     background-color:rgba(255,255,255,0.8);
   }
-
+  padding:0.5rem;
+  label{
+    font-size:0.75rem;
+    color:#888;
+  }
 }
 
-.login-form-title{
-padding-bottom:0.5rem;
-font-weight: bold;
-text-align: center;
-color:#888;
-}
 
 
 
@@ -83,6 +87,14 @@ color:#888;
   background-color:#F8F8F8;
   padding:2rem;
   color:#AAA;
+  h1 {
+    text-align: center;
+    font-size: 3rem;
+    margin-top:0;
+    margin-bottom:1rem;
+    color:#7AD;
+    text-shadow:1px 1px 1px white;
+  }
 }
 .hero-title{
   font-size:5rem;
@@ -97,10 +109,13 @@ color:#888;
   color:white;
   font-size:1.25rem;
 }
-
+.hero-sign-up-button{
+  font-size:1.5rem;
+  padding:0.5rem 2rem;
+  height:auto;
+}
 .copy-wrapper{
-  background-color:#F8F8F8;
-  padding:1.0rem;
+  background-color:white;
   border-top:1px solid #CCC;
   a{
     text-decoration:none;
@@ -141,36 +156,79 @@ footer{
     font-family: 'Lato',sans-serif;
     font-weight: bold;
     font-size:1.25em;
+    margin-bottom: 1.0rem;
   }
+
+  li{
+    display:block;
+    border-bottom:1px solid #CCC;
+    padding:1.0rem;
+    &:nth-child(2n){
+      text-align: right;
+    }
+    &:last-child{
+       border-bottom:none;
+       margin-bottom:0;
+    }
+  }
+
   p{
-    max-width:25rem;
     margin:0;
-    display:inline-block;
     font-size:0.9rem;
     color:#888;
     white-space: pre-line;
     line-height: 1.75;
+    & + p{
+      margin-top:0.5rem;
+    }
   }
 }
 
-
-.copy li{
-  max-width:@width*3/4;
-  display:inline-block;
-  margin-bottom: 1rem;
-  border-bottom:1px solid #CCC;
-  padding:0.5rem;
-  p {
+.tour-page{
+  .sub-nav{
+    margin:0 auto;
+    width:@width;
+    text-align: center;
+    padding:0;
   }
-  &:last-child{
-     border-bottom:none;
-  }
-}
+  .sub-nav-item{
+    display:inline-block;
+    text-align: center;
+    margin:0;
+    border:1px solid #CCC;
+    margin:0 0.5rem;
+    font-size: 1.25rem;
+    margin-bottom: -1px;
+    a{
+      display:inline-block;
+      text-decoration: none;
+      color:#888;
+      background-color: #EEE;
+      padding:0.5rem 1.0rem;
 
-.copy li:nth-child(2n){
-  float:right;
-  text-align: right;
-}
-.copy li:last-child{
-  margin-bottom:0;
+    }
+    &.is-selected{
+      border-bottom:none;
+      padding-bottom:1px;
+      background-color: white;
+      a{
+        background-color:white;
+      }
+    }
+  }
+  .copy{
+    border:1px solid #CCC;
+    font-size:1.0rem;
+    width:@width;
+    margin:0 auto;
+    padding:1.0rem;
+    background-color: white;
+  }
+  .section{
+    padding:1.0rem;
+    &:nth-child(2n){
+      border:1px solid #DDD;
+      background-color:#FAFAFA;
+    }
+  }
 }

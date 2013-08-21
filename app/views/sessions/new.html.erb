@@ -1,29 +1,6 @@
 <div class='page-wrapper'>
-  <header>
-  <div class='nav clearfix'>
-    <div class='btn-group pull-left'>
-  <a href="<%= root_path %>" class='nav-item active'>Water Cooler</a>
-  <a href="<%= tour_path %>" class='nav-item'>Tour</a>
-  <a href="<%= pricing_path %>" class='nav-item'>Pricing</a>
-</div>
 
-<div class='btn-group pull-right'>
-  <a href="#" class="nav-item nav-item-link login-modal-trigger">Sign In</a>
-</div>
-  <div class="login-modal form hidden">
-      <div class='login-form-title'>Authenticate</div>
-      <%= form_tag session_path do %>
-        <%= email_field_tag :email, params[:email], placeholder: 'Email' %>
-        <%= password_field_tag :password, nil, placeholder: 'Password' %>
-        <div class="clearfix">
-          <div class="btn-group pull-right">
-            <%= submit_tag 'Sign In', :class => 'form-btn form-btn-primary' %>
-          </div>
-        </div>
-      <% end %>
-    </div>
-  </div>
-</header>
+<%=render "shared/header" %>
 
 <div class="main">
   <div class="hero">
@@ -31,15 +8,14 @@
  -->
     <h1>Water Cooler</h1>
     <h2>Collaborative communication for creative teams</h2>
-    <a href="#" class='btn-primary'>Sign Up</a>
+    <a href="#" class='hero-sign-up-button btn-primary'>Sign Up</a>
   </div>
 </div>
 <div class="copy-wrapper">
   <ul class='copy clearfix'>
     <li>
   <h4>Less Stressful</h4>
-  <p>
-    Disclaimer: We can't actually reduce the stress of your job, that's your
+  <p>Disclaimer: We can't actually reduce the stress of your job, that's your
     problem. What we can help you with is the little things about communicating
     with your team.
   </p>
@@ -48,8 +24,7 @@
 
 <li>
   <h4>Web Native</h4>
-  <p>
-    You can access Water Cooler from any browser, but even cooler is that Water
+  <p>You can access Water Cooler from any browser, but even cooler is that Water
     Cooler's data is build with the web in mind. Stop sending email chains and
     just send a link to a thread.
   </p>
@@ -57,8 +32,7 @@
  </li>
  <li>
   <h4>Built For Teams</h4>
-  <p>
-    We've built Water Cooler from the ground up with small creative teams in
+  <p>We've built Water Cooler from the ground up with small creative teams in
     mind. Open ended discussion, brainstorming, deciding where to go to lunch;
     creative teams deal with these things constantly, so we built Water Cooler
     to be great at them.
@@ -68,12 +42,10 @@
 </li><li>
 
   <h4>Respects Privacy</h4>
-  <p>
-    Collaboration is about sharing information, but sometimes you still need to
+  <p>Collaboration is about sharing information, but sometimes you still need to
     be able to have a private conversation.
   </p>
-  <p>
-    Water Cooler has a simple set of controls that let you have restrict your
+  <p>Water Cooler has a simple set of controls that let you have restrict your
     conversations to 1-on-1, just your team, your whole organizaiton, or any
     ad-hoc group in between  (great for planning a surprise party).
   </p>
@@ -81,7 +53,7 @@
 </li>
 </ul>
 </div>
-<footer>
-  Built by <a href="#">Structural</a> in Boston, MA
-</footer>
+
+<%=render "shared/footer" %>
+
 </div>
