@@ -56,7 +56,10 @@ var Structural = new (Support.CompositeView.extend({
     Backbone.history.start({pushState: true});
 
     this.conversationFetcher = new conversationFetcher(this._conversation, 5000);
-    this.topicFetcher = new topicFetcher(this._conversations, 5000);
+
+    // TODO: Fetching topics is currently an extremely expensive call that cannot be
+    // made as a fetch until it is resolved server-side.
+    //this.topicFetcher = new topicFetcher(this._conversations, 5000);
 
     return this;
   },
