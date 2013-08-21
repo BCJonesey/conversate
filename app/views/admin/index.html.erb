@@ -1,25 +1,31 @@
 <%= render 'shared/hacky_top_bar' %>
 
 <div class="admin-page">
-  <h3>Database Usage</h3>
-  <table>
-    <thead>
-      <tr>
-        <td>Table</td>
-        <td>Row Count</td>
-      </tr>
-    </thead>
-    <tbody>
-      <% all_models.each do |model| %>
+  <div class='admin-table'>
+    <div class='btn-toolbar'>
+      <div class='btn-group'>
+        <span class='toolbar-title'>Database Usage</span>
+      </div>
+    </div>
+    <table>
+      <thead>
         <tr>
-          <td><%= model.name %></td>
-          <td><%= model.count %></td>
+          <td>Table</td>
+          <td>Row Count</td>
         </tr>
-      <% end %>
-      <tr>
-        <td>Total</td>
-        <td><%= all_models.collect {|m| m.count }.sum %></td>
-      </tr>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% all_models.each do |model| %>
+          <tr>
+            <td><%= model.name %></td>
+            <td><%= model.count %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <td>Total</td>
+          <td><%= all_models.collect {|m| m.count }.sum %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

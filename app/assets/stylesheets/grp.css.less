@@ -2,13 +2,17 @@
 @import 'mixins.css.less';
 
 .grp-page {
-  width: 50rem;
-  max-width: 100%;
-  margin: auto;
+  position:absolute;
+  bottom:0;
+  overflow:auto;
+  left:0;
+  right:0;
+  top:2.5rem;
 
   .grp {
     border:1px solid #AAA;
-    margin:2rem 1rem;
+    width:50rem;
+    margin:2rem auto;
     .grp-name {
       .title-font();
     }
@@ -24,7 +28,6 @@
 
   table {
     .stripey-table;
-    border-collapse: collapse;
     width: 100%;
     tbody{
       a{
