@@ -10,7 +10,7 @@ Conversate::Application.routes.draw do
 
   get 'admin' => 'admin#index', :as => 'admin'
   resource :users, :only => [:update]
-  resource :session, :only => [:new, :create]
+  resource :session, :only => [:create]
   get 'session/logout' => 'sessions#destroy', :as => 'destroy_sessions'
 
   get 'conversation/:slug/:id(#message:message_id)' => 'conversations#show',

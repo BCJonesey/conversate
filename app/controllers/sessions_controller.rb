@@ -1,8 +1,4 @@
 class SessionsController < ApplicationController
-  def new
-    @login_error = false
-  end
-
   def create
     if User.find_by_email(params[:email]).removed
       @login_error = true

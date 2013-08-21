@@ -1,5 +1,32 @@
-<%= form_tag speakeasy_path do %>
-  <%= label_tag :code_word, 'Passcode' %>
-  <%= text_field_tag :code_word, '' %>
-  <%= submit_tag 'Check it out' %>
-<% end %>
+<header>
+  <div class="nav clearfix">
+    <div class="btn-group pull-left">
+      <a href="<%= root_path %>" class="nav-item">Water Cooler</a>
+    </div>
+
+    <div class="btn-group pull-right">
+      <a href="#" class="btn home-entrance-toggle">Sign In</a>
+    </div>
+  </div>
+</header>
+
+<div class="main">
+  <div class="hero">
+    <div class="home-form-speakeasy">
+      <%= form_tag speakeasy_path, :class => 'form' do %>
+        <%= label_tag :code_word, 'Passcode' %>
+        <%= text_field_tag :code_word, '' %>
+        <%= submit_tag 'Check it out', :class => 'btn btn-primary' %>
+      <% end %>
+    </div>
+    <div class="home-form-sign-in hidden">
+      <%= form_tag session_path, :class => 'form' do %>
+        <%= label_tag :email, 'Email' %>
+        <%= email_field_tag :email, params[:email] %>
+        <%= label_tag :password, 'Password' %>
+        <%= password_field_tag :password %>
+        <%= submit_tag 'Sign In', :class => 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+</div>
