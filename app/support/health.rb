@@ -36,7 +36,12 @@ module Health
   end
 
   def Health.conversation_with_no_users
-    []
+    Conversation.all.keep_if {|c| c.users.empty? }.map do |c|
+      {
+        :model => c,
+        :notes => ''
+      }
+    end
   end
 
   def Health.conversation_with_no_topics
