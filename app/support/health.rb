@@ -1,25 +1,38 @@
 module Health
-  def Health.users_without_default_topics
+  def Health.user_with_nil_default_topic
+    User.where(:default_topic_id => nil).map do |u|
+      {
+        :model => u,
+        :notes => u.topics.map{|t| t.debug_s}.join(', ')
+      }
+    end
+  end
+
+  def Health.user_with_no_topics
     []
   end
 
-  def Health.users_without_any_topics
+  def Health.user_with_no_groups
     []
   end
 
-  def Health.topics_without_any_users
+  def Health.topic_with_no_users
     []
   end
 
-  def Health.conversations_without_any_users
+  def Health.conversation_with_no_users
     []
   end
 
-  def Health.conversations_without_any_topics
+  def Health.conversation_with_no_topics
     []
   end
 
-  def Health.topics_with_no_admins
+  def Health.group_with_no_admins
+    []
+  end
+
+  def Health.group_with_no_users
     []
   end
 end
