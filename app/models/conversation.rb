@@ -141,6 +141,10 @@ class Conversation < ActiveRecord::Base
     save
   end
 
+  def debug_s
+    "Conversation:#{self.id}:#{self.title}"
+  end
+
   protected
   # Internal: Creates a default conversation title based on who the participants
   # are.
