@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(:version => 20130814214058) do
     t.string   "title"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
-    t.datetime "most_recent_event", :default => '2000-01-01 01:07:19'
+    t.datetime "most_recent_event"
   end
 
   create_table "conversations_topics", :force => true do |t|
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(:version => 20130814214058) do
   create_table "group_participations", :force => true do |t|
     t.integer "group_id"
     t.integer "user_id"
-    t.boolean "group_admin"
+    t.boolean "group_admin", :default => false
   end
 
   create_table "groups", :force => true do |t|
