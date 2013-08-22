@@ -10,23 +10,41 @@
   </div>
 </header>
 
-<div class="main">
-  <div class="hero">
+<div class="home-main main">
+  <div class="modal-window">
     <div class="home-form-speakeasy">
-      <%= form_tag speakeasy_path, :class => 'form' do %>
+      <div class='btn-toolbar'>
+        <span class='toolbar-title'>Welcome to Water Cooler</span>
+      </div>
+      <%= form_tag speakeasy_path, :class => '' do %>
+      <div class='form modal-content'>
         <%= label_tag :code_word, 'Passcode' %>
         <%= text_field_tag :code_word, '' %>
-        <%= submit_tag 'Check it out', :class => 'btn btn-primary' %>
+      </div>
+        <div class='btn-toolbar-below clearfix'>
+          <div class='btn-group pull-right'>
+            <%= submit_tag 'Check it out', :class => 'btn btn-primary' %>
+          </div>
+        </div>
       <% end %>
     </div>
     <div class="home-form-sign-in hidden">
-      <%= form_tag session_path, :class => 'form' do %>
-        <%= label_tag :email, 'Email' %>
-        <%= email_field_tag :email, params[:email] %>
-        <%= label_tag :password, 'Password' %>
-        <%= password_field_tag :password, nil %>
-        <%= submit_tag 'Sign In', :class => 'btn btn-primary' %>
-      <% end %>
+      <div class='btn-toolbar'>
+        <span class='toolbar-title'>Sign In</span>
+      </div>
+      <%= form_tag session_path, :class => '' do %>
+        <div class='form modal-content'>
+          <%= label_tag :email, 'Email' %>
+          <%= email_field_tag :email, params[:email] %>
+          <%= label_tag :password, 'Password' %>
+          <%= password_field_tag :password, nil %>
+        </div>
+        <div class='btn-toolbar-below clearfix'>
+          <div class='btn-group pull-right'>
+            <%= submit_tag 'Sign In', :class => 'btn btn-primary' %>
+          </div>
+        </div>
+    <% end %>
     </div>
   </div>
 </div>
