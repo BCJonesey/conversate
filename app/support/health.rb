@@ -63,6 +63,11 @@ module Health
   end
 
   def Health.group_with_no_users
-    []
+    Group.all.keep_if {|g| g.users.empty? }.map do |g|
+      {
+        :model => g,
+        :notes => ''
+      }
+    end
   end
 end
