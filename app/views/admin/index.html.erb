@@ -47,7 +47,7 @@
         <% failed_health_tests.each do |check| %>
           <tr>
             <td><%= check[:model].debug_s %></td>
-            <td><%= check[:test].to_s.replace('_', ' ') %></td>
+            <td><%= check[:test].to_s.gsub('_', ' ') %></td>
             <td><%= check[:notes] %></td>
           </tr>
         <% end %>
