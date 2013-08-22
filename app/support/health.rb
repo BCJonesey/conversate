@@ -54,7 +54,12 @@ module Health
   end
 
   def Health.group_with_no_admins
-    []
+    Group.all.keep_if {|g| g.admins.empty? }.map do |g|
+      {
+        :model => g,
+        :notes => g.users.map {|u| u.debug_s }.join(', ')
+      }
+    end
   end
 
   def Health.group_with_no_users
