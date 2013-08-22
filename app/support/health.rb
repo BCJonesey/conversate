@@ -18,7 +18,12 @@ module Health
   end
 
   def Health.user_with_no_groups
-    []
+    User.all.keep_if {|u| u.groups.empty? }.map do |u|
+      {
+        :model => u,
+        :notes => ''
+      }
+    end
   end
 
   def Health.topic_with_no_users
