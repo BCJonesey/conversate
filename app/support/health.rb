@@ -1,4 +1,15 @@
+# Methods in this module will get automatically executed for the site admin
+# page.  Each method should follow some basic rules for best results:
+#   - The method name should describe the problem it finds using a singular
+#     reference to the model it finds it on.
+#   - The method should return an array of hashes with two keys:
+#       :model should be the model object that exhibits the error.
+#       :notes should be a string with any additionaly information useful in
+#              fixing the problem.
 module Health
+
+  # User health checkts
+
   def Health.user_with_nil_default_topic
     User.where(:default_topic_id => nil).map do |u|
       {
@@ -26,6 +37,8 @@ module Health
     end
   end
 
+  # Topic health checks
+
   def Health.topic_with_no_users
     Topic.all.keep_if {|t| t.users.empty? }.map do |t|
       {
@@ -34,6 +47,8 @@ module Health
       }
     end
   end
+
+  # Conversation health checks
 
   def Health.conversation_with_no_users
     Conversation.all.keep_if {|c| c.users.empty? }.map do |c|
@@ -52,6 +67,8 @@ module Health
       }
     end
   end
+
+  # Group health checks
 
   def Health.group_with_no_admins
     Group.all.keep_if {|g| g.admins.empty? }.map do |g|
