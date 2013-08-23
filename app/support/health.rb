@@ -68,6 +68,23 @@ module Health
     end
   end
 
+  def Health.conversation_hidden_from_users
+    hidden_users = []
+    Conversation.all.keep_if do |c|
+      c_topics = Set.new(c.topics)
+      hidden_from = c.users.keep_if do |u|
+        Set.new(u.topics).intersection(c_topics).empty?
+      end
+      hidden_users += hidden_from
+      hidden_from.length > 0
+    end.map do |c|
+      {
+        :model => c,
+        :notes => hidden_users.map {|u| u.debug_s }.join(', ')
+      }
+    end
+  end
+
   # Group health checks
 
   def Health.group_with_no_admins
