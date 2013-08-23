@@ -44,11 +44,11 @@
         </tr>
       </thead>
       <tbody>
-        <% failed_health_tests.each do |check| %>
+        <% failed_health_tests.each do |test| %>
           <tr>
-            <td><%= check[:model].debug_s %></td>
-            <td><%= check[:test].to_s.gsub('_', ' ') %></td>
-            <td><%= check[:notes] %></td>
+            <td><%= test[:model].debug_s %></td>
+            <td><%= test[:test].to_s.gsub('_', ' ') %></td>
+            <td><%= test[:notes] %></td>
           </tr>
         <% end %>
       </tbody>
