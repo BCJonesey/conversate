@@ -17,35 +17,38 @@ var Structural = new (Support.CompositeView.extend({
   },
   start: function(bootstrap) {
 
+    // Instantiate our primary data structures from our bootstrap data.
+    // We only care about things that are convenient to directly access right now,
+    // like the current topics, the current topic, the current conversation,
+    // and the current user.
     this._user = new Structural.Models.User(bootstrap.user);
     this._topics = new Structural.Collections.Topics(bootstrap.topics);
-
-    // TODO: This is pretty fucked, but basically, we never know which topic we have selected,
-    // except from our bootstrap data's conversation which includes the topicId of said topic.
-    this._topic = this._topics.where({id: bootstrap.conversation.topic_id})[0];
+    this._topic = new Structural.Models.Topic(bootstrap.topic);
     this._topic.conversations.set(bootstrap.conversations);
 
-    this._conversations = new Structural.Collections.Conversations(bootstrap.conversations);
-    this._conversation =  this._conversations.where({id: bootstrap.conversation.id})[0];
-    this._participants = new Structural.Collections.Participants(
-      bootstrap.participants,
-      {conversation: this._conversation ? this._conversation.id : undefined}
-    );
-    if (!this._conversation) {
-      this._conversation = new Structural.Models.Conversation();
-    }
+    // Instantiate the current conversation or a sane default.
+    this._conversation =  this._topic.conversations.where({id: bootstrap.conversation.id})[0];
+    this._conversation = this._conversation ? this._conversation : new Structural.Models.Conversation();
 
+    // Setup our current conversation's actions from the bootstrap data.
     if (this._conversation && this._conversation.id) {
       this._conversation.set('is_current', true);
-      // TODO: Refactor.
       this._conversation.actions.set(bootstrap.actions);
       this._conversation.actions._findMyMessages();
     }
 
+    // TODO: Refactor to be like other things instead of a singleton collection.
+    this._participants = new Structural.Collections.Participants(
+      bootstrap.participants,
+      // TODO: Is this even necessary now?
+      {conversation: this._conversation ? this._conversation.id : undefined}
+    );
+
+    // Setup our views with appropriate data settings.
     this._bar = new Structural.Views.StructuralBar({model: this._user});
     this._watercooler = new Structural.Views.WaterCooler({
       topics: this._topics,
-      conversations: this._conversations,
+      conversations: this._topic.conversations,
       actions: this._conversation.actions,
       participants: this._participants,
       conversation: this._conversation,
