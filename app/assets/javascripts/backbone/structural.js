@@ -144,7 +144,9 @@ var Structural = new (Support.CompositeView.extend({
                                {trigger: true});
   },
   _clearConversationView: function() {
-    this._conversation.actions.clearConversation();
+    if (this._conversation) {
+      this._conversation.actions.clearConversation();
+    }
     this._conversation = undefined;
     this._participants.clearConversation();
     this._watercooler.clearConversation();
