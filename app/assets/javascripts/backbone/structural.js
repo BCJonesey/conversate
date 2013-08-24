@@ -122,22 +122,23 @@ var Structural = new (Support.CompositeView.extend({
     if (topic.id !== this._topic.id) {
       this._topic = topic;
 
+      // We need to clear out our conversation view because we're about to swap.
+      self.trigger('clearConversation');
+      Structural._conversation = null;
+
       // TODO: Can probably try an immediate swap here and then fetch if we already have a cached
       // conversations list.
-      // this._topic.conversations.fetch({
-      //   success: function (collection, response, options) {
-      //     var conversation = collection.models[0];
-      //     if (conversation) {
-      //       self.viewConversation(conversation);
-      //     } else {
-      //       // TODO: Temporary hack to deal with no conversation.
-      //       self.trigger('clearConversation');
-      //     }
-      //   },
-      //   error : function (collection, response, options) {
-      //     // TODO: Error handling.
-      //   }
-      // });
+      this._topic.conversations.fetch({
+        success: function (collection, response, options) {
+          var conversation = collection.models[0];
+          if (conversation) {
+            self.viewConversation(conversation);
+          }
+        },
+        error : function (collection, response, options) {
+          // TODO: Error handling.
+        }
+      });
 
       this.trigger('changeTopic', topic);
 
