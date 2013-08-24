@@ -84,7 +84,6 @@ var Structural = new (Support.CompositeView.extend({
   focus: function(targets) {
     if (targets.topic) {
       this._topics.focus(targets.topic);
-      this._topic.conversations.setTopic(targets.topic);
     }
 
     if (targets.conversation) {
@@ -116,18 +115,17 @@ var Structural = new (Support.CompositeView.extend({
     }
   },
   viewTopic: function(topic) {
-    var self = this;
-    if (!self._conversation || topic.id !== self._conversation.topic_id) {
-      self._clearConversationView();
-      self._topic.conversations.changeTopic(topic.id, function(collection) {
-        if (collection.length > 0) {
-          collection.at(0).set('is_current', true);
-          self._changeConversationView(collection.at(0));
-        }
-        else {
-          self._clearConversationView();
-        }
-      });
+    if (!this._conversation || topic.id !== this._conversation.topic_id) {
+      this._clearConversationView();
+      // self._topic.conversations.changeTopic(topic.id, function(collection) {
+      //   if (collection.length > 0) {
+      //     collection.at(0).set('is_current', true);
+      //     self._changeConversationView(collection.at(0));
+      //   }
+      //   else {
+      //     self._clearConversationView();
+      //   }
+      // });
       Structural.Router.navigate(Structural.Router.topicPath(topic),
                                  {trigger: true});
     }
