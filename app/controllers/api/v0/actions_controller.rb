@@ -27,5 +27,4 @@ class Api::V0::ActionsController < ApplicationController
     conversation.update_most_recent_event
     render :json => action.to_json, :status => 201
   end
-
 end
