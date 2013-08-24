@@ -15,82 +15,82 @@
   box-shadow: 0 1rem 2rem rgba(0,0,0,0.2);
   max-width: 14rem;
 
-  .act-ut-header{
-    text-align: center;
-    background-color: #DDD;
-    border-bottom: @border-dark;
-    color:@gray;
-    font-size: 0.75rem;
-    padding:0.15rem;
-  }
-
   ul{
     margin:0;
     padding:0;
     list-style-type: none;
   }
+}
+.act-ut-header{
+  text-align: center;
+  background-color: #DDD;
+  border-bottom: @border-dark;
+  color:@gray;
+  font-size: 0.75rem;
+  padding:0.15rem;
+}
+.act-ut-topics-list{
+  background-color: #F0F0F0;
+  max-height:30rem;
+  overflow-y:auto;
+}
 
-  .topics-list{
-    background-color: #F0F0F0;
-    max-height:30rem;
-    overflow-y:auto;
-  }
-
-  .empty-error{
-    display:none;
-    border-bottom:@border-dark;
-    font-size:0.75rem;
-    text-align: center;
-    color:@gray;
-    padding:0.5rem;
-    .empty-error-text{
-      padding:@pad;
-      border:@border-light;
-      display:block;
-      background-color:#FFD;
-    }
-  }
-  &.emtpy .empty-error{
-    display:block;
-  }
-
-  .topic{
+.act-ut-empty-error{
+  display:none;
+  border-bottom:@border-dark;
+  font-size:0.75rem;
+  text-align: center;
+  color:@gray;
+  padding:0.5rem;
+  .act-ut-empty-error-text{
     padding:@pad;
-    border-bottom:1px solid #CCC;
-    cursor: pointer;
-    color:@gray;
-    &.checked,
-    &.checked:hover{
-      background-color: @checked-blue;
-    }
-    &:last-child{
-      border-bottom: none;
-    }
-    .topic-icon{
-      color:#AAA;
-      margin:@pad;
-    }
-    &:hover{
-      background-color:#FAFAFA;
-    }
+    border:@border-light;
+    display:block;
+    background-color:#FFD;
   }
 }
 
-.topic-left{
+&.emtpy .act-ut-empty-error{
+  display:block;
+}
+
+.act-ut-topic{
+  padding:@pad;
+  border-bottom:1px solid #CCC;
+  cursor: pointer;
+  color:@gray;
+  &.checked,
+  &.checked:hover{
+    background-color: @checked-blue;
+  }
+  &:last-child{
+    border-bottom: none;
+  }
+  &:hover{
+    background-color:#FAFAFA;
+  }
+}
+
+.act-ut-topic-icon{
+  color:#AAA;
+  margin:@pad;
+}
+
+.act-ut-topic-left{
   .ellipsis;
   padding:@pad 0;
   //padding-left:0;
 }
 
 
-.topics-list.single-select-mode .checkbox{
+.act-ut-topics-list.single-select-mode .act-ut-checkbox{
   display: none;
 }
 
-.topic .icon-check{
+.act-ut-topic .icon-check{
   display:none;
 }
-.topic.checked{
+.act-ut-topic.checked{
   .icon-check-empty{
     display:none;
   }
@@ -98,7 +98,8 @@
     display:inline-block;
   }
 }
-.topic-title{
+
+.act-ut-topic-title{
   padding-left:@pad;
 }
 

@@ -10,16 +10,16 @@ Structural.Views.UpdateTopicsDialog = Support.CompositeView.extend({
   },
   events: {
     'click .act-ut-header': 'changeMode',
-    'click .topic': 'toggleCheck'
+    'click .act-ut-topic': 'toggleCheck'
   },
   changeMode: function() {
-    this.$el.find('.topics-list').toggleClass('single-select-mode');
+    this.$el.find('.act-ut-topics-list').toggleClass('single-select-mode');
   },
   toggleCheck: function(e) {
 
-    var t = $(e.target).closest('.topic');
+    var t = $(e.target).closest('.act-ut-topic');
     var ts = this.$el.find('.checked');
-    var tl = this.$el.find('.topics-list');
+    var tl = this.$el.find('.act-ut-topics-list');
 
     if (tl.hasClass('single-select-mode')) {
       ts.removeClass('checked');
