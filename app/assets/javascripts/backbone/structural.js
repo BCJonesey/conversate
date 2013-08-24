@@ -69,7 +69,7 @@ var Structural = new (Support.CompositeView.extend({
 
     // TODO: Fetching topics is currently an extremely expensive call that cannot be
     // made as a fetch until it is resolved server-side.
-    //this.topicFetcher = new topicFetcher(this._conversations, 5000);
+    //this.topicFetcher = new topicFetcher(this._topic.conversations, 5000);
 
     return this;
   },
@@ -84,11 +84,11 @@ var Structural = new (Support.CompositeView.extend({
   focus: function(targets) {
     if (targets.topic) {
       this._topics.focus(targets.topic);
-      this._conversations.setTopic(targets.topic);
+      this._topic.conversations.setTopic(targets.topic);
     }
 
     if (targets.conversation) {
-      this._conversations.focus(targets.conversation);
+      this._topic.conversations.focus(targets.conversation);
     }
 
     if (targets.message) {
@@ -184,7 +184,7 @@ var Structural = new (Support.CompositeView.extend({
 
     var conversation = new Structural.Models.Conversation(data);
     conversation.get('participants').add([this._user], {at: 0});
-    this._conversations.add(conversation);
+    this._topic.conversations.add(conversation);
     conversation.save(null, {
       success: function (conversation, response) {
         conversation.focus();
