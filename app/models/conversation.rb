@@ -42,6 +42,25 @@ class Conversation < ActiveRecord::Base
     end
   end
 
+  def remove_participants(participants, user, create_action=true)
+    # TODO: Sometimes remove some topics - semantics TBD
+    if participants
+      participants.each do |p|
+        user_id = p[:id] || p['id']
+        u = User.find(user_id)
+        self.users.delete u
+      end
+
+      if create_action
+        self.actions.new(type: 'update_users',
+                         data: {removed: participants}.to_json,
+                         user_id: user.id)
+      end
+
+      self.save
+    end
+  end
+
   def add_actions(actions, user)
     if actions
       actions.each do |a|
@@ -127,10 +146,7 @@ class Conversation < ActiveRecord::Base
         self.add_participants(action.added, action.user, false)
       end
       if action.removed
-        action.removed.each do |action_user|
-          user = User.find_by_id(action_user['id'])
-          self.users.delete(user)
-        end
+        self.remove_participants(action.removed, action.user, false)
       end
     end
     save
