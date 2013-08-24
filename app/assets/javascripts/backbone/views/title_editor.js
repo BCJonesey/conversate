@@ -4,6 +4,7 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
   initialize: function(options) {
     options = options || {};
     this.conversation = options.conversation;
+    Structural.on('changeConversation', this.changeConversation, this);
   },
   render: function() {
     this.$el.html(this.template({conversation: this.conversation}));

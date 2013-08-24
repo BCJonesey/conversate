@@ -5,6 +5,7 @@ Structural.Views.Participants = Support.CompositeView.extend({
   userReminder: '<li class="user-reminder">You, and...</li>',
   initialize: function(options) {
     this.originalCollection = this.collection.clone();
+    Structural.on('changeConversation', this.changeConversation, this);
   },
   render: function() {
     this.$el.empty();
@@ -80,7 +81,10 @@ Structural.Views.Participants = Support.CompositeView.extend({
   currentParticipants: function() {
     return this.collection.clone();
   },
-
+  changeConversation: function(conversation) {
+    this.collection = conversation.participants;
+    this.reset();
+  },
   // This should be identical to _.difference, but I can't get that to work
   // for me.  It keeps giving me garbage or not existing, depending on how
   // I call it.

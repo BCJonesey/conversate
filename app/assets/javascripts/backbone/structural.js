@@ -109,9 +109,10 @@ var Structural = new (Support.CompositeView.extend({
   viewConversation: function(conversation) {
     // Let's not bother swapping if this is already the current conversation.
     if (!this._conversation || conversation.id !== this._conversation.id) {
-      //this._changeConversationView(conversation);
-      //this._changeConversationUrl(conversation);
+      this._conversation = conversation;
       this.trigger('changeConversation', conversation);
+      Structural.Router.navigate(Structural.Router.conversationPath(conversation),
+                               {trigger: true});
     }
   },
   viewTopic: function(topic) {
@@ -144,28 +145,6 @@ var Structural = new (Support.CompositeView.extend({
                                  {trigger: true});
     }
   },
-
-  _changeConversationView: function(conversation) {
-    this._clearConversationView();
-    this._conversation = conversation;
-    this._conversation.actions.changeConversation(conversation.id);
-    this._participants.changeConversation(conversation.id);
-    this._watercooler.actions = this._conversation.actions;
-    this._watercooler.changeConversation(conversation);
-  },
-  _changeConversationUrl: function(conversation) {
-    Structural.Router.navigate(Structural.Router.conversationPath(conversation),
-                               {trigger: true});
-  },
-  _clearConversationView: function() {
-    if (this._conversation) {
-      this._conversation.actions.clearConversation();
-    }
-    this._conversation = undefined;
-    this._participants.clearConversation();
-    this._watercooler.clearConversation();
-  },
-
   createRetitleAction: function(title) {
     this._conversation.actions.createRetitleAction(title, this._user);
   },

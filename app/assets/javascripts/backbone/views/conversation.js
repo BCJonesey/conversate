@@ -25,7 +25,7 @@ Structural.Views.Conversation = Support.CompositeView.extend({
     this.user = options.user;
 
     this.model.on('updated', this.reRender, this);
-    Structural.on('changeConversation', this.reRender, this);
+    Structural.on('changeConversation', this.changeConversation, this);
   },
   render: function() {
     this.$el.html(this.template({conversation: this.model}));
@@ -44,6 +44,11 @@ Structural.Views.Conversation = Support.CompositeView.extend({
   },
   events: {
     'click': 'view'
+  },
+
+  // TODO: I'm specifically trying to call out what we're doing with the view. Should this be in the controller?
+  changeConversation: function(conversation) {
+    this.reRender();
   },
 
   view: function(e) {
