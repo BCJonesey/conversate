@@ -79,6 +79,24 @@ class Conversation < ActiveRecord::Base
     end
   end
 
+  def remove_topics(topics, user, create_action=true)
+    if topics
+      topics.each do |t|
+        topic_id = t[:id] || t['id']
+        topic = TOpic.find(topic_id)
+        self.topics.delete topic
+      end
+
+      if create_action
+        self.actions.new(type: 'update_topics',
+                         data: {removed: topics}.to_json,
+                         user_id: user.id)
+      end
+
+      self.save
+    end
+  end
+
   def add_actions(actions, user)
     if actions
       actions.each do |a|
@@ -169,6 +187,9 @@ class Conversation < ActiveRecord::Base
       when 'update_topics'
         if action.added
           self.add_topics(action.added, action.user, false)
+        end
+        if action.removed
+          self.remove_topics(action.removed, action.user, false)
         end
     end
     save
