@@ -20,11 +20,11 @@ class Topic < ActiveRecord::Base
 
   def unread_conversations(user)
     unread_conversation_count = 0
-    conversations.each do |conversation|
-      if user.conversations.include?(conversation) && conversation.unread_count(user) > 0
-        unread_conversation_count += 1
-      end
-    end
+    # conversations.each do |conversation|
+    #   if user.conversations.include?(conversation) && conversation.unread_count(user) > 0
+    #     unread_conversation_count += 1
+    #   end
+    # end
     return unread_conversation_count
   end
 end
