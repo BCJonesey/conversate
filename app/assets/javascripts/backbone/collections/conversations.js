@@ -20,17 +20,5 @@ Structural.Collections.Conversations = Backbone.Collection.extend({
     this.filter(function(cnv) { return cnv.id != id; }).forEach(function(cnv) {
       cnv.unfocus();
     })
-  },
-  setTopic: function(id) {
-    this.topicId = id;
-  },
-  changeTopic: function(id, success) {
-    this.setTopic(id);
-    this.reset();
-    this.fetch({
-      reset: true,
-      remove: true,
-      success: success
-    });
   }
 });
