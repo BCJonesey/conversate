@@ -115,21 +115,31 @@ var Structural = new (Support.CompositeView.extend({
                                {trigger: true});
     }
   },
+
+  // Show the first conversation in a specific topic, if able.
   viewTopic: function(topic) {
     var self = this;
     if (topic.id !== this._topic.id) {
       this._topic = topic;
-      this._topic.conversations.fetch({
-        success: function (collection, response, options) {
-          var conversation = collection.models[0];
-          if (conversation) {
-            self.viewConversation(conversation);
-          }
-        },
-        error : function (collection, response, options) {
-          // TODO: Error handling.
-        }
-      });
+
+      // TODO: Can probably try an immediate swap here and then fetch if we already have a cached
+      // conversations list.
+      // this._topic.conversations.fetch({
+      //   success: function (collection, response, options) {
+      //     var conversation = collection.models[0];
+      //     if (conversation) {
+      //       self.viewConversation(conversation);
+      //     } else {
+      //       // TODO: Temporary hack to deal with no conversation.
+      //       self.trigger('clearConversation');
+      //     }
+      //   },
+      //   error : function (collection, response, options) {
+      //     // TODO: Error handling.
+      //   }
+      // });
+
+      this.trigger('changeTopic', topic);
 
       Structural.Router.navigate(Structural.Router.topicPath(topic),
                                  {trigger: true});
