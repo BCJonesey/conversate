@@ -104,7 +104,7 @@ class Conversation < ActiveRecord::Base
     json = super(options)
     # TODO: DRY.
     #most_recent_viewed = most_recent_viewed_for_user(options[:user])
-    #json[:participants] = participants;
+    json[:participants] = participants;
     most_recent_viewed = 0
 
     #json[:unread_count] = unread_count(options[:user]);
@@ -113,7 +113,6 @@ class Conversation < ActiveRecord::Base
     #json[:most_recent_viewed] = most_recent_viewed ? most_recent_viewed.msec : nil
     json[:most_recent_event] = 0
     json[:most_recent_viewed] = 0
-    json[:participants] = []
 
     json[:topic_id] = topics.keep_if {|t| options[:user].topics.include? t }.first.id
     return json
