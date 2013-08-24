@@ -8,7 +8,10 @@ class Action < ActiveRecord::Base
   validates_presence_of :conversation_id
   validates_presence_of :user_id
   validates_presence_of :type
-  validates :type, :inclusion => { :in => %w(message deletion retitle update_users move_message move_conversation)}
+  validates :type, :inclusion => {
+    :in => %w(message deletion retitle update_users update_topics
+              move_message move_conversation)
+  }
 
   after_initialize do |action|
     action.json = JSON::load data || {}
