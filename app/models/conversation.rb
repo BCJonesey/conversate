@@ -20,21 +20,25 @@ class Conversation < ActiveRecord::Base
     end
   end
 
-  def add_participants(participants, user)
+  def add_participants(participants, user, create_action=true)
     if participants
       topic_set = Set.new(self.topics)
       participants.each do |p|
-        u = User.find(p[:id])
+        user_id = p[:id] || p['id']
+        u = User.find(user_id)
         self.users << u
         if topic_set.intersection(Set.new(u.topics)).length == 0
           u_default = Topic.find(u.default_topic_id)
           self.topics << u_default
         end
       end
+      self.save
 
-      self.actions.new(type: 'update_users',
-                       data: {added: participants}.to_json,
-                       user_id: user.id)
+      if create_action
+        self.actions.new(type: 'update_users',
+                         data: {added: participants}.to_json,
+                         user_id: user.id)
+      end
     end
   end
 
@@ -120,16 +124,7 @@ class Conversation < ActiveRecord::Base
       self.title = action.title
     when 'update_users'
       if action.added
-        action.added.map do |action_user|
-          user = User.find_by_id(action_user['id'])
-          self.users << user
-
-          if Set.new(action.conversation.topics)
-                  .intersection(Set.new(user.topics)).length == 0
-            action.conversation.topics << Topic.find(user.default_topic_id)
-            action.conversation.save
-          end
-        end
+        self.add_participants(action.added, action.user, false)
       end
       if action.removed
         action.removed.each do |action_user|
