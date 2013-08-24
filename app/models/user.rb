@@ -75,4 +75,8 @@ class User < ActiveRecord::Base
 
     return json
   end
+
+  def debug_s
+    "User:#{self.id}:#{self.name}"
+  end
 end

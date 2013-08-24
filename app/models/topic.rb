@@ -27,4 +27,8 @@ class Topic < ActiveRecord::Base
     end
     return unread_conversation_count
   end
+
+  def debug_s
+    "Topic:#{self.id}:#{self.name}"
+  end
 end
