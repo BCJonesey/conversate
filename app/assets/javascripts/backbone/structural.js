@@ -108,7 +108,7 @@ var Structural = new (Support.CompositeView.extend({
   // Show a specific conversation.
   viewConversation: function(conversation) {
     // Let's not bother swapping if this is already the current conversation.
-    if (conversation.id !== this._conversation.id) {
+    if (!this._conversation || conversation.id !== this._conversation.id) {
       this._changeConversationView(conversation);
       this._changeConversationUrl(conversation);
       this.trigger('changeConversation', conversation);
@@ -126,6 +126,11 @@ var Structural = new (Support.CompositeView.extend({
       //     self._clearConversationView();
       //   }
       // });
+      this._topic = topic;
+      this._conversation = topic.conversations.models[0];
+      if (this._conversation) {
+        this.viewConversation(this._conversation);
+      }
       Structural.Router.navigate(Structural.Router.topicPath(topic),
                                  {trigger: true});
     }
