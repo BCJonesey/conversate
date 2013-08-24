@@ -6,6 +6,7 @@ Structural.Views.Participants = Support.CompositeView.extend({
   initialize: function(options) {
     this.originalCollection = this.collection.clone();
     Structural.on('changeConversation', this.changeConversation, this);
+    Structural.on('clearConversation', this.clearConversation, this);
   },
   render: function() {
     this.$el.empty();
@@ -36,12 +37,15 @@ Structural.Views.Participants = Support.CompositeView.extend({
     this.$('.token-input').attr('readonly', 'readonly');
   },
   reset: function() {
-    $('.token').remove();
-    $('.token-input').val('');
+    this.clearTokens();
     this.trigger('changeAutocompleteOptions', this.$('.token-input').val())
     this.collection.each(this.renderParticipant, this);
     this.originalCollection = this.collection.clone();
     return this;
+  },
+  clearTokens: function() {
+    $('.token').remove();
+    $('.token-input').val('');
   },
   cancel: function() {
     this.collection = this.originalCollection.clone();
@@ -84,6 +88,9 @@ Structural.Views.Participants = Support.CompositeView.extend({
   changeConversation: function(conversation) {
     this.collection = conversation.participants;
     this.reset();
+  },
+  clearConversation: function() {
+    this.clearTokens();
   },
   // This should be identical to _.difference, but I can't get that to work
   // for me.  It keeps giving me garbage or not existing, depending on how
