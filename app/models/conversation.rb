@@ -61,6 +61,24 @@ class Conversation < ActiveRecord::Base
     end
   end
 
+  def add_topics(topics, user, create_action=true)
+    if topics
+      topics.each do |t|
+        topic_id = t[:id] || t['id']
+        topic = Topic.find(topic_id)
+        self.topics << topic
+      end
+
+      if create_action
+        self.actions.new(type: 'update_topics',
+                         data: {added: topics}.to_json,
+                         user_id: user.id)
+      end
+
+      self.save
+    end
+  end
+
   def add_actions(actions, user)
     if actions
       actions.each do |a|
@@ -139,15 +157,19 @@ class Conversation < ActiveRecord::Base
 
   def handle(action)
     case action.type
-    when 'retitle'
-      self.title = action.title
-    when 'update_users'
-      if action.added
-        self.add_participants(action.added, action.user, false)
-      end
-      if action.removed
-        self.remove_participants(action.removed, action.user, false)
-      end
+      when 'retitle'
+        self.title = action.title
+      when 'update_users'
+        if action.added
+          self.add_participants(action.added, action.user, false)
+        end
+        if action.removed
+          self.remove_participants(action.removed, action.user, false)
+        end
+      when 'update_topics'
+        if action.added
+          self.add_topics(action.added, action.user, false)
+        end
     end
     save
   end
