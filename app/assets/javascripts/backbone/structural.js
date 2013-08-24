@@ -109,8 +109,8 @@ var Structural = new (Support.CompositeView.extend({
   viewConversation: function(conversation) {
     // Let's not bother swapping if this is already the current conversation.
     if (!this._conversation || conversation.id !== this._conversation.id) {
-      this._changeConversationView(conversation);
-      this._changeConversationUrl(conversation);
+      //this._changeConversationView(conversation);
+      //this._changeConversationUrl(conversation);
       this.trigger('changeConversation', conversation);
     }
   },

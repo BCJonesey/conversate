@@ -3,6 +3,8 @@ Structural.Views.Actions = Support.CompositeView.extend({
   initialize: function(options) {
     this.collection.on('add', this.renderAction, this);
     this.collection.on('reset', this.reRender, this);
+
+    Structural.on('changeConversation', this.changeConversation, this);
   },
   render: function() {
     this.collection.forEach(this.renderAction, this);
@@ -19,11 +21,12 @@ Structural.Views.Actions = Support.CompositeView.extend({
     this.$el.empty();
     this.render();
   },
-  changeConversation: function(actions) {
+  changeConversation: function(conversation) {
     this.collection.off(null, null, this);
-    this.collection = actions;
+    this.collection = conversation.actions;
     this.collection.on('add', this.renderAction, this);
     this.collection.on('reset', this.reRender, this);
+    this.collection.fetch({cache: false});
     this.reRender();
   }
 });
