@@ -1,3 +1,4 @@
+// A view for an actual conversation in the conversations list.
 Structural.Views.Conversation = Support.CompositeView.extend({
   className: function() {
     var classes = 'cnv';

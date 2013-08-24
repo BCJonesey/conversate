@@ -1,3 +1,4 @@
+// A view for the actual conversations list.
 Structural.Views.Conversations = Support.CompositeView.extend({
   className: 'cnv-list',
   initialize: function(options) {

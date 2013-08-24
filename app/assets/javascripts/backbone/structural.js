@@ -106,7 +106,9 @@ var Structural = new (Support.CompositeView.extend({
     this.appendChild(view);
   },
 
+  // Show a specific conversation.
   viewConversation: function(conversation) {
+    // Let's not bother swapping if this is already the current conversation.
     if (conversation.id !== this._conversation.id) {
       this._changeConversationView(conversation);
       this._changeConversationUrl(conversation);
@@ -136,7 +138,6 @@ var Structural = new (Support.CompositeView.extend({
     this._conversation = conversation;
     this._conversation.actions.changeConversation(conversation.id);
     this._participants.changeConversation(conversation.id);
-    // TODO: Refactor.
     this._watercooler.actions = this._conversation.actions;
     this._watercooler.changeConversation(conversation);
   },
