@@ -1,3 +1,5 @@
+// A view for an actual topic in the topics list.
+
 Structural.Views.Topic = Support.CompositeView.extend({
   className: function() {
     var classes = 'tpc';

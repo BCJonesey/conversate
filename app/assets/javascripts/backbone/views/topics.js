@@ -1,3 +1,5 @@
+// A view for an actual topics list.
+
 Structural.Views.Topics = Support.CompositeView.extend({
   className: 'tpc-list',
   topicHint: $('<div class="tpc-hint hidden">Move conversation to...</div>'),

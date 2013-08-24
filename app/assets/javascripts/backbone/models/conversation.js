@@ -17,6 +17,9 @@ Structural.Models.Conversation = Backbone.Model.extend({
     this.on('change:unread_count', function() {
       self.trigger('updated');
     });
+
+    // We want to update our most recent viewed right away if we've been clicked.
+    // TODO: Should almost certainly punt this to a controller.
     Structural.on('changeConversation', function(conversation) {
       if (conversation === self) {
         // This has the side effect that we'll also redraw for free.
