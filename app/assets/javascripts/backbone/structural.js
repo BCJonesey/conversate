@@ -117,23 +117,13 @@ var Structural = new (Support.CompositeView.extend({
   },
   viewTopic: function(topic) {
     var self = this;
-    if (!this._conversation || topic.id !== this._conversation.topic_id) {
-      this._clearConversationView();
-      // self._topic.conversations.changeTopic(topic.id, function(collection) {
-      //   if (collection.length > 0) {
-      //     collection.at(0).set('is_current', true);
-      //     self._changeConversationView(collection.at(0));
-      //   }
-      //   else {
-      //     self._clearConversationView();
-      //   }
-      // });
+    if (topic.id !== this._topic.id) {
       this._topic = topic;
       this._topic.conversations.fetch({
         success: function (collection, response, options) {
-          self._conversation = collection.models[0];
-          if (self._conversation) {
-            self.viewConversation(self._conversation);
+          var conversation = collection.models[0];
+          if (conversation) {
+            self.viewConversation(conversation);
           }
         },
         error : function (collection, response, options) {
