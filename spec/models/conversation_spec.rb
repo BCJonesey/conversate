@@ -57,4 +57,24 @@ describe Conversation do
       expect(conversation.topics.length).to eq(2)
     end
   end
+
+  describe 'adding topics' do
+    it 'without creating an action' do
+      false.should eq true
+    end
+
+    it 'and creating an action' do
+      false.should eq true
+    end
+  end
+
+  describe 'removing topics' do
+    it 'without creating an action' do
+      false.should eq true
+    end
+
+    it 'and creating an action' do
+      false.should eq true
+    end
+  end
 end
