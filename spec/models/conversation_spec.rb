@@ -78,7 +78,19 @@ describe Conversation do
     end
 
     it 'and creating an action' do
-      false.should eq true
+      conversation = Conversation.create!(title: 'Noah and the Whale')
+      other_topic = Topic.new(name: 'Five Year Plan')
+      other_topic.save
+      conversation.add_topics(hashify(@shared, other_topic), @james)
+
+      conversation.topics.length.should eq(2)
+      conversation.topics.include?(@shared).should be_true
+      conversation.topics.include?(other_topic).should be_true
+      conversation.actions.length.should eq(1)
+      conversation.actions.first.type.should eq('update_topics')
+      conversation.actions.first.added.length.should eq(2)
+      conversation.actions.first.added[0]['id'].should eq(@shared.id)
+      conversation.actions.first.added[1]['id'].should eq(other_topic.id)
     end
   end
 
