@@ -96,7 +96,15 @@ describe Conversation do
 
   describe 'removing topics' do
     it 'without creating an action' do
-      false.should eq true
+      conversation = Conversation.create(title: 'Zoe Keating')
+      topic_one = Topic.create(name: 'Code')
+      topic_two = Topic.create(name: 'x16')
+      conversation.topics += [@shared, topic_one, topic_two]
+      conversation.remove_topics(hashify(@shared, topic_one), @james, false)
+
+      conversation.topics.length.should eq(1)
+      conversation.topics.include?(topic_two).should be_true
+      conversation.actions.empty?.should be_true
     end
 
     it 'and creating an action' do

@@ -83,7 +83,7 @@ class Conversation < ActiveRecord::Base
     if topics
       topics.each do |t|
         topic_id = t[:id] || t['id']
-        topic = TOpic.find(topic_id)
+        topic = Topic.find(topic_id)
         self.topics.delete topic
       end
 
