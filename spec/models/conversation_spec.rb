@@ -58,9 +58,23 @@ describe Conversation do
     end
   end
 
+  def hashify(*models)
+    models.map do |m|
+      JSON::load(m.to_json(user: @james))
+    end
+  end
+
   describe 'adding topics' do
     it 'without creating an action' do
-      false.should eq true
+      conversation = Conversation.create!(title: 'Noah and the Whale')
+      other_topic = Topic.new(name: 'Five Year Plan')
+      other_topic.save
+      conversation.add_topics(hashify(@shared, other_topic), @james, false)
+
+      conversation.topics.length.should eq(2)
+      conversation.topics.include?(@shared).should be_true
+      conversation.topics.include?(other_topic).should be_true
+      conversation.actions.empty?.should be_true
     end
 
     it 'and creating an action' do
