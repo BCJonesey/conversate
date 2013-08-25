@@ -108,7 +108,19 @@ describe Conversation do
     end
 
     it 'and creating an action' do
-      false.should eq true
+      conversation = Conversation.create(title: 'Zoe Keating')
+      topic_one = Topic.create(name: 'Code')
+      topic_two = Topic.create(name: 'x16')
+      conversation.topics += [@shared, topic_one, topic_two]
+      conversation.remove_topics(hashify(@shared, topic_one), @james)
+
+      conversation.topics.length.should eq(1)
+      conversation.topics.include?(topic_two).should be_true
+      conversation.actions.length.should eq(1)
+      conversation.actions.first.type.should eq('update_topics')
+      conversation.actions.first.removed.length.should eq(2)
+      conversation.actions.first.removed[0]['id'].should eq(@shared.id)
+      conversation.actions.first.removed[1]['id'].should eq(topic_one.id)
     end
   end
 end
