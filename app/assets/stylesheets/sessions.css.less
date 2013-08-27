@@ -4,7 +4,7 @@
 @import "variables.css.less";
 @import "mixins.css.less";
 
-@width:50rem;
+@width:48rem;
 
 body.not-logged-in {
   overflow: auto;
@@ -146,9 +146,11 @@ footer{
 
 /* List */
 
+@offset:35%;
+
 .copy{
   list-style: none;
-  padding:0 1rem;
+  padding:0;
   width:@width;
   margin:0 auto;
   h4{
@@ -161,10 +163,20 @@ footer{
 
   li{
     display:block;
+    clear:both;
     border-bottom:1px solid #CCC;
-    padding:1.0rem;
+    padding:1.5rem;
+    p{
+      padding-right:@offset;
+    }
     &:nth-child(2n){
       text-align: right;
+      p{
+        //float:right;
+        padding-right:0;
+        padding-left:@offset;
+
+      }
     }
     &:last-child{
        border-bottom:none;
@@ -177,7 +189,8 @@ footer{
     font-size:0.9rem;
     color:#888;
     white-space: pre-line;
-    line-height: 1.75;
+    line-height: 1.85;
+    //max-width:75%;
     & + p{
       margin-top:0.5rem;
     }
@@ -221,14 +234,24 @@ footer{
     font-size:1.0rem;
     width:@width;
     margin:0 auto;
-    padding:1.0rem;
     background-color: white;
-  }
-  .section{
-    padding:1.0rem;
-    &:nth-child(2n){
-      border:1px solid #DDD;
+
+    .tagline{
+      color:#AAA;
+      font-style:italic;
+    }
+    .lead-in{
+      padding:2.0rem;
+      border-bottom:1px solid #DDD;
       background-color:#FAFAFA;
+
+    }
+    .section{
+      padding:2.0rem;
+    }
+    .divider{
+      height:1px;
+      .gradient-ltr(#CCC,white,90%);
     }
   }
 }
