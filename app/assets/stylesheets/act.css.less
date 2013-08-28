@@ -63,11 +63,14 @@
 
 .act-participants{
   position: relative;
-  height:1.5rem;
+  min-height:1.5rem;
+  max-height: 6rem;
+  overflow-y:auto;
   background-color: #EEE;
   border-bottom:1px solid @wc-toolbar-border-color;
   padding:0 .5rem;
-
+  z-index: 1;
+  overflow-y:visible;
   &.editing{
     .editing-style();
   }
@@ -130,9 +133,10 @@
 
 .act-participants-actions,
 .act-participants-save-actions{
-  right:.1rem;
-  top:.2rem;
   position: absolute;
+  right:.1rem;
+  top:50%;
+  margin-top:-0.5rem;
 }
 
 .participant-remove{
@@ -151,10 +155,12 @@
   overflow-x:hidden;
   overflow-y:auto;
   position:absolute;
-  bottom:2.7rem;
+  bottom:0;
+  margin-bottom:2.7rem;
   left:0;
   right:0;
   top:4rem;
+  -webkit-overflow-scrolling:touch;
 }
 .act-container.not-participating-in .act-list{
   bottom:0;
@@ -183,12 +189,7 @@
   padding:0.65rem;
   z-index:1;
   a{
-    text-decoration: none;
-    color: #28D;
-    word-wrap: break-word;
-    &:hover{
-      text-decoration: underline;
-    }
+    .link-blue();
   }
 
 }

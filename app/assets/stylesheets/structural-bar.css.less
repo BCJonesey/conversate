@@ -1,3 +1,7 @@
+@import 'variables.css.less';
+@import 'mixins.css.less';
+
+
 // --- Structural Bar --- //
 
 @stb-background-color:#BBB;
@@ -9,6 +13,7 @@
   background-color: #BBB;
   border-bottom:1px solid @stb-border-bottom-color;
   height:2.5rem;
+  min-width:@app-min-width;
 }
 
 
@@ -64,4 +69,12 @@
 .stb-name-text{
   font-size:1.0rem;
   color:#777;
+}
+
+.stb-selected{
+  .stb-icon,
+  .stb-link-text{
+    color:#EEE;
+    text-shadow: 0 1px 1px rgba(0,0,0, 0.4);
+  }
 }

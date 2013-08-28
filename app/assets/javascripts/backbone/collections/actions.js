@@ -12,6 +12,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     this.on('add', function(model, collection, options) {
       this.trigger('unreadCountChanged');
     });
+    this.on('add', this.triggerNewMessage, this);
   },
   comparator: 'timestamp',
 
@@ -107,6 +108,14 @@ Structural.Collections.Actions = Backbone.Collection.extend({
   setStateOnNewAction: function(model, collection) {
     if (model.get('user').id === this.userId) {
       model.isMine();
+    }
+  },
+  triggerNewMessage: function(model) {
+    console.log('added');
+    if (model.get('type') === 'message' &&
+        model.get('user').id !== this.userId) {
+      console.log('triggered');
+      this.trigger('addedSomeoneElsesMessage')
     }
   },
 

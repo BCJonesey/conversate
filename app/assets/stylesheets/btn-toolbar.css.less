@@ -12,7 +12,12 @@
   border-top: 1px solid #F8F8F8;
   //position: relative;
 }
+.btn-toolbar-border-top{
+  box-sizing:border-box;
+  border-top:1px solid @wc-toolbar-border-color;
+  border-bottom: 1px solid #F8F8F8;
 
+}
 // --- Actual Classes --- //
 
 @btn-toolbar-height:2.5rem;
@@ -29,6 +34,10 @@
   display: block;
   height:@btn-toolbar-height;  // 2.5rem
   display: relative;
+}
+.btn-toolbar-below{
+  .btn-toolbar();
+  .btn-toolbar-border-top();
 }
 
 
@@ -109,6 +118,9 @@
 }
 
 
+.toolbar-title{
+  .title-font();
+}
 // .text{
 //   .normal-size();
 //   .body-font();

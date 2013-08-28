@@ -4,7 +4,7 @@
   var topics = <%= json_with_user(@topics) %>;
   var topic = <%= json_with_user(@topic) %>;
   var conversations = <%= json_with_user(@conversations) %>;
-  var user = <%= current_user.to_json.html_safe %>;
+  var user = <%= current_user.to_json(include_address_book: true).html_safe %>;
 
   /* I'd like to transition the null-case of these three to 'undefined', but
      that's a refactor for another day. */

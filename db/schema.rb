@@ -36,6 +36,18 @@ ActiveRecord::Schema.define(:version => 20130828002314) do
     t.integer "topic_id"
   end
 
+  create_table "group_participations", :force => true do |t|
+    t.integer "group_id"
+    t.integer "user_id"
+    t.boolean "group_admin", :default => false
+  end
+
+  create_table "groups", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "reading_logs", :force => true do |t|
     t.integer  "conversation_id"
     t.integer  "user_id"
@@ -65,9 +77,10 @@ ActiveRecord::Schema.define(:version => 20130828002314) do
     t.string   "remember_me_token"
     t.datetime "remember_me_token_expires_at"
     t.string   "full_name"
-    t.boolean  "is_admin",                     :default => false
+    t.boolean  "site_admin",                   :default => false
     t.integer  "invited_by"
     t.integer  "default_topic_id"
+    t.boolean  "removed",                      :default => false
   end
 
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"

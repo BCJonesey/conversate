@@ -154,6 +154,7 @@ var Structural = new (Support.CompositeView.extend({
   },
   createMessageAction: function(text) {
     this._conversation.actions.createMessageAction(text, this._user);
+    this._watercooler.scrollActionsToBottom();
   },
   createDeleteAction: function(action) {
     this._conversation.actions.createDeleteAction(action, this._user);
