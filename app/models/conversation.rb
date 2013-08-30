@@ -91,7 +91,8 @@ class Conversation < ActiveRecord::Base
   end
 
   def unread_count(user)
-    most_recent_viewed = most_recent_viewed_for_user(user)
+    #most_recent_viewed = most_recent_viewed_for_user(user)
+    most_recent_viewed = 0
     # Fudge the timestamp here because actions sometimes have timestamps in the middle
     # of seconds.
     # TODO: Figure out this Ruby timestamp bullshit.  We shouldn't have to fudge
@@ -106,8 +107,7 @@ class Conversation < ActiveRecord::Base
     most_recent_viewed = most_recent_viewed_for_user(options[:user])
     json[:participants] = participants;
 
-    #json[:unread_count] = unread_count(options[:user]);
-    json[:unread_count] = 3
+    json[:unread_count] = unread_count(options[:user])
     json[:most_recent_event] = most_recent_event ? most_recent_event.msec : nil
     json[:most_recent_viewed] = most_recent_viewed ? most_recent_viewed.msec : nil
 
