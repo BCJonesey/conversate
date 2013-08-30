@@ -34,7 +34,6 @@ Structural.Views.Conversations = Support.CompositeView.extend({
     this.collection = topic.conversations;
     this.collection.on('add', this.renderConversation, this);
     this.collection.on('reset', this.reRender, this);
-    this.collection.fetch({cache: false});
     this.reRender();
   }
 });
