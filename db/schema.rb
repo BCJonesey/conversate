@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130828002314) do
+ActiveRecord::Schema.define(:version => 20130830232204) do
 
   create_table "actions", :force => true do |t|
     t.integer  "conversation_id"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20130828002314) do
     t.datetime "updated_at",      :null => false
   end
 
+  add_index "actions", ["conversation_id", "created_at"], :name => "index_actions_on_conversation_id_and_created_at"
   add_index "actions", ["conversation_id"], :name => "index_events_on_conversation_id"
 
   create_table "conversations", :force => true do |t|
