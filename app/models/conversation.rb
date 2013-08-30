@@ -106,7 +106,8 @@ class Conversation < ActiveRecord::Base
     most_recent_viewed = most_recent_viewed_for_user(options[:user])
     json[:participants] = participants;
 
-    json[:unread_count] = unread_count(options[:user]);
+    #json[:unread_count] = unread_count(options[:user]);
+    json[:unread_count] = 3
     json[:most_recent_event] = most_recent_event ? most_recent_event.msec : nil
     json[:most_recent_viewed] = most_recent_viewed ? most_recent_viewed.msec : nil
 
