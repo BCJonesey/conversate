@@ -10,7 +10,7 @@ class Action < ActiveRecord::Base
   validates_presence_of :type
   validates :type, :inclusion => {
     :in => %w(message deletion retitle update_users update_topics
-              move_message move_conversation)
+              move_message)
   }
 
   after_initialize do |action|
