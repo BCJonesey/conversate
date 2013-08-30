@@ -1,13 +1,19 @@
 Structural.Views.UpdateTopicsDialog = Support.CompositeView.extend({
-  className: 'act-update-topics',
+  className: 'act-update-topics hidden',
   template: JST['backbone/templates/actions/update_topics'],
   initialize: function(options) {
     options = options || {};
+    this.topics = options.topics;
   },
   render: function() {
-    this.$el.html(this.template());
+    this.$el.html(this.template(this.topics));
     return this;
   },
+
+  toggleVisible: function() {
+    this.$el.toggleClass('hidden');
+  },
+
   events: {
     'click .act-ut-header': 'changeMode',
     'click .act-ut-topic': 'toggleCheck'
