@@ -7,6 +7,7 @@
 @checked-blue:#F0F8FF;
 @gray-dark:#444;
 @gray:#888;
+@hover-gray: #F8F8F8;
 
 @pad:0.25rem;
 
@@ -72,7 +73,15 @@
     border-bottom: none;
   }
   &:hover{
-    background-color:#FAFAFA;
+    background-color:@hover-gray;
+  }
+  &.checked.last{
+    background-color:@checked-blue;
+    transition:background-color 0.5s;
+    &:active{
+      background-color:@hover-gray;
+      transition:background-color 0s;
+    }
   }
 }
 

@@ -15,29 +15,27 @@ Structural.Views.UpdateTopicsDialog = Support.CompositeView.extend({
   },
 
   events: {
-    'click .act-ut-header': 'changeMode',
     'click .act-ut-topic': 'toggleCheck'
-  },
-  changeMode: function() {
-    this.$el.find('.act-ut-topics-list').toggleClass('single-select-mode');
   },
   toggleCheck: function(e) {
 
-    var t = $(e.target).closest('.act-ut-topic');
-    var ts = this.$el.find('.checked');
+    var clicked = $(e.target).closest('.act-ut-topic');
+    var checked = this.$el.find('.act-ut-topics-list .checked');
     var tl = this.$el.find('.act-ut-topics-list');
 
-    if (tl.hasClass('single-select-mode')) {
-      ts.removeClass('checked');
-      t.addClass('checked');
-    } else {
-      if (ts.length <= 1 && (t.hasClass('checked') === true)) {
-        t.toggleClass('checked');
-        tl.addClass('empty');
-      } else {
-        t.toggleClass('checked');
-        this.$el.addClass('emtpy');
+    if (clicked.hasClass('checked')) {
+      // Trying to remove a folder
+      if (checked.length > 1) {
+        clicked.removeClass('checked');
       }
+      var new_checked = $('.act-ut-topics-list .checked');
+      if (new_checked.length === 1) {
+        $('.act-ut-topics-list .checked').addClass('last');
+      }
+    } else {
+      // Trying to add a folder
+      clicked.addClass('checked');
+      $('.act-ut-topics-list .last').removeClass('last');
     }
   }
 })
