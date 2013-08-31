@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130830232204) do
+ActiveRecord::Schema.define(:version => 20130831001759) do
 
   create_table "actions", :force => true do |t|
     t.integer  "conversation_id"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(:version => 20130830232204) do
   end
 
   add_index "reading_logs", ["conversation_id"], :name => "index_reading_logs_on_conversation_id"
+  add_index "reading_logs", ["user_id", "conversation_id", "most_recent_viewed"], :name => "quick_find_most_reent_viewed"
   add_index "reading_logs", ["user_id"], :name => "index_reading_logs_on_user_id"
 
   create_table "topics", :force => true do |t|

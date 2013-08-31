@@ -83,6 +83,8 @@ class Conversation < ActiveRecord::Base
   end
 
   def most_recent_viewed_for_user(user)
+
+    # TODO: Do this in the database, not with first. Is where actually a db call?
     reading_log = user.reading_logs.where(:conversation_id => self.id).first
     return nil unless reading_log
     most_recent_viewed = reading_log.most_recent_viewed
