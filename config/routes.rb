@@ -1,9 +1,16 @@
 Conversate::Application.routes.draw do
-  root :to => 'home#index'
+  # The docs say that the root matcher here only grabs GET, but I swear it was
+  # eating my POSTs too.
+  get '/' => 'home#index', :as => 'root'
+
+  post '/' => 'home#speakeasy', :as => 'speakeasy'
+  get '/intro' => 'marketing#index', :as => 'marketing'
+  get '/tour' => 'marketing#tour', :as => 'tour'
+  get '/pricing' => 'marketing#pricing', :as => 'pricing'
 
   get 'admin' => 'admin#index', :as => 'admin'
   resource :users, :only => [:update]
-  resource :session, :only => [:new, :create]
+  resource :session, :only => [:create]
   get 'session/logout' => 'sessions#destroy', :as => 'destroy_sessions'
 
   get 'conversation/:slug/:id(#message:message_id)' => 'conversations#show',
