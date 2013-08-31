@@ -66,6 +66,7 @@ class Conversation < ActiveRecord::Base
   # A conversation is unread if (and only if) it contains a message action more
   # recent than the last action a user has seen.
   def unread_for?(user)
+    return false
     messages = self.actions.where(:type => 'message')
     return false if messages.length == 0
 
@@ -83,8 +84,6 @@ class Conversation < ActiveRecord::Base
   end
 
   def most_recent_viewed_for_user(user)
-
-    # TODO: Do this in the database, not with first. Is where actually a db call?
     reading_log = user.reading_logs.where(:conversation_id => self.id).first
     return nil unless reading_log
     most_recent_viewed = reading_log.most_recent_viewed
@@ -92,26 +91,31 @@ class Conversation < ActiveRecord::Base
     return most_recent_viewed
   end
 
-  def unread_count(user, most_recent_viewed)
-    # Fudge the timestamp here because actions sometimes have timestamps in the middle
-    # of seconds.
-    # TODO: Figure out this Ruby timestamp bullshit.  We shouldn't have to fudge
-    # this much.
-    return 0 unless most_recent_viewed
-    self.actions.where('created_at > ?', most_recent_viewed.in(2)).length
+  def most_recent_viewed_for_reading_log(reading_log)
+    return nil unless reading_log
+    most_recent_viewed = reading_log.most_recent_viewed
+    return DateTime.parse('2000-01-01 01:07:19 UTC') unless most_recent_viewed
+    return most_recent_viewed
+  end
+
+  def unread_count(reading_log)
+    return 0 unless reading_log
+    return reading_log.unread_count
   end
 
   def as_json(options)
     json = super(options)
 
     # WARNING: Expensive call.
-    most_recent_viewed = most_recent_viewed_for_user(options[:user])
+    user = options[:user]
+    reading_log = user.reading_logs.where(:conversation_id => self.id).first
+    most_recent_viewed = most_recent_viewed_for_reading_log(reading_log)
 
     # TODO: Slow call still.
     json[:participants] = participants;
 
     # TODO: Slow call still.
-    json[:unread_count] = unread_count(options[:user], most_recent_viewed)
+    json[:unread_count] = unread_count(reading_log)
 
     json[:most_recent_event] = most_recent_event ? most_recent_event.msec : nil
     json[:most_recent_viewed] = most_recent_viewed ? most_recent_viewed.msec : nil
