@@ -90,9 +90,7 @@ class Conversation < ActiveRecord::Base
     return most_recent_viewed
   end
 
-  def unread_count(user)
-    #most_recent_viewed = most_recent_viewed_for_user(user)
-    most_recent_viewed = 0
+  def unread_count(user, most_recent_viewed)
     # Fudge the timestamp here because actions sometimes have timestamps in the middle
     # of seconds.
     # TODO: Figure out this Ruby timestamp bullshit.  We shouldn't have to fudge
@@ -103,15 +101,20 @@ class Conversation < ActiveRecord::Base
 
   def as_json(options)
     json = super(options)
-    # TODO: DRY.
+
+    # WARNING: Expensive call.
     most_recent_viewed = most_recent_viewed_for_user(options[:user])
+
+    # TODO: Slow call still.
     json[:participants] = participants;
 
-    json[:unread_count] = unread_count(options[:user])
+    # TODO: Slow call still.
+    json[:unread_count] = unread_count(options[:user], most_recent_viewed)
+
     json[:most_recent_event] = most_recent_event ? most_recent_event.msec : nil
     json[:most_recent_viewed] = most_recent_viewed ? most_recent_viewed.msec : nil
-
     json[:topic_id] = topics.keep_if {|t| options[:user].topics.include? t }.first.id
+
     return json
   end
 
