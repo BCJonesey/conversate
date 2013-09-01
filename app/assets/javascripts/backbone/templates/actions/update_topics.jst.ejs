@@ -1,7 +1,4 @@
 <div class='act-ut-header'>Folders</div>
-<div class='act-ut-empty-error'>
-  <span class='act-ut-empty-error-text'>Select at least one folder</span>
-</div>
 <ul class='act-ut-topics-list'>
   <% topics.each(function(topic) { %>
     <li class="act-ut-topic <%= selected_ids.indexOf(topic.id) >= 0 ? 'checked' : '' %>">
