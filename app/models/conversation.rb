@@ -169,7 +169,7 @@ class Conversation < ActiveRecord::Base
     json[:most_recent_event] = most_recent_event ? most_recent_event.msec : nil
     json[:most_recent_viewed] = most_recent_viewed ? most_recent_viewed.msec : nil
 
-    json[:topic_id] = topics.keep_if {|t| options[:user].topics.include? t }.first.id
+    json[:topic_ids] = topics.keep_if {|t| options[:user].topics.include? t }.map {|t| t.id }
     return json
   end
 
