@@ -4,7 +4,7 @@
 </div>
 <ul class='act-ut-topics-list'>
   <% topics.each(function(topic) { %>
-    <li class="act-ut-topic">
+    <li class="act-ut-topic <%= selected_ids.indexOf(topic.id) >= 0 ? 'checked' : '' %>">
       <div class="act-ut-topic-left">
         <span class="checkbox">
           <i class="icon-check"></i>
