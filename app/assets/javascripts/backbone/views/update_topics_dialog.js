@@ -4,9 +4,13 @@ Structural.Views.UpdateTopicsDialog = Support.CompositeView.extend({
   initialize: function(options) {
     options = options || {};
     this.topics = options.topics;
+    this.conversation = options.conversation;
   },
   render: function() {
-    this.$el.html(this.template(this.topics));
+    this.$el.html(this.template({
+      topics: this.topics,
+      selected_ids: this.conversation.get('topic_ids')
+    }));
     return this;
   },
 
@@ -22,7 +26,6 @@ Structural.Views.UpdateTopicsDialog = Support.CompositeView.extend({
     this.$el.find('.act-ut-topics-list').toggleClass('single-select-mode');
   },
   toggleCheck: function(e) {
-
     var t = $(e.target).closest('.act-ut-topic');
     var ts = this.$el.find('.checked');
     var tl = this.$el.find('.act-ut-topics-list');

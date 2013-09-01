@@ -9,7 +9,8 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
   render: function() {
     this.$el.html(this.template({conversation: this.conversation}));
     this._updateTopicsDialog = new Structural.Views.UpdateTopicsDialog({
-      topics: this.topics
+      topics: this.topics,
+      conversation: this.conversation
     });
     this.appendChild(this._updateTopicsDialog);
     this._input = this.$('input[type="text"]');
