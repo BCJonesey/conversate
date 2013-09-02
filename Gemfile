@@ -39,8 +39,10 @@ gem 'quiet_assets'
 group :test, :development do
   gem "rspec-rails", "~> 2.0"
   gem "yaml_db"
-  #gem "ruby-prof"
 end
+
+# Pulling this out for now.
+gem "ruby-prof"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
