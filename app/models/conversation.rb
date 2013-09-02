@@ -118,7 +118,12 @@ class Conversation < ActiveRecord::Base
     json[:most_recent_viewed] = most_recent_viewed ? most_recent_viewed.msec : nil
 
     # TODO: Appears to be the slowest call here.
-    json[:topic_id] = topics.keep_if {|t| user.topics.include? t }.first.id
+    user.topics.each do |topic|
+      if (topics.include?(topic))
+        json[:topic_id] = topic.id
+        break
+      end
+    end
 
     return json
   end
