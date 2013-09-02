@@ -21,17 +21,17 @@ Structural.Models.Action = Backbone.Model.extend({
       }, this);
     }
 
-    if (this.get('type') == 'update_users' &&
+    if ((this.get('type') == 'update_users' || this.get('type') == 'update_viewers') &&
         (!this.get('added') || this.get('added').length === 0)) {
       this.set('added', []);
     }
 
-    if (this.get('type') == 'update_users' &&
+    if ((this.get('type') == 'update_users' || this.get('type') == 'update_viewers') &&
         (!this.get('removed') || this.get('removed').length === 0)) {
       this.set('removed', []);
     }
 
-    if (this.get('type') == 'update_users' &&
+    if ((this.get('type') == 'update_users' || this.get('type') == 'update_viewers') &&
         this.get('added') &&
         this.get('removed')) {
       this.set('added', new Structural.Collections.Participants(this.get('added')));
