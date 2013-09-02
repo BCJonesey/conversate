@@ -1,14 +1,15 @@
 @import 'variables.css.less';
 @import 'mixins.css.less';
 
-@border-dark:1px solid #AAA;
+@border-dark-color:#AAA;
+@border-dark:1px solid @border-dark-color;
 @border-light:1px solid #DDD;
 
 @checked-blue:#F0F8FF;
 @gray-dark:#444;
 @gray:#888;
 @hover-gray: #F8F8F8;
-
+@header-gray: #DDD;
 @pad:0.25rem;
 
 .act-update-topics{
@@ -17,8 +18,8 @@
   max-width: 14rem;
   z-index: 2;
   position: absolute;
-  top:75%;
-  right:2rem;
+  top:98%;
+  right:2.25rem;
   background-color: white;
 
   ul{
@@ -29,7 +30,7 @@
 }
 .act-ut-header{
   text-align: center;
-  background-color: #DDD;
+  background-color: @header-gray;
   border-bottom: @border-dark;
   color:@gray;
   font-size: 0.75rem;
@@ -118,4 +119,35 @@
 .act-ut-topic-title{
   padding-left:@pad;
 }
+
+
+@tooltip-size: 10px;
+
+.act-ut-toolitp-triangle{
+    content:' ';
+    display:block;
+    width:0;
+    height:0;
+    position:absolute;
+
+    border-left: @tooltip-size solid transparent;
+    border-right: @tooltip-size solid transparent;
+    border-bottom:@tooltip-size solid @border-dark-color;
+
+    right:@tooltip-size;
+    top:-@tooltip-size;
+}
+.act-update-topics:before{
+  .act-ut-toolitp-triangle;
+}
+
+.act-update-topics:after{
+  .act-ut-toolitp-triangle;
+  border-bottom-color:@header-gray;
+  top:-@tooltip-size + 1px;
+}
+
+
+
+
 
