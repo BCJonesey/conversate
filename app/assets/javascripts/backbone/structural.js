@@ -67,7 +67,7 @@ var Structural = new (Support.CompositeView.extend({
 
     // Turn on our fetchers.
     this.conversationFetcher = new conversationFetcher(this._conversation, 5000);
-    this.topicFetcher = new topicFetcher(this._topic.conversations, 10000);
+    this.topicFetcher = new topicFetcher(this._topic.conversations, 60000);
 
     return this;
   },
