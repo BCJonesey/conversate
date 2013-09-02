@@ -111,15 +111,14 @@ class Conversation < ActiveRecord::Base
     reading_log = user.reading_logs.where(:conversation_id => self.id).first
     most_recent_viewed = most_recent_viewed_for_reading_log(reading_log)
 
-    # TODO: Slow call still.
     json[:participants] = participants;
-
-    # TODO: Slow call still.
     json[:unread_count] = unread_count(reading_log)
 
     json[:most_recent_event] = most_recent_event ? most_recent_event.msec : nil
     json[:most_recent_viewed] = most_recent_viewed ? most_recent_viewed.msec : nil
-    json[:topic_id] = topics.keep_if {|t| options[:user].topics.include? t }.first.id
+
+    # TODO: Appears to be the slowest call here.
+    json[:topic_id] = topics.keep_if {|t| user.topics.include? t }.first.id
 
     return json
   end

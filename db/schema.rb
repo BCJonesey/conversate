@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130831004505) do
+ActiveRecord::Schema.define(:version => 20130902165921) do
 
   create_table "actions", :force => true do |t|
     t.integer  "conversation_id"
@@ -36,6 +36,9 @@ ActiveRecord::Schema.define(:version => 20130831004505) do
     t.integer "conversation_id"
     t.integer "topic_id"
   end
+
+  add_index "conversations_topics", ["conversation_id", "topic_id"], :name => "index_conversations_topics_on_conversation_id_and_topic_id"
+  add_index "conversations_topics", ["topic_id", "conversation_id"], :name => "index_conversations_topics_on_topic_id_and_conversation_id"
 
   create_table "group_participations", :force => true do |t|
     t.integer "group_id"
@@ -70,6 +73,9 @@ ActiveRecord::Schema.define(:version => 20130831004505) do
     t.integer "topic_id"
     t.integer "user_id"
   end
+
+  add_index "topics_users", ["topic_id", "user_id"], :name => "index_topics_users_on_topic_id_and_user_id"
+  add_index "topics_users", ["user_id", "topic_id"], :name => "index_topics_users_on_user_id_and_topic_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                                           :null => false
