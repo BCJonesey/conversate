@@ -32,6 +32,7 @@ class Api::V0::ParticipantsController < ApplicationController
     render :json => user.to_json, :status => 204
   end
 
+  # This is actually called when a user wants to update most_recent_viewed. Pretty odd.
   def update
     conversation = Conversation.find_by_id(params[:conversation_id])
     user = User.find_by_id(params[:id])
@@ -39,6 +40,7 @@ class Api::V0::ParticipantsController < ApplicationController
     log = user.reading_logs.where(:conversation_id => conversation.id).first
     # API sends milliseconds
     log.most_recent_viewed = DateTime.strptime((params[:most_recent_viewed] / 1000).to_s, "%s")
+    log.unread_count = 0
     log.save
     render :json => user.to_json, :status => 204
   end
