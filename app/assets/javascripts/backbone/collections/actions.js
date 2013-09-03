@@ -94,6 +94,18 @@ Structural.Collections.Actions = Backbone.Collection.extend({
       }
     });
   },
+  createUpdateTopicsAction: function(added, removed, user) {
+    console.log(added);
+    this._newAction({
+      type: 'update_topics',
+      user: {
+        name: user.get('name'),
+        id: user.id
+      },
+      added: new Structural.Collections.Topics(added).toJSON(),
+      removed: new Structural.Collections.Topics(removed).toJSON()
+    });
+  },
 
   changeConversation: function(id) {
     this.conversationId = id;
@@ -110,10 +122,8 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     }
   },
   triggerNewMessage: function(model) {
-    console.log('added');
     if (model.get('type') === 'message' &&
         model.get('user').id !== this.userId) {
-      console.log('triggered');
       this.trigger('addedSomeoneElsesMessage')
     }
   },

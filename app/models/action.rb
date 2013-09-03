@@ -87,6 +87,11 @@ class Action < ActiveRecord::Base
         'added' => params['added'],
         'removed' => params['removed']
       }.to_json
+    when 'update_topics'
+      return {
+        'added' => params['added'],
+        'removed' => params['removed']
+      }.to_json
     end
   end
 

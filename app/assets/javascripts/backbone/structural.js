@@ -144,6 +144,9 @@ var Structural = new (Support.CompositeView.extend({
   createDeleteAction: function(action) {
     this._actions.createDeleteAction(action, this._user);
   },
+  createUpdateTopicsAction: function(added, removed) {
+    this._actions.createUpdateTopicsAction(added, removed, this._user);
+  },
   createNewConversation: function(title, participants, message) {
     var data = {};
     data.title = title;
