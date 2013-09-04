@@ -94,6 +94,16 @@ module Health
     end
   end
 
+  def Health.conversation_with_bogus_date
+    # We didn't have a water cooler server in Jan 2013
+    Conversation.where('created_at < ?', Date.new(2013)).map do |c|
+      {
+        :model => c,
+        :notes => ''
+      }
+    end
+  end
+
   # Group health checks
 
   def Health.group_with_no_admins
