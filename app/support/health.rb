@@ -59,6 +59,15 @@ module Health
     end
   end
 
+  def Health.conversation_with_duplicate_users
+    Conversation.all.keep_if {|c| c.users.length != c.users.uniq.length }.map do |c|
+      {
+        :model => c,
+        :notes => c.users.keep_if {|u| c.users.index(u) != c.users.rindex(u) }.uniq.map {|u| u.debug_s }.join(', ')
+      }
+    end
+  end
+
   def Health.conversation_with_no_topics
     Conversation.all.keep_if {|c| c.topics.empty? }.map do |c|
       {
