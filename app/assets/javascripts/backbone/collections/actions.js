@@ -111,10 +111,8 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     }
   },
   triggerNewMessage: function(model) {
-    console.log('added');
     if (model.get('type') === 'message' &&
         model.get('user').id !== this.userId) {
-      console.log('triggered');
       this.trigger('addedSomeoneElsesMessage')
     }
   },
