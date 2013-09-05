@@ -5,4 +5,10 @@ module AdminHelper
       klass.ancestors.include?(ActiveRecord::Base) ? klass : nil
     end
   end
+
+  def failed_health_tests
+    Health.methods(false).map do |m|
+      Health.send(m).map { |r| r.merge({:test => m}) }
+    end.flatten
+  end
 end

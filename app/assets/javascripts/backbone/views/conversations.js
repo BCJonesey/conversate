@@ -1,3 +1,5 @@
+// A view for the actual conversations list.
+
 Structural.Views.Conversations = Support.CompositeView.extend({
   className: 'cnv-list',
   initialize: function(options) {
@@ -6,6 +8,8 @@ Structural.Views.Conversations = Support.CompositeView.extend({
 
     this.collection.on('add', this.reRender, this);
     this.collection.on('reset', this.reRender, this);
+
+    Structural.on('changeTopic', this.changeTopic, this);
   },
   render: function() {
     this.$el.empty();
@@ -24,6 +28,13 @@ Structural.Views.Conversations = Support.CompositeView.extend({
       child.leave();
     });
     this.render();
+  },
+  changeTopic: function(topic) {
+    this.collection.off(null, null, this);
+    this.collection = topic.conversations;
+    this.collection.on('add', this.renderConversation, this);
+    this.collection.on('reset', this.reRender, this);
+    this.reRender();
   }
 });
 

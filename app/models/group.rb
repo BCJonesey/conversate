@@ -75,4 +75,8 @@ class Group < ActiveRecord::Base
     end
     user
   end
+
+  def debug_s
+    "Group:#{self.id}:#{self.name}"
+  end
 end

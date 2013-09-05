@@ -85,6 +85,9 @@ Structural.Models.Action = Backbone.Model.extend({
   },
   isMine: function(){
     this.set('isOwnAction', true);
+  },
+  isUnread: function(mostRecentEventViewed) {
+    return this.get('timestamp') > mostRecentEventViewed;
   }
 });
 

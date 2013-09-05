@@ -9,6 +9,7 @@ class ConversationsController < ApplicationController
     @conversations = topic.conversations
     @actions = @conversation.actions
     @participants = @conversation.participants
+    @topic = topic
 
     render 'structural/show'
   end

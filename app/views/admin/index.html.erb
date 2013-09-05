@@ -1,10 +1,10 @@
 <%= render 'shared/hacky_top_bar' %>
 
 <div class="admin-page">
-  <div class='admin-table'>
-    <div class='btn-toolbar'>
-      <div class='btn-group'>
-        <span class='toolbar-title'>Database Usage</span>
+  <div class="admin-table">
+    <div class="btn-toolbar">
+      <div class="btn-group">
+        <span class="toolbar-title">Database Usage</span>
       </div>
     </div>
     <table>
@@ -25,6 +25,32 @@
           <td>Total</td>
           <td><%= all_models.collect {|m| m.count }.sum %></td>
         </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="admin-table">
+    <div class="btn-toolbar">
+      <div class="btn-group">
+        <span class="toolbar-title">Health Checks</span>
+      </div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <td>Model</td>
+          <td>Failed Test</td>
+          <td>Notes</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% failed_health_tests.each do |test| %>
+          <tr>
+            <td><%= test[:model].debug_s %></td>
+            <td><%= test[:test].to_s.gsub('_', ' ') %></td>
+            <td><%= test[:notes] %></td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
   </div>
