@@ -40,7 +40,7 @@ Structural.Models.Conversation = Backbone.Model.extend({
 
   focus: function() {
     this.set('is_current', true);
-    this.actions.fetch();
+    this.actions.viewActions();
   },
   unfocus: function() {
     this.set('is_current', false);
