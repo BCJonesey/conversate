@@ -2,7 +2,6 @@ Structural.Views.Participants = Support.CompositeView.extend({
   tagName: 'ul',
   className: 'tokens',
   inputElement: '<li class="token-input-wrap"><input type="text" readonly="readonly" class="token-input"></li>',
-  userReminder: '<li class="user-reminder">You, and...</li>',
   initialize: function(options) {
     this.originalCollection = this.collection.clone();
     Structural.on('changeConversation', this.changeConversation, this);
@@ -10,7 +9,6 @@ Structural.Views.Participants = Support.CompositeView.extend({
   },
   render: function() {
     this.$el.empty();
-    this.$el.append($(this.userReminder));
     this.$el.append($(this.inputElement));
     this.collection.each(this.renderParticipant, this);
     return this;

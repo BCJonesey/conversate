@@ -41,6 +41,7 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
       .toggleClass('hidden');
     this.tokens.edit();
     this.$el.addClass('editing');
+    this.tokens.focus();
 
     Structural.on('clickAnywhere', this.cancel, this);
   },
