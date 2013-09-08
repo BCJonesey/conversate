@@ -124,20 +124,6 @@ var Structural = new (Support.CompositeView.extend({
       self.trigger('clearConversation');
       Structural._conversation = null;
 
-      // TODO: Can probably try an immediate swap here and then fetch if we already have a cached
-      // conversations list.
-      this._topic.conversations.fetch({
-        success: function (collection, response, options) {
-          var conversation = collection.models[0];
-          if (conversation) {
-            self.viewConversation(conversation);
-          }
-        },
-        error : function (collection, response, options) {
-          // TODO: Error handling.
-        }
-      });
-
       this.trigger('changeTopic', topic);
 
       Structural.Router.navigate(Structural.Router.topicPath(topic),

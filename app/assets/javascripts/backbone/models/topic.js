@@ -8,6 +8,7 @@ Structural.Models.Topic = Backbone.Model.extend({
 
   focus: function() {
     this.set('is_current', true);
+    this.conversations.viewConversations();
   },
   unfocus: function() {
     this.set('is_current', false);
