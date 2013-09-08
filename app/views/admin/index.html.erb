@@ -47,11 +47,32 @@
         <% failed_health_tests.each do |test| %>
           <tr>
             <td><%= test[:model].debug_s %></td>
-            <td><%= test[:test].to_s.gsub('_', ' ') %></td>
+            <td><%= test_s(test[:test]) %></td>
             <td><%= test[:notes] %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
+  </div>
+
+  <div class="admin-table">
+    <div class="btn-toolbar">
+      <div class="btn-group">
+        <span class="toolbar-title">Health Check List</span>
+      </div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <td>Name</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% health_tests.each do |test| %>
+          <tr>
+            <td><%= test_s(test, true) %></td>
+          </tr>
+        <% end %>
+      </tbody>
   </div>
 </div>
