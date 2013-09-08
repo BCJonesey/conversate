@@ -18,6 +18,8 @@ Structural.Views.ActionContainer = Support.CompositeView.extend({
     this.user = options.user;
 
     this.participants.on('reset', this.reClass, this);
+
+    Structural.on('changeConversation', this.changeConversation, this);
   },
   render: function() {
     this.titleView = new Structural.Views.TitleEditor({conversation: this.conversation});
@@ -42,6 +44,14 @@ Structural.Views.ActionContainer = Support.CompositeView.extend({
     return this;
   },
 
+  // TODO: Seems a little funky that we're holding onto so much information about our
+  // current coversation, but c'est la vie.
+  changeConversation: function(conversation) {
+    this.participants.off(null, null, this);
+    this.conversation = conversation;
+    this.participants = conversation.participants;
+    this.reClass();
+  },
   clearConversation: function() {
     this.titleView.clearConversation();
     this.composeView.clearConversation();
