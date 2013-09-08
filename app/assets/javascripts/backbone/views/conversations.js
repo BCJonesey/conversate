@@ -34,6 +34,13 @@ Structural.Views.Conversations = Support.CompositeView.extend({
     this.collection = topic.conversations;
     this.collection.on('add', this.renderConversation, this);
     this.collection.on('reset', this.reRender, this);
+
+    // We should show the first conversation if available, as well.
+    var conversation = this.collection.models[0];
+    if (conversation) {
+      Structural.viewConversation(conversation);
+    }
+
     this.reRender();
   }
 });

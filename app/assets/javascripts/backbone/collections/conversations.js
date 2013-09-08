@@ -20,5 +20,14 @@ Structural.Collections.Conversations = Backbone.Collection.extend({
     this.filter(function(cnv) { return cnv.id != id; }).forEach(function(cnv) {
       cnv.unfocus();
     })
+  },
+
+  // The topic associated with these conversations is being viewed.
+  viewConversations: function() {
+    var options = {};
+    if (this.length === 0) {
+      options.reset = true
+    }
+    this.fetch(options);
   }
 });
