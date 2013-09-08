@@ -10,7 +10,6 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     this.on('reset', this._findMyMessages, this);
     this.on('add', this.setStateOnNewAction, this);
     this.on('add', function(model, collection, options) {
-      console.log('add');
       this.trigger('unreadCountChanged');
     });
     this.on('add', this.triggerNewMessage, this);
@@ -18,7 +17,6 @@ Structural.Collections.Actions = Backbone.Collection.extend({
   comparator: 'timestamp',
 
   _findMyMessages: function() {
-    console.log('reset');
     this.forEach(function(action) {
       if (action.get('user').id === this.userId) {
         action.isMine();
@@ -100,12 +98,9 @@ Structural.Collections.Actions = Backbone.Collection.extend({
 
   // This actions collection's conversation is being viewed.
   viewActions: function() {
-    console.log('viewActions');
     var options = {}
     if (this.length === 0) {
       options.reset = true
-      //options.add = false
-      console.log('first viewing');
     }
     this.fetch(options);
   },
