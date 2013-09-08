@@ -96,7 +96,6 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     });
   },
   createUpdateTopicsAction: function(added, removed, user) {
-    console.log(added);
     this._newAction({
       type: 'update_topics',
       user: {

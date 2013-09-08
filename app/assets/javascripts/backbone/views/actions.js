@@ -59,9 +59,7 @@ Structural.Views.Actions = Support.CompositeView.extend({
     this._scrollerIntervalId = setInterval(scrollUnlessAtBottom, 300);
   },
   scrollDownIfAtBottom: function() {
-    console.log('caught');
     if (this.isAtBottom()) {
-      console.log('scrolled');
       this.scrollDownAtEarliestOpportunity();
     }
   }
