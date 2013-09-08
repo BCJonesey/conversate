@@ -5,7 +5,7 @@ Structural.Collections.Conversations = Backbone.Collection.extend({
   },
   initialize: function(data, options) {
     options = options || {};
-    this.startUpdate();
+    this.topicId = options.topicId;
   },
   comparator: function(conversation) {
     return -(conversation.get('most_recent_event'));
@@ -21,18 +21,19 @@ Structural.Collections.Conversations = Backbone.Collection.extend({
       cnv.unfocus();
     })
   },
-  setTopic: function(id) {
-    this.topicId = id;
-  },
-  changeTopic: function(id, success) {
-    this.setTopic(id);
-    this.reset();
-    this.fetch({
-      reset: true,
-      remove: true,
-      success: success
-    });
+
+  // The topic associated with these conversations is being viewed.
+  viewConversations: function() {
+    var self = this;
+    var options = {};
+    if (this.length === 0) {
+      options.reset = true
+
+      // We want to let our views know they can select a conversation since we're loading them lazily.
+      options.success = function() {
+        self.trigger('conversationsLoadedForFirstTime');
+      }
+    }
+    this.fetch(options);
   }
 });
-
-_.extend(Structural.Collections.Conversations.prototype, Support.FetchTimer(30000));

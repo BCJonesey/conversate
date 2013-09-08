@@ -1,5 +1,5 @@
 Structural.Views.Participant = Support.CompositeView.extend({
-  tagName: 'li',
+  tagName: 'span',
   className: 'token participant',
   template: JST['backbone/templates/participants/token'],
   initialize: function(options) {

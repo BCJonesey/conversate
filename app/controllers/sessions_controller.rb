@@ -1,12 +1,9 @@
 class SessionsController < ApplicationController
-  def new
-    @login_error = false
-  end
-
   def create
-    if User.find_by_email(params[:email]).removed
+    user = User.find_by_email(params[:email])
+    if !user || user.removed
       @login_error = true
-      render :new and return
+      redirect_to root_path and return
     end
 
     user = login params[:email], params[:password], params[:remember_me]
@@ -14,7 +11,7 @@ class SessionsController < ApplicationController
       redirect_back_or_to root_url
     else
       @login_error = true
-      render :new
+      redirect_to root_path
     end
   end
 

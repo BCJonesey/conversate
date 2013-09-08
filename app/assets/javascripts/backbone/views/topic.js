@@ -1,3 +1,5 @@
+// A view for an actual topic in the topics list.
+
 Structural.Views.Topic = Support.CompositeView.extend({
   className: function() {
     var classes = 'tpc';
@@ -20,11 +22,11 @@ Structural.Views.Topic = Support.CompositeView.extend({
     return this;
   },
   events: {
-    'click': 'changeTopic'
+    'click': 'viewTopic'
   },
-  changeTopic: function(e) {
+  viewTopic: function(e) {
     e.preventDefault();
-    this.trigger('click', this.model);
+    Structural.viewTopic(this.model);
   },
   reClass: function() {
     this.el.className = this.className();

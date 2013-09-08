@@ -1,43 +1,30 @@
 @import "mixins.css.less";
 @import "variables.css.less";
 
-.carousel {
-  .absolutely-centered(@soloHeroWidth, @soloHeroHeight);
 
-  .horse {
-    display: none;
-    .absolutely-centered(@soloHeroWidth, @soloHeroHeight);
-    overflow: hidden;
+.home-main{
+  z-index: -2;
+  position:absolute;
+  top:4rem;
+  bottom:0;
+  overflow-y:auto;
+  right:0;
+  left:0;
 
-    img {
-      position: relative;
+  .modal-window{
+    box-shadow:none;
+  }
+  .speakeasy-form-text{
+    padding: 0.25rem;
+    text-align: center;
+    font-size:0.75rem;
+    color:#888;
+    a{
+      .link-blue();
+    }
+    p{
+      margin:0.25rem;
     }
   }
 }
 
-.watercooler {
-  .title-font(10rem);
-  .absolutely-centered(1.6em, 4em);
-  // Override top margin because of text quirks.
-  margin-top: -1.8em;
-  word-break: break-word;
-  line-height: .9;
-  text-align: center;
-
-  a {
-    .title-font(10rem);
-    color: transparent;
-    text-decoration: none;
-    .transition(color);
-  }
-
-  &:hover a {
-    color: rgba(0, 0, 0, .5);
-    .transition(color);
-  }
-}
-
-.signup-form{
-  margin:4rem auto;
-  width:28rem;
-}

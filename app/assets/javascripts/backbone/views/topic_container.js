@@ -1,3 +1,6 @@
+// A view for the topics toolbar and a container for the actual
+// topics list.
+
 Structural.Views.TopicContainer = Support.CompositeView.extend({
   className: 'tpc-container',
   initialize: function(options) {

@@ -41,6 +41,9 @@ group :test, :development do
   gem "yaml_db"
 end
 
+# Pulling this out for now.
+gem "ruby-prof"
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

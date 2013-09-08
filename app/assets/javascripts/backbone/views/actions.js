@@ -1,8 +1,12 @@
 Structural.Views.Actions = Support.CompositeView.extend({
   className: 'act-list',
   initialize: function(options) {
+    var self = this;
     this.collection.on('add', this.renderAction, this);
     this.collection.on('reset', this.reRender, this);
+
+    Structural.on('changeConversation', this.changeConversation, this);
+    Structural.on('clearConversation', this.clearConversation, this);
     this.collection.on('addedSomeoneElsesMessage', this.scrollDownIfAtBottom, this);
   },
   render: function() {
@@ -15,11 +19,25 @@ Structural.Views.Actions = Support.CompositeView.extend({
     this.appendChild(view);
   },
   reRender: function() {
+    this.clearView();
+    this.render();
+  },
+  clearView: function() {
     this.children.each(function(view) {
       view.leave();
     })
     this.$el.empty();
-    this.render();
+  },
+  changeConversation: function(conversation) {
+    this.collection.off(null, null, this);
+    this.collection = conversation.actions;
+    this.collection.on('add', this.renderAction, this);
+    this.collection.on('reset', this.reRender, this);
+    this.reRender();
+  },
+  clearConversation: function() {
+    this.collection.off(null, null, this);
+    this.clearView();
   },
 
   // Sometimes when we want to scroll down the actions list hasn't actually been
