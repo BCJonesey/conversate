@@ -1,3 +1,5 @@
+// A view for the conversations toolbar and a container for the actual
+// conversations list.
 Structural.Views.ConversationContainer = Support.CompositeView.extend({
   className: 'cnv-container',
   initialize: function(options) {

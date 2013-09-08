@@ -26,6 +26,9 @@ Structural.Views.Compose = Support.CompositeView.extend({
     Structural.createMessageAction(input.find('textarea').val());
     input.find('textarea').val('');
     this.disableLongForm();
+
+    // The user has actually taken an action which we consider to be a viewing update.
+    this.conversation.updateMostRecentViewedToNow();
   },
   enableLongForm: function(e) {
     if (e) { e.preventDefault(); }

@@ -5,7 +5,7 @@ Structural.Collections.Conversations = Backbone.Collection.extend({
   },
   initialize: function(data, options) {
     options = options || {};
-    this.startUpdate();
+    this.topicId = options.topicId;
   },
   comparator: function(conversation) {
     return -(conversation.get('most_recent_event'));
@@ -20,19 +20,5 @@ Structural.Collections.Conversations = Backbone.Collection.extend({
     this.filter(function(cnv) { return cnv.id != id; }).forEach(function(cnv) {
       cnv.unfocus();
     })
-  },
-  setTopic: function(id) {
-    this.topicId = id;
-  },
-  changeTopic: function(id, success) {
-    this.setTopic(id);
-    this.reset();
-    this.fetch({
-      reset: true,
-      remove: true,
-      success: success
-    });
   }
 });
-
-_.extend(Structural.Collections.Conversations.prototype, Support.FetchTimer(30000));

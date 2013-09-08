@@ -9,9 +9,10 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     this.userId = options.user;
     this.on('reset', this._findMyMessages, this);
     this.on('add', this.setStateOnNewAction, this);
+    this.on('add', function(model, collection, options) {
+      this.trigger('unreadCountChanged');
+    });
     this.on('add', this.triggerNewMessage, this);
-
-    this.startUpdate();
   },
   comparator: 'timestamp',
 
@@ -96,12 +97,12 @@ Structural.Collections.Actions = Backbone.Collection.extend({
   },
 
   changeConversation: function(id) {
-    this.conversationId = id;
-    this.fetch({reset: true});
+    // this.conversationId = id;
+    this.fetch({cache: false});
   },
   clearConversation: function() {
-    this.conversationId = undefined;
-    this.reset();
+    // this.conversationId = undefined;
+    // this.reset();
   },
 
   setStateOnNewAction: function(model, collection) {
@@ -124,7 +125,13 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     this.add(model);
     model.save();
     return model;
+  },
+
+  unreadCount: function(mostRecentEventViewed) {
+    var count = 0;
+    this.forEach(function(action) {
+      count += action.isUnread(mostRecentEventViewed) ? 1 : 0;
+    });
+    return count;
   }
 });
-
-_.extend(Structural.Collections.Actions.prototype, Support.FetchTimer(5000));

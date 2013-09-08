@@ -75,6 +75,7 @@ class Conversation < ActiveRecord::Base
   # A conversation is unread if (and only if) it contains a message action more
   # recent than the last action a user has seen.
   def unread_for?(user)
+    return false
     messages = self.actions.where(:type => 'message')
     return false if messages.length == 0
 
@@ -99,27 +100,40 @@ class Conversation < ActiveRecord::Base
     return most_recent_viewed
   end
 
-  def unread_count(user)
-    most_recent_viewed = most_recent_viewed_for_user(user)
-    # Fudge the timestamp here because actions sometimes have timestamps in the middle
-    # of seconds.
-    # TODO: Figure out this Ruby timestamp bullshit.  We shouldn't have to fudge
-    # this much.
-    return 0 unless most_recent_viewed
-    self.actions.where('created_at > ?', most_recent_viewed.in(2)).length
+  def most_recent_viewed_for_reading_log(reading_log)
+    return nil unless reading_log
+    most_recent_viewed = reading_log.most_recent_viewed
+    return DateTime.parse('2000-01-01 01:07:19 UTC') unless most_recent_viewed
+    return most_recent_viewed
+  end
+
+  def unread_count(reading_log)
+    return 0 unless reading_log
+    return reading_log.unread_count
   end
 
   def as_json(options)
     json = super(options)
-    # TODO: DRY.
-    most_recent_viewed = most_recent_viewed_for_user(options[:user])
-    json[:participants] = participants;
 
-    json[:unread_count] = unread_count(options[:user]);
+    # WARNING: Expensive call.
+    user = options[:user]
+    reading_log = user.reading_logs.where(:conversation_id => self.id).first
+    most_recent_viewed = most_recent_viewed_for_reading_log(reading_log)
+
+    json[:participants] = participants;
+    json[:unread_count] = unread_count(reading_log)
+
     json[:most_recent_event] = most_recent_event ? most_recent_event.msec : nil
     json[:most_recent_viewed] = most_recent_viewed ? most_recent_viewed.msec : nil
 
-    json[:topic_id] = topics.keep_if {|t| options[:user].topics.include? t }.first.id
+    # TODO: Appears to be the slowest call here.
+    user.topics.each do |topic|
+      if (topics.include?(topic))
+        json[:topic_id] = topic.id
+        break
+      end
+    end
+
     return json
   end
 

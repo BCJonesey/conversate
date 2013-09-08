@@ -4,6 +4,8 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
   initialize: function(options) {
     options = options || {};
     this.conversation = options.conversation;
+    Structural.on('changeConversation', this.changeConversation, this);
+    Structural.on('clearConversation', this.clearConversation, this);
   },
   render: function() {
     this.$el.html(this.template({conversation: this.conversation}));
@@ -79,6 +81,5 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
   clearConversation: function() {
     this.conversation = undefined;
     this.$el.empty();
-    this.render();
   }
 });

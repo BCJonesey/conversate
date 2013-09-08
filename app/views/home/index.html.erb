@@ -1,14 +1,32 @@
+
 <header>
-  <div class="nav clearfix">
-    <div class="btn-group pull-left">
-      <a href="<%= root_path %>" class="nav-item">Water Cooler</a>
+  <div class='nav clearfix'>
+    <div class='btn-group pull-left'>
+      <a href="<%= root_path %>" class='nav-item <%= active_on_path marketing_path %>'>Water Cooler</a>
     </div>
 
     <div class="btn-group pull-right">
-      <a href="#" class="btn home-entrance-toggle">Sign In</a>
+      <a href="#" class="nav-item nav-item-toggle mkt-sign-in-toggle">Sign In</a>
+      <div class="login-modal hidden">
+        <%= form_tag session_path, :class => '' do %>
+          <div class='form modal-content'>
+            <%= label_tag :email, 'Email' %>
+            <%= email_field_tag :email, params[:email] %>
+            <%= label_tag :password, 'Password' %>
+            <%= password_field_tag :password, nil %>
+          </div>
+          <div class='clearfix'>
+            <div class='btn-group pull-right'>
+              <%= submit_tag 'Sign In', :class => 'btn-primary' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </header>
+
+
 
 <div class="home-main main">
   <div class="modal-window">
@@ -18,8 +36,15 @@
       </div>
       <%= form_tag speakeasy_path, :class => '' do %>
       <div class='form modal-content'>
+
         <%= label_tag :code_word, 'Passcode' %>
         <%= text_field_tag :code_word, '' %>
+
+        <div class='speakeasy-form-text'>
+          <p> If you received a passcode from a Water Cooler employee, enter it here. </p>
+          <p>If you already have a Water Cooler account, you can <a href='#' class='mkt-sign-in-toggle'>sign in</a>.</p>
+        </div>
+
       </div>
         <div class='btn-toolbar-below clearfix'>
           <div class='btn-group pull-right'>
@@ -27,24 +52,6 @@
           </div>
         </div>
       <% end %>
-    </div>
-    <div class="home-form-sign-in hidden">
-      <div class='btn-toolbar'>
-        <span class='toolbar-title'>Sign In</span>
-      </div>
-      <%= form_tag session_path, :class => '' do %>
-        <div class='form modal-content'>
-          <%= label_tag :email, 'Email' %>
-          <%= email_field_tag :email, params[:email] %>
-          <%= label_tag :password, 'Password' %>
-          <%= password_field_tag :password, nil %>
-        </div>
-        <div class='btn-toolbar-below clearfix'>
-          <div class='btn-group pull-right'>
-            <%= submit_tag 'Sign In', :class => 'btn btn-primary' %>
-          </div>
-        </div>
-    <% end %>
     </div>
   </div>
 </div>

@@ -68,7 +68,8 @@
   overflow-y:auto;
   background-color: #EEE;
   border-bottom:1px solid @wc-toolbar-border-color;
-  padding:0 .5rem;
+  padding:0 0.5rem;
+  padding-right:1.5rem;
   z-index: 1;
   overflow-y:visible;
   &.editing{
@@ -98,8 +99,17 @@
   list-style: none;
   display: inline-block;
 }
-.participant + .participant:before{
-  content:", ";
+.participant{
+  padding-left:0.25rem;
+  &:first-child{
+    padding-left:0;
+  }
+  .participant-text:after{
+    content:", ";
+  }
+  &:last-of-type .participant-text:after{
+    content:none;
+  }
 }
 
 .editing .participant{
@@ -109,7 +119,7 @@
     padding-right:0.1rem;
     margin-right:.4rem;
     display:inline-block;
-    &:before{
+    .participant-text:after{
       content:none;
     }
 }
@@ -126,8 +136,11 @@
 
 
 .token-input-wrap{
-  display:inline-block;
+  display:none;
   position:relative;
+}
+.act-participants.editing .token-input-wrap{
+  display:inline-block;
 }
 
 
@@ -137,6 +150,7 @@
   right:.1rem;
   top:50%;
   margin-top:-0.5rem;
+  margin-left:3rem;
 }
 
 .participant-remove{

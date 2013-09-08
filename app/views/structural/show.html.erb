@@ -2,6 +2,7 @@
 
 (function() {
   var topics = <%= json_with_user(@topics) %>;
+  var topic = <%= json_with_user(@topic) %>;
   var conversations = <%= json_with_user(@conversations) %>;
   var user = <%= current_user.to_json(include_address_book: true).html_safe %>;
 
@@ -13,6 +14,7 @@
 
   window.bootstrap = {
     topics: topics,
+    topic: topic,
     conversations: conversations,
     actions: actions,
     conversation: conversation,
