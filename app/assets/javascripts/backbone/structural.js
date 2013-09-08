@@ -138,6 +138,10 @@ var Structural = new (Support.CompositeView.extend({
   },
   createMessageAction: function(text) {
     this._conversation.actions.createMessageAction(text, this._user);
+
+    // A user sending a message should definitely update this time.
+    this._conversation.updateMostRecentViewedToNow();
+
     this._watercooler.scrollActionsToBottom();
   },
   createDeleteAction: function(action) {
