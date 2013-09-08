@@ -96,14 +96,17 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     });
   },
 
-  changeConversation: function(id) {
-    // this.conversationId = id;
-    this.fetch({cache: false});
+  // This actions collection's conversation is being viewed.
+  viewActions: function() {
+    var options = {}
+    if (this.length === 0) {
+      options.reset = true
+    }
+    this.fetch(options);
   },
-  clearConversation: function() {
-    // this.conversationId = undefined;
-    // this.reset();
-  },
+
+  // TODO: Remove & remove references to it.
+  clearConversation: function() {},
 
   setStateOnNewAction: function(model, collection) {
     if (model.get('user').id === this.userId) {
@@ -111,10 +114,8 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     }
   },
   triggerNewMessage: function(model) {
-    console.log('added');
     if (model.get('type') === 'message' &&
         model.get('user').id !== this.userId) {
-      console.log('triggered');
       this.trigger('addedSomeoneElsesMessage')
     }
   },
