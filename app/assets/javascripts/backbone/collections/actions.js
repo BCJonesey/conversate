@@ -103,7 +103,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     console.log('viewActions');
     var options = {}
     if (this.length === 0) {
-      //options.reset = false
+      options.reset = true
       //options.add = false
       console.log('first viewing');
     }
