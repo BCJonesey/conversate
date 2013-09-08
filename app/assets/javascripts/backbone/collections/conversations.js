@@ -24,9 +24,15 @@ Structural.Collections.Conversations = Backbone.Collection.extend({
 
   // The topic associated with these conversations is being viewed.
   viewConversations: function() {
+    var self = this;
     var options = {};
     if (this.length === 0) {
       options.reset = true
+
+      // We want to let our views know they can select a conversation since we're loading them lazily.
+      options.success = function() {
+        self.trigger('conversationsLoadedForFirstTime');
+      }
     }
     this.fetch(options);
   }
