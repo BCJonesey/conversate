@@ -5,8 +5,7 @@ var topicFetcher = function(conversations, interval) {
     self._conversations.fetch({cache: false});
   };
   setInterval(self._fetchHandler, interval);
-  Structural.on('changeTopic', function(newConversations) {
-    // TODO: Hook up this event.
-    self._conversations = newConversations;
+  Structural.on('changeTopic', function(topic) {
+    self._conversations = topic.conversations;
   });
 }
