@@ -69,6 +69,9 @@ var Structural = new (Support.CompositeView.extend({
     this.conversationFetcher = new conversationFetcher(this._conversation, 5000);
     this.topicFetcher = new topicFetcher(this._topic.conversations, 60000);
 
+    // Focus initial topic.
+    this._topics.focus(this._topic.id);
+
     return this;
   },
 
@@ -79,11 +82,10 @@ var Structural = new (Support.CompositeView.extend({
     this.trigger('clickAnywhere', e);
   },
 
+  // TODO: Focus is a little funky. We can probably shift this to
+  // the appropriate view functions. Topics was pulled out for performance
+  // reasons when switching conversations.
   focus: function(targets) {
-    if (targets.topic) {
-      this._topics.focus(targets.topic);
-    }
-
     if (targets.conversation) {
       this._topic.conversations.focus(targets.conversation);
     }
@@ -119,6 +121,9 @@ var Structural = new (Support.CompositeView.extend({
     var self = this;
     if (topic.id !== this._topic.id) {
       this._topic = topic;
+
+      // TODO: Refactor focus in general.
+      this._topics.focus(topic.id);
 
       // We need to clear out our conversation view because we're about to swap.
       self.trigger('clearConversation');
