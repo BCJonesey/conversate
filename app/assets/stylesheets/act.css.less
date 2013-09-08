@@ -42,8 +42,14 @@
   color:@act-title-color;
 }
 
-.act-container.not-participating-in .act-title-input{
-  color:mix(@act-title-color,white);
+.act-container.not-participating-in{
+  .act-title-input{
+    color:mix(@act-title-color,white);
+  }
+  .act-title-actions,
+  .act-participants-actions{
+    display:none !important;
+  }
 }
 
 .act-title.editing{
@@ -57,9 +63,6 @@
   right:.25rem;
 }
 
-.act-container.not-participating-in .act-title-actions{
-  display:none;
-}
 
 .act-participants{
   position: relative;
