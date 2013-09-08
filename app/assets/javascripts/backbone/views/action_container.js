@@ -42,15 +42,6 @@ Structural.Views.ActionContainer = Support.CompositeView.extend({
     return this;
   },
 
-  changeConversation: function(conversation) {
-    //TODO: Refactor
-    this.actions = conversation.actions;
-    this.actionsView.changeConversation(conversation.actions);
-
-    this.titleView.changeConversation(conversation);
-    this.composeView.changeConversation(conversation);
-    this.reClass();
-  },
   clearConversation: function() {
     this.titleView.clearConversation();
     this.composeView.clearConversation();
