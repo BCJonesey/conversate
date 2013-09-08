@@ -35,5 +35,13 @@ Structural.Collections.Conversations = Backbone.Collection.extend({
       }
     }
     this.fetch(options);
+  },
+
+  unreadCount: function() {
+    var count = 0;
+    this.forEach(function(conversation) {
+      count += conversation.unreadCount();
+    });
+    return count;
   }
 });

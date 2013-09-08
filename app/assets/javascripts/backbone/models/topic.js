@@ -12,5 +12,8 @@ Structural.Models.Topic = Backbone.Model.extend({
   },
   unfocus: function() {
     this.set('is_current', false);
+  },
+  unreadCount: function() {
+    return this.conversations.unreadCount();
   }
 });
