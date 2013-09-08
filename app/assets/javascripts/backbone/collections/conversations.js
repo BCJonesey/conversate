@@ -37,10 +37,10 @@ Structural.Collections.Conversations = Backbone.Collection.extend({
     this.fetch(options);
   },
 
-  unreadCount: function() {
+  unreadConversationCount: function() {
     var count = 0;
     this.forEach(function(conversation) {
-      count += conversation.unreadCount();
+      count += conversation.unreadCount() > 0 ? 1 : 0;
     });
     return count;
   }
