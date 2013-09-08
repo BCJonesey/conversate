@@ -1,6 +1,7 @@
 Structural.Views.Actions = Support.CompositeView.extend({
   className: 'act-list',
   initialize: function(options) {
+    var self = this;
     this.collection.on('add', this.renderAction, this);
     this.collection.on('reset', this.reRender, this);
 
@@ -32,7 +33,6 @@ Structural.Views.Actions = Support.CompositeView.extend({
     this.collection = conversation.actions;
     this.collection.on('add', this.renderAction, this);
     this.collection.on('reset', this.reRender, this);
-    this.collection.fetch({cache: false});
     this.reRender();
   },
   clearConversation: function() {
