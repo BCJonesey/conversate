@@ -118,6 +118,10 @@ var Structural = new (Support.CompositeView.extend({
                                {trigger: true});
     }
   },
+  clearConversation: function() {
+    this.trigger('clearConversation');
+    this._conversation = null;
+  },
 
   // Show the first conversation in a specific topic, if able.
   viewTopic: function(topic) {
@@ -126,8 +130,7 @@ var Structural = new (Support.CompositeView.extend({
       this._topic = topic;
 
       // We need to clear out our conversation view because we're about to swap.
-      self.trigger('clearConversation');
-      Structural._conversation = null;
+      self.clearConversation();
 
       this.trigger('changeTopic', topic);
       Structural.Router.navigate(Structural.Router.topicPath(topic),
@@ -149,6 +152,8 @@ var Structural = new (Support.CompositeView.extend({
   },
   createUpdateTopicsAction: function(added, removed) {
     this._conversation.actions.createUpdateTopicsAction(added, removed, this._user);
+    this._topics.updateConversationLists(this._conversation, added, removed);
+    this._conversation.updateTopicIds(added, removed);
   },
   createNewConversation: function(title, participants, message) {
     var data = {};

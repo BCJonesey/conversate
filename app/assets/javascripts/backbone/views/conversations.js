@@ -6,11 +6,15 @@ Structural.Views.Conversations = Support.CompositeView.extend({
     options = options || {};
     this.user = options.user;
 
-    this.collection.on('add', this.reRender, this);
-    this.collection.on('reset', this.reRender, this);
-    this.collection.on('conversationsLoadedForFirstTime', this.viewFirstConversation, this);
+    this._wireEvents(this.collection);
 
     Structural.on('changeTopic', this.changeTopic, this);
+  },
+  _wireEvents: function(collection) {
+    collection.on('add', this.reRender, this);
+    collection.on('reset', this.reRender, this);
+    collection.on('remove', this.reRender, this);
+    collection.on('conversationsLoadedForFirstTime', this.viewFirstConversation, this);
   },
   render: function() {
     this.$el.empty();
@@ -33,9 +37,7 @@ Structural.Views.Conversations = Support.CompositeView.extend({
   changeTopic: function(topic) {
     this.collection.off(null, null, this);
     this.collection = topic.conversations;
-    this.collection.on('add', this.renderConversation, this);
-    this.collection.on('reset', this.reRender, this);
-    this.collection.on('conversationsLoadedForFirstTime', this.viewFirstConversation, this);
+    this._wireEvents(this.collection);
 
     // Attempt to show the first conversation. This gets called always, so will pick up on cached
     // conversations just fine. However, the conversationsLoadedForFirstTime event will pick up

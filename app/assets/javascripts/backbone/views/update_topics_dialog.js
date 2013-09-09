@@ -4,7 +4,7 @@ Structural.Views.UpdateTopicsDialog = Support.CompositeView.extend({
   initialize: function(options) {
     options = options || {};
     this.topics = options.topics;
-    this.topic_ids = options.conversation.get('topic_ids');
+    this.topic_ids = options.conversation.get('topic_ids') || [];
     this.original_topic_ids = _.clone(this.topic_ids);
     Structural.on('clickAnywhere', this.hideIfClickOff, this);
     this.topics.each(function(topic) {
@@ -61,5 +61,18 @@ Structural.Views.UpdateTopicsDialog = Support.CompositeView.extend({
 
     Structural.createUpdateTopicsAction(added, removed);
     this.original_topic_ids = _.clone(this.topic_ids);
+
+    if (_.contains(removed_ids, Structural._topic.id)) {
+      // View first conversation in topic, if any
+      var firstConversation = Structural._topic.conversations.first();
+      console.log(firstConversation);
+      if (firstConversation) {
+        console.log('viewing');
+        Structural.viewConversation(firstConversation);
+      } else {
+        console.log('clearing');
+        Structural.clearConversation();
+      }
+    }
   }
 });

@@ -18,5 +18,16 @@ Structural.Collections.Topics = Backbone.Collection.extend({
   },
   current: function() {
     return this.where({is_current: true}).pop();
+  },
+
+  updateConversationLists: function(conversation, addedTopics, removedTopics) {
+    addedTopics.forEach(function(topic) {
+      topic.conversations.add(conversation);
+    });
+
+    removedTopics.forEach(function(topic) {
+      console.log('removing', conversation.get('title'), 'from', topic.get('name'));
+      topic.conversations.remove(conversation);
+    })
   }
 });
