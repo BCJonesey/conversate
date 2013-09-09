@@ -1,7 +1,7 @@
 Structural.Views.TopicUpdateOption = Support.CompositeView.extend({
   className: function() {
     classes = 'act-ut-topic';
-    if (this.topic && this.topic_ids.indexOf(this.topic.id) >= 0) {
+    if (this.topic && this.topic_ids && this.topic_ids.indexOf(this.topic.id) >= 0) {
       classes += ' checked';
     }
     return classes;
