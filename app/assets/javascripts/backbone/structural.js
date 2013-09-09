@@ -103,12 +103,17 @@ var Structural = new (Support.CompositeView.extend({
     this.appendChild(view);
   },
 
+  viewConversationData: function(conversation) {
+    if (!this._conversation || conversation.id !== this._conversation.id) {
+      this._conversation = conversation;
+      this.trigger('changeConversation', conversation);
+    }
+  },
   // Show a specific conversation.
   viewConversation: function(conversation) {
     // Let's not bother swapping if this is already the current conversation.
     if (!this._conversation || conversation.id !== this._conversation.id) {
-      this._conversation = conversation;
-      this.trigger('changeConversation', conversation);
+      this.viewConversationData(conversation);
       Structural.Router.navigate(Structural.Router.conversationPath(conversation),
                                {trigger: true});
     }
