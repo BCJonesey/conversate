@@ -26,7 +26,6 @@ Structural.Collections.Topics = Backbone.Collection.extend({
     });
 
     removedTopics.forEach(function(topic) {
-      console.log('removing', conversation.get('title'), 'from', topic.get('name'));
       topic.conversations.remove(conversation);
     })
   }

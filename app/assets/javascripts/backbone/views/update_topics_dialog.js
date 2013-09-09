@@ -65,12 +65,9 @@ Structural.Views.UpdateTopicsDialog = Support.CompositeView.extend({
     if (_.contains(removed_ids, Structural._topic.id)) {
       // View first conversation in topic, if any
       var firstConversation = Structural._topic.conversations.first();
-      console.log(firstConversation);
       if (firstConversation) {
-        console.log('viewing');
         Structural.viewConversation(firstConversation);
       } else {
-        console.log('clearing');
         Structural.clearConversation();
       }
     }
