@@ -95,6 +95,17 @@ Structural.Collections.Actions = Backbone.Collection.extend({
       }
     });
   },
+  createUpdateTopicsAction: function(added, removed, user) {
+    this._newAction({
+      type: 'update_topics',
+      user: {
+        name: user.get('name'),
+        id: user.id
+      },
+      added: new Structural.Collections.Topics(added).toJSON(),
+      removed: new Structural.Collections.Topics(removed).toJSON()
+    });
+  },
 
   // This actions collection's conversation is being viewed.
   viewActions: function() {

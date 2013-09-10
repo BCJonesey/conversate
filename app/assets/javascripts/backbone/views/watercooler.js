@@ -23,7 +23,8 @@ Structural.Views.WaterCooler = Support.CompositeView.extend({
       conversation: this.conversation,
       participants: this.participants,
       addressBook: this.addressBook,
-      user: this.user
+      user: this.user,
+      topics: this.topics
     });
 
     this.appendChild(this.topicsView);

@@ -105,15 +105,24 @@ var Structural = new (Support.CompositeView.extend({
     this.appendChild(view);
   },
 
+  viewConversationData: function(conversation) {
+    if (!this._conversation || conversation.id !== this._conversation.id) {
+      this._conversation = conversation;
+      this.trigger('changeConversation', conversation);
+    }
+  },
   // Show a specific conversation.
   viewConversation: function(conversation) {
     // Let's not bother swapping if this is already the current conversation.
     if (!this._conversation || conversation.id !== this._conversation.id) {
-      this._conversation = conversation;
-      this.trigger('changeConversation', conversation);
+      this.viewConversationData(conversation);
       Structural.Router.navigate(Structural.Router.conversationPath(conversation),
                                {trigger: true});
     }
+  },
+  clearConversation: function() {
+    this.trigger('clearConversation');
+    this._conversation = null;
   },
 
   // Show the first conversation in a specific topic, if able.
@@ -126,11 +135,9 @@ var Structural = new (Support.CompositeView.extend({
       this._topics.focus(topic.id);
 
       // We need to clear out our conversation view because we're about to swap.
-      self.trigger('clearConversation');
-      Structural._conversation = null;
+      self.clearConversation();
 
       this.trigger('changeTopic', topic);
-
       Structural.Router.navigate(Structural.Router.topicPath(topic),
                                  {trigger: true});
     }
@@ -147,6 +154,11 @@ var Structural = new (Support.CompositeView.extend({
   },
   createDeleteAction: function(action) {
     this._conversation.actions.createDeleteAction(action, this._user);
+  },
+  createUpdateTopicsAction: function(added, removed) {
+    this._conversation.actions.createUpdateTopicsAction(added, removed, this._user);
+    this._topics.updateConversationLists(this._conversation, added, removed);
+    this._conversation.updateTopicIds(added, removed);
   },
   createNewConversation: function(title, participants, message) {
     var data = {};

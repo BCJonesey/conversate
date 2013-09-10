@@ -380,6 +380,9 @@ switch(name) {
       addressBook: addresses
     });
     break;
+  case 'update-topics':
+    view = new Structural.Views.UpdateTopicsDialog();
+    break;
   case 'action':
     var model = new Structural.Models.Action(data.actions[0]);
     view = new Structural.Views.Action({model: model});

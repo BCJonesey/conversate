@@ -1,0 +1,153 @@
+@import 'variables.css.less';
+@import 'mixins.css.less';
+
+@border-dark-color:#AAA;
+@border-dark:1px solid @border-dark-color;
+@border-light:1px solid #DDD;
+
+@checked-blue:#F0F8FF;
+@gray-dark:#444;
+@gray:#888;
+@hover-gray: #F8F8F8;
+@header-gray: #DDD;
+@pad:0.25rem;
+
+.act-ut{
+  border:@border-dark;
+  box-shadow: 0 1rem 2rem rgba(0,0,0,0.2);
+  max-width: 14rem;
+  z-index: 2;
+  position: absolute;
+  top:98%;
+  right:2.25rem;
+  background-color: white;
+
+  ul{
+    margin:0;
+    padding:0;
+    list-style-type: none;
+  }
+}
+.act-ut-header{
+  text-align: center;
+  background-color: @header-gray;
+  border-bottom: @border-dark;
+  color:@gray;
+  font-size: 0.75rem;
+  padding:0.15rem;
+}
+.act-ut-topics-list{
+  background-color: #F0F0F0;
+  max-height:30rem;
+  overflow-y:auto;
+}
+
+.act-ut-empty-error{
+  display:none;
+  border-bottom:@border-dark;
+  font-size:0.75rem;
+  text-align: center;
+  color:@gray;
+  padding:0.5rem;
+  .act-ut-empty-error-text{
+    padding:@pad;
+    border:@border-light;
+    display:block;
+    background-color:#FFD;
+  }
+}
+
+&.emtpy .act-ut-empty-error{
+  display:block;
+}
+
+.act-ut-topic{
+  padding:@pad 0.5rem;
+  border-bottom:1px solid #CCC;
+  cursor: pointer;
+  color:@gray;
+  &.checked,
+  &.checked:hover{
+    background-color: @checked-blue;
+  }
+  &:last-child{
+    border-bottom: none;
+  }
+  &:hover{
+    background-color:@hover-gray;
+  }
+  &.checked.last{
+    background-color:@checked-blue;
+    transition:background-color 0.5s;
+    &:active{
+      background-color:@hover-gray;
+      transition:background-color 0s;
+    }
+  }
+}
+
+.act-ut-topic-identifier{
+  display:inline-block;
+  padding:@pad;
+  color:#AAA;
+}
+
+
+.act-ut-topic-left{
+  .ellipsis;
+  padding:@pad 0;
+  //padding-left:0;
+}
+
+
+.act-ut-topics-list.single-select-mode .act-ut-checkbox{
+  display: none;
+}
+
+.act-ut-topic .icon-check{
+  display:none;
+}
+.act-ut-topic.checked{
+  .icon-check-empty{
+    display:none;
+  }
+  .icon-check{
+    display:inline-block;
+  }
+}
+
+.act-ut-topic-title{
+  padding-left:@pad;
+}
+
+
+@tooltip-size: 10px;
+
+.act-ut-toolitp-triangle{
+    content:' ';
+    display:block;
+    width:0;
+    height:0;
+    position:absolute;
+
+    border-left: @tooltip-size solid transparent;
+    border-right: @tooltip-size solid transparent;
+    border-bottom:@tooltip-size solid @border-dark-color;
+
+    right:@tooltip-size;
+    top:-@tooltip-size;
+}
+.act-ut:before{
+  .act-ut-toolitp-triangle;
+}
+
+.act-ut:after{
+  .act-ut-toolitp-triangle;
+  border-bottom-color:@header-gray;
+  top:-@tooltip-size + 1px;
+}
+
+
+
+
+
