@@ -6,7 +6,7 @@ class Api::V0::ConversationsController < ApplicationController
     topic = Topic.find_by_id(params[:topic_id])
     head :status => :not_found and return unless topic
 
-    conversations = topic.conversations
+    conversations = topic.conversations.includes(:users, :topics)
     render :json => conversations.to_json(:user => current_user)
   end
 
