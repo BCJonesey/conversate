@@ -4,8 +4,14 @@ Structural.Collections.Conversations = Backbone.Collection.extend({
     return Structural.apiPrefix + '/topics/' + this.topicId + '/conversations';
   },
   initialize: function(data, options) {
+    var self = this;
     options = options || {};
     this.topicId = options.topicId;
+    this.on('add', function(conversation) {
+      conversation.on('updated', function() {
+        console.log('convo updated');
+      }, self);
+    }, this);
   },
   comparator: function(conversation) {
     return -(conversation.get('most_recent_event'));
