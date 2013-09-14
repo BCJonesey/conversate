@@ -47,8 +47,8 @@ Structural.Views.Participants = Support.CompositeView.extend({
     return this;
   },
   clearTokens: function() {
-    $('.token').remove();
-    $('.token-input').val('');
+    this.$('.token').remove();
+    this.$('.token-input').val('');
   },
   cancel: function() {
     this.collection = this.originalCollection.clone();
