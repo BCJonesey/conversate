@@ -6,9 +6,6 @@ Structural.Views.FaviconAndTitle = Support.CompositeView.extend({
     this._title = $('head title');
   },
   render: function() {
-    var totalUnreadConversations = this._topics.reduce(function(sum, topic) {
-      return sum + topic.unreadConversationCount();
-    }, 0);
     var iconName = 'watercooler';
     var title = 'Water Cooler';
 
@@ -19,7 +16,16 @@ Structural.Views.FaviconAndTitle = Support.CompositeView.extend({
       title = 'Kuhltank';
     }
 
+    // Figure out how the title should look factoring in unread conversation count.
+    var totalUnreadConversations = this._topics.reduce(function(sum, topic) {
+      return sum + topic.unreadConversationCount();
+    }, 0);
+    var preamble = '';
+    if (totalUnreadConversations > 0) {
+      preamble = '(' + totalUnreadConversations + ') ';
+    }
+
     this._favicon.attr('href', '/assets/' + iconName + '.png');
-    this._title.text(title);
+    this._title.text(preamble + title);
   }
 });
