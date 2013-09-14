@@ -32,6 +32,7 @@ Structural.Views.AutocompleteOptions = Support.CompositeView.extend({
     var index = Math.min(this.matches.length - 1,
                   Math.max(0, this.targetIndex + (direction === 'up' ? -1 : 1)));
     this._changeTargetIndex(index);
+    this._centerSelectedOption();
   },
   changeAutocompleteOptions: function(pattern) {
     if (pattern === '') {
@@ -72,5 +73,11 @@ Structural.Views.AutocompleteOptions = Support.CompositeView.extend({
     $(this.$('.token-option')[this.targetIndex]).removeClass('target');
     this.targetIndex = newIndex;
     $(this.$('.token-option')[this.targetIndex]).addClass('target');
+  },
+  _centerSelectedOption: function() {
+    var target = this.$('.target');
+    var center = this.el.scrollTop + target.position().top + (target.outerHeight() / 2);
+    var scrollTop = center - this.$el.innerHeight() / 2;
+    this.$el.scrollTop(scrollTop);
   }
 });
