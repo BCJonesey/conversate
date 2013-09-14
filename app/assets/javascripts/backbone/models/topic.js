@@ -8,6 +8,12 @@ Structural.Models.Topic = Backbone.Model.extend({
 
     self.conversations = new Structural.Collections.Conversations([], {topicId: self.id});
     self.conversations.on('updated', function() {
+
+      // One of our conversations has been read. We should lower our expected count.
+      // TODO: Rename this whole event chain for clarity.
+      var currentUnreadConversationCount = self.get('unread_conversations');
+      self.set('unread_conversations', currentUnreadConversationCount - 1);
+
       self.trigger('updated');
     }, self);
   },
