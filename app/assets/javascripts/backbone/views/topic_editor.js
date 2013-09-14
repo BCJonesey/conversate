@@ -4,12 +4,15 @@ Structural.Views.TopicEditor = Support.CompositeView.extend({
   initialize: function(options) {
     options = options || {};
   },
-  render: function() {
-    this.$el.html(this.template());
+  render: function(topic) {
+    if (topic) {
+      this.$el.html(this.template({topic: topic}));
+    }
     return this;
   },
 
   show: function(topic) {
+    this.render(topic);
     this.$('.modal-background').removeClass('hidden');
   }
 });
