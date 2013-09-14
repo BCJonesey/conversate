@@ -1,15 +1,38 @@
 <div class='page-wrapper demo-page marketing'>
   <%=render "shared/header" %>
   <div class="main">
-    <div class='container'>
-      <div class='explanation'>
-        <h4>Have a Quick Conversation</h4>
 
-        <p>Shoot your team a quick message about small things.  </p>
+    <div class='container-wrapper'>
+      <div class='container container-1 active'>
+        <div class='explanation'>
+          <h4>Have a Quick Conversation</h4>
 
+          <p>Shoot your team a quick message about something small.  </p>
+
+          <p>Exchanging quick messages in a water cooler thread feels a lot like using a chat program.</p>
+
+        </div>
+        <div class='demo-box clearfix'>
+          <%=render "marketing/quick" %>
+        </div>
       </div>
-      <div class='demo-box clearfix'>
-        <%=render "marketing/quick" %>
+
+      <div class='container container-2'>
+        <div class='explanation'>
+          <h4>Compose longer messages</h4>
+
+          <p>Sometimes you need to compose longer thoughts.    </p>
+
+        </div>
+        <div class='demo-box clearfix'>
+          <%=render "marketing/longer" %>
+        </div>
+      </div>
+      <div class='container-selector'>
+        <a class='container-selector-item active' data-container="1" href='#'>1</a>
+        <a class='container-selector-item' data-container="2" href='#'>2<a/>
+        <a class='container-selector-item' data-container="3" href='#'>3<a/>
+        <a class='container-selector-item' data-container="4" href='#'>4<a/>
       </div>
     </div>
   </div>
@@ -21,9 +44,10 @@
 
 $(document).ready(function(){
   $('.act-list').scrollTop(1000);
-});
-$('.demo-box').on('scroll onscroll', function(e){
-  e.stopPropagation();
+  $('.demo-box').on('scroll onscroll', function(e){
+    e.stopPropagation();
+  });
+  $('.container-selector .container-selector-item').on('click')
 });
 
 <% end %>
