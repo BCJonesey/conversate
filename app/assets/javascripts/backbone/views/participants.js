@@ -28,6 +28,7 @@ Structural.Views.Participants = Support.CompositeView.extend({
     this.focus();
   },
   save: function() {
+    this.$('.token-input').val('');
     var added   = this._difference(this.collection, this.originalCollection);
     var removed = this._difference(this.originalCollection, this.collection);
     this.trigger('update_users', added, removed);
