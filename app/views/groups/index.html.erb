@@ -66,8 +66,8 @@
           <tbody>
             <% group.users.each do |user| %>
               <tr>
-                <td><%= user.full_name %></td>
-                <td><%= user.email %></td>
+                <td title="<%= user.full_name %>"><%= user.full_name %></td>
+                <td title="<%= user.email %>"><%= user.email %></td>
                 <td>
                   <%= check_box_tag 'admin[]', user.id, user.group_admin?(group),
                                     disabled: !current_user.group_admin?(group) %>
