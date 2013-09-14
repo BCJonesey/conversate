@@ -6,10 +6,15 @@ Structural.Views.Conversations = Support.CompositeView.extend({
     options = options || {};
     this.user = options.user;
 
-    this.collection.on('add', this.reRender, this);
-    this.collection.on('reset', this.reRender, this);
+    this._wireEvents(this.collection);
 
     Structural.on('changeTopic', this.changeTopic, this);
+  },
+  _wireEvents: function(collection) {
+    collection.on('add', this.reRender, this);
+    collection.on('reset', this.reRender, this);
+    collection.on('remove', this.reRender, this);
+    collection.on('conversationsLoadedForFirstTime', this.viewFirstConversation, this);
   },
   render: function() {
     this.$el.empty();
@@ -32,9 +37,23 @@ Structural.Views.Conversations = Support.CompositeView.extend({
   changeTopic: function(topic) {
     this.collection.off(null, null, this);
     this.collection = topic.conversations;
-    this.collection.on('add', this.renderConversation, this);
-    this.collection.on('reset', this.reRender, this);
+    this._wireEvents(this.collection);
+
+    // Attempt to show the first conversation. This gets called always, so will pick up on cached
+    // conversations just fine. However, the conversationsLoadedForFirstTime event will pick up
+    // on conversations that needed fetching for picking the first.
+    this.viewFirstConversation();
+
     this.reRender();
+  },
+
+  // Attempts to show the first conversation. This basically gets called after the conversations
+  // have finished loading, so we can actually pick one to show.
+  viewFirstConversation: function() {
+    var conversation = this.collection.models[0];
+    if (conversation) {
+      Structural.viewConversationData(conversation);
+    }
   }
 });
 

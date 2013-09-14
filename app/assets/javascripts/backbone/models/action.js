@@ -38,6 +38,23 @@ Structural.Models.Action = Backbone.Model.extend({
       this.set('removed', new Structural.Collections.Participants(this.get('removed')));
     }
 
+    if (this.get('type') === 'update_topics' &&
+        !this.get('added')) {
+      this.set('added', []);
+    }
+
+    if (this.get('type') === 'update_topics' &&
+        !this.get('removed')) {
+      this.set('removed', []);
+    }
+
+    if (this.get('type') === 'update_topics' &&
+        this.get('added') &&
+        this.get('removed')) {
+      this.set('added', new Structural.Collections.Topics(this.get('added')));
+      this.set('removed', new Structural.Collections.Topics(this.get('removed')));
+    }
+
     if (this.get('type') == 'move_conversation') {
       this.set('from', new Structural.Models.Topic(this.get('from')));
       this.set('to', new Structural.Models.Topic(this.get('to')));

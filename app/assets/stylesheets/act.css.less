@@ -42,8 +42,14 @@
   color:@act-title-color;
 }
 
-.act-container.not-participating-in .act-title-input{
-  color:mix(@act-title-color,white);
+.act-container.not-participating-in{
+  .act-title-input{
+    color:mix(@act-title-color,white);
+  }
+  .act-title-actions,
+  .act-participants-actions{
+    display:none !important;
+  }
 }
 
 .act-title.editing{
@@ -57,9 +63,6 @@
   right:.25rem;
 }
 
-.act-container.not-participating-in .act-title-actions{
-  display:none;
-}
 
 .act-participants{
   position: relative;
@@ -169,15 +172,12 @@
   overflow-x:hidden;
   overflow-y:auto;
   position:absolute;
-  bottom:0;
-  margin-bottom:2.7rem;
   left:0;
   right:0;
   top:4rem;
-  -webkit-overflow-scrolling:touch;
-}
-.act-container.not-participating-in .act-list{
   bottom:0;
+  margin-bottom:2.7rem;
+  -webkit-overflow-scrolling:touch;
 }
 .act{
   padding:0.25rem;
@@ -188,14 +188,16 @@
 .act-message + .act-update-users,
 .act-message + .act-deletion,
 .act-message + .act-move-conversation,
-.act-message + .act-retitle {
+.act-message + .act-retitle,
+.act-message + .act-update-topics {
   padding-top:0.5rem;
 }
 
 .act-update-users + .act-message,
 .act-move-conversation + .act-message,
 .act-deletion + .act-message,
-.act-retitle + .act-message {
+.act-retitle + .act-message,
+.act-update-topics + .act-message {
   margin-top:0.25rem;
 }
 
@@ -305,7 +307,8 @@
 .act-update-users,
 .act-retitle,
 .act-deletion,
-.act-move-conversation{
+.act-move-conversation,
+.act-update-topics{
   font-size:.75rem;
   color:#CCC;
   text-align: center;

@@ -40,7 +40,7 @@ Structural.Models.Conversation = Backbone.Model.extend({
 
   focus: function() {
     this.set('is_current', true);
-    this.actions.fetch();
+    this.actions.viewActions();
   },
   unfocus: function() {
     this.set('is_current', false);
@@ -76,6 +76,15 @@ Structural.Models.Conversation = Backbone.Model.extend({
       }
     })
     self.trigger('updated');
+  },
+  updateTopicIds: function(added, removed) {
+    var self = this;
+    added.forEach(function(topic) {
+      self.get('topic_ids').push(topic.id);
+    });
+    removed.forEach(function(topic) {
+      self.set('topic_ids', _.without(self.get('topic_ids'), topic.id));
+    });
   }
 });
 
