@@ -1,9 +1,10 @@
 Structural.Models.Topic = Backbone.Model.extend({
   initialize: function(attributes, options) {
-    this.set('is_unread', this.get('unread_conversations') > 0);
-    this.on('change:unread_conversations', Structural.updateTitleAndFavicon, Structural);
+    var self = this;
+    self.set('is_unread', self.get('unread_conversations') > 0);
+    self.on('change:unread_conversations', Structural.updateTitleAndFavicon, Structural);
 
-    this.conversations = new Structural.Collections.Conversations([], {topicId: this.id});
+    self.conversations = new Structural.Collections.Conversations([], {topicId: self.id});
   },
 
   focus: function() {
