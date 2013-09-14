@@ -23,6 +23,9 @@ Structural.Views.FaviconAndTitle = Support.CompositeView.extend({
     var preamble = '';
     if (totalUnreadConversations > 0) {
       preamble = '(' + totalUnreadConversations + ') ';
+
+      // Also want to swap to the unread icon.
+      iconName = 'watercooler-unread';
     }
 
     this._favicon.attr('href', '/assets/' + iconName + '.png');
