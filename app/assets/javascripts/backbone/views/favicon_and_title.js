@@ -7,7 +7,7 @@ Structural.Views.FaviconAndTitle = Support.CompositeView.extend({
   },
   render: function() {
     var totalUnreadConversations = this._topics.reduce(function(sum, topic) {
-      return sum + topic.get('unread_conversations');
+      return sum + topic.unreadConversationCount();
     }, 0);
     var iconName = 'watercooler';
     var title = 'Water Cooler';

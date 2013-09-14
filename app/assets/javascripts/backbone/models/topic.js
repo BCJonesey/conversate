@@ -2,6 +2,8 @@ Structural.Models.Topic = Backbone.Model.extend({
   initialize: function(attributes, options) {
     var self = this;
     self.set('is_unread', self.get('unread_conversations') > 0);
+
+    // TODO: This gets us the favicon changes for free, but I don't like the asymmetry. Refactor.
     self.on('change:unread_conversations', Structural.updateTitleAndFavicon, Structural);
 
     self.conversations = new Structural.Collections.Conversations([], {topicId: self.id});

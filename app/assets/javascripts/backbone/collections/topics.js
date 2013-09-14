@@ -3,7 +3,16 @@ Structural.Collections.Topics = Backbone.Collection.extend({
   url: Structural.apiPrefix + '/topics',
 
   initialize: function(options) {
+    var self = this;
     options = options || {};
+    self.on('add', function(topic) {
+      topic.on('updated', function() {
+
+        // TODO: Replace with event.
+        Structural.updateTitleAndFavicon();
+
+      })
+    }, self);
   },
 
   focus: function(id) {
