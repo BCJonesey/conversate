@@ -20,7 +20,7 @@ Structural.Views.AutocompleteOptions = Support.CompositeView.extend({
     this._changeTargetIndex(this.targetIndex);
   },
   events: {
-    'hover .token-option': 'focusAutocompleteTarget',
+    'mouseenter .token-option': 'focusAutocompleteTarget',
     'click .token-option': 'selectOption'
   },
 
