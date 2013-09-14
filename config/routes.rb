@@ -29,7 +29,7 @@ Conversate::Application.routes.draw do
   namespace :api do
     namespace :v0 do
       resources :topics, :only => [:index, :create, :update] do
-        put 'update_users', :on => :member
+        post 'users', :on => :member
         resources :conversations, :only => [:index, :create]
       end
       resources :conversations, :only => [:show] do
