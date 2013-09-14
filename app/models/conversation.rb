@@ -222,6 +222,9 @@ class Conversation < ActiveRecord::Base
     "Conversation:#{self.id}:#{self.title}"
   end
 
+  def ensure_user_has_in_topic(user)
+    self.topics << user.default_topic if (self.topics.to_set & user.topics.to_set).empty? 
+  end
 
 
   protected

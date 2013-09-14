@@ -6,7 +6,12 @@ class Topic < ActiveRecord::Base
 
   validates_presence_of :name
 
+  default_scope includes(:users)
+  
   def as_json(options)
+    options.merge!({:include=>[:users]}) unless options.include?(:include)
+    options[:include] = ([options[:include]]) unless options[:include].is_a?(Array)
+    options[:include] << :users unless options[:include].include?(:users)
     json = super(options)
     json['unread_conversations'] = unread_conversations(options[:user])
     return json
@@ -50,6 +55,7 @@ class Topic < ActiveRecord::Base
       self.users.delete(users_set.to_a)
       self.save
       self.conversations.each do |c|
+	c.participants.each{|u| c.ensure_user_has_in_topic(u)}
         conversation_users_set = users_set - c.participants.to_set - c.viewers.to_set
         if conversation_users_set.size > 0
           # log the action to the conversations

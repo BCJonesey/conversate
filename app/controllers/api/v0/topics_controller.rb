@@ -2,7 +2,7 @@ class Api::V0::TopicsController < ApplicationController
   before_filter :require_login
 
   def index
-    render :json => current_user.topics(:include => :users).to_json({:user => current_user,:include => :users})
+    render :json => current_user.topics.to_json(:user => current_user)
   end
 
   def create
@@ -14,10 +14,16 @@ class Api::V0::TopicsController < ApplicationController
 
   def update
     topic = Topic.find(params[:id])
+    params[:users].map!{|x| User.find(x[:id])}
+    params[:users] = params[:users].to_set
+    existingUsers = topic.users.to_set
+    topic.remove_users((existingUsers-params[:users]).to_a,current_user)
+    topic.add_users((params[:users]-existingUsers).to_a,current_user)
+    binding.pry
     if topic.update_attributes(params[:topic])
-        format.json { head :ok }
+        head :ok
     else
-      format.json { render json: topic.errors, status: :unprocessable_entity }
+      render json: topic.errors, status: :unprocessable_entity
     end
   end
   def users
