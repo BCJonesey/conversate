@@ -6,7 +6,6 @@ Structural.Models.Topic = Backbone.Model.extend({
 
     self.conversations = new Structural.Collections.Conversations([], {topicId: self.id});
     self.conversations.on('updated', function() {
-      console.log('topic updating');
       self.trigger('updated');
     }, self);
   },
