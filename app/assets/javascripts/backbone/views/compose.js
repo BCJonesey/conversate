@@ -36,6 +36,9 @@ Structural.Views.Compose = Support.CompositeView.extend({
     if (e) { e.preventDefault(); }
     this._long.find('textarea').val(this._short.find('textarea').val());
     this._long.removeClass('hidden');
+
+    // This action is considered to signify having read a conversation.
+    Structural.trigger('readConversation', Structural._conversation);
   },
   disableLongForm: function(e) {
     if (e) { e.preventDefault(); }
