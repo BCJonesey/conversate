@@ -18,7 +18,7 @@ Structural.Views.Topic = Support.CompositeView.extend({
     var self = this;
     self.model.on('change', self.reRender, self);
     self.model.on('updated', function() {
-      console.log('topic view updating');
+      self.reRender();
     }, self);
   },
   render: function() {
