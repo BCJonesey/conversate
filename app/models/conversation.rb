@@ -165,6 +165,9 @@ class Conversation < ActiveRecord::Base
 
   # TODO: Make one call. This is janky, but needed for topics right now.
   def unread_count_for_user(user)
+    if (!participants.include?(user))
+      return 0
+    end
     reading_log = user.reading_logs.where(:conversation_id => self.id).first
     return unread_count(reading_log)
   end
