@@ -201,6 +201,8 @@ var Structural = new (Support.CompositeView.extend({
     this.viewTopic(this._topics.current());
   },
   updateTitleAndFavicon: function() {
-    this._faviconAndTitle.render();
+    if (this._faviconAndTitle) {
+      this._faviconAndTitle.render();
+    }
   }
 }))({el: $('body'), apiPrefix: '/api/v0'});
