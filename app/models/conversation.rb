@@ -121,22 +121,6 @@ class Conversation < ActiveRecord::Base
     (Random::rand * 10000).to_i
   end
 
-  # Public: Determines if this conversation is unread for the given user.
-  # A conversation is unread if (and only if) it contains a message action more
-  # recent than the last action a user has seen.
-  def unread_for?(user)
-    return false
-    messages = self.actions.where(:type => 'message')
-    return false if messages.length == 0
-
-    most_recent_viewed = most_recent_viewed_for_user(user)
-    # Fudge the timestamp here because actions sometimes have timestamps in the middle
-    # of seconds.
-    # TODO: Figure out this Ruby timestamp bullshit.  We shouldn't have to fudge
-    # this much.
-    return messages.order('created_at DESC').first.created_at > most_recent_viewed.in(2)
-  end
-
   def update_most_recent_event
     self.most_recent_event = Time.now
     self.save
