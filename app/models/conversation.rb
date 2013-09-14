@@ -171,7 +171,15 @@ class Conversation < ActiveRecord::Base
     most_recent_viewed = most_recent_viewed_for_reading_log(reading_log)
 
     json[:participants] = participants;
-    json[:unread_count] = unread_count(reading_log)
+
+    # A user might only be a shared conversation user, in which case they should have zero
+    # unread messages.
+    if (participants.include?(user))
+      json[:unread_count] = unread_count(reading_log)
+    else
+      json[:unread_count] = 0
+    end
+
 
     json[:most_recent_event] = most_recent_event ? most_recent_event.msec : nil
     json[:most_recent_viewed] = most_recent_viewed ? most_recent_viewed.msec : nil
