@@ -5,6 +5,9 @@ Structural.Models.Topic = Backbone.Model.extend({
     self.on('change:unread_conversations', Structural.updateTitleAndFavicon, Structural);
 
     self.conversations = new Structural.Collections.Conversations([], {topicId: self.id});
+    self.conversations.on('updated', function() {
+      console.log('topic updated');
+    }, self);
   },
 
   focus: function() {
