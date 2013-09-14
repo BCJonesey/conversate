@@ -1,5 +1,5 @@
 Structural.Views.TopicEditor = Support.CompositeView.extend({
-  className: 'tpc-editor hidden',
+  className: 'tpc-editor',
   template: JST['backbone/templates/topics/editor'],
   initialize: function(options) {
     options = options || {};
@@ -10,6 +10,6 @@ Structural.Views.TopicEditor = Support.CompositeView.extend({
   },
 
   show: function(topic) {
-    this.$el.removeClass('hidden');
+    this.$('.modal-background').removeClass('hidden');
   }
 });
