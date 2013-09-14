@@ -6,6 +6,7 @@ Conversate::Application.routes.draw do
   post '/' => 'home#speakeasy', :as => 'speakeasy'
   get '/intro' => 'marketing#index', :as => 'marketing'
   get '/tour' => 'marketing#tour', :as => 'tour'
+  get '/features' => 'marketing#features', :as => 'features'
   get '/pricing' => 'marketing#pricing', :as => 'pricing'
 
   get 'admin' => 'admin#index', :as => 'admin'

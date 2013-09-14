@@ -1,0 +1,107 @@
+<%=render "shared/header" %>
+
+<div class='page-wrapper tour-page'>
+
+<div class="main">
+
+<div class='copy'>
+
+<div class='lead-in'>
+
+<h4>What can you do with Water Cooler?</h4>
+
+<p>Water Cooler is pretty versatile.  Sometimes it looks a lot like email.  Sometimes it's more like chat.  Sometimes it'll even feel a bit like a bullitin board or forums.  </p>
+
+<p>In Water Cooler, you can do some pretty snazzy things like... </p>
+
+</div>
+
+<div class='section'>
+
+<h4>Have a Quick Conversation</h4>
+
+<p>Water Cooler conversations are powerful, but they can be as ephemeral as they need to be. </p>
+
+<p>Create -> add participants -> discuss -> archive</p>
+
+<p>Where are we going for lunch?</p>
+
+<div class='demo-box clearfix'>
+  <%=render "marketing/quick" %>
+</div>
+
+</div>
+
+<div class='divider'></div>
+<div class='section'>
+
+<h4>Have an Important Conversation</h4>
+
+<p>Marketing Strategy Change:  </p>
+
+</div>
+
+<div class='divider'></div>
+<div class='section'>
+
+<h4>Have an long running Conversation</h4>
+
+<p>Design Team Lobby </p>
+
+</div>
+
+<div class='divider'></div>
+
+<div class='section'>
+
+<h4>Turn a little conversation into a bigger conversation</h4>
+
+<p>Crazy Idea from lunch -> Architecture Change</p>
+
+</div>
+<div class='divider'></div>
+
+<div class='section'>
+
+<h4>Keep up on conversations (without being inundated with notifications)</h4>
+
+<p>Managers need to keep up on what's going on, but they don't need every detail of every messages sent.   With shared folders, team members can have lots all kinds of detailed conversations, and only notify their manager about key threads.  But the manager can still access all the threads if they need to.  </p>
+<div></div>
+
+</div>
+<div class='divider'></div>
+<div class='section'>
+
+<h4>Keep off-topic chatter out of your serious conversations</h4>
+
+<p> Create an 'Off Topic' folder and share it with your team.  Now when conversations are created in that folder, they'll already be in that folder for everyone and won't clutter up everyone's main inboxes. </p>
+
+</div>
+<div class='divider'></div>
+<div class='section'>
+
+<h4>Follow just the conversations you really need</h4>
+
+<p>With Water Cooler's folders, you can file just the conversations that are really important to you into one folder.   Then you can focus on just those conversations, even if all kinds of other activity is happening.  </p>
+
+</div>
+
+</div>
+
+</div>
+
+<%=render "shared/footer" %>
+
+</div>
+
+<%= content_for :javascript do -%>
+
+
+$(document).ready(function(){
+  $('.act-list').scrollTop(1000);
+});
+$('.demo-box').on('scroll onscroll', function(e){
+  e.stopPropagation();
+});
+
+<% end %>
