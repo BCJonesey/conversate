@@ -31,7 +31,7 @@ Structural.Models.Topic = Backbone.Model.extend({
   },
   unreadConversationCount: function() {
     var countByCalculation = this.conversations.unreadConversationCount();
-    var countByState = this.get('unread_conversations');
+    var countByState = this.get('unread_conversations').length;
     return countByState > countByCalculation ? countByState : countByCalculation;
   }
 });
