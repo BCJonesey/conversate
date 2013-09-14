@@ -15,7 +15,11 @@ Structural.Views.Topic = Support.CompositeView.extend({
   },
   template: JST['backbone/templates/topics/topic'],
   initialize: function(options) {
-    this.model.on('change', this.reRender, this);
+    var self = this;
+    self.model.on('change', self.reRender, self);
+    self.model.on('updated', function() {
+      console.log('topic view updating');
+    }, self);
   },
   render: function() {
     this.$el.html(this.template({ topic: this.model }));
