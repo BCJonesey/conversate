@@ -10,8 +10,8 @@ Structural.Collections.Conversations = Backbone.Collection.extend({
 
     // We want to bind updates on our conversations so that we can alert our topics too.
     self.on('add', function(conversation) {
-      conversation.on('updated', function() {
-        self.trigger('updated');
+      conversation.on('updated', function(conversation) {
+        self.trigger('updated', conversation);
       }, self);
     }, self);
 

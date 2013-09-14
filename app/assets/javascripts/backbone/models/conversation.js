@@ -13,10 +13,10 @@ Structural.Models.Conversation = Backbone.Model.extend({
     this.participants = this.get('participants');
     this.actions = new Structural.Collections.Actions([], {conversation: this.id, user:Structural._user.id});
     this.actions.on('add', function() {
-      self.trigger('updated');
+      self.trigger('updated', self);
     })
     this.on('change:unread_count', function() {
-      self.trigger('updated');
+      self.trigger('updated', self);
     });
 
     // We want to update our most recent viewed right away if we've been clicked.

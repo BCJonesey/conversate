@@ -7,15 +7,15 @@ Structural.Models.Topic = Backbone.Model.extend({
     self.on('change:unread_conversations', Structural.updateTitleAndFavicon, Structural);
 
     self.conversations = new Structural.Collections.Conversations([], {topicId: self.id});
-    self.conversations.on('updated', function() {
+    self.conversations.on('updated', function(conversation) {
 
       // One of our conversations has been read. We should lower our expected count.
       // TODO: Rename this whole event chain for clarity.
-      var currentUnreadConversationCount = self.get('unread_conversations');
+      var currentUnreadConversationCount = self.get('unread_conversations').length;
       if (currentUnreadConversationCount > 0) {
 
         // TODO: Wacky bug, figure out what's up with negative unread counts.
-        self.set('unread_conversations', currentUnreadConversationCount - 1);
+        self.filterNewlyReadConversation(conversation);
       }
 
       self.trigger('updated');
@@ -33,5 +33,17 @@ Structural.Models.Topic = Backbone.Model.extend({
     var countByCalculation = this.conversations.unreadConversationCount();
     var countByState = this.get('unread_conversations').length;
     return countByState > countByCalculation ? countByState : countByCalculation;
+  },
+  filterNewlyReadConversation: function(conversation) {
+
+    // We want to remove the newly read conversation from our unread list.
+    var filteredUnreadConversations = _.reject(this.get('unread_conversations'), function (conversationId) {
+      if (conversation.id === conversationId && conversation.unreadCount() === 0) {
+        return true;
+      }
+      return false;
+    });
+
+    this.set('unread_conversations', filteredUnreadConversations);
   }
 });
