@@ -12,7 +12,11 @@ Structural.Models.Topic = Backbone.Model.extend({
       // One of our conversations has been read. We should lower our expected count.
       // TODO: Rename this whole event chain for clarity.
       var currentUnreadConversationCount = self.get('unread_conversations');
-      self.set('unread_conversations', currentUnreadConversationCount - 1);
+      if (currentUnreadConversationCount > 0) {
+
+        // TODO: Wacky bug, figure out what's up with negative unread counts.
+        self.set('unread_conversations', currentUnreadConversationCount - 1);
+      }
 
       self.trigger('updated');
     }, self);
