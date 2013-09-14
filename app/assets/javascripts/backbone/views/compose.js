@@ -20,7 +20,8 @@ Structural.Views.Compose = Support.CompositeView.extend({
     'click .send-long-form': 'newMessageAction',
     'click a.enable-long-form': 'enableLongForm',
     'click a.disable-long-form': 'disableLongForm',
-    'keydown .short-form-compose textarea': 'shortFormType'
+    'keydown .short-form-compose textarea': 'shortFormType',
+    'focus .short-form-compose': 'shortFormFocus'
   },
   newMessageAction: function(e) {
     if (e) { e.preventDefault(); }
@@ -49,6 +50,11 @@ Structural.Views.Compose = Support.CompositeView.extend({
     if (e.which === Support.Keys.enter) {
       this.newMessageAction(e);
     }
+  },
+  shortFormFocus: function(e) {
+
+    // This action is considered to signify having read a conversation.
+    Structural.trigger('readConversation', Structural._conversation);
   },
   changeConversation: function(conversation) {
     this.conversation = conversation;
