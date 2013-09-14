@@ -16,13 +16,17 @@ Structural.Views.ActionContainer = Support.CompositeView.extend({
     this.actions = options.actions;
     this.addressBook = options.addressBook;
     this.user = options.user;
+    this.topics = options.topics;
 
     this.participants.on('reset', this.reClass, this);
 
     Structural.on('changeConversation', this.changeConversation, this);
   },
   render: function() {
-    this.titleView = new Structural.Views.TitleEditor({conversation: this.conversation});
+    this.titleView = new Structural.Views.TitleEditor({
+      conversation: this.conversation,
+      topics: this.topics
+    });
     this.participantsView = new Structural.Views.ParticipantEditor({
       participants: this.participants,
       addressBook: this.addressBook

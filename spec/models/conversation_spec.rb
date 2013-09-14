@@ -57,4 +57,70 @@ describe Conversation do
       expect(conversation.topics.length).to eq(2)
     end
   end
+
+  def hashify(*models)
+    models.map do |m|
+      JSON::load(m.to_json(user: @james))
+    end
+  end
+
+  describe 'adding topics' do
+    it 'without creating an action' do
+      conversation = Conversation.create!(title: 'Noah and the Whale')
+      other_topic = Topic.new(name: 'Five Year Plan')
+      other_topic.save
+      conversation.add_topics(hashify(@shared, other_topic), @james, false)
+
+      conversation.topics.length.should eq(2)
+      conversation.topics.include?(@shared).should be_true
+      conversation.topics.include?(other_topic).should be_true
+      conversation.actions.empty?.should be_true
+    end
+
+    it 'and creating an action' do
+      conversation = Conversation.create!(title: 'Noah and the Whale')
+      other_topic = Topic.new(name: 'Five Year Plan')
+      other_topic.save
+      conversation.add_topics(hashify(@shared, other_topic), @james)
+
+      conversation.topics.length.should eq(2)
+      conversation.topics.include?(@shared).should be_true
+      conversation.topics.include?(other_topic).should be_true
+      conversation.actions.length.should eq(1)
+      conversation.actions.first.type.should eq('update_topics')
+      conversation.actions.first.added.length.should eq(2)
+      conversation.actions.first.added[0]['id'].should eq(@shared.id)
+      conversation.actions.first.added[1]['id'].should eq(other_topic.id)
+    end
+  end
+
+  describe 'removing topics' do
+    it 'without creating an action' do
+      conversation = Conversation.create(title: 'Zoe Keating')
+      topic_one = Topic.create(name: 'Code')
+      topic_two = Topic.create(name: 'x16')
+      conversation.topics += [@shared, topic_one, topic_two]
+      conversation.remove_topics(hashify(@shared, topic_one), @james, false)
+
+      conversation.topics.length.should eq(1)
+      conversation.topics.include?(topic_two).should be_true
+      conversation.actions.empty?.should be_true
+    end
+
+    it 'and creating an action' do
+      conversation = Conversation.create(title: 'Zoe Keating')
+      topic_one = Topic.create(name: 'Code')
+      topic_two = Topic.create(name: 'x16')
+      conversation.topics += [@shared, topic_one, topic_two]
+      conversation.remove_topics(hashify(@shared, topic_one), @james)
+
+      conversation.topics.length.should eq(1)
+      conversation.topics.include?(topic_two).should be_true
+      conversation.actions.length.should eq(1)
+      conversation.actions.first.type.should eq('update_topics')
+      conversation.actions.first.removed.length.should eq(2)
+      conversation.actions.first.removed[0]['id'].should eq(@shared.id)
+      conversation.actions.first.removed[1]['id'].should eq(topic_one.id)
+    end
+  end
 end

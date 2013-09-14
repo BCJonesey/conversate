@@ -12,6 +12,7 @@ class TestbedController < ApplicationController
       'topic-container',
       'title-editor',
       'participant-editor',
+      'update-topics',
       'action',
       'action-list',
       'compose',

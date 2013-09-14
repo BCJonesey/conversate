@@ -4,17 +4,23 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
   initialize: function(options) {
     options = options || {};
     this.conversation = options.conversation;
+    this.topics = options.topics;
     Structural.on('changeConversation', this.changeConversation, this);
     Structural.on('clearConversation', this.clearConversation, this);
   },
   render: function() {
     this.$el.html(this.template({conversation: this.conversation}));
+    this._updateTopicsDialog = new Structural.Views.UpdateTopicsDialog({
+      topics: this.topics,
+      conversation: this.conversation
+    });
+    this.appendChild(this._updateTopicsDialog);
     this._input = this.$('input[type="text"]');
     return this;
   },
   events: {
     submit: 'retitleConversation',
-    'click .act-move-cnv': 'moveConversation',
+    'click .act-move-cnv': 'toggleUpdateTopicsDialog',
     'click .act-title-edit': 'openTitleEditor',
     'click .act-title-save': 'retitleConversation',
     'keyup': 'cancelOnEscape'
@@ -32,10 +38,9 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
     this.trigger('change_title', title);
     this.closeTitleEditor();
   },
-  moveConversation: function(e) {
+  toggleUpdateTopicsDialog: function(e) {
     e.preventDefault();
-    // Moving conversations is currently disabled.
-    // TODO: Call Structural.moveConversationMode().
+    this._updateTopicsDialog.toggleVisible();
   },
   openTitleEditor: function(e) {
     e.preventDefault();

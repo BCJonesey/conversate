@@ -4,6 +4,8 @@ Structural.Views.Compose = Support.CompositeView.extend({
   initialize: function(options) {
     options = options || {};
     this.conversation = options.conversation;
+
+    Structural.on('changeConversation', this.changeConversation, this);
   },
   render: function() {
     this.$el.html(this.template({conversation: this.conversation}));
@@ -47,11 +49,6 @@ Structural.Views.Compose = Support.CompositeView.extend({
   },
   changeConversation: function(conversation) {
     this.conversation = conversation;
-    this.$el.empty();
-    this.render();
-  },
-  clearConversation: function() {
-    this.conversation = undefined;
     this.$el.empty();
     this.render();
   }

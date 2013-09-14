@@ -12,12 +12,12 @@ Structural.Router = new (Backbone.Router.extend({
     Structural.focus({ topic: Structural._topics.at(0).id });
   },
   conversation: function(slug, id) {
-    Structural.focus({ topic: Structural._conversation.get('topic_id'),
+    Structural.focus({ topic: this._topicIdForConversation(Structural._conversation),
                        conversation: id });
     this._fixSlug('conversation/', slug, '/' + id, Structural._conversation.get('title'));
   },
   message: function(slug, id, messageId) {
-    Structural.focus({ topic: Structural._conversation.get('topic_id'),
+    Structural.focus({ topic: this._topicIdForConversation(Structural._conversation),
                        conversation: id,
                        message: messageId });
     this._fixSlug('conversation/', slug, '/' + id + '#message' + messageId, Structural._conversation.get('title'));
@@ -29,6 +29,13 @@ Structural.Router = new (Backbone.Router.extend({
   profile: function() { },
   admin: function() { },
   people: function() { },
+
+  _topicIdForConversation: function(conversation) {
+    if (_.contains(conversation.get('topic_ids'), Structural._topic.id)) {
+      return Structural._topic.id;
+    }
+    return conversation.get('topic_ids')[0];
+  },
 
   initialize: function(options) {
   },
