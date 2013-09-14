@@ -124,6 +124,7 @@ class Conversation < ActiveRecord::Base
   # Public: Determines if this conversation is unread for the given user.
   # A conversation is unread if (and only if) it contains a message action more
   # recent than the last action a user has seen.
+  # TODO: This is used in one place, but not really. Remove it/do something with it.
   def unread_for?(user)
     return false
     messages = self.actions.where(:type => 'message')
@@ -160,6 +161,12 @@ class Conversation < ActiveRecord::Base
   def unread_count(reading_log)
     return 0 unless reading_log
     return reading_log.unread_count
+  end
+
+  # TODO: Make one call. This is janky, but needed for topics right now.
+  def unread_count_for_user(user)
+    reading_log = user.reading_logs.where(:conversation_id => self.id).first
+    return unread_count(reading_log)
   end
 
   def as_json(options)
