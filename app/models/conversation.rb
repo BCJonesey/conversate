@@ -182,7 +182,10 @@ class Conversation < ActiveRecord::Base
 
 
     json[:most_recent_event] = most_recent_event ? most_recent_event.msec : nil
-    json[:most_recent_viewed] = most_recent_viewed ? most_recent_viewed.msec : nil
+
+    # If the user has no most recent viewed, they are shared and we shouldn't care. Not returning
+    # nil basically will make the client calculate 0 unread count too.
+    json[:most_recent_viewed] = most_recent_viewed ? most_recent_viewed.msec : DateTime.now
 
     # TODO: Appears to be the slowest call here.
     json[:topic_ids] = []
