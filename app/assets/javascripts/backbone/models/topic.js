@@ -20,6 +20,12 @@ Structural.Models.Topic = Backbone.Model.extend({
 
       self.trigger('updated');
     }, self);
+
+    // We should listen for one of our conversations being read in a different topic.
+    Structural.on('readConversation', function(conversation) {
+      self.filterNewlyReadConversation(conversation);
+      self.trigger('updated');
+    }, self);
   },
 
   focus: function() {
@@ -35,10 +41,12 @@ Structural.Models.Topic = Backbone.Model.extend({
     return countByState > countByCalculation ? countByState : countByCalculation;
   },
   filterNewlyReadConversation: function(conversation) {
-
+    var self = this;
     // We want to remove the newly read conversation from our unread list.
-    var filteredUnreadConversations = _.reject(this.get('unread_conversations'), function (conversationId) {
+    var filteredUnreadConversations = _.reject(self.get('unread_conversations'), function (conversationId) {
+      console.log(self.get('id') + ' - ' + conversation.id + ':' + conversationId);
       if (conversation.id === conversationId && conversation.unreadCount() === 0) {
+        console.log(conversation);
         return true;
       }
       return false;
