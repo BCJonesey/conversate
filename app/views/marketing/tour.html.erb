@@ -47,7 +47,10 @@ $(document).ready(function(){
   $('.demo-box').on('scroll onscroll', function(e){
     e.stopPropagation();
   });
-  $('.container-selector .container-selector-item').on('click')
+  $('.container-selector .container-selector-item').on('click', function(e){
+    $('.container.active').removeClass('active');
+    $('.container-2').addClass('active');
+  });
 });
 
 <% end %>
