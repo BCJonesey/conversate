@@ -6,18 +6,17 @@
     </div>
 
     <div class="btn-group pull-right">
-      <a href="#" class="nav-item nav-item-toggle mkt-sign-in-toggle">Sign In</a>
+      <a href="#" class="nav-item nav-item-toggle mkt-sign-in-toggle">Test Site</a>
       <div class="login-modal hidden">
-        <%= form_tag session_path, :class => '' do %>
-          <div class='form modal-content'>
-            <%= label_tag :email, 'Email' %>
-            <%= email_field_tag :email, params[:email] %>
-            <%= label_tag :password, 'Password' %>
-            <%= password_field_tag :password, nil %>
-          </div>
+        <%= form_tag speakeasy_path, :class => '' do %>
+        <div class='form modal-content'>
+
+          <%= label_tag :code_word, 'Passcode' %>
+          <%= text_field_tag :code_word, '' %>
+        </div>
           <div class='clearfix'>
             <div class='btn-group pull-right'>
-              <%= submit_tag 'Sign In', :class => 'btn-primary' %>
+              <%= submit_tag 'Go to Test Site', :class => 'btn btn-primary' %>
             </div>
           </div>
         <% end %>
@@ -30,28 +29,26 @@
 
 <div class="home-main main">
   <div class="modal-window">
-    <div class="home-form-speakeasy">
+
+    <div class="login-form">
       <div class='btn-toolbar'>
         <span class='toolbar-title'>Welcome to Water Cooler</span>
       </div>
-      <%= form_tag speakeasy_path, :class => '' do %>
-      <div class='form modal-content'>
-
-        <%= label_tag :code_word, 'Passcode' %>
-        <%= text_field_tag :code_word, '' %>
-
-        <div class='speakeasy-form-text'>
-          <p> If you received a passcode from a Water Cooler employee, enter it here. </p>
-          <p>If you already have a Water Cooler account, you can <a href='#' class='mkt-sign-in-toggle'>sign in</a>.</p>
+      <%= form_tag session_path, :class => '' do %>
+        <div class='form modal-content'>
+          <%= label_tag :email, 'Email' %>
+          <%= email_field_tag :email, params[:email] %>
+          <%= label_tag :password, 'Password' %>
+          <%= password_field_tag :password, nil %>
         </div>
-
-      </div>
         <div class='btn-toolbar-below clearfix'>
           <div class='btn-group pull-right'>
-            <%= submit_tag 'Check it out', :class => 'btn btn-primary' %>
+            <%= submit_tag 'Sign In', :class => 'btn-primary' %>
           </div>
         </div>
       <% end %>
     </div>
+
+
   </div>
 </div>
