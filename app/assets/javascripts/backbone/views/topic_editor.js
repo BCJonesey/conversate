@@ -11,8 +11,19 @@ Structural.Views.TopicEditor = Support.CompositeView.extend({
     return this;
   },
 
+  events: {
+    'click .ef-save-button': 'save'
+  },
+
   show: function(topic) {
+    this._topic = topic;
     this.render(topic);
     this.$('.modal-background').removeClass('hidden');
+  },
+  save: function(e) {
+    e.preventDefault();
+    if (this._topic) {
+      // TODO: Save this._topic
+    }
   }
 });
