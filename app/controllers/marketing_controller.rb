@@ -7,7 +7,7 @@ class MarketingController < ApplicationController
   def tour
   end
 
-  def features
+  def pricing
   end
 
   private
