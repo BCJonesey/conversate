@@ -4,11 +4,15 @@ Structural.Views.Topics = Support.CompositeView.extend({
   className: 'tpc-list',
   topicHint: $('<div class="tpc-hint hidden">Move conversation to...</div>'),
   initialize: function(options) {
+    options = options || {};
+
     this.collection.on('add', this.renderTopic, this);
     this.collection.each(function(topic) {
       topic.on('edit', this.editTopic, this);
     }, this);
-    this._topicEditor = new Structural.Views.TopicEditor();
+    this._topicEditor = new Structural.Views.TopicEditor({
+      addressBook: options.addressBook
+    });
   },
   render: function() {
     this.$el.append(this.topicHint);
