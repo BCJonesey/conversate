@@ -14,18 +14,21 @@ class Api::V0::TopicsController < ApplicationController
 
   def update
     topic = Topic.find(params[:id])
+
     params[:users].map!{|x| User.find(x[:id])}
     params[:users] = params[:users].to_set
     existingUsers = topic.users.to_set
+
     topic.remove_users((existingUsers-params[:users]).to_a,current_user)
     topic.add_users((params[:users]-existingUsers).to_a,current_user)
-    binding.pry
+
     if topic.update_attributes(params[:topic])
-        head :ok
+      head :ok
     else
       render json: topic.errors, status: :unprocessable_entity
     end
   end
+
   def users
     topic = Topic.find(params[:id])
     binding.pry

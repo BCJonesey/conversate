@@ -30,7 +30,13 @@ Structural.Views.TopicEditor = Support.CompositeView.extend({
   save: function(e) {
     e.preventDefault();
     if (this._topic) {
-      // TODO: Save this._topic
+      var name = this.$('.ef-name-input').val();
+      if (name.length === 0) { return; }
+
+      var participants = this._participantEditor.currentParticipants();
+
+      this._topic.update(name, participants);
+      this.$('.modal-background').addClass('hidden');
     }
   }
 });
