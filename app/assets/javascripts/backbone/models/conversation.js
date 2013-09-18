@@ -78,7 +78,7 @@ Structural.Models.Conversation = Backbone.Model.extend({
         );
       }
     })
-    self.trigger('updated');
+    self.trigger('updated', self);
   },
   updateTopicIds: function(added, removed) {
     var self = this;

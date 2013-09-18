@@ -15,6 +15,16 @@ Structural.Collections.Conversations = Backbone.Collection.extend({
       }, self);
     }, self);
 
+    Structural.on('readConversation', function(conversation) {
+
+      // Let's see if a conversation in a different topic is one of ours too,
+      // and was just read.
+      var conversation = self.get(conversation.id);
+      if (conversation) {
+        conversation.updateMostRecentViewedToNow();
+      }
+    });
+
   },
   comparator: function(conversation) {
     return -(conversation.get('most_recent_event'));
