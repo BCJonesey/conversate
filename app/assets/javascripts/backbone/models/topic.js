@@ -44,9 +44,7 @@ Structural.Models.Topic = Backbone.Model.extend({
     var self = this;
     // We want to remove the newly read conversation from our unread list.
     var filteredUnreadConversations = _.reject(self.get('unread_conversations'), function (conversationId) {
-      console.log(self.get('id') + ' - ' + conversation.id + ':' + conversationId);
-      if (conversation.id === conversationId && conversation.unreadCount() === 0) {
-        console.log(conversation);
+      if (conversation.id === conversationId) {
         return true;
       }
       return false;
