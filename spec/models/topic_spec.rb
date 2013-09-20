@@ -17,7 +17,12 @@ describe Topic do
   end
 
   describe 'adding users' do
+    before :each do
+      @topic.add_users([@carl], @alice)
+    end
+
     it 'the new users are associated with the topic' do
+      @topic.users.include?(@carl).should be_true
     end
 
     it 'creates an update_viewers action in affected conversations' do
