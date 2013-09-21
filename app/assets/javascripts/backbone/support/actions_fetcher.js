@@ -3,7 +3,7 @@ Support.ActionsFetcher = function(conversation, interval) {
   self._conversation = conversation;
 
   self._fetchHandler = function() {
-    self._conversation.actions.fetch();
+    self._conversation.actions.fetch({cache: false});
   };
   setInterval(self._fetchHandler, interval);
 

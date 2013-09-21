@@ -4,7 +4,16 @@ Structural.Collections.Topics = Backbone.Collection.extend({
   comparator: 'created_at',
 
   initialize: function(options) {
+    var self = this;
     options = options || {};
+    self.on('add', function(topic) {
+      topic.on('updated', function() {
+
+        // TODO: Replace with event.
+        Structural.updateTitleAndFavicon();
+
+      })
+    }, self);
   },
 
   focus: function(id) {
