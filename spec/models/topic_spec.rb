@@ -40,7 +40,12 @@ describe Topic do
   end
 
   describe 'removing users' do
+    before :each do
+      @topic.remove_users([@bob], @alice)
+    end
+
     it 'the old users are no longer associated with the topic' do
+      @topic.users.include?(@bob).should be_false
     end
 
     it 'create an update_viewers action in affected conversations' do
