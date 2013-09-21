@@ -1,6 +1,7 @@
-var topicsFetcher = function(topics, interval) {
+Support.TopicsFetcher = function(topics, interval) {
   var self = this;
   self._topics = topics;
+
   self._fetchHandler = function() {
     self._topics.fetch({cache: false});
   };
