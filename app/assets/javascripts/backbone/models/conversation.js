@@ -62,8 +62,7 @@ Structural.Models.Conversation = Backbone.Model.extend({
   updateMostRecentViewedToNow: function() {
     var self = this;
 
-    // Adding in a slight fudge factor for now. It'll make sure something we just did is behind
-    // our most recent viewed time.
+    // We want to basically reset our server-side information.
     self.set('most_recent_viewed', (new Date()).valueOf());
     self.set('unread_count', 0);
 
