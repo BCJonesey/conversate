@@ -12,7 +12,7 @@ describe Topic do
     @convo_abc.actions.create(type: 'retitle', data: '{"title": "ABC"}', user_id: @alice.id)
     @convo_ab = Conversation.create title: 'AB'
     @convo_ab.users += [@alice, @bob]
-    @convo_abc.actions.create(type: 'retitle', data: '{"title": "AB"}', user_id: @alice.id)
+    @convo_ab.actions.create(type: 'retitle', data: '{"title": "AB"}', user_id: @alice.id)
     @convo_a = Conversation.create title: 'A'
     @convo_a.users << @alice
     @convo_abc.actions.create(type: 'retitle', data: '{"title": "A"}', user_id: @alice.id)
@@ -49,6 +49,11 @@ describe Topic do
     end
 
     it 'create an update_viewers action in affected conversations' do
+      @convo_abc.actions.last.type.should_not eq 'update_viewers'
+      @convo_ab.actions.last.type.should_not eq 'update_viewers'
+      @convo_a.actions.last.type.should eq 'update_viewers'
+      @convo_a.actions.last.removed.length.should eq 1
+      @convo_a.actions.last.removed[0]['id'].should eq @bob.id
     end
 
     it 'puts conversations where that user is participating in their default topic' do
