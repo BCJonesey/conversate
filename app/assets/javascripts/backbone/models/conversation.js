@@ -64,7 +64,7 @@ Structural.Models.Conversation = Backbone.Model.extend({
 
     // Adding in a slight fudge factor for now. It'll make sure something we just did is behind
     // our most recent viewed time.
-    self.set('most_recent_viewed', (new Date()).valueOf() + 1000);
+    self.set('most_recent_viewed', (new Date()).valueOf());
     self.set('unread_count', 0);
 
     self.get('participants').each( function(participant) {
