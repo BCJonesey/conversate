@@ -38,5 +38,12 @@ Structural.Collections.Topics = Backbone.Collection.extend({
     removedTopics.forEach(function(topic) {
       topic.conversations.remove(conversation);
     })
+  },
+
+  createNewTopic: function(title) {
+    var topic = new new Structural.Models.Topic({});
+    // unread_conversations
+    // name
+    // users << self
   }
 });
