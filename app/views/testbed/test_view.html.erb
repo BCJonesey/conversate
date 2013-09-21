@@ -368,6 +368,9 @@ switch(name) {
     var collection = new Structural.Collections.Topics(data.topics);
     view = new Structural.Views.TopicContainer({topics: collection});
     break;
+  case 'topic-editor':
+    view = new Structural.Views.TopicEditor();
+    break;
   case 'title-editor':
     var model = new Structural.Models.Conversation(data.conversations[0]);
     view = new Structural.Views.TitleEditor({conversation: model});

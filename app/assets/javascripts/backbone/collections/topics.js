@@ -1,6 +1,7 @@
 Structural.Collections.Topics = Backbone.Collection.extend({
   model: Structural.Models.Topic,
   url: Structural.apiPrefix + '/topics',
+  comparator: 'created_at',
 
   initialize: function(options) {
     options = options || {};

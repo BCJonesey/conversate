@@ -1,0 +1,40 @@
+@import 'variables.css.less';
+@import 'mixins.css.less';
+@import 'modal.css.less';
+
+.ef-window{
+//this is to override the participants list visual styles.  it shouldn't be ncessary once that is refactored.
+  .modal-content{
+    overflow:visible;
+  }
+
+  .act-participants{
+    padding:0.25rem;
+    border:1px solid #CCC;
+    background-color: transparent;
+    &.editing{
+      border-color:#ABC;
+      box-shadow: inset 0 0 5px rgba(0,0,255,0.2);
+      background-color: @modal-input-highlight-background;
+    }
+    .participant-text{
+      //font-size: 1.0rem;
+    }
+  }
+  .participant{
+    margin-bottom: 0.25rem;
+    margin-top: 0.25rem;
+  }
+
+  .token-input{
+    border:none !important;
+    box-shadow:none !important;
+    background-color: transparent !important;
+    height:auto;
+    padding:0;
+    margin:0;
+  }
+  .token-options{
+    z-index: 10;
+  }
+}
