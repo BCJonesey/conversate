@@ -7,7 +7,7 @@ class Topic < ActiveRecord::Base
   validates_presence_of :name
 
   default_scope includes(:users)
-  
+
   def as_json(options)
     options.merge!({:include=>[:users]}) unless options.include?(:include)
     options[:include] = ([options[:include]]) unless options[:include].is_a?(Array)
@@ -34,36 +34,50 @@ class Topic < ActiveRecord::Base
   end
 
   def add_users(users_array, user)
-    # add users to the topic
     users_set = users_array.to_set - self.users.to_set
+
     if users_set.size > 0
       self.conversations.each do |c|
         conversation_users_set = users_set - c.participants.to_set - c.viewers.to_set
+
         if conversation_users_set.size > 0
-          # log the action to the conversations
-          c.actions.build({user_id:user.id,data:{removed: [],added:conversation_users_set}.to_json,type: "update_viewers"}).save
+          c.actions.build({
+            user_id: user.id,
+            data: { removed: [],
+                    added:conversation_users_set}.to_json,
+            type: "update_viewers"
+          }).save
         end
       end
+
       self.users << users_set.to_a
       self.save
     end
   end
+
   def remove_users(users_array,user)
-    # remove users from the topic
     users_set = users_array.to_set & self.users.to_set
+
     if users_set.size > 0
       self.users.delete(users_set.to_a)
       self.save
+
       self.conversations.each do |c|
-	c.participants.each{|u| c.ensure_user_has_in_topic(u)}
+	      c.participants.each{|u| c.ensure_user_has_in_topic(u)}
         conversation_users_set = users_set - c.participants.to_set - c.viewers.to_set
+
         if conversation_users_set.size > 0
-          # log the action to the conversations
-          c.actions.build({user_id:user.id,data:{added: [],removed:conversation_users_set}.to_json,type: "update_viewers"}).save
+          c.actions.build({
+            user_id: user.id,
+            data: { added: [],
+                    removed:conversation_users_set}.to_json,
+            type: "update_viewers"
+          }).save
         end
       end
     end
   end
+
   def debug_s
     "Topic:#{self.id}:#{self.name}"
   end
