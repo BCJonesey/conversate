@@ -9,10 +9,13 @@ describe Topic do
     @topic.users += [@alice, @bob]
     @convo_abc = Conversation.create title: 'ABC'
     @convo_abc.users += [@alice, @bob, @carl]
+    @convo_abc.actions.create(type: 'retitle', data: '{"title": "ABC"}', user_id: @alice.id)
     @convo_ab = Conversation.create title: 'AB'
     @convo_ab.users += [@alice, @bob]
+    @convo_abc.actions.create(type: 'retitle', data: '{"title": "AB"}', user_id: @alice.id)
     @convo_a = Conversation.create title: 'A'
     @convo_a.users << @alice
+    @convo_abc.actions.create(type: 'retitle', data: '{"title": "A"}', user_id: @alice.id)
     @topic.conversations += [@convo_abc, @convo_ab, @convo_a]
   end
 
@@ -26,6 +29,13 @@ describe Topic do
     end
 
     it 'creates an update_viewers action in affected conversations' do
+      @convo_abc.actions.last.type.should_not eq 'update_viewers'
+      @convo_ab.actions.last.type.should eq 'update_viewers'
+      @convo_ab.actions.last.added.length.should eq 1
+      @convo_ab.actions.last.added[0]['id'].should eq @carl.id
+      @convo_a.actions.last.type.should eq 'update_viewers'
+      @convo_a.actions.last.added.length.should eq 1
+      @convo_a.actions.last.added[0]['id'].should eq @carl.id
     end
   end
 
