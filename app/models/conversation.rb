@@ -113,6 +113,15 @@ class Conversation < ActiveRecord::Base
     self.users
   end
 
+  def viewers
+    viewers_set = Set.new([])
+    self.topics.each do |topic|
+      viewers_set += topic.users.to_set
+    end
+    (viewers_set - self.participants).to_a
+  end
+    
+
   # Public: Gets the next id for a message in this conversation.
   #
   # Note - at the moment this just generates a random number and we're ignoring
@@ -212,6 +221,11 @@ class Conversation < ActiveRecord::Base
   def debug_s
     "Conversation:#{self.id}:#{self.title}"
   end
+
+  def ensure_user_has_in_topic(user)
+    self.topics << user.default_topic if (self.topics.to_set & user.topics.to_set).empty? 
+  end
+
 
   protected
   # Internal: Creates a default conversation title based on who the participants

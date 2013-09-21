@@ -6,10 +6,14 @@ Structural.Views.TopicContainer = Support.CompositeView.extend({
   initialize: function(options) {
     options = options || {};
     this.topics = options.topics;
+    this.addressBook = options.addressBook;
   },
   render: function() {
     this.toolbarView = new Structural.Views.TopicToolbar();
-    this.listView = new Structural.Views.Topics({collection: this.topics});
+    this.listView = new Structural.Views.Topics({
+      collection: this.topics,
+      addressBook: this.addressBook
+    });
     this.inputView = new Structural.Views.NewTopic();
 
     this.appendChild(this.toolbarView);

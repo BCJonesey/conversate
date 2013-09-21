@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :group_participations
   has_many :groups, :through => :group_participations
   has_and_belongs_to_many :topics
+  belongs_to :default_topic, class_name: "Topic", foreign_key: "default_topic_id"
 
   attr_accessible :email, :full_name, :password, :password_confirmation
 
@@ -19,11 +20,11 @@ class User < ActiveRecord::Base
     user = User.new(params)
     return false if user.save == false
 
-    default_topic = Topic.new
-    default_topic.name = 'My Conversations'
-    default_topic.users << user
-    default_topic.save
-    user.default_topic_id = default_topic.id
+    new_topic = Topic.new
+    new_topic.name = 'My Conversations'
+    new_topic.users << user
+    new_topic.save
+    user.default_topic_id = new_topic.id
     user.save
 
     user
