@@ -27,6 +27,23 @@ namespace :reading_logs do
     end
   end
 
+  desc 'Remove duplicate entries'
+  task dedupe: [:environment] do
+    # I originally wrote this by trying to use Array#uniq! on a
+    # Conversation#users array, but ActiveRecord doesn't seem to play nice with
+    # that.
+    User.all.each do |u|
+      u.conversations.each do |c|
+        logs = ReadingLog.where(user_id: u.id, conversation_id: c.id)
+                         .order('most_recent_viewed DESC')
+                         .drop(1)
+        unless logs.empty?
+          puts "Removing #{logs.length} dupe users from conversation #{c.title}"
+          logs.each {|l| l.delete }
+        end
+      end
+    end
+  end
 end
 
 # Calculates the unread count for a given conversation and indirectly, a user through their reading log.

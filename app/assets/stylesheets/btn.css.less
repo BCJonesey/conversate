@@ -25,11 +25,12 @@
   cursor:pointer;
   .user-select(none);
   &:hover,
-  &.hover{
+  &.hover,
+  &:focus{
      background-color:#D8E8F8;
+     outline:none;
    }
   &:active,
-  &:focus,
   &.actve{
     box-shadow: none;
     position: relative;
@@ -45,8 +46,10 @@
   text-shadow:1px 1px 1px #888;
 	.button-shadow(0.4);
   &:hover,
-  &.hover{
+  &.hover,
+  &:focus{
 	   background-color:#8BE;
+     border-color:#9AC;
 	 }
 }
 
@@ -66,24 +69,17 @@
   }
 }
 
-
-/* btn-faint is a modifer on buttons for how much the button is show when it is not being hovered */
-
-@color-faint:rgba(0,0,0,0.05);
-@color-hover:#CCC;
-@color-solid:#444;
-
 .btn-faint{
 
   text-decoration: none;
   background-color:transparent;
-  color:@color-faint;
+  color:@btn-faint-color;
   border-color: transparent;
   box-shadow:none;
   text-shadow: none;
   -webkit-transition: color 0.85s;
   &:hover {
-    color:@color-solid;
+    color:@btn-faint-color-solid;
     -webkit-transition: color 0.35s;
 
   }
@@ -91,21 +87,21 @@
   &.active {
     position:relative;
     top:1px;
-    color:@color-solid;
+    color:@btn-faint-color-solid;
   }
 }
 .btn-faint-container{
   & .btn-faint.active{
-    color:@color-solid;
+    color:@btn-faint-color-solid;
   }
   &:hover .btn-faint{
-    color:@color-hover;
+    color:@btn-faint-color-hover;
     -webkit-transition: color 0.5s;
     -webkit-transition-delay: color 0.5s;
 
     &:hover,
     &.active{
-        color:@color-solid;
+        color:@btn-faint-color-solid;
     }
   }
 }

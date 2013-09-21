@@ -26,11 +26,16 @@ Structural.Views.Topic = Support.CompositeView.extend({
     return this;
   },
   events: {
+    'click .tpc-details-toggle': 'editTopic',
     'click': 'viewTopic'
   },
   viewTopic: function(e) {
     e.preventDefault();
     Structural.viewTopic(this.model);
+  },
+  editTopic: function(e) {
+    e.preventDefault();
+    this.model.trigger('edit', this.model);
   },
   reClass: function() {
     this.el.className = this.className();

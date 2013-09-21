@@ -1,4 +1,6 @@
 Structural.Models.Topic = Backbone.Model.extend({
+  urlroot: Structural.apiPrefix + '/topics',
+
   initialize: function(attributes, options) {
     var self = this;
     self.set('is_unread', self.get('unread_conversations') > 0);
@@ -26,6 +28,10 @@ Structural.Models.Topic = Backbone.Model.extend({
       self.filterNewlyReadConversation(conversation);
       self.trigger('updated');
     }, self);
+
+    if (this.get('users')) {
+      this.set('users', new Structural.Collections.TopicParticipants(this.get('users')));
+    }
   },
 
   focus: function() {
@@ -51,5 +57,11 @@ Structural.Models.Topic = Backbone.Model.extend({
     });
 
     this.set('unread_conversations', filteredUnreadConversations);
+  },
+
+  update: function(name, participants) {
+    this.set('name', name);
+    this.set('users', participants);
+    this.save();
   }
 });
