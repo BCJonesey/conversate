@@ -66,7 +66,7 @@ var Structural = new (Support.CompositeView.extend({
     Backbone.history.start({pushState: true});
 
     // Turn on our fetchers.
-    this.conversationFetcher = new conversationFetcher(this._conversation, 5000);
+    this.conversationFetcher = new Support.ConversationFetcher(this._conversation, 5000);
     this.topicFetcher = new topicFetcher(this._topic.conversations, 60000);
     this.topicsFetcher = new topicsFetcher(this._topics, 60000);
 
