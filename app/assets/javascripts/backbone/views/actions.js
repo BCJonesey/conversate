@@ -8,6 +8,7 @@ Structural.Views.Actions = Support.CompositeView.extend({
     Structural.on('changeConversation', this.changeConversation, this);
     Structural.on('clearConversation', this.clearConversation, this);
     this.collection.on('addedSomeoneElsesMessage', this.scrollDownIfAtBottom, this);
+    self.collection.on('actionsLoadedForFirstTime', this.reRender, this);
   },
   render: function() {
     this.collection.forEach(this.renderAction, this);
