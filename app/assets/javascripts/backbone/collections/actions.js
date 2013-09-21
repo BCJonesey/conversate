@@ -117,7 +117,6 @@ Structural.Collections.Actions = Backbone.Collection.extend({
       // We want to let our views know that they can go ahead and render the actions en block now,
       // since they're actually loaded.
       options.success = function() {
-        console.log('actionsLoadedForFirstTime');
         self.trigger('actionsLoadedForFirstTime');
       }
     }
