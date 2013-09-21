@@ -24,13 +24,13 @@ class Topic < ActiveRecord::Base
   end
 
   def unread_conversations(user)
-    unread_conversation_count = 0
-    # conversations.each do |conversation|
-    #   if user.conversations.include?(conversation) && conversation.unread_count(user) > 0
-    #     unread_conversation_count += 1
-    #   end
-    # end
-    return unread_conversation_count
+    unread_conversations = []
+    conversations.each do |conversation|
+      if conversation.unread_count_for_user(user) > 0
+        unread_conversations.push(conversation.id)
+      end
+    end
+    return unread_conversations
   end
 
   def add_users(users_array, user)

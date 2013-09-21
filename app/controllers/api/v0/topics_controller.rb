@@ -2,7 +2,7 @@ class Api::V0::TopicsController < ApplicationController
   before_filter :require_login
 
   def index
-    render :json => current_user.topics.to_json(:user => current_user)
+    render :json => current_user.topics.includes(:conversations).to_json(:user => current_user)
   end
 
   def create
