@@ -67,7 +67,7 @@ var Structural = new (Support.CompositeView.extend({
 
     // Turn on our fetchers.
     this.conversationFetcher = new Support.ConversationFetcher(this._conversation, 5000);
-    this.topicFetcher = new topicFetcher(this._topic.conversations, 60000);
+    this.topicFetcher = new Support.TopicFetcher(this._topic.conversations, 60000);
     this.topicsFetcher = new topicsFetcher(this._topics, 60000);
 
     // Focus initial topic.
