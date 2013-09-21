@@ -57,6 +57,10 @@ describe Topic do
     end
 
     it 'puts conversations where that user is participating in their default topic' do
+      bob_topic = Topic.find(@bob.default_topic_id)
+      @convo_abc.topics.include?(bob_topic).should be_true
+      @convo_ab.topics.include?(bob_topic).should be_true
+      @convo_a.topics.include?(bob_topic).should be_false
     end
   end
 end
