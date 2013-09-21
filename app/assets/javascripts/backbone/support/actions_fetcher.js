@@ -1,4 +1,4 @@
-Support.ConversationFetcher = function(conversation, interval) {
+Support.ActionsFetcher = function(conversation, interval) {
   var self = this;
   self._conversation = conversation;
 

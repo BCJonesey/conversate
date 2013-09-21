@@ -1,4 +1,4 @@
-Support.TopicFetcher = function(conversations, interval) {
+Support.ConversationsFetcher = function(conversations, interval) {
   var self = this;
   self._conversations = conversations;
 
