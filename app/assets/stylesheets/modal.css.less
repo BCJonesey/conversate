@@ -47,7 +47,9 @@
     }
   }
 
-  label, input{
+  label,
+  input[type='text'],
+  input[type='password']{
     display: block;
   }
 
@@ -57,7 +59,8 @@
     color:#888;
   }
 
-  input,
+  input[type='text'],
+  input[type='password'],
   textarea{
     font-size: 1rem;
     border: 1px solid @modal-input-border-color;
