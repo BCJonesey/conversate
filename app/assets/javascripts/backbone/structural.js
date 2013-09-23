@@ -22,7 +22,9 @@ var Structural = new (Support.CompositeView.extend({
     // like the current topics, the current topic, the current conversation,
     // and the current user.
     this._user = new Structural.Models.User(bootstrap.user);
-    this._topics = new Structural.Collections.Topics(bootstrap.topics);
+    this._topics = new Structural.Collections.Topics(bootstrap.topics, {
+      mainCollection: true
+    });
 
     // We pass the topic over, but we should let it come from the collection.
     this._topic = this._topics.where({id: bootstrap.topic.id})[0];
