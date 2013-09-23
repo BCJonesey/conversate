@@ -23,7 +23,7 @@ var Structural = new (Support.CompositeView.extend({
     // and the current user.
     this._user = new Structural.Models.User(bootstrap.user);
     this._topics = new Structural.Collections.Topics(bootstrap.topics, {
-      mainCollection: true
+      isMainCollection: true
     });
 
     // We pass the topic over, but we should let it come from the collection.
