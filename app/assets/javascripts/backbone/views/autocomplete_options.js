@@ -18,6 +18,7 @@ Structural.Views.AutocompleteOptions = Support.CompositeView.extend({
       this.$el.removeClass('hidden');
     }
     this._changeTargetIndex(this.targetIndex);
+    this._centerSelectedOption();
   },
   events: {
     'mouseenter .token-option': 'focusAutocompleteTarget',
