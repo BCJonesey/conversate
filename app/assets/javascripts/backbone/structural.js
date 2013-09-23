@@ -76,6 +76,7 @@ var Structural = new (Support.CompositeView.extend({
 
     // Focus initial topic.
     this._topics.focus(this._topic.id);
+    this._topics.focusAlternates(this._conversation);
 
     return this;
   },
