@@ -194,6 +194,10 @@ var Structural = new (Support.CompositeView.extend({
     this._topic.conversations.add(conversation);
     conversation.save(null, {
       success: function (conversation, response) {
+        // Need to tell our actions collection our server-approved new id.
+        // TODO: Right place for this? Maybe hide behind a function?
+        conversation.actions.conversationId = conversation.id;
+
         conversation.focus();
         Structural.viewConversation(conversation);
       }

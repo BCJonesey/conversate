@@ -109,9 +109,16 @@ Structural.Collections.Actions = Backbone.Collection.extend({
 
   // This actions collection's conversation is being viewed.
   viewActions: function() {
+    var self = this;
     var options = {}
     if (this.length === 0) {
-      options.reset = true
+      options.reset = true;
+
+      // We want to let our views know that they can go ahead and render the actions en block now,
+      // since they're actually loaded.
+      options.success = function() {
+        self.trigger('actionsLoadedForFirstTime');
+      }
     }
     this.fetch(options);
   },
