@@ -36,7 +36,7 @@
   font-size: 0.75rem;
   padding:0.15rem;
 }
-.act-ut-topics-list{
+.act-ut-folders-list{
   background-color: #F0F0F0;
   max-height:30rem;
   overflow-y:auto;
@@ -61,7 +61,7 @@
   display:block;
 }
 
-.act-ut-topic{
+.act-ut-folder{
   padding:@pad 0.5rem;
   border-bottom:1px solid #CCC;
   cursor: pointer;
@@ -86,28 +86,28 @@
   }
 }
 
-.act-ut-topic-identifier{
+.act-ut-folder-identifier{
   display:inline-block;
   padding:@pad;
   color:#AAA;
 }
 
 
-.act-ut-topic-left{
+.act-ut-folder-left{
   .ellipsis;
   padding:@pad 0;
   //padding-left:0;
 }
 
 
-.act-ut-topics-list.single-select-mode .act-ut-checkbox{
+.act-ut-folders-list.single-select-mode .act-ut-checkbox{
   display: none;
 }
 
-.act-ut-topic .icon-check{
+.act-ut-folder .icon-check{
   display:none;
 }
-.act-ut-topic.checked{
+.act-ut-folder.checked{
   .icon-check-empty{
     display:none;
   }
@@ -116,7 +116,7 @@
   }
 }
 
-.act-ut-topic-title{
+.act-ut-folder-title{
   padding-left:@pad;
 }
 

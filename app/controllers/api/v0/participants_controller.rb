@@ -16,9 +16,9 @@ class Api::V0::ParticipantsController < ApplicationController
     head :status => 404 and return unless conversation && user
     conversation.users << user
 
-    # Let's add this conversation to the first topic for now.
-    topic = Topic.first
-    topic.conversations << conversation
+    # Let's add this conversation to the first folder for now.
+    folder = Folder.first
+    folder.conversations << conversation
 
     render :json => user.to_json, :status => 201
   end

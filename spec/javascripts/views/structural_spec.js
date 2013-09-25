@@ -28,7 +28,7 @@ describe("Structural", function() {
 
   describe("app view", function() {
     it("has a watercooler and a bar", function() {
-      var topics = [
+      var folders = [
         { name: "Conversations", id: 1 },
         { name: "Structural", id: 2 },
         { name: "Chatter", id: 3 }
@@ -89,7 +89,7 @@ describe("Structural", function() {
       var user = { full_name: "Jack Kennedy" };
 
       bootstrap = {
-        topics: topics,
+        folders: folders,
         conversations: conversations,
         actions: actions,
         participants: participants,

@@ -1,0 +1,8 @@
+<div class='fld-right'>
+  <a class='btn-faint fld-details-toggle'href='#'><i class='icon-info-sign'></i></a>
+  <% if (folder.unreadConversationCount() > 0) { %>
+    <span class='fld-count'><%= folder.unreadConversationCount() %></span>
+  <% } %>
+</div>
+
+<span class='fld-label'> <%= folder.escape('name') %> </span>

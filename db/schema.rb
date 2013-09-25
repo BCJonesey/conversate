@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130902165921) do
+ActiveRecord::Schema.define(:version => 20130924213825) do
 
   create_table "actions", :force => true do |t|
     t.integer  "conversation_id"
@@ -27,18 +27,32 @@ ActiveRecord::Schema.define(:version => 20130902165921) do
 
   create_table "conversations", :force => true do |t|
     t.string   "title"
-    t.datetime "created_at",                                           :null => false
-    t.datetime "updated_at",                                           :null => false
-    t.datetime "most_recent_event", :default => '2000-01-01 01:07:19'
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.datetime "most_recent_event"
   end
 
-  create_table "conversations_topics", :force => true do |t|
+  create_table "conversations_folders", :force => true do |t|
     t.integer "conversation_id"
-    t.integer "topic_id"
+    t.integer "folder_id"
   end
 
-  add_index "conversations_topics", ["conversation_id", "topic_id"], :name => "index_conversations_topics_on_conversation_id_and_topic_id"
-  add_index "conversations_topics", ["topic_id", "conversation_id"], :name => "index_conversations_topics_on_topic_id_and_conversation_id"
+  add_index "conversations_folders", ["conversation_id", "folder_id"], :name => "index_conversations_topics_on_conversation_id_and_topic_id"
+  add_index "conversations_folders", ["folder_id", "conversation_id"], :name => "index_conversations_topics_on_topic_id_and_conversation_id"
+
+  create_table "folders", :force => true do |t|
+    t.string   "name",       :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "folders_users", :force => true do |t|
+    t.integer "folder_id"
+    t.integer "user_id"
+  end
+
+  add_index "folders_users", ["folder_id", "user_id"], :name => "index_topics_users_on_topic_id_and_user_id"
+  add_index "folders_users", ["user_id", "folder_id"], :name => "index_topics_users_on_user_id_and_topic_id"
 
   create_table "group_participations", :force => true do |t|
     t.integer "group_id"
@@ -63,20 +77,6 @@ ActiveRecord::Schema.define(:version => 20130902165921) do
   add_index "reading_logs", ["user_id", "conversation_id", "most_recent_viewed"], :name => "quick_find_most_reent_viewed"
   add_index "reading_logs", ["user_id"], :name => "index_reading_logs_on_user_id"
 
-  create_table "topics", :force => true do |t|
-    t.string   "name",       :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "topics_users", :force => true do |t|
-    t.integer "topic_id"
-    t.integer "user_id"
-  end
-
-  add_index "topics_users", ["topic_id", "user_id"], :name => "index_topics_users_on_topic_id_and_user_id"
-  add_index "topics_users", ["user_id", "topic_id"], :name => "index_topics_users_on_user_id_and_topic_id"
-
   create_table "users", :force => true do |t|
     t.string   "email",                                           :null => false
     t.string   "crypted_password"
@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(:version => 20130902165921) do
     t.string   "full_name"
     t.boolean  "site_admin",                   :default => false
     t.integer  "invited_by"
-    t.integer  "default_topic_id"
+    t.integer  "default_folder_id"
     t.boolean  "removed",                      :default => false
   end
 
