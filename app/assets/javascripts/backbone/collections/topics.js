@@ -6,7 +6,7 @@ Structural.Collections.Topics = Backbone.Collection.extend({
   initialize: function(models, options) {
     var self = this;
     options = options || {};
-    if (options.mainCollection) {
+    if (options.isMainCollection) {
       self.on('add', function(topic) {
         topic.on('updated', function() {
 
