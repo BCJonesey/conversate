@@ -53,6 +53,7 @@ Structural.Views.Conversations = Support.CompositeView.extend({
     var conversation = this.collection.models[0];
     if (conversation) {
       Structural.viewConversationData(conversation);
+      conversation.focus();
     }
   }
 });
