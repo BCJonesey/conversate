@@ -40,10 +40,12 @@ Structural.Collections.Topics = Backbone.Collection.extend({
     })
   },
 
-  createNewTopic: function(title) {
-    var topic = new new Structural.Models.Topic({});
-    // unread_conversations
-    // name
-    // users << self
+  createNewFolder: function(title) {
+    var folder = new Structural.Models.Topic({
+      name: title,
+      unread_conversations: 0,
+      users: [Structural._user]
+    });
+    this.add(folder);
   }
 });
