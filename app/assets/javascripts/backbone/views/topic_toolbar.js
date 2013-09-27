@@ -10,6 +10,6 @@ Structural.Views.TopicToolbar = Support.CompositeView.extend({
   },
   newTopic: function(e) {
     e.preventDefault();
-    // TODO: Create a new topic.
+    Structural.createNewFolder();
   }
 });
