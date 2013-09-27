@@ -47,5 +47,10 @@ Structural.Collections.Topics = Backbone.Collection.extend({
       users: [Structural._user]
     });
     this.add(folder);
+    folder.save({}, {
+      success: function(model, response) {
+        folder.conversations.topicId = model.id;
+      }
+    });
   }
 });
