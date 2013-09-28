@@ -7,6 +7,8 @@ Structural.Views.AutocompleteOptions = Support.CompositeView.extend({
     this.participants = options.participants;
     this.matches = [];
     this.targetIndex = 0;
+
+    Structural.on('changeConversation', this._changeConversation, this);
   },
   render: function() {
     this.$el.empty();
@@ -79,5 +81,9 @@ Structural.Views.AutocompleteOptions = Support.CompositeView.extend({
     var center = this.el.scrollTop + target.position().top + (target.outerHeight() / 2);
     var scrollTop = center - this.$el.innerHeight() / 2;
     this.$el.scrollTop(scrollTop);
+  },
+  _changeConversation: function(conversation) {
+    this.participants = conversation.participants;
+    this.render();
   }
 });
