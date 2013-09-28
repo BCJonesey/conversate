@@ -152,5 +152,14 @@ Structural.Collections.Actions = Backbone.Collection.extend({
       count += action.isUnread(mostRecentEventViewed) ? 1 : 0;
     });
     return count;
+  },
+
+  fetch: function(options) {
+    if (this.conversationId) {
+      // http://rockycode.com/blog/backbone-inheritance/
+      // God, I fucking hate javascript so much.  Is this really the best there
+      // is for basic inheritance?  Should we be using mixins instead?
+      return this.constructor.__super__.fetch.call(this, options);
+    }
   }
 });
