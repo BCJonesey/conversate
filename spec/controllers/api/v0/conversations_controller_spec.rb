@@ -7,17 +7,17 @@ describe Api::V0::ConversationsController do
                           :full_name => 'Rufio Pan',
                           :password => 'superDUPERsecretPassword')
     login_user
-    @topic = Topic.create(:name => 'The Wobbles')
-    @user.topics << @topic
-    @topic.conversations.create(:title => 'Wobbly Wobble')
-    @topic.conversations.create(:title => 'Pretty Damn Solid')
+    @folder = Folder.create(:name => 'The Wobbles')
+    @user.folders << @folder
+    @folder.conversations.create(:title => 'Wobbly Wobble')
+    @folder.conversations.create(:title => 'Pretty Damn Solid')
     @user.conversations << Conversation.find(1)
     @user.conversations << Conversation.find(2)
   end
 
   describe 'GET #index' do
-    it "responds successfully with a list of the user's conversations in this topic" do
-      get :index, :topic_id => 1
+    it "responds successfully with a list of the user's conversations in this folder" do
+      get :index, :folder_id => 1
       expect(response).to be_success
       expect(response.code).to eq("200")
       body = JSON.parse(response.body)
@@ -28,7 +28,7 @@ describe Api::V0::ConversationsController do
     end
     it 'responds successfully with the correct most_recent_event' do
       check_most_recent_event = lambda do |mre|
-        get :index, :topic_id => 1
+        get :index, :folder_id => 1
         expect(response).to be_success
         expect(response.code).to eq("200")
         body = JSON.parse(response.body)
@@ -36,7 +36,7 @@ describe Api::V0::ConversationsController do
         expect(body[2]['most_recent_event']).to eq(mre)
         expect(body[2]['most_recent_event']).to be_a(Integer)
       end
-      conversation = @topic.conversations.create!(:title => 'Timestamp Convo')
+      conversation = @folder.conversations.create!(:title => 'Timestamp Convo')
       conversation.users << @user
       check_most_recent_event[946688839000] # Default value.
       conversation.actions.create!(:type => 'message',
@@ -48,7 +48,7 @@ describe Api::V0::ConversationsController do
     it 'responds successfully with the correct most_recent_viewed' do
       conversation = Conversation.find_by_id(1)
       check_most_recent_viewed = lambda do |mve|
-        get :index, :topic_id => 1
+        get :index, :folder_id => 1
         expect(response).to be_success
         expect(response.code).to eq("200")
         body = JSON.parse(response.body)
@@ -74,7 +74,7 @@ describe Api::V0::ConversationsController do
       conversation = Conversation.find_by_id(1)
       conversation.users << user2
       conversation.users << user3
-      get :index, :topic_id => 1
+      get :index, :folder_id => 1
       expect(response).to be_success
       expect(response.code).to eq("200")
       body = JSON.parse(response.body)
@@ -86,8 +86,8 @@ describe Api::V0::ConversationsController do
       expect(body[0]['participants'][2]['email']).to eq('anotheruser@example.com')
       expect(body[0]['participants'][2]['full_name']).to eq('Bob the Builder')
     end
-    it 'responds unsuccessfully when the topic does not exist' do
-      get :index, :topic_id => 100
+    it 'responds unsuccessfully when the folder does not exist' do
+      get :index, :folder_id => 100
       expect(response).not_to be_success
       expect(response.code).to eq("404")
     end
@@ -110,20 +110,20 @@ describe Api::V0::ConversationsController do
   end
 
   describe 'POST #create' do
-    it 'successfully creates a new default conversation in this topic' do
-      post :create, :topic_id => 1
+    it 'successfully creates a new default conversation in this folder' do
+      post :create, :folder_id => 1
       expect(response).to be_success
       expect(response.code).to eq("201")
       body = JSON.parse(response.body)
       expect(body['id']).to eq(3)
       expect(body['title']).to eq('New Conversation')
     end
-    it 'successfully creates a new conversation in this topic with parameters' do
+    it 'successfully creates a new conversation in this folder with parameters' do
       user2 = User.create!(:email => 'dummyUser2@example.com',
                           :full_name => 'Huffle Puff',
                           :password => 'superDUPERsecretPassword')
-      user2.topics << Topic.find(1)
-      post :create, :topic_id => 1, :title => 'Hufflepuff',
+      user2.folders << Folder.find(1)
+      post :create, :folder_id => 1, :title => 'Hufflepuff',
         :participants => [{:id => 1,:name => "Rufio Pan"},{:id => 2, :name => "Huffle Puff"}],
         :actions => [{:type => "message",:user => {:id => 1}, :text => "Hiyoo"}]
       expect(response).to be_success
@@ -135,8 +135,8 @@ describe Api::V0::ConversationsController do
       expect(conversation.title).to eq('Hufflepuff')
     end
     it 'has the correct participants and actions'
-    it 'responds unsuccessfully when the topic does not exist' do
-      post :create, :topic_id => 100
+    it 'responds unsuccessfully when the folder does not exist' do
+      post :create, :folder_id => 100
       expect(response).not_to be_success
       expect(response.code).to eq("404")
     end

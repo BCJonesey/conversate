@@ -1,11 +1,11 @@
 class HomeController < ApplicationController
   def index
     if logged_in?
-      topic = current_user.topics.first
-      if topic
-        redirect_to topic_path(topic.slug, topic.id) and return
+      folder = current_user.folders.first
+      if folder
+        redirect_to folder_path(folder.slug, folder.id) and return
       else
-        @topics = Topic.all
+        @folders = Folder.all
         @conversation = nil
         @conversations = []
         @actions = nil

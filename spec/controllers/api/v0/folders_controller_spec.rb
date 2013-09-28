@@ -1,20 +1,20 @@
 require "spec_helper"
 
-describe Api::V0::TopicsController do
+describe Api::V0::FoldersController do
 
   before(:each) do
     @user = User.create!(:email => 'dummyUser@example.com',
                           :full_name => 'Rufio Pan',
                           :password => 'superDUPERsecretPassword')
     login_user
-    tt = Topic.create(:name => 'Terror Time')
-    p = Topic.create(:name => 'Plebians')
-    @user.topics << tt
-    @user.topics << p
+    tt = Folder.create(:name => 'Terror Time')
+    p = Folder.create(:name => 'Plebians')
+    @user.folders << tt
+    @user.folders << p
   end
 
   describe 'GET #index' do
-    it "successfully returns a list of all topics" do
+    it "successfully returns a list of all folders" do
       get :index
       expect(response).to be_success
       expect(response.code).to eq("200")
@@ -24,7 +24,7 @@ describe Api::V0::TopicsController do
       expect(body[1]['id']).to eq(2)
       expect(body[1]['name']).to eq('Plebians')
     end
-    it "successfully returns topics with correct unread counts" do
+    it "successfully returns folders with correct unread counts" do
       check_unread_count = lambda do |count|
         get :index
         expect(response).to be_success
@@ -33,8 +33,8 @@ describe Api::V0::TopicsController do
         expect(body[0]['unread_conversations']).to eq count
       end
       check_unread_count[0]
-      topic = Topic.find_by_id(1)
-      conversation = topic.conversations.create(:title => 'A conversation')
+      folder = Folder.find_by_id(1)
+      conversation = folder.conversations.create(:title => 'A conversation')
       @user.conversations << conversation
       conversation.actions.create!(:type => 'message',
                                     :data => '{"text":"Just a random message."}',
@@ -50,7 +50,7 @@ describe Api::V0::TopicsController do
   end
 
   describe 'POST #create' do
-    it "successfully creates a new topic" do
+    it "successfully creates a new folder" do
       post :create, :name => 'Huzzah!'
       expect(response).to be_success
       expect(response.code).to eq("201")

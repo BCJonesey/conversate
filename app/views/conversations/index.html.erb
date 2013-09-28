@@ -1,7 +1,7 @@
 <%= content_for :javascript do -%>
 
-var topics = <%= current_user.topics.to_json(:user => current_user).html_safe %>;
-var conversations = <%= @opened_topic.conversations.to_json(:user => current_user).html_safe %>;
+var folders = <%= current_user.folders.to_json(:user => current_user).html_safe %>;
+var conversations = <%= @opened_folder.conversations.to_json(:user => current_user).html_safe %>;
 var user = <%= current_user.to_json().html_safe %>;
 <% if @opened_conversation %>
   var actions = <%= @opened_conversation.actions.to_json(:user => current_user).html_safe %>;
@@ -14,7 +14,7 @@ var user = <%= current_user.to_json().html_safe %>;
 <% end %>
 
 var bootstrap = {
-  topics: topics,
+  folders: folders,
   conversations: conversations,
   actions: actions,
   participants: participants,

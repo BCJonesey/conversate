@@ -19,17 +19,17 @@ var Structural = new (Support.CompositeView.extend({
 
     // Instantiate our primary data structures from our bootstrap data.
     // We only care about things that are convenient to directly access right now,
-    // like the current topics, the current topic, the current conversation,
+    // like the current folders, the current folder, the current conversation,
     // and the current user.
     this._user = new Structural.Models.User(bootstrap.user);
-    this._topics = new Structural.Collections.Topics(bootstrap.topics);
+    this._folders = new Structural.Collections.Folders(bootstrap.folders);
 
-    // We pass the topic over, but we should let it come from the collection.
-    this._topic = this._topics.where({id: bootstrap.topic.id})[0];
-    this._topic.conversations.set(bootstrap.conversations);
+    // We pass the folder over, but we should let it come from the collection.
+    this._folder = this._folders.where({id: bootstrap.folder.id})[0];
+    this._folder.conversations.set(bootstrap.conversations);
 
     // Instantiate the current conversation or a sane default.
-    this._conversation =  this._topic.conversations.where({id: bootstrap.conversation.id})[0];
+    this._conversation =  this._folder.conversations.where({id: bootstrap.conversation.id})[0];
     this._conversation = this._conversation ? this._conversation : new Structural.Models.Conversation();
 
     // Setup our current conversation's actions from the bootstrap data.
@@ -49,8 +49,8 @@ var Structural = new (Support.CompositeView.extend({
     // Setup our views with appropriate data settings.
     this._bar = new Structural.Views.StructuralBar({model: this._user});
     this._watercooler = new Structural.Views.WaterCooler({
-      topics: this._topics,
-      conversations: this._topic.conversations,
+      folders: this._folders,
+      conversations: this._folder.conversations,
       actions: this._conversation.actions,
       participants: this._participants,
       conversation: this._conversation,
@@ -58,7 +58,7 @@ var Structural = new (Support.CompositeView.extend({
       user: this._user
     });
     this._faviconAndTitle = new Structural.Views.FaviconAndTitle({
-      topics: this._topics
+      folders: this._folders
     });
 
     this.appendChild(this._bar);
@@ -69,11 +69,11 @@ var Structural = new (Support.CompositeView.extend({
 
     // Turn on our fetchers.
     this.actionsFetcher = new Support.ActionsFetcher(this._conversation, 5000);
-    this.topicFetcher = new Support.ConversationsFetcher(this._topic.conversations, 60000);
-    this.topicsFetcher = new Support.TopicsFetcher(this._topics, 60000);
+    this.folderFetcher = new Support.ConversationsFetcher(this._folder.conversations, 60000);
+    this.foldersFetcher = new Support.FoldersFetcher(this._folders, 60000);
 
-    // Focus initial topic.
-    this._topics.focus(this._topic.id);
+    // Focus initial folder.
+    this._folders.focus(this._folder.id);
 
     return this;
   },
@@ -86,11 +86,11 @@ var Structural = new (Support.CompositeView.extend({
   },
 
   // TODO: Focus is a little funky. We can probably shift this to
-  // the appropriate view functions. Topics was pulled out for performance
+  // the appropriate view functions. Folders was pulled out for performance
   // reasons when switching conversations.
   focus: function(targets) {
     if (targets.conversation) {
-      this._topic.conversations.focus(targets.conversation);
+      this._folder.conversations.focus(targets.conversation);
     }
 
     if (targets.message) {
@@ -128,20 +128,20 @@ var Structural = new (Support.CompositeView.extend({
     this._conversation = null;
   },
 
-  // Show the first conversation in a specific topic, if able.
-  viewTopic: function(topic) {
+  // Show the first conversation in a specific folder, if able.
+  viewFolder: function(folder) {
     var self = this;
-    if (topic.id !== this._topic.id) {
-      this._topic = topic;
+    if (folder.id !== this._folder.id) {
+      this._folder = folder;
 
       // TODO: Refactor focus in general.
-      this._topics.focus(topic.id);
+      this._folders.focus(folder.id);
 
       // We need to clear out our conversation view because we're about to swap.
       self.clearConversation();
 
-      this.trigger('changeTopic', topic);
-      Structural.Router.navigate(Structural.Router.topicPath(topic),
+      this.trigger('changeFolder', folder);
+      Structural.Router.navigate(Structural.Router.folderPath(folder),
                                  {trigger: true});
     }
   },
@@ -162,10 +162,10 @@ var Structural = new (Support.CompositeView.extend({
   createDeleteAction: function(action) {
     this._conversation.actions.createDeleteAction(action, this._user);
   },
-  createUpdateTopicsAction: function(added, removed) {
-    this._conversation.actions.createUpdateTopicsAction(added, removed, this._user);
-    this._topics.updateConversationLists(this._conversation, added, removed);
-    this._conversation.updateTopicIds(added, removed);
+  createUpdateFoldersAction: function(added, removed) {
+    this._conversation.actions.createUpdateFoldersAction(added, removed, this._user);
+    this._folders.updateConversationLists(this._conversation, added, removed);
+    this._conversation.updateFolderIds(added, removed);
   },
   createNewConversation: function(title, participants, message) {
     var data = {};
@@ -188,7 +188,7 @@ var Structural = new (Support.CompositeView.extend({
 
     var conversation = new Structural.Models.Conversation(data);
     conversation.get('participants').add([this._user], {at: 0});
-    this._topic.conversations.add(conversation);
+    this._folder.conversations.add(conversation);
     conversation.save(null, {
       success: function (conversation, response) {
         // Need to tell our actions collection our server-approved new id.
@@ -200,9 +200,9 @@ var Structural = new (Support.CompositeView.extend({
       }
     });
   },
-  moveConversation: function(topic) {
-    this._conversation.actions.createMoveConversationAction(topic, this._user);
-    this.viewTopic(this._topics.current());
+  moveConversation: function(folder) {
+    this._conversation.actions.createMoveConversationAction(folder, this._user);
+    this.viewFolder(this._folders.current());
   },
   updateTitleAndFavicon: function() {
     if (this._faviconAndTitle) {

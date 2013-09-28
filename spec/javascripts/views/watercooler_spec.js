@@ -2,7 +2,7 @@ describe("Water Cooler view", function() {
   var view;
 
   beforeEach(function() {
-    var topics = [
+    var folders = [
       { name: "Conversations", id: 1 },
       { name: "Structural", id: 2 },
       { name: "Chatter", id: 3 }
@@ -59,14 +59,14 @@ describe("Water Cooler view", function() {
       }
     ];
 
-    var topicsCollection = new Structural.Collections.Topics(topics);
+    var foldersCollection = new Structural.Collections.Folders(folders);
     var conversationsCollection = new Structural.Collections.Conversations(conversations);
     var actionsCollection = new Structural.Collections.Actions(actions);
     var conversationModel = new Structural.Models.Conversation(conversation);
     var participantsCollection = new Structural.Collections.Participants(participants);
 
     view = new Structural.Views.WaterCooler({
-      topics: topicsCollection,
+      folders: foldersCollection,
       conversations: conversationsCollection,
       actions: actionsCollection,
       conversation: conversationModel,
@@ -75,7 +75,7 @@ describe("Water Cooler view", function() {
     view.render();
   });
 
-  it("has a topics column", function() {
+  it("has a folders column", function() {
     expect(view.$('.tpc-container').length).toEqual(1);
     expect(view.$('.tpc').length).toEqual(3);
   });

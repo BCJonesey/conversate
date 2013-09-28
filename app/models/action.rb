@@ -9,7 +9,7 @@ class Action < ActiveRecord::Base
   validates_presence_of :user_id
   validates_presence_of :type
   validates :type, :inclusion => {
-    :in => %w(message deletion retitle update_users update_topics
+    :in => %w(message deletion retitle update_users update_folders
               move_message update_viewers)
   }
 
@@ -92,7 +92,7 @@ class Action < ActiveRecord::Base
         'added' => params['added'],
         'removed' => params['removed']
       }.to_json
-    when 'update_topics'
+    when 'update_folders'
       return {
         'added' => params['added'],
         'removed' => params['removed']

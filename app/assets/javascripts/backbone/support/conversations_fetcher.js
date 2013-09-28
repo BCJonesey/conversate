@@ -7,7 +7,7 @@ Support.ConversationsFetcher = function(conversations, interval) {
   };
   setInterval(self._fetchHandler, interval);
 
-  Structural.on('changeTopic', function(topic) {
-    self._conversations = topic.conversations;
+  Structural.on('changeFolder', function(folder) {
+    self._conversations = folder.conversations;
   });
 }
