@@ -28,7 +28,11 @@ Structural.Views.FaviconAndTitle = Support.CompositeView.extend({
       iconName = 'watercooler-unread';
     }
 
-    this._favicon.attr('href', '/assets/' + iconName + '.png');
+    // Firefox won't change the icon unless we make an actual new tag.
+    var newFavicon = this._favicon.clone();
+    newFavicon.attr('href', '/assets/' + iconName + '.png');
+    this._favicon.replaceWith(newFavicon);
+    this._favicon = newFavicon;
     this._title.text(preamble + title);
   }
 });
