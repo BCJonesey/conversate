@@ -31,6 +31,8 @@ Structural.Collections.Topics = Backbone.Collection.extend({
       tpc.unfocus();
     });
   },
+  // 'Alternate' topics are ones that the given conversation is in, but aren't
+  // the current topic.
   focusAlternates: function(conversation) {
     var ids = conversation ? conversation.get('topic_ids') : [];
     this.each(function(topic) {

@@ -23,6 +23,7 @@ var Structural = new (Support.CompositeView.extend({
     // and the current user.
     this._user = new Structural.Models.User(bootstrap.user);
     this._topics = new Structural.Collections.Topics(bootstrap.topics, {
+      // This is the only Topics collection that we want to handle events.
       isMainCollection: true
     });
 
