@@ -9,11 +9,9 @@ class Topic < ActiveRecord::Base
   default_scope includes(:users)
 
   def as_json(options)
-    options.merge!({:include=>[:users]}) unless options.include?(:include)
-    options[:include] = ([options[:include]]) unless options[:include].is_a?(Array)
-    options[:include] << :users unless options[:include].include?(:users)
     json = super(options)
     json['unread_conversations'] = unread_conversations(options[:user])
+    json[:users] = users
     return json
   end
 
