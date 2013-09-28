@@ -17,6 +17,7 @@ Structural.Collections.Topics = Backbone.Collection.extend({
       }, self);
 
       Structural.on('changeConversation', this.focusAlternates, this);
+      Structural.on('clearConversation', this.focusAlternates, this);
     }
   },
 
@@ -31,7 +32,7 @@ Structural.Collections.Topics = Backbone.Collection.extend({
     });
   },
   focusAlternates: function(conversation) {
-    var ids = conversation.get('topic_ids');
+    var ids = conversation ? conversation.get('topic_ids') : [];
     this.each(function(topic) {
       if (_.contains(ids, topic.id)) {
         topic.focusAlternate();
