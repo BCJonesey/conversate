@@ -1,9 +1,9 @@
 @import 'variables.css.less';
 @import 'mixins.css.less';
 
-// --- Topics --- //
+// --- Folders --- //
 
-.tpc-list{
+.fld-list{
   background-color:#F8F8F8;
   position: absolute;
   top:@toolbar-height;
@@ -16,7 +16,7 @@
   -webkit-overflow-scrolling:touch;
 }
 
-.tpc-hint{
+.fld-hint{
   padding:.3rem;
   margin:.3rem;
   border:1px solid #DDD;
@@ -25,49 +25,50 @@
   font-size:.8rem;
 }
 
-.tpc{
+.fld{
+  margin:0.25rem;
   padding:0.25rem;
   color:#888;
   cursor: pointer;
   border:1px solid transparent;
   margin-top:-1px;
-  &.tpc-alternate{
+  &.fld-alternate{
     border-color:#DDD;
     background-color:#FCFCFC;
   }
-  &.tpc-current{
+  &.fld-current{
     border-color:#DDD;
     background-color:#F0F8FF;
   }
 
 }
 
-.tpc-label{
+.fld-label{
   text-decoration: none;
   .ellipsis();
   padding:0.25rem;
   line-height: 1.0;
 }
 
-.tpc-right{
+.fld-right{
   float:right;
   display:inline-block;
   margin-top:-0.1rem;
   padding:0.25rem;
 }
 
-.tpc-details-toggle{
+.fld-details-toggle{
  display:none;
  line-height: 1.0;
 }
 
-.tpc.tpc-default .tpc-details-toggle,
-.tpc.tpc-shared .tpc-details-toggle,
-.tpc.tpc-current .tpc-details-toggle{
+.fld.fld-default .fld-details-toggle,
+.fld.fld-shared .fld-details-toggle,
+.fld.fld-current .fld-details-toggle{
   display:inline;
 }
 
-.tpc-count{
+.fld-count{
   display:inline-block;
   font-weight: normal;
   .count();
@@ -89,7 +90,7 @@
 }
 
 
-.tpc-new {
+.fld-new {
   position: fixed;
   top:10%;
   left:10%;
@@ -105,7 +106,7 @@
     border:1px solid #CCC;
   }
 }
-.tpc-new-input{
+.fld-new-input{
   width:100%;
   box-sizing:border-box;
   border:1px solid #CCC;

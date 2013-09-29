@@ -36,22 +36,22 @@ describe Group do
       coworkers.users += [alice, dave, catherine, fletcher]
       coworkers.save
 
-      friend_talk = Topic.new(name: 'Friend Talk')
+      friend_talk = Folder.new(name: 'Friend Talk')
       friend_talk.users += friends.users
       friend_talk.save
 
       hey_friends = Conversation.new(title: 'Hey Friends')
       hey_friends.users += friends.users
-      hey_friends.topics << friend_talk
+      hey_friends.folders << friend_talk
       hey_friends.save
 
-      work_talk = Topic.new(name: 'Work Talk')
+      work_talk = Folder.new(name: 'Work Talk')
       work_talk.users += coworkers.users
       work_talk.save
 
       do_some_work = Conversation.new(title: 'Do Some Work')
       do_some_work.users += coworkers.users
-      do_some_work.topics << work_talk
+      do_some_work.folders << work_talk
       do_some_work.save
 
       not_fully_removed = coworkers.remove_users([dave.id])

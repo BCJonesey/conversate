@@ -6,55 +6,55 @@ describe Conversation do
     @sally = User.build(email: 'sally@example.com', password: 'a')
     @steve = User.build(email: 'steve@example.com', password: 'a')
 
-    @shared = Topic.create!(name: 'Shared')
-    @james.topics << @shared
-    @sally.topics << @shared
+    @shared = Folder.create!(name: 'Shared')
+    @james.folders << @shared
+    @sally.folders << @shared
   end
 
   describe 'creation' do
-    it 'adds the conversation to a participant\'s default topic if necessary' do
+    it 'adds the conversation to a participant\'s default folder if necessary' do
       conversation = Conversation.create!(title: 'Hey everyone')
 
-      conversation.topics << @shared
+      conversation.folders << @shared
       conversation.users << @james
 
-      expect(conversation.topics.length).to eq(1)
-      expect(conversation.topics.first).to eq(@shared)
+      expect(conversation.folders.length).to eq(1)
+      expect(conversation.folders.first).to eq(@shared)
 
       conversation.add_participants([{id: @steve.id}], @james)
 
-      expect(conversation.topics.length).to eq(2)
-      expect(conversation.topics[1].id).to eq(@steve.default_topic_id)
+      expect(conversation.folders.length).to eq(2)
+      expect(conversation.folders[1].id).to eq(@steve.default_folder_id)
 
       conversation.add_participants([{id: @sally.id}], @james)
 
-      expect(conversation.topics.length).to eq(2)
+      expect(conversation.folders.length).to eq(2)
     end
   end
 
   describe 'adding participants later' do
-    it 'adds the conversation to a participant\'s default topic if necessary' do
+    it 'adds the conversation to a participant\'s default folder if necessary' do
       conversation = Conversation.create!(title: 'Buzzards')
-      conversation.topics << @shared
+      conversation.folders << @shared
       conversation.users << @james
 
-      expect(conversation.topics.length).to eq(1)
-      expect(conversation.topics.first).to eq(@shared)
+      expect(conversation.folders.length).to eq(1)
+      expect(conversation.folders.first).to eq(@shared)
 
       conversation.handle(conversation.actions.new(type: 'update_users',
                                                    data: {added: [{id: @steve.id}],
                                                           removed: []}.to_json,
                                                    user_id: @james.id))
 
-      expect(conversation.topics.length).to eq(2)
-      expect(conversation.topics[1].id).to eq(@steve.default_topic_id)
+      expect(conversation.folders.length).to eq(2)
+      expect(conversation.folders[1].id).to eq(@steve.default_folder_id)
 
       conversation.handle(conversation.actions.new(type: 'update_users',
                                                    data: {added: [{id: @sally.id}],
                                                           removed: []}.to_json,
                                                    user_id: @james.id))
 
-      expect(conversation.topics.length).to eq(2)
+      expect(conversation.folders.length).to eq(2)
     end
   end
 
@@ -64,63 +64,63 @@ describe Conversation do
     end
   end
 
-  describe 'adding topics' do
+  describe 'adding folders' do
     it 'without creating an action' do
       conversation = Conversation.create!(title: 'Noah and the Whale')
-      other_topic = Topic.new(name: 'Five Year Plan')
-      other_topic.save
-      conversation.add_topics(hashify(@shared, other_topic), @james, false)
+      other_folder = Folder.new(name: 'Five Year Plan')
+      other_folder.save
+      conversation.add_folders(hashify(@shared, other_folder), @james, false)
 
-      conversation.topics.length.should eq(2)
-      conversation.topics.include?(@shared).should be_true
-      conversation.topics.include?(other_topic).should be_true
+      conversation.folders.length.should eq(2)
+      conversation.folders.include?(@shared).should be_true
+      conversation.folders.include?(other_folder).should be_true
       conversation.actions.empty?.should be_true
     end
 
     it 'and creating an action' do
       conversation = Conversation.create!(title: 'Noah and the Whale')
-      other_topic = Topic.new(name: 'Five Year Plan')
-      other_topic.save
-      conversation.add_topics(hashify(@shared, other_topic), @james)
+      other_folder = Folder.new(name: 'Five Year Plan')
+      other_folder.save
+      conversation.add_folders(hashify(@shared, other_folder), @james)
 
-      conversation.topics.length.should eq(2)
-      conversation.topics.include?(@shared).should be_true
-      conversation.topics.include?(other_topic).should be_true
+      conversation.folders.length.should eq(2)
+      conversation.folders.include?(@shared).should be_true
+      conversation.folders.include?(other_folder).should be_true
       conversation.actions.length.should eq(1)
-      conversation.actions.first.type.should eq('update_topics')
+      conversation.actions.first.type.should eq('update_folders')
       conversation.actions.first.added.length.should eq(2)
       conversation.actions.first.added[0]['id'].should eq(@shared.id)
-      conversation.actions.first.added[1]['id'].should eq(other_topic.id)
+      conversation.actions.first.added[1]['id'].should eq(other_folder.id)
     end
   end
 
-  describe 'removing topics' do
+  describe 'removing folders' do
     it 'without creating an action' do
       conversation = Conversation.create(title: 'Zoe Keating')
-      topic_one = Topic.create(name: 'Code')
-      topic_two = Topic.create(name: 'x16')
-      conversation.topics += [@shared, topic_one, topic_two]
-      conversation.remove_topics(hashify(@shared, topic_one), @james, false)
+      folder_one = Folder.create(name: 'Code')
+      folder_two = Folder.create(name: 'x16')
+      conversation.folders += [@shared, folder_one, folder_two]
+      conversation.remove_folders(hashify(@shared, folder_one), @james, false)
 
-      conversation.topics.length.should eq(1)
-      conversation.topics.include?(topic_two).should be_true
+      conversation.folders.length.should eq(1)
+      conversation.folders.include?(folder_two).should be_true
       conversation.actions.empty?.should be_true
     end
 
     it 'and creating an action' do
       conversation = Conversation.create(title: 'Zoe Keating')
-      topic_one = Topic.create(name: 'Code')
-      topic_two = Topic.create(name: 'x16')
-      conversation.topics += [@shared, topic_one, topic_two]
-      conversation.remove_topics(hashify(@shared, topic_one), @james)
+      folder_one = Folder.create(name: 'Code')
+      folder_two = Folder.create(name: 'x16')
+      conversation.folders += [@shared, folder_one, folder_two]
+      conversation.remove_folders(hashify(@shared, folder_one), @james)
 
-      conversation.topics.length.should eq(1)
-      conversation.topics.include?(topic_two).should be_true
+      conversation.folders.length.should eq(1)
+      conversation.folders.include?(folder_two).should be_true
       conversation.actions.length.should eq(1)
-      conversation.actions.first.type.should eq('update_topics')
+      conversation.actions.first.type.should eq('update_folders')
       conversation.actions.first.removed.length.should eq(2)
       conversation.actions.first.removed[0]['id'].should eq(@shared.id)
-      conversation.actions.first.removed[1]['id'].should eq(topic_one.id)
+      conversation.actions.first.removed[1]['id'].should eq(folder_one.id)
     end
   end
 end

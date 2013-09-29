@@ -6,8 +6,8 @@ class User < ActiveRecord::Base
   has_many :actions, :inverse_of => :user
   has_many :group_participations
   has_many :groups, :through => :group_participations
-  has_and_belongs_to_many :topics
-  belongs_to :default_topic, class_name: "Topic", foreign_key: "default_topic_id"
+  has_and_belongs_to_many :folders
+  belongs_to :default_folder, class_name: "Folder", foreign_key: "default_folder_id"
 
   attr_accessible :email, :full_name, :password, :password_confirmation
 
@@ -20,11 +20,11 @@ class User < ActiveRecord::Base
     user = User.new(params)
     return false if user.save == false
 
-    new_topic = Topic.new
-    new_topic.name = 'My Conversations'
-    new_topic.users << user
-    new_topic.save
-    user.default_topic_id = new_topic.id
+    new_folder = Folder.new
+    new_folder.name = 'My Conversations'
+    new_folder.users << user
+    new_folder.save
+    user.default_folder_id = new_folder.id
     user.save
 
     user

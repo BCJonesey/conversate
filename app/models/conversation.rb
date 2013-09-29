@@ -3,7 +3,7 @@ class Conversation < ActiveRecord::Base
   has_many :reading_logs
   has_many :users, :through => :reading_logs
   has_many :actions, :inverse_of => :conversation
-  has_and_belongs_to_many :topics
+  has_and_belongs_to_many :folders
 
   attr_accessible :title, :users, :most_recent_event
 
@@ -22,14 +22,14 @@ class Conversation < ActiveRecord::Base
 
   def add_participants(participants, user, create_action=true)
     if participants
-      topic_set = Set.new(self.topics)
+      folder_set = Set.new(self.folders)
       participants.each do |p|
         user_id = p[:id] || p['id']
         u = User.find(user_id)
         self.users << u
-        if topic_set.intersection(Set.new(u.topics)).length == 0
-          u_default = Topic.find(u.default_topic_id)
-          self.topics << u_default
+        if folder_set.intersection(Set.new(u.folders)).length == 0
+          u_default = Folder.find(u.default_folder_id)
+          self.folders << u_default
         end
       end
       self.save
@@ -43,7 +43,7 @@ class Conversation < ActiveRecord::Base
   end
 
   def remove_participants(participants, user, create_action=true)
-    # TODO: Sometimes remove some topics - semantics TBD
+    # TODO: Sometimes remove some folders - semantics TBD
     if participants
       participants.each do |p|
         user_id = p[:id] || p['id']
@@ -61,17 +61,17 @@ class Conversation < ActiveRecord::Base
     end
   end
 
-  def add_topics(topics, user, create_action=true)
-    if topics
-      topics.each do |t|
-        topic_id = t[:id] || t['id']
-        topic = Topic.find(topic_id)
-        self.topics << topic
+  def add_folders(folders, user, create_action=true)
+    if folders
+      folders.each do |t|
+        folder_id = t[:id] || t['id']
+        folder = Folder.find(folder_id)
+        self.folders << folder
       end
 
       if create_action
-        self.actions.new(type: 'update_topics',
-                         data: {added: topics}.to_json,
+        self.actions.new(type: 'update_folders',
+                         data: {added: folders}.to_json,
                          user_id: user.id)
       end
 
@@ -79,17 +79,17 @@ class Conversation < ActiveRecord::Base
     end
   end
 
-  def remove_topics(topics, user, create_action=true)
-    if topics
-      topics.each do |t|
-        topic_id = t[:id] || t['id']
-        topic = Topic.find(topic_id)
-        self.topics.delete topic
+  def remove_folders(folders, user, create_action=true)
+    if folders
+      folders.each do |t|
+        folder_id = t[:id] || t['id']
+        folder = Folder.find(folder_id)
+        self.folders.delete folder
       end
 
       if create_action
-        self.actions.new(type: 'update_topics',
-                         data: {removed: topics}.to_json,
+        self.actions.new(type: 'update_folders',
+                         data: {removed: folders}.to_json,
                          user_id: user.id)
       end
 
@@ -115,8 +115,8 @@ class Conversation < ActiveRecord::Base
 
   def viewers
     viewers_set = Set.new([])
-    self.topics.each do |topic|
-      viewers_set += topic.users.to_set
+    self.folders.each do |folder|
+      viewers_set += folder.users.to_set
     end
     (viewers_set - self.participants).to_a
   end
@@ -175,7 +175,7 @@ class Conversation < ActiveRecord::Base
     return reading_log.unread_count
   end
 
-  # TODO: Make one call. This is janky, but needed for topics right now.
+  # TODO: Make one call. This is janky, but needed for folders right now.
   def unread_count_for_user(user)
     if (!participants.include?(user))
       return 0
@@ -210,10 +210,10 @@ class Conversation < ActiveRecord::Base
     json[:most_recent_viewed] = most_recent_viewed ? most_recent_viewed.msec : DateTime.now
 
     # TODO: Appears to be the slowest call here.
-    json[:topic_ids] = []
-    user.topics.each do |topic|
-      if (topics.include?(topic))
-        json[:topic_ids] << topic.id
+    json[:folder_ids] = []
+    user.folders.each do |folder|
+      if (folders.include?(folder))
+        json[:folder_ids] << folder.id
       end
     end
 
@@ -231,12 +231,12 @@ class Conversation < ActiveRecord::Base
         if action.removed
           self.remove_participants(action.removed, action.user, false)
         end
-      when 'update_topics'
+      when 'update_folders'
         if action.added
-          self.add_topics(action.added, action.user, false)
+          self.add_folders(action.added, action.user, false)
         end
         if action.removed
-          self.remove_topics(action.removed, action.user, false)
+          self.remove_folders(action.removed, action.user, false)
         end
     end
     save
@@ -246,8 +246,8 @@ class Conversation < ActiveRecord::Base
     "Conversation:#{self.id}:#{self.title}"
   end
 
-  def ensure_user_has_in_topic(user)
-    self.topics << user.default_topic if (self.topics.to_set & user.topics.to_set).empty? 
+  def ensure_user_has_in_folder(user)
+    self.folders << user.default_folder if (self.folders.to_set & user.folders.to_set).empty?
   end
 
 

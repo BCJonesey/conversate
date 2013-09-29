@@ -4,7 +4,7 @@
 <%= content_for :javascript do -%>
 
 data = {
-  topics: [
+  folders: [
     { "id": 1,
       "name": "Conversations",
       "unread_conversations": 3
@@ -27,7 +27,7 @@ data = {
       "unread_conversations": 0
     },
     { "id": 12,
-      "name": "This topic is intentionally entirely too long",
+      "name": "This folder is intentionally entirely too long",
       "unread_conversations": 0
     }
   ],
@@ -356,20 +356,20 @@ switch(name) {
     var collection = new Structural.Collections.Conversations(data.conversations);
     view = new Structural.Views.ConversationContainer({conversations: collection});
     break;
-  case 'topic':
-    var model = new Structural.Models.Topic(data.topics[0]);
-    view = new Structural.Views.Topic({model: model});
+  case 'folder':
+    var model = new Structural.Models.Folder(data.folders[0]);
+    view = new Structural.Views.Folder({model: model});
     break;
-  case 'topic-list':
-    var collection = new Structural.Collections.Topics(data.topics);
-    view = new Structural.Views.Topics({collection: collection});
+  case 'folder-list':
+    var collection = new Structural.Collections.Folders(data.folders);
+    view = new Structural.Views.Folders({collection: collection});
     break;
-  case 'topic-container':
-    var collection = new Structural.Collections.Topics(data.topics);
-    view = new Structural.Views.TopicContainer({topics: collection});
+  case 'folder-container':
+    var collection = new Structural.Collections.Folders(data.folders);
+    view = new Structural.Views.FolderContainer({folders: collection});
     break;
-  case 'topic-editor':
-    view = new Structural.Views.TopicEditor();
+  case 'folder-editor':
+    view = new Structural.Views.FolderEditor();
     break;
   case 'title-editor':
     var model = new Structural.Models.Conversation(data.conversations[0]);
@@ -383,8 +383,8 @@ switch(name) {
       addressBook: addresses
     });
     break;
-  case 'update-topics':
-    view = new Structural.Views.UpdateTopicsDialog();
+  case 'update-folders':
+    view = new Structural.Views.UpdateFoldersDialog();
     break;
   case 'action':
     var model = new Structural.Models.Action(data.actions[0]);

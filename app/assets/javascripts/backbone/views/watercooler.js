@@ -2,7 +2,7 @@ Structural.Views.WaterCooler = Support.CompositeView.extend({
   className: 'water-cooler',
   initialize: function(options) {
     options = options || {};
-    this.topics = options.topics;
+    this.folders = options.folders;
     this.conversations = options.conversations;
     this.actions = options.actions;
     this.conversation = options.conversation;
@@ -11,8 +11,8 @@ Structural.Views.WaterCooler = Support.CompositeView.extend({
     this.user = options.user;
   },
   render: function() {
-    this.topicsView = new Structural.Views.TopicContainer({
-      topics: this.topics,
+    this.foldersView = new Structural.Views.FolderContainer({
+      folders: this.folders,
       addressBook: this.addressBook
     });
     this.conversationsView = new Structural.Views.ConversationContainer({
@@ -25,10 +25,10 @@ Structural.Views.WaterCooler = Support.CompositeView.extend({
       participants: this.participants,
       addressBook: this.addressBook,
       user: this.user,
-      topics: this.topics
+      folders: this.folders
     });
 
-    this.appendChild(this.topicsView);
+    this.appendChild(this.foldersView);
     this.appendChild(this.conversationsView);
     this.appendChild(this.actionsView);
   },
@@ -40,7 +40,7 @@ Structural.Views.WaterCooler = Support.CompositeView.extend({
     this.actionsView.clearConversation();
   },
   moveConversationMode: function() {
-    this.topicsView.moveConversationMode();
+    this.foldersView.moveConversationMode();
   },
   scrollActionsToBottom: function() {
     this.actionsView.scrollToBottom();

@@ -1,5 +1,5 @@
-Structural.Models.Topic = Backbone.Model.extend({
-  urlroot: Structural.apiPrefix + '/topics',
+Structural.Models.Folder = Backbone.Model.extend({
+  urlroot: Structural.apiPrefix + '/folders',
 
   initialize: function(attributes, options) {
     var self = this;
@@ -8,7 +8,7 @@ Structural.Models.Topic = Backbone.Model.extend({
     // TODO: This gets us the favicon changes for free, but I don't like the asymmetry. Refactor.
     self.on('change:unread_conversations', Structural.updateTitleAndFavicon, Structural);
 
-    self.conversations = new Structural.Collections.Conversations([], {topicId: self.id});
+    self.conversations = new Structural.Collections.Conversations([], {folderId: self.id});
     self.conversations.on('updated', function(conversation) {
 
       // One of our conversations has been read. We should lower our expected count.
@@ -23,15 +23,29 @@ Structural.Models.Topic = Backbone.Model.extend({
       self.trigger('updated');
     }, self);
 
-    // We should listen for one of our conversations being read in a different topic.
+    // We should listen for one of our conversations being read in a different folder.
     Structural.on('readConversation', function(conversation) {
       self.filterNewlyReadConversation(conversation);
       self.trigger('updated');
     }, self);
 
     if (this.get('users')) {
-      this.set('users', new Structural.Collections.TopicParticipants(this.get('users')));
+      this.set('users', new Structural.Collections.FolderParticipants(this.get('users')));
     }
+  },
+
+  parse: function (response, options) {
+
+    // We're expecting the folder participants to be an actual collection.
+    var users = new Structural.Collections.FolderParticipants();
+
+    _.each(response.users, function (p) {
+      users.add(new Structural.Models.Participant(p));
+    });
+
+    response.users = users;
+    return response;
+
   },
 
   focus: function() {
@@ -40,6 +54,14 @@ Structural.Models.Topic = Backbone.Model.extend({
   },
   unfocus: function() {
     this.set('is_current', false);
+  },
+  // A folder is an 'alternate' folder if the current conversation is in it, but
+  // the folder isn't the current folder.
+  focusAlternate: function() {
+    this.set('is_alternate', true);
+  },
+  unfocusAlternate: function() {
+    this.set('is_alternate', false);
   },
   unreadConversationCount: function() {
     var countByCalculation = this.conversations.unreadConversationCount();

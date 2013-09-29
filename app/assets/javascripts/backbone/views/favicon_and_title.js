@@ -1,7 +1,7 @@
 Structural.Views.FaviconAndTitle = Support.CompositeView.extend({
   initialize: function(options) {
     options = options || {};
-    this._topics = options.topics;
+    this._folders = options.folders;
     this._favicon = $('head link[rel="icon"]');
     this._title = $('head title');
   },
@@ -17,8 +17,8 @@ Structural.Views.FaviconAndTitle = Support.CompositeView.extend({
     }
 
     // Figure out how the title should look factoring in unread conversation count.
-    var totalUnreadConversations = this._topics.reduce(function(sum, topic) {
-      return sum + topic.unreadConversationCount();
+    var totalUnreadConversations = this._folders.reduce(function(sum, folder) {
+      return sum + folder.unreadConversationCount();
     }, 0);
     var preamble = '';
     if (totalUnreadConversations > 0) {
@@ -28,7 +28,11 @@ Structural.Views.FaviconAndTitle = Support.CompositeView.extend({
       iconName = 'watercooler-unread';
     }
 
-    this._favicon.attr('href', '/assets/' + iconName + '.png');
+    // Firefox won't change the icon unless we make an actual new tag.
+    var newFavicon = this._favicon.clone();
+    newFavicon.attr('href', '/assets/' + iconName + '.png');
+    this._favicon.replaceWith(newFavicon);
+    this._favicon = newFavicon;
     this._title.text(preamble + title);
   }
 });

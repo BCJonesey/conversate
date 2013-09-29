@@ -1,14 +1,14 @@
 Structural.Collections.Conversations = Backbone.Collection.extend({
 	model: Structural.Models.Conversation,
   url: function() {
-    return Structural.apiPrefix + '/topics/' + this.topicId + '/conversations';
+    return Structural.apiPrefix + '/folders/' + this.folderId + '/conversations';
   },
   initialize: function(data, options) {
     var self = this;
     options = options || {};
-    this.topicId = options.topicId;
+    this.folderId = options.folderId;
 
-    // We want to bind updates on our conversations so that we can alert our topics too.
+    // We want to bind updates on our conversations so that we can alert our folders too.
     self.on('add', function(conversation) {
       conversation.on('updated', function(conversation) {
         self.trigger('updated', conversation);
@@ -17,7 +17,7 @@ Structural.Collections.Conversations = Backbone.Collection.extend({
 
     Structural.on('readConversation', function(conversation) {
 
-      // Let's see if a conversation in a different topic is one of ours too,
+      // Let's see if a conversation in a different folder is one of ours too,
       // and was just read.
       var conversation = self.get(conversation.id);
       if (conversation) {
@@ -41,7 +41,7 @@ Structural.Collections.Conversations = Backbone.Collection.extend({
     })
   },
 
-  // The topic associated with these conversations is being viewed.
+  // The folder associated with these conversations is being viewed.
   viewConversations: function() {
     var self = this;
     var options = {};

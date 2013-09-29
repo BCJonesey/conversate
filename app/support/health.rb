@@ -10,17 +10,17 @@ module Health
 
   # User health checkts
 
-  def Health.user_with_nil_default_topic
-    User.where(:default_topic_id => nil).map do |u|
+  def Health.user_with_nil_default_folder
+    User.where(:default_folder_id => nil).map do |u|
       {
         :model => u,
-        :notes => u.topics.map{|t| t.debug_s}.join(', ')
+        :notes => u.folders.map{|t| t.debug_s}.join(', ')
       }
     end
   end
 
-  def Health.user_with_no_topics
-    User.all.keep_if {|u| u.topics.empty? }.map do |u|
+  def Health.user_with_no_folders
+    User.all.keep_if {|u| u.folders.empty? }.map do |u|
       {
         :model => u,
         :notes => ''
@@ -37,10 +37,10 @@ module Health
     end
   end
 
-  # Topic health checks
+  # Folder health checks
 
-  def Health.topic_with_no_users
-    Topic.all.keep_if {|t| t.users.empty? }.map do |t|
+  def Health.folder_with_no_users
+    Folder.all.keep_if {|t| t.users.empty? }.map do |t|
       {
         :model => t,
         :notes => ''
@@ -68,8 +68,8 @@ module Health
     end
   end
 
-  def Health.conversation_with_no_topics
-    Conversation.all.keep_if {|c| c.topics.empty? }.map do |c|
+  def Health.conversation_with_no_folders
+    Conversation.all.keep_if {|c| c.folders.empty? }.map do |c|
       {
         :model => c,
         :notes => ''
@@ -80,9 +80,9 @@ module Health
   def Health.conversation_hidden_from_users
     hidden_users = []
     Conversation.all.keep_if do |c|
-      c_topics = Set.new(c.topics)
+      c_folders = Set.new(c.folders)
       hidden_from = c.users.keep_if do |u|
-        Set.new(u.topics).intersection(c_topics).empty?
+        Set.new(u.folders).intersection(c_folders).empty?
       end
       hidden_users += hidden_from
       hidden_from.length > 0

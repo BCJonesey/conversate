@@ -16,7 +16,7 @@ Structural.Views.ActionContainer = Support.CompositeView.extend({
     this.actions = options.actions;
     this.addressBook = options.addressBook;
     this.user = options.user;
-    this.topics = options.topics;
+    this.folders = options.folders;
 
     this.participants.on('reset', this.reClass, this);
 
@@ -25,7 +25,7 @@ Structural.Views.ActionContainer = Support.CompositeView.extend({
   render: function() {
     this.titleView = new Structural.Views.TitleEditor({
       conversation: this.conversation,
-      topics: this.topics
+      folders: this.folders
     });
     this.participantsView = new Structural.Views.ParticipantEditor({
       participants: this.participants,

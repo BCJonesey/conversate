@@ -7,6 +7,8 @@ Structural.Views.AutocompleteOptions = Support.CompositeView.extend({
     this.participants = options.participants;
     this.matches = [];
     this.targetIndex = 0;
+
+    Structural.on('changeConversation', this._changeConversation, this);
   },
   render: function() {
     this.$el.empty();
@@ -18,6 +20,7 @@ Structural.Views.AutocompleteOptions = Support.CompositeView.extend({
       this.$el.removeClass('hidden');
     }
     this._changeTargetIndex(this.targetIndex);
+    this._centerSelectedOption();
   },
   events: {
     'mouseenter .token-option': 'focusAutocompleteTarget',
@@ -76,8 +79,17 @@ Structural.Views.AutocompleteOptions = Support.CompositeView.extend({
   },
   _centerSelectedOption: function() {
     var target = this.$('.target');
-    var center = this.el.scrollTop + target.position().top + (target.outerHeight() / 2);
-    var scrollTop = center - this.$el.innerHeight() / 2;
-    this.$el.scrollTop(scrollTop);
+
+    // I swear I have no idea how target could be a valid object and have .position()
+    // return undefined, but that's what's happening. Thanks, Eich.
+    if (target.position()) {
+      var center = this.el.scrollTop + target.position().top + (target.outerHeight() / 2);
+      var scrollTop = center - this.$el.innerHeight() / 2;
+      this.$el.scrollTop(scrollTop);
+    }
+  },
+  _changeConversation: function(conversation) {
+    this.participants = conversation.participants;
+    this.render();
   }
 });
