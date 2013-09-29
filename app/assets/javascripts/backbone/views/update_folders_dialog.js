@@ -1,30 +1,30 @@
-Structural.Views.UpdateTopicsDialog = Support.CompositeView.extend({
+Structural.Views.UpdateFoldersDialog = Support.CompositeView.extend({
   className: 'act-ut hidden',
-  template: JST['backbone/templates/actions/update_topics'],
+  template: JST['backbone/templates/actions/update_folders'],
   initialize: function(options) {
     options = options || {};
-    this.topics = options.topics;
-    this.topic_ids = options.conversation.get('topic_ids') || [];
-    this.original_topic_ids = _.clone(this.topic_ids);
+    this.folders = options.folders;
+    this.folder_ids = options.conversation.get('folder_ids') || [];
+    this.original_folder_ids = _.clone(this.folder_ids);
     Structural.on('clickAnywhere', this.hideIfClickOff, this);
-    this.topics.each(function(topic) {
-      topic.on('checked', this.addTopic, this);
-      topic.on('unchecked', this.removeTopic, this);
+    this.folders.each(function(folder) {
+      folder.on('checked', this.addFolder, this);
+      folder.on('unchecked', this.removeFolder, this);
     }, this);
   },
   render: function() {
     this.$el.html(this.template());
-    this.topics.each(function(topic) {
-      this.renderOption(topic);
+    this.folders.each(function(folder) {
+      this.renderOption(folder);
     }, this);
     return this;
   },
-  renderOption: function(topic) {
-    var option = new Structural.Views.TopicUpdateOption({
-      topic: topic,
-      topic_ids: this.topic_ids
+  renderOption: function(folder) {
+    var option = new Structural.Views.FolderUpdateOption({
+      folder: folder,
+      folder_ids: this.folder_ids
     });
-    this.appendChildTo(option, this.$el.find('.act-ut-topics-list'));
+    this.appendChildTo(option, this.$el.find('.act-ut-folders-list'));
   },
 
   toggleVisible: function() {
@@ -41,30 +41,30 @@ Structural.Views.UpdateTopicsDialog = Support.CompositeView.extend({
     }
   },
 
-  addTopic: function(topic) {
-    this.topic_ids.push(topic.id);
+  addFolder: function(folder) {
+    this.folder_ids.push(folder.id);
   },
-  removeTopic: function(topic) {
-    this.topic_ids = _.without(this.topic_ids, topic.id);
+  removeFolder: function(folder) {
+    this.folder_ids = _.without(this.folder_ids, folder.id);
   },
   save: function() {
-    var added_ids = _.difference(this.topic_ids, this.original_topic_ids);
-    var removed_ids = _.difference(this.original_topic_ids, this.topic_ids);
+    var added_ids = _.difference(this.folder_ids, this.original_folder_ids);
+    var removed_ids = _.difference(this.original_folder_ids, this.folder_ids);
 
     if (added_ids.length === 0 && removed_ids.length === 0) {
       return;
     }
 
     var self = this;
-    var added = added_ids.map(function(id) { return self.topics.get(id); });
-    var removed = removed_ids.map(function(id) { return self.topics.get(id); });
+    var added = added_ids.map(function(id) { return self.folders.get(id); });
+    var removed = removed_ids.map(function(id) { return self.folders.get(id); });
 
-    Structural.createUpdateTopicsAction(added, removed);
-    this.original_topic_ids = _.clone(this.topic_ids);
+    Structural.createUpdateFoldersAction(added, removed);
+    this.original_folder_ids = _.clone(this.folder_ids);
 
-    if (_.contains(removed_ids, Structural._topic.id)) {
-      // View first conversation in topic, if any
-      var firstConversation = Structural._topic.conversations.first();
+    if (_.contains(removed_ids, Structural._folder.id)) {
+      // View first conversation in folder, if any
+      var firstConversation = Structural._folder.conversations.first();
       if (firstConversation) {
         Structural.viewConversation(firstConversation);
       } else {

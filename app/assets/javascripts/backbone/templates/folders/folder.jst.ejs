@@ -1,8 +1,8 @@
-<div class='tpc-right'>
-  <a class='btn-faint tpc-details-toggle'href='#'><i class='icon-info-sign'></i></a>
-  <% if (topic.unreadConversationCount() > 0) { %>
-    <span class='tpc-count'><%= topic.unreadConversationCount() %></span>
+<div class='fld-right'>
+  <a class='btn-faint fld-details-toggle'href='#'><i class='icon-info-sign'></i></a>
+  <% if (folder.unreadConversationCount() > 0) { %>
+    <span class='fld-count'><%= folder.unreadConversationCount() %></span>
   <% } %>
 </div>
 
-<span class='tpc-label'> <%= topic.escape('name') %> </span>
+<span class='fld-label'> <%= folder.escape('name') %> </span>

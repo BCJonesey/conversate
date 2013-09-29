@@ -45,9 +45,9 @@ class Group < ActiveRecord::Base
 
       if user.groups.length == 1 && user.groups.include?(self)
         user.removed = true
-        user.topics.each do |topic|
-          topic.users.delete user
-          topic.save
+        user.folders.each do |folder|
+          folder.users.delete user
+          folder.save
         end
         user.conversations.each do |conversation|
           conversation.users.delete user

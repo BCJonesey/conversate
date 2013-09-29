@@ -1,14 +1,14 @@
-Structural.Collections.Topics = Backbone.Collection.extend({
-  model: Structural.Models.Topic,
-  url: Structural.apiPrefix + '/topics',
+Structural.Collections.Folders = Backbone.Collection.extend({
+  model: Structural.Models.Folder,
+  url: Structural.apiPrefix + '/folders',
   comparator: 'created_at',
 
   initialize: function(models, options) {
     var self = this;
     options = options || {};
     if (options.isMainCollection) {
-      self.on('add', function(topic) {
-        topic.on('updated', function() {
+      self.on('add', function(folder) {
+        folder.on('updated', function() {
 
           // TODO: Replace with event.
           Structural.updateTitleAndFavicon();
@@ -22,24 +22,24 @@ Structural.Collections.Topics = Backbone.Collection.extend({
   },
 
   focus: function(id) {
-    var topic = this.get(id);
-    if(topic) {
-      topic.focus();
+    var folder = this.get(id);
+    if(folder) {
+      folder.focus();
     }
 
-    this.filter(function(tpc) { return tpc.id != id; }).forEach(function(tpc) {
-      tpc.unfocus();
+    this.filter(function(fld) { return fld.id != id; }).forEach(function(fld) {
+      fld.unfocus();
     });
   },
-  // 'Alternate' topics are ones that the given conversation is in, but aren't
-  // the current topic.
+  // 'Alternate' folders are ones that the given conversation is in, but aren't
+  // the current folder.
   focusAlternates: function(conversation) {
-    var ids = conversation ? conversation.get('topic_ids') : [];
-    this.each(function(topic) {
-      if (_.contains(ids, topic.id)) {
-        topic.focusAlternate();
+    var ids = conversation ? conversation.get('folder_ids') : [];
+    this.each(function(folder) {
+      if (_.contains(ids, folder.id)) {
+        folder.focusAlternate();
       } else {
-        topic.unfocusAlternate();
+        folder.unfocusAlternate();
       }
     }, this);
   },
@@ -47,13 +47,13 @@ Structural.Collections.Topics = Backbone.Collection.extend({
     return this.where({is_current: true}).pop();
   },
 
-  updateConversationLists: function(conversation, addedTopics, removedTopics) {
-    addedTopics.forEach(function(topic) {
-      topic.conversations.add(conversation);
+  updateConversationLists: function(conversation, addedFolders, removedFolders) {
+    addedFolders.forEach(function(folder) {
+      folder.conversations.add(conversation);
     });
 
-    removedTopics.forEach(function(topic) {
-      topic.conversations.remove(conversation);
+    removedFolders.forEach(function(folder) {
+      folder.conversations.remove(conversation);
     })
   }
 });

@@ -15,7 +15,7 @@ Conversate::Application.routes.draw do
 
   get 'conversation/:slug/:id(#message:message_id)' => 'conversations#show',
     :as => 'conversation'
-  get 'topic/:slug/:id' => 'topics#show', :as => 'topic'
+  get 'folder/:slug/:id' => 'folders#show', :as => 'folder'
 
   get 'ux/testbed' => 'testbed#index', :as => 'testbed'
   get 'ux/testbed/:view' => 'testbed#test_view', :as  =>'test_view'
@@ -28,7 +28,7 @@ Conversate::Application.routes.draw do
 
   namespace :api do
     namespace :v0 do
-      resources :topics, :only => [:index, :create, :update] do
+      resources :folders, :only => [:index, :create, :update] do
         post 'users', :on => :member
         resources :conversations, :only => [:index, :create]
       end

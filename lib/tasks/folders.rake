@@ -1,25 +1,25 @@
-namespace :topic do
+namespace :folder do
   namespace :default do
-    desc 'Create a default topic for each user that has none'
+    desc 'Create a default folder for each user that has none'
     task create: [:environment] do
       User.all.each do |user|
-        if user.default_topic_id.nil?
-          default_topic = Topic.new
-          default_topic.name = 'My Conversations'
-          default_topic.save
-          user.default_topic_id = default_topic.id
-          user.topics << default_topic
+        if user.default_folder_id.nil?
+          default_folder = Folder.new
+          default_folder.name = 'My Conversations'
+          default_folder.save
+          user.default_folder_id = default_folder.id
+          user.folders << default_folder
           user.save
         end
       end
     end
 
-    desc 'Move all conversations into default topics'
+    desc 'Move all conversations into default folders'
     task populate: [:environment] do
       User.all.each do |user|
-        default = Topic.find(user.default_topic_id)
+        default = Folder.find(user.default_folder_id)
         user.conversations.each do |conversation|
-          conversation.topics << default
+          conversation.folders << default
           conversation.save
         end
       end

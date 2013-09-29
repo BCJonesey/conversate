@@ -1,36 +1,36 @@
-// A view for the topics toolbar and a container for the actual
-// topics list.
+// A view for the folders toolbar and a container for the actual
+// folders list.
 
-Structural.Views.TopicContainer = Support.CompositeView.extend({
-  className: 'tpc-container',
+Structural.Views.FolderContainer = Support.CompositeView.extend({
+  className: 'fld-container',
   initialize: function(options) {
     options = options || {};
-    this.topics = options.topics;
+    this.folders = options.folders;
     this.addressBook = options.addressBook;
   },
   render: function() {
-    this.toolbarView = new Structural.Views.TopicToolbar();
-    this.listView = new Structural.Views.Topics({
-      collection: this.topics,
+    this.toolbarView = new Structural.Views.FolderToolbar();
+    this.listView = new Structural.Views.Folders({
+      collection: this.folders,
       addressBook: this.addressBook
     });
-    this.inputView = new Structural.Views.NewTopic();
+    this.inputView = new Structural.Views.NewFolder();
 
     this.appendChild(this.toolbarView);
     this.appendChild(this.listView);
     this.appendChild(this.inputView);
 
-    this.toolbarView.on('new_topic', this.newTopic, this);
-    this.inputView.on('create_topic', this.createTopic, this);
+    this.toolbarView.on('new_folder', this.newFolder, this);
+    this.inputView.on('create_folder', this.createFolder, this);
   },
 
-  newTopic: function() {
+  newFolder: function() {
     this.inputView.edit();
   },
 
-  createTopic: function(name) {
-    var model = new Structural.Models.Topic({name: name});
-    this.topics.add(model);
+  createFolder: function(name) {
+    var model = new Structural.Models.Folder({name: name});
+    this.folders.add(model);
     model.save();
   },
 

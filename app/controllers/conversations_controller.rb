@@ -3,13 +3,13 @@ class ConversationsController < ApplicationController
   before_filter :require_participation
 
   def show
-    @topics = current_user.topics
+    @folders = current_user.folders
     @conversation = Conversation.find(params[:id])
-    topic = @conversation.topics.keep_if {|t| current_user.topics.include? t }.first
-    @conversations = topic.conversations
+    folder = @conversation.folders.keep_if {|t| current_user.folders.include? t }.first
+    @conversations = folder.conversations
     @actions = @conversation.actions
     @participants = @conversation.participants
-    @topic = topic
+    @folder = folder
 
     render 'structural/show'
   end
@@ -22,8 +22,8 @@ class ConversationsController < ApplicationController
     conversation = Conversation.find(params[:id])
     return if current_user.in? conversation.users
 
-    conversation.topics.each do |t|
-      return if t.in? current_user.topics
+    conversation.folders.each do |t|
+      return if t.in? current_user.folders
     end
 
     render :not_participating

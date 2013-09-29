@@ -81,7 +81,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     model.save();
     action.delete(user);
   },
-  createMoveConversationAction: function(topic, user) {
+  createMoveConversationAction: function(folder, user) {
     this._newAction({
       type: 'move_conversation',
       user: {
@@ -90,20 +90,20 @@ Structural.Collections.Actions = Backbone.Collection.extend({
       },
       conversation_id: this.conversationId,
       to: {
-        name: topic.get('name'),
-        id: topic.id
+        name: folder.get('name'),
+        id: folder.id
       }
     });
   },
-  createUpdateTopicsAction: function(added, removed, user) {
+  createUpdateFoldersAction: function(added, removed, user) {
     this._newAction({
-      type: 'update_topics',
+      type: 'update_folders',
       user: {
         name: user.get('name'),
         id: user.id
       },
-      added: new Structural.Collections.Topics(added).toJSON(),
-      removed: new Structural.Collections.Topics(removed).toJSON()
+      added: new Structural.Collections.Folders(added).toJSON(),
+      removed: new Structural.Collections.Folders(removed).toJSON()
     });
   },
 

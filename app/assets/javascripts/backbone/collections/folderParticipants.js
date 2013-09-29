@@ -1,3 +1,3 @@
-Structural.Collections.TopicParticipants = Backbone.Collection.extend({
+Structural.Collections.FolderParticipants = Backbone.Collection.extend({
   model: Structural.Models.Participant
 })
