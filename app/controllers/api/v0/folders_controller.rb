@@ -36,7 +36,6 @@ class Api::V0::FoldersController < ApplicationController
 
   def users
     folder = Folder.find(params[:id])
-    binding.pry
     folder.add_users(params[:added].map { |e|  User.find(e[:id])},current_user)
     folder.remove_users(params[:removed].map { |e|  User.find(e[:id])},current_user)
     format.json { head :ok }
