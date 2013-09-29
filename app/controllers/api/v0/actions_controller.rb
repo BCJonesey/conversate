@@ -12,8 +12,8 @@ class Api::V0::ActionsController < ApplicationController
 
   # Note that this will always be on urls like /conversations/1/actions.
   def create
-    conversation = current_user.conversations.find_by_id(params[:conversation_id])
-    head :status => 404 and return unless conversation
+    conversation = Conversation.find(params[:conversation_id])
+    head :status => 404 and return unless (conversation && conversation.can_user_update?(current_user))
     action = conversation.actions.new(:type => params[:type],
                                       :data => Action::data_for_params(params),
                                       :user_id => current_user.id)
