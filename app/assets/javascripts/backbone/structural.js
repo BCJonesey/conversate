@@ -22,7 +22,10 @@ var Structural = new (Support.CompositeView.extend({
     // like the current topics, the current topic, the current conversation,
     // and the current user.
     this._user = new Structural.Models.User(bootstrap.user);
-    this._topics = new Structural.Collections.Topics(bootstrap.topics);
+    this._topics = new Structural.Collections.Topics(bootstrap.topics, {
+      // This is the only Topics collection that we want to handle events.
+      isMainCollection: true
+    });
 
     // We pass the topic over, but we should let it come from the collection.
     this._topic = this._topics.where({id: bootstrap.topic.id})[0];
@@ -74,6 +77,7 @@ var Structural = new (Support.CompositeView.extend({
 
     // Focus initial topic.
     this._topics.focus(this._topic.id);
+    this._topics.focusAlternates(this._conversation);
 
     return this;
   },
