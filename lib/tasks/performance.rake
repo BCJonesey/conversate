@@ -4,7 +4,7 @@ namespace :profile do
   desc 'Profiles the json for a user\'s conversations'
   task conversations: [:environment] do
     u = User.find(1)
-    t = Topic.find(u.default_topic_id)
+    t = Folder.find(u.default_folder_id)
 
     result = RubyProf.profile do
       t.conversations.to_json(:user => u)

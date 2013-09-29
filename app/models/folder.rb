@@ -1,4 +1,4 @@
-class Topic < ActiveRecord::Base
+class Folder < ActiveRecord::Base
   has_and_belongs_to_many :conversations
   has_and_belongs_to_many :users
 
@@ -9,11 +9,9 @@ class Topic < ActiveRecord::Base
   default_scope includes(:users)
 
   def as_json(options)
-    options.merge!({:include=>[:users]}) unless options.include?(:include)
-    options[:include] = ([options[:include]]) unless options[:include].is_a?(Array)
-    options[:include] << :users unless options[:include].include?(:users)
     json = super(options)
     json['unread_conversations'] = unread_conversations(options[:user])
+    json[:users] = users
     return json
   end
 
@@ -63,7 +61,7 @@ class Topic < ActiveRecord::Base
       self.save
 
       self.conversations.each do |c|
-	      c.participants.each{|u| c.ensure_user_has_in_topic(u)}
+	      c.participants.each{|u| c.ensure_user_has_in_folder(u)}
         conversation_users_set = users_set - c.participants.to_set - c.viewers.to_set
 
         if conversation_users_set.size > 0
@@ -79,6 +77,6 @@ class Topic < ActiveRecord::Base
   end
 
   def debug_s
-    "Topic:#{self.id}:#{self.name}"
+    "Folder:#{self.id}:#{self.name}"
   end
 end

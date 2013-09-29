@@ -81,7 +81,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     model.save();
     action.delete(user);
   },
-  createMoveConversationAction: function(topic, user) {
+  createMoveConversationAction: function(folder, user) {
     this._newAction({
       type: 'move_conversation',
       user: {
@@ -90,28 +90,35 @@ Structural.Collections.Actions = Backbone.Collection.extend({
       },
       conversation_id: this.conversationId,
       to: {
-        name: topic.get('name'),
-        id: topic.id
+        name: folder.get('name'),
+        id: folder.id
       }
     });
   },
-  createUpdateTopicsAction: function(added, removed, user) {
+  createUpdateFoldersAction: function(added, removed, user) {
     this._newAction({
-      type: 'update_topics',
+      type: 'update_folders',
       user: {
         name: user.get('name'),
         id: user.id
       },
-      added: new Structural.Collections.Topics(added).toJSON(),
-      removed: new Structural.Collections.Topics(removed).toJSON()
+      added: new Structural.Collections.Folders(added).toJSON(),
+      removed: new Structural.Collections.Folders(removed).toJSON()
     });
   },
 
   // This actions collection's conversation is being viewed.
   viewActions: function() {
+    var self = this;
     var options = {}
     if (this.length === 0) {
-      options.reset = true
+      options.reset = true;
+
+      // We want to let our views know that they can go ahead and render the actions en block now,
+      // since they're actually loaded.
+      options.success = function() {
+        self.trigger('actionsLoadedForFirstTime');
+      }
     }
     this.fetch(options);
   },
@@ -145,5 +152,14 @@ Structural.Collections.Actions = Backbone.Collection.extend({
       count += action.isUnread(mostRecentEventViewed) ? 1 : 0;
     });
     return count;
+  },
+
+  fetch: function(options) {
+    if (this.conversationId) {
+      // http://rockycode.com/blog/backbone-inheritance/
+      // God, I fucking hate javascript so much.  Is this really the best there
+      // is for basic inheritance?  Should we be using mixins instead?
+      return this.constructor.__super__.fetch.call(this, options);
+    }
   }
 });

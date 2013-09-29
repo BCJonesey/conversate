@@ -1,19 +1,23 @@
-// A view for an actual topic in the topics list.
+// A view for an actual folder in the folders list.
 
-Structural.Views.Topic = Support.CompositeView.extend({
+Structural.Views.Folder = Support.CompositeView.extend({
   className: function() {
-    var classes = 'tpc';
+    var classes = 'fld';
     if (this.model.get('is_current')) {
-      classes += ' tpc-current';
+      classes += ' fld-current';
+    }
+
+    if (this.model.get('is_alternate')) {
+      classes += ' fld-alternate';
     }
 
     if (this.model.get('is_unread')) {
-      classes += ' tpc-unread';
+      classes += ' fld-unread';
     }
 
     return classes;
   },
-  template: JST['backbone/templates/topics/topic'],
+  template: JST['backbone/templates/folders/folder'],
   initialize: function(options) {
     var self = this;
     self.model.on('change', self.reRender, self);
@@ -22,18 +26,18 @@ Structural.Views.Topic = Support.CompositeView.extend({
     }, self);
   },
   render: function() {
-    this.$el.html(this.template({ topic: this.model }));
+    this.$el.html(this.template({ folder: this.model }));
     return this;
   },
   events: {
-    'click .tpc-details-toggle': 'editTopic',
-    'click': 'viewTopic'
+    'click .fld-details-toggle': 'editFolder',
+    'click': 'viewFolder'
   },
-  viewTopic: function(e) {
+  viewFolder: function(e) {
     e.preventDefault();
-    Structural.viewTopic(this.model);
+    Structural.viewFolder(this.model);
   },
-  editTopic: function(e) {
+  editFolder: function(e) {
     e.preventDefault();
     this.model.trigger('edit', this.model);
   },

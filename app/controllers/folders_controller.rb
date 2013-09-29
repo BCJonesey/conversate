@@ -1,12 +1,12 @@
-class TopicsController < ApplicationController
+class FoldersController < ApplicationController
   before_filter :require_login
 
   def show
-    topic = Topic.find(params[:id])
+    folder = Folder.find(params[:id])
 
-    @topic = topic
-    @topics = current_user.topics
-    @conversations = topic.conversations.order('most_recent_event DESC')
+    @folder = folder
+    @folders = current_user.folders
+    @conversations = folder.conversations.order('most_recent_event DESC')
     @conversation = @conversations.first
     @actions = @conversation ? @conversation.actions : nil
     @participants = @conversation ? @conversation.participants : nil

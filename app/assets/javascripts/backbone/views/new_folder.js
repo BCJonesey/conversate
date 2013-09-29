@@ -1,17 +1,17 @@
-Structural.Views.NewTopic = Support.CompositeView.extend({
-  className: 'tpc-new hidden',
-  template: JST['backbone/templates/topics/new_topic_input'],
+Structural.Views.NewFolder = Support.CompositeView.extend({
+  className: 'fld-new hidden',
+  template: JST['backbone/templates/folders/new_folder_input'],
   render: function() {
     this.$el.html(this.template());
-    this.inpt = this.$('.tpc-new-input');
+    this.inpt = this.$('.fld-new-input');
     return this;
   },
   events: {
-    submit: 'createTopic'
+    submit: 'createFolder'
   },
-  createTopic: function(e) {
+  createFolder: function(e) {
     e.preventDefault();
-    this.trigger('create_topic', this.inpt.val());
+    this.trigger('create_folder', this.inpt.val());
     this.cancel();
   },
   edit: function() {
@@ -20,7 +20,7 @@ Structural.Views.NewTopic = Support.CompositeView.extend({
     this.inpt.focus();
   },
   cancel: function(e) {
-    if (!e || $(e.target).closest('.tpc-container').length == 0) {
+    if (!e || $(e.target).closest('.fld-container').length == 0) {
       this.inpt.val('');
       this.$el.addClass('hidden');
       Structural.off('clickAnywhere', this.cancel, this);

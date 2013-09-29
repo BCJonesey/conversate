@@ -1,18 +1,18 @@
-Structural.Views.TopicEditor = Support.CompositeView.extend({
-  className: 'tpc-editor',
-  template: JST['backbone/templates/topics/editor'],
+Structural.Views.FolderEditor = Support.CompositeView.extend({
+  className: 'fld-editor',
+  template: JST['backbone/templates/folders/editor'],
   initialize: function(options) {
     options = options || {};
     this._addressBook = options.addressBook;
   },
-  render: function(topic) {
-    if (topic) {
+  render: function(folder) {
+    if (folder) {
       this._participantEditor = new Structural.Views.ParticipantEditor({
-        participants: topic.get('users'),
+        participants: folder.get('users'),
         addressBook: this._addressBook
       });
 
-      this.$el.html(this.template({topic: topic}));
+      this.$el.html(this.template({folder: folder}));
       this.insertChildAfter(this._participantEditor, this.$('label[for="folder-participants"]'));
     }
     return this;
@@ -26,9 +26,9 @@ Structural.Views.TopicEditor = Support.CompositeView.extend({
     'click .ef-deletion-confirmation':'toggleDeleteButton'
   },
 
-  show: function(topic) {
-    this._topic = topic;
-    this.render(topic);
+  show: function(folder) {
+    this._folder = folder;
+    this.render(folder);
     this.$('.modal-background').removeClass('hidden');
   },
   showDeleteWarning: function(e){
@@ -60,13 +60,13 @@ Structural.Views.TopicEditor = Support.CompositeView.extend({
   },
   save: function(e) {
     e.preventDefault();
-    if (this._topic) {
+    if (this._folder) {
       var name = this.$('.ef-name-input').val();
       if (name.length === 0) { return; }
 
       var participants = this._participantEditor.currentParticipants();
 
-      this._topic.update(name, participants);
+      this._folder.update(name, participants);
       this.$('.modal-background').addClass('hidden');
     }
   }

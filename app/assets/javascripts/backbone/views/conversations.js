@@ -8,7 +8,7 @@ Structural.Views.Conversations = Support.CompositeView.extend({
 
     this._wireEvents(this.collection);
 
-    Structural.on('changeTopic', this.changeTopic, this);
+    Structural.on('changeFolder', this.changeFolder, this);
   },
   _wireEvents: function(collection) {
     collection.on('add', this.reRender, this);
@@ -34,9 +34,9 @@ Structural.Views.Conversations = Support.CompositeView.extend({
     });
     this.render();
   },
-  changeTopic: function(topic) {
+  changeFolder: function(folder) {
     this.collection.off(null, null, this);
-    this.collection = topic.conversations;
+    this.collection = folder.conversations;
     this._wireEvents(this.collection);
 
     // Attempt to show the first conversation. This gets called always, so will pick up on cached
@@ -53,6 +53,7 @@ Structural.Views.Conversations = Support.CompositeView.extend({
     var conversation = this.collection.models[0];
     if (conversation) {
       Structural.viewConversationData(conversation);
+      conversation.focus();
     }
   }
 });
