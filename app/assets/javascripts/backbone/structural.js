@@ -150,7 +150,7 @@ var Structural = new (Support.CompositeView.extend({
     }
   },
   createNewFolder: function () {
-    this._topics.createNewFolder('New Folder');
+    this._folders.createNewFolder('New Folder');
   },
   createRetitleAction: function(title) {
     this._conversation.actions.createRetitleAction(title, this._user);
