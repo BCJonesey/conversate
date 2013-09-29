@@ -7,7 +7,7 @@ Structural.Views.Topics = Support.CompositeView.extend({
     options = options || {};
 
     this.collection.on('add', this.renderTopic, this);
-    this.collection.each(function(topic) {
+    this.collection.on('add', function(topic) {
       topic.on('edit', this.editTopic, this);
     }, this);
     this._topicEditor = new Structural.Views.TopicEditor({
