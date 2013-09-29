@@ -30,7 +30,7 @@ describe Api::V0::FoldersController do
         expect(response).to be_success
         expect(response.code).to eq("200")
         body = JSON.parse(response.body)
-        expect(body[0]['unread_conversations']).to eq count
+        expect(body[0]['unread_conversations'].length).to eq count
       end
       check_unread_count[0]
       folder = Folder.find_by_id(1)
@@ -57,7 +57,7 @@ describe Api::V0::FoldersController do
       body = JSON.parse(response.body)
       expect(body['id']).to eq(3)
       expect(body['name']).to eq('Huzzah!')
-      expect(body['unread_conversations']).to eq 0
+      expect(body['unread_conversations'].length).to eq 0
     end
   end
 
