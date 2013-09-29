@@ -3,17 +3,22 @@ Structural.Collections.Topics = Backbone.Collection.extend({
   url: Structural.apiPrefix + '/topics',
   comparator: 'created_at',
 
-  initialize: function(options) {
+  initialize: function(models, options) {
     var self = this;
     options = options || {};
-    self.on('add', function(topic) {
-      topic.on('updated', function() {
+    if (options.isMainCollection) {
+      self.on('add', function(topic) {
+        topic.on('updated', function() {
 
-        // TODO: Replace with event.
-        Structural.updateTitleAndFavicon();
+          // TODO: Replace with event.
+          Structural.updateTitleAndFavicon();
 
-      })
-    }, self);
+        })
+      }, self);
+
+      Structural.on('changeConversation', this.focusAlternates, this);
+      Structural.on('clearConversation', this.focusAlternates, this);
+    }
   },
 
   focus: function(id) {
@@ -25,6 +30,18 @@ Structural.Collections.Topics = Backbone.Collection.extend({
     this.filter(function(tpc) { return tpc.id != id; }).forEach(function(tpc) {
       tpc.unfocus();
     });
+  },
+  // 'Alternate' topics are ones that the given conversation is in, but aren't
+  // the current topic.
+  focusAlternates: function(conversation) {
+    var ids = conversation ? conversation.get('topic_ids') : [];
+    this.each(function(topic) {
+      if (_.contains(ids, topic.id)) {
+        topic.focusAlternate();
+      } else {
+        topic.unfocusAlternate();
+      }
+    }, this);
   },
   current: function() {
     return this.where({is_current: true}).pop();

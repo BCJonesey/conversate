@@ -41,6 +41,14 @@ Structural.Models.Topic = Backbone.Model.extend({
   unfocus: function() {
     this.set('is_current', false);
   },
+  // A topic is an 'alternate' topic if the current conversation is in it, but
+  // the topic isn't the current topic.
+  focusAlternate: function() {
+    this.set('is_alternate', true);
+  },
+  unfocusAlternate: function() {
+    this.set('is_alternate', false);
+  },
   unreadConversationCount: function() {
     var countByCalculation = this.conversations.unreadConversationCount();
     var countByState = this.get('unread_conversations').length;
