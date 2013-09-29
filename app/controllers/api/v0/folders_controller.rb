@@ -29,6 +29,11 @@ class Api::V0::FoldersController < ApplicationController
     end
   end
 
+  def destroy
+    Folder.delete(params[:id])
+    render :json => {}, :status => 204
+  end
+
   def users
     folder = Folder.find(params[:id])
     binding.pry
