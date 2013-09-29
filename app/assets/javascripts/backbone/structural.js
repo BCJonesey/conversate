@@ -152,6 +152,9 @@ var Structural = new (Support.CompositeView.extend({
   deleteFolder: function(folder) {
     this._folders.remove(folder);
   },
+  createNewFolder: function () {
+    this._folders.createNewFolder('New Folder');
+  },
   createRetitleAction: function(title) {
     this._conversation.actions.createRetitleAction(title, this._user);
   },
