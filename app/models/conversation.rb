@@ -87,6 +87,8 @@ class Conversation < ActiveRecord::Base
         self.folders.delete folder
       end
 
+      self.users.each {|u| ensure_user_has_in_folder(u) }
+
       if create_action
         self.actions.new(type: 'update_folders',
                          data: {removed: folders}.to_json,
