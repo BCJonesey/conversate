@@ -5,7 +5,8 @@
 .ef-window{
 //this is to override the participants list visual styles.  it shouldn't be ncessary once that is refactored.
   .modal-content{
-    overflow:visible;
+    overflow:auto;
+
   }
 
   .act-participants{
@@ -37,4 +38,39 @@
   .token-options{
     z-index: 10;
   }
+}
+
+
+.ef-window-content{
+}
+.ef-deletion-message{
+  padding:0 0.5rem;
+  background-color: white;
+  border:1px solid #CCC;
+  > div{
+    padding:0.25rem;
+  }
+
+  .ef-deletion-heading{
+    border-bottom:1px solid #CCC;
+    color:#FA6;
+  }
+  .ef-deletion-description{
+    p{
+      font-size:0.8rem;
+      color:#888;
+    }
+  }
+  .ef-deletion-options label{
+    display:inline-block;
+    font-weight: bold;
+    color:#444;
+  }
+  .ef-deletion-cancel{
+    display:inline-block;
+    font-size:0.8rem;
+    padding:0.25rem;
+    .link-blue();
+  }
+
 }

@@ -34,6 +34,20 @@ Structural.Models.Folder = Backbone.Model.extend({
     }
   },
 
+  parse: function (response, options) {
+
+    // We're expecting the folder participants to be an actual collection.
+    var users = new Structural.Collections.FolderParticipants();
+
+    _.each(response.users, function (p) {
+      users.add(new Structural.Models.Participant(p));
+    });
+
+    response.users = users;
+    return response;
+
+  },
+
   focus: function() {
     this.set('is_current', true);
     this.conversations.viewConversations();

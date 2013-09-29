@@ -10,6 +10,6 @@ Structural.Views.FolderToolbar = Support.CompositeView.extend({
   },
   newFolder: function(e) {
     e.preventDefault();
-    // TODO: Create a new folder.
+    Structural.createNewFolder();
   }
 });

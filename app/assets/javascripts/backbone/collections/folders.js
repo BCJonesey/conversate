@@ -55,5 +55,27 @@ Structural.Collections.Folders = Backbone.Collection.extend({
     removedFolders.forEach(function(folder) {
       folder.conversations.remove(conversation);
     })
+  },
+
+  createNewFolder: function(title) {
+    var participants = new Structural.Collections.FolderParticipants();
+    participants.add(new Structural.Models.Participant({
+      email: Structural._user.get('email'),
+      full_name: Structural._user.get('full_name')
+    }));
+
+    var folder = new Structural.Models.Folder({
+      name: title,
+      unread_conversations: 0,
+      users: participants
+    });
+    this.add(folder);
+
+    folder.save({}, {
+      success: function(model, response) {
+        folder.conversations.folderId = model.id;
+        folder.trigger('edit', folder);
+      }
+    });
   }
 });
