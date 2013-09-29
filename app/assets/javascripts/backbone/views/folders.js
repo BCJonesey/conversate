@@ -7,9 +7,16 @@ Structural.Views.Folders = Support.CompositeView.extend({
     options = options || {};
 
     this.collection.on('add', this.renderFolder, this);
+
+    // We need to setup edit for all of our bootstrapped folders,
+    // in addition to any new folders that get added.
     this.collection.each(function(folder) {
       folder.on('edit', this.editFolder, this);
     }, this);
+    this.collection.on('add', function(folder) {
+      folder.on('edit', this.editFolder, this);
+    }, this);
+
     this._folderEditor = new Structural.Views.FolderEditor({
       addressBook: options.addressBook
     });
