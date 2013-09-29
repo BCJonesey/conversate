@@ -7,9 +7,16 @@ Structural.Views.Topics = Support.CompositeView.extend({
     options = options || {};
 
     this.collection.on('add', this.renderTopic, this);
+
+    // We need to setup edit for all of our bootstrapped topics,
+    // in addition to any new topics that get added.
+    this.collection.each(function(topic) {
+      topic.on('edit', this.editTopic, this);
+    }, this);
     this.collection.on('add', function(topic) {
       topic.on('edit', this.editTopic, this);
     }, this);
+
     this._topicEditor = new Structural.Views.TopicEditor({
       addressBook: options.addressBook
     });
