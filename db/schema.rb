@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130929001725) do
+ActiveRecord::Schema.define(:version => 20130929002028) do
 
   create_table "actions", :force => true do |t|
     t.integer  "conversation_id"
@@ -27,9 +27,9 @@ ActiveRecord::Schema.define(:version => 20130929001725) do
 
   create_table "conversations", :force => true do |t|
     t.string   "title"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
-    t.datetime "most_recent_event"
+    t.datetime "created_at",                                           :null => false
+    t.datetime "updated_at",                                           :null => false
+    t.datetime "most_recent_event", :default => '2000-01-01 01:07:19'
   end
 
   create_table "conversations_folders", :force => true do |t|
