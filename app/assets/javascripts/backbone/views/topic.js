@@ -7,6 +7,10 @@ Structural.Views.Topic = Support.CompositeView.extend({
       classes += ' tpc-current';
     }
 
+    if (this.model.get('is_alternate')) {
+      classes += ' tpc-alternate';
+    }
+
     if (this.model.get('is_unread')) {
       classes += ' tpc-unread';
     }
