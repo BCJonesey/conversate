@@ -53,7 +53,7 @@ Structural.Views.ActionContainer = Support.CompositeView.extend({
   changeConversation: function(conversation) {
     this.participants.off(null, null, this);
     this.conversation = conversation;
-    this.participants = conversation.get('participants');
+    this.participants = conversation.participants;
     this.reClass();
   },
   clearConversation: function() {
