@@ -1,7 +1,7 @@
 describe("Structural router", function() {
   var bootstrap;
   beforeEach(function() {
-    var topics = [
+    var folders = [
       { name: "Conversations", id: 1 },
       { name: "Structural", id: 2 },
       { name: "Chatter", id: 3 }
@@ -48,7 +48,7 @@ describe("Structural router", function() {
     var conversation = {
       name: "Conversation",
       id: 1,
-      topic_id: 2
+      folder_id: 2
     };
     var participants = [
       { name: "Sharon Jones",
@@ -61,7 +61,7 @@ describe("Structural router", function() {
     var user = { full_name: "Jack Kennedy" };
 
     bootstrap = {
-      topics: topics,
+      folders: folders,
       conversations: conversations,
       actions: actions,
       participants: participants,
@@ -84,25 +84,25 @@ describe("Structural router", function() {
 
     it("from the index page", function() {
       Structural.Router.index();
-      expect(Structural.focus).toHaveBeenCalledWith({topic: 1});
+      expect(Structural.focus).toHaveBeenCalledWith({folder: 1});
     });
 
     it("from the conversation page", function() {
       Structural.Router.conversation('the-awesome-conversation', 1);
-      expect(Structural.focus).toHaveBeenCalledWith({topic: 2,
+      expect(Structural.focus).toHaveBeenCalledWith({folder: 2,
                                                      conversation: 1});
     });
 
     it("from the message page", function() {
       Structural.Router.message('the-awesome-conversation', 1, 543);
-      expect(Structural.focus).toHaveBeenCalledWith({topic: 2,
+      expect(Structural.focus).toHaveBeenCalledWith({folder: 2,
                                                      conversation: 1,
                                                      message: 543});
     });
 
-    it("from the topic page", function() {
-      Structural.Router.topic('look-a-topic', 3);
-      expect(Structural.focus).toHaveBeenCalledWith({topic: 3});
+    it("from the folder page", function() {
+      Structural.Router.folder('look-a-folder', 3);
+      expect(Structural.focus).toHaveBeenCalledWith({folder: 3});
     })
   });
 });

@@ -4,23 +4,23 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
   initialize: function(options) {
     options = options || {};
     this.conversation = options.conversation;
-    this.topics = options.topics;
+    this.folders = options.folders;
     Structural.on('changeConversation', this.changeConversation, this);
     Structural.on('clearConversation', this.clearConversation, this);
   },
   render: function() {
     this.$el.html(this.template({conversation: this.conversation}));
-    this._updateTopicsDialog = new Structural.Views.UpdateTopicsDialog({
-      topics: this.topics,
+    this._updateFoldersDialog = new Structural.Views.UpdateFoldersDialog({
+      folders: this.folders,
       conversation: this.conversation
     });
-    this.appendChild(this._updateTopicsDialog);
+    this.appendChild(this._updateFoldersDialog);
     this._input = this.$('input[type="text"]');
     return this;
   },
   events: {
     submit: 'retitleConversation',
-    'click .act-move-cnv': 'toggleUpdateTopicsDialog',
+    'click .act-move-cnv': 'toggleUpdateFoldersDialog',
     'click .act-title-edit': 'openTitleEditor',
     'click .act-title-save': 'retitleConversation',
     'keyup': 'cancelOnEscape'
@@ -38,9 +38,9 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
     this.trigger('change_title', title);
     this.closeTitleEditor();
   },
-  toggleUpdateTopicsDialog: function(e) {
+  toggleUpdateFoldersDialog: function(e) {
     e.preventDefault();
-    this._updateTopicsDialog.toggleVisible();
+    this._updateFoldersDialog.toggleVisible();
   },
   openTitleEditor: function(e) {
     e.preventDefault();

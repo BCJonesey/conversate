@@ -3,38 +3,38 @@ Structural.Router = new (Backbone.Router.extend({
     '': 'index',
     'conversation/:slug/:id': 'conversation',
     'conversation/:slug/:id#message:messageId': 'message',
-    'topic/:slug/:id': 'topic',
+    'folder/:slug/:id': 'folder',
     'profile': 'profile',
     'admin': 'admin',
     'people': 'people'
   },
   index: function() {
-    Structural.focus({ topic: Structural._topics.at(0).id });
+    Structural.focus({ folder: Structural._folders.at(0).id });
   },
   conversation: function(slug, id) {
-    Structural.focus({ topic: this._topicIdForConversation(Structural._conversation),
+    Structural.focus({ folder: this._folderIdForConversation(Structural._conversation),
                        conversation: id });
     this._fixSlug('conversation/', slug, '/' + id, Structural._conversation.get('title'));
   },
   message: function(slug, id, messageId) {
-    Structural.focus({ topic: this._topicIdForConversation(Structural._conversation),
+    Structural.focus({ folder: this._folderIdForConversation(Structural._conversation),
                        conversation: id,
                        message: messageId });
     this._fixSlug('conversation/', slug, '/' + id + '#message' + messageId, Structural._conversation.get('title'));
   },
-  topic: function(slug, id) {
-    Structural.focus({ topic: id });
-    this._fixSlug('topic/', slug, '/' + id, Structural._topics.get(id|0).get('name'));
+  folder: function(slug, id) {
+    Structural.focus({ folder: id });
+    this._fixSlug('folder/', slug, '/' + id, Structural._folders.get(id|0).get('name'));
   },
   profile: function() { },
   admin: function() { },
   people: function() { },
 
-  _topicIdForConversation: function(conversation) {
-    if (_.contains(conversation.get('topic_ids'), Structural._topic.id)) {
-      return Structural._topic.id;
+  _folderIdForConversation: function(conversation) {
+    if (_.contains(conversation.get('folder_ids'), Structural._folder.id)) {
+      return Structural._folder.id;
     }
-    return conversation.get('topic_ids')[0];
+    return conversation.get('folder_ids')[0];
   },
 
   initialize: function(options) {
@@ -59,10 +59,10 @@ Structural.Router = new (Backbone.Router.extend({
     return this.conversationPath(conversation) +
            '#message' + message.id;
   },
-  topicPath: function(topic) {
-    return 'topic/' +
-           this.slugify(topic.get('name')) +
-           '/' + topic.id;
+  folderPath: function(folder) {
+    return 'folder/' +
+           this.slugify(folder.get('name')) +
+           '/' + folder.id;
   },
   adminPath: function() {
     return 'admin';
@@ -85,8 +85,8 @@ Structural.Router = new (Backbone.Router.extend({
   messageHref: function(conversation, message) {
     return '/' + this.messagePath(conversation, message);
   },
-  topicHref: function(topic) {
-    return '/' + this.topicPath(topic);
+  folderHref: function(folder) {
+    return '/' + this.folderPath(folder);
   },
   adminHref: function() {
     return '/' + this.adminPath();

@@ -1,20 +1,20 @@
 class Api::V0::ConversationsController < ApplicationController
   before_filter :require_login
 
-  # Note that this is always on a url like /topics/1/conversations.
+  # Note that this is always on a url like /folders/1/conversations.
   def index
-    topic = Topic.find_by_id(params[:topic_id])
-    head :status => :not_found and return unless topic
+    folder = Folder.find_by_id(params[:folder_id])
+    head :status => :not_found and return unless folder
 
-    conversations = topic.conversations.includes(:users, :topics)
+    conversations = folder.conversations.includes(:users, :folders)
     render :json => conversations.to_json(:user => current_user)
   end
 
-  # Note that this is always on a url like /topics/1/conversations.
+  # Note that this is always on a url like /folders/1/conversations.
   def create
-    topic = Topic.find_by_id(params[:topic_id])
-    head :status => :not_found and return unless topic
-    conversation = topic.conversations.create()
+    folder = Folder.find_by_id(params[:folder_id])
+    head :status => :not_found and return unless folder
+    conversation = folder.conversations.create()
 
     conversation.set_title params[:title] || 'New Conversation', current_user
 
