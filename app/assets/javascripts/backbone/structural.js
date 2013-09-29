@@ -149,6 +149,9 @@ var Structural = new (Support.CompositeView.extend({
                                  {trigger: true});
     }
   },
+  deleteFolder: function(folder) {
+    this._folders.remove(folder);
+  },
   createRetitleAction: function(title) {
     this._conversation.actions.createRetitleAction(title, this._user);
   },

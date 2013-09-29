@@ -69,5 +69,12 @@ Structural.Views.FolderEditor = Support.CompositeView.extend({
       this._folder.update(name, participants);
       this.$('.modal-background').addClass('hidden');
     }
+  },
+  delete: function(e) {
+    e.preventDefault();
+    if (this._folder) {
+      Structural.deleteFolder(this._folder);
+      this.$('.modal-background').addClass('hidden');
+    }
   }
 });

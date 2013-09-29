@@ -4,6 +4,7 @@ Structural.Views.Folders = Support.CompositeView.extend({
   className: 'fld-list',
   folderHint: $('<div class="fld-hint hidden">Move conversation to...</div>'),
   initialize: function(options) {
+    var self = this;
     options = options || {};
 
     this.collection.on('add', this.renderFolder, this);
@@ -13,12 +14,23 @@ Structural.Views.Folders = Support.CompositeView.extend({
     this._folderEditor = new Structural.Views.FolderEditor({
       addressBook: options.addressBook
     });
+
+    this.collection.on('remove', function(folders) {
+      self.reRender();
+    })
   },
   render: function() {
     this.$el.append(this.folderHint);
     this.appendChild(this._folderEditor);
     this.collection.forEach(this.renderFolder, this);
     return this;
+  },
+  reRender: function() {
+    this.children.forEach(function(child) {
+      child.leave();
+    });
+    this.$el.empty();
+    this.render();
   },
   renderFolder: function(folder) {
     var folderView = new Structural.Views.Folder({model: folder});
