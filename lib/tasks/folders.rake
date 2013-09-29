@@ -25,4 +25,12 @@ namespace :folder do
       end
     end
   end
+
+  desc 'Change all update_topics actions to update_folders'
+   task from_topics: [:environment] do
+     Action.where(type: 'update_topics').each do |action|
+       action.type = 'update_folders'
+       action.save
+     end
+   end
 end
