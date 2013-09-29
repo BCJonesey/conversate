@@ -60,7 +60,6 @@ describe Api::V0::ConversationsController do
       conversation.actions.create!(:type => 'message',
                                   :data => '{"text":"You forgot the i, GIII"}',
                                   :user_id => @user.id)
-      conversation.users << @user
       @user.update_most_recent_viewed(conversation)
       check_most_recent_viewed[conversation.most_recent_viewed_for_user(@user).msec]
     end
