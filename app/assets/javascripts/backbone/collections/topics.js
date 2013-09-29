@@ -58,15 +58,23 @@ Structural.Collections.Topics = Backbone.Collection.extend({
   },
 
   createNewFolder: function(title) {
+    var participants = new Structural.Collections.TopicParticipants();
+    participants.add(new Structural.Models.Participant({
+      email: Structural._user.get('email'),
+      full_name: Structural._user.get('full_name')
+    }));
+
     var folder = new Structural.Models.Topic({
       name: title,
       unread_conversations: 0,
-      users: [Structural._user]
+      users: participants
     });
     this.add(folder);
+
     folder.save({}, {
       success: function(model, response) {
         folder.conversations.topicId = model.id;
+        folder.trigger('edit', folder);
       }
     });
   }
