@@ -87,8 +87,10 @@ class Conversation < ActiveRecord::Base
         self.folders.delete folder
       end
 
+      # Orphaning users by taking a conversation out of the only folder they
+      # can see it in is bad.
       before = self.folders.clone
-      self.users.each {|u| ensure_user_has_in_folder(u) }
+      self.users.each {|u| u.ensure_cnv_in_at_least_one_folder self }
       added = self.folders - before
 
       if create_action
@@ -246,11 +248,6 @@ class Conversation < ActiveRecord::Base
   def debug_s
     "Conversation:#{self.id}:#{self.title}"
   end
-
-  def ensure_user_has_in_folder(user)
-    self.folders << user.default_folder if (self.folders.to_set & user.folders.to_set).empty?
-  end
-
 
   protected
   # Internal: Creates a default conversation title based on who the participants

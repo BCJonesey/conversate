@@ -61,7 +61,7 @@ class Folder < ActiveRecord::Base
       self.save
 
       self.conversations.each do |c|
-	      c.participants.each{|u| c.ensure_user_has_in_folder(u)}
+	      c.participants.each{|u| u.ensure_cnv_in_at_least_one_folder c }
         conversation_users_set = users_set - c.participants.to_set - c.viewers.to_set
 
         if conversation_users_set.size > 0
