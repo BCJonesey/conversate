@@ -87,11 +87,13 @@ class Conversation < ActiveRecord::Base
         self.folders.delete folder
       end
 
+      before = self.folders.clone
       self.users.each {|u| ensure_user_has_in_folder(u) }
+      added = self.folders - before
 
       if create_action
         self.actions.new(type: 'update_folders',
-                         data: {removed: folders}.to_json,
+                         data: {removed: folders, added: added}.to_json,
                          user_id: user.id)
       end
 
