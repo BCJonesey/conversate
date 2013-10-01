@@ -63,8 +63,8 @@ class Conversation < ActiveRecord::Base
 
   def add_folders(folders, user, create_action=true)
     if folders
-      folders.each do |t|
-        folder_id = t[:id] || t['id']
+      folders.each do |f|
+        folder_id = f[:id] || f['id']
         folder = Folder.find(folder_id)
         self.folders << folder
       end
@@ -81,8 +81,8 @@ class Conversation < ActiveRecord::Base
 
   def remove_folders(folders, user, create_action=true)
     if folders
-      folders.each do |t|
-        folder_id = t[:id] || t['id']
+      folders.each do |f|
+        folder_id = f[:id] || f['id']
         folder = Folder.find(folder_id)
         self.folders.delete folder
       end
