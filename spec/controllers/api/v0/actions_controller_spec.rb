@@ -26,7 +26,7 @@ describe Api::V0::ActionsController do
     conversation.actions.create!(:type => 'move_message',
                                   :data => '{"message_id":1,"from":{"title":"Whatever","id":1},"to":{"title":"Wherever","id":2}}',
                                   :user_id => @user.id)
-    conversation.actions.create!(:type => 'move_conversation',
+    conversation.actions.create!(:type => 'update_folders',
                                   :data => '{"conversation_id":1,"from":{"name":"Whatevercee","id":1},"to":{"name":"Wherevercee","id":2}}',
                                   :user_id => @user.id)
   end
@@ -93,7 +93,7 @@ describe Api::V0::ActionsController do
 
       #Move Conversation
       expect(body[5]['id']).to eq(6)
-      expect(body[5]['type']).to eq('move_conversation')
+      expect(body[5]['type']).to eq('update_folders')
       from = {'name' => 'Whatevercee', 'id' => 1}
       to = {'name' => 'Wherevercee', 'id' => 2}
       expect(body[5]['from']).to eq(from)
