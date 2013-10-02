@@ -2,7 +2,6 @@
 
 Structural.Views.Folders = Support.CompositeView.extend({
   className: 'fld-list',
-  folderHint: $('<div class="fld-hint hidden">Move conversation to...</div>'),
   initialize: function(options) {
     options = options || {};
 
@@ -22,7 +21,6 @@ Structural.Views.Folders = Support.CompositeView.extend({
     });
   },
   render: function() {
-    this.$el.append(this.folderHint);
     this.appendChild(this._folderEditor);
     this.collection.forEach(this.renderFolder, this);
     return this;
