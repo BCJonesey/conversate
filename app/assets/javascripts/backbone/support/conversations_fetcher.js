@@ -1,13 +1,8 @@
-Support.ConversationsFetcher = function(conversations, interval) {
-  var self = this;
-  self._conversations = conversations;
+//= require ./collection_fetcher
 
-  self._fetchHandler = function() {
-    self._conversations.fetch({cache: false});
-  };
-  setInterval(self._fetchHandler, interval);
-
-  Structural.on('changeFolder', function(folder) {
-    self._conversations = folder.conversations;
+Support.ConversationsFetcher = Support.CollectionFetcher(
+  60000,
+  'changeFolder',
+  function(folder) {
+    return folder.conversations;
   });
-}

@@ -1,13 +1,8 @@
-Support.ActionsFetcher = function(conversation, interval) {
-  var self = this;
-  self._conversation = conversation;
+//= require ./collection_fetcher
 
-  self._fetchHandler = function() {
-    self._conversation.actions.fetch({cache: false});
-  };
-  setInterval(self._fetchHandler, interval);
-
-  Structural.on('changeConversation', function(newConversation) {
-    self._conversation = newConversation;
+Support.ActionsFetcher = Support.CollectionFetcher(
+  5000,
+  'changeConversation',
+  function(conversation) {
+    return conversation.actions;
   });
-}
