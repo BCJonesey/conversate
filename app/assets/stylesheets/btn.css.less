@@ -48,9 +48,16 @@
   &:hover,
   &.hover,
   &:focus{
-	   background-color:#8BE;
-     border-color:#9AC;
-	 }
+    background-color:#8BE;
+    border-color:#9AC;
+  }
+  &.disabled{
+    background-color: #ABC;
+    box-shadow: none;
+    &:active{
+      top:0;
+    }
+  }
 }
 
 .btn-danger{
@@ -65,24 +72,25 @@
 }
 
 .btn-small{
-  &.btn,&.btn-primary,&.btn-small{
-    font-size: 0.75rem;
+  &.btn,
+  &.btn-primary{
+    font-size: 0.7rem;
     height: 1.0rem;
-    line-height: 0.75rem;
+    line-height: 1.0;
     margin-left:0.15rem;
     margin-right:0.15rem;
-    padding:.15rem 0.4rem;
+    padding:0.05rem 0.4rem;
       }
-  &.btn-icon > i{
+  &.btn-icon > i,
+  &.btn-icon-primary > i{
     font-size: 0.7rem;
   }
 }
 
 .btn-faint{
-
   text-decoration: none;
   background-color:transparent;
-  color:@btn-faint-color;
+  color:@btn-faint-color-hover;
   border-color: transparent;
   box-shadow:none;
   text-shadow: none;
@@ -100,13 +108,16 @@
   }
 }
 .btn-faint-container{
-  & .btn-faint.active{
+  .btn-faint{
+    color:@btn-faint-color;
+  }
+   .btn-faint.active{
     color:@btn-faint-color-solid;
   }
   &:hover .btn-faint{
     color:@btn-faint-color-hover;
-    -webkit-transition: color 0.5s;
-    -webkit-transition-delay: color 0.5s;
+    -webkit-transition: color 0.35s;
+    -webkit-transition-delay: color 0.35s;
 
     &:hover,
     &.active{

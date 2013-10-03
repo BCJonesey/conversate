@@ -53,10 +53,19 @@
     color:mix(@act-title-color,white);
   }
   .act-title-actions,
-  .act-participants-actions{
+  .act-participants-edit{
     display:none !important;
   }
 }
+.act-participants-actions{
+  .act-participants-join{
+    display:none;
+  }
+  .act-container.not-participating-in.act-participants-join{
+    display:inline;
+  }
+}
+
 
 .act-title.editing{
   .editing-style();
@@ -65,7 +74,7 @@
 .act-title-actions,
 .act-title-save-actions{
   position: absolute;
-  top:.25rem;
+  top:.3rem;
   right:.25rem;
 }
 
@@ -158,7 +167,7 @@
   position: absolute;
   right:.1rem;
   top:50%;
-  margin-top:-0.5rem;
+  margin-top:-0.7rem;
   margin-left:3rem;
 }
 
