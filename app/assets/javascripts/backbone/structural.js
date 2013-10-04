@@ -21,6 +21,8 @@ var Structural = new (Support.CompositeView.extend({
     // We only care about things that are convenient to directly access right now,
     // like the current folders, the current folder, the current conversation,
     // and the current user.
+    this._status = new Structural.Models.Status(bootstrap.status);
+
     this._user = new Structural.Models.User(bootstrap.user);
     this._folders = new Structural.Collections.Folders(bootstrap.folders, {
       // This is the only Folders collection that we want to handle events.
@@ -69,6 +71,8 @@ var Structural = new (Support.CompositeView.extend({
     this._faviconAndTitle.render();
 
     Backbone.history.start({pushState: true});
+
+    this.statusFetcher = new Support.StatusFetcher(this._status);
 
     // Focus initial folder.
     this._folders.focus(this._folder.id);
