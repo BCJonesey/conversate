@@ -69,6 +69,15 @@ class User < ActiveRecord::Base
     end
   end
 
+  def status
+    status = {}
+    if self.conversations.length > 0
+      status[:global_most_recent_action] =
+        self.conversations.maximum(:most_recent_action).msec
+    end
+    status
+  end
+
   # This avoids us writing out passwords, salts, etc. when rendering json.
   def as_json(options={})
     json = super(:only => [:email, :full_name, :id, :site_admin])
