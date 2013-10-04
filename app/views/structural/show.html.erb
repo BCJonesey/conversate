@@ -1,6 +1,7 @@
 <%= content_for :javascript do -%>
 
 (function() {
+  var status = <%= current_user.status.to_json.html_safe %>;
   var folders = <%= json_with_user(@folders) %>;
   var folder = <%= json_with_user(@folder) %>;
   var conversations = <%= json_with_user(@conversations) %>;
@@ -13,6 +14,7 @@
   var participants = <%= @conversation ? json_with_user(@participants, :conversation => @conversation) : '[]' %>;
 
   window.bootstrap = {
+    status: status,
     folders: folders,
     folder: folder,
     conversations: conversations,
