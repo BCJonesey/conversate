@@ -34,7 +34,7 @@ class Api::V0::ActionsController < ApplicationController
 
     conversation.handle(action)
     action.save
-    conversation.update_most_recent_event
+    conversation.update_most_recent_action
     render :json => action.to_json, :status => 201
   end
 end

@@ -96,7 +96,7 @@ module Health
 
   def Health.conversation_with_bogus_date
     # We didn't have a water cooler server in Jan 2013
-    Conversation.where('most_recent_event < ?', Date.new(2013)).map do |c|
+    Conversation.where('most_recent_action < ?', Date.new(2013)).map do |c|
       {
         :model => c,
         :notes => ''

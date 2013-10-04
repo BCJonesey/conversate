@@ -3,7 +3,7 @@ class Api::V0::StatusesController < ApplicationController
 
   def show
     render :json => {
-      global_most_recent_event: current_user.conversations.maximum(:most_recent_event)
+      global_most_recent_action: current_user.conversations.maximum(:most_recent_action)
     }.to_json
   end
 end

@@ -6,7 +6,7 @@ class FoldersController < ApplicationController
 
     @folder = folder
     @folders = current_user.folders
-    @conversations = folder.conversations.order('most_recent_event DESC')
+    @conversations = folder.conversations.order('most_recent_action DESC')
     @conversation = @conversations.first
     @actions = @conversation ? @conversation.actions : nil
     @participants = @conversation ? @conversation.participants : nil
