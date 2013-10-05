@@ -161,10 +161,8 @@ var Structural = new (Support.CompositeView.extend({
   addSelfToConversation: function(){
     var convo = this._conversation;
     convo.actions.createUpdateUserAction([this._user], [], this._user);
-    Structural._conversation.participants.add(new Structural.Models.Participant(Structural._user.attributes))
+    Structural._conversation.get("participants").add(new Structural.Models.Participant(Structural._user.attributes))
     this._folder.conversations.fetch(true);
-    this.trigger('changeFolder', this._folder);
-    this._conversation = convo;
     this.trigger('changeConversation', convo);
   },
   createMessageAction: function(text) {
