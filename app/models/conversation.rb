@@ -126,7 +126,10 @@ class Conversation < ActiveRecord::Base
     end
     (viewers_set - self.participants).to_a
   end
-
+  
+  def can_user_update?(user)
+    self.participants.include?(user) || self.viewers.include?(user)
+  end
 
   # Public: Gets the next id for a message in this conversation.
   #

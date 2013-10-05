@@ -34,6 +34,7 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
   events: {
     'click .act-participants-edit': 'enterEditingMode',
     'click .act-participants-save': 'saveParticipants',
+    'click .act-participants-join': 'addSelfToConversation'
   },
   enterEditingMode: function(e) {
     if (e) {
@@ -56,6 +57,10 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
     this.$el.removeClass('editing');
 
     Structural.off('clickAnywhere', this.cancel, this);
+  },
+  addSelfToConversation: function(e) {
+    e.preventDefault();
+    Structural.addSelfToConversation();
   },
   selectParticipant: function() {
     this.tokens.addToken(this.tokenOptions.currentOption());
