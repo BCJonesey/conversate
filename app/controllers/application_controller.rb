@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   private
   def not_authenticated
-    redirect_to new_session_url
+    redirect_to root_url
   end
 
   def require_site_admin

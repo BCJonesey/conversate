@@ -63,8 +63,8 @@ class Conversation < ActiveRecord::Base
 
   def add_folders(folders, user, create_action=true)
     if folders
-      folders.each do |t|
-        folder_id = t[:id] || t['id']
+      folders.each do |f|
+        folder_id = f[:id] || f['id']
         folder = Folder.find(folder_id)
         self.folders << folder
       end
@@ -81,15 +81,21 @@ class Conversation < ActiveRecord::Base
 
   def remove_folders(folders, user, create_action=true)
     if folders
-      folders.each do |t|
-        folder_id = t[:id] || t['id']
+      folders.each do |f|
+        folder_id = f[:id] || f['id']
         folder = Folder.find(folder_id)
         self.folders.delete folder
       end
 
+      # Orphaning users by taking a conversation out of the only folder they
+      # can see it in is bad.
+      before = self.folders.clone
+      self.users.each {|u| u.ensure_cnv_in_at_least_one_folder self }
+      added = self.folders - before
+
       if create_action
         self.actions.new(type: 'update_folders',
-                         data: {removed: folders}.to_json,
+                         data: {removed: folders, added: added}.to_json,
                          user_id: user.id)
       end
 
@@ -245,11 +251,6 @@ class Conversation < ActiveRecord::Base
   def debug_s
     "Conversation:#{self.id}:#{self.title}"
   end
-
-  def ensure_user_has_in_folder(user)
-    self.folders << user.default_folder if (self.folders.to_set & user.folders.to_set).empty?
-  end
-
 
   protected
   # Internal: Creates a default conversation title based on who the participants

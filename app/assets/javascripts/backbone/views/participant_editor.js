@@ -1,5 +1,5 @@
 Structural.Views.ParticipantEditor = Support.CompositeView.extend({
-  className: 'act-participants btn-faint-container',
+  className: 'act-participants',
   template: JST['backbone/templates/participants/editor'],
   initialize: function(options) {
     options = options || {};

@@ -71,7 +71,7 @@ var Structural = new (Support.CompositeView.extend({
     Backbone.history.start({pushState: true});
 
     // Turn on our fetchers.
-    this.actionsFetcher = new Support.ActionsFetcher(this._conversation, 5000);
+    this.actionsFetcher = new Support.ActionsFetcher(this._conversation, 15000);
     this.folderFetcher = new Support.ConversationsFetcher(this._folder.conversations, 60000);
     this.foldersFetcher = new Support.FoldersFetcher(this._folders, 60000);
 

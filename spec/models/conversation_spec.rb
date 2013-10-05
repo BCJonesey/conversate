@@ -122,5 +122,25 @@ describe Conversation do
       conversation.actions.first.removed[0]['id'].should eq(@shared.id)
       conversation.actions.first.removed[1]['id'].should eq(folder_one.id)
     end
+
+    it 'puts the conversation in the default folder of orphaned users' do
+      conversation = Conversation.create(title: 'Tom Morello')
+      conversation.folders << @shared
+      conversation.users << @james
+      conversation.save
+
+      conversation.folders.length.should eq(1)
+      conversation.folders.include?(@shared).should be_true
+
+      conversation.remove_folders([{id: @shared.id}], @james)
+
+      conversation.folders.length.should eq(1)
+      conversation.folders.include?(@james.default_folder).should be_true
+      conversation.actions.last.type.should eq('update_folders')
+      conversation.actions.last.added.length.should eq(1)
+      conversation.actions.last.added[0]['id'].should eq(@james.default_folder.id)
+      conversation.actions.last.removed.length.should eq(1)
+      conversation.actions.last.removed[0]['id'].should eq(@shared.id)
+    end
   end
 end

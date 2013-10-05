@@ -48,10 +48,6 @@
   color:@act-title-color;
 }
 
-.act-participants-join{
-  display:none !important;
-}
-
 .act-container.not-participating-in{
   .act-title-input{
     color:mix(@act-title-color,white);
@@ -60,10 +56,16 @@
   .act-participants-edit{
     display:none !important;
   }
+}
+.act-participants-actions{
   .act-participants-join{
-    display:inline !important;
+    display:none;
+  }
+  .act-container.not-participating-in.act-participants-join{
+    display:inline;
   }
 }
+
 
 .act-title.editing{
   .editing-style();
@@ -72,7 +74,7 @@
 .act-title-actions,
 .act-title-save-actions{
   position: absolute;
-  top:.25rem;
+  top:.3rem;
   right:.25rem;
 }
 
