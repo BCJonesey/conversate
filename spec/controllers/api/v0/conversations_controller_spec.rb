@@ -26,24 +26,24 @@ describe Api::V0::ConversationsController do
       expect(body[1]['id']).to eq(2)
       expect(body[1]['title']).to eq('Pretty Damn Solid')
     end
-    it 'responds successfully with the correct most_recent_event' do
-      check_most_recent_event = lambda do |mre|
+    it 'responds successfully with the correct most_recent_action' do
+      check_most_recent_action = lambda do |mre|
         get :index, :folder_id => 1
         expect(response).to be_success
         expect(response.code).to eq("200")
         body = JSON.parse(response.body)
         expect(body[2]['title']).to eq('Timestamp Convo')
-        expect(body[2]['most_recent_event']).to eq(mre)
-        expect(body[2]['most_recent_event']).to be_a(Integer)
+        expect(body[2]['most_recent_action']).to eq(mre)
+        expect(body[2]['most_recent_action']).to be_a(Integer)
       end
       conversation = @folder.conversations.create!(:title => 'Timestamp Convo')
       conversation.users << @user
-      check_most_recent_event[946688839000] # Default value.
+      check_most_recent_action[946688839000] # Default value.
       conversation.actions.create!(:type => 'message',
                                   :data => '{"text":"You forgot the i, GIII"}',
                                   :user_id => @user.id)
-      conversation.update_most_recent_event
-      check_most_recent_event[conversation.most_recent_event.msec]
+      conversation.update_most_recent_action
+      check_most_recent_action[conversation.most_recent_action.msec]
     end
     it 'responds successfully with the correct most_recent_viewed' do
       conversation = Conversation.find_by_id(1)

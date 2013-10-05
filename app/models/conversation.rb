@@ -5,7 +5,7 @@ class Conversation < ActiveRecord::Base
   has_many :actions, :inverse_of => :conversation
   has_and_belongs_to_many :folders
 
-  attr_accessible :title, :users, :most_recent_event
+  attr_accessible :title, :users, :most_recent_action
 
   after_initialize do |convo|
     convo.title = convo.default_conversation_title if (convo.title.nil? || convo.title.empty?)
@@ -156,8 +156,8 @@ class Conversation < ActiveRecord::Base
     return messages.order('created_at DESC').first.created_at > most_recent_viewed.in(2)
   end
 
-  def update_most_recent_event
-    self.most_recent_event = Time.now
+  def update_most_recent_action
+    self.most_recent_action = Time.now
     self.save
   end
 
@@ -209,7 +209,7 @@ class Conversation < ActiveRecord::Base
     end
 
 
-    json[:most_recent_event] = most_recent_event ? most_recent_event.msec : nil
+    json[:most_recent_action] = most_recent_action ? most_recent_action.msec : nil
 
     # If the user has no most recent viewed, they are shared and we shouldn't care. Not returning
     # nil basically will make the client calculate 0 unread count too.

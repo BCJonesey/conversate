@@ -37,7 +37,7 @@ Conversate::Application.routes.draw do
         resources :participants, :only => [:index, :create, :destroy, :update]
       end
       resources :users, :only => [:index, :create, :update]
-      resources :admin, :only => [:index]
+      resource :status, :only => [:show]
     end
   end
 

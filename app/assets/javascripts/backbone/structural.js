@@ -198,7 +198,7 @@ var Structural = new (Support.CompositeView.extend({
         }
       ]
     }
-    data.most_recent_event = (new Date()).valueOf();
+    data.most_recent_action = (new Date()).valueOf();
 
     var conversation = new Structural.Models.Conversation(data);
     conversation.get('participants').add([this._user], {at: 0});

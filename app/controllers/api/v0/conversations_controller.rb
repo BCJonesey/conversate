@@ -28,7 +28,7 @@ class Api::V0::ConversationsController < ApplicationController
 
     conversation.add_actions params[:actions], current_user
 
-    conversation.update_most_recent_event
+    conversation.update_most_recent_action
     current_user.update_most_recent_viewed conversation
 
     conversation.save

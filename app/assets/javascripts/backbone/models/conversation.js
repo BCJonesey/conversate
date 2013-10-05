@@ -89,4 +89,4 @@ Structural.Models.Conversation = Backbone.Model.extend({
 });
 
 _.extend(Structural.Models.Conversation.prototype,
-         Support.HumanizedTimestamp('most_recent_event'));
+         Support.HumanizedTimestamp('most_recent_action'));
