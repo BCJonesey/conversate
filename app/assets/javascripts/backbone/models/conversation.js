@@ -27,9 +27,6 @@ Structural.Models.Conversation = Backbone.Model.extend({
     });
 
   },
-  participants: function(){
-    return this.get('participants');
-  },
   parse: function (response, options) {
 
     // This gets used later in a template so we need real models from our response.
