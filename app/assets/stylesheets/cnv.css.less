@@ -5,6 +5,7 @@
 
 // This does not include styles that control the position, of the converstion list column.  those are with the water-cooler.css.less file and other general layout stuff
 
+@cnv-highlight:#F0F8FF;
 
 .cnv-list {
     position: absolute;
@@ -20,9 +21,8 @@
 .cnv {
   padding: 0;
   border: none;
-  padding-bottom: 1px;
-  .gradient-ltr(#CCC,white,90%);
   cursor:pointer;
+  border-bottom:@border-1;
 }
 
 .cnv-left {
@@ -32,7 +32,7 @@
 }
 
 .cnv.cnv-current .cnv-left{
-  .gradient-ltr(#F0F8FF,white,90%)
+  background-color:@cnv-highlight;
 }
 .cnv-right{
   float:right;
