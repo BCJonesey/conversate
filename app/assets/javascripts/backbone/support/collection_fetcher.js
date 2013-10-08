@@ -3,8 +3,17 @@ Support.CollectionFetcher = function(options) {
     var self = this;
     self._collection = initialCollection;
     self._waitingOnRequest = false;
+    self._lastResponse = "";
+    self._fetchesSinceChange = 0;
 
-    self._requestFinished = function() {
+    self._requestFinished = function(collection, response, opts) {
+      if (self._lastResponse === opts.xhr.responseText) {
+        self._fetchesSinceChange += 1;
+      } else {
+        self._fetchesSinceChange = 0;
+      }
+
+      self._lastResponse = opts.xhr.responseText;
       self._waitingOnRequest = false;
     };
 
