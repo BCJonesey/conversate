@@ -20,7 +20,6 @@
   border:1px solid #CCC;
   background-color:#F0F0F0;
   color:#444;
-  text-shadow:1px 1px 1px white;
   .button-shadow(0.2);
   cursor:pointer;
   .user-select(none);
@@ -43,7 +42,6 @@
 	border-color: #AAA;
   background-color:#7AD;
   color:white;
-  text-shadow:1px 1px 1px #888;
 	.button-shadow(0.4);
   &:hover,
   &.hover,
@@ -93,7 +91,6 @@
   color:@btn-faint-color-hover;
   border-color: transparent;
   box-shadow:none;
-  text-shadow: none;
   -webkit-transition: color 0.85s;
   &:hover {
     color:@btn-faint-color-solid;
@@ -144,10 +141,6 @@ They are most useful for floating multiple buttons to one side.  */
 .btn-group.pull-right > *:last-child{
   margin-right:0;
 }
-
-
-
-
 
 
 
@@ -214,38 +207,29 @@ They are most useful for floating multiple buttons to one side.  */
   border:none;
   padding:0;
   height:@btn-height;
-  //font-size:0;
-  //line-height: 1.0;
   font-weight: normal;
   text-decoration:none;
   cursor:pointer;
   margin:0;
   margin-left:.25rem;
   margin-right:.25rem;
-  //background-color:rgba(0,0,0,0.25);
 
   color:#AAA;
-  text-shadow:1px 1px 1px white;
 
   &:hover,
   &.hover{
     color:rgba(0,0,0,0.7);
-    //text-shadow:1px 1px 10px #ABC;
     transition: color 0.35s;
-    -moz-transition:color 0.35s;
-    -webkit-transition: color 0.35s;
   }
   &.active,
   &:active,
   &:focus{
     position:relative;
-    text-shadow: none;
     top:1px;
   }
   &.disabled,
   &.disabled{
     color:rgba(64,64,64,0.1) !important;
-    text-shadow:none !important;
     &.active,
     &:active,
     &:focus{
