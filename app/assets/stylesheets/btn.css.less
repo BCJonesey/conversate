@@ -145,3 +145,141 @@ They are most useful for floating multiple buttons to one side.  */
   margin-right:0;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+/* Button Toolbars are block level elements that contain buttons and button groups.  */
+
+// --- Mixins for setting borders on toolbars --- //
+
+.btn-toolbar-border-bottom{
+  box-sizing:border-box;
+  border-bottom:1px solid @wc-toolbar-border-color;
+  border-top: 1px solid #F8F8F8;
+  //position: relative;
+}
+.btn-toolbar-border-top{
+  box-sizing:border-box;
+  border-top:1px solid @wc-toolbar-border-color;
+  border-bottom: 1px solid #F8F8F8;
+
+}
+// --- Actual Classes --- //
+
+@btn-toolbar-height:2.5rem;
+
+@btn-font-size: 1.0rem;
+@btn-padding-vertical:0.35rem;
+@btn-height: @btn-font-size + 2 * @btn-padding-vertical;
+
+
+.btn-toolbar {
+  .btn-toolbar-border-bottom();
+  padding:0.3rem .45rem;
+  background-color:@wc-toolbar-color;
+  display: block;
+  height:@btn-toolbar-height;  // 2.5rem
+  display: relative;
+}
+.btn-toolbar-below{
+  .btn-toolbar();
+  .btn-toolbar-border-top();
+}
+
+
+.btn-group{
+  //font-size: 0;
+  //line-height:@btn-toolbar-height;
+  white-space: nowrap;
+  .clearfix();
+  padding:0;
+  & > * {
+    display:inline-block;
+    //line-height: 1.0;
+    font-size:@btn-font-size;
+    vertical-align: top;
+  }
+}
+
+.btn-icon{
+  border:none;
+  padding:0;
+  height:@btn-height;
+  //font-size:0;
+  //line-height: 1.0;
+  font-weight: normal;
+  text-decoration:none;
+  cursor:pointer;
+  margin:0;
+  margin-left:.25rem;
+  margin-right:.25rem;
+  //background-color:rgba(0,0,0,0.25);
+
+  color:#AAA;
+  text-shadow:1px 1px 1px white;
+
+  &:hover,
+  &.hover{
+    color:rgba(0,0,0,0.7);
+    //text-shadow:1px 1px 10px #ABC;
+    transition: color 0.35s;
+    -moz-transition:color 0.35s;
+    -webkit-transition: color 0.35s;
+  }
+  &.active,
+  &:active,
+  &:focus{
+    position:relative;
+    text-shadow: none;
+    top:1px;
+  }
+  &.disabled,
+  &.disabled{
+    color:rgba(64,64,64,0.1) !important;
+    text-shadow:none !important;
+    &.active,
+    &:active,
+    &:focus{
+      top:0 !important;
+    }
+  }
+
+  i{
+    font-size:@btn-height;
+  }
+
+  .i-text{
+    display:inline-block;
+    //vertical-align: middle;
+    font-size:@btn-font-size;
+    line-height: 1.0;
+    height:@btn-height;
+    padding-top: @btn-padding-vertical;
+    //background-color:red;
+  }
+
+  i + .i-text{
+    margin-left:.35rem;
+  }
+}
+.btn-icon-primary{
+  .btn-icon();
+  color:#06A !important;
+  &:hover{
+    color:#48B !important;
+  }
+}
+
+.toolbar-title{
+  .title-font();
+}
+
