@@ -1,4 +1,4 @@
-Support.CollectionFetcher = function(interval, event, collFunc) {
+Support.CollectionFetcher = function(options) {
   return function(initialCollection) {
     var self = this;
     self._collection = initialCollection;
@@ -18,11 +18,11 @@ Support.CollectionFetcher = function(interval, event, collFunc) {
         self._waitingOnRequest = true;
       }
     };
-    setInterval(self._fetchHandler, interval);
+    setInterval(self._fetchHandler, options.interval);
 
-    if (event) {
-      Structural.on(event, function(eventArg) {
-        self._collection = collFunc(eventArg);
+    if (options.event) {
+      Structural.on(options.event, function(eventArg) {
+        self._collection = options.collFunc(eventArg);
       });
     }
   };

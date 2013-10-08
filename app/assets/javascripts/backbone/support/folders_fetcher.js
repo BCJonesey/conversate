@@ -1,3 +1,5 @@
 //= require ./collection_fetcher
 
-Support.FoldersFetcher = Support.CollectionFetcher(60000);
+Support.FoldersFetcher = Support.CollectionFetcher({
+  interval: 60000
+});
