@@ -1,7 +1,5 @@
 @import 'variables.css.less';
 @import 'mixins.css.less';
-@import 'btn.css.less';
-//@import 'btn-toolbar.css.less';
 
 // --- Actions --- //
 
@@ -83,8 +81,9 @@
   min-height:1.5rem;
   max-height: 6rem;
   overflow-y:auto;
-  background-color: #EEE;
-  border-bottom:1px solid @wc-toolbar-border-color;
+  background-color: @bg-1;
+  border:1px solid transparent;
+  border-bottom-color:@border-color-1;
   padding:0 0.5rem;
   padding-right:1.5rem;
   z-index: 1;
