@@ -39,7 +39,6 @@ Structural.Models.Folder = Backbone.Model.extend({
 
   _inflatedUsersCollection: function(coll) {
     if (coll && !(coll instanceof Backbone.Collection)) {
-      console.log('inflate');
       return new Structural.Collections.FolderParticipants(coll);
     }
     return coll;
