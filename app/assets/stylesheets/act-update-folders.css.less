@@ -1,20 +1,14 @@
 @import 'variables.css.less';
 @import 'mixins.css.less';
 
-@border-dark-color:#AAA;
-@border-dark:1px solid @border-dark-color;
-@border-light:1px solid #DDD;
-
-@checked-blue:#F0F8FF;
-@gray-dark:#444;
+@checked-blue:#F8FAFF;
 @gray:#888;
 @hover-gray: #F8F8F8;
-@header-gray: #DDD;
 @pad:0.25rem;
 
 .act-ut{
-  border:@border-dark;
-  box-shadow: 0 1rem 2rem rgba(0,0,0,0.2);
+  border:@border-1;
+  box-shadow: 0 0.75rem 2rem rgba(0,0,0,0.3);
   max-width: 14rem;
   z-index: 2;
   position: absolute;
@@ -30,31 +24,16 @@
 }
 .act-ut-header{
   text-align: center;
-  background-color: @header-gray;
-  border-bottom: @border-dark;
+  background-color: @bg-1;
+  border-bottom: @border-1;
   color:@gray;
   font-size: 0.75rem;
   padding:0.15rem;
 }
 .act-ut-folders-list{
-  background-color: #F0F0F0;
+  background-color: white;
   max-height:30rem;
   overflow-y:auto;
-}
-
-.act-ut-empty-error{
-  display:none;
-  border-bottom:@border-dark;
-  font-size:0.75rem;
-  text-align: center;
-  color:@gray;
-  padding:0.5rem;
-  .act-ut-empty-error-text{
-    padding:@pad;
-    border:@border-light;
-    display:block;
-    background-color:#FFD;
-  }
 }
 
 &.emtpy .act-ut-empty-error{
@@ -63,7 +42,7 @@
 
 .act-ut-folder{
   padding:@pad 0.5rem;
-  border-bottom:1px solid #CCC;
+  border-bottom:@border-1;
   cursor: pointer;
   color:@gray;
   &.checked,
@@ -80,7 +59,7 @@
     background-color:@checked-blue;
     transition:background-color 0.5s;
     &:active{
-      background-color:@hover-gray;
+      background-color:@bg-1;
       transition:background-color 0s;
     }
   }
@@ -132,7 +111,7 @@
 
     border-left: @tooltip-size solid transparent;
     border-right: @tooltip-size solid transparent;
-    border-bottom:@tooltip-size solid @border-dark-color;
+    border-bottom:@tooltip-size solid @border-color-1;
 
     right:@tooltip-size;
     top:-@tooltip-size;
@@ -143,7 +122,7 @@
 
 .act-ut:after{
   .act-ut-toolitp-triangle;
-  border-bottom-color:@header-gray;
+  border-bottom-color:@bg-1;
   top:-@tooltip-size + 1px;
 }
 

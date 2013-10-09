@@ -20,7 +20,7 @@
   bottom: 0;
   left: 0;
   width: 15rem;
-  border-right: 1px solid #AAA;
+  border-right: @border-1;
   overflow:hidden;
 }
 
@@ -30,7 +30,7 @@
     bottom: 0;
     left: 15rem;
     width: 20rem;
-    border-right: 1px solid #AAA;
+    border-right: @border-1;
     overflow:hidden;
   }
 
@@ -52,12 +52,16 @@
 
 // --- Scroll Bars --- //
 
+@scrollbar-color: rgba(0,0,0,0.1);
+@scrollbar-hover: rgba(0,0,0,0.3);
+
 .water-cooler {
 
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
     background-color: transparent;
+    border-left:@border-1;
   }
 
   ::-webkit-scrollbar-track {
@@ -76,8 +80,8 @@
     background-color: transparent;
     .transition(background-color, 1.2s);
     border: 2px solid transparent;
-    border-left: none;
-    box-shadow: inset 0px 0px 0px 4px @scrollbarColor;
+    border-left: 3px solid transparent;
+    box-shadow: inset 0px 0px 0px 4px @scrollbar-color;
     .transition(box-shadow, 1s);
   }
 
@@ -87,7 +91,6 @@
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    .transition(background-color, 1.2s);
-    box-shadow: inset 0px 0px 0px 4px @scrollbarHoverColor;
+    box-shadow: inset 0px 0px 0px 4px @scrollbar-hover;
   }
 }

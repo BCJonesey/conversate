@@ -15,7 +15,6 @@
     padding-left: .25em;
     font-size:0.75rem;
     color:#888;
-
   }
 
   input[type="text"],
@@ -23,19 +22,19 @@
   input[type="password"],
   textarea{
     font-size: 1rem;
-    border: 1px solid @borderColor;
+    border: @border-1;
     color: @textColor;
     .body-font;
     outline:none;
-    box-shadow:inset 0 0 5px rgba(0,0,0,0.2);
+    //box-shadow:inset 0 0 5px rgba(0,0,0,0.2);
     width: 100%;
     padding: .5em;
     background-color: white;
     margin-bottom: 10px;
 
     &:focus {
-      border-color:#ABC;
-      box-shadow: inset 0 0 5px rgba(0,0,255,0.2);
+      border-color:#BCD;
+      box-shadow: inset 0 0 4px rgba(0,128,255,0.2);
     }
   }
 }
@@ -48,7 +47,6 @@
   font-weight: normal;
   background-color:#F0F0F0;
   color:#444;
-  text-shadow:1px 1px 1px white;
   cursor:pointer;
   .button-shadow(0.2);
   .user-select(none);
@@ -69,7 +67,6 @@
   border-color: #AAA;
   background-color:#7AD;
   color:white;
-  text-shadow:1px 1px 1px #888;
   .button-shadow(0.4);
   &:hover,
   &.hover{
