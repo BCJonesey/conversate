@@ -20,7 +20,6 @@
   border:1px solid #CCC;
   background-color:#F0F0F0;
   color:#444;
-  text-shadow:1px 1px 1px white;
   .button-shadow(0.2);
   cursor:pointer;
   .user-select(none);
@@ -43,7 +42,6 @@
 	border-color: #AAA;
   background-color:#7AD;
   color:white;
-  text-shadow:1px 1px 1px #888;
 	.button-shadow(0.4);
   &:hover,
   &.hover,
@@ -93,7 +91,6 @@
   color:@btn-faint-color-hover;
   border-color: transparent;
   box-shadow:none;
-  text-shadow: none;
   -webkit-transition: color 0.85s;
   &:hover {
     color:@btn-faint-color-solid;
@@ -143,5 +140,122 @@ They are most useful for floating multiple buttons to one side.  */
 
 .btn-group.pull-right > *:last-child{
   margin-right:0;
+}
+
+
+
+
+
+
+
+
+
+/* Button Toolbars are block level elements that contain buttons and button groups.  */
+
+// --- Mixins for setting borders on toolbars --- //
+
+.btn-toolbar-style{
+  box-sizing:border-box;
+  border:1px solid transparent;
+  background-color: @bg-1;
+  padding:0.3rem .45rem;
+  display: block;
+  height:@btn-toolbar-height;  // 2.5rem
+  display: relative;
+}
+
+@btn-toolbar-height:2.5rem;
+@btn-font-size: 1.0rem;
+@btn-padding-vertical:0.35rem;
+@btn-height: @btn-font-size + 2 * @btn-padding-vertical;
+
+// --- Actual Classes --- //
+
+.btn-toolbar {
+  .btn-toolbar-style;
+  border-bottom-color:@border-color-1;
+}
+.btn-toolbar-below{
+  .btn-toolbar-style;
+  border-top-color:@border-color-1;
+}
+
+
+.btn-group{
+  //font-size: 0;
+  //line-height:@btn-toolbar-height;
+  white-space: nowrap;
+  .clearfix();
+  padding:0;
+  & > * {
+    display:inline-block;
+    //line-height: 1.0;
+    font-size:@btn-font-size;
+    vertical-align: top;
+  }
+}
+
+.btn-icon{
+  border:none;
+  padding:0;
+  height:@btn-height;
+  font-weight: normal;
+  text-decoration:none;
+  cursor:pointer;
+  margin:0;
+  margin-left:.25rem;
+  margin-right:.25rem;
+
+  color:#AAA;
+
+  &:hover,
+  &.hover{
+    color:rgba(0,0,0,0.7);
+    transition: color 0.35s;
+  }
+  &.active,
+  &:active,
+  &:focus{
+    position:relative;
+    top:1px;
+  }
+  &.disabled,
+  &.disabled{
+    color:rgba(64,64,64,0.1) !important;
+    &.active,
+    &:active,
+    &:focus{
+      top:0 !important;
+    }
+  }
+
+  i{
+    font-size:@btn-height;
+  }
+
+  .i-text{
+    display:inline-block;
+    //vertical-align: middle;
+    font-size:@btn-font-size;
+    line-height: 1.0;
+    height:@btn-height;
+    padding-top: @btn-padding-vertical;
+    //background-color:red;
+  }
+
+  i + .i-text{
+    margin-left:.35rem;
+  }
+}
+.btn-icon-primary{
+  .btn-icon();
+  color:#06A !important;
+  &:hover{
+    color:#48B !important;
+  }
+}
+
+.toolbar-title{
+  .title-font();
 }
 
