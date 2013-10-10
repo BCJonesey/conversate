@@ -1,10 +1,10 @@
-#= require ./support/support
-#= require_self
-#= require_tree ./templates
-#= require_tree ./models
-#= require_tree ./collections
-#= require_tree ./views
-#= require_tree ./routers
+//= require ./support/support
+//= require_self
+//= require_tree ./templates
+//= require_tree ./models
+//= require_tree ./collections
+//= require_tree ./views
+//= require_tree ./routers
 
 var Structural = new (Support.CompositeView.extend({
   Models: {},
@@ -71,9 +71,9 @@ var Structural = new (Support.CompositeView.extend({
     Backbone.history.start({pushState: true});
 
     // Turn on our fetchers.
-    this.actionsFetcher = new Support.ActionsFetcher(this._conversation, 15000);
-    this.folderFetcher = new Support.ConversationsFetcher(this._folder.conversations, 60000);
-    this.foldersFetcher = new Support.FoldersFetcher(this._folders, 60000);
+    this.actionsFetcher = new Support.ActionsFetcher(this._conversation.actions);
+    this.folderFetcher = new Support.ConversationsFetcher(this._folder.conversations);
+    this.foldersFetcher = new Support.FoldersFetcher(this._folders);
 
     // Focus initial folder.
     this._folders.focus(this._folder.id);
