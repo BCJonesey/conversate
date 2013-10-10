@@ -29,23 +29,19 @@ Structural.Models.Folder = Backbone.Model.extend({
       self.trigger('updated');
     }, self);
 
-    if (this.get('users')) {
-      this.set('users', new Structural.Collections.FolderParticipants(this.get('users')));
-    }
+    this.set('users', this._inflatedUsersCollection(this.get('users')));
   },
 
   parse: function (response, options) {
-
-    // We're expecting the folder participants to be an actual collection.
-    var users = new Structural.Collections.FolderParticipants();
-
-    _.each(response.users, function (p) {
-      users.add(new Structural.Models.Participant(p));
-    });
-
-    response.users = users;
+    response.users = this._inflatedUsersCollection(response.users);
     return response;
+  },
 
+  _inflatedUsersCollection: function(coll) {
+    if (coll && !(coll instanceof Backbone.Collection)) {
+      return new Structural.Collections.FolderParticipants(coll);
+    }
+    return coll;
   },
 
   focus: function() {
