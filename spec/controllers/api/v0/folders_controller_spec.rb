@@ -49,12 +49,14 @@ describe Api::V0::FoldersController do
     end
   end
 
-  describe 'DELETE #delete' do
+  describe 'DELETE #delete', :t => true do
     it "successfully deletes the specified folder" do
       expect(Folder.find_by_id(1)).to be_true
       delete :destroy, :id => 1
       expect(Folder.find_by_id(1)).to be_nil
     end
+    it "cannot delete a user's default folder"
+    it "moves orphaned conversations for each participant to their default folder"
   end
 
 end
