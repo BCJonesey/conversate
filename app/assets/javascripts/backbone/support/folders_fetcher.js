@@ -1,9 +1,5 @@
-Support.FoldersFetcher = function(folders, interval) {
-  var self = this;
-  self._folders = folders;
+//= require ./collection_fetcher
 
-  self._fetchHandler = function() {
-    self._folders.fetch({cache: false});
-  };
-  setInterval(self._fetchHandler, interval);
-}
+Support.FoldersFetcher = Support.CollectionFetcher({
+  interval: {min: 30000, max: 300000}
+});
