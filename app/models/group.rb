@@ -40,28 +40,30 @@ class Group < ActiveRecord::Base
   #     admins can contact us for next steps.
   def remove_users(ids)
     users_not_fully_removed = []
-    ids.each do |id|
-      user = User.find(id)
+    if ids
+      ids.each do |id|
+        user = User.find(id)
 
-      if user.groups.length == 1 && user.groups.include?(self)
-        user.removed = true
-        user.folders.each do |folder|
-          folder.users.delete user
-          folder.save
+        if user.groups.length == 1 && user.groups.include?(self)
+          user.removed = true
+          user.folders.each do |folder|
+            folder.users.delete user
+            folder.save
+          end
+          user.conversations.each do |conversation|
+            conversation.users.delete user
+            conversation.save
+          end
+        else
+          users_not_fully_removed << user
         end
-        user.conversations.each do |conversation|
-          conversation.users.delete user
-          conversation.save
-        end
-      else
-        users_not_fully_removed << user
+
+        user.groups.delete self
+        # Always force the user to log out and back in, to make sure that any
+        # old copies of convos, etc. that they have in javascript are gone.
+        user.forget_me!
+        user.save
       end
-
-      user.groups.delete self
-      # Always force the user to log out and back in, to make sure that any
-      # old copies of convos, etc. that they have in javascript are gone.
-      user.forget_me!
-      user.save
     end
 
     users_not_fully_removed

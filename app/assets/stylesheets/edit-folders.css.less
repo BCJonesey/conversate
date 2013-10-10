@@ -2,11 +2,14 @@
 @import 'mixins.css.less';
 @import 'modal.css.less';
 
-.ef-window{
+.modal-window.ef-window{
+
 //this is to override the participants list visual styles.  it shouldn't be ncessary once that is refactored.
+  .act-participants-join{
+    display:none;
+  }
   .modal-content{
     overflow:auto;
-
   }
 
   .act-participants{
@@ -32,12 +35,13 @@
     box-shadow:none !important;
     background-color: transparent !important;
     height:auto;
-    padding:0;
-    margin:0;
+    padding:0 !important;
+    margin:0 !important;
   }
   .token-options{
     z-index: 10;
   }
+
 }
 
 

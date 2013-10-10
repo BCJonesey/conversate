@@ -71,7 +71,7 @@ var Structural = new (Support.CompositeView.extend({
     Backbone.history.start({pushState: true});
 
     // Turn on our fetchers.
-    this.actionsFetcher = new Support.ActionsFetcher(this._conversation, 5000);
+    this.actionsFetcher = new Support.ActionsFetcher(this._conversation, 15000);
     this.folderFetcher = new Support.ConversationsFetcher(this._folder.conversations, 60000);
     this.foldersFetcher = new Support.FoldersFetcher(this._folders, 60000);
 
@@ -160,6 +160,13 @@ var Structural = new (Support.CompositeView.extend({
   },
   createUpdateUserAction: function(added, removed) {
     this._conversation.actions.createUpdateUserAction(added, removed, this._user);
+  },
+  addSelfToConversation: function(){
+    var convo = this._conversation;
+    convo.actions.createUpdateUserAction([this._user], [], this._user);
+    Structural._conversation.get("participants").add(new Structural.Models.Participant(Structural._user.attributes))
+    this._folder.conversations.fetch(true);
+    this.trigger('changeConversation', convo);
   },
   createMessageAction: function(text) {
     this._conversation.actions.createMessageAction(text, this._user);

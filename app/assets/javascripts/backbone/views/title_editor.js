@@ -1,5 +1,5 @@
 Structural.Views.TitleEditor = Support.CompositeView.extend({
-  className: 'btn-toolbar act-title btn-faint-container',
+  className: 'btn-toolbar act-title',
   template: JST['backbone/templates/actions/title_editor'],
   initialize: function(options) {
     options = options || {};

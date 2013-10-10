@@ -89,7 +89,7 @@ Structural.Views.Participants = Support.CompositeView.extend({
     return this.collection.clone();
   },
   changeConversation: function(conversation) {
-    this.collection = conversation.participants;
+    this.collection = conversation.get("participants");
     this.reset();
   },
   clearConversation: function() {

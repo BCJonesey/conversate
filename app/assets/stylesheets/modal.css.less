@@ -17,8 +17,8 @@
   margin:5rem auto 1.0rem;
   width:30rem;
   background-color:white;
-  border:1px solid #AAA;
-  box-shadow: 0 1rem 2rem rgba(0,0,0,0.2);
+  border:@border-1;
+  box-shadow: 0 1rem 2rem rgba(0,0,0,0.15);
 }
 
 .modal-message {
@@ -28,12 +28,11 @@
 .modal-title{
   .title-font();
 }
-@modal-background:#F8F8F8;
 @modal-input-border-color:#D8D8D8;
-@modal-input-highlight-background:#FFF;
+@modal-input-highlight-background:white;
 
 .modal-content{
-  background-color: @modal-background;
+  background-color: white;
   padding:0.5rem;
   overflow-x:hidden;
   overflow-y:auto;
@@ -48,6 +47,7 @@
   }
 
   label,
+  input[type='email'],
   input[type='text'],
   input[type='password']{
     display: block;
@@ -58,7 +58,10 @@
     font-size:0.75rem;
     color:#888;
   }
+}
 
+.modal-content.inspector{
+  input[type='email'],
   input[type='text'],
   input[type='password'],
   textarea{
@@ -69,14 +72,14 @@
     color:#888;
     width: 100%;
     padding: .5em;
-    background-color: @modal-background;
+    background-color: white;
     margin-bottom: 10px;
 
     &:focus {
       color:#444;
       border-color:#ABC;
-      box-shadow: inset 0 0 5px rgba(0,0,255,0.2);
-      background-color: @modal-input-highlight-background;
+      box-shadow: inset 0 0 5px rgba(0,128,255,0.2);
+      background-color: white;
     }
   }
 }
