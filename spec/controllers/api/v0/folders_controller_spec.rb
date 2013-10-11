@@ -53,9 +53,21 @@ describe Api::V0::FoldersController do
     it "successfully deletes the specified folder" do
       expect(Folder.find_by_id(1)).to be_true
       delete :destroy, :id => 1
+      expect(response).to be_success
+      expect(response.code).to eq("204")
       expect(Folder.find_by_id(1)).to be_nil
     end
-    it "cannot delete a user's default folder"
+    it "cannot delete a user's default folder" do
+      @user.default_folder_id = Folder.create!(:name => 'Unsinkable Folder').id
+      @user.save
+      expect(User.find_by_id(1).default_folder_id).to eq(3)
+
+      expect(Folder.find_by_id(3)).to be_true
+      delete :destroy, :id => 3
+      expect(response).not_to be_success
+      expect(response.code).to eq("409")
+      expect(Folder.find_by_id(3)).to be_true
+    end
     it "moves orphaned conversations for each participant to their default folder"
   end
 

@@ -30,8 +30,13 @@ class Api::V0::FoldersController < ApplicationController
   end
 
   def destroy
-    Folder.delete(params[:id])
-    render :json => {}, :status => 204
+    user = User.find_by_default_folder_id(params[:id])
+    if (user)
+      render :json => {}, :status => 409
+    else
+      Folder.delete(params[:id])
+      render :json => {}, :status => 204
+    end
   end
 
   def users
