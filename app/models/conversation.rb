@@ -43,12 +43,20 @@ class Conversation < ActiveRecord::Base
   end
 
   def remove_participants(participants, user, create_action=true)
-    # TODO: Sometimes remove some folders - semantics TBD
     if participants
       participants.each do |p|
         user_id = p[:id] || p['id']
         u = User.find(user_id)
         self.users.delete u
+      end
+
+      # If everyone in a folder's been removed, they probably don't want to be
+      # seeing it either.
+      participant_set = self.users.to_set
+      self.folders.each do |f|
+        if participant_set.intersection(f.users.to_set).empty?
+          self.folders.delete f
+        end
       end
 
       if create_action
@@ -126,7 +134,7 @@ class Conversation < ActiveRecord::Base
     end
     (viewers_set - self.participants).to_a
   end
-  
+
   def can_user_update?(user)
     self.participants.include?(user) || self.viewers.include?(user)
   end
