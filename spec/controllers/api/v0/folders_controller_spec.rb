@@ -80,16 +80,18 @@ describe Api::V0::FoldersController do
       deadFolder = Folder.create!(:name => 'The Walking Dead')
       expect(Folder.find_by_id(4)).to be_true
       conversation = deadFolder.conversations.create(:title => 'Gonna Move')
+      conversation.users << orphanUser
       expect(Conversation.find_by_id(1)).to be_true
       expect(conversation.folders.find_by_id(4)).to be_true
-      expect(conversation.folders.find_by_id(1)).not_to be_true
+      expect(conversation.folders.find_by_id(3)).not_to be_true
+      expect(conversation.users.find_by_id(2)).to be_true
 
       delete :destroy, :id => 4
       expect(response).to be_success
       expect(response.code).to eq("204")
       expect(Folder.find_by_id(4)).not_to be_true
       expect(conversation.folders.find_by_id(4)).not_to be_true
-      expect(conversation.folders.find_by_id(1)).to be_true
+      expect(conversation.folders.find_by_id(3)).to be_true
     end
   end
 

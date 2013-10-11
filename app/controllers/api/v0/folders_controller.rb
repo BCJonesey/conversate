@@ -34,7 +34,15 @@ class Api::V0::FoldersController < ApplicationController
     if (user)
       render :json => {}, :status => 409
     else
+      folder = Folder.includes(:conversations, :users).find_by_id(params[:id])
       Folder.delete(params[:id])
+      folder.conversations.each do |conversation|
+        puts conversation
+        conversation.users.each do |user|
+          puts user
+          user.ensure_cnv_in_at_least_one_folder(conversation)
+        end
+      end
       render :json => {}, :status => 204
     end
   end
