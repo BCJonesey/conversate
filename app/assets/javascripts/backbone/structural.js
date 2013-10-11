@@ -151,6 +151,7 @@ var Structural = new (Support.CompositeView.extend({
   },
   deleteFolder: function(folder) {
     this._folders.remove(folder);
+    folder.destroy();
   },
   createNewFolder: function () {
     this._folders.createNewFolder('New Folder');
