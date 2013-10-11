@@ -50,8 +50,8 @@ class Conversation < ActiveRecord::Base
         self.users.delete u
       end
 
-      # If everyone in a folder's been removed, they probably don't want to be
-      # seeing it either.
+      # If everyone in a folder's been removed, those users probably shouldn't
+      # be seeing it either.
       participant_set = self.users.to_set
       self.folders.each do |f|
         if participant_set.intersection(f.users.to_set).empty?
