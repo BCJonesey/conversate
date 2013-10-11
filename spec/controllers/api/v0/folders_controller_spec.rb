@@ -68,7 +68,29 @@ describe Api::V0::FoldersController do
       expect(response.code).to eq("409")
       expect(Folder.find_by_id(3)).to be_true
     end
-    it "moves orphaned conversations for each participant to their default folder"
+    it "moves orphaned conversations for each participant to their default folder" do
+      orphanUser = User.create!(:email => 'heehee@example.com',
+                          :full_name => 'Captain Hee-hee',
+                          :password => 'superDUPERsecretPassword')
+      orphanUser.default_folder_id = Folder.create!(:name => 'Safety Folder').id
+      orphanUser.save
+      expect(User.find_by_id(2).default_folder_id).to eq(3)
+      expect(Folder.find_by_id(3)).to be_true
+
+      deadFolder = Folder.create!(:name => 'The Walking Dead')
+      expect(Folder.find_by_id(4)).to be_true
+      conversation = deadFolder.conversations.create(:title => 'Gonna Move')
+      expect(Conversation.find_by_id(1)).to be_true
+      expect(conversation.folders.find_by_id(4)).to be_true
+      expect(conversation.folders.find_by_id(1)).not_to be_true
+
+      delete :destroy, :id => 4
+      expect(response).to be_success
+      expect(response.code).to eq("204")
+      expect(Folder.find_by_id(4)).not_to be_true
+      expect(conversation.folders.find_by_id(4)).not_to be_true
+      expect(conversation.folders.find_by_id(1)).to be_true
+    end
   end
 
 end
