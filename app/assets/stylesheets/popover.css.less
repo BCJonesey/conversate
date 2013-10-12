@@ -1,0 +1,53 @@
+@import 'variables.css.less';
+@import 'mixins.css.less';
+
+
+@tooltip-size: 10px;
+
+.toolitp-triangle-style{
+  content:' ';
+  display:block;
+  width:0;
+  height:0;
+  position:absolute;
+
+  border-left: @tooltip-size solid transparent;
+  border-right: @tooltip-size solid transparent;
+  border-bottom:@tooltip-size solid @border-color-1;
+
+  right:@tooltip-size;
+  top:-@tooltip-size;
+}
+
+.popover:before{
+  .toolitp-triangle-style;
+}
+
+.popover:after{
+  .toolitp-triangle-style;
+  border-bottom-color:@bg-1;
+  top:-@tooltip-size + 1px;
+}
+
+
+
+
+.popover{
+  border:@border-1;
+  background-color: white;
+  height: 10rem;
+  width:15rem;
+  position:absolute;
+  top:100%;
+  right:-5px;
+  z-index:10;
+  box-shadow:0 1rem 2rem rgba(0,0,0,0.2);
+  .header{
+    text-align: center;
+    background-color: @bg-1;
+    border-bottom: @border-1;
+    color:#888;
+    font-size: 0.75rem;
+    padding:0.15rem;
+  }
+}
