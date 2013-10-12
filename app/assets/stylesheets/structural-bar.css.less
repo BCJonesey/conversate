@@ -22,22 +22,28 @@
 .stb-link,
 .stb-name{
   display: inline-block;
-  color:@stb-color;
   text-decoration: none;
   vertical-align: top;
   padding:0.45rem;
   margin:0 0.1rem;
+  & > i {
+    color:@stb-color;
+  }
 }
 
 .stb-link{
   cursor:pointer;
   position:relative;
-  &:hover,
-  &.hover{
-    color:@stb-hover;
-    transition: color 0.35s;
-    -moz-transition:color 0.35s;
-    -webkit-transition: color 0.35s;
+  .stb-link-text{
+    font-size:1.25rem;
+    font-weight: bold;
+    color:@stb-color;
+  }
+  &:hover, &.hover{
+    & > i, .stb-link-text{
+      color:@stb-hover;
+      transition: color 0.35s;
+    }
   }
   &:active,
   &.active,
@@ -63,6 +69,7 @@
 .stb-link-text{
   font-size:1.25rem;
   font-weight: bold;
+  color:@stb-color;
 }
 .stb-name-text{
   font-size:1.0rem;

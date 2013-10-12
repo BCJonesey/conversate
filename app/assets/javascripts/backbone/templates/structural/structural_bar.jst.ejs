@@ -34,14 +34,21 @@
 </div>
 
 <div class="stb-group pull-right">
-  <a href="#" class="stb-link wc-news-toggle" title="Water Cooler News">
-    <i class="stb-icon icon-lightbulb"></i>
-
+  <span class='popover-wrap'>
+    <a class="stb-link wc-news-toggle" title="Water Cooler News">
+      <i class="stb-icon icon-bullhorn"></i>
+    </a>
     <div class='wc-news-popover popover hidden'>
       <div class='header'>Water Cooler News</div>
+      <div class='popover-content'>
+        <div class='divider'>Chrome Notifier</div>
+        <div class='section'>
+          <p><a href="https://chrome.google.com/webstore/detail/water-cooler/iojmggbopjbgmkhceojpkdlkjndpfpbb">Chrome Notifier</a></p>
+          <p>Mr. Ben Jones built a barebones chrome extension that puts your unread conversation count in your chrome toolbar.  </p>
+        </div>
+      </div>
     </div>
-
-  </a>
+  </span>
 
   <span class='stb-name'>
     <span class="stb-name-text"><%= user.escape('name') %></span>
