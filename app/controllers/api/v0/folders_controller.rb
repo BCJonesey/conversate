@@ -29,9 +29,24 @@ class Api::V0::FoldersController < ApplicationController
     end
   end
 
+  def destroy
+    user = User.find_by_default_folder_id(params[:id])
+    if (user)
+      render :json => {}, :status => 409
+    else
+      folder = Folder.includes(:conversations, :users).find_by_id(params[:id])
+      Folder.delete(params[:id])
+      folder.conversations.each do |conversation|
+        conversation.users.each do |user|
+          user.ensure_cnv_in_at_least_one_folder(conversation)
+        end
+      end
+      render :json => {}, :status => 204
+    end
+  end
+
   def users
     folder = Folder.find(params[:id])
-    binding.pry
     folder.add_users(params[:added].map { |e|  User.find(e[:id])},current_user)
     folder.remove_users(params[:removed].map { |e|  User.find(e[:id])},current_user)
     format.json { head :ok }

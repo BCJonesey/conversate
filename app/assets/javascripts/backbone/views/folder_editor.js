@@ -19,13 +19,44 @@ Structural.Views.FolderEditor = Support.CompositeView.extend({
   },
 
   events: {
-    'click .ef-save-button': 'save'
+    'click .ef-save-button': 'save',
+    'click .ef-delete-button':'delete',
+    'click .ef-trash-button':'showDeleteWarning',
+    'click .ef-deletion-cancel':'hideDeleteWarning',
+    'click .ef-deletion-confirmation':'toggleDeleteButton'
   },
 
   show: function(folder) {
     this._folder = folder;
     this.render(folder);
     this.$('.modal-background').removeClass('hidden');
+  },
+  showDeleteWarning: function(e){
+    e.preventDefault();
+    this.$('.ef-window-content').addClass('hidden');
+    this.$('.ef-deletion-content').removeClass('hidden');
+  },
+  hideDeleteWarning: function(e){
+    e.preventDefault();
+    this.$('.ef-window-content').removeClass('hidden');
+    this.$('.ef-deletion-content').addClass('hidden');
+    this.hideDeleteButton();
+    this.$('.ef-deletion-confirmation').prop('checked', false);
+  },
+  showDeleteButton: function(e){
+    this.$('.ef-delete-button').removeClass('hidden');
+    this.$('.ef-save-button').addClass('hidden');
+  },
+  hideDeleteButton: function(e){
+    this.$('.ef-save-button').removeClass('hidden');
+    this.$('.ef-delete-button').addClass('hidden');
+  },
+  toggleDeleteButton: function(e){
+    if (this.$('.ef-deletion-confirmation').prop('checked') === true){
+      this.showDeleteButton();
+    } else {
+      this.hideDeleteButton();
+    }
   },
   save: function(e) {
     e.preventDefault();
@@ -36,6 +67,13 @@ Structural.Views.FolderEditor = Support.CompositeView.extend({
       var participants = this._participantEditor.currentParticipants();
 
       this._folder.update(name, participants);
+      this.$('.modal-background').addClass('hidden');
+    }
+  },
+  delete: function(e) {
+    e.preventDefault();
+    if (this._folder) {
+      Structural.deleteFolder(this._folder);
       this.$('.modal-background').addClass('hidden');
     }
   }

@@ -3,7 +3,10 @@
 Structural.Views.Folders = Support.CompositeView.extend({
   className: 'fld-list',
   initialize: function(options) {
+    var self = this;
     options = options || {};
+
+    this.addressBook = options.addressBook;
 
     this.collection.on('add', this.renderFolder, this);
 
@@ -16,14 +19,26 @@ Structural.Views.Folders = Support.CompositeView.extend({
       folder.on('edit', this.editFolder, this);
     }, this);
 
-    this._folderEditor = new Structural.Views.FolderEditor({
-      addressBook: options.addressBook
-    });
+    this.collection.on('remove', function(folders) {
+      self.reRender();
+    })
   },
   render: function() {
+    this._folderEditor = new Structural.Views.FolderEditor({
+      addressBook: this.addressBook
+    });
     this.appendChild(this._folderEditor);
     this.collection.forEach(this.renderFolder, this);
     return this;
+  },
+  reRender: function() {
+    this.children.forEach(function(child) {
+      child.leave();
+    });
+    this._folderEditor.unbind();
+    this._folderEditor.remove();
+    this.$el.empty();
+    this.render();
   },
   renderFolder: function(folder) {
     var folderView = new Structural.Views.Folder({model: folder});
