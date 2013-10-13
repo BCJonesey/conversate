@@ -104,6 +104,28 @@ module Health
     end
   end
 
+  # This one is looking for conversations that are in a folder but don't have
+  # anyone participating on the conversation that are participating in that
+  # folder.
+  def Health.conversation_with_no_participants_in_folder
+    bad_folders = {}
+    Conversation.all.keep_if do |c|
+      c_set = c.users.to_set
+      c.folders.each do |f|
+        f_set = f.users.to_set
+        if c_set.intersection(f_set).empty?
+          bad_folders[c] = bad_folders.fetch(c, []).push(f)
+        end
+      end
+      bad_folders.has_key? c
+    end.map do |c|
+      {
+        :model => c,
+        :notes => bad_folders.fetch(c, []).map{|f| f.debug_s }.join(', ')
+      }
+    end
+  end
+
   # Group health checks
 
   def Health.group_with_no_admins
