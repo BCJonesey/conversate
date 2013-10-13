@@ -1,5 +1,5 @@
 Structural.Models.Folder = Backbone.Model.extend({
-  urlroot: Structural.apiPrefix + '/folders',
+  urlRoot: Structural.apiPrefix + '/folders',
 
   initialize: function(attributes, options) {
     var self = this;

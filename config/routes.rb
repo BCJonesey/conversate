@@ -28,7 +28,7 @@ Conversate::Application.routes.draw do
 
   namespace :api do
     namespace :v0 do
-      resources :folders, :only => [:index, :create, :update] do
+      resources :folders, :only => [:index, :create, :update, :destroy] do
         post 'users', :on => :member
         resources :conversations, :only => [:index, :create]
       end
