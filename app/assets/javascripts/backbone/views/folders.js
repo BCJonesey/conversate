@@ -6,6 +6,8 @@ Structural.Views.Folders = Support.CompositeView.extend({
     var self = this;
     options = options || {};
 
+    this.addressBook = options.addressBook;
+
     this.collection.on('add', this.renderFolder, this);
 
     // We need to setup edit for all of our bootstrapped folders,
@@ -17,15 +19,14 @@ Structural.Views.Folders = Support.CompositeView.extend({
       folder.on('edit', this.editFolder, this);
     }, this);
 
-    this._folderEditor = new Structural.Views.FolderEditor({
-      addressBook: options.addressBook
-    });
-
     this.collection.on('remove', function(folders) {
       self.reRender();
     })
   },
   render: function() {
+    this._folderEditor = new Structural.Views.FolderEditor({
+      addressBook: this.addressBook
+    });
     this.appendChild(this._folderEditor);
     this.collection.forEach(this.renderFolder, this);
     return this;
