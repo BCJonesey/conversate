@@ -13,7 +13,7 @@
 
   border-left: @tooltip-size solid transparent;
   border-right: @tooltip-size solid transparent;
-  border-bottom:@tooltip-size solid @border-color-1;
+  border-bottom:@tooltip-size solid @border-color-2;
 
   right:@tooltip-size;
   top:-@tooltip-size;
@@ -25,7 +25,7 @@
 
 .popover:after{
   .toolitp-triangle-style;
-  border-bottom-color:@bg-1;
+  border-bottom-color:@bg-2;
   top:-@tooltip-size + 1px;
 }
 
@@ -55,14 +55,33 @@
     padding:0.15rem;
   }
   .divider{
+    .clearfix();
     background-color: @bg-1;
     border-bottom:@border-1;
     color:#AAA;
     font-size: 0.75rem;
-    padding:0.15rem 0.5rem;
+    //padding:0.15rem 0.5rem;
+    .left{
+      .ellipsis();
+      padding:0.25rem 0.5rem;
+    }
+    .right{
+      float:right;
+      padding:0.4rem 0.4rem;
+      color:#CCC;
+      font-size:0.5rem;
+    }
   }
   .section{
+    //padding:0.5rem;
+    border-bottom: @border-1
+  }
+
+  .item{
     padding:0.5rem;
+    & + .item{
+      border-top:@border-1;
+    }
   }
   .popover-content{
     overflow:auto;
