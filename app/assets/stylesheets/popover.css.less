@@ -44,7 +44,7 @@
   top:110%;
   right:0;
   z-index:10;
-  box-shadow:0 1rem 2rem rgba(0,0,0,0.2);
+  box-shadow:0 1rem 2rem rgba(0,0,0,0.25);
   .header{
     text-align: center;
     background-color: @bg-2;
@@ -72,7 +72,6 @@
     }
   }
   .section{
-    //padding:0.5rem;
     border-bottom: @border-1
   }
 
@@ -89,9 +88,13 @@
       .link-blue();
     }
     p{
-      margin: 0.25rem 0;
+      margin: 0;
       color:#888;
       font-size:0.85rem;
+      line-height: 1.35;
+      & + p{
+        margin-top:0.5rem;
+      }
     }
   }
 }
