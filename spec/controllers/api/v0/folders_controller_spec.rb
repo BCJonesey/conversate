@@ -49,4 +49,50 @@ describe Api::V0::FoldersController do
     end
   end
 
+  describe 'DELETE #delete', :t => true do
+    it "successfully deletes the specified folder" do
+      expect(Folder.find_by_id(1)).to be_true
+      delete :destroy, :id => 1
+      expect(response).to be_success
+      expect(response.code).to eq("204")
+      expect(Folder.find_by_id(1)).to be_nil
+    end
+    it "cannot delete a user's default folder" do
+      @user.default_folder_id = Folder.create!(:name => 'Unsinkable Folder').id
+      @user.save
+      expect(User.find_by_id(1).default_folder_id).to eq(3)
+
+      expect(Folder.find_by_id(3)).to be_true
+      delete :destroy, :id => 3
+      expect(response).not_to be_success
+      expect(response.code).to eq("409")
+      expect(Folder.find_by_id(3)).to be_true
+    end
+    it "moves orphaned conversations for each participant to their default folder" do
+      orphanUser = User.create!(:email => 'heehee@example.com',
+                          :full_name => 'Captain Hee-hee',
+                          :password => 'superDUPERsecretPassword')
+      orphanUser.default_folder_id = Folder.create!(:name => 'Safety Folder').id
+      orphanUser.save
+      expect(User.find_by_id(2).default_folder_id).to eq(3)
+      expect(Folder.find_by_id(3)).to be_true
+
+      deadFolder = Folder.create!(:name => 'The Walking Dead')
+      expect(Folder.find_by_id(4)).to be_true
+      conversation = deadFolder.conversations.create(:title => 'Gonna Move')
+      conversation.users << orphanUser
+      expect(Conversation.find_by_id(1)).to be_true
+      expect(conversation.folders.find_by_id(4)).to be_true
+      expect(conversation.folders.find_by_id(3)).not_to be_true
+      expect(conversation.users.find_by_id(2)).to be_true
+
+      delete :destroy, :id => 4
+      expect(response).to be_success
+      expect(response.code).to eq("204")
+      expect(Folder.find_by_id(4)).not_to be_true
+      expect(conversation.folders.find_by_id(4)).not_to be_true
+      expect(conversation.folders.find_by_id(3)).to be_true
+    end
+  end
+
 end
