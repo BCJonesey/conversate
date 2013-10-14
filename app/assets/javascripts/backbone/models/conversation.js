@@ -30,9 +30,8 @@ Structural.Models.Conversation = Backbone.Model.extend({
   parse: function (response, options) {
 
     // This gets used later in a template so we need real models from our response.
-    response.participants = _.map(response.participants, function (p) {
-      return new Structural.Models.Participant(p);
-    });
+    response.participants = new Structural.Collections.Participants(response.participants);
+
     return response;
   },
 
