@@ -18,6 +18,7 @@ Structural.Views.News = Support.CompositeView.extend({
   },
   toggleNews: function() {
     this.$('.wc-news-popover').toggleClass('hidden');
+    this.$('.wc-news-toggle').toggleClass('active');
   },
   hide: function(e) {
     var target = $(e.target);
