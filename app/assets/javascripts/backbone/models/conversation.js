@@ -2,12 +2,7 @@ Structural.Models.Conversation = Backbone.Model.extend({
   initialize: function(attributes, options) {
     var self = this;
     if (this.get('participants')) {
-      this.set('participants', new Structural.Collections.Participants(
-        this.get('participants'),
-        {
-          conversation: self.id
-        })
-      );
+      this.set('participants', this._inflateParticipants(this.get('participants'), self.id));
     }
     this.actions = new Structural.Collections.Actions([], {conversation: this.id, user:Structural._user.id});
     this.actions.on('add', function() {
@@ -28,11 +23,16 @@ Structural.Models.Conversation = Backbone.Model.extend({
 
   },
   parse: function (response, options) {
-
     // This gets used later in a template so we need real models from our response.
-    response.participants = new Structural.Collections.Participants(response.participants);
+    response.participants = this._inflateParticipants(response.participants, response.id);
 
     return response;
+  },
+  _inflateParticipants: function(data, id) {
+    if (!(data instanceof Backbone.Collection)) {
+      return new Structural.Collections.Participants(data, { conversation: id });
+    }
+    return data;
   },
 
   focus: function() {
