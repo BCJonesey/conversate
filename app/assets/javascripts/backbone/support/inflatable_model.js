@@ -24,14 +24,14 @@ Support.InflatableModel = function(attributes, options) {
 
 _.extend(Support.InflatableModel.prototype, Backbone.Model.prototype, {
   initialize: function(attributes, options) {
-    this.attributes = inflateAttributes(this.attributes);
+    _.extend(this.attributes, this.inflateAttributes(this.attributes));
   },
 
   parse: function(response) {
-    return inflateAttributes(response);
+    return this.inflateAttributes(response);
   },
 
-  inflateAtttributes = function(attrs) {
+  inflateAtttributes: function(attrs) {
     return attrs;
   },
 
