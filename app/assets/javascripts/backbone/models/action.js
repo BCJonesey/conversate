@@ -11,7 +11,7 @@ Structural.Models.Action = Backbone.Model.extend({
         // and maybe the stars will be in a better alignment.
 
         // It's probably because it's a sub part of the json and needs to be parsed out
-        // Nas a real model. Not interested right now. - Nick
+        // as a real model. Not interested right now. - Nick
         if (this.get('user') instanceof Structural.Models.Participant) {
           // No-op
         }
