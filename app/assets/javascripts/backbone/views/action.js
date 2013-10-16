@@ -28,6 +28,12 @@ Structural.Views.Action = Support.CompositeView.extend({
       this.reRender();
       // TODO: If we just set is_current to true, we want to scroll to the message.
     }, this);
+
+    // If a model gets dumped, like when we try to post while getting actions, this will
+    // clean up the duped view.
+    this.model.on('remove', function() {
+      this.leave();
+    }, this)
   },
   render: function() {
     var template;
