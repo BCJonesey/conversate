@@ -3,7 +3,14 @@ Support.InflatableModel = function(attributes, options) {
 }
 
 _.extend(Support.InflatableModel.prototype, Backbone.Model.prototype, {
-  // Override this in children to properly inflate a model.
+  initialize: function(attributes, options) {
+    this.attributes = inflateAttributes(this.attributes);
+  },
+
+  parse: function(response) {
+    return inflateAttributes(response);
+  },
+
   inflateAtttributes = function(attrs) {
     return attrs;
   },
