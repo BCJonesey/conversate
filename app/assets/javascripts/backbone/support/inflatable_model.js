@@ -1,10 +1,10 @@
 Support.InflatableModel = {
   inflateExtend: function(attributes) {
-    _.extend(attributes, this.inflateAttributes(attributes));
+    _.extend(attributes, this.inflateAttributes(_.clone(attributes)));
   },
 
   inflateReturn: function(attributes) {
-    return this.inflateAttributes(attributes);
+    return this.inflateAttributes(_.clone(attributes));
   },
 
   inflateAtttributes: function(attrs) {
