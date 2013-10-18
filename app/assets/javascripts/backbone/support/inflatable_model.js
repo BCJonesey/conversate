@@ -1,34 +1,10 @@
-// Inflatable models have other Backbone collections or models as some of their
-// attributes.  In order to make an inflatable model, do three things.
-//
-// 1) Extend from Support.InflatableModel:
-//
-//    Structural.Models.Foo = Support.InflatableModel.extend({});
-//
-// 2) Implement inflateAttributes:
-//
-//    inflateAttributes: function(attrs) {
-//      attrs.bars = inflate(Structural.Collections.Bars, attrs.bars);
-//      return attrs;
-//    }
-//
-// 3) If you implement initialize or parse, include the appropriate super
-//    call:
-//
-//    this.constructor.__super__.initialize.call(this, attributes, options);
-//    response = this.constructor.__super__.parse.call(this, response);
-
-Support.InflatableModel = function(attributes, options) {
-  Backbone.Model.apply(this, [attributes, options]);
-}
-
-_.extend(Support.InflatableModel.prototype, Backbone.Model.prototype, {
-  initialize: function(attributes, options) {
-    _.extend(this.attributes, this.inflateAttributes(this.attributes));
+Support.InflatableModel = {
+  inflateExtend: function(attributes) {
+    _.extend(attributes, this.inflateAttributes(attributes));
   },
 
-  parse: function(response) {
-    return this.inflateAttributes(response);
+  inflateReturn: function(attributes) {
+    return this.inflateAttributes(attributes);
   },
 
   inflateAtttributes: function(attrs) {
@@ -61,6 +37,4 @@ _.extend(Support.InflatableModel.prototype, Backbone.Model.prototype, {
       return function(x) { return x; };
     }
   }
-});
-
-Support.InflatableModel.extend = Backbone.Model.extend;
+};
