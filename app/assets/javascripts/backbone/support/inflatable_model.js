@@ -1,3 +1,26 @@
+// There are four things you need to do to properly inflate a model.
+//
+// 1) Mix Support.InflatableModel in to your model constructor:
+//
+//     _.extend(Structural.Models.Foo.prototype, Support.InflatableModel);
+//
+// 2) Implement inflatableAttributes in your model.  You should be using inflate
+//    any time you want to create a Backbone object from JSON data:
+//
+//     inflateAttributes: function(attrs) {
+//       attrs.bar = this.inflate(Structural.Models.Bar, attrs.bar);
+//       return attrs;
+//     }
+//
+// 3) Include this line in your model's initialize function (before any code
+//    expects inflated data):
+//
+//     this.inflateExtend(this.attributes);
+//
+// 4) Include this line in your model's parse function:
+//
+//     response = this.inflateReturn(response);
+
 Support.InflatableModel = {
   inflateExtend: function(attributes) {
     _.extend(attributes, this.inflateAttributes(_.clone(attributes)));
