@@ -31,12 +31,14 @@ Support.InflatableModel = {
   },
 
 
-  inflate: function(type, data) {
+  inflate: function(type, data, options) {
+    // If not passed, options is undefined
+    options = _.extend({}, options);
     if (data instanceof Backbone.Collection ||
         data instanceof Backbone.Model) {
       return data;
     } else {
-      return new type(data);
+      return new type(data, options);
     }
   },
 
