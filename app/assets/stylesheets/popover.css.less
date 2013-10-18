@@ -1,0 +1,100 @@
+@import 'variables.css.less';
+@import 'mixins.css.less';
+
+
+@tooltip-size: 10px;
+
+.tooltip-triangle-style{
+  content:' ';
+  display:block;
+  width:0;
+  height:0;
+  position:absolute;
+
+  border-left: @tooltip-size solid transparent;
+  border-right: @tooltip-size solid transparent;
+  border-bottom:@tooltip-size solid @border-color-2;
+
+  right:@tooltip-size;
+  top:-@tooltip-size;
+}
+
+.popover:before{
+  .tooltip-triangle-style;
+}
+
+.popover:after{
+  .tooltip-triangle-style;
+  border-bottom-color:@bg-2;
+  top:-@tooltip-size + 1px;
+}
+
+.popover-wrap{
+  display:inline-block;
+  position:relative;
+}
+
+
+.popover{
+  border:@border-2;
+  background-color: white;
+  width:15rem;
+  min-height:5rem;
+  position:absolute;
+  top:110%;
+  right:0;
+  z-index:10;
+  box-shadow:0 0.5rem 1rem rgba(0,0,0,0.2);
+  .header{
+    text-align: center;
+    background-color: @bg-2;
+    border-bottom: @border-2;
+    color:#666;
+    //font-size: 0.75rem;
+    padding:0.15rem;
+  }
+  .divider{
+    .clearfix();
+    background-color: @bg-1;
+    border-bottom:@border-1;
+    color:#AAA;
+    font-size: 0.75rem;
+    //padding:0.15rem 0.5rem;
+    .left{
+      .ellipsis();
+      padding:0.25rem 0.5rem;
+    }
+    .right{
+      float:right;
+      padding:0.4rem 0.4rem;
+      color:#CCC;
+      font-size:0.5rem;
+    }
+  }
+  .section{
+    border-bottom: @border-1
+  }
+
+  .item{
+    padding:0.5rem;
+    & + .item{
+      border-top:@border-1;
+    }
+  }
+  .popover-content{
+    overflow:auto;
+    max-height:40rem;
+    a {
+      .link-blue();
+    }
+    p{
+      margin: 0;
+      color:#888;
+      font-size:0.85rem;
+      line-height: 1.35;
+      & + p{
+        margin-top:0.5rem;
+      }
+    }
+  }
+}
