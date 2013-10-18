@@ -30,9 +30,6 @@ Support.InflatableModel = {
     return this.inflateAttributes(_.clone(attributes));
   },
 
-  inflateAttributes: function(attrs) {
-    return attrs;
-  },
 
   inflate: function(type, data) {
     if (data instanceof Backbone.Collection ||
