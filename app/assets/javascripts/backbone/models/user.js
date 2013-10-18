@@ -4,8 +4,16 @@ Structural.Models.User = Backbone.Model.extend({
       this.set('name', this.get('full_name') || this.get('email'));
     }
 
-    if (this.get('address_book')) {
-      this.set('address_book', new Structural.Collections.Participants(this.get('address_book')));
+    this.inflateExtend(this.attributes);
+  },
+
+  inflateAttributes: function(attrs) {
+    if (attrs.address_book) {
+      attrs.address_book = this.inflate(Structural.Collections.Participants,
+                                        attrs.address_book);
     }
+    return attrs;
   }
 });
+
+_.extend(Structural.Models.User.prototype, Support.InflatableModel);
