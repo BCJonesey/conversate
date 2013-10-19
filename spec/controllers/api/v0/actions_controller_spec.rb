@@ -155,19 +155,27 @@ describe Api::V0::ActionsController do
       @user.folders << Folder.create!(:name => 'Boff')
       @user.default_folder_id = 2
       @user.save
+      Folder.create!(:name => 'Toff')
 
       post :create, :conversation_id => 1, :type => 'update_folders',
-        :added => [{"id" => 1}, {"id" => 2}], :removed => []
+        :added => [{"id" => 1}, {"id" => 3}], :removed => []
       expect(response).to be_success
       expect(response.code).to eq("201")
       body = JSON.parse(response.body)
-      #"id"=>6, "type"=>"update_folders", "added"=>[{"id"=>"1"}, {"id"=>"2"}], "removed"=>[], "user"=>{"id"=>1, "name"=>"Rufio Pan"}, "timestamp"=>1382212814359}
+
       expect(body['id']).to eq(6)
       expect(body['type']).to eq('update_folders')
-      expect(body['added']).to eq([{"id" => "1"}, {"id" => "2"}])
+      expect(body['added']).to eq([{"id" => "1"}, {"id" => "3"}])
       expect(body['removed']).to eq([])
       expect(body['user']).to eq({"id" => 1, "name"=>"Rufio Pan"})
       expect(body['timestamp']).to eq(timestamp(6))
+
+      conversation = Conversation.find_by_id(1)
+      expect(conversation.folders.count).to eq(3)
+      folder1 = Folder.find_by_id(1)
+      folder2 = Folder.find_by_id(3)
+      expect(conversation.folders.include?(folder1)).to eq(true)
+      expect(conversation.folders.include?(folder2)).to eq(true)
     end
     it 'responds unsuccessfully when the conversation does not exist' do
       post :create, :conversation_id => 100, :type => 'message', :text => 'Bye'
