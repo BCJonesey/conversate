@@ -26,9 +26,6 @@ describe Api::V0::ActionsController do
     conversation.actions.create!(:type => 'move_message',
                                   :data => '{"message_id":1,"from":{"title":"Whatever","id":1},"to":{"title":"Wherever","id":2}}',
                                   :user_id => @user.id)
-    conversation.actions.create!(:type => 'update_folders',
-                                  :data => '{"conversation_id":1,"from":{"name":"Whatevercee","id":1},"to":{"name":"Wherevercee","id":2}}',
-                                  :user_id => @user.id)
   end
 
   def timestamp(id)
@@ -90,18 +87,6 @@ describe Api::V0::ActionsController do
       expect(body[4]['user']['name']).to eq('Rufio Pan')
       expect(body[4]['user']['id']).to eq(1)
       expect(body[4]['timestamp']).to eq(timestamp(5))
-
-      #Move Conversation
-      expect(body[5]['id']).to eq(6)
-      expect(body[5]['type']).to eq('update_folders')
-      from = {'name' => 'Whatevercee', 'id' => 1}
-      to = {'name' => 'Wherevercee', 'id' => 2}
-      expect(body[5]['from']).to eq(from)
-      expect(body[5]['to']).to eq(to)
-      expect(body[5]['conversation_id']).to eq(1)
-      expect(body[5]['user']['name']).to eq('Rufio Pan')
-      expect(body[5]['user']['id']).to eq(1)
-      expect(body[5]['timestamp']).to eq(timestamp(6))
 
     end
     it 'responds successfully for each type of action'
