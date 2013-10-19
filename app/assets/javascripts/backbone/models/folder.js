@@ -3,7 +3,7 @@ Structural.Models.Folder = Backbone.Model.extend({
 
   initialize: function(attributes, options) {
     var self = this;
-    self.set('is_unread', self.get('unread_conversations') > 0);
+    this.inflateExtend(this.attributes)
 
     // TODO: This gets us the favicon changes for free, but I don't like the asymmetry. Refactor.
     self.on('change:unread_conversations', Structural.updateTitleAndFavicon, Structural);
@@ -28,20 +28,21 @@ Structural.Models.Folder = Backbone.Model.extend({
       self.filterNewlyReadConversation(conversation);
       self.trigger('updated');
     }, self);
-
-    this.set('users', this._inflatedUsersCollection(this.get('users')));
   },
 
   parse: function (response, options) {
-    response.users = this._inflatedUsersCollection(response.users);
-    return response;
+    return this.inflateReturn(response);
   },
 
-  _inflatedUsersCollection: function(coll) {
-    if (coll && !(coll instanceof Backbone.Collection)) {
-      return new Structural.Collections.FolderParticipants(coll);
+  inflateAttributes: function(attrs) {
+    if (attrs.users) {
+      attrs.users = this.inflate(Structural.Collections.FolderParticipants,
+                                 attrs.users);
     }
-    return coll;
+
+    attrs.is_unread = attrs.unread_conversations > 0;
+
+    return attrs;
   },
 
   focus: function() {
@@ -83,3 +84,5 @@ Structural.Models.Folder = Backbone.Model.extend({
     this.save();
   }
 });
+
+_.extend(Structural.Models.Folder.prototype, Support.InflatableModel);
