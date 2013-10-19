@@ -152,13 +152,22 @@ describe Api::V0::ActionsController do
     it 'successfully adds to conversation\'s folders', :t => true do
       # Merely trying to make a spec for our current behavior.
       Folder.create!(:name => 'Roff')
-      Folder.create!(:name => 'Boff')
+      @user.folders << Folder.create!(:name => 'Boff')
+      @user.default_folder_id = 2
+      @user.save
+
       post :create, :conversation_id => 1, :type => 'update_folders',
         :added => [{"id" => 1}, {"id" => 2}], :removed => []
       expect(response).to be_success
-      expect(response.code).to eq("200")
+      expect(response.code).to eq("201")
       body = JSON.parse(response.body)
-      puts body
+      #"id"=>6, "type"=>"update_folders", "added"=>[{"id"=>"1"}, {"id"=>"2"}], "removed"=>[], "user"=>{"id"=>1, "name"=>"Rufio Pan"}, "timestamp"=>1382212814359}
+      expect(body['id']).to eq(6)
+      expect(body['type']).to eq('update_folders')
+      expect(body['added']).to eq([{"id" => "1"}, {"id" => "2"}])
+      expect(body['removed']).to eq([])
+      expect(body['user']).to eq({"id" => 1, "name"=>"Rufio Pan"})
+      expect(body['timestamp']).to eq(timestamp(6))
     end
     it 'responds unsuccessfully when the conversation does not exist' do
       post :create, :conversation_id => 100, :type => 'message', :text => 'Bye'
