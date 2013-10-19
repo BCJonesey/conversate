@@ -149,7 +149,17 @@ describe Api::V0::ActionsController do
     end
     it 'successfully updates users'
     it 'successfully moves a message'
-    it 'successfully updates a conversation\'s folders'
+    it 'successfully adds to conversation\'s folders', :tag => 't' do
+      # Merely trying to make a spec for our current behavior.
+      Folder.create!(:title => 'Roff')
+      Folder.create!(:title => 'Boff')
+      post :create, :conversation_id => 1, :type => 'update_folders',
+        :added => [{"id" => 1}, {"id" => 2}], :removed => []
+      expect(response).to be_success
+      expect(response.code).to eq("200")
+      body = JSON.parse(response.body)
+      puts body
+    end
     it 'responds unsuccessfully when the conversation does not exist' do
       post :create, :conversation_id => 100, :type => 'message', :text => 'Bye'
       expect(response).not_to be_success
