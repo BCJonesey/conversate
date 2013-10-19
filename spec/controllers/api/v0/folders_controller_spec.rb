@@ -49,7 +49,7 @@ describe Api::V0::FoldersController do
     end
   end
 
-  describe 'DELETE #delete', :t => true do
+  describe 'DELETE #delete' do
     it "successfully deletes the specified folder" do
       expect(Folder.find_by_id(1)).to be_true
       delete :destroy, :id => 1
