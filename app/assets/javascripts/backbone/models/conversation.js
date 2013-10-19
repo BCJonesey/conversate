@@ -1,9 +1,8 @@
 Structural.Models.Conversation = Backbone.Model.extend({
   initialize: function(attributes, options) {
     var self = this;
-    if (this.get('participants')) {
-      this.set('participants', this._inflateParticipants(this.get('participants'), self.id));
-    }
+    this.inflateExtend(this.attributes);
+
     this.actions = new Structural.Collections.Actions([], {conversation: this.id, user:Structural._user.id});
     this.actions.on('add', function() {
       self.trigger('updated', self);
@@ -23,16 +22,16 @@ Structural.Models.Conversation = Backbone.Model.extend({
 
   },
   parse: function (response, options) {
-    // This gets used later in a template so we need real models from our response.
-    response.participants = this._inflateParticipants(response.participants, response.id);
-
-    return response;
+    return this.inflateReturn(response);
   },
-  _inflateParticipants: function(data, id) {
-    if (!(data instanceof Backbone.Collection)) {
-      return new Structural.Collections.Participants(data, { conversation: id });
+
+  inflateAttributes: function(attrs) {
+    if (attrs.participants) {
+      attrs.participants = this.inflate(Structural.Collections.Participants,
+                                        attrs.participants,
+                                        { conversation: attrs.id });
     }
-    return data;
+    return attrs;
   },
 
   focus: function() {
@@ -89,3 +88,4 @@ Structural.Models.Conversation = Backbone.Model.extend({
 
 _.extend(Structural.Models.Conversation.prototype,
          Support.HumanizedTimestamp('most_recent_event'));
+_.extend(Structural.Models.Conversation.prototype, Support.InflatableModel);
