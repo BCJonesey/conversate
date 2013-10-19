@@ -103,13 +103,13 @@ describe Api::V0::ActionsController do
       expect(response).to be_success
       expect(response.code).to eq("201")
       body = JSON.parse(response.body)
-      expect(body['id']).to eq(7)
+      expect(body['id']).to eq(6)
       expect(body['type']).to eq('message')
       expect(body['text']).to eq('Hi')
       expect(body['user']['name']).to eq('Rufio Pan')
       expect(body['user']['id']).to eq(1)
-      expect(body['timestamp']).to eq(timestamp(7))
-      action = Action.find(7)
+      expect(body['timestamp']).to eq(timestamp(6))
+      action = Action.find(6)
       expect(action.text).to eq('Hi')
     end
     it 'successfully retitles a conversation' do
@@ -117,15 +117,15 @@ describe Api::V0::ActionsController do
       expect(response).to be_success
       expect(response.code).to eq("201")
       body = JSON.parse(response.body)
-      expect(body['id']).to eq(7)
+      expect(body['id']).to eq(6)
       expect(body['type']).to eq('retitle')
       expect(body['title']).to eq('My new title')
       expect(body['user']['name']).to eq('Rufio Pan')
       expect(body['user']['id']).to eq(1)
-      expect(body['timestamp']).to eq(timestamp(7))
+      expect(body['timestamp']).to eq(timestamp(6))
       conversation = Conversation.find(1)
       expect(conversation.title).to eq('My new title')
-      action = Action.find(7)
+      action = Action.find(6)
       expect(action.title).to eq('My new title')
     end
     it 'successfully deletes a message' do
@@ -133,13 +133,13 @@ describe Api::V0::ActionsController do
       expect(response).to be_success
       expect(response.code).to eq("201")
       body = JSON.parse(response.body)
-      expect(body['id']).to eq(7)
+      expect(body['id']).to eq(6)
       expect(body['type']).to eq('deletion')
       expect(body['msg_id']).to eq('1')
       expect(body['user']['name']).to eq('Rufio Pan')
       expect(body['user']['id']).to eq(1)
-      expect(body['timestamp']).to eq(timestamp(7))
-      action = Action.find(7)
+      expect(body['timestamp']).to eq(timestamp(6))
+      action = Action.find(6)
       expect(action.msg_id).to eq('1')
     end
     it 'fails when deleting a non-message action' do
