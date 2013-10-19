@@ -149,10 +149,10 @@ describe Api::V0::ActionsController do
     end
     it 'successfully updates users'
     it 'successfully moves a message'
-    it 'successfully adds to conversation\'s folders', :tag => 't' do
+    it 'successfully adds to conversation\'s folders', :t => true do
       # Merely trying to make a spec for our current behavior.
-      Folder.create!(:title => 'Roff')
-      Folder.create!(:title => 'Boff')
+      Folder.create!(:name => 'Roff')
+      Folder.create!(:name => 'Boff')
       post :create, :conversation_id => 1, :type => 'update_folders',
         :added => [{"id" => 1}, {"id" => 2}], :removed => []
       expect(response).to be_success
