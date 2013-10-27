@@ -110,9 +110,6 @@ class Action < ActiveRecord::Base
   protected
   attr_accessor :json
 
-# TODO: Only for consultation. Remove when possible.
-#Parameters: {"type"=>"update_folders", "user"=>{"name"=>"Nick Martin", "id"=>3}, "added"=>[{"created_at"=>"2013-08-07T17:39:49Z", "id"=>54, "name"=>"Structural", "updated_at"=>"2013-08-07T17:39:49Z", "unread_conversations"=>nil, "users"=>[{"email"=>"skermes@gmail.com", "full_name"=>"Sean Kermes", "id"=>1, "site_admin"=>true, "name"=>"Sean Kermes"}, {"email"=>"will.lubelski@gmail.com", "full_name"=>"William Lubelski", "id"=>2, "site_admin"=>true, "name"=>"William Lubelski"}, {"email"=>"martin.nick@gmail.com", "full_name"=>"Nick Martin", "id"=>3, "site_admin"=>true, "name"=>"Nick Martin"}, {"email"=>"bcjonesey@gmail.com", "full_name"=>"Ben Jones", "id"=>23, "site_admin"=>false, "name"=>"Ben Jones"}], "is_unread"=>false, "is_current"=>false, "is_alternate"=>false}], "removed"=>nil, "timestamp"=>1382896954029, "isOwnAction"=>true, "conversation_id"=>"208"}
-
   private
   def self.calculateAddedViewers(params)
     if (! params['prior_conversation_users_and_participants'])
