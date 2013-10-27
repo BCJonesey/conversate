@@ -42,6 +42,7 @@ Support.CollectionFetcher = function(options) {
         }
 
         self._collection.fetch({
+          remove: false,
           cache: false,
           success: self._requestFinished,
           error: self._requestFinished
