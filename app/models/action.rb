@@ -101,6 +101,12 @@ class Action < ActiveRecord::Base
     end
   end
 
+  def update_data(params)
+    self.data = Action::data_for_params(params)
+    self.json = JSON::load data || {}
+    save
+  end
+
   protected
   attr_accessor :json
 

@@ -38,7 +38,7 @@ class Api::V0::ActionsController < ApplicationController
 
     # Now we can actually calculate our real data for our update_folders.
     if (action.type == 'update_folders')
-      action.data = Action::data_for_params(params)
+      action.update_data(params)
     end
 
     if (action.type == 'deletion')

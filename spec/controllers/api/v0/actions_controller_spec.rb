@@ -213,7 +213,7 @@ describe Api::V0::ActionsController do
       body = JSON.parse(response.body)
 
       expect(body['addedViewers'].length).to eq(1)
-      expect(body['addedViewers'][0].id).to eq(user2.id)
+      expect(body['addedViewers'][0]['id']).to eq(user2.id)
     end
     it 'responds unsuccessfully when the conversation does not exist' do
       post :create, :conversation_id => 100, :type => 'message', :text => 'Bye'
