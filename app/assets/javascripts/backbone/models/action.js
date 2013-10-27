@@ -55,6 +55,12 @@ Structural.Models.Action = Backbone.Model.extend({
       return false;
     }
     return this.get('timestamp') > mostRecentEventViewed;
+  },
+  isUpdateFoldersWithoutAdditions: function() {
+    if (this.get('type') != 'update_folders' || this.get('addedViewers').length > 0) {
+      return false;
+    }
+    return true;
   }
 });
 

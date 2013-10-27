@@ -11,6 +11,9 @@ Structural.Views.Action = Support.CompositeView.extend({
     if(this.model.get('is_unread')) {
       classes += ' act-unread';
     }
+    if(this.model.isUpdateFoldersWithoutAdditions()) {
+      classes += ' hidden';
+    }
     return classes;
   },
 
