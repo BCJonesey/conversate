@@ -193,6 +193,28 @@ describe Api::V0::ActionsController do
       expect(conversation.folders.count).to eq(2)
       expect(body['addedViewers']).to eq([])
     end
+    it 'successfully shows one new viewer when updating a conversation\'s folders', :t => true do
+      @user.folders << Folder.create!(:name => 'Roff')
+      @user.default_folder_id = 1
+      @user.save
+      newFolder = Folder.create!(:name => 'New folder')
+
+      user2 = User.create!(:email => 'newUser@example.com',
+                              :full_name => 'Bob the Barbary Corsair',
+                              :password => 'blackbeard')
+      user2.folders << newFolder
+      user2.default_folder_id = 2
+      user2.save
+
+      post :create, :conversation_id => 1, :type => 'update_folders',
+        :added => [{"id" => 2}], :removed => []
+      expect(response).to be_success
+      expect(response.code).to eq("201")
+      body = JSON.parse(response.body)
+
+      expect(body['addedViewers'].length).to eq(1)
+      expect(body['addedViewers'][0].id).to eq(user2.id)
+    end
     it 'responds unsuccessfully when the conversation does not exist' do
       post :create, :conversation_id => 100, :type => 'message', :text => 'Bye'
       expect(response).not_to be_success
