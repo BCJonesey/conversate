@@ -36,7 +36,13 @@ Support.CollectionFetcher = function(options) {
 
     self._fetchHandler = function() {
       if (!self._waitingOnRequest) {
+        if (Support.DebugMode.noFetching) {
+          setTimeout(self._fetchHandler, self._nextTimeoutLength());
+          return;
+        }
+
         self._collection.fetch({
+          remove: false,
           cache: false,
           success: self._requestFinished,
           error: self._requestFinished
