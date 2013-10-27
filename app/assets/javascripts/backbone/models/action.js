@@ -11,10 +11,11 @@ Structural.Models.Action = Backbone.Model.extend({
       attrs.user = this.inflate(Structural.Models.Participant, attrs.user);
     }
 
-    if (_.contains(['update_users', 'update_folders'], attrs.type)) {
+    if (_.contains(['update_users', 'update_folders', 'update_viewers'], attrs.type)) {
       var collection = this.chooseType({
         update_users: Structural.Collections.Participants,
-        update_folders: Structural.Collections.Folders
+        update_folders: Structural.Collections.Folders,
+        update_viewers: Structural.Collections.Participants
       }, attrs.type);
 
       attrs.added = this.inflate(collection, attrs.added);
