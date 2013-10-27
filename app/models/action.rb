@@ -95,11 +95,18 @@ class Action < ActiveRecord::Base
     when 'update_folders'
       return {
         'added' => params['added'],
-        'removed' => params['removed']
+        'removed' => params['removed'],
+        'addedViewers' => calculateAddedViewers(params)
       }.to_json
     end
   end
 
   protected
   attr_accessor :json
+
+  private
+  def self.calculateAddedViewers(params)
+    return []
+  end
+
 end
