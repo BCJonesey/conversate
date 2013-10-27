@@ -1,6 +1,6 @@
-<%= action.get('user').escape('name') %> filed the conversation.
+<%= action.get('user').get('name') %> filed the conversation.
 <% if (action.get('addedViewers') && action.get('addedViewers').length > 0) { %>
-  <%= action.get('addedViewers').map(function(t) { return t.escape('name'); }).join(', ') %>
+  <%= action.get('addedViewers').map(function(t) { return t.get('full_name') }).join(', ') %>
   can now see this conversation.
 <% } else { %>
   No one new can see this conversation.
