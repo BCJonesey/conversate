@@ -19,6 +19,7 @@ Structural.Models.Action = Backbone.Model.extend({
 
       attrs.added = this.inflate(collection, attrs.added);
       attrs.removed = this.inflate(collection, attrs.removed);
+      attrs.addedViewers = this.inflate(collection, attrs.addedViewers);
     }
 
     if (attrs.type === 'move_message') {
