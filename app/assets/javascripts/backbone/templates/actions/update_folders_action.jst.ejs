@@ -1,4 +1,3 @@
-<%= action.get('user').get('name') %> filed the conversation.
 <% if (action.get('addedViewers') && action.get('addedViewers').length > 0) { %>
   <%= action.get('addedViewers').map(function(t) { return t.get('name') }).join(', ') %>
   can now see this conversation.
