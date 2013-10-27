@@ -149,7 +149,7 @@ describe Api::V0::ActionsController do
     end
     it 'successfully updates users'
     it 'successfully moves a message'
-    it 'successfully adds to conversation\'s folders', :t => true do
+    it 'successfully adds to conversation\'s folders' do
       # Merely trying to make a spec for our current behavior.
       Folder.create!(:name => 'Roff')
       @user.folders << Folder.create!(:name => 'Boff')
@@ -177,7 +177,7 @@ describe Api::V0::ActionsController do
       expect(conversation.folders.include?(folder1)).to eq(true)
       expect(conversation.folders.include?(folder2)).to eq(true)
     end
-    it 'successfully shows no new viewers when updating a conversation\'s folders', :t => true do
+    it 'successfully shows no new viewers when updating a conversation\'s folders' do
       @user.folders << Folder.create!(:name => 'Roff')
       @user.default_folder_id = 1
       @user.save
@@ -193,7 +193,7 @@ describe Api::V0::ActionsController do
       expect(conversation.folders.count).to eq(2)
       expect(body['addedViewers']).to eq([])
     end
-    it 'successfully shows one new viewer when updating a conversation\'s folders', :t => true do
+    it 'successfully shows one new viewer when updating a conversation\'s folders' do
       @user.folders << Folder.create!(:name => 'Roff')
       @user.default_folder_id = 1
       @user.save
