@@ -93,11 +93,32 @@ class Action < ActiveRecord::Base
     when 'update_folders'
       return {
         'added' => params['added'],
-        'removed' => params['removed']
+        'removed' => params['removed'],
+        'addedViewers' => calculateAddedViewers(params)
       }.to_json
     end
   end
 
+  def update_data(params)
+    self.data = Action::data_for_params(params)
+    self.json = JSON::load data || {}
+    save
+  end
+
   protected
   attr_accessor :json
+
+  private
+  def self.calculateAddedViewers(params)
+    if (! params['prior_conversation_users_and_participants'])
+      return []
+    end
+
+    conversation = Conversation.find_by_id(params['conversation_id'])
+    # The current viewers are the set of users in this conversation, plus the users on all of its current folders,
+    # unique. The added viewers are the current viewers plus the set of current viewers with folder changes.
+    # Note that it should be impossible to remove users via changes due to the default folder selection.
+    return conversation.viewers_and_participants() - params['prior_conversation_users_and_participants']
+  end
+
 end

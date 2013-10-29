@@ -11,14 +11,19 @@ Structural.Models.Action = Backbone.Model.extend({
       attrs.user = this.inflate(Structural.Models.Participant, attrs.user);
     }
 
-    if (_.contains(['update_users', 'update_folders'], attrs.type)) {
+    if (_.contains(['update_users', 'update_folders', 'update_viewers'], attrs.type)) {
       var collection = this.chooseType({
         update_users: Structural.Collections.Participants,
-        update_folders: Structural.Collections.Folders
+        update_folders: Structural.Collections.Folders,
+        update_viewers: Structural.Collections.Participants
       }, attrs.type);
 
       attrs.added = this.inflate(collection, attrs.added);
       attrs.removed = this.inflate(collection, attrs.removed);
+    }
+
+    if (attrs.type == 'update_folders') {
+      attrs.addedViewers = this.inflate(Structural.Collections.Participants, attrs.addedViewers);
     }
 
     if (attrs.type === 'move_message') {
@@ -50,6 +55,12 @@ Structural.Models.Action = Backbone.Model.extend({
       return false;
     }
     return this.get('timestamp') > mostRecentEventViewed;
+  },
+  isUpdateFoldersWithoutAdditions: function() {
+    if (this.get('type') != 'update_folders' || this.get('addedViewers').length > 0) {
+      return false;
+    }
+    return true;
   }
 });
 

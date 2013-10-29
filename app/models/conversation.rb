@@ -128,11 +128,11 @@ class Conversation < ActiveRecord::Base
   end
 
   def viewers
-    viewers_set = Set.new([])
-    self.folders.each do |folder|
-      viewers_set += folder.users.to_set
-    end
-    (viewers_set - self.participants).to_a
+    (set_of_viewers() - self.participants).to_a
+  end
+
+  def viewers_and_participants
+    (set_of_viewers() + self.participants).to_a
   end
 
   def can_user_update?(user)
@@ -269,5 +269,15 @@ class Conversation < ActiveRecord::Base
   def default_conversation_title()
     return 'New Conversation' if self.users.length <= 1
     "A conversation with #{self.users.map {|u| u.name}.join(', ')}"
+  end
+
+  private
+
+  def set_of_viewers
+    viewers_set = Set.new([])
+    self.folders.each do |folder|
+      viewers_set += folder.users.to_set
+    end
+    return viewers_set
   end
 end
