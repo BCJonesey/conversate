@@ -1,14 +1,14 @@
-<%= action.get('user').get('name') %>
-<% if (action.get('added') && action.get('added').length > 0) { %>
+<%= action.get('user').escape('name') %>
+<% if (action.escape('added') && action.escape('added').length > 0) { %>
   added
-  <%= action.get('added').map(function(p) { return p.get('name'); }).join(', ') %>
+  <%= action.escape('added').map(function(p) { return p.escape('name'); }).join(', ') %>
   as a viewer
-  <% if (action.get('removed') && action.get('removed').length > 0) { %>
+  <% if (action.escape('removed') && action.escape('removed').length > 0) { %>
     and
   <% } %>
 <% } %>
-<% if (action.get('removed') && action.get('removed').length > 0) { %>
+<% if (action.escape('removed') && action.escape('removed').length > 0) { %>
   removed
-  <%= action.get('removed').map(function(p) { return p.get('name'); }).join(', ') %>
+  <%= action.escape('removed').map(function(p) { return p.escape('name'); }).join(', ') %>
   as a viewer
 <% } %>
