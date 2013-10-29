@@ -61,9 +61,7 @@ class Action < ActiveRecord::Base
       json.merge!(self.json)
     end
     user = User.find(user_id)
-    json['user'] = Hash.new
-    json['user']['id'] = user.id
-    json['user']['name'] = user.name
+    json['user'] = user
     json['timestamp'] = created_at.msec
     return json
   end
