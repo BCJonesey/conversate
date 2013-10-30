@@ -1,14 +1,17 @@
 Structural.Views.Actions = Support.CompositeView.extend({
   className: 'act-list',
   initialize: function(options) {
-    var self = this;
-    this.collection.on('add', this.renderAction, this);
-    this.collection.on('reset', this.reRender, this);
+    this._wireEvents(this.collection);
 
     Structural.on('changeConversation', this.changeConversation, this);
     Structural.on('clearConversation', this.clearConversation, this);
-    this.collection.on('addedSomeoneElsesMessage', this.scrollDownIfAtBottom, this);
-    self.collection.on('actionsLoadedForFirstTime', this.reRender, this);
+
+  },
+  _wireEvents: function(collection) {
+    collection.on('add', this.renderAction, this);
+    collection.on('reset', this.reRender, this);
+    collection.on('addedSomeoneElsesMessage', this.scrollDownIfAtBottom, this);
+    collection.on('actionsLoadedForFirstTime', this.reRender, this);
   },
   render: function() {
     this.collection.forEach(this.renderAction, this);
@@ -32,10 +35,7 @@ Structural.Views.Actions = Support.CompositeView.extend({
   changeConversation: function(conversation) {
     this.collection.off(null, null, this);
     this.collection = conversation.actions;
-    this.collection.on('add', this.renderAction, this);
-    this.collection.on('reset', this.reRender, this);
-    this.collection.on('addedSomeoneElsesMessage', this.scrollDownIfAtBottom, this);
-    this.collection.on('actionsLoadedForFirstTime', this.reRender, this);
+    this._wireEvents(this.collection);
     this.reRender();
   },
   clearConversation: function() {
