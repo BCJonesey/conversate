@@ -3,8 +3,9 @@ Structural.Models.User = Backbone.Model.extend({
     if (!this.get('name')) {
       if (this.get('full_name') && this.get('full_name').length > 0) {
         this.set('name', this.get('full_name'));
+      } else {
+        this.set('name', this.get('email'));
       }
-      this.set('name', this.get('email'));
     }
 
     this.inflateExtend(this.attributes);
