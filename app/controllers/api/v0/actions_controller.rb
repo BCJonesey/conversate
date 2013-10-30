@@ -7,7 +7,7 @@ class Api::V0::ActionsController < ApplicationController
     # conversation controllers.
     conversation = Conversation.find_by_id(params[:conversation_id])
     head :status => 404 and return unless conversation
-    render :json => conversation.actions.to_json
+    render :json => conversation.actions.reverse.to_json
   end
 
   # Note that this will always be on urls like /conversations/1/actions.

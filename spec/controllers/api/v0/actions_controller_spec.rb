@@ -41,52 +41,52 @@ describe Api::V0::ActionsController do
       body = JSON.parse(response.body)
 
       # Message
-      expect(body[0]['id']).to eq(1)
-      expect(body[0]['type']).to eq('message')
-      expect(body[0]['text']).to eq('After the final no')
-      expect(body[0]['user']['name']).to eq('Rufio Pan')
-      expect(body[0]['user']['id']).to eq(1)
-      expect(body[0]['timestamp']).to eq(timestamp(1))
+      expect(body[4]['id']).to eq(1)
+      expect(body[4]['type']).to eq('message')
+      expect(body[4]['text']).to eq('After the final no')
+      expect(body[4]['user']['full_name']).to eq('Rufio Pan')
+      expect(body[4]['user']['id']).to eq(1)
+      expect(body[4]['timestamp']).to eq(timestamp(1))
 
       # Retitle
-      expect(body[1]['id']).to eq(2)
-      expect(body[1]['type']).to eq('retitle')
-      expect(body[1]['title']).to eq('There comes a yes?')
-      expect(body[1]['user']['name']).to eq('Rufio Pan')
-      expect(body[1]['user']['id']).to eq(1)
-      expect(body[1]['timestamp']).to eq(timestamp(2))
+      expect(body[3]['id']).to eq(2)
+      expect(body[3]['type']).to eq('retitle')
+      expect(body[3]['title']).to eq('There comes a yes?')
+      expect(body[3]['user']['full_name']).to eq('Rufio Pan')
+      expect(body[3]['user']['id']).to eq(1)
+      expect(body[3]['timestamp']).to eq(timestamp(2))
 
       #Deletion
       expect(body[2]['id']).to eq(3)
       expect(body[2]['type']).to eq('deletion')
       expect(body[2]['msg_id']).to eq(1)
-      expect(body[2]['user']['name']).to eq('Rufio Pan')
+      expect(body[2]['user']['full_name']).to eq('Rufio Pan')
       expect(body[2]['user']['id']).to eq(1)
       expect(body[2]['timestamp']).to eq(timestamp(3))
 
       #Update users
-      expect(body[3]['id']).to eq(4)
-      expect(body[3]['type']).to eq('update_users')
+      expect(body[1]['id']).to eq(4)
+      expect(body[1]['type']).to eq('update_users')
       added = Hash.new
       added['id'] = 2
       added['name'] = 'Harry Houdini'
-      expect(body[3]['added']).to eq([added])
-      expect(body[3]['removed']).to eq([])
-      expect(body[3]['user']['name']).to eq('Rufio Pan')
-      expect(body[3]['user']['id']).to eq(1)
-      expect(body[3]['timestamp']).to eq(timestamp(4))
+      expect(body[1]['added']).to eq([added])
+      expect(body[1]['removed']).to eq([])
+      expect(body[1]['user']['full_name']).to eq('Rufio Pan')
+      expect(body[1]['user']['id']).to eq(1)
+      expect(body[1]['timestamp']).to eq(timestamp(4))
 
       #Move message
-      expect(body[4]['id']).to eq(5)
-      expect(body[4]['type']).to eq('move_message')
+      expect(body[0]['id']).to eq(5)
+      expect(body[0]['type']).to eq('move_message')
       from = {'title' => 'Whatever', 'id' => 1}
       to = {'title' => 'Wherever', 'id' => 2}
-      expect(body[4]['from']).to eq(from)
-      expect(body[4]['to']).to eq(to)
-      expect(body[4]['message_id']).to eq(1)
-      expect(body[4]['user']['name']).to eq('Rufio Pan')
-      expect(body[4]['user']['id']).to eq(1)
-      expect(body[4]['timestamp']).to eq(timestamp(5))
+      expect(body[0]['from']).to eq(from)
+      expect(body[0]['to']).to eq(to)
+      expect(body[0]['message_id']).to eq(1)
+      expect(body[0]['user']['full_name']).to eq('Rufio Pan')
+      expect(body[0]['user']['id']).to eq(1)
+      expect(body[0]['timestamp']).to eq(timestamp(5))
 
     end
     it 'responds successfully for each type of action'
@@ -106,7 +106,7 @@ describe Api::V0::ActionsController do
       expect(body['id']).to eq(6)
       expect(body['type']).to eq('message')
       expect(body['text']).to eq('Hi')
-      expect(body['user']['name']).to eq('Rufio Pan')
+      expect(body['user']['full_name']).to eq('Rufio Pan')
       expect(body['user']['id']).to eq(1)
       expect(body['timestamp']).to eq(timestamp(6))
       action = Action.find(6)
@@ -120,7 +120,7 @@ describe Api::V0::ActionsController do
       expect(body['id']).to eq(6)
       expect(body['type']).to eq('retitle')
       expect(body['title']).to eq('My new title')
-      expect(body['user']['name']).to eq('Rufio Pan')
+      expect(body['user']['full_name']).to eq('Rufio Pan')
       expect(body['user']['id']).to eq(1)
       expect(body['timestamp']).to eq(timestamp(6))
       conversation = Conversation.find(1)
@@ -136,7 +136,7 @@ describe Api::V0::ActionsController do
       expect(body['id']).to eq(6)
       expect(body['type']).to eq('deletion')
       expect(body['msg_id']).to eq('1')
-      expect(body['user']['name']).to eq('Rufio Pan')
+      expect(body['user']['full_name']).to eq('Rufio Pan')
       expect(body['user']['id']).to eq(1)
       expect(body['timestamp']).to eq(timestamp(6))
       action = Action.find(6)
@@ -167,7 +167,8 @@ describe Api::V0::ActionsController do
       expect(body['type']).to eq('update_folders')
       expect(body['added']).to eq([{"id" => "1"}, {"id" => "3"}])
       expect(body['removed']).to eq([])
-      expect(body['user']).to eq({"id" => 1, "name"=>"Rufio Pan"})
+      expect(body['user']).to eq({"email"=>"dummyUser@example.com",
+        "full_name"=>"Rufio Pan", "id"=>1, "site_admin"=>false})
       expect(body['timestamp']).to eq(timestamp(6))
 
       conversation = Conversation.find_by_id(1)
