@@ -34,6 +34,8 @@ Structural.Views.Actions = Support.CompositeView.extend({
     this.collection = conversation.actions;
     this.collection.on('add', this.renderAction, this);
     this.collection.on('reset', this.reRender, this);
+    this.collection.on('addedSomeoneElsesMessage', this.scrollDownIfAtBottom, this);
+    this.collection.on('actionsLoadedForFirstTime', this.reRender, this);
     this.reRender();
   },
   clearConversation: function() {
