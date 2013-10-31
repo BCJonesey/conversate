@@ -18,6 +18,8 @@ class Api::V0::ConversationsController < ApplicationController
 
     conversation.set_title params[:title] || 'New Conversation', current_user
 
+    conversation.add_actions params[:actions], current_user
+
     conversation.add_participants params[:participants], current_user
     # The API technically doesn't specify whether this request should include
     # the user creating the conversation or not, and the client goes back and
@@ -25,8 +27,6 @@ class Api::V0::ConversationsController < ApplicationController
     unless conversation.users.include? current_user
       conversation.users << current_user
     end
-
-    conversation.add_actions params[:actions], current_user
 
     conversation.update_most_recent_event
     current_user.update_most_recent_viewed conversation

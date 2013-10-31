@@ -27,10 +27,15 @@ class Conversation < ActiveRecord::Base
         user_id = p[:id] || p['id']
         u = User.find(user_id)
         self.users << u
+
         if folder_set.intersection(Set.new(u.folders)).length == 0
           u_default = Folder.find(u.default_folder_id)
           self.folders << u_default
         end
+
+        reading_log = ReadingLog.get(user_id, self.id)
+        reading_log.unread_count = self.actions.count
+        reading_log.save
       end
       self.save
 
