@@ -53,9 +53,10 @@ Structural.Views.Conversations = Support.CompositeView.extend({
   },
 
   // Attempts to show the first conversation. This basically gets called after the conversations
-  // have finished loading, so we can actually pick one to show.
+  // have finished loading, so we can actually pick one to show. We don't want to pick one that
+  // has been archived.
   viewFirstConversation: function() {
-    var conversation = this.collection.models[0];
+    conversation = this.collection.findWhere({archived: false});
     if (conversation) {
       Structural.viewConversationData(conversation);
       conversation.focus();
