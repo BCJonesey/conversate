@@ -21,7 +21,7 @@ Structural.Views.Conversations = Support.CompositeView.extend({
     var sectionRegular = new Structural.Views.ConversationsSection({name: "My Conversations"});
     this.appendChild(sectionRegular);
 
-    var sectionArchived = new Structural.Views.ConversationsSection({name: "Archived"});
+    var sectionArchived = new Structural.Views.ConversationsSection({name: "Archive"});
     this.appendChild(sectionArchived);
 
     this.collection.forEach(function(conversation) {
