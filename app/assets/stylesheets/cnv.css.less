@@ -16,7 +16,17 @@
     overflow-x:hidden;
     -webkit-overflow-scrolling:touch;
 }
-
+.cnv-divider{
+  .gradient-ltr(@border-color-1,white,90%);
+  padding-bottom: 1px;
+  .cnv-divider-inner{
+    .gradient-ltr(#F8F8F8,white,90%);
+    .ellipsis();
+    color:#AAA;
+    font-size: 0.8rem;
+    padding: 0.25rem;
+  }
+}
 .cnv {
   padding: 0;
   border: none;
