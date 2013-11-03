@@ -236,6 +236,8 @@ class Conversation < ActiveRecord::Base
       end
     end
 
+    json[:archived] = reading_log.archived
+
     return json
   end
 
