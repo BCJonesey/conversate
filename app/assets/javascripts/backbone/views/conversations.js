@@ -18,7 +18,12 @@ Structural.Views.Conversations = Support.CompositeView.extend({
   },
   render: function() {
     this.$el.empty();
-    this.collection.forEach(this.renderConversation, this);
+    var sectionRegular = new Structural.Views.ConversationsSection({name: "My Conversations"});
+    this.appendChild(sectionRegular);
+
+    var sectionArchived = new Structural.Views.ConversationsSection({name: "Archived"});
+    this.appendChild(sectionArchived);
+    //this.collection.forEach(this.renderConversation, this);
     return this;
   },
   renderConversation: function(conversation) {
