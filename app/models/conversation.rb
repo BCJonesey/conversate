@@ -236,7 +236,7 @@ class Conversation < ActiveRecord::Base
       end
     end
 
-    json[:archived] = reading_log.archived
+    json[:archived] = reading_log ? reading_log.archived : false
 
     return json
   end
