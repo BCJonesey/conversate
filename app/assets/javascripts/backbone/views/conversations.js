@@ -23,8 +23,9 @@ Structural.Views.Conversations = Support.CompositeView.extend({
 
     var sectionArchived = new Structural.Views.ConversationsSection({name: "Archived"});
     this.appendChild(sectionArchived);
+
     this.collection.forEach(function(conversation) {
-      if (conversation.archived) {
+      if (conversation.get('archived')) {
         sectionArchived.renderConversation(conversation);
       } else {
         sectionRegular.renderConversation(conversation);
