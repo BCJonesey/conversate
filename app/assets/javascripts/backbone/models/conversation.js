@@ -62,17 +62,15 @@ Structural.Models.Conversation = Backbone.Model.extend({
     self.set('most_recent_viewed', (new Date()).valueOf());
     self.set('unread_count', 0);
 
-    self.get('participants').each( function(participant) {
-      if (Structural._user.id === participant.id) {
-        // The server-side function has a side effect in that it will update most recent viewed
-        // for this conversation and user, which will be close enough to the time we want.
-        participant.save(
-          {
-            most_recent_viewed: self.get('most_recent_viewed')
-          }
-        );
-      }
-    })
+    self.withCurrentUserFromSelf(function(participant) {
+      // The server-side function has a side effect in that it will update most recent viewed
+      // for this conversation and user, which will be close enough to the time we want.
+      participant.save(
+        {
+          most_recent_viewed: self.get('most_recent_viewed')
+        }
+      );
+    });
     self.trigger('updated', self);
   },
   updateFolderIds: function(added, removed) {
@@ -82,6 +80,22 @@ Structural.Models.Conversation = Backbone.Model.extend({
     });
     removed.forEach(function(folder) {
       self.set('folder_ids', _.without(self.get('folder_ids'), folder.id));
+    });
+  },
+  archive: function() {
+    var self = this;
+    self.set('archived', true);
+    self.withCurrentUserFromSelf(function(participant) {
+      participant.save({
+        archived: self.get('archived')
+      });
+    });
+  },
+  withCurrentUserFromSelf: function(callback) {
+    this.get('participants').each( function(participant) {
+      if (Structural._user.id === participant.id) {
+        callback(participant);
+      }
     });
   }
 });

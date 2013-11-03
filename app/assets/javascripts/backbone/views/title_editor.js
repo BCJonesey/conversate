@@ -23,6 +23,7 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
     'click .act-move-cnv': 'toggleUpdateFoldersDialog',
     'click .act-title-edit': 'openTitleEditor',
     'click .act-title-save': 'retitleConversation',
+    'click .act-archive-cnv': 'archiveConversation',
     'keyup': 'cancelOnEscape'
   },
   retitleConversation: function(e) {
@@ -37,6 +38,10 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
     this.conversation.changeTitle(title);
     this.trigger('change_title', title);
     this.closeTitleEditor();
+  },
+  archiveConversation: function(e) {
+    e.preventDefault();
+    this.conversation.archive();
   },
   toggleUpdateFoldersDialog: function(e) {
     e.preventDefault();
