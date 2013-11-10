@@ -11,6 +11,15 @@ class Conversation < ActiveRecord::Base
     convo.title = convo.default_conversation_title if (convo.title.nil? || convo.title.empty?)
   end
 
+  def email_address
+    # On kuhltank, set EMAIL_SUBDOMAIN=kuhltank
+    subdomain = ENV['EMAIL_SUBDOMAIN']
+    unless subdomain.nil?
+      subdomain += '.'
+    end
+    "cnv-#{self.id}@#{subdomain}watercoolr.io"
+  end
+
   def set_title(title, user)
     if title
       self.title = title
