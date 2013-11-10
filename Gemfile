@@ -36,6 +36,8 @@ gem 'ejs'	# Required for the .ejs templates.
 gem 'newrelic_rpm' # For New Relic analytics.
 gem 'quiet_assets'
 
+gem 'mandrill-api'
+
 group :test, :development do
   gem "rspec-rails", "~> 2.0"
   gem "yaml_db"
