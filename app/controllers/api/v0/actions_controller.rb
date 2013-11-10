@@ -34,6 +34,7 @@ class Api::V0::ActionsController < ApplicationController
       params['prior_conversation_users_and_participants'] = conversation.viewers_and_participants()
     end
 
+    action.save
     conversation.handle(action)
 
     # Now we can actually calculate our real data for our update_folders.
@@ -41,7 +42,6 @@ class Api::V0::ActionsController < ApplicationController
       action.update_data(params)
     end
 
-    action.save
     conversation.update_most_recent_event
     render :json => action.to_json, :status => 201
   end
