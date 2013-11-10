@@ -84,12 +84,13 @@ Structural.Models.Conversation = Backbone.Model.extend({
   },
   archive: function() {
     var self = this;
-    self.set('archived', true);
+    self.set('archived', ! self.get('archived'));
     self.withCurrentUserFromSelf(function(participant) {
       participant.save({
         archived: self.get('archived')
       });
     });
+    self.trigger('archived', self);
   },
   withCurrentUserFromSelf: function(callback) {
     this.get('participants').each( function(participant) {

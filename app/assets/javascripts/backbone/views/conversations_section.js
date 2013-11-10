@@ -22,5 +22,11 @@ Structural.Views.ConversationsSection = Support.CompositeView.extend({
   },
   toggleCollapsed: function(e){
     $(e.target).closest('.cnv-section').toggleClass('is-collapsed')
+  },
+  renderConversations: function(conversations) {
+    var self = this;
+    conversations.forEach(function(conversation) {
+      self.renderConversation(conversation);
+    });
   }
 });
