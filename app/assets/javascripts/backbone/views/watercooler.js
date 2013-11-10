@@ -52,25 +52,33 @@ Structural.Views.WaterCooler = Support.CompositeView.extend({
   scrollActionsToBottom: function() {
     this.actionsView.scrollToBottom();
   },
-  showAct: function(){
-    console.log('showAct');
+
+  showAct: function(e){
+    if (e) { e.preventDefault(); }
+
     this.actionsView.show(true);
     this.conversationsView.show(false);
     this.foldersView.show(false);
     this.$el.removeClass('hidden');
   },
-  showCnv: function(){
+  showCnv: function(e){
+    if (e) { e.preventDefault(); }
+
     this.conversationsView.show(true);
     this.actionsView.show(false);
     this.$el.removeClass('hidden');
   },
-  showFld: function(){
+  showFld: function(e){
+    if (e) { e.preventDefault(); }
+
     this.foldersView.show(true);
     this.conversationsView.show(false);
     this.actionsView.show(false);
     this.$el.removeClass('hidden');
   },
-  showStb: function(){
+  showStb: function(e){
+    if (e) { e.preventDefault(); }
+
     this.foldersView.show(false);
     this.conversationsView.show(false);
     this.actionsView.show(false);
