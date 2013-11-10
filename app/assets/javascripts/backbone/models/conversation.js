@@ -82,7 +82,7 @@ Structural.Models.Conversation = Backbone.Model.extend({
       self.set('folder_ids', _.without(self.get('folder_ids'), folder.id));
     });
   },
-  archive: function() {
+  toggleArchive: function() {
     var self = this;
     self.set('archived', ! self.get('archived'));
     self.withCurrentUserFromSelf(function(participant) {

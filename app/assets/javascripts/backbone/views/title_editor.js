@@ -41,7 +41,7 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
   },
   archiveConversation: function(e) {
     e.preventDefault();
-    this.conversation.archive();
+    this.conversation.toggleArchive();
   },
   toggleUpdateFoldersDialog: function(e) {
     e.preventDefault();
