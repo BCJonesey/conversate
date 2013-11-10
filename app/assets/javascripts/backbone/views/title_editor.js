@@ -15,13 +15,15 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
       conversation: this.conversation
     });
     this.appendChild(this._updateFoldersDialog);
+    this.titleEditorModal = new Structural.Views.TitleEditorModal({});
+    this.appendChild(this.titleEditorModal);
     this._input = this.$('input[type="text"]');
     return this;
   },
   events: {
     submit: 'retitleConversation',
     'click .act-move-cnv': 'toggleUpdateFoldersDialog',
-    'click .act-title-edit': 'openTitleEditor',
+    //'click .act-title-edit': 'openTitleEditor',
     'click .act-title-save': 'retitleConversation',
     'keyup': 'cancelOnEscape'
   },
