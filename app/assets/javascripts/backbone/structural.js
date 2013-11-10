@@ -119,9 +119,10 @@ var Structural = new (Support.CompositeView.extend({
       this._conversation = conversation;
 
       this.trigger('changeConversation', conversation);
-      if (!options.silentResponsiveView) {
-        this.trigger('showResponsiveActions');
-      }
+    }
+
+    if (!options.silentResponsiveView) {
+      this.trigger('showResponsiveActions');
     }
   },
   // Show a specific conversation.
@@ -132,6 +133,8 @@ var Structural = new (Support.CompositeView.extend({
       Structural.Router.navigate(Structural.Router.conversationPath(conversation),
                                {trigger: true});
     }
+
+    this.trigger('showResponsiveActions');
   },
   clearConversation: function() {
     this.trigger('clearConversation');
@@ -151,10 +154,11 @@ var Structural = new (Support.CompositeView.extend({
       self.clearConversation();
 
       this.trigger('changeFolder', folder);
-      this.trigger('showResponsiveConversations');
       Structural.Router.navigate(Structural.Router.folderPath(folder),
                                  {trigger: true});
     }
+
+    this.trigger('showResponsiveConversations');
   },
   deleteFolder: function(folder) {
     this._folders.remove(folder);
