@@ -143,6 +143,7 @@ describe Api::V0::ActionsController do
       expect(action.msg_id).to eq('1')
     end
     it 'fails when deleting a non-message action' do
+      pending('Deletion is no longer a feature')
       post :create, :conversation_id => 1, :type => 'deletion', :msg_id => 2
       expect(response).not_to be_success
       expect(response.code).to eq("409")
