@@ -239,6 +239,12 @@ class Conversation < ActiveRecord::Base
     return json
   end
 
+  def send_email_for(message)
+    self.participants.keep_if {|p| p.external }.each do |user|
+      EmailQueue.push(message, user) unless user == message.user
+    end
+  end
+
   def handle(action)
     case action.type
       when 'retitle'
@@ -257,6 +263,8 @@ class Conversation < ActiveRecord::Base
         if action.removed
           self.remove_folders(action.removed, action.user, false)
         end
+      when 'message'
+        self.send_email_for action
     end
     save
   end
