@@ -54,6 +54,7 @@ class User < ActiveRecord::Base
       addressee['id'] = user.id
       addressee['full_name'] = user.full_name
       addressee['email'] = user.email
+      addressee['external'] = user.external
       address_book.push(addressee)
     end
     return address_book
@@ -71,7 +72,7 @@ class User < ActiveRecord::Base
 
   # This avoids us writing out passwords, salts, etc. when rendering json.
   def as_json(options={})
-    json = super(:only => [:email, :full_name, :id, :site_admin])
+    json = super(:only => [:email, :full_name, :id, :site_admin, :external])
     if options[:include_address_book]
       json['address_book'] = address_book
     end
