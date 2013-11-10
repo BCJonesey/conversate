@@ -32,7 +32,7 @@ var Structural = new (Support.CompositeView.extend({
     this._folder.conversations.set(bootstrap.conversations);
 
     // Instantiate the current conversation or a sane default.
-    this._conversation =  this._folder.conversations.where({id: bootstrap.conversation.id})[0];
+    this._conversation = this._folder.conversations.where({id: bootstrap.conversation.id})[0];
     this._conversation = this._conversation ? this._conversation : new Structural.Models.Conversation();
 
     // Setup our current conversation's actions from the bootstrap data.
