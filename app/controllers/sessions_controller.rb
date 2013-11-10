@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   def create
     user = User.find_by_email(params[:email])
-    if !user || user.removed
+    if !user || user.removed || user.external
       @login_error = true
       redirect_to root_path and return
     end
