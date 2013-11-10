@@ -16,5 +16,12 @@ Structural.Views.ConversationContainer = Support.CompositeView.extend({
 
     this.appendChild(toolbar);
     this.appendChild(list);
+  },
+  show: function(show){
+    if (show) {
+      this.$el.addClass('visible');
+    } else {
+      this.$el.removeClass('visible');
+    }
   }
 });

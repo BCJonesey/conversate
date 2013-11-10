@@ -1,10 +1,14 @@
 Structural.Views.ActionContainer = Support.CompositeView.extend({
   className: function() {
-    var classes = 'ui-section visible act-container';
+    var classes = 'ui-section act-container';
 
     if (this.participants &&
         !_(this.participants.map(function(p) { return p.id; })).contains(this.user.id)) {
       classes += ' not-participating-in';
+    }
+
+    if (this.$el && this.$el.hasClass('visible')){
+      classes += ' visible'
     }
 
     return classes;
@@ -69,5 +73,12 @@ Structural.Views.ActionContainer = Support.CompositeView.extend({
 
   reClass: function() {
     this.el.className = this.className();
+  },
+  show: function(show){
+    if (show) {
+      this.$el.addClass('visible');
+    } else {
+      this.$el.removeClass('visible');
+    }
   }
 });
