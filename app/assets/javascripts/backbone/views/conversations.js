@@ -19,19 +19,34 @@ Structural.Views.Conversations = Support.CompositeView.extend({
   },
   render: function() {
     this.$el.empty();
-    var sectionRegular = new Structural.Views.ConversationsSection({name: "My Conversations"});
-    this.appendChild(sectionRegular);
 
-    var sectionArchived = new Structural.Views.ConversationsSection({name: "Archive"});
-    this.appendChild(sectionArchived);
+    // TODO: We can almost certainly make this much more generic for n sections.
+
+    var regularConversations = [];
+    var archivedConversations = [];
 
     this.collection.forEach(function(conversation) {
       if (conversation.get('archived')) {
-        sectionArchived.renderConversation(conversation);
+        archivedConversations.push(conversation);
       } else {
-        sectionRegular.renderConversation(conversation);
+        regularConversations.push(conversation);
       }
     }, this);
+
+    // We only want to show a section if there are actually archived conversations.
+
+    if (regularConversations.length > 0) {
+      var sectionRegular = new Structural.Views.ConversationsSection({name: "My Conversations"});
+      this.appendChild(sectionRegular);
+      sectionRegular.renderConversations(regularConversations);
+    }
+
+    if (archivedConversations.length > 0) {
+      var sectionArchived = new Structural.Views.ConversationsSection({name: "Archive"});
+      this.appendChild(sectionArchived);
+      sectionArchived.renderConversations(archivedConversations);
+    }
+
     return this;
   },
   reRender: function() {

@@ -14,5 +14,11 @@ Structural.Views.ConversationsSection = Support.CompositeView.extend({
       user: this.user
     });
     this.appendChild(view);
+  },
+  renderConversations: function(conversations) {
+    var self = this;
+    conversations.forEach(function(conversation) {
+      self.renderConversation(conversation);
+    });
   }
 });
