@@ -112,10 +112,16 @@ var Structural = new (Support.CompositeView.extend({
     this.appendChild(view);
   },
 
-  viewConversationData: function(conversation) {
+  viewConversationData: function(conversation, options) {
+    options = _.defaults(options || {}, {silentResponsiveView: false});
+
     if (!this._conversation || conversation.id !== this._conversation.id) {
       this._conversation = conversation;
+
       this.trigger('changeConversation', conversation);
+      if (!options.silentResponsiveView) {
+        this.trigger('showResponsiveActions');
+      }
     }
   },
   // Show a specific conversation.
@@ -145,6 +151,7 @@ var Structural = new (Support.CompositeView.extend({
       self.clearConversation();
 
       this.trigger('changeFolder', folder);
+      this.trigger('showResponsiveConversations');
       Structural.Router.navigate(Structural.Router.folderPath(folder),
                                  {trigger: true});
     }

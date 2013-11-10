@@ -9,8 +9,8 @@ Structural.Views.WaterCooler = Support.CompositeView.extend({
     this.participants = options.participants;
     this.addressBook = options.addressBook;
     this.user = options.user;
-    this.listenTo(Structural,'changeConversation',this.showAct);
-    this.listenTo(Structural,'changeFolder',this.showCnv);
+    this.listenTo(Structural,'showResponsiveActions',this.showAct);
+    this.listenTo(Structural,'showResponsiveConversations',this.showCnv);
   },
   events: {
     'click .act-container .ui-back-button': 'showCnv',
