@@ -3,10 +3,14 @@ Structural.Views.ConversationsSection = Support.CompositeView.extend({
   initialize: function(options) {
     options = options || {};
     this.name = options.name;
+    this.collection = options.collection;
   },
   template: JST['backbone/templates/conversations/conversations-section'],
   render: function() {
-    this.$el.html(this.template({name: this.name}));
+    if (this.collection.length > 0) {
+      this.$el.html(this.template({name: this.name}));
+      this.renderConversations(this.collection);
+    }
     return this;
   },
   events: {
