@@ -3,7 +3,7 @@
 # with the UsersController in the app.
 
 class Api::V0::UsersController < ApplicationController
-  before_filter :require_login, :except => [:create]
+  before_filter :require_login_api, :except => [:create]
 
   # This is going to be kind of weird in that it shows data about the current_user
   # rather than all users.

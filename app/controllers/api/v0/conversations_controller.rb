@@ -1,5 +1,5 @@
 class Api::V0::ConversationsController < ApplicationController
-  before_filter :require_login
+  before_filter :require_login_api
 
   # Note that this is always on a url like /folders/1/conversations.
   def index
