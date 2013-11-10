@@ -41,11 +41,6 @@ class Api::V0::ActionsController < ApplicationController
       action.update_data(params)
     end
 
-    if (action.type == 'deletion')
-      deleted = Action.find(action.msg_id)
-      head :status => 409 and return unless (deleted.type == 'message')
-    end
-
     action.save
     conversation.update_most_recent_event
     render :json => action.to_json, :status => 201
