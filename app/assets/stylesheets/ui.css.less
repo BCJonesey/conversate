@@ -1,0 +1,22 @@
+@bp-1:800px;
+
+
+.ui-back-button-group{
+  display:none;
+}
+
+@media (max-width:@bp-1){
+  .ui-back-button-group{
+    display:inline-block;
+  }
+}
+
+
+@media (max-width:@bp-1){
+  .ui-section{
+    display:none;
+    &.visible{
+      display:block;
+    }
+  }
+}

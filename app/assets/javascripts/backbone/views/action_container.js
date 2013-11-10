@@ -1,6 +1,6 @@
 Structural.Views.ActionContainer = Support.CompositeView.extend({
   className: function() {
-    var classes = 'act-container';
+    var classes = 'ui-section visible act-container';
 
     if (this.participants &&
         !_(this.participants.map(function(p) { return p.id; })).contains(this.user.id)) {

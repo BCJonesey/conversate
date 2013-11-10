@@ -2,7 +2,7 @@
 // folders list.
 
 Structural.Views.FolderContainer = Support.CompositeView.extend({
-  className: 'fld-container',
+  className: ' ui-section fld-container',
   initialize: function(options) {
     options = options || {};
     this.folders = options.folders;
