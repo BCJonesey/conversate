@@ -40,19 +40,6 @@ ActiveRecord::Schema.define(:version => 20131110162705) do
   add_index "conversations_folders", ["conversation_id", "folder_id"], :name => "index_conversations_topics_on_conversation_id_and_topic_id"
   add_index "conversations_folders", ["folder_id", "conversation_id"], :name => "index_conversations_topics_on_topic_id_and_conversation_id"
 
-  create_table "email_queues", :force => true do |t|
-    t.string   "subject"
-    t.text     "text"
-    t.string   "from_email"
-    t.string   "from_name"
-    t.string   "to_email"
-    t.string   "to_name"
-    t.string   "reply_email"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.string   "reply_name"
-  end
-
   create_table "folders", :force => true do |t|
     t.string   "name",       :null => false
     t.datetime "created_at", :null => false
