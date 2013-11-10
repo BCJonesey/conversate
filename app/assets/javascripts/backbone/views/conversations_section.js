@@ -4,6 +4,7 @@ Structural.Views.ConversationsSection = Support.CompositeView.extend({
     options = options || {};
     this.name = options.name;
     this.collection = options.collection;
+    this.user = options.user;
   },
   template: JST['backbone/templates/conversations/conversations-section'],
   render: function() {
