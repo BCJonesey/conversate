@@ -15,6 +15,7 @@ Structural.Views.Conversations = Support.CompositeView.extend({
     collection.on('reset', this.reRender, this);
     collection.on('remove', this.reRender, this);
     collection.on('conversationsLoadedForFirstTime', this.viewFirstConversation, this);
+    collection.on('archived', this.reRender, this);
   },
   render: function() {
     this.$el.empty();
