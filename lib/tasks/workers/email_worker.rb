@@ -1,6 +1,8 @@
 require 'mandrill'
 
 class EmailWorker
+  SLEEP = 5
+
   def initialize(options={})
     @verbose = !!options[:verbose]
     @exit = false
@@ -13,7 +15,7 @@ class EmailWorker
     trap('INT') { log 'interrupted'; @exit = true }
 
     loop do
-      sleep 5
+      sleep SLEEP
       break if @exit
     end
   end
