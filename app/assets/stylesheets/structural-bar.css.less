@@ -12,22 +12,37 @@
 .structural-bar{
   box-sizing:border-box;
   background-color: @stb-background-color;
-  height:2.5rem;
-  min-width:@app-min-width;
+  @media (min-width: @bp-1){
+    height:2.5rem;
+  }
+  //min-width:@app-min-width;
+
+  @media (min-width: @bp-1){
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+  }
 }
 
 
 .stb-group{
+  @media (max-width:@bp-1){
+    float:none !important;
+  }
 }
 .stb-link,
 .stb-name{
-  display: inline-block;
+  display:block; /* testing */
   text-decoration: none;
   vertical-align: top;
   padding:0.45rem;
   margin:0 0.1rem;
   & > i {
     color:@stb-color;
+  }
+  @media (min-width: @bp-1){
+    display: inline-block;
   }
 }
 

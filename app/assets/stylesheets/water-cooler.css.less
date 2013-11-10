@@ -6,41 +6,66 @@
 // --- Layout --- //
 
 .water-cooler {
+  overflow:hidden;
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
   top: @toolbar-height;
-  overflow:hidden;
-  min-width:@app-min-width;
+
+  @media (max-width: @bp-1){
+    top:0;
+  }
+
+  //min-width:@app-min-width;
 
 & > .fld-container {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 15rem;
-  border-right: @border-1;
   overflow:hidden;
+  background-color: #EFE; /* testing */
+  position:absolute;
+  top:0;left:0;right:0;bottom:0;
+
+  @media (min-width: @bp-1){
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 15rem;
+    border-right: @border-1;
+  }
 }
 
   & > .cnv-container {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 15rem;
-    width: 20rem;
-    border-right: @border-1;
     overflow:hidden;
+    background-color: #EEF; /* testing */
+    position: absolute;
+    top:0;left:0;right:0;bottom:0;
+
+
+    @media (min-width: @bp-1){
+      top: 0;
+      bottom: 0;
+      left: 15rem;
+      width: 20rem;
+      border-right: @border-1;
+    }
   }
 
   & > .act-container {
-    position: absolute;
-    left: 35rem;
-    top: 0;
-    bottom: 0;
-    right: 0;
     overflow:hidden;
+    background-color: #FEE; /* testing */
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+
+    @media (min-width: @bp-1){
+      left: 35rem;
+      top: 0;
+      bottom: 0;
+      right: 0;
+    }
   }
 }
 .short-form-compose {
