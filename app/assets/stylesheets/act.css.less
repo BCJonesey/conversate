@@ -35,6 +35,10 @@
 }
 @act-title-color:#444444;
 
+.act-back-button-group{
+  display:none;
+}
+
 .act-title-input{
   box-sizing:border-box;
   background-color:transparent;
@@ -49,7 +53,18 @@
   .title-font();
   color:@act-title-color;
 }
+@media (max-width: @bp-1){
 
+  .act-back-button-group{
+    display:inline-block;
+    position:absolute;
+    top:0.25rem;
+    left:0.25rem;
+  }
+  .act-title-input{
+    padding-left:1.5rem;
+  }
+}
 .act-container.not-participating-in{
   .act-title-input{
     color:mix(@act-title-color,white);
