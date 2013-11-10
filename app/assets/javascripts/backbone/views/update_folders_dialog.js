@@ -70,6 +70,8 @@ Structural.Views.UpdateFoldersDialog = Support.CompositeView.extend({
       } else {
         Structural.clearConversation();
       }
+
+      Structural.trigger('showResponsiveConversations');
     }
   }
 });
