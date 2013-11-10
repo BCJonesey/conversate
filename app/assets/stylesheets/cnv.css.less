@@ -16,9 +16,22 @@
     overflow-x:hidden;
     -webkit-overflow-scrolling:touch;
 }
+.cnv-section{
+  .cnv-note{
+    display:none;
+  }
+
+}
+.cnv-section.is-collapsed{
+  .cnv{
+    display:none;
+  }
+  .cnv-note{
+    display:block;
+  }
+}
 .cnv-divider{
   .gradient-ltr(@border-color-1,white,90%);
-  .user-select(none);
   cursor:default;
   padding-bottom: 1px;
   .cnv-divider-inner{
@@ -28,6 +41,21 @@
     font-size: 0.75rem;
     padding: 0.25rem;
   }
+}
+.cnv-note{
+  .gradient-ltr(@border-color-1,white,90%);
+  cursor:default;
+  padding-bottom: 1px;
+  .cnv-note-inner{
+    background-color: white;
+    .ellipsis();
+    color:#DDD;
+    font-weight: normal;
+    font-size: 0.75rem;
+    padding: 0.75rem;
+    text-align: center;
+  }
+
 }
 .cnv {
   padding: 0;
