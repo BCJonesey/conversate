@@ -25,6 +25,7 @@ class EmailWorker
         sleep SLEEP
       else
         pending_emails.each do |email|
+          EmailQueue.delete email
           send_email email
           break if @exit
         end
