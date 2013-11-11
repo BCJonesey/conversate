@@ -29,6 +29,16 @@ class Conversation < ActiveRecord::Base
     end
   end
 
+  def mark_all_unread_for(participants)
+    participants.each do |participant|
+      reading_log = ReadingLog.get(participant.id, self.id)
+      unless reading_log.nil?
+        reading_log.unread_count = self.actions.count
+        reading_log.save
+      end
+    end
+  end
+
   def add_participants(participants, user, create_action=true)
     if participants
       folder_set = Set.new(self.folders)
@@ -41,10 +51,6 @@ class Conversation < ActiveRecord::Base
           u_default = Folder.find(u.default_folder_id)
           self.folders << u_default
         end
-
-        reading_log = ReadingLog.get(user_id, self.id)
-        reading_log.unread_count = self.actions.count
-        reading_log.save
       end
       self.save
 
@@ -131,8 +137,8 @@ class Conversation < ActiveRecord::Base
         action = self.actions.new(type: a[:type],
                                   data: Action::data_for_params(a),
                                   user_id: user.id)
-        self.handle(action)
         action.save
+        self.handle(action)
       end
     end
   end
