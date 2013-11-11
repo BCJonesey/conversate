@@ -14,22 +14,18 @@ class EmailWorker
     trap('TERM') { log 'terminated'; @exit = true }
     trap('INT') { log 'interrupted'; @exit = true }
 
+    process_queue_forever
+  end
+
+  def process_queue_forever
     loop do
       pending_emails = EmailQueue.all
 
-      if pending_emails.count == 0
+      if pending_emails.empty?
         sleep SLEEP
       else
         pending_emails.each do |email|
-          user = User.find(email.external_user_id)
-          action = Action.find(email.action_id)
-          conversation = action.conversation
-          log "sending email to #{user.email}: action ##{action.id}"
-          EmailQueue.delete email
-          response = send_email user, action, conversation
-          log "response from #{user.email} for action ##{action.id}: #{response}"
-          # TODO: Handle errors in delivery
-
+          send_email email
           break if @exit
         end
       end
@@ -38,8 +34,11 @@ class EmailWorker
     end
   end
 
-  def send_email(user, action, conversation)
-    message = {
+  def construct_message(email)
+    user = User.find(email.external_user_id)
+    action = Action.find(email.action_id)
+    conversation = action.conversation
+    return {
       subject: conversation.title,
       text: action.text,
       from_email: action.user.email,
@@ -55,6 +54,10 @@ class EmailWorker
         'Reply-To' => "#{conversation.title} <#{conversation.email_address}>"
       }
     }
+  end
+
+  def send_email(email)
+    message = construct_message email
 
     # It looks like we need to make a new API instance every time we do stuff
     # with the Mandrill API.  My best guess is that it's because it holds onto
@@ -64,7 +67,11 @@ class EmailWorker
     # Note also that you need to the set the environment variable
     # MANDRILL_APIKEY before running this
     mandrill = Mandrill::API.new
-    mandrill.messages.send message
+
+    log "sending email to #{message[:to][0][:email]}: action ##{email.action_id}"
+    response = mandrill.messages.send message
+    log "response from #{message[:to][0][:email]} for action ##{email.action_id}: #{response}"
+    # TODO: Handle errors in delivery
   end
 
   def log(text)
