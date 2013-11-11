@@ -1,7 +1,7 @@
 // A view for an actual folders list.
 
 Structural.Views.Folders = Support.CompositeView.extend({
-  className: 'fld-list',
+  className: 'fld-list ui-scrollable',
   initialize: function(options) {
     var self = this;
     options = options || {};

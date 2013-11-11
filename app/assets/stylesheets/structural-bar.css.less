@@ -11,14 +11,19 @@
 
 .structural-bar{
   box-sizing:border-box;
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
   background-color: @stb-background-color;
+  //z-index:1;
   @media (min-width: @bp-1){
     height:2.5rem;
+    z-index: 1;
   }
   //min-width:@app-min-width;
 
   @media (max-width: @bp-1){
-    position:absolute;
     top:0;
     left:0;
     right:0;
@@ -106,7 +111,6 @@
     .ui-desktop-hidden();
   }
 }
-
 
 /* Responsive Stuff */
 
