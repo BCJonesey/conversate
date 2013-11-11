@@ -175,10 +175,18 @@ They are most useful for floating multiple buttons to one side.  */
 .btn-toolbar {
   .btn-toolbar-style;
   border-bottom-color:@border-color-1;
+  @media(max-width:@bp-1){
+    border-bottom-color:@border-color-2;
+  }
+
 }
 .btn-toolbar-below{
   .btn-toolbar-style;
   border-top-color:@border-color-1;
+  @media(max-width:@bp-1){
+    border-top-color:@border-color-2;
+  }
+
 }
 
 
