@@ -1,7 +1,7 @@
 // A view for the actual conversations list.
 
 Structural.Views.Conversations = Support.CompositeView.extend({
-  className: 'cnv-list',
+  className: 'cnv-list ui-scrollabe',
   initialize: function(options) {
     options = options || {};
     this.user = options.user;
@@ -74,7 +74,7 @@ Structural.Views.Conversations = Support.CompositeView.extend({
   viewFirstConversation: function() {
     conversation = this.collection.findWhere({archived: false});
     if (conversation) {
-      Structural.viewConversationData(conversation);
+      Structural.viewConversationData(conversation, {silentResponsiveView: true});
       conversation.focus();
     }
   }
