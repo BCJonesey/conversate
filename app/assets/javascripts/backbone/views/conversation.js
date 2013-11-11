@@ -53,6 +53,7 @@ Structural.Views.Conversation = Support.CompositeView.extend({
 
   view: function(e) {
     e.preventDefault();
+
     Structural.viewConversation(this.model);
   }
 });

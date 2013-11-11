@@ -112,10 +112,17 @@ var Structural = new (Support.CompositeView.extend({
     this.appendChild(view);
   },
 
-  viewConversationData: function(conversation) {
+  viewConversationData: function(conversation, options) {
+    options = _.defaults(options || {}, {silentResponsiveView: false});
+
     if (!this._conversation || conversation.id !== this._conversation.id) {
       this._conversation = conversation;
+
       this.trigger('changeConversation', conversation);
+    }
+
+    if (!options.silentResponsiveView) {
+      this.trigger('showResponsiveActions');
     }
   },
   // Show a specific conversation.
@@ -126,6 +133,8 @@ var Structural = new (Support.CompositeView.extend({
       Structural.Router.navigate(Structural.Router.conversationPath(conversation),
                                {trigger: true});
     }
+
+    this.trigger('showResponsiveActions');
   },
   clearConversation: function() {
     this.trigger('clearConversation');
@@ -148,6 +157,8 @@ var Structural = new (Support.CompositeView.extend({
       Structural.Router.navigate(Structural.Router.folderPath(folder),
                                  {trigger: true});
     }
+
+    this.trigger('showResponsiveConversations');
   },
   deleteFolder: function(folder) {
     this._folders.remove(folder);

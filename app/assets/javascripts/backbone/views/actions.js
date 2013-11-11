@@ -1,5 +1,5 @@
 Structural.Views.Actions = Support.CompositeView.extend({
-  className: 'act-list',
+  className: 'act-list ui-scrollable',
   initialize: function(options) {
     this._wireEvents(this.collection);
 

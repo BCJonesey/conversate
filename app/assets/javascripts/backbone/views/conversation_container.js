@@ -1,7 +1,7 @@
 // A view for the conversations toolbar and a container for the actual
 // conversations list.
 Structural.Views.ConversationContainer = Support.CompositeView.extend({
-  className: 'cnv-container',
+  className: 'ui-section cnv-container',
   initialize: function(options) {
     options = options || {};
     this.conversations = options.conversations;
@@ -16,5 +16,12 @@ Structural.Views.ConversationContainer = Support.CompositeView.extend({
 
     this.appendChild(toolbar);
     this.appendChild(list);
+  },
+  show: function(show){
+    if (show) {
+      this.$el.addClass('visible');
+    } else {
+      this.$el.removeClass('visible');
+    }
   }
 });
