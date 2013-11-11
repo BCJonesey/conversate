@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130929002028) do
+ActiveRecord::Schema.define(:version => 20131110162705) do
 
   create_table "actions", :force => true do |t|
     t.integer  "conversation_id"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(:version => 20130929002028) do
     t.integer  "user_id"
     t.datetime "most_recent_viewed"
     t.integer  "unread_count",       :default => 0
+    t.boolean  "archived",           :default => false
   end
 
   add_index "reading_logs", ["conversation_id"], :name => "index_reading_logs_on_conversation_id"
@@ -90,6 +91,7 @@ ActiveRecord::Schema.define(:version => 20130929002028) do
     t.integer  "invited_by"
     t.integer  "default_folder_id"
     t.boolean  "removed",                      :default => false
+    t.boolean  "external",                     :default => false
   end
 
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"
