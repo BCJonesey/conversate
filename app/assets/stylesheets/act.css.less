@@ -29,14 +29,14 @@
 
 .btn-toolbar.act-title{
   position: relative;
-  padding:0 ;
-  padding-left:0.5rem;
+  padding:0;
   padding-right:5rem;
 }
 @act-title-color:#444444;
 
-.act-back-button-group{
-  display:none;
+.act-title-edit,
+.act-move-cnv{
+  .ui-mobile-hidden();
 }
 
 .act-title-input{
@@ -46,6 +46,7 @@
   width:100%;
   //height:2rem;
   padding:.25rem 0;
+  padding-left:0.5rem;
   font-size: 1rem;
   //overflow:hidden;
   //display:block;
@@ -55,14 +56,8 @@
 }
 @media (max-width: @bp-1){
 
-  .act-back-button-group{
-    display:inline-block;
-    position:absolute;
-    top:0.25rem;
-    left:0.25rem;
-  }
   .act-title-input{
-    padding-left:1.5rem;
+    padding-left:2.0rem;
   }
 }
 .act-container.not-participating-in{
@@ -203,7 +198,10 @@
 }
 
 .act-list{
-  padding:0.75rem;
+  padding:0.5rem;
+  @media(min-width:@bp-1){
+    padding:0.75rem;
+  }
   overflow-x:hidden;
   overflow-y:auto;
   position:absolute;
@@ -215,7 +213,10 @@
   -webkit-overflow-scrolling:touch;
 }
 .act{
-  padding:0.25rem;
+  padding:0.125rem;
+  @media(min-width:@bp-1){
+    padding:0.25rem;
+  }
 }
 
 // These are some real bullshit to adjust the spacing of update messages in relation to regular messages
@@ -239,7 +240,11 @@
 }
 
 .act-message{
-  padding:0.65rem;
+  padding:0.25rem;
+  @media(min-width:@bp-1){
+    padding:0.65rem;
+  }
+
   z-index:1;
   a{
     .link-blue();
@@ -337,6 +342,10 @@
   line-height: 1.5;
   white-space:pre-wrap;
   margin-top:0.25rem;
+  font-size:0.8rem;
+  @media(min-width:@bp-1){
+    font-size:1.0rem;
+  }
 }
 
 .act-update-viewers,
@@ -345,9 +354,12 @@
 .act-deletion,
 .act-move-conversation,
 .act-update-folders{
-  font-size:.75rem;
+  font-size:.6rem;
   color:#CCC;
   text-align: center;
+  @media(min-width:@bp-1){
+    font-size:0.75rem;
+  }
 }
 
 .tokens{

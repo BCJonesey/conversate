@@ -1,15 +1,19 @@
-@bp-1:800px;
+@import "variables.css.less";
+@import 'mixins.css.less';
 
-
-.ui-back-button-group{
-  display:none;
+.ui-back-button{
+  .ui-desktop-hidden();
+  position:absolute;
+  top:0;
+  left:0;
+  bottom:0;
+  padding-top:0.5rem;
+  padding-left:0.25rem;
+  color:#888;
 }
 
-@media (max-width:@bp-1){
-  .ui-back-button-group{
-    display:inline-block;
-  }
-}
+
+
 
 
 @media (max-width:@bp-1){
@@ -20,3 +24,4 @@
     }
   }
 }
+

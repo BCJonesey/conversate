@@ -13,8 +13,24 @@
     overflow-y: auto;
     overflow-x:hidden;
     -webkit-overflow-scrolling:touch;
+    padding:0.25rem;
+    @media (min-width:@bp-1){
+      padding:0;
+    }
 }
-
+.cnv-list-title{
+  .ui-desktop-hidden();
+  .title-font();
+  .ellipsis();
+  text-align: center;
+  position:absolute;
+  left:4rem;
+  right:4rem;
+  top:0.5rem;
+}
+.cnv-new-button{
+  .ui-mobile-hidden();
+}
 .cnv {
   padding: 0;
   border: none;
@@ -25,7 +41,10 @@
 
 .cnv-left {
   background-color:white;
-  padding: .25rem;
+  padding: 0.5rem;
+  @media(min-width:@bp-1){
+    padding: 0.25rem;
+  }
   background-color: white;
 }
 @media (min-width:@bp-1){
