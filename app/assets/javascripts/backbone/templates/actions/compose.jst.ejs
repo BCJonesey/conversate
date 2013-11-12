@@ -14,19 +14,17 @@
 
 <div class="long-form-compose hidden">
   <div class="long-form-window">
-      <div class="long-form-toolbar btn-toolbar clearfix">
-        <div class="btn-group pull-right">
-          <a class="disable-long-form btn">Cancel</a>
-          <a class="send-long-form btn btn-primary">Send</a>
-        </div>
-        <div class="btn-group pull-left">
-          <a class="long-form-title"><%= conversation ? conversation.escape('title') : '' %></a>
-        </div>
+    <div class="long-form-toolbar btn-toolbar clearfix">
+      <div class="btn-group pull-right">
+        <a class="disable-long-form btn">Cancel</a>
+        <a class="send-long-form btn btn-primary">Send</a>
       </div>
-      <div class="long-form-contents">
-        <div class="long-form-textarea">
-          <textarea name="text" class="text-long-form write"></textarea>
-        </div>
+      <div class="long-form-title"><%= conversation ? conversation.escape('title') : '' %></div>
+    </div>
+    <div class="long-form-contents">
+      <div class="long-form-textarea">
+        <textarea name="text" class="text-long-form write"></textarea>
       </div>
+    </div>
   </div>
 </div>

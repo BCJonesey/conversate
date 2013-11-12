@@ -9,6 +9,13 @@ Structural.Views.WaterCooler = Support.CompositeView.extend({
     this.participants = options.participants;
     this.addressBook = options.addressBook;
     this.user = options.user;
+    this.listenTo(Structural,'showResponsiveActions',this.showAct);
+    this.listenTo(Structural,'showResponsiveConversations',this.showCnv);
+  },
+  events: {
+    'click .act-container .ui-back-button': 'showCnv',
+    'click .cnv-container .ui-back-button': 'showFld',
+    'click .fld-container .ui-back-button': 'showStb'
   },
   render: function() {
     this.foldersView = new Structural.Views.FolderContainer({
@@ -44,5 +51,37 @@ Structural.Views.WaterCooler = Support.CompositeView.extend({
   },
   scrollActionsToBottom: function() {
     this.actionsView.scrollToBottom();
+  },
+
+  showAct: function(e){
+    if (e) { e.preventDefault(); }
+
+    this.actionsView.show(true);
+    this.conversationsView.show(false);
+    this.foldersView.show(false);
+    this.$el.removeClass('hidden');
+  },
+  showCnv: function(e){
+    if (e) { e.preventDefault(); }
+
+    this.conversationsView.show(true);
+    this.actionsView.show(false);
+    this.$el.removeClass('hidden');
+  },
+  showFld: function(e){
+    if (e) { e.preventDefault(); }
+
+    this.foldersView.show(true);
+    this.conversationsView.show(false);
+    this.actionsView.show(false);
+    this.$el.removeClass('hidden');
+  },
+  showStb: function(e){
+    if (e) { e.preventDefault(); }
+
+    this.foldersView.show(false);
+    this.conversationsView.show(false);
+    this.actionsView.show(false);
+    this.$el.addClass('hidden');
   }
 });

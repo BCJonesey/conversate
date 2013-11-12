@@ -319,3 +319,14 @@ background-image: linear-gradient(to right, @left-color 0%, @right-color @right-
   overflow-x:hidden;
   overflow-y:auto;
 }
+
+.ui-mobile-hidden(){
+  @media (max-width:@bp-1){
+    display:none !important;
+  }
+}
+.ui-desktop-hidden(){
+  @media(min-width:@bp-1){
+    display:none !important;
+  }
+}
