@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   def create
     user = login params[:email], params[:password], params[:remember_me]
-    if user
+    if user  && !user.removed && !user.external
       redirect_back_or_to root_url 
     else
       @login_error = true
