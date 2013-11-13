@@ -15,7 +15,8 @@ Structural.Views.WaterCooler = Support.CompositeView.extend({
   events: {
     'click .act-container .ui-back-button': 'showCnv',
     'click .cnv-container .ui-back-button': 'showFld',
-    'click .fld-container .ui-back-button': 'showStb'
+    'click .fld-container .ui-back-button': 'showStb',
+    'click .fld-popover-close-button':'showCnv'
   },
   render: function() {
     this.foldersView = new Structural.Views.FolderContainer({
@@ -63,7 +64,7 @@ Structural.Views.WaterCooler = Support.CompositeView.extend({
   },
   showCnv: function(e){
     if (e) { e.preventDefault(); }
-
+    this.foldersView.show(false);
     this.conversationsView.show(true);
     this.actionsView.show(false);
     this.$el.removeClass('hidden');

@@ -14,7 +14,7 @@
   top: @toolbar-height;
   //height:100%;
 
-  @media (max-width: @bp-2){
+  @media (max-width: @bp-1){
     top:0;
   }
 
@@ -26,7 +26,18 @@
   position:absolute;
   top:0;left:0;right:0;bottom:0;
 
+  @media (min-width:@bp-1){
+    //display:none;
+    position:absolute;
+    width: 15rem;
+    top:2rem;
+    left:2rem;
+    bottom:2rem;
+    z-index: 12;
+    border:@border-1;
+  }
   @media (min-width: @bp-2){
+    //display:block;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -42,13 +53,15 @@
     position: absolute;
     top:0;left:0;right:0;bottom:0;
 
-
-    @media (min-width: @bp-2){
-      top: 0;
-      bottom: 0;
-      left: 15rem;
+    @media (min-width: @bp-1){
       width: 20rem;
       border-right: @border-1;
+      left:0;
+
+    }
+
+    @media (min-width: @bp-2){
+      left: 15rem;
     }
   }
 
@@ -61,6 +74,9 @@
     right:0;
     bottom:0;
 
+    @media (min-width: @bp-1){
+      left:20rem;
+    }
     @media (min-width: @bp-2){
       left: 35rem;
       top: 0;
