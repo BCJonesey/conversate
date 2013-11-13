@@ -1,5 +1,5 @@
 class Api::V0::ActionsController < ApplicationController
-  before_filter :require_login
+  before_filter :require_login_api
 
   # Note that this will always be on urls like /conversations/1/actions.
   def index
