@@ -1,5 +1,5 @@
 class Api::V0::ParticipantsController < ApplicationController
-  before_filter :require_login
+  before_filter :require_login_api
 
   # Note that this is always on urls like /conversation/1/participants.
   def index

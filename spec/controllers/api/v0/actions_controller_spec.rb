@@ -143,6 +143,7 @@ describe Api::V0::ActionsController do
       expect(action.msg_id).to eq('1')
     end
     it 'fails when deleting a non-message action' do
+      pending('Deletion is no longer a feature')
       post :create, :conversation_id => 1, :type => 'deletion', :msg_id => 2
       expect(response).not_to be_success
       expect(response.code).to eq("409")
@@ -168,7 +169,7 @@ describe Api::V0::ActionsController do
       expect(body['added']).to eq([{"id" => "1"}, {"id" => "3"}])
       expect(body['removed']).to eq([])
       expect(body['user']).to eq({"email"=>"dummyUser@example.com",
-        "full_name"=>"Rufio Pan", "id"=>1, "site_admin"=>false})
+        "full_name"=>"Rufio Pan", "id"=>1, "site_admin"=>false, "external"=>false})
       expect(body['timestamp']).to eq(timestamp(6))
 
       conversation = Conversation.find_by_id(1)
