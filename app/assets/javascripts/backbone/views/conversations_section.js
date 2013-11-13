@@ -5,6 +5,7 @@ Structural.Views.ConversationsSection = Support.CompositeView.extend({
     this.name = options.name;
     this.collection = []
     this.startsCollapsed = options.startsCollapsed;
+    this.user = options.user;
   },
   template: JST['backbone/templates/conversations/conversations-section'],
   render: function() {
