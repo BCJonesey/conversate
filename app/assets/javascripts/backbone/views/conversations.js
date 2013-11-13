@@ -9,6 +9,12 @@ Structural.Views.Conversations = Support.CompositeView.extend({
     this._wireEvents(this.collection);
 
     Structural.on('changeFolder', this.changeFolder, this);
+
+    this.sectionRegular = new Structural.Views.ConversationsSection({name: "My Conversations",
+                                                                     user: this.user});
+    this.sectionArchived = new Structural.Views.ConversationsSection({name: "Archive",
+                                                                      user: this.user,
+                                                                      startsCollapsed: true});
   },
   _wireEvents: function(collection) {
     collection.on('add', this.reRender, this);
@@ -36,21 +42,13 @@ Structural.Views.Conversations = Support.CompositeView.extend({
     // We only want to show a section if there are actually archived conversations.
 
     if (regularConversations.length > 0) {
-      var sectionRegular = new Structural.Views.ConversationsSection({
-        name: "My Conversations",
-        collection: regularConversations,
-        user: this.user
-      });
-      this.appendChild(sectionRegular);
+      this.sectionRegular.collection = regularConversations;
+      this.appendChild(this.sectionRegular);
     }
 
     if (archivedConversations.length > 0) {
-      var sectionArchived = new Structural.Views.ConversationsSection({
-        name: "Archive",
-        collection: archivedConversations,
-        user: this.user
-      });
-      this.appendChild(sectionArchived);
+      this.sectionArchived.collection = archivedConversations;
+      this.appendChild(this.sectionArchived);
     }
 
     return this;

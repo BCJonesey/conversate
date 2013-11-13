@@ -3,13 +3,21 @@ Structural.Views.ConversationsSection = Support.CompositeView.extend({
   initialize: function(options) {
     options = options || {};
     this.name = options.name;
-    this.collection = options.collection;
+    this.collection = []
+    this.startsCollapsed = options.startsCollapsed;
     this.user = options.user;
   },
   template: JST['backbone/templates/conversations/conversations-section'],
   render: function() {
     if (this.collection.length > 0) {
+      if (this.startsCollapsed) {
+        this.$el.addClass('is-collapsed');
+        // We don't want to automatically collapse the section if a
+        // new conversation or something comes in.
+        this.startsCollapsed = false;
+      }
       this.$el.html(this.template({name: this.name}));
+      this.delegateEvents();
       this.renderConversations(this.collection);
     }
     return this;
