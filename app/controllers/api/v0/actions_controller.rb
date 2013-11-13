@@ -34,6 +34,11 @@ class Api::V0::ActionsController < ApplicationController
       params['prior_conversation_users_and_participants'] = conversation.viewers_and_participants()
     end
 
+    # Unfortunately, there's some important order-of-operations stateful stuff
+    # here.  We need to save the action before handling it - in the case of
+    # message actions that need emails sent, the email queue runs off the action
+    # id.
+    action.save
     conversation.handle(action)
 
     # Now we can actually calculate our real data for our update_folders.
@@ -41,12 +46,6 @@ class Api::V0::ActionsController < ApplicationController
       action.update_data(params)
     end
 
-    if (action.type == 'deletion')
-      deleted = Action.find(action.msg_id)
-      head :status => 409 and return unless (deleted.type == 'message')
-    end
-
-    action.save
     conversation.update_most_recent_event
     render :json => action.to_json, :status => 201
   end
