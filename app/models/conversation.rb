@@ -11,12 +11,31 @@ class Conversation < ActiveRecord::Base
     convo.title = convo.default_conversation_title if (convo.title.nil? || convo.title.empty?)
   end
 
+  def email_address
+    # On kuhltank, set EMAIL_SUBDOMAIN=kuhltank
+    subdomain = ENV['EMAIL_SUBDOMAIN']
+    unless subdomain.nil?
+      subdomain += '.'
+    end
+    "cnv-#{self.id}@#{subdomain}watercoolr.io"
+  end
+
   def set_title(title, user)
     if title
       self.title = title
       self.actions.new(type: 'retitle',
                        data: {title: title}.to_json,
                        user_id: user.id)
+    end
+  end
+
+  def mark_all_unread_for(participants)
+    participants.each do |participant|
+      reading_log = ReadingLog.get(participant.id, self.id)
+      unless reading_log.nil?
+        reading_log.unread_count = self.actions.count
+        reading_log.save
+      end
     end
   end
 
@@ -32,10 +51,6 @@ class Conversation < ActiveRecord::Base
           u_default = Folder.find(u.default_folder_id)
           self.folders << u_default
         end
-
-        reading_log = ReadingLog.get(user_id, self.id)
-        reading_log.unread_count = self.actions.count
-        reading_log.save
       end
       self.save
 
@@ -122,8 +137,8 @@ class Conversation < ActiveRecord::Base
         action = self.actions.new(type: a[:type],
                                   data: Action::data_for_params(a),
                                   user_id: user.id)
-        self.handle(action)
         action.save
+        self.handle(action)
       end
     end
   end
@@ -241,6 +256,12 @@ class Conversation < ActiveRecord::Base
     return json
   end
 
+  def send_email_for(message)
+    self.participants.keep_if {|p| p.external }.each do |user|
+      EmailQueue.push(message, user) unless user == message.user
+    end
+  end
+
   def handle(action)
     case action.type
       when 'retitle'
@@ -259,6 +280,8 @@ class Conversation < ActiveRecord::Base
         if action.removed
           self.remove_folders(action.removed, action.user, false)
         end
+      when 'message'
+        self.send_email_for action
     end
     save
   end

@@ -11,4 +11,10 @@ class ApplicationController < ActionController::Base
   end
 
   SpeakeasyCode = 'blue spigot'
+
+	def require_login_api
+		if !logged_in?
+			render :text => "401 Not Logged In", :status => :unauthorized
+		end
+	end
 end

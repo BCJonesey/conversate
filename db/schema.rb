@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131110162705) do
+ActiveRecord::Schema.define(:version => 20131110183405) do
 
   create_table "actions", :force => true do |t|
     t.integer  "conversation_id"
@@ -39,6 +39,13 @@ ActiveRecord::Schema.define(:version => 20131110162705) do
 
   add_index "conversations_folders", ["conversation_id", "folder_id"], :name => "index_conversations_topics_on_conversation_id_and_topic_id"
   add_index "conversations_folders", ["folder_id", "conversation_id"], :name => "index_conversations_topics_on_topic_id_and_conversation_id"
+
+  create_table "email_queues", :force => true do |t|
+    t.integer  "action_id"
+    t.integer  "external_user_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
 
   create_table "folders", :force => true do |t|
     t.string   "name",       :null => false
