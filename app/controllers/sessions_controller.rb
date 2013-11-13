@@ -2,10 +2,10 @@ class SessionsController < ApplicationController
   def create
     user = login params[:email], params[:password], params[:remember_me]
     if user  && !user.removed && !user.external
-      redirect_back_or_to root_url 
+      redirect_back_or_to root_url
     else
       @login_error = true
-      flash[:alert] = "Failed to match e-mail/password"
+      flash[:alert] = "Unable to Sign In"
       redirect_to root_path
     end
   end

@@ -37,7 +37,7 @@
       <%= form_tag session_path, :class => '' do %>
         <div class='form modal-content'>
           <% if flash[:alert] %>
-          <div style="color:red"><%= flash[:alert]%></div>
+          <div class='login-error-message'><%= flash[:alert]%></div>
           <% end %>
           <%= label_tag :email, 'Email' %>
           <%= email_field_tag :email, params[:email] %>
