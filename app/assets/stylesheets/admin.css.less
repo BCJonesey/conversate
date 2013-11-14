@@ -8,7 +8,12 @@
     .link-blue();
   }
   td{
-    .ellipsis();
+    @media(max-width:@bp-1){
+      .ellipsis();
+    }
+    overflow-x:hidden;
+    text-overflow:ellipsis;
+
   }
   .admin-table, .admin-links{
     border:@border-1;
