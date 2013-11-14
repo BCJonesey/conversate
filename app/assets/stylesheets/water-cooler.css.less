@@ -7,7 +7,7 @@
 
 .water-cooler {
   overflow:hidden;
-  position: fixed;
+  position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
@@ -30,11 +30,12 @@
     //display:none;
     position:absolute;
     width: 15rem;
-    top:0;
+    top:0.5rem;
+    bottom:0.5rem;
     left:0;
-    bottom:0;
     z-index: 12;
     border:@border-1;
+    box-shadow: 0.25rem 0 0.5rem rgba(0,0,0,0.2);
   }
   @media (min-width: @bp-2){
     //display:block;
@@ -43,7 +44,9 @@
     bottom: 0;
     left: 0;
     width: 15rem;
+    border:none;
     border-right: @border-1;
+    box-shadow: none;
   }
 }
 
@@ -57,7 +60,6 @@
       width: 20rem;
       border-right: @border-1;
       left:0;
-
     }
 
     @media (min-width: @bp-2){
