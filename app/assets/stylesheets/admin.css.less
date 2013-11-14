@@ -3,18 +3,20 @@
 
 
 .admin-page {
-  .admin-links{
-    max-width: 30rem;
-    border:@border-1;
-    margin: 2rem auto;
-    a{
-      .link-blue();
-    }
+  background-color: white;
+  a{
+    .link-blue();
   }
-  .admin-table{
-    max-width:30rem;
+  td{
+    .ellipsis();
+  }
+  .admin-table, .admin-links{
     border:@border-1;
-    margin: 2rem auto;
+    margin:1rem;
+    @media( min-width:@bp-1){
+      max-width:30rem;
+      margin: 2rem auto;
+    }
   }
 
   .full-page();
@@ -24,3 +26,4 @@
     width:100%;
   }
 }
+
