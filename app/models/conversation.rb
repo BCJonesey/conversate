@@ -33,7 +33,7 @@ class Conversation < ActiveRecord::Base
     participants.each do |participant|
       reading_log = ReadingLog.get(participant.id, self.id)
       unless reading_log.nil?
-        reading_log.unread_count = self.actions.count
+        reading_log.unread_count = self.actions.where(type: 'message').count
         reading_log.save
       end
     end
