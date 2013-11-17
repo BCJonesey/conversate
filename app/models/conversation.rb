@@ -257,7 +257,7 @@ class Conversation < ActiveRecord::Base
   end
 
   def send_email_for(message)
-    self.participants.keep_if {|p| p.external }.each do |user|
+    self.users.where(external: true).each do |user|
       EmailQueue.push(message, user) unless user == message.user
     end
   end
