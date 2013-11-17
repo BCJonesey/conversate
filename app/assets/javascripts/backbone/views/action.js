@@ -1,19 +1,31 @@
 Structural.Views.Action = Support.CompositeView.extend({
   className: function() {
     var classes = 'act btn-faint-container';
+
+    if (this.model.get('type') == 'message' ||
+        this.model.get('type') == 'email_message') {
+      classes += ' act-msg';
+    } else {
+      classes += ' act-sys';
+    }
     classes += ' act-' + this.model.get('type').replace('_', '-');
+
     if (this.model.get('isOwnAction')) {
       classes += ' act-my-message';
     }
+
     if(this.model.get('is_current')) {
       classes += ' act-current';
     }
+
     if(this.model.get('is_unread')) {
       classes += ' act-unread';
     }
+
     if(this.model.isUpdateFoldersWithoutAdditions()) {
       classes += ' hidden';
     }
+
     return classes;
   },
 
