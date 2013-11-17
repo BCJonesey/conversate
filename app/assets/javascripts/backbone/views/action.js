@@ -18,6 +18,7 @@ Structural.Views.Action = Support.CompositeView.extend({
   },
 
   messageTemplate: JST['backbone/templates/actions/message'],
+  emailMessageTemplate: JST['backbone/templates/actions/email_message'],
   updateUsersTemplate: JST['backbone/templates/actions/update_users'],
   updateViewersTemplate: JST['backbone/templates/actions/update_viewers'],
   retitleTemplate: JST['backbone/templates/actions/retitle'],
@@ -43,6 +44,9 @@ Structural.Views.Action = Support.CompositeView.extend({
     switch(this.model.get('type')) {
       case 'message':
         template = this.messageTemplate;
+        break;
+      case 'email_message':
+        template = this.emailMessageTemplate;
         break;
       case 'update_users':
         template = this.updateUsersTemplate;
