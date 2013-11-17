@@ -33,7 +33,7 @@ class Conversation < ActiveRecord::Base
     participants.each do |participant|
       reading_log = ReadingLog.get(participant.id, self.id)
       unless reading_log.nil?
-        reading_log.unread_count = self.actions.count
+        reading_log.unread_count = self.actions.where(type: 'message').count
         reading_log.save
       end
     end
@@ -257,8 +257,18 @@ class Conversation < ActiveRecord::Base
   end
 
   def send_email_for(message)
-    self.participants.keep_if {|p| p.external }.each do |user|
+    self.users.where(external: true).each do |user|
       EmailQueue.push(message, user) unless user == message.user
+    end
+  end
+
+  def increment_unread_counts_for(message)
+    self.users.each do |participant|
+      unless participant == message.user
+        reading_log = ReadingLog.get(participant.id, self.id)
+        reading_log.unread_count += 1
+        reading_log.save
+      end
     end
   end
 
@@ -282,6 +292,7 @@ class Conversation < ActiveRecord::Base
         end
       when 'message'
         self.send_email_for action
+        self.increment_unread_counts_for action
     end
     save
   end
