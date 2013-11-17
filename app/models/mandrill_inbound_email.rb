@@ -7,7 +7,7 @@ class MandrillInboundEmail
     @data = data
     @sender = User.find_by_email(@data['from_email']) unless @user
     @action = Action.new(
-      type: 'message',
+      type: 'email_message',
       data: { text: @data['text'] }.to_json,
       user_id: self.sender_user.id
     )
