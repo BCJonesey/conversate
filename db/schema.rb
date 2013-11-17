@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131110183405) do
+ActiveRecord::Schema.define(:version => 20131117182940) do
 
   create_table "actions", :force => true do |t|
     t.integer  "conversation_id"
@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(:version => 20131110183405) do
     t.integer  "default_folder_id"
     t.boolean  "removed",                      :default => false
     t.boolean  "external",                     :default => false
+    t.boolean  "send_me_mail",                 :default => false
   end
 
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"
