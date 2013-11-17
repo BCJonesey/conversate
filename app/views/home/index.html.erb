@@ -14,11 +14,11 @@
           <%= label_tag :code_word, 'Passcode' %>
           <%= text_field_tag :code_word, '' %>
         </div>
-          <div class='clearfix'>
-            <div class='btn-group pull-right'>
-              <%= submit_tag 'Go to Test Site', :class => 'btn btn-primary' %>
-            </div>
+        <div class='clearfix'>
+          <div class='btn-group pull-right'>
+            <%= submit_tag 'Go to Test Site', :class => 'btn btn-primary' %>
           </div>
+        </div>
         <% end %>
       </div>
     </div>
@@ -33,17 +33,20 @@
       <span class='toolbar-title'>Welcome to Water Cooler</span>
     </div>
     <%= form_tag session_path, :class => '' do %>
-      <div class='form modal-content'>
-        <%= label_tag :email, 'Email' %>
-        <%= email_field_tag :email, params[:email] %>
-        <%= label_tag :password, 'Password' %>
-        <%= password_field_tag :password, nil %>
+    <div class='form modal-content'>
+      <% if flash[:alert] %>
+      <div class='login-error-message'><%= flash[:alert]%></div>
+      <% end %>
+      <%= label_tag :email, 'Email' %>
+      <%= email_field_tag :email, params[:email] %>
+      <%= label_tag :password, 'Password' %>
+      <%= password_field_tag :password, nil %>
+    </div>
+    <div class='btn-toolbar-below clearfix'>
+      <div class='btn-group pull-right'>
+        <%= submit_tag 'Sign In', :class => 'btn-primary' %>
       </div>
-      <div class='btn-toolbar-below clearfix'>
-        <div class='btn-group pull-right'>
-          <%= submit_tag 'Sign In', :class => 'btn-primary' %>
-        </div>
-      </div>
+    </div>
     <% end %>
   </div>
 </div>
