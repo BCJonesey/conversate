@@ -18,9 +18,13 @@ class Api::V0::ConversationsController < ApplicationController
 
     conversation.set_title params[:title] || 'New Conversation', current_user
 
-    conversation.add_actions params[:actions], current_user
-
+    # Again, order of ops stuff.  We need participants before we do actions so
+    # that we can send emails to external users.
     conversation.add_participants params[:participants], current_user
+    conversation.add_actions params[:actions], current_user
+    conversation.reload
+    conversation.mark_all_unread_for(conversation.users - [current_user])
+
     # The API technically doesn't specify whether this request should include
     # the user creating the conversation or not, and the client goes back and
     # forth.

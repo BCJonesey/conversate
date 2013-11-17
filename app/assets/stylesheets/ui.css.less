@@ -12,9 +12,11 @@
   color:#888;
 }
 
-
-
-
+.act-container, .fld-container{
+  .ui-back-button{
+    .ui-tablet-hidden();
+  }
+}
 
 @media (max-width:@bp-1){
   .ui-section{
@@ -25,8 +27,18 @@
   }
 }
 
+@media (min-width:@bp-1) and (max-width:@bp-2){
+  .fld-container{
+    display:none;
+    &.visible{
+      display:block;
+    }
+  }
+}
 
-.ui-scrollabe{
+
+
+.ui-scrollable{
   -webkit-overflow-scrolling:touch;
   -moz-overflow-scrolling:touch;
   overflow-scrolling:touch;

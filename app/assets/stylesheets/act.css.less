@@ -103,9 +103,11 @@
   background-color: @bg-1;
   border:1px solid transparent;
   border-bottom-color:@border-color-1;
+  @media(max-width:@bp-1){
+    border-bottom-color:@border-color-2;
+  }
   padding:0 0.5rem;
   padding-right:1.5rem;
-  z-index: 1;
   overflow-y:visible;
   &.editing{
     .editing-style();
@@ -128,55 +130,7 @@
   }
 }
 
-.participant{
-  font-size:.8rem;
-  color:#888;
-  list-style: none;
-  display: inline-block;
-}
-.participant{
-  padding-left:0.25rem;
-  &:first-child{
-    padding-left:0;
-  }
-  .participant-text:after{
-    content:", ";
-  }
-  &:last-of-type .participant-text:after{
-    content:none;
-  }
-}
 
-.editing .participant{
-    background-color:#DEF;
-    border:1px solid #ABC;
-    padding-left:0.2rem;
-    padding-right:0.1rem;
-    margin-right:.4rem;
-    display:inline-block;
-    .participant-text:after{
-      content:none;
-    }
-}
-.editing .participant-remove{
-    color:#CCC;
-    position:relative;
-    bottom:.05rem;
-    padding:0.1rem;
-}
-
-.editing .participant-remove:hover{
-    color:#888;
-}
-
-
-.token-input-wrap{
-  display:none;
-  position:relative;
-}
-.act-participants.editing .token-input-wrap{
-  display:inline-block;
-}
 
 
 .act-participants-actions,

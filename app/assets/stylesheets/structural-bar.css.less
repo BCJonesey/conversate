@@ -11,7 +11,7 @@
 
 .structural-bar{
   box-sizing:border-box;
-  position:fixed;
+  position:absolute;
   top:0;
   left:0;
   right:0;
@@ -108,15 +108,19 @@
 
 .stb-link-sign-out{
   .stb-link-text{
-    .ui-desktop-hidden();
+    .ui-mobile-only();
   }
 }
 
 /* Responsive Stuff */
 
-.stb-link-people,
 .stb-link-settings,
 .wc-news-wrap,
 .stb-name{
   .ui-mobile-hidden();
+}
+
+.stb-link-testbed .stb-link-text,
+.stb-link-dashboard .stb-link-text{
+  .ui-tablet-hidden();
 }
