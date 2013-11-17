@@ -295,6 +295,9 @@ class Conversation < ActiveRecord::Base
       when 'message'
         self.send_email_for action
         self.increment_unread_counts_for action
+      when 'email_message'
+        self.send_email_for action
+        self.increment_unread_counts_for action
     end
     save
   end
