@@ -7,7 +7,7 @@
 
 .water-cooler {
   overflow:hidden;
-  position: fixed;
+  position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
@@ -26,13 +26,27 @@
   position:absolute;
   top:0;left:0;right:0;bottom:0;
 
-  @media (min-width: @bp-1){
+  @media (min-width:@bp-1){
+    //display:none;
+    position:absolute;
+    width: 15rem;
+    top:0.5rem;
+    bottom:0.5rem;
+    left:0;
+    z-index: 12;
+    border:@border-1;
+    box-shadow: 0.25rem 0 0.5rem rgba(0,0,0,0.2);
+  }
+  @media (min-width: @bp-2){
+    //display:block;
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     width: 15rem;
+    border:none;
     border-right: @border-1;
+    box-shadow: none;
   }
 }
 
@@ -42,13 +56,14 @@
     position: absolute;
     top:0;left:0;right:0;bottom:0;
 
-
     @media (min-width: @bp-1){
-      top: 0;
-      bottom: 0;
-      left: 15rem;
       width: 20rem;
       border-right: @border-1;
+      left:0;
+    }
+
+    @media (min-width: @bp-2){
+      left: 15rem;
     }
   }
 
@@ -62,6 +77,9 @@
     bottom:0;
 
     @media (min-width: @bp-1){
+      left:20rem;
+    }
+    @media (min-width: @bp-2){
       left: 35rem;
       top: 0;
       bottom: 0;
@@ -82,7 +100,7 @@
 @scrollbar-hover: rgba(0,0,0,0.3);
 
 .water-cooler {
-  @media(min-width:@bp-1){
+  @media(min-width:@bp-2){
     ::-webkit-scrollbar {
       width: 10px;
       height: 10px;

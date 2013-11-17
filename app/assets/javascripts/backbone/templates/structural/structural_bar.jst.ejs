@@ -21,12 +21,12 @@
        regret typing that. -->
 
   <% if(user.get('site_admin')) { %>
-    <a href="<%= Structural.Router.adminHref() %>" class="stb-link">
+    <a href="<%= Structural.Router.adminHref() %>" class="stb-link stb-link-dashboard">
       <i class="stb-icon fa fa-fw fa-dashboard"></i>
       <span class="stb-link-text">Admin</span>
     </a>
     <!-- This isn't a real app link so it doesn't get a router function. -->
-    <a href="/ux/testbed" class="stb-link">
+    <a href="/ux/testbed" class="stb-link stb-link-testbed">
       <i class="stb-icon fa fa-fw fa-fighter-jet fa-rotate-270"></i>
       <span class="stb-link-text">UX Testbed</span>
     </a>

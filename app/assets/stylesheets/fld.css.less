@@ -4,6 +4,9 @@
 // --- Folders --- //
 
 
+.fld-popover-close-button{
+  .ui-tablet-only();
+}
 
 .fld-list{
   position: absolute;
@@ -17,7 +20,7 @@
   -webkit-overflow-scrolling:touch;
 }
 .fld-list-title{
-  .ui-desktop-hidden();
+  .ui-mobile-only();
   .title-font();
   .ellipsis();
   text-align: center;
@@ -71,9 +74,9 @@
 }
 
 .fld-details-toggle{
- display:none;
- line-height: 1.0;
- .ui-mobile-hidden();
+  display:none;
+  line-height: 1.0;
+  .ui-desktop-only();
 }
 
 .fld.fld-default .fld-details-toggle,
@@ -93,7 +96,7 @@
 }
 
 .fld-new-button{
-  .ui-mobile-hidden();
+  .ui-desktop-only();
 }
 .fld-new {
   position: fixed;

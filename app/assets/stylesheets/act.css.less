@@ -103,9 +103,11 @@
   background-color: @bg-1;
   border:1px solid transparent;
   border-bottom-color:@border-color-1;
+  @media(max-width:@bp-1){
+    border-bottom-color:@border-color-2;
+  }
   padding:0 0.5rem;
   padding-right:1.5rem;
-  z-index: 1;
   overflow-y:visible;
   &.editing{
     .editing-style();
