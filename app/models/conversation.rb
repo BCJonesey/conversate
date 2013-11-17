@@ -262,6 +262,16 @@ class Conversation < ActiveRecord::Base
     end
   end
 
+  def increment_unread_counts_for(message)
+    self.users.each do |participant|
+      unless participant == message.user
+        reading_log = ReadingLog.get(participant.id, self.id)
+        reading_log.unread_count += 1
+        reading_log.save
+      end
+    end
+  end
+
   def handle(action)
     case action.type
       when 'retitle'
@@ -282,6 +292,7 @@ class Conversation < ActiveRecord::Base
         end
       when 'message'
         self.send_email_for action
+        self.increment_unread_counts_for action
     end
     save
   end
