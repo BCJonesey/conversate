@@ -176,25 +176,15 @@
 
 // These are some real bullshit to adjust the spacing of update messages in relation to regular messages
 
-.act-message + .act-update-viewers,
-.act-message + .act-update-users,
-.act-message + .act-deletion,
-.act-message + .act-move-conversation,
-.act-message + .act-retitle,
-.act-message + .act-update-folders {
-  padding-top:0.5rem;
+.act-sys{
+  padding:0.5rem;
 }
 
-.act-update-viewers + .act-message,
-.act-update-users + .act-message,
-.act-move-conversation + .act-message,
-.act-deletion + .act-message,
-.act-retitle + .act-message,
-.act-update-folders + .act-message {
-  margin-top:0.25rem;
+.act-sys + .act-sys{
+  padding-top:0;
 }
 
-.act-message{
+.act-msg{
   padding:0.25rem;
   @media(min-width:@bp-1){
     padding:0.65rem;
@@ -224,12 +214,6 @@
 @border-act-my-message: 1px solid @border-color-act-my-message;
 @border-pending: 1px solid @border-color-pending;
 
-.act-message + .act-message,
-.act + .act-message,
-.act-message + .act{
-  border-top:@border-message;
-}
-
 .act-list .act:first-child{
   border-top:@border-message;
 }
@@ -238,22 +222,46 @@
   border-bottom:@border-message;
 }
 
-.act-message.act-my-message{
+.act-sys + .act-msg.act-my-message,
+.act-msg + .act-msg.act-my-message{
+  border-top:@border-message;
+  margin-top:0;
+}
+
+.act-msg.act-my-message + .act-msg.act-my-message{
+  margin-top:1.0rem;
+}
+
+.act-msg + .act-msg{
+  border-top:@border-message;
+  margin-top:0;
+}
+.act-msg.act-my-message + .act-msg,
+.act-msg.act-my-message + .act-sys{
+  border-top:0;
+}
+.act-msg.act-my-message + .act-msg.act-my-message{
+  border-top:@border-message;
+  margin-top:1.0rem;
+}
+
+.act-msg + .act-sys{
+  border-top:@border-message;
+}
+.act-msg.act-my-message + .act-sys{
+  boreder-top:none;
+}
+
+
+.act-sys + .act-msg{
+  border-top:@border-message;
+}
+
+.act-msg.act-my-message{
   background-color:@background-color-act-my-message;
   border:@border-act-my-message;
   transition: none;
 }
-
-.act-message.act-my-message + .act-message.act-my-message{
-  margin-top:1.0rem;
-}
-.act-message.act-my-message + .act:not(.act-my-message){
-  border-top:none;
-}
-.act-message.act-my-message + .act.act-my-message:not(.act-message){
-  border-top:none;
-}
-
 
 .act-message.act-my-message.pending{
   background-color:@background-color-pending;
