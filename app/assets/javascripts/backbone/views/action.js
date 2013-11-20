@@ -23,7 +23,7 @@ Structural.Views.Action = Support.CompositeView.extend({
     }
 
     if(this.model.isUpdateFoldersWithoutAdditions()) {
-      classes += ' hidden';
+      classes += ' removed';
     }
 
     return classes;
