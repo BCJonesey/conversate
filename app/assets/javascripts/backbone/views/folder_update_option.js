@@ -6,7 +6,7 @@ Structural.Views.FolderUpdateOption = Support.CompositeView.extend({
     }
     return classes;
   },
-  template: JST['backbone/templates/actions/update_folders_option'],
+  template: JST.template('actions/update_folders_option'),
   initialize: function(options) {
     options = options || {};
     this.folder = options.folder;

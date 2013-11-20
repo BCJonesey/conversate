@@ -7,7 +7,7 @@ Structural.Views.Participant = Support.CompositeView.extend({
     }
     return classes;
   },
-  template: JST['backbone/templates/participants/token'],
+  template: JST.template('participants/token'),
   initialize: function(options) {
   },
   render: function() {

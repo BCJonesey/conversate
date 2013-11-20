@@ -1,7 +1,7 @@
 Structural.Views.News = Support.CompositeView.extend({
   tagName: 'span',
   className: 'wc-news-wrap popover-wrap',
-  template: JST['backbone/templates/structural/news'],
+  template: JST.template('structural/news'),
   initialize: function(options) {
     Structural.on('clickAnywhere', this.hide, this);
   },

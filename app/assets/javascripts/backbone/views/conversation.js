@@ -19,7 +19,7 @@ Structural.Views.Conversation = Support.CompositeView.extend({
 
     return classes;
   },
-  template: JST['backbone/templates/conversations/conversation'],
+  template: JST.template('conversations/conversation'),
   initialize: function(options) {
     options = options || {};
     this.user = options.user;

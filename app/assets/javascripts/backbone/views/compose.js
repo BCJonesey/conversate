@@ -1,6 +1,6 @@
 Structural.Views.Compose = Support.CompositeView.extend({
   className: 'act-compose',
-  template: JST['backbone/templates/actions/compose'],
+  template: JST.template('actions/compose'),
   initialize: function(options) {
     options = options || {};
     this.conversation = options.conversation;
