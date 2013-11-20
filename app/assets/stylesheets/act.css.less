@@ -194,7 +194,13 @@
   a{
     .link-blue();
   }
+}
 
+.act-update-folders.removed{
+  height:0 !important;
+  & + .act-update-folders.removed{
+    display:none;
+  }
 }
 
 // --- Messages --- //
@@ -288,15 +294,21 @@
   font-weight: bold;
 }
 
+
+
 .act-info-group{
   display:inline-block;
 }
 
-.act-time{
+.act-msg-details{
   color:#DDD;
+}
+.act-email-indicator{
+  margin-right:0.35rem;
+}
+.act-time{
+  //display: inline-block;
   font-size: .75rem;
-  vertical-align: middle;
-  display: inline-block;
 }
 
 .act-text{
@@ -311,12 +323,7 @@
   }
 }
 
-.act-update-viewers,
-.act-update-users,
-.act-retitle,
-.act-deletion,
-.act-move-conversation,
-.act-update-folders{
+.act-sys{
   font-size:.6rem;
   color:#CCC;
   text-align: center;

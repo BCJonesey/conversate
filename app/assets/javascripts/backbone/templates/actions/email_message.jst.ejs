@@ -1,13 +1,10 @@
 <div class="act-info clearfix">
-  <div class="act-info-group pull-right">
-    <span><i class="fa fa-envelope-o"></i></span>
-    <span class="i-text act-time"><%= action.humanizedTimestamp() %></span>
-  </div>
-  <div class="act-info-group pull-left">
-    <span class="act-sender"><%= action.get('user').escape('name') %></span>
-  </div>
+  <div class="act-info-group pull-right act-msg-details"><span class='act-email-indicator' title='Message was via Email'><i class="fa fa-envelope-o"></i></span><span class="i-text act-time"><%= action.humanizedTimestamp() %></span></div>
+  <div class="act-info-group pull-left"><span class="act-sender"><%= action.get('user').escape('name') %></span></div>
 </div>
+<div class="act-text"><%= action.get('enhanced_text') %></div>
+
+
 <% /* The enhanced_text property includes link tags and such, so it needs
       to be escaped when it's created.  If it isn't html safe at this point,
       it's gone horribly wrong. */ %>
-<div class="act-text"><%= action.get('enhanced_text') %></div>
