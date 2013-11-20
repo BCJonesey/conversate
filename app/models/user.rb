@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
   end
 
   def unread_count
-    self.conversations.keep_if {|c| c.unread_for?(self) }.length
+    self.reading_logs.where("unread_count >0").count
   end
 
   # Public: returns the users this user knows.

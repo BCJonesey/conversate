@@ -28,7 +28,7 @@ Then you should do this:
 ## Are you getting inbound email to this WC instance?
 Then you should do this:
 
-1. Add the domain you're recieving email from to this page:
+1. Add the domain you're receiving email from to this page:
    https://mandrillapp.com/inbound.  Configure the DNS settings until there
    aren't any errors.  Pay attention to DNS propagation times if you think you
    have everything set up right but Mandrill is still seeing errors.

@@ -39,6 +39,9 @@ class Api::V0::ConversationsController < ApplicationController
     render :json => conversation.to_json(:user => current_user), :status => 201
   end
 
+  def unread_count
+    render :json => current_user.unread_count
+  end
   def show
     conversation = Conversation.find_by_id(params[:id])
     head :status => :not_found and return unless conversation
