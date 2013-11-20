@@ -1,11 +1,11 @@
 <%= render 'shared/hacky_top_bar' %>
 <div class='profile-page'>
-<div class='profile-update-form modal-window'>
+<div class='profile-update-form'>
       <div class='btn-toolbar'><div class='btn-group pull-left'>
         <span class='toolbar-title'>User Profile Information</span>
       </div>
     </div>
-<div class='form modal-content'>
+<div class='form'>
     <%= form_tag users_path, :method => 'put' do %>
       <% if @edit_status == :failure %>
         <div class="error-messages">
