@@ -160,7 +160,7 @@ describe Conversation do
       @conversation.handle action
       ReadingLog.get(@sally.id, @conversation.id).unread_count.should eq (before_count + 1)
     end
-    it 'does not incrememnt unread count on not-messages' do
+    it 'does not increment unread count on not-messages' do
       before_count = ReadingLog.get(@sally.id, @conversation.id).unread_count
 
       action = @conversation.actions.create(type: 'retitle',
