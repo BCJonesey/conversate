@@ -6,8 +6,8 @@
         <span class='toolbar-title'>User Profile Information</span>
       </div>
     </div>
-    <div class='form'>
-      <%= form_tag users_path, :method => 'put' do %>
+    <%= form_tag users_path, :method => 'put' do %>
+      <div class='form'>
         <% if @edit_status == :failure %>
           <div class="error-messages">
             <span>Something went wrong...</span>
@@ -33,12 +33,12 @@
           <%= label_tag :send_me_mail %>
           <%= check_box_tag :send_me_mail, 'yes', @user.send_me_mail %>
         <% end %>
-        <div class='btn-toolbar-below'>
-          <div class='btn-group pull-right'>
-            <%= submit_tag "Update", :class => "btn btn-primary" %>
-          </div>
+      </div>
+      <div class='btn-toolbar-below'>
+        <div class='btn-group pull-right'>
+          <%= submit_tag "Update", :class => "btn btn-primary" %>
         </div>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
 </div>
