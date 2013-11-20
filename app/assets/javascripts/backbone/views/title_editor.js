@@ -15,15 +15,13 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
       conversation: this.conversation
     });
     this.appendChild(this._updateFoldersDialog);
-    this.titleEditorModal = new Structural.Views.TitleEditorModal({});
-    this.appendChild(this.titleEditorModal);
     this._input = this.$('input[type="text"]');
     return this;
   },
   events: {
     submit: 'retitleConversation',
     'click .act-move-cnv': 'toggleUpdateFoldersDialog',
-    //'click .act-title-edit': 'openTitleEditor',
+    'click .act-title-edit': 'openTitleEditor',
     'click .act-title-save': 'retitleConversation',
     'click .act-archive-cnv': 'archiveConversation',
     'keyup': 'cancelOnEscape'
@@ -51,17 +49,10 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
   },
   openTitleEditor: function(e) {
     e.preventDefault();
-    this.$('.act-title-actions').addClass('hidden');
-    this.$('.act-title-save-actions').removeClass('hidden');
-    this.$el.addClass('editing');
-    this._input.removeAttr('readonly');
-    this._input.focus();
-    // JQuery's focus() method selects all the text in the input which we don't
-    // want; this should clear it.
-    this._input.get(0).setSelectionRange(this._input.val().length + 1,
-                                         this._input.val().length + 2);
-
-    Structural.on('clickAnywhere', this.cancelRetitle, this);
+    // TODO: Really move the title editor out into its own view? The current span wrapping makes it a little
+    // tricky...
+    this.$('.wc-title-editor-popover').toggleClass('hidden');
+    this.$('.wc-title-editor-toggle').toggleClass('active');
   },
   closeTitleEditor: function(e) {
     if (!e || $(e.target).closest('.act-title').length === 0) {
