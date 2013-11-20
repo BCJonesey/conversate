@@ -38,7 +38,7 @@
 </div>
 <% end %>
 
-<div class="grp-page">
+<div class="grp-page ui-scrollable">
   <% current_user.groups.each do |group| %>
     <div class="grp">
       <div class='btn-toolbar clearfix'>
@@ -55,33 +55,33 @@
         <table>
           <thead>
             <tr>
-              <td>Name</td>
-              <td>Email Address</td>
-              <td>Admin</td>
+              <td class='name'>Name</td>
+              <td class='email'>Email Address</td>
+              <td class='is-admin'>Admin</td>
               <% if current_user.group_admin?(group) %>
-                <td>Remove</td>
+                <td class='remove'>Remove</td>
               <% end %>
               <% if current_user.site_admin %>
-                <td>External</td>
+                <td class='is-external'>External</td>
               <% end %>
             </tr>
           </thead>
           <tbody>
             <% group.users.each do |user| %>
               <tr>
-                <td title="<%= user.full_name %>"><%= user.full_name %></td>
-                <td title="<%= user.email %>"><%= user.email %></td>
-                <td>
+                <td class='name' title="<%= user.full_name %>"><%= user.full_name %></td>
+                <td class='email' title="<%= user.email %>"><%= user.email %></td>
+                <td class='is-admin'>
                   <%= check_box_tag 'admin[]', user.id, user.group_admin?(group),
                                     disabled: !current_user.group_admin?(group) %>
                 </td>
                 <% if current_user.group_admin?(group) %>
-                  <td>
+                  <td class='remove'>
                     <%= check_box_tag 'remove[]', user.id, false %>
                   </td>
                 <% end %>
                 <% if current_user.site_admin %>
-                  <td>
+                  <td class='is-external'>
                     <%= user.external ? "yes" : "no" %>
                   </td>
                 <% end %>
@@ -100,7 +100,7 @@
       <% end %>
 
       <div class="modal-background hidden grp-new-user-form">
-        <div class="modal-window">
+        <div class="modal-window grp-new-user-window">
           <div class='btn-toolbar'>
             <div class=' btn-group pull-left grp-new-user-title'>
               <span class='toolbar-title'>Add a new user to "<strong><%= group.name %></strong>"</span>

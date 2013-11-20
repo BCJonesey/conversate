@@ -3,6 +3,11 @@
 
 // --- Folders --- //
 
+
+.fld-popover-close-button{
+  .ui-tablet-only();
+}
+
 .fld-list{
   position: absolute;
   top:@toolbar-height;
@@ -14,7 +19,16 @@
   padding:0.25rem;
   -webkit-overflow-scrolling:touch;
 }
-
+.fld-list-title{
+  .ui-mobile-only();
+  .title-font();
+  .ellipsis();
+  text-align: center;
+  position:absolute;
+  left:4rem;
+  right:4rem;
+  top:0.5rem;
+}
 .fld-hint{
   padding:.3rem;
   margin:.3rem;
@@ -25,15 +39,24 @@
 }
 
 .fld{
-  padding:0.25rem;
+  padding:0.75rem;
   color:#888;
   cursor: pointer;
   border:1px solid transparent;
+  border-bottom-color:@border-color-1;
   &.fld-current{
-    border-color:@border-color-1;
-    background-color:#F0F8FF;
   }
-
+}
+@media (min-width:@bp-1){
+  .fld{
+    margin:0;
+    padding:0.25rem;
+    border-bottom-color:transparent;
+    &.fld-current{
+      border-color:@border-color-1;
+      background-color:#F0F8FF;
+    }
+  }
 }
 
 .fld-label{
@@ -51,8 +74,9 @@
 }
 
 .fld-details-toggle{
- display:none;
- line-height: 1.0;
+  display:none;
+  line-height: 1.0;
+  .ui-desktop-only();
 }
 
 .fld.fld-default .fld-details-toggle,
@@ -71,7 +95,9 @@
   font-size:0.80rem;
 }
 
-
+.fld-new-button{
+  .ui-desktop-only();
+}
 .fld-new {
   position: fixed;
   top:10%;

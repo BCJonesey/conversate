@@ -1,0 +1,45 @@
+@import "variables.css.less";
+@import 'mixins.css.less';
+
+.ui-back-button{
+  .ui-desktop-hidden();
+  position:absolute;
+  top:0;
+  left:0;
+  bottom:0;
+  padding-top:0.5rem;
+  padding-left:0.25rem;
+  color:#888;
+}
+
+.act-container, .fld-container{
+  .ui-back-button{
+    .ui-tablet-hidden();
+  }
+}
+
+@media (max-width:@bp-1){
+  .ui-section{
+    display:none;
+    &.visible{
+      display:block;
+    }
+  }
+}
+
+@media (min-width:@bp-1) and (max-width:@bp-2){
+  .fld-container{
+    display:none;
+    &.visible{
+      display:block;
+    }
+  }
+}
+
+
+
+.ui-scrollable{
+  -webkit-overflow-scrolling:touch;
+  -moz-overflow-scrolling:touch;
+  overflow-scrolling:touch;
+}

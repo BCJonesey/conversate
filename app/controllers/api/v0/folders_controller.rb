@@ -1,5 +1,5 @@
 class Api::V0::FoldersController < ApplicationController
-  before_filter :require_login
+  before_filter :require_login_api
 
   def index
     render :json => current_user.folders.includes(:conversations).to_json(:user => current_user)

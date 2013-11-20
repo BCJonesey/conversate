@@ -1,5 +1,5 @@
 class Api::V0::ParticipantsController < ApplicationController
-  before_filter :require_login
+  before_filter :require_login_api
 
   # Note that this is always on urls like /conversation/1/participants.
   def index
@@ -39,8 +39,11 @@ class Api::V0::ParticipantsController < ApplicationController
     head :status => 404 and return unless conversation && user
     log = user.reading_logs.where(:conversation_id => conversation.id).first
     # API sends milliseconds
-    log.most_recent_viewed = DateTime.strptime((params[:most_recent_viewed] / 1000).to_s, "%s")
+    if (params[:most_recent_viewed])
+      log.most_recent_viewed = DateTime.strptime((params[:most_recent_viewed] / 1000).to_s, "%s")
+    end
     log.unread_count = 0
+    log.archived = params[:archived] ? params[:archived] : log.archived
     log.save
     render :json => user.to_json, :status => 204
   end

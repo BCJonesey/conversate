@@ -4,8 +4,6 @@
 // --- Conversations List --- //
 
 // This does not include styles that control the position, of the converstion list column.  those are with the water-cooler.css.less file and other general layout stuff
-
-
 .cnv-list {
     position: absolute;
     top: 2.5rem;
@@ -14,9 +12,61 @@
     bottom: 0;
     overflow-y: auto;
     overflow-x:hidden;
-    -webkit-overflow-scrolling:touch;
+
+}
+.cnv-list-title{
+  .ui-mobile-only();
+  .title-font();
+  .ellipsis();
+  text-align: center;
+  position:absolute;
+  left:4rem;
+  right:4rem;
+  top:0.5rem;
+}
+.cnv-new-button{
 }
 
+.cnv-section{
+  .cnv-note{
+    display:none;
+  }
+}
+.cnv-section.is-collapsed{
+  .cnv{
+    display:none;
+  }
+  .cnv-note{
+    display:block;
+  }
+}
+.cnv-divider{
+  .gradient-ltr(@border-color-1,white,90%);
+  cursor:default;
+  padding-bottom: 1px;
+  .cnv-divider-inner{
+    .gradient-ltr(#F8F8F8,white,90%);
+    .ellipsis();
+    color:#AAA;
+    font-size: 0.75rem;
+    padding: 0.25rem;
+  }
+}
+.cnv-note{
+  .gradient-ltr(@border-color-1,white,90%);
+  cursor:default;
+  padding-bottom: 1px;
+  .cnv-note-inner{
+    background-color: white;
+    .ellipsis();
+    color:#DDD;
+    font-weight: normal;
+    font-size: 0.75rem;
+    padding: 0.75rem;
+    text-align: center;
+  }
+
+}
 .cnv {
   padding: 0;
   border: none;
@@ -27,12 +77,16 @@
 
 .cnv-left {
   background-color:white;
-  padding: .25rem;
+  padding: 0.5rem;
+  @media(min-width:@bp-2){
+    padding: 0.25rem;
+  }
   background-color: white;
 }
-
-.cnv.cnv-current .cnv-left{
-  .gradient-ltr(#F0F8FF,white,90%)
+@media (min-width:@bp-1){
+  .cnv.cnv-current .cnv-left{
+    .gradient-ltr(#F0F8FF,white,90%)
+  }
 }
 .cnv-right{
   float:right;
