@@ -26,7 +26,12 @@ Structural.Views.Compose = Support.CompositeView.extend({
   newMessageAction: function(e) {
     if (e) { e.preventDefault(); }
     var input = this._long.hasClass('hidden') ? this._short : this._long;
-    Structural.createMessageAction(input.find('textarea').val());
+    var text = input.find('textarea').val();
+
+    if (text.length > 0) {
+      Structural.createMessageAction(input.find('textarea').val());
+    }
+
     input.find('textarea').val('');
     this.disableLongForm();
 
