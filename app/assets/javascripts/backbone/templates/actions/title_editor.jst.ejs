@@ -1,22 +1,19 @@
 <a href='#' class='ui-back-button'>
   <i class='fa fa-fw fa-chevron-left'></i>
 </a>
-<input autocomplete="off" class="act-title-input" name="title" readonly="readonly"
-       type="text" value="<%= conversation ? conversation.escape('title') : '' %>">
+<span class="act-title-input">
+  <%= conversation ? conversation.escape('title') : '' %>
+</span>
 <div class="btn-group act-title-actions">
 
-  <span class="wc-title-editor-wrap popover-wrap">
-    <a class="btn-icon btn-faint act-title-edit" title="Edit Title">
-      <i class="fa fa-pencil"></i>
-    </a>
-    <div class='wc-title-editor-popover popover hidden'>
-      <div class='header'>Title</div>
-      <div class='popover-content'>
-        <div class='section'>
-          <div class='item'>
-            <p>Name (For Everyone)</p>
-          </div>
-        </div>
+  <span class="act-title-editor-wrap popover-wrap">
+
+    <a class="btn-icon btn-faint act-title-edit act-title-editor-toggle" title="Edit Title"><i class="fa fa-pencil"></i></a>
+
+    <div class='act-title-editor-popover popover hidden'>
+      <div class='header'>Conversation Details</div>
+      <div class='popover-content form'>
+        <input type='text' value="  <%= conversation ? conversation.escape('title') : '' %>"/>
       </div>
     </div>
   </span>
@@ -26,10 +23,5 @@
   </a>
   <a href="#" class="btn-icon btn-faint act-move-cnv" title="Move Conversation">
     <i class="fa fa-folder-open-o"></i>
-  </a>
-</div>
-<div class="btn-group act-title-save-actions hidden">
-  <a href="#" class="btn-icon-primary act-title-save">
-    <i class='fa fa-check'></i>
   </a>
 </div>

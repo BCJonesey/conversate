@@ -51,8 +51,8 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
     e.preventDefault();
     // TODO: Really move the title editor out into its own view? The current span wrapping makes it a little
     // tricky...
-    this.$('.wc-title-editor-popover').toggleClass('hidden');
-    this.$('.wc-title-editor-toggle').toggleClass('active');
+    this.$('.act-title-editor-popover').toggleClass('hidden');
+    this.$('.act-title-editor-toggle').toggleClass('active');
   },
   closeTitleEditor: function(e) {
     if (!e || $(e.target).closest('.act-title').length === 0) {
