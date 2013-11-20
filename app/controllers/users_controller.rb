@@ -17,6 +17,11 @@ class UsersController < ApplicationController
         @user.full_name = params[:full_name]
       end
 
+      # One of the ridiculous, tragic flaws of HTML and Rails is that check
+      # boxes don't actually use boolean values.
+      send_me_mail_checked = !params[:send_me_mail].nil?
+      @user.send_me_mail = send_me_mail_checked
+
       @edit_status = @user.save ? :success : :failure
     else
       @edit_error = :failure
