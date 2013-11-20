@@ -9,7 +9,7 @@ class Action < ActiveRecord::Base
   validates_presence_of :user_id
   validates_presence_of :type
   validates :type, :inclusion => {
-    :in => %w(message deletion retitle update_users update_folders
+    :in => %w(message email_message deletion retitle update_users update_folders
               move_message update_viewers)
   }
 

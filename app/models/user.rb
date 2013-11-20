@@ -20,6 +20,9 @@ class User < ActiveRecord::Base
     user = User.new(params)
     return false if user.save == false
 
+    # External users have no purpose other than to receive mail.
+    user.send_me_mail = true if user.external
+
     new_folder = Folder.new
     new_folder.name = 'My Conversations'
     new_folder.users << user
