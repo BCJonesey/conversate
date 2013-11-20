@@ -38,7 +38,8 @@ Structural.Views.Action = Support.CompositeView.extend({
     'deletion': JST.template('actions/deletion'),
     'move_message': JST.template('actions/move_message'),
     'move_conversation': JST.template('actions/move_conversation'),
-    'update_folders': JST.template('actions/update_folders_action')
+    'update_folders': JST.template('actions/update_folders_action'),
+    'email_delivery_error': JST.template('actions/email_delivery_error')
   },
 
   initialize: function(options) {
