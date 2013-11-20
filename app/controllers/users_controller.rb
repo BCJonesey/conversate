@@ -24,7 +24,7 @@ class UsersController < ApplicationController
 
       @edit_status = @user.save ? :success : :failure
     else
-      @edit_error = :failure
+      @edit_status = :failure
     end
     render :edit
   end
