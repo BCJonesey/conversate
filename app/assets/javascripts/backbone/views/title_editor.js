@@ -55,8 +55,14 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
     this.$('.act-title-editor-popover').toggleClass('hidden');
     this.$('.act-title-editor-toggle').toggleClass('active');
   },
+  isOpen: function() {
+    return !this.$('.act-title-editor-popover').hasClass('hidden');
+  },
   hide: function(e) {
-    console.log('hide');
+    var target = $(e.target);
+    if (target.closest('.act-title-editor-wrap').length === 0 && this.isOpen()) {
+      this.toggleTitleEditor(e);
+    }
   },
   changeConversation: function(conversation) {
     this.conversation = conversation;
