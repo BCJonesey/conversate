@@ -7,6 +7,7 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
     this.folders = options.folders;
     Structural.on('changeConversation', this.changeConversation, this);
     Structural.on('clearConversation', this.clearConversation, this);
+    Structural.on('clickAnywhere', this.hide, this);
   },
   render: function() {
     this.$el.html(this.template({conversation: this.conversation}));
@@ -21,7 +22,7 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
   events: {
     submit: 'retitleConversation',
     'click .act-move-cnv': 'toggleUpdateFoldersDialog',
-    'click .act-title-edit': 'openTitleEditor',
+    'click .act-title-edit': 'toggleTitleEditor',
     'click .act-title-save': 'retitleConversation',
     'click .act-archive-cnv': 'archiveConversation',
     'keyup': 'cancelOnEscape'
@@ -47,34 +48,15 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
     e.preventDefault();
     this._updateFoldersDialog.toggleVisible();
   },
-  openTitleEditor: function(e) {
+  toggleTitleEditor: function(e) {
     e.preventDefault();
     // TODO: Really move the title editor out into its own view? The current span wrapping makes it a little
     // tricky...
     this.$('.act-title-editor-popover').toggleClass('hidden');
     this.$('.act-title-editor-toggle').toggleClass('active');
   },
-  closeTitleEditor: function(e) {
-    if (!e || $(e.target).closest('.act-title').length === 0) {
-      this.$('.act-title-actions').removeClass('hidden');
-      this.$('.act-title-save-actions').addClass('hidden');
-      this.$el.removeClass('editing');
-      this.$('input[type="text"]').attr('readonly', 'readonly');
-
-      Structural.off('clickAnywhere', this.closeTitleEditor, this);
-      return true;
-    }
-    return false;
-  },
-  cancelRetitle: function(e) {
-    if(this.closeTitleEditor(e)) {
-      this.$('input[type="text"]').val(this.conversation.get('title'));
-    }
-  },
-  cancelOnEscape: function(e) {
-    if (e.which === Support.Keys.escape) {
-      this.cancelRetitle();
-    }
+  hide: function(e) {
+    console.log('hide');
   },
   changeConversation: function(conversation) {
     this.conversation = conversation;
