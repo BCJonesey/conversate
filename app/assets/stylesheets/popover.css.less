@@ -19,21 +19,27 @@
   top:-@tooltip-size;
 }
 
-.popover:before{
-  .tooltip-triangle-style;
-}
-
-.popover:after{
-  .tooltip-triangle-style;
-  border-bottom-color:@bg-2;
-  top:-@tooltip-size + 1px;
-}
 
 .popover-wrap{
   display:inline-block;
   position:relative;
 }
 
+
+
+
+
+@media (min-width:@bp-1){
+  .popover:before{
+    .tooltip-triangle-style;
+  }
+
+  .popover:after{
+    .tooltip-triangle-style;
+    border-bottom-color:@bg-2;
+    top:-@tooltip-size + 1px;
+  }
+}
 
 .popover{
   border:@border-2;
@@ -104,7 +110,7 @@
   padding:0.15rem;
 }
 .popover-close{
-  .mobile-only();
+  .ui-mobile-only();
   position:absolute;
   top:0.1rem;
   right:0.25rem;
