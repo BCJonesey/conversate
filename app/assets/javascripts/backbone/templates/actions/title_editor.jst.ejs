@@ -15,7 +15,9 @@
       <div class='popover-content form'>
         <label>Conversation Name</label>
         <input type='text' value="  <%= conversation ? conversation.escape('title') : '' %>"/>
-        <a href="#" class="btn act-archive-cnv" title="Archive Conversation">Archive Conversation</a>
+        <div class='act-convo-actions'>
+          <a href="#" class="btn act-archive-cnv" title="Archive Conversation">Archive Conversation</a>
+        </div>
 
       </div>
     </div>

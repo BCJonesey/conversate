@@ -27,32 +27,44 @@
 
 
 
-
-
-@media (min-width:@bp-1){
-  .popover:before{
-    .tooltip-triangle-style;
+.popover{
+  position:fixed;
+  top:1.0rem;
+  left:1.0rem;
+  right:1.0rem;
+  @media (max-width:@bp-1){
+    z-index: 10;
+    &:before{
+      content:" ";
+      background-color: rgba(0,0,0,0.2);
+      position:fixed;
+      top:0;left:0;right:0;bottom:0;
+      z-index:-1;
+    }
   }
-
-  .popover:after{
-    .tooltip-triangle-style;
-    border-bottom-color:@bg-2;
-    top:-@tooltip-size + 1px;
+  @media (min-width:@bp-1){
+    position:absolute;
+    left:auto;
+    top:110%;
+    right:0;
+    width:15rem;
+    &:before{
+      .tooltip-triangle-style;
+    }
+    &:after{
+      .tooltip-triangle-style;
+      border-bottom-color:@bg-2;
+      top:-@tooltip-size + 1px;
+    }
   }
 }
 
 .popover{
   border:@border-2;
   background-color: white;
-  width:15rem;
   min-height:5rem;
-  position:absolute;
-  top:110%;
-  right:0;
   z-index:10;
   box-shadow:0 0.5rem 1rem rgba(0,0,0,0.2);
-  .header{
-  }
   .divider{
     .clearfix();
     background-color: @bg-1;
@@ -84,6 +96,7 @@
   .popover-content{
     overflow:auto;
     max-height:40rem;
+    background-color: white;
     .item{
       a {
        .link-blue();
@@ -107,14 +120,19 @@
   background-color: @bg-2;
   border-bottom: @border-2;
   color:#666;
-  padding:0.15rem;
+  padding:0.5rem;
+  font-size:1.0rem;
+  @media (min-width:@bp-1){
+    padding:0.15rem;
+  }
 }
 .popover-close{
   .ui-mobile-only();
   position:absolute;
-  top:0.1rem;
-  right:0.25rem;
+  top:0.15rem;
+  right:0.5rem;
   color:#AAA;
+  font-size:1.5rem;
   &:hover{
     color:#444;
   }

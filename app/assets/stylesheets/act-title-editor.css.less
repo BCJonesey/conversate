@@ -9,8 +9,7 @@
 @act-title-color:#444444;
 
 .act-title-edit,
-.act-move-cnv,
-.act-archive-cnv{
+.act-move-cnv{
   .ui-mobile-hidden();
 }
 
@@ -50,10 +49,13 @@
 }
 
 .popover.act-title-editor-popover{
-  right:-0.25rem;
-  top:130%;
-  width: 20rem;
+  @media (min-width:@bp-1){
+    right:-0.25rem;
+    top:130%;
+    width: 20rem;
+  }
 }
 
-
-
+.act-convo-actions{
+  text-align: center;
+}
