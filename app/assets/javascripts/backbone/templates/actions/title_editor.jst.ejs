@@ -11,16 +11,16 @@
     <a class="btn-icon btn-faint act-title-edit act-title-editor-toggle" title="Edit Title"><i class="fa fa-pencil"></i></a>
 
     <div class='act-title-editor-popover popover hidden'>
-      <div class='header'>Conversation Details</div>
+      <div class='popover-header'>Conversation Details<a href='#' class='popover-close'><i class='fa fa-times'></i></a></div>
       <div class='popover-content form'>
+        <label>Conversation Name</label>
         <input type='text' value="  <%= conversation ? conversation.escape('title') : '' %>"/>
+        <a href="#" class="btn act-archive-cnv" title="Archive Conversation">Archive Conversation</a>
+
       </div>
     </div>
   </span>
 
-  <a href="#" class="btn-icon btn-faint act-archive-cnv" title="Archive Conversation">
-    <i class="fa fa-archive"></i>
-  </a>
   <a href="#" class="btn-icon btn-faint act-move-cnv" title="Move Conversation">
     <i class="fa fa-folder-open-o"></i>
   </a>

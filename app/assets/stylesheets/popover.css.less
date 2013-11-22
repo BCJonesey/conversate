@@ -46,12 +46,6 @@
   z-index:10;
   box-shadow:0 0.5rem 1rem rgba(0,0,0,0.2);
   .header{
-    text-align: center;
-    background-color: @bg-2;
-    border-bottom: @border-2;
-    color:#666;
-    //font-size: 0.75rem;
-    padding:0.15rem;
   }
   .divider{
     .clearfix();
@@ -84,8 +78,10 @@
   .popover-content{
     overflow:auto;
     max-height:40rem;
-    a {
-      .link-blue();
+    .item{
+      a {
+       .link-blue();
+      }
     }
     p{
       margin: 0;
@@ -98,3 +94,23 @@
     }
   }
 }
+
+.popover-header{
+  position:relative;
+  text-align: center;
+  background-color: @bg-2;
+  border-bottom: @border-2;
+  color:#666;
+  padding:0.15rem;
+}
+.popover-close{
+  .mobile-only();
+  position:absolute;
+  top:0.1rem;
+  right:0.25rem;
+  color:#AAA;
+  &:hover{
+    color:#444;
+  }
+}
+

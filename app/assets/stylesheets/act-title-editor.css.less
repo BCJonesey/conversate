@@ -1,0 +1,59 @@
+@import 'variables.css.less';
+@import 'mixins.css.less';
+
+.btn-toolbar.act-title{
+  position: relative;
+  padding:0;
+  padding-right:7.5rem;
+}
+@act-title-color:#444444;
+
+.act-title-edit,
+.act-move-cnv,
+.act-archive-cnv{
+  .ui-mobile-hidden();
+}
+
+.act-title-input{
+  box-sizing:border-box;
+  background-color:transparent;
+  border:none;
+  width:100%;
+  //height:2rem;
+  padding:.25rem 0;
+  padding-left:0.5rem;
+  font-size: 1rem;
+  //overflow:hidden;
+  //display:block;
+  outline:none;
+  .ellipsis();
+  .title-font();
+  color:@act-title-color;
+}
+@media (max-width: @bp-1){
+
+  .act-title-input{
+    padding-left:2.0rem;
+  }
+}
+
+
+.act-title.editing{
+  //.editing-style();
+}
+
+.act-title-actions,
+.act-title-save-actions{
+  position: absolute;
+  top:.3rem;
+  right:.25rem;
+}
+
+.popover.act-title-editor-popover{
+  right:-0.25rem;
+  top:130%;
+  width: 20rem;
+}
+
+
+
