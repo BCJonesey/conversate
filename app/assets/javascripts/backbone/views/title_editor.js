@@ -23,6 +23,7 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
     submit: 'retitleConversation',
     'click .act-move-cnv': 'toggleUpdateFoldersDialog',
     'click .act-title-edit': 'toggleTitleEditor',
+    'click .act-title-editor-popover .popover-close': 'toggleTitleEditor',
     'click .act-title-save': 'retitleConversation',
     'click .act-archive-cnv': 'archiveConversation',
     'keyup': 'cancelOnEscape'
