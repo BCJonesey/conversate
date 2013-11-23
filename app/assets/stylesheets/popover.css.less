@@ -15,7 +15,7 @@
   border-right: @tooltip-size solid transparent;
   border-bottom:@tooltip-size solid @border-color-2;
 
-  right:@tooltip-size;
+  right:0.25rem;
   top:-@tooltip-size;
 }
 
@@ -24,8 +24,6 @@
   display:inline-block;
   position:relative;
 }
-
-
 
 .popover{
   position:fixed;
@@ -45,7 +43,7 @@
   @media (min-width:@bp-1){
     position:absolute;
     left:auto;
-    top:110%;
+    top:130%;
     right:0;
     width:15rem;
     &:before{
