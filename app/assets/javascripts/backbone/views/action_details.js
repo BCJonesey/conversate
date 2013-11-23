@@ -7,6 +7,9 @@ Structural.Views.ActionDetails = Support.CompositeView.extend({
   initialize: function(options) {
 
   },
+  events:{
+    'click .act-details-close':'hide'
+  },
   render: function() {
     if (this.action) {
       this.$el.html(this.template({action: this.action}));
@@ -17,5 +20,8 @@ Structural.Views.ActionDetails = Support.CompositeView.extend({
     this.action = action;
     this.$el.removeClass('hidden');
     this.render();
+  },
+  hide:function(){
+    this.$el.addClass('hidden');
   }
 });
