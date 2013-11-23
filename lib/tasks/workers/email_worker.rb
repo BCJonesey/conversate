@@ -35,10 +35,7 @@ class EmailWorker
     end
   end
 
-  def construct_message(email)
-    user = User.find(email.external_user_id)
-    action = Action.find(email.action_id)
-    conversation = action.conversation
+  def construct_message(user, action, conversation)
     return {
       subject: conversation.title,
       text: action.text,
@@ -57,22 +54,45 @@ class EmailWorker
     }
   end
 
+  def report_error(user, action, conversation)
+    error_action = conversation.actions.create(
+      type: 'email_delivery_error',
+      user_id: action.user.id,
+      data: { recipient: user,
+              message: action }.to_json)
+    log "error action created: #{error_action.id}"
+  end
+
   def send_email(email)
-    message = construct_message email
+    user = User.find(email.external_user_id)
+    action = Action.find(email.action_id)
+    conversation = action.conversation
+    message = construct_message(user, action, conversation)
 
-    # It looks like we need to make a new API instance every time we do stuff
-    # with the Mandrill API.  My best guess is that it's because it holds onto
-    # a session object instead of making a new one each request.  See
-    # https://bitbucket.org/mailchimp/mandrill-api-ruby/src/03e3e28e77dcba31eab7d2f9e2216b5a01d2110d/lib/mandrill.rb?at=master
-    #
-    # Note also that you need to the set the environment variable
-    # MANDRILL_APIKEY before running this
-    mandrill = Mandrill::API.new
+    begin
+      # It looks like we need to make a new API instance every time we do stuff
+      # with the Mandrill API.  My best guess is that it's because it holds onto
+      # a session object instead of making a new one each request.  See
+      # https://bitbucket.org/mailchimp/mandrill-api-ruby/src/03e3e28e77dcba31eab7d2f9e2216b5a01d2110d/lib/mandrill.rb?at=master
+      #
+      # Note also that you need to the set the environment variable
+      # MANDRILL_APIKEY before running this
+      mandrill = Mandrill::API.new
 
-    log "sending email to #{message[:to][0][:email]}: action ##{email.action_id}"
-    response = mandrill.messages.send message
-    log "response from #{message[:to][0][:email]} for action ##{email.action_id}: #{response}"
-    # TODO: Handle errors in delivery
+      log "sending email to #{message[:to][0][:email]}: action ##{email.action_id}"
+      response = mandrill.messages.send message
+      log "response from #{message[:to][0][:email]} for action ##{email.action_id}: #{response}"
+
+      unless response['status'] == 'sent' && response['reject_reason'].nil?
+        report_error(user, action, conversation)
+      end
+    rescue Exception
+      log "exception sending mail: #{$!}"
+      report_error(user, action, conversation)
+    rescue StandardError
+      log "exception sending mail: #{$!}"
+      report_error(user, action, conversation)
+    end
   end
 
   def log(text)
