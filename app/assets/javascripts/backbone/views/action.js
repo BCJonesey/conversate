@@ -94,10 +94,15 @@ Structural.Views.Action = Support.CompositeView.extend({
   },
   events: {
     'click .act-delete': 'deleteMessage',
+    'click .act-show-full-text': 'showFullText',
     'mouseover': 'markRead'
   },
   deleteMessage: function(e) {
     e.preventDefault();
     Structural.createDeleteAction(this.model);
+  },
+  showFullText: function(e) {
+    e.preventDefault();
+    this.model.collection.trigger('showDetails', this.model);
   }
 });
