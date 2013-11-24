@@ -19,7 +19,13 @@
         <label>Conversation Name</label>
         <input type='text' value="  <%= conversation ? conversation.escape('title') : '' %>"/>
         <div class='act-convo-actions'>
-          <a href="#" class="btn act-archive-cnv" title="Archive Conversation">Archive Conversation</a>
+          <a href="#" class="btn act-archive-cnv" title="Archive Conversation">
+            <% if (conversation.get('archived')) { %>
+              Unarchive Conversation
+            <% } else { %>
+              Archive Conversation
+            <% } %>
+          </a>
         </div>
       </div>
     </div>
