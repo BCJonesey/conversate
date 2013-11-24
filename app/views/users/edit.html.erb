@@ -6,16 +6,16 @@
         <span class='toolbar-title'>User Profile Information</span>
       </div>
     </div>
-    <div class='form'>
-      <%= form_tag users_path, :method => 'put' do %>
+    <%= form_tag users_path, :method => 'put' do %>
+      <div class='form'>
         <% if @edit_status == :failure %>
-        <div class="error-messages">
-          <span>Something went wrong...</span>
-        </div>
-        <% elsif @edit_status == :success %>
-        <div class="success-messages">
-          <span>Profile information successfully updated</span>
-        </div>
+          <div class="error-messages">
+            <span>Something went wrong...</span>
+          </div>
+          <% elsif @edit_status == :success %>
+          <div class="success-messages">
+            <span>Profile information successfully updated</span>
+          </div>
         <% end %>
         <%= label_tag :password do %>
           Original password
@@ -29,12 +29,16 @@
         <%= password_field_tag :new_password_confirmation %>
         <%= label_tag :full_name %>
         <%= text_field_tag :full_name, @user.full_name %>
-      <% end %>
-    </div>
-    <div class='btn-toolbar-below'>
-      <div class='btn-group pull-right'>
-      <%= submit_tag "Update", :class => "btn btn-primary" %>
+        <% if @user.site_admin %>
+          <%= label_tag :send_me_mail %>
+          <%= check_box_tag :send_me_mail, 'yes', @user.send_me_mail %>
+        <% end %>
       </div>
-    </div>
+      <div class='btn-toolbar-below'>
+        <div class='btn-group pull-right'>
+          <%= submit_tag "Update", :class => "btn btn-primary" %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>

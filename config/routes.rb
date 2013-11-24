@@ -42,6 +42,12 @@ Conversate::Application.routes.draw do
     end
   end
 
+  namespace :webhooks do
+    namespace :v0 do
+      post 'email/mandrill' => 'email#mandrill_inbound'
+    end
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

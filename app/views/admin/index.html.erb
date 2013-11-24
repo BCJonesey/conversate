@@ -31,7 +31,7 @@
         </tr>
       </thead>
       <tbody>
-        <% all_models.each do |model| %>
+        <% all_database_models.each do |model| %>
           <tr>
             <td><%= model.name %></td>
             <td><%= model.count %></td>
@@ -39,7 +39,7 @@
         <% end %>
         <tr>
           <td>Total</td>
-          <td><%= all_models.collect {|m| m.count }.sum %></td>
+          <td><%= all_database_models.collect {|m| m.count }.sum %></td>
         </tr>
       </tbody>
     </table>
