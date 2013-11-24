@@ -43,7 +43,7 @@ class Api::V0::ParticipantsController < ApplicationController
       log.most_recent_viewed = DateTime.strptime((params[:most_recent_viewed] / 1000).to_s, "%s")
     end
     log.unread_count = 0
-    log.archived = params[:archived] ? params[:archived] : log.archived
+    log.archived = params.has_key?(:archived) ? params[:archived] : log.archived
     log.save
     render :json => user.to_json, :status => 204
   end
