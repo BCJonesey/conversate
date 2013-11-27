@@ -2,7 +2,13 @@
 @import 'mixins.css.less';
 
 
-@tooltip-size: 10px;
+@tooltip-size: 0.625rem;
+@tooltip-border-size: 0.0875rem;
+
+@popover-bg-color:@bg-3;
+@popover-border-color:@border-color-3;
+
+@popover-title-color:#666;
 
 .tooltip-triangle-style{
   content:' ';
@@ -13,7 +19,7 @@
 
   border-left: @tooltip-size solid transparent;
   border-right: @tooltip-size solid transparent;
-  border-bottom:@tooltip-size solid @border-color-2;
+  border-bottom:@tooltip-size solid @popover-border-color;
 
   right:0.25rem;
   top:-@tooltip-size;
@@ -51,14 +57,14 @@
     }
     &:after{
       .tooltip-triangle-style;
-      border-bottom-color:@bg-2;
-      top:-@tooltip-size + 1px;
+      border-bottom-color:@popover-bg-color;
+      top:-@tooltip-size + 0.0875rem;
     }
   }
 }
 
 .popover{
-  border:@border-2;
+  border:@tooltip-border-size solid @popover-border-color;
   background-color: white;
   min-height:5rem;
   z-index:10;
@@ -115,11 +121,12 @@
 .popover-header{
   position:relative;
   text-align: center;
-  background-color: @bg-2;
-  border-bottom: @border-2;
-  color:#666;
+  background-color: @popover-bg-color;
+  border-bottom: 1px solid @popover-border-color;
+  color:@popover-title-color;
   padding:0.5rem;
   font-size:1.0rem;
+  .title-font();
   @media (min-width:@bp-1){
     padding:0.15rem;
   }
@@ -129,10 +136,10 @@
   position:absolute;
   top:0.15rem;
   right:0.5rem;
-  color:#AAA;
+  color:@popover-title-color;
   font-size:1.5rem;
   &:hover{
-    color:#444;
+    color:darken(@popover-title-color,15%)
   }
 }
 
