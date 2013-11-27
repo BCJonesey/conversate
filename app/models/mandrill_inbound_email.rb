@@ -11,7 +11,7 @@ class MandrillInboundEmail
       type: 'email_message',
       data: { text: reply_text,
               full_text: @data['text'] }.to_json,
-      user_id: self.sender_user.id
+      user_id: @sender.id
     )
     CNV_REGEX =~ @data['email']
     match = $1
