@@ -1,6 +1,6 @@
 Structural.Views.FolderEditor = Support.CompositeView.extend({
   className: 'fld-editor',
-  template: JST['backbone/templates/folders/editor'],
+  template: JST.template('folders/editor'),
   initialize: function(options) {
     options = options || {};
     this._addressBook = options.addressBook;

@@ -1,6 +1,6 @@
 Structural.Views.TitleEditor = Support.CompositeView.extend({
   className: 'btn-toolbar act-title',
-  template: JST['backbone/templates/actions/title_editor'],
+  template: JST.template('actions/title_editor'),
   initialize: function(options) {
     options = options || {};
     this.conversation = options.conversation;

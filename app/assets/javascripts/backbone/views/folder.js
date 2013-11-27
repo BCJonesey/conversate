@@ -17,7 +17,7 @@ Structural.Views.Folder = Support.CompositeView.extend({
 
     return classes;
   },
-  template: JST['backbone/templates/folders/folder'],
+  template: JST.template('folders/folder'),
   initialize: function(options) {
     var self = this;
     self.model.on('change', self.reRender, self);

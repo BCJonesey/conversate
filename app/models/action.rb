@@ -10,7 +10,7 @@ class Action < ActiveRecord::Base
   validates_presence_of :type
   validates :type, :inclusion => {
     :in => %w(message email_message deletion retitle update_users update_folders
-              move_message update_viewers)
+              move_message update_viewers email_delivery_error)
   }
 
   after_initialize do |action|

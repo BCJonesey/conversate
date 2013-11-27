@@ -1,6 +1,6 @@
 Structural.Views.NewFolder = Support.CompositeView.extend({
   className: 'fld-new hidden',
-  template: JST['backbone/templates/folders/new_folder_input'],
+  template: JST.template('folders/new_folder_input'),
   render: function() {
     this.$el.html(this.template());
     this.inpt = this.$('.fld-new-input');

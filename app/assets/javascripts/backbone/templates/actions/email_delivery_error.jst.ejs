@@ -1,0 +1,6 @@
+Failed to send email to
+<%= action.get('recipient').escape('name') %>
+for
+<%= action.get('message').get('user').escape('name') %>'s
+message
+"<%= action.get('message').textSnippet(25) %>"
