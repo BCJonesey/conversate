@@ -1,6 +1,6 @@
 Structural.Views.UpdateFoldersDialog = Support.CompositeView.extend({
   className: 'act-ut hidden',
-  template: JST['backbone/templates/actions/update_folders'],
+  template: JST.template('actions/update_folders'),
   initialize: function(options) {
     options = options || {};
     this.folders = options.folders;

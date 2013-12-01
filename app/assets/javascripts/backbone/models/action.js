@@ -34,6 +34,12 @@ Structural.Models.Action = Backbone.Model.extend({
       attrs.enhanced_text = Support.TextEnhancer.enhance(_.escape(attrs.text));
     }
 
+    if (attrs.type === 'email_delivery_error') {
+      attrs.recipient = this.inflate(Structural.Models.Participant,
+                                     attrs.recipient);
+      attrs.message = this.inflate(Structural.Models.Action, attrs.message);
+    }
+
     return attrs;
   },
 
@@ -61,6 +67,14 @@ Structural.Models.Action = Backbone.Model.extend({
       return false;
     }
     return true;
+  },
+  textSnippet: function(length) {
+    var text = this.escape('text');
+    if (length >= text.length) {
+      return text;
+    } else {
+      return text.substring(0, length) + '&hellip;';
+    }
   }
 });
 

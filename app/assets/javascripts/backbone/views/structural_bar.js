@@ -1,6 +1,6 @@
 Structural.Views.StructuralBar = Support.CompositeView.extend({
   className: 'structural-bar clearfix',
-  template: JST['backbone/templates/structural/structural_bar'],
+  template: JST.template('structural/structural_bar'),
   initialize: function(options) {
     options = options || {};
     this._news = new Structural.Views.News();
