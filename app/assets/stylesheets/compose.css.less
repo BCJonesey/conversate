@@ -2,8 +2,29 @@
 @import "mixins.css.less";
 
 
-// --- Foucus mixin --- //
+// --- Style mixins --- //
 
+.ui-compose-input{
+  outline: none;
+  display: block;
+  box-sizing:border-box;
+  resize: none;
+  overflow-y:auto;
+  padding: 2px 5px;
+  padding:0.25rem;
+  font-size: .9em;
+  line-height: 1.5em;
+  width: 100%;
+  border: @border-1;
+  color: @textColor;
+  background-color: @backgroundColor;
+  .body-font();
+  &:focus {
+    outline: none;
+    box-shadow:inset 0 0 5px rgba(0,0,255,0.2);
+    border-color: #ABC;
+  }
+}
 
 
 // --- New message compose window --- //
@@ -147,7 +168,8 @@
 }
 
 .new-cnv-participants-input{
-  .new-cnv-input-style();
+  .ui-compose-input();
+  //.new-cnv-input-style();
   font-size:0.75rem;
   color:#AAA;
   padding:0.25rem 0.5rem;
@@ -162,30 +184,18 @@
   top:0.05rem;
 }
 .new-cnv-contents{
-  padding:0.4rem;
+  padding:0.35rem;
 }
 
 .new-cnv-body{
-  .new-cnv-input-style();
-  .body-font();
-  color:@textColor;
-  background-color: white;
+  .ui-compose-input();
   resize: vertical;
   min-height: 15rem;
   max-height:25rem;
   height:15rem;
-  margin:0;
-  border:@border-1;
-  display:block;
 }
 
-.placeholder-style{
-  color:#CCC;
-  //font-style: italic;
-  //font-weight: normal;
-  //line-height: 1.8;
-  //font-size:0.75rem;
-}
+.placeholder-style{color:#CCC;}
 ::-webkit-input-placeholder {.placeholder-style();}
 :-moz-placeholder { .placeholder-style();}
 ::-moz-placeholder { .placeholder-style();}
@@ -230,12 +240,8 @@
   }
 }
 
-// .toolbar-text{
-//   font-size:1rem;
-// }
-
 .long-form-contents{
-
+  padding:0.35rem;
   max-height:30rem;
   overflow-y:auto;
   background-color:@bg-1;
@@ -249,42 +255,15 @@
   .ellipsis;
 }
 
-.long-form-textarea{
-  padding:.4rem;
-}
 
-.text-long-form {
-  width: 100%;
-  //resize: vertical;
+.long-form-textarea{
+  .ui-compose-input();
+  resize:vertical;
   min-height: 15rem;
   max-height:25rem;
   height:15rem;
   margin-bottom: 0;
 }
-
-textarea.write{
-  padding: 2px 5px;
-  font-size: .9em;
-  line-height: 1.5em;
-  box-sizing:border-box;
-  width: 100%;
-  //height: 1em;
-  resize: vertical;
-  border: @border-1;
-  color: @textColor;
-  background-color: @backgroundColor;
-  outline: none;
-  display: block;
-  .body-font();
-  //box-shadow:inset 0 0 5px rgba(0,0,0,0.2);
-  &:focus {
-    outline: none;
-    box-shadow:inset 0 0 5px rgba(0,0,255,0.2);
-    border-color: #ABC;
-  }
-}
-
-
 
 .cnv-compose-short-input{
   position: relative;
@@ -334,3 +313,6 @@ textarea.write{
   margin-right:0;
 }
 
+.short-form-textarea{
+  .ui-compose-input();
+}
