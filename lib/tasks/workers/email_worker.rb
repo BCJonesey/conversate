@@ -83,6 +83,11 @@ class EmailWorker
       response = mandrill.messages.send message
       log "response from #{message[:to][0][:email]} for action ##{email.action_id}: #{response}"
 
+      # Since we're mapping a single conversation to a single email, we should
+      # only be sending one email at a time here, so we can assume Mandrill's
+      # response will only have one hash.
+      response = response.first
+
       unless response['status'] == 'sent' && response['reject_reason'].nil?
         report_error(user, action, conversation)
       end
