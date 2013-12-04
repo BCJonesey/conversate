@@ -36,10 +36,11 @@ class EmailWorker
   end
 
   def construct_message(user, action, conversation)
+    email_renderer = EmailRenderer.new(conversation, user)
     return {
       subject: conversation.title,
-      text: EmailRenderer.render(conversation, user, :text),
-      html: EmailRenderer.render(conversation, user, :html),
+      text: email_renderer.render(:text),
+      html: email_renderer.render(:html),
       from_email: action.user.email,
       from_name: action.user.full_name,
       to: [
