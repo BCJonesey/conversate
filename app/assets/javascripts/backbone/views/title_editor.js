@@ -7,7 +7,7 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
     this.folders = options.folders;
     Structural.on('changeConversation', this.changeConversation, this);
     Structural.on('clearConversation', this.clearConversation, this);
-    Structural.on('clickAnywhere', this.hide, this);
+    Structural.on('clickAnywhere', this.saveAndHideAnywhere, this);
   },
   render: function() {
     this.$el.html(this.template({conversation: this.conversation}));
@@ -20,31 +20,25 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
     return this;
   },
   events: {
-    submit: 'retitleConversation',
     'click .act-move-cnv': 'toggleUpdateFoldersDialog',
     'click .act-title-edit': 'toggleTitleEditor',
     'click .act-title-editor-popover .popover-close': 'toggleTitleEditor',
-    'click .act-title-save': 'retitleConversation',
+    'click .act-title-save': 'saveAndHide',
     'click .act-archive-cnv': 'archiveConversation',
     'keyup': 'cancelOnEscape'
-  },
-  retitleConversation: function(e) {
-    e.preventDefault();
-    var title = this.$('input').val().trim();
-
-    if (title === this.conversation.get('title').trim()) {
-      this.cancelRetitle();
-      return;
-    }
-
-    this.conversation.changeTitle(title);
-    this.trigger('change_title', title);
-    this.closeTitleEditor();
   },
   archiveConversation: function(e) {
     e.preventDefault();
     this.conversation.toggleArchive();
     this.render();
+  },
+  retitleConversation: function() {
+    var title = this.$('input').val().trim();
+
+    if (title !== this.conversation.get('title').trim()) {
+      this.conversation.changeTitle(title);
+      this.trigger('change_title', title);
+    }
   },
   toggleUpdateFoldersDialog: function(e) {
     e.preventDefault();
@@ -60,11 +54,16 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
   isOpen: function() {
     return !this.$('.act-title-editor-popover').hasClass('hidden');
   },
-  hide: function(e) {
+  saveAndHideAnywhere: function(e) {
     var target = $(e.target);
     if (target.closest('.act-title-editor-wrap').length === 0 && this.isOpen()) {
+      this.retitleConversation();
       this.toggleTitleEditor(e);
     }
+  },
+  saveAndHide: function(e) {
+    this.retitleConversation();
+    this.toggleTitleEditor(e);
   },
   changeConversation: function(conversation) {
     this.conversation = conversation;
