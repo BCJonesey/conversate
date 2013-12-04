@@ -28,7 +28,8 @@ class EmailRenderer
         rendered += render_separator(format)
       end
     end
-    rendered
+
+    render_layout(rendered, format)
   end
 
   private
@@ -45,6 +46,10 @@ class EmailRenderer
   def render_participation_header(format)
     render_template(format, 'participation_header', {:conversation => @conversation,
                                                      :current_user => @current_user})
+  end
+
+  def render_layout(content, format)
+    render_template(format, 'layout', {:content => content})
   end
 
   def render_template(format, template, data)
