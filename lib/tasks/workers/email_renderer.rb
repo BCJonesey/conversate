@@ -10,6 +10,7 @@ class EmailRenderer
                                     .where('type not in (?)', UNWANTED_TYPES)
                                     .order('created_at DESC')
                                     .limit(30)
+                                    .includes(:user)
   end
 
   def render(format)
