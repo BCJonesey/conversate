@@ -2,9 +2,12 @@ module EmailRenderer
   # Text files have trailing newlines, so we don't need one
   # at the start of the separator.
   SEPARATOR = "----------------------------\n"
+  UNWANTED_TYPES = ['update_folders', 'email_delivery_error']
 
   def EmailRenderer.render(conversation, current_user)
-    relevant_actions = conversation.actions.order('created_at DESC').limit(30)
+    relevant_actions = conversation.actions
+                                   .where('type not in (?)', UNWANTED_TYPES)
+                                   .order('created_at DESC').limit(30)
 
     rendered = render_participation_header(conversation, current_user);
     relevant_actions.each_index do |idx|
