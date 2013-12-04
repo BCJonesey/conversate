@@ -1,7 +1,4 @@
 class EmailRenderer
-  # Template files have trailing newlines, so we don't need one
-  # at the start of the separator.
-  SEPARATOR = "----------------------------\n"
   UNWANTED_TYPES = ['update_folders', 'email_delivery_error']
 
   attr_reader :conversation, :current_user
@@ -20,14 +17,14 @@ class EmailRenderer
     @relevant_actions.each_index do |idx|
       action = @relevant_actions[idx]
       if action.message_type?
-        rendered += SEPARATOR
+        rendered += render_separator(format)
       end
 
       rendered += render_action(action, format)
 
       next_action = @relevant_actions[idx + 1]
       if action.message_type? && next_action && !next_action.message_type?
-        rendered += SEPARATOR
+        rendered += render_separator(format)
       end
     end
     rendered
@@ -38,6 +35,10 @@ class EmailRenderer
   def render_action(action, format)
     render_template(format, action.type, {:action => action,
                                           :current_user => @current_user})
+  end
+
+  def render_separator(format)
+    render_template(format, 'email_section_separator', {})
   end
 
   def render_participation_header(format)
