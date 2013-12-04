@@ -13,6 +13,20 @@ class Action < ActiveRecord::Base
               move_message update_viewers email_delivery_error)
   }
 
+  DEFAULTS_BY_TYPE = {
+    'message' => {'text' => ''},
+    'email_message' => {'text' => ''},
+    'retitle' => {'title' => ''},
+    'update_users' => {'added' => [],
+                       'removed' => []},
+    'update_folders' => {'added' => [],
+                         'removed' => []},
+    'update_viewers' => {'added' => [],
+                         'removed' => []},
+    'email_delivery_error' => {'recipient' => nil,
+                               'message' => nil}
+  }
+
   after_initialize do |action|
     action.json = JSON::load data || {}
   end
@@ -48,12 +62,19 @@ class Action < ActiveRecord::Base
     name = meth.to_s
     setter = name.end_with? '='
     name = name[0...-1] if setter
-    if @json != nil && @json.has_key?(name)
+    if !@json.nil? && @json.has_key?(name)
       if setter
         @json[name] = args[0]
       else
-        @json[name]
+        value = @json[name]
+        if value.nil? && DEFAULTS_BY_TYPE[self.type].has_key?(name)
+          DEFAULTS_BY_TYPE[self.type][name]
+        else
+          value
+        end
       end
+    elsif DEFAULTS_BY_TYPE[self.type].has_key?(name)
+      DEFAULTS_BY_TYPE[self.type][name]
     else
       super meth, args, block
     end
