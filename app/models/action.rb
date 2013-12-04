@@ -21,6 +21,10 @@ class Action < ActiveRecord::Base
     action.data = action.json.to_json
   end
 
+  def message_type?
+    ['message', 'email_message'].include? self.type
+  end
+
   # Public: Access and modify data stored as json in the action record. This will
   # effectively create a slightly different set of fields for each action type.
   #

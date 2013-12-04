@@ -5,9 +5,23 @@ module EmailRenderer
 
   def EmailRenderer.render(conversation, current_user)
     relevant_actions = conversation.actions.order('created_at DESC').limit(30)
-    fragments = relevant_actions.map {|a| render_action(a, current_user) }
-    fragments.insert(0, render_participation_header(conversation, current_user))
-    fragments.join(SEPARATOR)
+
+    rendered = render_participation_header(conversation, current_user);
+    relevant_actions.each_index do |idx|
+      action = relevant_actions[idx]
+      if action.message_type?
+        rendered += SEPARATOR
+      end
+
+      rendered += render_action(action, current_user)
+
+      next_action = relevant_actions[idx + 1]
+      if action.message_type? && next_action && !next_action.message_type?
+        rendered += SEPARATOR
+      end
+    end
+
+    rendered
   end
 
   def EmailRenderer.render_action(action, current_user)
