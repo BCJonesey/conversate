@@ -1,0 +1,9 @@
+<% if action.added && action.added.count == 1 && action.added[0]['id'] == action.user.id %>
+<%= action.user.name %> joined the thread
+<% elsif (action.added && action.added.count > 0) && (!action.removed || action.removed.count == 0) %>
+<%= action.user.name %> added <%= action.added.map {|p| p['name']}.join(', ') %> to the thread
+<% elsif (!action.added || action.added.count == 0) && (action.removed && action.removed.count > 0) %>
+<%= action.user.name %> removed <%= action.removed.map {|p| p['name']}.join(', ') %> from the thread
+<% else %>
+<%= action.user.name %> added <%= action.added.map {|p| p['name']}.join(', ') %> to the thread and removed <%= action.removed.map {|p| p['name'] }.join(', ') %> from the thread
+<% end %>
