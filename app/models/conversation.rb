@@ -274,6 +274,14 @@ class Conversation < ActiveRecord::Base
     end
   end
 
+  def unarchive_for(message)
+    self.users.each do |participant|
+      reading_log = ReadingLog.get(participant.id, self.id)
+      reading_log.archived = false
+      reading_log.save
+    end
+  end
+
   def handle(action)
     case action.type
       when 'retitle'
@@ -295,6 +303,7 @@ class Conversation < ActiveRecord::Base
       when 'message'
         self.send_email_for action
         self.increment_unread_counts_for action
+        self.unarchive_for action
       when 'email_message'
         self.send_email_for action
         self.increment_unread_counts_for action
