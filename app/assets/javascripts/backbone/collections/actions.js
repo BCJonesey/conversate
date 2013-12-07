@@ -60,7 +60,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
   createMessageAction: function(text, user) {
     var model = this._newAction({
       type: 'message',
-      text: text,
+      text: text.trim(),
       user: {
         name: user.get('name'),
         id: user.id
