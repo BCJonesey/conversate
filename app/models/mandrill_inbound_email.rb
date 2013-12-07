@@ -6,10 +6,12 @@ class MandrillInboundEmail
   def initialize(data)
     @data = data
     @sender = User.find_by_email(@data['from_email']) unless @user
+    reply_text = EmailReplyParser.parse_reply(@data['text'])
     @action = Action.new(
       type: 'email_message',
-      data: { text: @data['text'] }.to_json,
-      user_id: self.sender_user.id
+      data: { text: reply_text,
+              full_text: @data['text'] }.to_json,
+      user_id: @sender.id
     )
     CNV_REGEX =~ @data['email']
     match = $1

@@ -38,3 +38,8 @@ Then you should do this:
 3. Add a route to the domain you configured in step 1.  Tell it to match ```*```
    and use the URL from step 2 as the POST To URL.  Hit "send test".  If it
    works, you're good.
+
+If you want to test getting inbound email, here's a useful cURL command:
+```
+curl -X POST -d "mandrill_events=[{\"event\":\"inbound\",\"msg\":{\"from_email\":\"test2@example.com\",\"text\":\"We can probably swing a few things.\n\n\nOn Thu, Nov 14, 2013 at 11:43 AM, Nick Martin <nickm@skimbox.co> wrote:\n\n> Hey guys,\n>\n> We, uh, may have forgotten to bring any games besides Risk, CAH, and\n> Resistance. If you'd like to play something else I'd be thankful if you\n> could bring it.\n>\n> Nick\n>\",\"email\":\"cnv-22@kuhltank.watercoolr.io\"}}]" http://localhost:3000/webhooks/v0/email/mandrill
+```

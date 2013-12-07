@@ -40,6 +40,7 @@ GEM
     daemons (1.1.9)
     diff-lcs (1.2.4)
     ejs (1.1.1)
+    email_reply_parser (0.5.3)
     erubis (2.7.0)
     eventmachine (1.0.3)
     excon (0.27.6)
@@ -181,6 +182,7 @@ PLATFORMS
 DEPENDENCIES
   backbone-rails
   ejs
+  email_reply_parser
   jasmine
   jquery-rails
   less-rails

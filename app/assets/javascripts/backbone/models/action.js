@@ -34,6 +34,10 @@ Structural.Models.Action = Backbone.Model.extend({
       attrs.enhanced_text = Support.TextEnhancer.enhance(_.escape(attrs.text));
     }
 
+    if (attrs.full_text) {
+      attrs.enhanced_full_text = Support.TextEnhancer.enhance(_.escape(attrs.full_text));
+    }
+
     if (attrs.type === 'email_delivery_error') {
       attrs.recipient = this.inflate(Structural.Models.Participant,
                                      attrs.recipient);

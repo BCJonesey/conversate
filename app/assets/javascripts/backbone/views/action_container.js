@@ -37,7 +37,11 @@ Structural.Views.ActionContainer = Support.CompositeView.extend({
     });
     this.actionsView = new Structural.Views.Actions({collection: this.actions});
     this.composeView = new Structural.Views.Compose({conversation: this.conversation});
+    this.detailsView = new Structural.Views.ActionDetails();
 
+    this.actions.on('showDetails', this.detailsView.show, this.detailsView);
+
+    this.appendChild(this.detailsView);
     this.appendChild(this.titleView);
     this.appendChild(this.participantsView);
     this.appendChild(this.actionsView);
