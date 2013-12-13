@@ -1,3 +1,13 @@
-From: <%= action.user.name %> (<%= action.created_at.strftime('%A, %B %-e %-I:%M%P') %>)
+<div style="font-family:sans-serif;background-color:white;border-top:1px solid #CCC;padding:5px;margin:5px;">
 
-<%=action.text%>
+  <div style='padding:5px;'>
+
+    <span style='float:right;color:#AAA;'><%= action.created_at.strftime('%A, %B %-e %-I:%M%P') %></span>
+
+    <span style="font-weight:bold"><span><%= action.user.name %> </span>
+
+  </div>
+
+  <div style="clear:both;white-space:pre-wrap;padding:5px;line-height:1.5;color:#444;"><%=action.text%></div>
+
+</div>
