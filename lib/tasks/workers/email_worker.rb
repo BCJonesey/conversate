@@ -38,7 +38,7 @@ class EmailWorker
   def construct_message(user, action, conversation)
     email_renderer = EmailRenderer.new(conversation, user)
     return {
-      subject: conversation.title,
+      subject: "Re: #{conversation.title}",
       text: email_renderer.render(:text),
       html: email_renderer.render(:html),
       from_email: action.user.email,
