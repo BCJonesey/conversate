@@ -15,6 +15,14 @@ class EmailRenderer
 
   def render(format)
     rendered = render_participation_header(format)
+
+    # Barring race conditions, this should always be true, since emails are
+    # kicked off by messages.
+    if @relevant_actions.first.message_type?
+      rendered += render_first_message(@relevant_actions.first, format)
+      @relevant_actions.delete_at 0
+    end
+
     @relevant_actions.each_index do |idx|
       action = @relevant_actions[idx]
       if action.message_type?
@@ -41,6 +49,11 @@ class EmailRenderer
 
   def render_separator(format)
     render_template(format, 'email_section_separator', {})
+  end
+
+  def render_first_message(action, format)
+    render_template(format, 'first_message', {:action => action,
+                                              :current_user => @current_user})
   end
 
   def render_participation_header(format)
