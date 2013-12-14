@@ -14,7 +14,13 @@ class EmailRenderer
   end
 
   def render(format)
-    rendered = render_participation_header(format)
+    rendered = ''
+
+    # With two users the participants are obvious - the recpient of the email
+    # and the person who wrote the message.
+    if conversation.participants.count > 2
+      render_participation_header(format)
+    end
 
     # Barring race conditions, this should always be true, since emails are
     # kicked off by messages.
