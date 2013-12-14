@@ -1,7 +1,9 @@
-<% if !action.added.empty? && action.removed.empty? %>
-<%= action.user.name %> added <%= action.added.map {|p| p['name']}.join(', ') %> as a viewer
-<% elsif action.added.empty? && !action.removed.empty? %>
-<%= action.user.name %> removed <%= action.removed.map {|p| p['name']}.join(', ') %> as a viewer
-<% else %>
-<%= action.user.name %> added <%= action.added.map {|p| p['name']}.join(', ') %> as a viewer and removed <%= action.removed.map {|p| p['name']}.join(', ') %> as a viewer
-<% end %>
+<tr><td colspan='2' style='color:#AAA; font-size:12px; text-align:center'>
+  <% if !action.added.empty? && action.removed.empty? %>
+  <%= action.user.name %> added <%= action.added.map {|p| p['name']}.join(', ') %> as a viewer
+  <% elsif action.added.empty? && !action.removed.empty? %>
+  <%= action.user.name %> removed <%= action.removed.map {|p| p['name']}.join(', ') %> as a viewer
+  <% else %>
+  <%= action.user.name %> added <%= action.added.map {|p| p['name']}.join(', ') %> as a viewer and removed <%= action.removed.map {|p| p['name']}.join(', ') %> as a viewer
+  <% end %>
+</td></tr>
