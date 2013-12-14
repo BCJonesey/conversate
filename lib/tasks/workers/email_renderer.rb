@@ -74,6 +74,7 @@ class EmailRenderer
   def render_template(format, template, data)
     # Sneaky trick from http://archive.railsforum.com/viewtopic.php?pid=105722#p105722
     view = ActionView::Base.new(ActionController::Base.view_paths, {})
+    view.extend EmailHelper
     view.render(:file => "emails/#{template}.#{format}.erb", :locals => data)
   end
 end
