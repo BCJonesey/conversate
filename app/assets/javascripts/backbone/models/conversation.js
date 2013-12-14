@@ -10,6 +10,9 @@ Structural.Models.Conversation = Backbone.Model.extend({
     this.on('change:unread_count', function() {
       self.trigger('updated', self);
     });
+    this.on('change:archived', function() {
+      self.trigger('archived', self);
+    });
 
     // We want to update our most recent viewed right away if we've been clicked.
     // TODO: Should almost certainly punt this to a controller.
@@ -83,6 +86,7 @@ Structural.Models.Conversation = Backbone.Model.extend({
     });
   },
   toggleArchive: function() {
+    // Note that we don't need to trigger an archive event because the model is watching its own state.
     var self = this;
     self.set('archived', ! self.get('archived'));
     self.withCurrentUserFromSelf(function(participant) {
@@ -90,7 +94,6 @@ Structural.Models.Conversation = Backbone.Model.extend({
         archived: self.get('archived')
       });
     });
-    self.trigger('archived', self);
   },
   withCurrentUserFromSelf: function(callback) {
     this.get('participants').each( function(participant) {

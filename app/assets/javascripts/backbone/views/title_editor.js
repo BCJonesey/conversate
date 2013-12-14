@@ -8,6 +8,7 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
     Structural.on('changeConversation', this.changeConversation, this);
     Structural.on('clearConversation', this.clearConversation, this);
     Structural.on('clickAnywhere', this.saveAndHideAnywhere, this);
+    this.conversation.on('archived', this.reRender, this);
   },
   render: function() {
     this.$el.html(this.template({conversation: this.conversation}));
@@ -18,6 +19,12 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
     this.appendChild(this._updateFoldersDialog);
     this._input = this.$('input[type="text"]');
     return this;
+  },
+  reRender: function() {
+    this.children.forEach(function(child) {
+      child.leave();
+    });
+    this.render();
   },
   events: {
     'click .act-move-cnv': 'toggleUpdateFoldersDialog',
@@ -77,6 +84,6 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
   },
   clearConversation: function() {
     this.conversation = undefined;
-    this.$el.empty();
+    this.$('input').empty();
   }
 });
