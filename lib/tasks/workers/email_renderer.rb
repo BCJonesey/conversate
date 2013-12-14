@@ -22,22 +22,23 @@ class EmailRenderer
       render_participation_header(format)
     end
 
+    actions = @relevant_actions.clone
     # Barring race conditions, this should always be true, since emails are
     # kicked off by messages.
-    if @relevant_actions.first.message_type?
-      rendered += render_first_message(@relevant_actions.first, format)
-      @relevant_actions.delete_at 0
+    if actions.first.message_type?
+      rendered += render_first_message(actions.first, format)
+      actions.delete_at 0
     end
 
-    @relevant_actions.each_index do |idx|
-      action = @relevant_actions[idx]
+    actions.each_index do |idx|
+      action = actions[idx]
       if action.message_type?
         rendered += render_separator(format)
       end
 
       rendered += render_action(action, format)
 
-      next_action = @relevant_actions[idx + 1]
+      next_action = actions[idx + 1]
       if action.message_type? && next_action && !next_action.message_type?
         rendered += render_separator(format)
       end
