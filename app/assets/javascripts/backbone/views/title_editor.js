@@ -33,12 +33,17 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
     this.render();
   },
   retitleConversation: function() {
-    var title = this.$('input').val().trim();
+    // TODO: Figure out what the actual deal with isOpen being false is about.
+    // This is just some defensive programming to short circuit some nastiness.
+    if (this.$('input').val()) {
+      var title = this.$('input').val().trim();
 
-    if (title !== this.conversation.get('title').trim()) {
-      this.conversation.changeTitle(title);
-      this.trigger('change_title', title);
+      if (title !== this.conversation.get('title').trim()) {
+        this.conversation.changeTitle(title);
+        this.trigger('change_title', title);
+      }
     }
+
   },
   toggleUpdateFoldersDialog: function(e) {
     e.preventDefault();
