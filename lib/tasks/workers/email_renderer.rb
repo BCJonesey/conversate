@@ -32,7 +32,7 @@ class EmailRenderer
 
     actions.each_index do |idx|
       action = actions[idx]
-      if action.message_type?
+      if idx > 0 && action.message_type?
         rendered += render_separator(format)
       end
 
