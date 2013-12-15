@@ -4,6 +4,6 @@ for
 <%= action.get('message').get('user').escape('name') %>'s
 message
 "<%= action.get('message').textSnippet(25) %>"
-<% if action.get('description') { %>
+<% if(action.get('description')) { %>
 Because <%= action.get('description') %>
 <% } %>
