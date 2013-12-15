@@ -1,5 +1,5 @@
 class MandrillInboundEmail
-  CNV_REGEX = /(.*)@(.*)\.watercoolr\.io/
+  CNV_REGEX = /(.*)@([^.]*)\.?watercoolr\.io/
 
   attr_reader :sender, :action, :conversation, :subdomain, :recipient, :folder
 
