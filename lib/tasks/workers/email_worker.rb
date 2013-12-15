@@ -54,12 +54,13 @@ class EmailWorker
     }
   end
 
-  def report_error(user, action, conversation)
+  def report_error(user, action, conversation, description)
     error_action = conversation.actions.create(
       type: 'email_delivery_error',
       user_id: action.user.id,
       data: { recipient: user,
-              message: action }.to_json)
+              message: action,
+              description: description }.to_json)
     log "error action created: #{error_action.id}"
   end
 
@@ -84,15 +85,22 @@ class EmailWorker
       log "response from #{message[:to][0][:email]} for action ##{email.action_id}: #{response}"
 
       unless response['status'] == 'sent' && response['reject_reason'].nil?
-        report_error(user, action, conversation)
+        report_error(user, action, conversation, error_description(response))
       end
     rescue Exception
       log "exception sending mail: #{$!}"
-      report_error(user, action, conversation)
+      report_error(user, action, conversation, error_description())
     rescue StandardError
       log "exception sending mail: #{$!}"
-      report_error(user, action, conversation)
+      report_error(user, action, conversation, error_description())
     end
+  end
+
+  def error_description(response={})
+    "Error description:
+  Response from mandrill: #{response}
+  Exception: #{$!}
+  Backtrace: #{$!.backtrace}"
   end
 
   def log(text)
