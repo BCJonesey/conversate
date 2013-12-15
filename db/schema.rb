@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131117182940) do
+ActiveRecord::Schema.define(:version => 20131215035807) do
 
   create_table "actions", :force => true do |t|
     t.integer  "conversation_id"
@@ -51,7 +51,10 @@ ActiveRecord::Schema.define(:version => 20131117182940) do
     t.string   "name",       :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "email"
   end
+
+  add_index "folders", ["email"], :name => "index_folders_on_email"
 
   create_table "folders_users", :force => true do |t|
     t.integer "folder_id"
