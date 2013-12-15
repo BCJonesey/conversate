@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   end
 
   def name
-    full_name.empty? ? full_name : email
+    full_name.empty? ? email : full_name
   end
 
   def update_most_recent_viewed(conversation)
