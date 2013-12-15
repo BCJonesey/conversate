@@ -1,7 +1,7 @@
 
 <tr>
   <td width='1%'></td>
-  <td  width='4%'style='border-left:2px solid cornflowerblue;'></td>
+  <td  width='4%'style='border-left:<%=quote_border%>;'></td>
   <td colspan='2' style='color:#AAA; font-size:12px; text-align:center'>
     <% if action.removed.empty? && action.added.count == 1 && action.added[0]['id'] == action.user.id %>
     <%= action.user.name %> joined the thread
