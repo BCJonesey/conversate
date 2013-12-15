@@ -1,6 +1,6 @@
 Structural.Views.NewConversation = Support.CompositeView.extend({
   className: 'new-cnv-compose',
-  template: JST['backbone/templates/conversations/new'],
+  template: JST.template('conversations/new'),
   initialize: function(options) {
     options = options || {};
     this.participants = new Structural.Collections.Participants([]);

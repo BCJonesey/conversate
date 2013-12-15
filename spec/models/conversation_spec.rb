@@ -169,5 +169,49 @@ describe Conversation do
       @conversation.handle action
       ReadingLog.get(@sally.id, @conversation.id).unread_count.should eq before_count
     end
+    it 'marks reading logs for all participants as unarchived on messages' do
+      @conversation.users.each do |user|
+        reading_log = ReadingLog.get(user.id, @conversation.id)
+        reading_log.archived.should eq false
+        reading_log.archived = true
+        reading_log.save
+      end
+
+      @conversation.users.each do |user|
+        reading_log = ReadingLog.get(user.id, @conversation.id)
+        reading_log.archived.should eq true
+      end
+
+      action = @conversation.actions.create(type: 'message',
+                                            data: {text: 'Hey'}.to_json,
+                                            user_id: @james.id)
+      @conversation.handle action
+      @conversation.users.each do |user|
+        reading_log = ReadingLog.get(user.id, @conversation.id)
+        reading_log.archived.should eq false
+      end
+    end
+    it 'marks reading logs for all participants as unarchived on email messages' do
+      @conversation.users.each do |user|
+        reading_log = ReadingLog.get(user.id, @conversation.id)
+        reading_log.archived.should eq false
+        reading_log.archived = true
+        reading_log.save
+      end
+
+      @conversation.users.each do |user|
+        reading_log = ReadingLog.get(user.id, @conversation.id)
+        reading_log.archived.should eq true
+      end
+
+      action = @conversation.actions.create(type: 'email_message',
+                                            data: {text: 'Hey'}.to_json,
+                                            user_id: @james.id)
+      @conversation.handle action
+      @conversation.users.each do |user|
+        reading_log = ReadingLog.get(user.id, @conversation.id)
+        reading_log.archived.should eq false
+      end
+    end
   end
 end

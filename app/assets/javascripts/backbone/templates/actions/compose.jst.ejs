@@ -5,7 +5,7 @@
       </a>
     </div>
     <div class="act-compose-short-input">
-      <textarea class="write" name="text"></textarea>
+      <textarea class="short-form-textarea" name="text"></textarea>
     </div>
     <div class='btn-group act-short-form-send-group'>
       <a class="act-short-form-send btn-primary">Send</a>
@@ -22,9 +22,7 @@
       <div class="long-form-title"><%= conversation ? conversation.escape('title') : '' %></div>
     </div>
     <div class="long-form-contents">
-      <div class="long-form-textarea">
-        <textarea name="text" class="text-long-form write"></textarea>
-      </div>
+      <textarea name="text" class="long-form-textarea ui-scrollable"></textarea>
     </div>
   </div>
 </div>

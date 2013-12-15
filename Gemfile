@@ -37,6 +37,7 @@ gem 'newrelic_rpm' # For New Relic analytics.
 gem 'quiet_assets'
 
 gem 'mandrill-api'
+gem 'email_reply_parser'
 
 group :test, :development do
   gem "rspec-rails", "~> 2.0"

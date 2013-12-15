@@ -1,6 +1,6 @@
 Structural.Views.Compose = Support.CompositeView.extend({
   className: 'act-compose',
-  template: JST['backbone/templates/actions/compose'],
+  template: JST.template('actions/compose'),
   initialize: function(options) {
     options = options || {};
     this.conversation = options.conversation;
@@ -32,8 +32,8 @@ Structural.Views.Compose = Support.CompositeView.extend({
       Structural.createMessageAction(input.find('textarea').val());
     }
 
-    input.find('textarea').val('');
     this.disableLongForm();
+    $(this._short, this._long).find('textarea').val('');
 
     // The user has actually taken an action which we consider to be a viewing update.
     this.conversation.updateMostRecentViewedToNow();

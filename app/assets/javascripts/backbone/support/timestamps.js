@@ -6,7 +6,7 @@
    `new Date()`. */
 Support.HumanizedTimestamp = function(property) {
   var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug',
-                'Sep', 'Oct', 'Nov', 'Dev'];
+                'Sep', 'Oct', 'Nov', 'Dec'];
   return {
     humanizedTimestamp: function(relativeTo) {
       relativeTo = relativeTo || new Date();
