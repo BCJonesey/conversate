@@ -1,5 +1,5 @@
 class MandrillInboundEmail
-  CNV_REGEX = /cnv-(\d+)@(.*)\.watercoolr\.io/
+  CNV_REGEX = /(.*)@(.*)\.watercoolr\.io/
 
   attr_reader :sender, :action, :conversation, :subdomain, :domain, :recipient, :folder
 
@@ -9,7 +9,7 @@ class MandrillInboundEmail
     @action = Action.new(
       type: 'email_message',
       data: { text: @data['text'] }.to_json,
-      user_id: self.sender_user.id
+      user_id: self.sender.id
     )
     CNV_REGEX =~ @data['email']
     @recipient = $1
@@ -18,8 +18,9 @@ class MandrillInboundEmail
     case @recipient
       when /cnv-(\d+)/
         @conversation = Conversation.find($1)
-      when /(\d+)/
+      when /fol-(\d+)/
         @folder = Folder.find($1)
+        @subject = @data['subject']
     end
   end
 
@@ -37,14 +38,16 @@ class MandrillInboundEmail
   def dispatch_to_conversation
     self.action.save
     self.conversation.actions << self.action
-    # TODO: make handle deal with unread counts
+    conversation.update_most_recent_event
+    @sender.update_most_recent_viewed conversation
     self.conversation.handle action
   end
 
   def dispatch_to_folder
     @conversation =  @folder.conversations.create()
-    conversation.set_title params[:title]
+    conversation.set_title @subject, @sender
     conversation.add_participants [@sender], @sender
+    conversation.reload
     self.dispatch_to_conversation
   end
 end
