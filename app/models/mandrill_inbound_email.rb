@@ -40,7 +40,7 @@ class MandrillInboundEmail
     elsif self.to_folder?
       self.dispatch_to_folder
     else
-      Rails.logger.error "Inbound email sent to #{@data['email']}"
+      Rails.logger.error "Inbound email sent to unknown address: #{@data['email']}"
     end
   end
   def dispatch_to_conversation
