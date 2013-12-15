@@ -19,7 +19,7 @@ class EmailRenderer
     # With two users the participants are obvious - the recpient of the email
     # and the person who wrote the message.
     if conversation.participants.count > 2
-      render_participation_header(format)
+      rendered += render_participation_header(format)
     end
 
     actions = @relevant_actions.clone
