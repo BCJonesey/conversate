@@ -20,9 +20,11 @@ class MandrillInboundEmail
     case @recipient
       when /cnv-(\d+)/
         @conversation = Conversation.find($1)
-      else
+      when /(.*)/
         @folder = Folder.find_by_email($1)
         @subject = @data['subject']
+      else
+        Rails.logger.error "Inbound mail can't match any address pattern."
     end
   end
 
