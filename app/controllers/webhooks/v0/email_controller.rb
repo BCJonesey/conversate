@@ -5,11 +5,7 @@ class Webhooks::V0::EmailController < ApplicationController
       events.keep_if {|e| e['event'] == 'inbound' }
             .map {|e| MandrillInboundEmail.new(e['msg']) }
             .each do |email|
-              if email.to_conversation?
-                email.dispatch_to_conversation
-              else
-                # TODO: Send emails to folders
-              end
+              email.dispatch
             end
     rescue
       render text: $!.to_s + '\n\n'
