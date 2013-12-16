@@ -1,7 +1,7 @@
 class MandrillInboundEmail
   CNV_REGEX = /(.*)@(.*)\.watercoolr\.io/
 
-  attr_reader :sender, :action, :conversation, :subdomain, :domain, :recipient, :folder
+  attr_reader :sender, :action, :conversation, :subdomain, :recipient, :folder
 
   def initialize(data)
     @data = data
