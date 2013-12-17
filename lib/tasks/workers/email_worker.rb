@@ -36,9 +36,11 @@ class EmailWorker
   end
 
   def construct_message(user, action, conversation)
+    email_renderer = EmailRenderer.new(conversation, user)
     return {
-      subject: conversation.title,
-      text: action.text,
+      subject: "Re: #{conversation.title}",
+      text: email_renderer.render(:text),
+      html: email_renderer.render(:html),
       from_email: action.user.email,
       from_name: action.user.full_name,
       to: [
@@ -83,6 +85,11 @@ class EmailWorker
       log "sending email to #{message[:to][0][:email]}: action ##{email.action_id}"
       response = mandrill.messages.send message
       log "response from #{message[:to][0][:email]} for action ##{email.action_id}: #{response}"
+
+      # Since we're mapping a single conversation to a single email, we should
+      # only be sending one email at a time here, so we can assume Mandrill's
+      # response will only have one hash.
+      response = response.first
 
       unless response['status'] == 'sent' && response['reject_reason'].nil?
         report_error(user, action, conversation, error_description(response))
