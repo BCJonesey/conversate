@@ -2,11 +2,10 @@
   <td width='1%'></td>
   <td  width='4%'style='border-left:<%=quote_border%>;'></td>
   <td class="sender" style="font-weight: bold; font-size;12px;"><b><%= action.user.name %></b></td>
-  <td class="time" style="text-align: right;color: #AAA;font-size: 10px;margin-top: 3px;"><%= action.created_at.strftime('%-e %b %Y, %-I:%M%P') %></td>
-  <td class="sender" style="font-weight: bold;"><%= action.user.name %></td>
+  <td class="time" style="text-align: right;color: #AAA;font-size: 10px;margin-top: 3px;"><%= spanify_characters(action.created_at.strftime('%-e %b %Y, %-I:%M%P')) %></td>
 </tr>
 <tr>
   <td width='2%'></td>
   <td  width='2%'style='border-left:<%=quote_border%>;'></td>
-  <td class="act-text" colspan="2" style="font-size: 12px;white-space: pre-wrap;line-height: 1.75;color: #444;"><%=action.text%></td>
+  <td class="act-text" colspan="2" style="font-size: 12px;white-space: pre-wrap;line-height: 1.75;color: #444; padding-top:5px;"><%=action.text%></td>
 </tr>
