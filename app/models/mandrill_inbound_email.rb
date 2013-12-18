@@ -5,7 +5,7 @@ class MandrillInboundEmail
 
   def initialize(data)
     @data = data
-    @sender = User.find_by_email(@data['from_email']) unless @user
+    @sender = User.find_by_email_insensitive(@data['from_email']) unless @user
     reply_text = EmailReplyParser.parse_reply(@data['text'])
     @action = Action.new(
       type: 'email_message',

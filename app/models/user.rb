@@ -33,6 +33,10 @@ class User < ActiveRecord::Base
     user
   end
 
+  def self.find_by_email_insensitive(email)
+    User.where('lower(email) = ?', email.downcase).first
+  end
+
   def name
     full_name.empty? ? email : full_name
   end
