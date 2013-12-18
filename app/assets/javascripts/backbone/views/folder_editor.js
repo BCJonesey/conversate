@@ -62,11 +62,15 @@ Structural.Views.FolderEditor = Support.CompositeView.extend({
     e.preventDefault();
     if (this._folder) {
       var name = this.$('.ef-name-input').val();
+      var email = null;
+      if(user.get('site_admin')){
+        email = this.$('.ef-email-input').val();
+      }
       if (name.length === 0) { return; }
 
       var participants = this._participantEditor.currentParticipants();
 
-      this._folder.update(name, participants);
+      this._folder.update(name, participants, email);
       this.$('.modal-background').addClass('hidden');
     }
   },
