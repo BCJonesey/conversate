@@ -106,8 +106,8 @@ class EmailWorker
   def error_description(response={})
     "Error description:
   Response from mandrill: #{response}
-  Exception: #{$!}
-  Backtrace: #{$!.backtrace}"
+  Exception: #{$! ? $! : ''}
+  Backtrace: #{$! ? $!.backtrace : ''}"
   end
 
   def log(text)
