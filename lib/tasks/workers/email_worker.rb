@@ -2,6 +2,12 @@ require 'mandrill'
 
 class EmailWorker
   SLEEP = 5
+  # Data is a little thin on the ground for what the mandrill
+  # statuses mean, but as far as I can tell "sent" means the
+  # message has actually been sent to the recipient mail server,
+  # "queued" means it will sent as soon as possible, and
+  # "scheduled" means that you're using the send-in-the-future feature.
+  MANDRILL_SUCCESS_STATUSES = ['sent', 'queued', 'scheduled']
 
   def initialize(options={})
     @verbose = !!options[:verbose]
@@ -91,7 +97,8 @@ class EmailWorker
       # response will only have one hash.
       response = response.first
 
-      unless response['status'] == 'sent' && response['reject_reason'].nil?
+      unless MANDRILL_SUCCESS_STATUSES.include?(response['status']) &&
+             response['reject_reason'].nil?
         report_error(user, action, conversation, error_description(response))
       end
     rescue Exception
