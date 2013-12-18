@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby "1.9.3"
 gem 'rails', '>= 3.2.11'
 gem 'pry-rails'
 
@@ -35,6 +36,9 @@ gem 'backbone-rails'	# Used for including the backbone.js files and general inte
 gem 'ejs'	# Required for the .ejs templates.
 gem 'newrelic_rpm' # For New Relic analytics.
 gem 'quiet_assets'
+
+gem 'mandrill-api'
+gem 'email_reply_parser'
 
 group :test, :development do
   gem "rspec-rails", "~> 2.0"

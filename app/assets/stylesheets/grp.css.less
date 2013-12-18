@@ -8,11 +8,17 @@
   left:0;
   right:0;
   top:2.5rem;
+  padding:1.0rem;
+  background-color: white;
 
   .grp {
-    border:@border-1;
-    width:50rem;
-    margin:2rem auto;
+    border:@border-2;
+    @media(min-width:@bp-1){
+      border-color:@border-color-1;
+      margin:1rem auto;
+      max-width:50rem;
+    }
+
     .grp-name {
       .title-font();
     }
@@ -38,6 +44,22 @@
         overflow:hidden;
       }
     }
+    .is-admin,
+    .is-external,
+    .remove{
+      width:4rem;
+      text-align: center;
+    }
+    @media(max-width:@bp-1){
+      .is-admin,
+      .remove{
+        display:none;
+      }
+      td{
+        font-size:0.75rem;
+      }
+    }
+
   }
 
   /* We set -webkit-apperance to `none` for all inputs in our root.css, which
@@ -49,14 +71,15 @@
 }
 
 .grp-new-user-form{
-  .modal-window{
-    //background-color:#EEE;
-    //width:30rem;
+
+  // This is to prevent the iOS position fixed problem
+  // the user form is inside of the main page, which is ui-scrollable, which messes up on iOS.
+  position:absolute !important;
+  input[type='checkbox']{
+    margin:0.5rem 0.25rem;
+
   }
 }
-// .grp-new-user-title{
-//   .title-font();
-// }
 
 .grp-user-list{
   border:1px solid #DDD;

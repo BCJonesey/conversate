@@ -11,14 +11,19 @@ Structural.Models.Action = Backbone.Model.extend({
       attrs.user = this.inflate(Structural.Models.Participant, attrs.user);
     }
 
-    if (_.contains(['update_users', 'update_folders'], attrs.type)) {
+    if (_.contains(['update_users', 'update_folders', 'update_viewers'], attrs.type)) {
       var collection = this.chooseType({
         update_users: Structural.Collections.Participants,
-        update_folders: Structural.Collections.Folders
+        update_folders: Structural.Collections.Folders,
+        update_viewers: Structural.Collections.Participants
       }, attrs.type);
 
       attrs.added = this.inflate(collection, attrs.added);
       attrs.removed = this.inflate(collection, attrs.removed);
+    }
+
+    if (attrs.type == 'update_folders') {
+      attrs.addedViewers = this.inflate(Structural.Collections.Participants, attrs.addedViewers);
     }
 
     if (attrs.type === 'move_message') {
@@ -27,6 +32,16 @@ Structural.Models.Action = Backbone.Model.extend({
 
     if (attrs.text) {
       attrs.enhanced_text = Support.TextEnhancer.enhance(_.escape(attrs.text));
+    }
+
+    if (attrs.full_text) {
+      attrs.enhanced_full_text = Support.TextEnhancer.enhance(_.escape(attrs.full_text));
+    }
+
+    if (attrs.type === 'email_delivery_error') {
+      attrs.recipient = this.inflate(Structural.Models.Participant,
+                                     attrs.recipient);
+      attrs.message = this.inflate(Structural.Models.Action, attrs.message);
     }
 
     return attrs;
@@ -50,6 +65,20 @@ Structural.Models.Action = Backbone.Model.extend({
       return false;
     }
     return this.get('timestamp') > mostRecentEventViewed;
+  },
+  isUpdateFoldersWithoutAdditions: function() {
+    if (this.get('type') != 'update_folders' || this.get('addedViewers').length > 0) {
+      return false;
+    }
+    return true;
+  },
+  textSnippet: function(length) {
+    var text = this.escape('text');
+    if (length >= text.length) {
+      return text;
+    } else {
+      return text.substring(0, length) + '&hellip;';
+    }
   }
 });
 

@@ -26,9 +26,6 @@ describe Api::V0::ActionsController do
     conversation.actions.create!(:type => 'move_message',
                                   :data => '{"message_id":1,"from":{"title":"Whatever","id":1},"to":{"title":"Wherever","id":2}}',
                                   :user_id => @user.id)
-    conversation.actions.create!(:type => 'update_folders',
-                                  :data => '{"conversation_id":1,"from":{"name":"Whatevercee","id":1},"to":{"name":"Wherevercee","id":2}}',
-                                  :user_id => @user.id)
   end
 
   def timestamp(id)
@@ -44,64 +41,52 @@ describe Api::V0::ActionsController do
       body = JSON.parse(response.body)
 
       # Message
-      expect(body[0]['id']).to eq(1)
-      expect(body[0]['type']).to eq('message')
-      expect(body[0]['text']).to eq('After the final no')
-      expect(body[0]['user']['name']).to eq('Rufio Pan')
-      expect(body[0]['user']['id']).to eq(1)
-      expect(body[0]['timestamp']).to eq(timestamp(1))
+      expect(body[4]['id']).to eq(1)
+      expect(body[4]['type']).to eq('message')
+      expect(body[4]['text']).to eq('After the final no')
+      expect(body[4]['user']['full_name']).to eq('Rufio Pan')
+      expect(body[4]['user']['id']).to eq(1)
+      expect(body[4]['timestamp']).to eq(timestamp(1))
 
       # Retitle
-      expect(body[1]['id']).to eq(2)
-      expect(body[1]['type']).to eq('retitle')
-      expect(body[1]['title']).to eq('There comes a yes?')
-      expect(body[1]['user']['name']).to eq('Rufio Pan')
-      expect(body[1]['user']['id']).to eq(1)
-      expect(body[1]['timestamp']).to eq(timestamp(2))
+      expect(body[3]['id']).to eq(2)
+      expect(body[3]['type']).to eq('retitle')
+      expect(body[3]['title']).to eq('There comes a yes?')
+      expect(body[3]['user']['full_name']).to eq('Rufio Pan')
+      expect(body[3]['user']['id']).to eq(1)
+      expect(body[3]['timestamp']).to eq(timestamp(2))
 
       #Deletion
       expect(body[2]['id']).to eq(3)
       expect(body[2]['type']).to eq('deletion')
       expect(body[2]['msg_id']).to eq(1)
-      expect(body[2]['user']['name']).to eq('Rufio Pan')
+      expect(body[2]['user']['full_name']).to eq('Rufio Pan')
       expect(body[2]['user']['id']).to eq(1)
       expect(body[2]['timestamp']).to eq(timestamp(3))
 
       #Update users
-      expect(body[3]['id']).to eq(4)
-      expect(body[3]['type']).to eq('update_users')
+      expect(body[1]['id']).to eq(4)
+      expect(body[1]['type']).to eq('update_users')
       added = Hash.new
       added['id'] = 2
       added['name'] = 'Harry Houdini'
-      expect(body[3]['added']).to eq([added])
-      expect(body[3]['removed']).to eq([])
-      expect(body[3]['user']['name']).to eq('Rufio Pan')
-      expect(body[3]['user']['id']).to eq(1)
-      expect(body[3]['timestamp']).to eq(timestamp(4))
+      expect(body[1]['added']).to eq([added])
+      expect(body[1]['removed']).to eq([])
+      expect(body[1]['user']['full_name']).to eq('Rufio Pan')
+      expect(body[1]['user']['id']).to eq(1)
+      expect(body[1]['timestamp']).to eq(timestamp(4))
 
       #Move message
-      expect(body[4]['id']).to eq(5)
-      expect(body[4]['type']).to eq('move_message')
+      expect(body[0]['id']).to eq(5)
+      expect(body[0]['type']).to eq('move_message')
       from = {'title' => 'Whatever', 'id' => 1}
       to = {'title' => 'Wherever', 'id' => 2}
-      expect(body[4]['from']).to eq(from)
-      expect(body[4]['to']).to eq(to)
-      expect(body[4]['message_id']).to eq(1)
-      expect(body[4]['user']['name']).to eq('Rufio Pan')
-      expect(body[4]['user']['id']).to eq(1)
-      expect(body[4]['timestamp']).to eq(timestamp(5))
-
-      #Move Conversation
-      expect(body[5]['id']).to eq(6)
-      expect(body[5]['type']).to eq('update_folders')
-      from = {'name' => 'Whatevercee', 'id' => 1}
-      to = {'name' => 'Wherevercee', 'id' => 2}
-      expect(body[5]['from']).to eq(from)
-      expect(body[5]['to']).to eq(to)
-      expect(body[5]['conversation_id']).to eq(1)
-      expect(body[5]['user']['name']).to eq('Rufio Pan')
-      expect(body[5]['user']['id']).to eq(1)
-      expect(body[5]['timestamp']).to eq(timestamp(6))
+      expect(body[0]['from']).to eq(from)
+      expect(body[0]['to']).to eq(to)
+      expect(body[0]['message_id']).to eq(1)
+      expect(body[0]['user']['full_name']).to eq('Rufio Pan')
+      expect(body[0]['user']['id']).to eq(1)
+      expect(body[0]['timestamp']).to eq(timestamp(5))
 
     end
     it 'responds successfully for each type of action'
@@ -118,13 +103,13 @@ describe Api::V0::ActionsController do
       expect(response).to be_success
       expect(response.code).to eq("201")
       body = JSON.parse(response.body)
-      expect(body['id']).to eq(7)
+      expect(body['id']).to eq(6)
       expect(body['type']).to eq('message')
       expect(body['text']).to eq('Hi')
-      expect(body['user']['name']).to eq('Rufio Pan')
+      expect(body['user']['full_name']).to eq('Rufio Pan')
       expect(body['user']['id']).to eq(1)
-      expect(body['timestamp']).to eq(timestamp(7))
-      action = Action.find(7)
+      expect(body['timestamp']).to eq(timestamp(6))
+      action = Action.find(6)
       expect(action.text).to eq('Hi')
     end
     it 'successfully retitles a conversation' do
@@ -132,15 +117,15 @@ describe Api::V0::ActionsController do
       expect(response).to be_success
       expect(response.code).to eq("201")
       body = JSON.parse(response.body)
-      expect(body['id']).to eq(7)
+      expect(body['id']).to eq(6)
       expect(body['type']).to eq('retitle')
       expect(body['title']).to eq('My new title')
-      expect(body['user']['name']).to eq('Rufio Pan')
+      expect(body['user']['full_name']).to eq('Rufio Pan')
       expect(body['user']['id']).to eq(1)
-      expect(body['timestamp']).to eq(timestamp(7))
+      expect(body['timestamp']).to eq(timestamp(6))
       conversation = Conversation.find(1)
       expect(conversation.title).to eq('My new title')
-      action = Action.find(7)
+      action = Action.find(6)
       expect(action.title).to eq('My new title')
     end
     it 'successfully deletes a message' do
@@ -148,23 +133,90 @@ describe Api::V0::ActionsController do
       expect(response).to be_success
       expect(response.code).to eq("201")
       body = JSON.parse(response.body)
-      expect(body['id']).to eq(7)
+      expect(body['id']).to eq(6)
       expect(body['type']).to eq('deletion')
       expect(body['msg_id']).to eq('1')
-      expect(body['user']['name']).to eq('Rufio Pan')
+      expect(body['user']['full_name']).to eq('Rufio Pan')
       expect(body['user']['id']).to eq(1)
-      expect(body['timestamp']).to eq(timestamp(7))
-      action = Action.find(7)
+      expect(body['timestamp']).to eq(timestamp(6))
+      action = Action.find(6)
       expect(action.msg_id).to eq('1')
     end
     it 'fails when deleting a non-message action' do
+      pending('Deletion is no longer a feature')
       post :create, :conversation_id => 1, :type => 'deletion', :msg_id => 2
       expect(response).not_to be_success
       expect(response.code).to eq("409")
     end
     it 'successfully updates users'
     it 'successfully moves a message'
-    it 'successfully moves a conversation'
+    it 'successfully adds to conversation\'s folders' do
+      # Merely trying to make a spec for our current behavior.
+      Folder.create!(:name => 'Roff')
+      @user.folders << Folder.create!(:name => 'Boff')
+      @user.default_folder_id = 2
+      @user.save
+      Folder.create!(:name => 'Toff')
+
+      post :create, :conversation_id => 1, :type => 'update_folders',
+        :added => [{"id" => 1}, {"id" => 3}], :removed => []
+      expect(response).to be_success
+      expect(response.code).to eq("201")
+      body = JSON.parse(response.body)
+
+      expect(body['id']).to eq(6)
+      expect(body['type']).to eq('update_folders')
+      expect(body['added']).to eq([{"id" => "1"}, {"id" => "3"}])
+      expect(body['removed']).to eq([])
+      expect(body['user']).to eq({"email"=>"dummyUser@example.com",
+        "full_name"=>"Rufio Pan", "id"=>1, "site_admin"=>false, "external"=>false})
+      expect(body['timestamp']).to eq(timestamp(6))
+
+      conversation = Conversation.find_by_id(1)
+      expect(conversation.folders.count).to eq(3)
+      folder1 = Folder.find_by_id(1)
+      folder2 = Folder.find_by_id(3)
+      expect(conversation.folders.include?(folder1)).to eq(true)
+      expect(conversation.folders.include?(folder2)).to eq(true)
+    end
+    it 'successfully shows no new viewers when updating a conversation\'s folders' do
+      @user.folders << Folder.create!(:name => 'Roff')
+      @user.default_folder_id = 1
+      @user.save
+      Folder.create!(:name => 'New folder')
+
+      post :create, :conversation_id => 1, :type => 'update_folders',
+        :added => [{"id" => 2}], :removed => []
+      expect(response).to be_success
+      expect(response.code).to eq("201")
+      body = JSON.parse(response.body)
+
+      conversation = Conversation.find_by_id(1)
+      expect(conversation.folders.count).to eq(2)
+      expect(body['addedViewers']).to eq([])
+    end
+    it 'successfully shows one new viewer when updating a conversation\'s folders' do
+      @user.folders << Folder.create!(:name => 'Roff')
+      @user.default_folder_id = 1
+      @user.save
+      newFolder = Folder.create!(:name => 'New folder')
+
+      user2 = User.create!(:email => 'newUser@example.com',
+                              :full_name => 'Bob the Barbary Corsair',
+                              :password => 'blackbeard')
+      user2.folders << newFolder
+      user2.default_folder_id = 2
+      user2.save
+
+      post :create, :conversation_id => 1, :type => 'update_folders',
+        :added => [{"id" => 2}], :removed => []
+      expect(response).to be_success
+      expect(response.code).to eq("201")
+      body = JSON.parse(response.body)
+
+      expect(body['addedViewers'].length).to eq(1)
+      expect(body['addedViewers'][0]['id']).to eq(user2.id)
+    end
     it 'responds unsuccessfully when the conversation does not exist' do
       post :create, :conversation_id => 100, :type => 'message', :text => 'Bye'
       expect(response).not_to be_success

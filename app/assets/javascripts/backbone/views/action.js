@@ -1,27 +1,46 @@
 Structural.Views.Action = Support.CompositeView.extend({
   className: function() {
     var classes = 'act btn-faint-container';
+
+    if (this.model.get('type') == 'message' ||
+        this.model.get('type') == 'email_message') {
+      classes += ' act-msg';
+    } else {
+      classes += ' act-sys';
+    }
     classes += ' act-' + this.model.get('type').replace('_', '-');
+
     if (this.model.get('isOwnAction')) {
       classes += ' act-my-message';
     }
+
     if(this.model.get('is_current')) {
       classes += ' act-current';
     }
+
     if(this.model.get('is_unread')) {
       classes += ' act-unread';
     }
+
+    if(this.model.isUpdateFoldersWithoutAdditions()) {
+      classes += ' removed';
+    }
+
     return classes;
   },
 
-  messageTemplate: JST['backbone/templates/actions/message'],
-  updateUsersTemplate: JST['backbone/templates/actions/update_users'],
-  updateViewersTemplate: JST['backbone/templates/actions/update_viewers'],
-  retitleTemplate: JST['backbone/templates/actions/retitle'],
-  deletionTemplate: JST['backbone/templates/actions/deletion'],
-  moveConversationTemplate: JST['backbone/templates/actions/move_conversation'],
-  moveMessageTemplate: JST['backbone/templates/actions/move_message'],
-  updateFoldersTemplate: JST['backbone/templates/actions/update_folders_action'],
+  templates: {
+    'message': JST.template('actions/message'),
+    'email_message': JST.template('actions/email_message'),
+    'update_users': JST.template('actions/update_users'),
+    'update_viewers': JST.template('actions/update_viewers'),
+    'retitle': JST.template('actions/retitle'),
+    'deletion': JST.template('actions/deletion'),
+    'move_message': JST.template('actions/move_message'),
+    'move_conversation': JST.template('actions/move_conversation'),
+    'update_folders': JST.template('actions/update_folders_action'),
+    'email_delivery_error': JST.template('actions/email_delivery_error')
+  },
 
   initialize: function(options) {
     this.model.on('change', function() {
@@ -36,33 +55,9 @@ Structural.Views.Action = Support.CompositeView.extend({
     }, this)
   },
   render: function() {
-    var template;
-    switch(this.model.get('type')) {
-      case 'message':
-        template = this.messageTemplate;
-        break;
-      case 'update_users':
-        template = this.updateUsersTemplate;
-        break;
-      case 'update_viewers':
-        template = this.updateViewersTemplate;
-        break;
-      case 'retitle':
-        template = this.retitleTemplate;
-        break;
-      case 'deletion':
-        template = this.deletionTemplate;
-        break;
-      case 'move_message':
-        template = this.moveMessageTemplate;
-        break;
-      case 'move_conversation':
-        template = this.moveConversationTemplate;
-        break;
-      case 'update_folders':
-        template = this.updateFoldersTemplate;
-        break;
-    }
+    var template = this.templates[this.model.get('type')];
+    // TODO: make a default template or something
+
     this.$el.html(template({action: this.model}));
     return this;
   },
@@ -75,10 +70,15 @@ Structural.Views.Action = Support.CompositeView.extend({
   },
   events: {
     'click .act-delete': 'deleteMessage',
+    'click .act-show-full-text': 'showFullText',
     'mouseover': 'markRead'
   },
   deleteMessage: function(e) {
     e.preventDefault();
     Structural.createDeleteAction(this.model);
+  },
+  showFullText: function(e) {
+    e.preventDefault();
+    this.model.collection.trigger('showDetails', this.model);
   }
 });

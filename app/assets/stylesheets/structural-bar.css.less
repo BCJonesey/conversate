@@ -11,23 +11,45 @@
 
 .structural-bar{
   box-sizing:border-box;
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
   background-color: @stb-background-color;
-  height:2.5rem;
-  min-width:@app-min-width;
+  //z-index:1;
+  @media (min-width: @bp-1){
+    height:2.5rem;
+    z-index: 1;
+  }
+  //min-width:@app-min-width;
+
+  @media (max-width: @bp-1){
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    height:auto;
+  }
 }
 
 
 .stb-group{
+  @media (max-width:@bp-1){
+    float:none !important;
+  }
 }
 .stb-link,
 .stb-name{
-  display: inline-block;
+  display:block; /* testing */
   text-decoration: none;
   vertical-align: top;
   padding:0.45rem;
   margin:0 0.1rem;
   & > i {
     color:@stb-color;
+  }
+  @media (min-width: @bp-1){
+    display: inline-block;
   }
 }
 
@@ -82,4 +104,29 @@
   .stb-link-text{
     color:@stb-active;
   }
+}
+
+.stb-link-sign-out{
+  .stb-link-text{
+    .ui-mobile-only();
+  }
+}
+
+//Override default popover positioning because stb-bar stuff is a little weird.
+.popover.wc-news-popover{
+  top:110%;
+  right:0.5rem;
+}
+
+/* Responsive Stuff */
+
+.stb-link-settings,
+.wc-news-wrap,
+.stb-name{
+  .ui-mobile-hidden();
+}
+
+.stb-link-testbed .stb-link-text,
+.stb-link-dashboard .stb-link-text{
+  .ui-tablet-hidden();
 }

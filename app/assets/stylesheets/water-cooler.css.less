@@ -6,41 +6,85 @@
 // --- Layout --- //
 
 .water-cooler {
+  overflow:hidden;
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
   top: @toolbar-height;
-  overflow:hidden;
-  min-width:@app-min-width;
+  //height:100%;
+
+  @media (max-width: @bp-1){
+    top:0;
+  }
+
+  //min-width:@app-min-width;
 
 & > .fld-container {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 15rem;
-  border-right: @border-1;
-  overflow:hidden;
+  overflow:visible;
+  background-color: white;
+  position:absolute;
+  top:0;left:0;right:0;bottom:0;
+
+  @media (min-width:@bp-1){
+    //display:none;
+    position:absolute;
+    width: 15rem;
+    top:0.5rem;
+    bottom:0.5rem;
+    left:0;
+    z-index: 12;
+    border:@border-1;
+    box-shadow: 0.25rem 0 0.5rem rgba(0,0,0,0.2);
+  }
+  @media (min-width: @bp-2){
+    //display:block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 15rem;
+    border:none;
+    border-right: @border-1;
+    box-shadow: none;
+  }
 }
 
   & > .cnv-container {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 15rem;
-    width: 20rem;
-    border-right: @border-1;
     overflow:hidden;
+    background-color: white;
+    position: absolute;
+    top:0;left:0;right:0;bottom:0;
+
+    @media (min-width: @bp-1){
+      width: 20rem;
+      border-right: @border-1;
+      left:0;
+    }
+
+    @media (min-width: @bp-2){
+      left: 15rem;
+    }
   }
 
   & > .act-container {
-    position: absolute;
-    left: 35rem;
-    top: 0;
-    bottom: 0;
-    right: 0;
     overflow:hidden;
+    background-color: white;
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+
+    @media (min-width: @bp-1){
+      left:20rem;
+    }
+    @media (min-width: @bp-2){
+      left: 35rem;
+      top: 0;
+      bottom: 0;
+      right: 0;
+    }
   }
 }
 .short-form-compose {
@@ -56,39 +100,40 @@
 @scrollbar-hover: rgba(0,0,0,0.3);
 
 .water-cooler {
+  @media(min-width:@bp-2){
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+      background-color: transparent;
+      border-left:@border-1;
+    }
 
-  ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-    background-color: transparent;
-    border-left:@border-1;
-  }
+    ::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
 
-  ::-webkit-scrollbar-track {
-    background-color: transparent;
-  }
+    ::-webkit-scrollbar-track:horizontal {
+      background-color: transparent;
+      border-left: none;
+      .usual-border(top);
+      margin-left: -1px;
+      margin-right: -1px;
+    }
 
-  ::-webkit-scrollbar-track:horizontal {
-    background-color: transparent;
-    border-left: none;
-    .usual-border(top);
-    margin-left: -1px;
-    margin-right: -1px;
-  }
+    ::-webkit-scrollbar-thumb {
+      background-color: transparent;
+      border: 2px solid transparent;
+      border-left: 3px solid transparent;
+      box-shadow: inset 0px 0px 0px 4px @scrollbar-color;
+    }
 
-  ::-webkit-scrollbar-thumb {
-    background-color: transparent;
-    border: 2px solid transparent;
-    border-left: 3px solid transparent;
-    box-shadow: inset 0px 0px 0px 4px @scrollbar-color;
-  }
+    ::-webkit-scrollbar-thumb:horizontal {
+      border-bottom: none;
+      .usual-border(right);
+    }
 
-  ::-webkit-scrollbar-thumb:horizontal {
-    border-bottom: none;
-    .usual-border(right);
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    box-shadow: inset 0px 0px 0px 4px @scrollbar-hover;
+    ::-webkit-scrollbar-thumb:hover {
+      box-shadow: inset 0px 0px 0px 4px @scrollbar-hover;
+    }
   }
 }

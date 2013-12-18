@@ -13,6 +13,19 @@ describe User do
       expect(user.folders.first.id).to eq(user.default_folder_id)
       expect(Folder.all.length).to eq(folder_count + 1)
     end
+
+    it 'sets send_me_mail for external users' do
+      user = User.build(email: 'test@example.com',
+                        password: 'a',
+                        external: true)
+      user.send_me_mail.should be_true
+    end
+
+    it 'doesn\t set send_me_mail for regular users' do
+      user = User.build(email: 'test@example.com',
+                        password: 'a')
+      user.send_me_mail.should be_false
+    end
   end
 
   describe 'address books' do

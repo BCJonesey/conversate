@@ -4,7 +4,7 @@
       <div class='btn-group pull-left modal-title'><%= folder.escape('name') %></div>
       <div class='btn-group pull-right'>
         <a href='#' class="btn-icon ef-cancel-button modal-message-dismiss">
-          <i class='icon-remove'></i>
+          <i class='fa fa-times'></i>
         </a>
       </div>
     </div>
@@ -13,11 +13,16 @@
       <input id="folder-name" type="text" class='ef-name-input'
              value="<%= folder.escape('name') %>">
       <label for="folder-participants">Participants</label>
+      <% if(user.get('site_admin')) {%>
+      <label for="folder-email">E-Mail Address</label>
+      <input id="folder-email" type="text" class='ef-email-input'
+             value="<%= folder.escape('email') %>"><span class='ef-email-domain'>@watercoolr.io</span>
+       <% } %>
     </div>
     <div class='modal-content ef-deletion-content hidden'>
       <div class='ef-deletion-message'>
         <div class='ef-deletion-heading'>
-          <i class='icon-warning-sign'></i>
+          <i class='fa fa-warning-sign'></i>
           <span class='ef-deletion-heading-text'>Deleting a Folder</span>
         </div>
         <div class='ef-deletion-description'>
@@ -35,7 +40,7 @@
     </div>
     <div class='btn-toolbar-below'>
       <div class="btn-group pull-left">
-        <a href='#' class="btn-icon ef-trash-button"><i class='icon-trash'></i></a>
+        <a href='#' class="btn-icon ef-trash-button"><i class='fa fa-trash-o'></i></a>
       </div>
       <div class='btn-group pull-right'>
         <a href='#' class='btn-primary ef-save-button'>Save</a>

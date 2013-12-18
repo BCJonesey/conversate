@@ -10,6 +10,9 @@ Structural.Models.Conversation = Backbone.Model.extend({
     this.on('change:unread_count', function() {
       self.trigger('updated', self);
     });
+    this.on('change:archived', function() {
+      self.trigger('archived', self);
+    });
 
     // We want to update our most recent viewed right away if we've been clicked.
     // TODO: Should almost certainly punt this to a controller.
@@ -62,17 +65,15 @@ Structural.Models.Conversation = Backbone.Model.extend({
     self.set('most_recent_viewed', (new Date()).valueOf());
     self.set('unread_count', 0);
 
-    self.get('participants').each( function(participant) {
-      if (Structural._user.id === participant.id) {
-        // The server-side function has a side effect in that it will update most recent viewed
-        // for this conversation and user, which will be close enough to the time we want.
-        participant.save(
-          {
-            most_recent_viewed: self.get('most_recent_viewed')
-          }
-        );
-      }
-    })
+    self.withCurrentUserFromSelf(function(participant) {
+      // The server-side function has a side effect in that it will update most recent viewed
+      // for this conversation and user, which will be close enough to the time we want.
+      participant.save(
+        {
+          most_recent_viewed: self.get('most_recent_viewed')
+        }
+      );
+    });
     self.trigger('updated', self);
   },
   updateFolderIds: function(added, removed) {
@@ -82,6 +83,23 @@ Structural.Models.Conversation = Backbone.Model.extend({
     });
     removed.forEach(function(folder) {
       self.set('folder_ids', _.without(self.get('folder_ids'), folder.id));
+    });
+  },
+  toggleArchive: function() {
+    // Note that we don't need to trigger an archive event because the model is watching its own state.
+    var self = this;
+    self.set('archived', ! self.get('archived'));
+    self.withCurrentUserFromSelf(function(participant) {
+      participant.save({
+        archived: self.get('archived')
+      });
+    });
+  },
+  withCurrentUserFromSelf: function(callback) {
+    this.get('participants').each( function(participant) {
+      if (Structural._user.id === participant.id) {
+        callback(participant);
+      }
     });
   }
 });

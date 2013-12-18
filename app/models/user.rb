@@ -9,16 +9,19 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :folders
   belongs_to :default_folder, class_name: "Folder", foreign_key: "default_folder_id"
 
-  attr_accessible :email, :full_name, :password, :password_confirmation
+  attr_accessible :email, :full_name, :password, :password_confirmation, :external
 
   validates_confirmation_of :password
-  validates_presence_of :password, :on => :create
+  validates_presence_of :password, :on => :create, :unless => :external
   validates_presence_of :email
   validates_uniqueness_of :email
 
   def self.build(params)
     user = User.new(params)
     return false if user.save == false
+
+    # External users have no purpose other than to receive mail.
+    user.send_me_mail = true if user.external
 
     new_folder = Folder.new
     new_folder.name = 'My Conversations'
@@ -31,7 +34,7 @@ class User < ActiveRecord::Base
   end
 
   def name
-    full_name || email
+    full_name.empty? ? email : full_name
   end
 
   def update_most_recent_viewed(conversation)
@@ -41,7 +44,7 @@ class User < ActiveRecord::Base
   end
 
   def unread_count
-    self.conversations.keep_if {|c| c.unread_for?(self) }.length
+    self.reading_logs.where("unread_count >0").count
   end
 
   # Public: returns the users this user knows.
@@ -54,6 +57,7 @@ class User < ActiveRecord::Base
       addressee['id'] = user.id
       addressee['full_name'] = user.full_name
       addressee['email'] = user.email
+      addressee['external'] = user.external
       address_book.push(addressee)
     end
     return address_book
@@ -71,7 +75,7 @@ class User < ActiveRecord::Base
 
   # This avoids us writing out passwords, salts, etc. when rendering json.
   def as_json(options={})
-    json = super(:only => [:email, :full_name, :id, :site_admin])
+    json = super(:only => [:email, :full_name, :id, :site_admin, :external])
     if options[:include_address_book]
       json['address_book'] = address_book
     end

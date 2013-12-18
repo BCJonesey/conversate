@@ -3,30 +3,34 @@
 
 .profile-page{
   .full-page();
+  background-color: white;
 }
 
 .profile-update-form{
-  width:40rem;
-  margin:5rem auto;
-  border:1px solid #AAA;
+  border:@border-1;
+  background-color: white;
+  margin:1rem;
+  @media(min-width:@bp-1){
+    margin:2rem auto;
+    max-width:@bp-1;
+  }
 }
 
 
-.message{
+.message(){
   border:1px solid #CCC;
   border-top-color:#DDD;
   padding:0.5rem;
   color:#888;
   margin:0.5rem 0;
   background-color: #FAFAFA;
-  box-shadow:0 0.15rem 0.25rem rgba(128,128,128,0.35);
 }
 
 .error-messages{
-  .message;
+  .message();
   background-color: #FEE;
 }
 .success-messages{
-  .message;
+  .message();
   background-color: #EFE;
 }

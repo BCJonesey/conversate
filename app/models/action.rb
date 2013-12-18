@@ -9,8 +9,22 @@ class Action < ActiveRecord::Base
   validates_presence_of :user_id
   validates_presence_of :type
   validates :type, :inclusion => {
-    :in => %w(message deletion retitle update_users update_folders
-              move_message update_viewers)
+    :in => %w(message email_message deletion retitle update_users update_folders
+              move_message update_viewers email_delivery_error)
+  }
+
+  DEFAULTS_BY_TYPE = {
+    'message' => {'text' => ''},
+    'email_message' => {'text' => ''},
+    'retitle' => {'title' => ''},
+    'update_users' => {'added' => [],
+                       'removed' => []},
+    'update_folders' => {'added' => [],
+                         'removed' => []},
+    'update_viewers' => {'added' => [],
+                         'removed' => []},
+    'email_delivery_error' => {'recipient' => nil,
+                               'message' => nil}
   }
 
   after_initialize do |action|
@@ -19,6 +33,10 @@ class Action < ActiveRecord::Base
 
   before_save do |action|
     action.data = action.json.to_json
+  end
+
+  def message_type?
+    ['message', 'email_message'].include? self.type
   end
 
   # Public: Access and modify data stored as json in the action record. This will
@@ -44,12 +62,19 @@ class Action < ActiveRecord::Base
     name = meth.to_s
     setter = name.end_with? '='
     name = name[0...-1] if setter
-    if @json != nil && @json.has_key?(name)
+    if !@json.nil? && @json.has_key?(name)
       if setter
         @json[name] = args[0]
       else
-        @json[name]
+        value = @json[name]
+        if value.nil? && DEFAULTS_BY_TYPE[self.type].has_key?(name)
+          DEFAULTS_BY_TYPE[self.type][name]
+        else
+          value
+        end
       end
+    elsif DEFAULTS_BY_TYPE[self.type].has_key?(name)
+      DEFAULTS_BY_TYPE[self.type][name]
     else
       super meth, args, block
     end
@@ -61,9 +86,7 @@ class Action < ActiveRecord::Base
       json.merge!(self.json)
     end
     user = User.find(user_id)
-    json['user'] = Hash.new
-    json['user']['id'] = user.id
-    json['user']['name'] = user.name
+    json['user'] = user
     json['timestamp'] = created_at.msec
     return json
   end
@@ -95,11 +118,32 @@ class Action < ActiveRecord::Base
     when 'update_folders'
       return {
         'added' => params['added'],
-        'removed' => params['removed']
+        'removed' => params['removed'],
+        'addedViewers' => calculateAddedViewers(params)
       }.to_json
     end
   end
 
+  def update_data(params)
+    self.data = Action::data_for_params(params)
+    self.json = JSON::load data || {}
+    save
+  end
+
   protected
   attr_accessor :json
+
+  private
+  def self.calculateAddedViewers(params)
+    if (! params['prior_conversation_users_and_participants'])
+      return []
+    end
+
+    conversation = Conversation.find_by_id(params['conversation_id'])
+    # The current viewers are the set of users in this conversation, plus the users on all of its current folders,
+    # unique. The added viewers are the current viewers plus the set of current viewers with folder changes.
+    # Note that it should be impossible to remove users via changes due to the default folder selection.
+    return conversation.viewers_and_participants() - params['prior_conversation_users_and_participants']
+  end
+
 end

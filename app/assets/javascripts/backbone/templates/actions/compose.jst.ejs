@@ -1,11 +1,11 @@
 <div class="short-form-compose clearfix">
     <div class='btn-group enable-long-form-group'>
       <a class="enable-long-form btn-icon" title="Compose a longer message">
-        <i class="icon-edit"></i>
+        <i class="fa fa-edit"></i>
       </a>
     </div>
     <div class="act-compose-short-input">
-      <textarea class="write" name="text"></textarea>
+      <textarea class="short-form-textarea" name="text"></textarea>
     </div>
     <div class='btn-group act-short-form-send-group'>
       <a class="act-short-form-send btn-primary">Send</a>
@@ -14,19 +14,15 @@
 
 <div class="long-form-compose hidden">
   <div class="long-form-window">
-      <div class="long-form-toolbar btn-toolbar clearfix">
-        <div class="btn-group pull-right">
-          <a class="disable-long-form btn">Cancel</a>
-          <a class="send-long-form btn btn-primary">Send</a>
-        </div>
-        <div class="btn-group pull-left">
-          <a class="long-form-title"><%= conversation ? conversation.escape('title') : '' %></a>
-        </div>
+    <div class="long-form-toolbar btn-toolbar clearfix">
+      <div class="btn-group pull-right">
+        <a class="disable-long-form btn">Cancel</a>
+        <a class="send-long-form btn btn-primary">Send</a>
       </div>
-      <div class="long-form-contents">
-        <div class="long-form-textarea">
-          <textarea name="text" class="text-long-form write"></textarea>
-        </div>
-      </div>
+      <div class="long-form-title"><%= conversation ? conversation.escape('title') : '' %></div>
+    </div>
+    <div class="long-form-contents">
+      <textarea name="text" class="long-form-textarea ui-scrollable"></textarea>
+    </div>
   </div>
 </div>

@@ -1,7 +1,7 @@
 Structural.Views.AutocompleteOptions = Support.CompositeView.extend({
   tagName: 'ul',
   className: 'token-options',
-  template: JST['backbone/templates/participants/options'],
+  template: JST.template('participants/options'),
   initialize: function(options) {
     options = options || {};
     this.participants = options.participants;

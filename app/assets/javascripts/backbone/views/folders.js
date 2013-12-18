@@ -1,12 +1,13 @@
 // A view for an actual folders list.
 
 Structural.Views.Folders = Support.CompositeView.extend({
-  className: 'fld-list',
+  className: 'fld-list ui-scrollable',
   initialize: function(options) {
     var self = this;
     options = options || {};
 
     this.addressBook = options.addressBook;
+    this.user = options.user;
 
     this.collection.on('add', this.renderFolder, this);
 
@@ -25,7 +26,8 @@ Structural.Views.Folders = Support.CompositeView.extend({
   },
   render: function() {
     this._folderEditor = new Structural.Views.FolderEditor({
-      addressBook: this.addressBook
+      addressBook: this.addressBook,
+      user: this.user
     });
     this.appendChild(this._folderEditor);
     this.collection.forEach(this.renderFolder, this);

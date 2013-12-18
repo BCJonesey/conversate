@@ -27,32 +27,10 @@
   }
 }
 
-.btn-toolbar.act-title{
-  position: relative;
-  padding:0 ;
-  padding-left:0.5rem;
-  padding-right:5rem;
-}
-@act-title-color:#444444;
-
-.act-title-input{
-  box-sizing:border-box;
-  background-color:transparent;
-  border:none;
-  width:100%;
-  //height:2rem;
-  padding:.25rem 0;
-  font-size: 1rem;
-  //overflow:hidden;
-  //display:block;
-  outline:none;
-  .title-font();
-  color:@act-title-color;
-}
 
 .act-container.not-participating-in{
   .act-title-input{
-    color:mix(@act-title-color,white);
+    color:#888;
   }
   .act-title-actions,
   .act-participants-edit{
@@ -70,33 +48,24 @@
   }
 }
 
-
-.act-title.editing{
-  .editing-style();
-}
-
-.act-title-actions,
-.act-title-save-actions{
-  position: absolute;
-  top:.3rem;
-  right:.25rem;
-}
-
-
 .act-participants{
   position: relative;
   min-height:1.5rem;
-  max-height: 6rem;
+  max-height: 1.5rem;
+
   overflow-y:auto;
   background-color: @bg-1;
   border:1px solid transparent;
-  border-bottom-color:@border-color-1;
+  border-bottom-color:@border-color-2;
+  @media(min-width:@bp-1){
+    border-bottom-color:@border-color-1;
+  }
   padding:0 0.5rem;
   padding-right:1.5rem;
-  z-index: 1;
   overflow-y:visible;
   &.editing{
     .editing-style();
+    max-height: 6.0rem;
   }
 
   ul{
@@ -116,55 +85,7 @@
   }
 }
 
-.participant{
-  font-size:.8rem;
-  color:#888;
-  list-style: none;
-  display: inline-block;
-}
-.participant{
-  padding-left:0.25rem;
-  &:first-child{
-    padding-left:0;
-  }
-  .participant-text:after{
-    content:", ";
-  }
-  &:last-of-type .participant-text:after{
-    content:none;
-  }
-}
 
-.editing .participant{
-    background-color:#DEF;
-    border:1px solid #ABC;
-    padding-left:0.2rem;
-    padding-right:0.1rem;
-    margin-right:.4rem;
-    display:inline-block;
-    .participant-text:after{
-      content:none;
-    }
-}
-.editing .participant-remove{
-    color:#CCC;
-    position:relative;
-    bottom:.05rem;
-    padding:0.1rem;
-}
-
-.editing .participant-remove:hover{
-    color:#888;
-}
-
-
-.token-input-wrap{
-  display:none;
-  position:relative;
-}
-.act-participants.editing .token-input-wrap{
-  display:inline-block;
-}
 
 
 .act-participants-actions,
@@ -188,7 +109,11 @@
 }
 
 .act-list{
-  padding:0.75rem;
+  background-color: white;
+  padding:0.5rem;
+  @media(min-width:@bp-1){
+    padding:0.75rem;
+  }
   overflow-x:hidden;
   overflow-y:auto;
   position:absolute;
@@ -197,39 +122,41 @@
   top:4rem;
   bottom:0;
   margin-bottom:2.7rem;
-  -webkit-overflow-scrolling:touch;
 }
 .act{
-  padding:0.25rem;
+  padding:0.125rem;
+  @media(min-width:@bp-1){
+    padding:0.25rem;
+  }
 }
 
 // These are some real bullshit to adjust the spacing of update messages in relation to regular messages
 
-.act-message + .act-update-viewers,
-.act-message + .act-update-users,
-.act-message + .act-deletion,
-.act-message + .act-move-conversation,
-.act-message + .act-retitle,
-.act-message + .act-update-folders {
-  padding-top:0.5rem;
+.act-sys{
+  padding:0.5rem;
 }
 
-.act-update-viewers + .act-message,
-.act-update-users + .act-message,
-.act-move-conversation + .act-message,
-.act-deletion + .act-message,
-.act-retitle + .act-message,
-.act-update-folders + .act-message {
-  margin-top:0.25rem;
+.act-sys + .act-sys{
+  padding-top:0;
 }
 
-.act-message{
-  padding:0.65rem;
+.act-msg{
+  padding:0.25rem;
+  @media(min-width:@bp-1){
+    padding:0.65rem;
+  }
+
   z-index:1;
   a{
     .link-blue();
   }
+}
 
+.act-update-folders.removed{
+  height:0 !important;
+  & + .act-update-folders.removed{
+    display:none;
+  }
 }
 
 // --- Messages --- //
@@ -249,12 +176,6 @@
 @border-act-my-message: 1px solid @border-color-act-my-message;
 @border-pending: 1px solid @border-color-pending;
 
-.act-message + .act-message,
-.act + .act-message,
-.act-message + .act{
-  border-top:@border-message;
-}
-
 .act-list .act:first-child{
   border-top:@border-message;
 }
@@ -263,22 +184,46 @@
   border-bottom:@border-message;
 }
 
-.act-message.act-my-message{
+.act-sys + .act-msg.act-my-message,
+.act-msg + .act-msg.act-my-message{
+  border-top:@border-message;
+  margin-top:0;
+}
+
+.act-msg.act-my-message + .act-msg.act-my-message{
+  margin-top:1.0rem;
+}
+
+.act-msg + .act-msg{
+  border-top:@border-message;
+  margin-top:0;
+}
+.act-msg.act-my-message + .act-msg,
+.act-msg.act-my-message + .act-sys{
+  border-top:0;
+}
+.act-msg.act-my-message + .act-msg.act-my-message{
+  border-top:@border-message;
+  margin-top:1.0rem;
+}
+
+.act-msg + .act-sys{
+  border-top:@border-message;
+}
+.act-msg.act-my-message + .act-sys{
+  boreder-top:none;
+}
+
+
+.act-sys + .act-msg{
+  border-top:@border-message;
+}
+
+.act-msg.act-my-message{
   background-color:@background-color-act-my-message;
   border:@border-act-my-message;
   transition: none;
 }
-
-.act-message.act-my-message + .act-message.act-my-message{
-  margin-top:1.0rem;
-}
-.act-message.act-my-message + .act:not(.act-my-message){
-  border-top:none;
-}
-.act-message.act-my-message + .act.act-my-message:not(.act-message){
-  border-top:none;
-}
-
 
 .act-message.act-my-message.pending{
   background-color:@background-color-pending;
@@ -305,15 +250,25 @@
   font-weight: bold;
 }
 
+
+
 .act-info-group{
   display:inline-block;
 }
 
-.act-time{
+.act-msg-details{
   color:#DDD;
+}
+.act-email-indicator{
+  margin-right:0.35rem;
+  cursor:pointer;
+  &:hover{
+    color:#444;
+  }
+}
+.act-time{
+  //display: inline-block;
   font-size: .75rem;
-  vertical-align: middle;
-  display: inline-block;
 }
 
 .act-text{
@@ -322,17 +277,20 @@
   line-height: 1.5;
   white-space:pre-wrap;
   margin-top:0.25rem;
+  font-size:0.8rem;
+  word-wrap:break-word;
+  @media(min-width:@bp-1){
+    font-size:1.0rem;
+  }
 }
 
-.act-update-viewers,
-.act-update-users,
-.act-retitle,
-.act-deletion,
-.act-move-conversation,
-.act-update-folders{
-  font-size:.75rem;
+.act-sys{
+  font-size:.6rem;
   color:#CCC;
   text-align: center;
+  @media(min-width:@bp-1){
+    font-size:0.75rem;
+  }
 }
 
 .tokens{

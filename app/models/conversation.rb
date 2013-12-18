@@ -11,12 +11,31 @@ class Conversation < ActiveRecord::Base
     convo.title = convo.default_conversation_title if (convo.title.nil? || convo.title.empty?)
   end
 
+  def email_address
+    # On kuhltank, set EMAIL_SUBDOMAIN=kuhltank
+    subdomain = ENV['EMAIL_SUBDOMAIN']
+    unless subdomain.nil?
+      subdomain += '.'
+    end
+    "cnv-#{self.id}@#{subdomain}watercoolr.io"
+  end
+
   def set_title(title, user)
     if title
       self.title = title
       self.actions.new(type: 'retitle',
                        data: {title: title}.to_json,
                        user_id: user.id)
+    end
+  end
+
+  def mark_all_unread_for(participants)
+    participants.each do |participant|
+      reading_log = ReadingLog.get(participant.id, self.id)
+      unless reading_log.nil?
+        reading_log.unread_count = self.actions.where(type: 'message').count
+        reading_log.save
+      end
     end
   end
 
@@ -27,6 +46,7 @@ class Conversation < ActiveRecord::Base
         user_id = p[:id] || p['id']
         u = User.find(user_id)
         self.users << u
+
         if folder_set.intersection(Set.new(u.folders)).length == 0
           u_default = Folder.find(u.default_folder_id)
           self.folders << u_default
@@ -117,8 +137,8 @@ class Conversation < ActiveRecord::Base
         action = self.actions.new(type: a[:type],
                                   data: Action::data_for_params(a),
                                   user_id: user.id)
-        self.handle(action)
         action.save
+        self.handle(action)
       end
     end
   end
@@ -128,11 +148,11 @@ class Conversation < ActiveRecord::Base
   end
 
   def viewers
-    viewers_set = Set.new([])
-    self.folders.each do |folder|
-      viewers_set += folder.users.to_set
-    end
-    (viewers_set - self.participants).to_a
+    (set_of_viewers() - self.participants).to_a
+  end
+
+  def viewers_and_participants
+    (set_of_viewers() + self.participants).to_a
   end
 
   def can_user_update?(user)
@@ -231,7 +251,41 @@ class Conversation < ActiveRecord::Base
       end
     end
 
+    json[:archived] = reading_log ? reading_log.archived : false
+
     return json
+  end
+
+  def send_email_for(message)
+    self.users.where(send_me_mail: true).each do |user|
+      unless user == message.user && message.type == 'email_message'
+        EmailQueue.push(message, user)
+      end
+    end
+  end
+
+  def increment_unread_counts_for(message)
+    self.users.each do |participant|
+      unless participant == message.user
+        reading_log = ReadingLog.get(participant.id, self.id)
+        reading_log.unread_count += 1
+        reading_log.save
+      end
+    end
+  end
+
+  def unarchive_for(message)
+    self.users.each do |participant|
+      reading_log = ReadingLog.get(participant.id, self.id)
+      reading_log.archived = false
+      reading_log.save
+    end
+  end
+
+  def handle_message_actions(action)
+    self.send_email_for action
+    self.increment_unread_counts_for action
+    self.unarchive_for action
   end
 
   def handle(action)
@@ -252,6 +306,10 @@ class Conversation < ActiveRecord::Base
         if action.removed
           self.remove_folders(action.removed, action.user, false)
         end
+      when 'message'
+        handle_message_actions action
+      when 'email_message'
+        handle_message_actions action
     end
     save
   end
@@ -269,5 +327,15 @@ class Conversation < ActiveRecord::Base
   def default_conversation_title()
     return 'New Conversation' if self.users.length <= 1
     "A conversation with #{self.users.map {|u| u.name}.join(', ')}"
+  end
+
+  private
+
+  def set_of_viewers
+    viewers_set = Set.new([])
+    self.folders.each do |folder|
+      viewers_set += folder.users.to_set
+    end
+    return viewers_set
   end
 end

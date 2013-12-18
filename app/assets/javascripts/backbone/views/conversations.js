@@ -1,7 +1,7 @@
 // A view for the actual conversations list.
 
 Structural.Views.Conversations = Support.CompositeView.extend({
-  className: 'cnv-list',
+  className: 'cnv-list ui-scrollable',
   initialize: function(options) {
     options = options || {};
     this.user = options.user;
@@ -9,24 +9,49 @@ Structural.Views.Conversations = Support.CompositeView.extend({
     this._wireEvents(this.collection);
 
     Structural.on('changeFolder', this.changeFolder, this);
+
+    this.sectionRegular = new Structural.Views.ConversationsSection({name: "My Conversations",
+                                                                     user: this.user});
+    this.sectionArchived = new Structural.Views.ConversationsSection({name: "Archive",
+                                                                      user: this.user,
+                                                                      startsCollapsed: true});
   },
   _wireEvents: function(collection) {
     collection.on('add', this.reRender, this);
     collection.on('reset', this.reRender, this);
     collection.on('remove', this.reRender, this);
     collection.on('conversationsLoadedForFirstTime', this.viewFirstConversation, this);
+    collection.on('archived', this.reRender, this);
   },
   render: function() {
     this.$el.empty();
-    this.collection.forEach(this.renderConversation, this);
+
+    // TODO: We can almost certainly make this much more generic for n sections.
+
+    var regularConversations = [];
+    var archivedConversations = [];
+
+    this.collection.forEach(function(conversation) {
+      if (conversation.get('archived')) {
+        archivedConversations.push(conversation);
+      } else {
+        regularConversations.push(conversation);
+      }
+    }, this);
+
+    // We only want to show a section if there are actually archived conversations.
+
+    if (regularConversations.length > 0) {
+      this.sectionRegular.collection = regularConversations;
+      this.appendChild(this.sectionRegular);
+    }
+
+    if (archivedConversations.length > 0) {
+      this.sectionArchived.collection = archivedConversations;
+      this.appendChild(this.sectionArchived);
+    }
+
     return this;
-  },
-  renderConversation: function(conversation) {
-    var view = new Structural.Views.Conversation({
-      model: conversation,
-      user: this.user
-    });
-    this.appendChild(view);
   },
   reRender: function() {
     this.children.forEach(function(child) {
@@ -48,11 +73,12 @@ Structural.Views.Conversations = Support.CompositeView.extend({
   },
 
   // Attempts to show the first conversation. This basically gets called after the conversations
-  // have finished loading, so we can actually pick one to show.
+  // have finished loading, so we can actually pick one to show. We don't want to pick one that
+  // has been archived.
   viewFirstConversation: function() {
-    var conversation = this.collection.models[0];
+    conversation = this.collection.findWhere({archived: false});
     if (conversation) {
-      Structural.viewConversationData(conversation);
+      Structural.viewConversationData(conversation, {silentResponsiveView: true});
       conversation.focus();
     }
   }

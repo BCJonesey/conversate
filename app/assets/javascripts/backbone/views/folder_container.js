@@ -2,17 +2,19 @@
 // folders list.
 
 Structural.Views.FolderContainer = Support.CompositeView.extend({
-  className: 'fld-container',
+  className: ' ui-section fld-container visible',
   initialize: function(options) {
     options = options || {};
     this.folders = options.folders;
     this.addressBook = options.addressBook;
+    this.user = options.user;
   },
   render: function() {
     this.toolbarView = new Structural.Views.FolderToolbar();
     this.listView = new Structural.Views.Folders({
       collection: this.folders,
-      addressBook: this.addressBook
+      addressBook: this.addressBook,
+      user: this.user
     });
     this.inputView = new Structural.Views.NewFolder();
 
@@ -36,5 +38,12 @@ Structural.Views.FolderContainer = Support.CompositeView.extend({
 
   moveConversationMode: function() {
     this.listView.moveConversationMode();
+  },
+  show: function(show){
+    if (show) {
+      this.$el.addClass('visible');
+    } else {
+      this.$el.removeClass('visible');
+    }
   }
 });

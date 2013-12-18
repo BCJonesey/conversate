@@ -11,6 +11,10 @@ body.not-logged-in {
   margin:0;
   padding:0;
 }
+html,
+body.logged-in{
+  height:100%;
+}
 
 .page-wrapper{
   background-color:#888;
@@ -25,6 +29,7 @@ header{
   max-width:@width;
   margin:0 auto;
   position: relative;
+  z-index: 1;
 }
 
 .nav-item{

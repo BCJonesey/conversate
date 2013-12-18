@@ -3,11 +3,25 @@
 
 
 .admin-page {
+  background-color: white;
+  a{
+    .link-blue();
+  }
+  td{
+    @media(max-width:@bp-1){
+      .ellipsis();
+    }
+    overflow-x:hidden;
+    text-overflow:ellipsis;
 
-  .admin-table{
-    max-width:30rem;
+  }
+  .admin-table, .admin-links{
     border:@border-1;
-    margin: 2rem auto;
+    margin:1rem;
+    @media( min-width:@bp-1){
+      max-width:30rem;
+      margin: 2rem auto;
+    }
   }
 
   .full-page();
@@ -17,3 +31,4 @@
     width:100%;
   }
 }
+

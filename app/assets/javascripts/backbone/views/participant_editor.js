@@ -1,6 +1,6 @@
 Structural.Views.ParticipantEditor = Support.CompositeView.extend({
   className: 'act-participants',
-  template: JST['backbone/templates/participants/editor'],
+  template: JST.template('participants/editor'),
   initialize: function(options) {
     options = options || {};
     this.participants = options.participants;

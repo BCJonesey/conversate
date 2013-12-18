@@ -1,6 +1,6 @@
 Structural.Views.FolderToolbar = Support.CompositeView.extend({
   className: 'btn-toolbar fld-toolbar clearfix',
-  template: JST['backbone/templates/folders/toolbar'],
+  template: JST.template('folders/toolbar'),
   render: function() {
     this.$el.html(this.template());
     return this;

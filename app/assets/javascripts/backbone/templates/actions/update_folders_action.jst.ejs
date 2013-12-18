@@ -1,12 +1,4 @@
-<%= action.get('user').escape('name') %>
-<% if (action.get('added') && action.get('added').length > 0) { %>
-  filed the conversation in
-  <%= action.get('added').map(function(t) { return t.escape('name'); }).join(', ') %>
-  <% if (action.get('removed') && action.get('removed').length > 0) { %>
-    and
-  <% } %>
-<% } %>
-<% if (action.get('removed') && action.get('removed').length > 0) { %>
-  removed the conversation from
-  <%= action.get('removed').map(function(t) { return t.escape('name'); }).join(', ') %>
+<% if (action.get('addedViewers') && action.get('addedViewers').length > 0) { %>
+  <%= action.get('addedViewers').map(function(t) { return t.escape('name') }).join(', ') %>
+  can now see this conversation.
 <% } %>

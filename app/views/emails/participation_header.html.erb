@@ -1,0 +1,4 @@
+<tr>
+  <td colspan='5' style='color:#AAA; font-size:12px; border-bottom:<%=border_1%>; padding-bottom:5px;margin-bottom:5px;'>To: <%= (conversation.participants - [current_user]).map {|p| p.name }.join(', ') %>
+  </td>
+</tr>

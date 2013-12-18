@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130929002028) do
+ActiveRecord::Schema.define(:version => 20131215035807) do
 
   create_table "actions", :force => true do |t|
     t.integer  "conversation_id"
@@ -40,11 +40,21 @@ ActiveRecord::Schema.define(:version => 20130929002028) do
   add_index "conversations_folders", ["conversation_id", "folder_id"], :name => "index_conversations_topics_on_conversation_id_and_topic_id"
   add_index "conversations_folders", ["folder_id", "conversation_id"], :name => "index_conversations_topics_on_topic_id_and_conversation_id"
 
+  create_table "email_queues", :force => true do |t|
+    t.integer  "action_id"
+    t.integer  "external_user_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
   create_table "folders", :force => true do |t|
     t.string   "name",       :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "email"
   end
+
+  add_index "folders", ["email"], :name => "index_folders_on_email"
 
   create_table "folders_users", :force => true do |t|
     t.integer "folder_id"
@@ -71,6 +81,7 @@ ActiveRecord::Schema.define(:version => 20130929002028) do
     t.integer  "user_id"
     t.datetime "most_recent_viewed"
     t.integer  "unread_count",       :default => 0
+    t.boolean  "archived",           :default => false
   end
 
   add_index "reading_logs", ["conversation_id"], :name => "index_reading_logs_on_conversation_id"
@@ -90,6 +101,8 @@ ActiveRecord::Schema.define(:version => 20130929002028) do
     t.integer  "invited_by"
     t.integer  "default_folder_id"
     t.boolean  "removed",                      :default => false
+    t.boolean  "external",                     :default => false
+    t.boolean  "send_me_mail",                 :default => false
   end
 
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"
