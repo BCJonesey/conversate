@@ -78,7 +78,10 @@ Structural.Models.Folder = Backbone.Model.extend({
     this.set('unread_conversations', filteredUnreadConversations);
   },
 
-  update: function(name, participants) {
+  update: function(name, participants, email) {
+    if(email != null){
+      this.set('email', email);
+    }
     this.set('name', name);
     this.set('users', participants);
     this.save();

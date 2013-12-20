@@ -21,7 +21,8 @@ Structural.Views.WaterCooler = Support.CompositeView.extend({
   render: function() {
     this.foldersView = new Structural.Views.FolderContainer({
       folders: this.folders,
-      addressBook: this.addressBook
+      addressBook: this.addressBook,
+      user: this.user
     });
     this.conversationsView = new Structural.Views.ConversationContainer({
       conversations: this.conversations,

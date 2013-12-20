@@ -20,9 +20,11 @@ class MandrillInboundEmail
     case @recipient
       when /cnv-(\d+)/
         @conversation = Conversation.find($1)
-      when /fol-(\d+)/
-        @folder = Folder.find($1)
+      when /(.*)/
+        @folder = Folder.find_by_email($1)
         @subject = @data['subject']
+      else
+        Rails.logger.error "Inbound mail can't match any address pattern."
     end
   end
 
@@ -30,11 +32,17 @@ class MandrillInboundEmail
     !@conversation.nil?
   end
 
+  def to_folder?
+    !@folder.nil?
+  end
+
   def dispatch
-    if !@conversation.nil?
+    if self.to_conversation?
       self.dispatch_to_conversation
-    elsif !folder.nil?
+    elsif self.to_folder?
       self.dispatch_to_folder
+    else
+      Rails.logger.error "Inbound email sent to unknown address: #{@data['email']}"
     end
   end
   def dispatch_to_conversation

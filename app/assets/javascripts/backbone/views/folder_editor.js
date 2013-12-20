@@ -4,6 +4,7 @@ Structural.Views.FolderEditor = Support.CompositeView.extend({
   initialize: function(options) {
     options = options || {};
     this._addressBook = options.addressBook;
+    this._user = options.user;
   },
   render: function(folder) {
     if (folder) {
@@ -12,7 +13,7 @@ Structural.Views.FolderEditor = Support.CompositeView.extend({
         addressBook: this._addressBook
       });
 
-      this.$el.html(this.template({folder: folder}));
+      this.$el.html(this.template({folder: folder, user: this._user}));
       this.insertChildAfter(this._participantEditor, this.$('label[for="folder-participants"]'));
     }
     return this;
@@ -62,11 +63,15 @@ Structural.Views.FolderEditor = Support.CompositeView.extend({
     e.preventDefault();
     if (this._folder) {
       var name = this.$('.ef-name-input').val();
+      var email = null;
+      if(this._user.get('site_admin')){
+        email = this.$('.ef-email-input').val();
+      }
       if (name.length === 0) { return; }
 
       var participants = this._participantEditor.currentParticipants();
 
-      this._folder.update(name, participants);
+      this._folder.update(name, participants, email);
       this.$('.modal-background').addClass('hidden');
     }
   },
