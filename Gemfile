@@ -32,6 +32,7 @@ gem 'jquery-rails'
 
 gem 'sorcery'	# For login and security.
 gem 'thin'	# A minimalist web server. Heroku likes it.
+gem 'unicorn' # A magick web server. The horns are used for dark incantations.
 gem 'backbone-rails'	# Used for including the backbone.js files and general integration.
 gem 'ejs'	# Required for the .ejs templates.
 gem 'newrelic_rpm' # For New Relic analytics.
