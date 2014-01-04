@@ -1,6 +1,6 @@
 Structural.Views.AutocompleteInput = Support.CompositeView.extend({
   className: '',
-  template: JST['backbone/templates/autocomplete/input'],
+  template: JST.template('autocomplete/input'),
   initialize: function(options) {
   },
   render: function() {
