@@ -24,7 +24,7 @@ class MandrillInboundEmail
         @folder = Folder.find_by_email($1)
         @subject = @data['subject']
       else
-        Rails.logger.error "Inbound mail can't match any address pattern."
+        Rails.logger.warn "Inbound mail can't match any address pattern."
     end
   end
 
@@ -42,7 +42,7 @@ class MandrillInboundEmail
     elsif self.to_folder?
       self.dispatch_to_folder
     else
-      Rails.logger.error "Inbound email sent to unknown address: #{@data['email']}"
+      Rails.logger.warn "Inbound email sent to unknown address: #{@data['email']}"
     end
   end
   def dispatch_to_conversation
