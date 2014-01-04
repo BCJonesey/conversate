@@ -31,7 +31,6 @@ end
 gem 'jquery-rails'
 
 gem 'sorcery'	# For login and security.
-gem 'thin'	# A minimalist web server. Heroku likes it.
 gem 'unicorn' # A magick web server. The horns are used for dark incantations.
 gem 'backbone-rails'	# Used for including the backbone.js files and general integration.
 gem 'ejs'	# Required for the .ejs templates.
@@ -44,6 +43,7 @@ gem 'email_reply_parser'
 group :test, :development do
   gem "rspec-rails", "~> 2.0"
   gem "yaml_db"
+  gem 'thin'  # A minimalist web server. Heroku likes it.
 end
 
 # Pulling this out for now.
