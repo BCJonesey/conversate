@@ -12,5 +12,9 @@ Structural.Views.AutocompleteInput = Support.CompositeView.extend({
     'keydown': 'preventSubmit'
   },
 
-
+  preventSubmit: function(e) {
+    if (e.which === Support.Keys.enter) {
+      e.preventDefault();
+    }
+  }
 });
