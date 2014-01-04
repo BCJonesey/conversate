@@ -74,7 +74,7 @@ Structural.Views.Autocomplete = Support.CompositeView.extend({
     inputView.on('textChanged', optionsView.updateOptionsList, optionsView);
     inputView.on('up', optionsView.targetUp, optionsView);
     inputView.on('down', optionsView.targetDown, optionsView);
-    inputView.on('enter', this._select, this);
+    inputView.on('select', this._select, this);
     optionsView.on('click', this._select, this);
     Structural.on('clickAnywhere', this._cancelIfClickOff, this);
   },
