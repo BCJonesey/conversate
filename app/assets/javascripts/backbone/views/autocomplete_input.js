@@ -5,8 +5,14 @@ Structural.Views.AutocompleteInput = Support.CompositeView.extend({
   },
   render: function() {
     this.$el.html(this.template());
+    this._input = this.$('.input');
     return this;
   },
+
+  clear: function() {
+    this._input.val('');
+  },
+
   events: {
     'keyup': 'input',
     'keydown': 'preventSubmit'
@@ -21,7 +27,7 @@ Structural.Views.AutocompleteInput = Support.CompositeView.extend({
                e.which === Support.Keys.tab) {
       this.trigger('select');
     } else {
-      this.trigger('textChanged', this.$('.input').val());
+      this.trigger('textChanged', this._input.val());
     }
   },
 
