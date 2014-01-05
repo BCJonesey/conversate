@@ -5,6 +5,8 @@ Structural.Views.NewConversation = Support.CompositeView.extend({
     options = options || {};
     this.participants = new Structural.Collections.Participants([]);
     this.addressBook = options.addressBook;
+
+    Structural.on('clickAnywhere', this.leaveParticipantEditingModeOnClickOff, this);
   },
   render: function() {
     this.autocomplete = new Structural.Views.Autocomplete({
@@ -32,7 +34,7 @@ Structural.Views.NewConversation = Support.CompositeView.extend({
     'click .send-new-cnv': 'send',
     'click .new-cnv-participants': 'focusParticipantsInput',
     'focus .new-cnv-participants input': 'enterParticipantEditingMode',
-    'blur .new-cnv-participants input': 'leaveParticipantEditingMode',
+    'blur .new-cnv-participants input': 'leaveParticipantEditingModeOnTab',
     'focus .new-cnv-title-toolbar input': 'enterTitleEditingMode',
     'blur .new-cnv-title-toolbar input': 'leaveTitleEditingMode'
   },
@@ -54,7 +56,8 @@ Structural.Views.NewConversation = Support.CompositeView.extend({
     Structural.createNewConversation(title, participants, firstMessage);
     this.leave();
   },
-  focusParticipantsInput:function(e){
+
+  focusParticipantsInput:function(e) {
     this.$('.new-cnv-participants input').focus();
   },
   enterParticipantEditingMode: function(e) {
@@ -73,5 +76,20 @@ Structural.Views.NewConversation = Support.CompositeView.extend({
   },
   leaveTitleEditingMode: function(e) {
     this.$('.new-cnv-title-toolbar').removeClass('editing');
-  }
+  },
+
+  leaveParticipantEditingModeOnClickOff: function(e) {
+    if (this.$('.new-cnv-participants').hasClass('editing')) {
+      var target = $(e.target);
+      if (target.closest('.new-cnv-participants').length === 0 &&
+          target.closest('body').length > 0) {
+        this.leaveParticipantEditingMode();
+      }
+    }
+  },
+  leaveParticipantEditingModeOnTab: function(e) {
+    if (e.relatedTarget) {
+      this.leaveParticipantEditingMode();
+    }
+  },
 });
