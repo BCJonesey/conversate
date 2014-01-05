@@ -45,13 +45,8 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
     if (e) { e.preventDefault(); }
 
     var editedParticipants = this.removableList.participants();
-    var added = Support.Collections.difference(editedParticipants, this.participants);
-    var removed = Support.Collections.difference(this.participants, editedParticipants);
-
-    if (added.length > 0 || removed.length > 0) {
-      this.trigger('update_users', added, removed);
-      this.participants = editedParticipants;
-    }
+    this.trigger('update_users', editedParticipants);
+    this.participants = editedParticipants;
 
     this.toggleEditor();
   },

@@ -12,13 +12,13 @@ Structural.Views.ParticipantList = Support.CompositeView.extend({
   },
 
   changeConversation: function(conversation) {
-    this._replaceCollection(conversation.get('participants'));
+    this.replaceCollection(conversation.get('participants'));
   },
   clearConversation: function() {
-    this._replaceCollection(new Structural.Collections.Participants([]));
+    this.replaceCollection(new Structural.Collections.Participants([]));
   },
 
-  _replaceCollection: function(collection) {
+  replaceCollection: function(collection) {
     this.collection = collection;
     this.render();
   }
