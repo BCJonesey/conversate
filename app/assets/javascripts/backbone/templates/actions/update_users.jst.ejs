@@ -1,18 +1,22 @@
 <%= action.get('user').escape('name') %>
 <% if (action.get('added').length == 1 && action.get('added').at(0).get('id') == action.get('user').get('id')) { %>
   joined the conversation.
+<% } else if (action.get('removed').length === 1 &&
+              action.get('added').length === 0 &&
+              action.get('removed').at(0).id === action.get('user').id) { %>
+  left the conversation
 <% } else { %>
-<% if (action.get('added') && action.get('added').length > 0) { %>
-  added
-  <%= action.get('added').map(function(p) { return p.escape('name'); }).join(', ') %>
-  to the conversation
-  <% if (action.get('removed') && action.get('removed').length > 0) { %>
-    and
+  <% if (action.get('added') && action.get('added').length > 0) { %>
+    added
+    <%= action.get('added').map(function(p) { return p.escape('name'); }).join(', ') %>
+    to the conversation
+    <% if (action.get('removed') && action.get('removed').length > 0) { %>
+      and
+    <% } %>
   <% } %>
-<% } %>
-<% if (action.get('removed') && action.get('removed').length > 0) { %>
-  removed
-  <%= action.get('removed').map(function(p) { return p.escape('name'); }).join(', ') %>
-  from the conversation
-<% } %>
+  <% if (action.get('removed') && action.get('removed').length > 0) { %>
+    removed
+    <%= action.get('removed').map(function(p) { return p.escape('name'); }).join(', ') %>
+    from the conversation
+  <% } %>
 <% } %>
