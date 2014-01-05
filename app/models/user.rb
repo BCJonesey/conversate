@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password
   validates_presence_of :password, :on => :create, :unless => :external
   validates_presence_of :email
-  validates_uniqueness_of :email
+  validates_uniqueness_of :email, :case_sensitive => false
 
   def self.build(params)
     user = User.new(params)
@@ -31,6 +31,10 @@ class User < ActiveRecord::Base
     user.save
 
     user
+  end
+
+  def self.find_by_email_insensitive(email)
+    User.where('lower(email) = ?', email.downcase).first
   end
 
   def name

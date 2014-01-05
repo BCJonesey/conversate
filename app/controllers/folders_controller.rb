@@ -6,7 +6,8 @@ class FoldersController < ApplicationController
 
     @folder = folder
     @folders = current_user.folders
-    @conversations = folder.conversations.joins(:reading_logs).order('most_recent_event DESC')
+    @conversations = folder.conversations.joins(:reading_logs).where('reading_logs.user_id' =>
+      current_user.id).order('most_recent_event DESC')
     @conversation = @conversations.where('reading_logs.user_id' => current_user.id,
                                           'reading_logs.archived' => false)[0]
     @actions = @conversation ? @conversation.actions : nil
