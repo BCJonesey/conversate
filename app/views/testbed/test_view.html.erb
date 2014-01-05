@@ -376,13 +376,11 @@ switch(name) {
     view = new Structural.Views.TitleEditor({conversation: model});
     break;
   case 'participant-editor':
-    var dictionary = new Structural.Collections.Participants(data.user.address_book);
-    var blacklist = new Structural.Collections.Participants(data.participants);
-    view = new Structural.Views.Autocomplete({
-      dictionary: dictionary,
-      blacklist: blacklist,
-      addSelectionToBlacklist: true,
-      property: 'name'
+    var addressBook = new Structural.Collections.Participants(data.user.address_book);
+    var participants = new Structural.Collections.Participants(data.participants);
+    view = new Structural.Views.Participants({
+      participants: participants,
+      addressBook: addressBook
     });
     break;
   case 'update-folders':
