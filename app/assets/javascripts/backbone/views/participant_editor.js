@@ -10,6 +10,15 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
   },
   render: function() {
     this.$el.html(this.template());
+
+    var autocomplete = new Structural.Views.Autocomplete({
+      dictionary: this.addressBook,
+      blacklist: this.participants,
+      addSelectionToBlacklist: true,
+      property: 'name'
+    });
+    this.renderChildInto(autocomplete, this.$('.act-participants-editor-autocomplete'));
+
     return this;
   },
   events: {
