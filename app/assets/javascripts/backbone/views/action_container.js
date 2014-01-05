@@ -31,7 +31,7 @@ Structural.Views.ActionContainer = Support.CompositeView.extend({
       conversation: this.conversation,
       folders: this.folders
     });
-    this.participantsView = new Structural.Views.ParticipantEditor({
+    this.participantsView = new Structural.Views.Participants({
       participants: this.participants,
       addressBook: this.addressBook
     });
