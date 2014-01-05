@@ -3,6 +3,9 @@ Structural.Views.Participants = Support.CompositeView.extend({
   initialize: function(options) {
     this._participants = options.participants;
     this._addressBook = options.addressBook;
+
+    Structural.on('changeConversation', this.changeConversation, this);
+    Structural.on('clearConversation', this.clearConversation, this);
   },
   render: function() {
     this._list = new Structural.Views.ParticipantList({
@@ -27,5 +30,12 @@ Structural.Views.Participants = Support.CompositeView.extend({
       this._list.replaceCollection(editedParticipants);
       this._participants = editedParticipants;
     }
+  },
+
+  changeConversation: function(conversation) {
+    this._participants = conversation.get('participants').clone();
+  },
+  clearConversation: function() {
+    this._participants = new Structural.Collections.Participants([]);
   }
 });

@@ -62,13 +62,17 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
   },
 
   changeConversation: function(conversation) {
-    this.autocomplete.replaceBlacklist(conversation.get('participants'));
+    this._replaceParticipants(conversation.get('participants'));
   },
   clearConversation: function() {
-    this.autocomplete.replaceBlacklist(new Structural.Collections.Participants([]));
+    this._replaceParticipants(new Structural.Collections.Participants([]));
   },
 
   _isOpen: function() {
     return !this.$('.act-participants-editor-popover').hasClass('hidden');
+  },
+  _replaceParticipants: function(participants) {
+    this.autocomplete.replaceBlacklist(participants);
+    this.removableList.replace(participants);
   }
 });
