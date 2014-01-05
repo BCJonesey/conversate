@@ -11,21 +11,21 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
   render: function() {
     this.$el.html(this.template());
 
-    var autocomplete = new Structural.Views.Autocomplete({
+    this.autocomplete = new Structural.Views.Autocomplete({
       dictionary: this.addressBook,
       blacklist: this.participants.clone(),
       addSelectionToBlacklist: true,
       property: 'name'
     });
-    var removableList = new Structural.Views.RemovableParticipantList({
+    this.removableList = new Structural.Views.RemovableParticipantList({
       collection: this.participants.clone(),
     });
 
-    autocomplete.on('select', removableList.add, removableList);
-    removableList.on('remove', autocomplete.removeFromBlacklist, autocomplete);
+    this.autocomplete.on('select', this.removableList.add, this.removableList);
+    this.removableList.on('remove', this.autocomplete.removeFromBlacklist, this.autocomplete);
 
-    this.renderChildInto(autocomplete, this.$('.act-participants-editor-autocomplete'));
-    this.renderChildInto(removableList, this.$('.act-participants-editor-list'));
+    this.renderChildInto(this.autocomplete, this.$('.act-participants-editor-autocomplete'));
+    this.renderChildInto(this.removableList, this.$('.act-participants-editor-list'));
 
     return this;
   },
@@ -43,7 +43,16 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
   },
   saveAndClose: function(e) {
     if (e) { e.preventDefault(); }
-    // TODO: Commit changes
+
+    var editedParticipants = this.removableList.participants();
+    var added = Support.Collections.difference(editedParticipants, this.participants);
+    var removed = Support.Collections.difference(this.participants, editedParticipants);
+
+    if (added.length > 0 || removed.length > 0) {
+      this.trigger('update_users', added, removed);
+      this.participants = editedParticipants;
+    }
+
     this.toggleEditor();
   },
   saveAndCloseIfClickOff: function(e) {

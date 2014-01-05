@@ -8,9 +8,14 @@ Structural.Views.Participants = Support.CompositeView.extend({
     this.appendChild(new Structural.Views.ParticipantList({
       collection: this._participants
     }));
-    this.appendChild(new Structural.Views.ParticipantEditor({
+
+    var editor = new Structural.Views.ParticipantEditor({
       participants: this._participants,
       addressBook: this._addressBook
-    }))
+    });
+    this.appendChild(editor);
+    editor.on('update_users', function(added, removed) {
+      this.trigger('update_users', added, removed);
+    }, this);
   }
 });
