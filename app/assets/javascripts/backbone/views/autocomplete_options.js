@@ -75,6 +75,9 @@ Structural.Views.AutocompleteOptions = Support.CompositeView.extend({
     // This and the Autocomplete view have a reference to the same instance of
     // the blacklist, so we don't actually need to do anything here.
   },
+  replaceBlacklist: function(blacklist) {
+    this._blacklist = blacklist;
+  },
 
   _getIndexFromEvent: function(e) {
     return $(e.target).prevAll().length;

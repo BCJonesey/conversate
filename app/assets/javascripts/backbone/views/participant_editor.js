@@ -7,6 +7,8 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
     this.addressBook = options.addressBook;
 
     Structural.on('clickAnywhere', this.saveAndCloseIfClickOff, this);
+    Structural.on('changeConversation', this.changeConversation, this);
+    Structural.on('clearConversation', this.clearConversation, this);
   },
   render: function() {
     this.$el.html(this.template());
@@ -57,6 +59,13 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
         this._isOpen()) {
       this.saveAndClose();
     }
+  },
+
+  changeConversation: function(conversation) {
+    this.autocomplete.replaceBlacklist(conversation.get('participants'));
+  },
+  clearConversation: function() {
+    this.autocomplete.replaceBlacklist(new Structural.Collections.Participants([]));
   },
 
   _isOpen: function() {

@@ -67,6 +67,11 @@ Structural.Views.Autocomplete = Support.CompositeView.extend({
     this._optionsView.removeFromBlacklist(item);
   },
 
+  replaceBlacklist: function(blacklist) {
+    this._blacklist = blacklist.clone();
+    this._optionsView.replaceBlacklist(this._blacklist);
+  },
+
   cancel: function() {
     this._optionsView.clear();
     this._inputView.clear();
