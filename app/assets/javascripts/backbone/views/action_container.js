@@ -28,7 +28,8 @@ Structural.Views.ActionContainer = Support.CompositeView.extend({
     });
     this.participantsView = new Structural.Views.Participants({
       participants: this.participants,
-      addressBook: this.addressBook
+      addressBook: this.addressBook,
+      userId: this.user.id
     });
     this.actionsView = new Structural.Views.Actions({collection: this.actions});
     this.composeView = new Structural.Views.Compose({conversation: this.conversation});

@@ -3,6 +3,7 @@ Structural.Views.Participants = Support.CompositeView.extend({
   initialize: function(options) {
     this._participants = options.participants;
     this._addressBook = options.addressBook;
+    this._userId = options.userId;
 
     Structural.on('changeConversation', this.changeConversation, this);
     Structural.on('clearConversation', this.clearConversation, this);
@@ -29,6 +30,10 @@ Structural.Views.Participants = Support.CompositeView.extend({
       this.trigger('update_users', added, removed);
       this._list.replaceCollection(editedParticipants);
       this._participants = editedParticipants;
+
+      if (_.contains(_.map(removed, function(p) { return p.id }), this._userId)) {
+        Structural.removeSelfFromConversation();
+      }
     }
   },
 
