@@ -65,7 +65,7 @@ Structural.Views.NewConversation = Support.CompositeView.extend({
     this.$('.autocomplete input').attr('placeholder', '');
   },
   leaveParticipantEditingMode: function(e) {
-    this.$('.new-cnv-participants input').val('');
+    this.autocomplete.cancel();
     this.$('.new-cnv-participants').removeClass('editing');
     if (this.$('.removable-participant').length === 0) {
       this.$('.autocomplete input').attr('placeholder', 'Add people...');
