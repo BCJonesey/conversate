@@ -29,7 +29,9 @@ Structural.Views.NewConversation = Support.CompositeView.extend({
   },
   events: {
     'click .disable-new-cnv': 'cancel',
-    'click .send-new-cnv': 'send'
+    'click .send-new-cnv': 'send',
+    'focus .new-cnv-participants input': 'enterParticipantEditingMode',
+    'blur .new-cnv-participants input': 'leaveParticipantEditingMode'
   },
 
   cancel: function(e) {
@@ -48,5 +50,12 @@ Structural.Views.NewConversation = Support.CompositeView.extend({
 
     Structural.createNewConversation(title, participants, firstMessage);
     this.leave();
+  },
+
+  enterParticipantEditingMode: function(e) {
+    this.$('.new-cnv-participants').addClass('editing');
+  },
+  leaveParticipantEditingMode: function(e) {
+    this.$('.new-cnv-participants').removeClass('editing');
   }
 });
