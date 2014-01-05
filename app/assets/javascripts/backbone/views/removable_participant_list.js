@@ -3,7 +3,7 @@ Structural.Views.RemovableParticipantList = Support.CompositeView.extend({
   className: 'participants-removable-list',
   template: JST.template('participants/removable_list'),
   initialize: function(options) {
-
+    this.addAtEnd = options.addAtEnd || false;
   },
   render: function() {
     this.$el.html(this.template({participants: this.collection}));
@@ -21,7 +21,8 @@ Structural.Views.RemovableParticipantList = Support.CompositeView.extend({
     this.render();
   },
   add: function(model) {
-    this.collection.add(model, {at: 0});
+    var index = this.addAtEnd ? this.collection.length : 0;
+    this.collection.add(model, {at: index});
     this.render();
   },
   replace: function(list) {

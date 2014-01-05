@@ -14,7 +14,8 @@ Structural.Views.NewConversation = Support.CompositeView.extend({
       property: 'name'
     });
     this.removableList = new Structural.Views.RemovableParticipantList({
-      collection: this.participants.clone()
+      collection: this.participants.clone(),
+      addAtEnd: true
     });
 
     this.autocomplete.on('select', this.removableList.add, this.removableList);
