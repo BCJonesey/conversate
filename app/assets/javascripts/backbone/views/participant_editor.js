@@ -13,12 +13,12 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
 
     var autocomplete = new Structural.Views.Autocomplete({
       dictionary: this.addressBook,
-      blacklist: this.participants,
+      blacklist: this.participants.clone(),
       addSelectionToBlacklist: true,
       property: 'name'
     });
     var removableList = new Structural.Views.RemovableParticipantList({
-      collection: this.participants,
+      collection: this.participants.clone(),
     });
 
     this.renderChildInto(autocomplete, this.$('.act-participants-editor-autocomplete'));
