@@ -8,5 +8,9 @@ Structural.Views.Participants = Support.CompositeView.extend({
     this.appendChild(new Structural.Views.ParticipantList({
       collection: this._participants
     }));
+    this.appendChild(new Structural.Views.ParticipantEditor({
+      participants: this._participants,
+      addressBook: this._addressBook
+    }))
   }
 });
