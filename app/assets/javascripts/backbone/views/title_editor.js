@@ -31,8 +31,7 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
     'click .act-title-edit': 'toggleTitleEditor',
     'click .act-title-editor-popover .popover-close': 'toggleTitleEditor',
     'click .act-title-save': 'saveAndHide',
-    'click .act-archive-cnv': 'archiveConversation',
-    'keyup': 'cancelOnEscape'
+    'click .act-archive-cnv': 'archiveConversation'
   },
   archiveConversation: function(e) {
     e.preventDefault();
