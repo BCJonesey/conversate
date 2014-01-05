@@ -32,8 +32,9 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
     return this;
   },
   events: {
-    'click .act-participants-editor-toggle': 'toggleEditor',
+    'click .act-participants-edit': 'toggleEditor',
     'click .act-participants-editor-popover .popover-close': 'toggleEditor',
+    'click .act-participants-join': 'joinConversation',
     'click .act-participants-save': 'saveAndClose'
   },
 
@@ -41,7 +42,12 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
     if (e) { e.preventDefault(); }
 
     this.$('.act-participants-editor-popover').toggleClass('hidden');
-    this.$('.act-participants-editor-toggle').toggleClass('active');
+    this.$('.act-participants-edit').toggleClass('active');
+  },
+  joinConversation: function(e) {
+    if (e) { e.preventDefault(); }
+
+    Structural.addSelfToConversation();
   },
   saveAndClose: function(e) {
     if (e) { e.preventDefault(); }
