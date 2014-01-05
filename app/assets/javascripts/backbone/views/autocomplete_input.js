@@ -1,5 +1,5 @@
 Structural.Views.AutocompleteInput = Support.CompositeView.extend({
-  className: '',
+  className: 'autocomplete-input',
   template: JST.template('autocomplete/input'),
   initialize: function(options) {
   },
@@ -21,7 +21,7 @@ Structural.Views.AutocompleteInput = Support.CompositeView.extend({
   input: function(e) {
     if (e.which === Support.Keys.up) {
       this.trigger('up');
-    } else if (e.which === Suport.Keys.down) {
+    } else if (e.which === Support.Keys.down) {
       this.trigger('down');
     } else if (e.which === Support.Keys.enter ||
                e.which === Support.Keys.tab) {

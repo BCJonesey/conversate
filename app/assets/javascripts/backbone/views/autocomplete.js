@@ -33,15 +33,17 @@ for design info/mockups.
 */
 
 Structural.Views.Autocomplete = Support.CompositeView.extend({
-  className: '',
+  className: 'autocomplete',
   initialize: function(options) {
     this._dictionary = options.dictionary;
     this._blacklist = options.blacklist;
     this._addSelectionToBlacklist = options.addSelectionToBlacklist;
+    this._property = options.property;
 
     this._optionsView = new Structural.Views.AutocompleteOptions({
       collection: this._dictionary,
-      blacklist: this._blacklist
+      blacklist: this._blacklist,
+      property: this._property
     });
 
     this._inputView = new Structural.Views.AutocompleteInput({
@@ -56,12 +58,12 @@ Structural.Views.Autocomplete = Support.CompositeView.extend({
   },
 
   addToBlacklist: function(item) {
-    this._blacklist.push(item);
+    this._blacklist.add(item);
     this._optionsView.addToBlacklist(item);
   },
 
   removeFromBlacklist: function(item) {
-    this._blacklist = _.reject(this._blacklist, function(x) { return x == item; });
+    this._blacklist.remove(item);
     this._optionsView.removeFromBlacklist(item);
   },
 
@@ -75,7 +77,7 @@ Structural.Views.Autocomplete = Support.CompositeView.extend({
     inputView.on('up', optionsView.targetUp, optionsView);
     inputView.on('down', optionsView.targetDown, optionsView);
     inputView.on('select', this._select, this);
-    optionsView.on('click', this._select, this);
+    optionsView.on('select', this._select, this);
     Structural.on('clickAnywhere', this._cancelIfClickOff, this);
   },
 
@@ -92,9 +94,10 @@ Structural.Views.Autocomplete = Support.CompositeView.extend({
   },
 
   _cancelIfClickOff: function(e) {
+    var self = this;
     var target = $(e.target);
     if (!target.is(this.$el) &&
-        _.filter(target.parents(), function(x) { return x.is(this.$el); }).length === 0) {
+        _.filter(target.parents(), function(x) { return $(x).is(self.$el); }).length === 0) {
       this.cancel();
     }
   }
