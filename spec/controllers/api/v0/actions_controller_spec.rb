@@ -35,6 +35,7 @@ describe Api::V0::ActionsController do
 
   describe 'GET #index' do
     it 'successfully responds with a list of actions for a specified conversation' do
+
       get :index, :conversation_id => 1
       expect(response).to be_success
       expect(response.code).to eq("200")

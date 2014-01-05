@@ -137,8 +137,7 @@ describe Conversation do
       conversation.folders.length.should eq(1)
       conversation.folders.include?(@james.default_folder).should be_true
       conversation.actions.last.type.should eq('update_folders')
-      conversation.actions.last.added.length.should eq(1)
-      conversation.actions.last.added[0]['id'].should eq(@james.default_folder.id)
+      conversation.actions.last.added.length.should eq(0)
       conversation.actions.last.removed.length.should eq(1)
       conversation.actions.last.removed[0]['id'].should eq(@shared.id)
     end

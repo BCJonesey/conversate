@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-ruby "1.9.3"
-gem 'rails', '>= 3.2.11'
+ruby "2.0.0"
+gem 'rails', '>= 4.0.2'
 gem 'pry-rails'
 
 # Bundle edge Rails instead:
@@ -46,17 +46,13 @@ group :test, :development do
   gem 'thin'  # A minimalist web server. Heroku likes it.
 end
 
-# Pulling this out for now.
 gem "ruby-prof"
+
+gem "protected_attributes" # Let's us use the old-style attr_accessible calls.
+gem "rails_serve_static_assets" # Let's us actually serve our assets with heroku on rails 4.
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the app server
-# gem 'unicorn'
 
 # Deploy with Capistrano
 # gem 'capistrano'
