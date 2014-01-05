@@ -7,13 +7,22 @@ Structural.Views.NewConversation = Support.CompositeView.extend({
     this.addressBook = options.addressBook;
   },
   render: function() {
-    this.participantEditor = new Structural.Views.ParticipantEditor({
-      participants: this.participants,
-      addressBook: this.addressBook
+    this.autocomplete = new Structural.Views.Autocomplete({
+      dictionary: this.addressBook,
+      blacklist: this.participants.clone(),
+      addSelectionToBlacklist: true,
+      property: 'name'
+    });
+    this.removableList = new Structural.Views.RemovableParticipantList({
+      collection: this.participants.clone()
     });
 
+    this.autocomplete.on('select', this.removableList.add, this.removableList);
+    this.removableList.on('remove', this.autocomplete.removeFromBlacklist, this.autocomplete);
+
     this.$el.html(this.template());
-    this.insertChildBefore(this.participantEditor, this.$('.new-cnv-contents'));
+    this.insertChildBefore(this.autocomplete, this.$('.new-cnv-contents'));
+    this.insertChildBefore(this.removableList, this.$('.new-cnv-contents'));
 
     return this;
   },
@@ -33,7 +42,7 @@ Structural.Views.NewConversation = Support.CompositeView.extend({
     if (title.length === 0) {
       title = 'New Conversation';
     }
-    var participants = this.participantEditor.currentParticipants();
+    var participants = this.removableList.participants();
     var firstMessage = this.$('.new-cnv-body').val();
 
     Structural.createNewConversation(title, participants, firstMessage);

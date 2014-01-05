@@ -366,6 +366,11 @@ switch(name) {
     var collection = new Structural.Collections.Conversations(data.conversations);
     view = new Structural.Views.ConversationContainer({conversations: collection});
     break;
+  case 'new-conversation':
+    view = new Structural.Views.NewConversation({
+      addressBook: new Structural.Collections.Participants(data.user.address_book)
+    });
+    break;
   case 'folder':
     var model = new Structural.Models.Folder(data.folders[0]);
     view = new Structural.Views.Folder({model: model});
