@@ -31,7 +31,9 @@ Structural.Views.NewConversation = Support.CompositeView.extend({
     'click .disable-new-cnv': 'cancel',
     'click .send-new-cnv': 'send',
     'focus .new-cnv-participants input': 'enterParticipantEditingMode',
-    'blur .new-cnv-participants input': 'leaveParticipantEditingMode'
+    'blur .new-cnv-participants input': 'leaveParticipantEditingMode',
+    'focus .new-cnv-title-toolbar input': 'enterTitleEditingMode',
+    'blur .new-cnv-title-toolbar input': 'leaveTitleEditingMode'
   },
 
   cancel: function(e) {
@@ -57,5 +59,11 @@ Structural.Views.NewConversation = Support.CompositeView.extend({
   },
   leaveParticipantEditingMode: function(e) {
     this.$('.new-cnv-participants').removeClass('editing');
+  },
+  enterTitleEditingMode: function(e) {
+    this.$('.new-cnv-title-toolbar').addClass('editing');
+  },
+  leaveTitleEditingMode: function(e) {
+    this.$('.new-cnv-title-toolbar').removeClass('editing');
   }
 });
