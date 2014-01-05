@@ -21,8 +21,8 @@ Structural.Views.NewConversation = Support.CompositeView.extend({
     this.removableList.on('remove', this.autocomplete.removeFromBlacklist, this.autocomplete);
 
     this.$el.html(this.template());
-    this.insertChildBefore(this.autocomplete, this.$('.new-cnv-contents'));
     this.insertChildBefore(this.removableList, this.$('.new-cnv-contents'));
+    this.insertChildBefore(this.autocomplete, this.$('.new-cnv-contents'));
 
     return this;
   },
