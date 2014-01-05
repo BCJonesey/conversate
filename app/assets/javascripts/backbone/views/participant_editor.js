@@ -17,7 +17,12 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
       addSelectionToBlacklist: true,
       property: 'name'
     });
+    var removableList = new Structural.Views.RemovableParticipantList({
+      collection: this.participants,
+    });
+
     this.renderChildInto(autocomplete, this.$('.act-participants-editor-autocomplete'));
+    this.renderChildInto(removableList, this.$('.act-participants-editor-list'));
 
     return this;
   },

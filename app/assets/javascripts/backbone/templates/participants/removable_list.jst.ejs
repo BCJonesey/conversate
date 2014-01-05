@@ -1,0 +1,8 @@
+<% participants.each(function(p) { %>
+<li>
+  <%= p.escape('name') %>
+  <span class="remove-participant">
+    <i class="fa fa-times"></i>
+  </span>
+</li>
+<% }) %>
