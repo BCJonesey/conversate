@@ -57,10 +57,14 @@ Structural.Views.NewConversation = Support.CompositeView.extend({
 
   enterParticipantEditingMode: function(e) {
     this.$('.new-cnv-participants').addClass('editing');
+    this.$('.autocomplete input').attr('placeholder', '');
   },
   leaveParticipantEditingMode: function(e) {
     this.$('.new-cnv-participants input').val('');
     this.$('.new-cnv-participants').removeClass('editing');
+    if (this.$('.removable-participant').length === 0) {
+      this.$('.autocomplete input').attr('placeholder', 'Add people...');
+    }
   },
   enterTitleEditingMode: function(e) {
     this.$('.new-cnv-title-toolbar').addClass('editing');
