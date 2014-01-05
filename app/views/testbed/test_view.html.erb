@@ -7,7 +7,17 @@ data = {
   folders: [
     { "id": 1,
       "name": "Conversations",
-      "unread_conversations": 3
+      "unread_conversations": 3,
+      "users": [
+        { "id": 2,
+          "name": "Paul Revere",
+          "last_updated_time": 1235123423,
+        },
+        { "id": 4,
+          "name": "Thomas Paine",
+          "last_updated_time": 1613423423,
+        }
+      ]
     },
     { "id": 4,
       "name": "Structural",
@@ -369,7 +379,11 @@ switch(name) {
     view = new Structural.Views.FolderContainer({folders: collection});
     break;
   case 'folder-editor':
-    view = new Structural.Views.FolderEditor();
+    view = new Structural.Views.FolderEditor({
+      addressBook: new Structural.Collections.Participants(data.user.address_book),
+      user: new Structural.Models.User(data.user)
+    });
+    view._folder = new Structural.Models.Folder(data.folders[0]);
     break;
   case 'title-editor':
     var model = new Structural.Models.Conversation(data.conversations[0]);

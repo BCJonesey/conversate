@@ -6,15 +6,24 @@ Structural.Views.FolderEditor = Support.CompositeView.extend({
     this._addressBook = options.addressBook;
     this._user = options.user;
   },
-  render: function(folder) {
-    if (folder) {
-      this._participantEditor = new Structural.Views.ParticipantEditor({
-        participants: folder.get('users'),
-        addressBook: this._addressBook
+  render: function() {
+    if (this._folder) {
+      this._autocomplete = new Structural.Views.Autocomplete({
+        dictionary: this._addressBook,
+        blacklist: this._folder.get('users').clone(),
+        addSelectionToBlacklist: true,
+        property: 'name'
+      });
+      this._removableList = new Structural.Views.RemovableParticipantList({
+        collection: this._folder.get('users').clone()
       });
 
-      this.$el.html(this.template({folder: folder, user: this._user}));
-      this.insertChildAfter(this._participantEditor, this.$('label[for="folder-participants"]'));
+      this._autocomplete.on('select', this._removableList.add, this._removableList);
+      this._removableList.on('remove', this._autocomplete.removeFromBlacklist, this._autocomplete);
+
+      this.$el.html(this.template({folder: this._folder, user: this._user}));
+      this.insertChildAfter(this._removableList, this.$('label[for="folder-participants"]'));
+      this.insertChildAfter(this._autocomplete, this.$('label[for="folder-participants"]'));
     }
     return this;
   },
@@ -29,7 +38,7 @@ Structural.Views.FolderEditor = Support.CompositeView.extend({
 
   show: function(folder) {
     this._folder = folder;
-    this.render(folder);
+    this.render();
     this.$('.modal-background').removeClass('hidden');
   },
   showDeleteWarning: function(e){
@@ -69,7 +78,7 @@ Structural.Views.FolderEditor = Support.CompositeView.extend({
       }
       if (name.length === 0) { return; }
 
-      var participants = this._participantEditor.currentParticipants();
+      var participants = this._removableList.participants();
 
       this._folder.update(name, participants, email);
       this.$('.modal-background').addClass('hidden');
