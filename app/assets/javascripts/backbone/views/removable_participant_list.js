@@ -13,8 +13,15 @@ Structural.Views.RemovableParticipantList = Support.CompositeView.extend({
   },
 
   remove: function(e) {
-    var target = $(e.target);
+    var target = $(e.target).closest('.removable-participant');
     var index = target.prevAll().length;
-    this.trigger('remove', this.collection.at(index));
+    var model = this.collection.at(index);
+    this.trigger('remove', model);
+    this.collection.remove(model);
+    this.render();
+  },
+  add: function(model) {
+    this.collection.add(model);
+    this.render();
   }
 })

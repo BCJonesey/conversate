@@ -90,7 +90,7 @@ Structural.Views.Autocomplete = Support.CompositeView.extend({
       this.addToBlacklist(selected);
     }
 
-    this.trigger('selected', selected);
+    this.trigger('select', selected);
   },
 
   _cancelIfClickOff: function(e) {

@@ -21,6 +21,9 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
       collection: this.participants.clone(),
     });
 
+    autocomplete.on('select', removableList.add, removableList);
+    removableList.on('remove', autocomplete.removeFromBlacklist, autocomplete);
+
     this.renderChildInto(autocomplete, this.$('.act-participants-editor-autocomplete'));
     this.renderChildInto(removableList, this.$('.act-participants-editor-list'));
 
@@ -45,7 +48,9 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
   },
   saveAndCloseIfClickOff: function(e) {
     var target = $(e.target);
-    if (target.closest('.act-participants-editor').length === 0 && this._isOpen()) {
+    if (target.closest('.act-participants-editor').length === 0 &&
+        target.closest('body').length !== 0 &&
+        this._isOpen()) {
       this.saveAndClose();
     }
   },
