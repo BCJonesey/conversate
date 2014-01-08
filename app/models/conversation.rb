@@ -4,6 +4,7 @@ class Conversation < ActiveRecord::Base
   has_many :users, :through => :reading_logs
   has_many :actions, :inverse_of => :conversation
   has_and_belongs_to_many :folders
+  default_scope includes(:folders)
 
   attr_accessible :title, :users, :most_recent_event
 
@@ -222,7 +223,7 @@ class Conversation < ActiveRecord::Base
     json = super(options)
 
     # WARNING: Expensive call.
-    user = options[:user]
+    user = User.includes(:folders).find_by_id(options[:user].id)
     reading_log = user.reading_logs.where(:conversation_id => self.id).first
     most_recent_viewed = most_recent_viewed_for_reading_log(reading_log)
 
