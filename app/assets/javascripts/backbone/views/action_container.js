@@ -22,11 +22,6 @@ Structural.Views.ActionContainer = Support.CompositeView.extend({
     this.user = options.user;
     this.folders = options.folders;
 
-    this.participants.on('reset', this.reClass, this);
-
-    Structural.on('changeConversation', this.changeConversation, this);
-  },
-  render: function() {
     this.titleView = new Structural.Views.TitleEditor({
       conversation: this.conversation,
       folders: this.folders
@@ -39,16 +34,19 @@ Structural.Views.ActionContainer = Support.CompositeView.extend({
     this.composeView = new Structural.Views.Compose({conversation: this.conversation});
     this.detailsView = new Structural.Views.ActionDetails();
 
-    this.actions.on('showDetails', this.detailsView.show, this.detailsView);
+    this.participants.on('reset', this.reClass, this);
+    this.conversation.actions.on('showDetails', this.detailsView.show, this.detailsView);
+    this.titleView.on('change_title', Structural.createRetitleAction, Structural);
+    this.participantsView.on('update_users', Structural.createUpdateUserAction, Structural);
 
+    Structural.on('changeConversation', this.changeConversation, this);
+  },
+  render: function() {
     this.appendChild(this.detailsView);
     this.appendChild(this.titleView);
     this.appendChild(this.participantsView);
     this.appendChild(this.actionsView);
     this.appendChild(this.composeView);
-
-    this.titleView.on('change_title', Structural.createRetitleAction, Structural);
-    this.participantsView.on('update_users', Structural.createUpdateUserAction, Structural);
 
     // The first time backbone calls className we don't have some data?
     this.reClass();
@@ -63,6 +61,8 @@ Structural.Views.ActionContainer = Support.CompositeView.extend({
     this.conversation = conversation;
     this.participants = conversation.get("participants");
     this.reClass();
+
+    this.conversation.actions.on('showDetails', this.detailsView.show, this.detailsView);
   },
   clearConversation: function() {
     this.titleView.clearConversation();
