@@ -26,4 +26,7 @@ Conversate::Application.configure do
   config.assets.debug = true
 
   config.log_level = :info
+
+  # Rails 4 recommendation.
+  config.eager_load = false
 end
