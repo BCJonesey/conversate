@@ -2,7 +2,7 @@ class Folder < ActiveRecord::Base
   has_and_belongs_to_many :conversations
   has_and_belongs_to_many :users
 
-  attr_accessible :name, :email
+  #attr_accessible :name, :email
 
   validates_presence_of :name
 

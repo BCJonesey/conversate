@@ -1,5 +1,5 @@
 class EmailQueue < ActiveRecord::Base
-  attr_accessible :action_id, :external_user_id
+  #attr_accessible :action_id, :external_user_id
 
   def EmailQueue.push(message, user)
     EmailQueue.create({

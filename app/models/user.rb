@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :folders
   belongs_to :default_folder, class_name: "Folder", foreign_key: "default_folder_id"
 
-  attr_accessible :email, :full_name, :password, :password_confirmation, :external
+  #attr_accessible :email, :full_name, :password, :password_confirmation, :external
 
   validates_confirmation_of :password
   validates_presence_of :password, :on => :create, :unless => :external

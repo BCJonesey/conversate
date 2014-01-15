@@ -3,7 +3,7 @@ class Action < ActiveRecord::Base
   belongs_to :conversation, :inverse_of => :actions
   belongs_to :user, :inverse_of => :actions
 
-  attr_accessible :conversation_id, :user_id, :type, :data
+  #attr_accessible :conversation_id, :user_id, :type, :data
 
   validates_presence_of :conversation_id
   validates_presence_of :user_id
