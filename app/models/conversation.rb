@@ -6,7 +6,7 @@ class Conversation < ActiveRecord::Base
   has_and_belongs_to_many :folders
   default_scope includes(:folders, :users)
 
-  #attr_accessible :title, :users, :most_recent_event
+  attr_accessible :title, :users, :most_recent_event
 
   after_initialize do |convo|
     convo.title = convo.default_conversation_title if (convo.title.nil? || convo.title.empty?)
