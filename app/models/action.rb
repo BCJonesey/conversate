@@ -60,7 +60,8 @@ class Action < ActiveRecord::Base
   #   # => ArgumentError
   def method_missing(meth, *args, &block)
     if respond_to? meth
-      super
+      # Catches things like attribute accessors.
+      send(meth, *args, &block)
     else
 
       # Our actual method_missing body. Yay, Rails 4!
