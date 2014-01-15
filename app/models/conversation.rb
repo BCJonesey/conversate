@@ -4,7 +4,7 @@ class Conversation < ActiveRecord::Base
   has_many :users, :through => :reading_logs
   has_many :actions, :inverse_of => :conversation
   has_and_belongs_to_many :folders
-  default_scope includes(:folders, :users)
+  default_scope { includes(:folders, :users)}
 
   attr_accessible :title, :users, :most_recent_event
 
