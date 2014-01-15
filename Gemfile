@@ -46,17 +46,12 @@ group :test, :development do
   gem 'thin'  # A minimalist web server. Heroku likes it.
 end
 
-# Pulling this out for now.
 gem "ruby-prof"
+
+gem "protected_attributes" # Let's us use the old-style attr_accessible calls.
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the app server
-# gem 'unicorn'
 
 # Deploy with Capistrano
 # gem 'capistrano'
