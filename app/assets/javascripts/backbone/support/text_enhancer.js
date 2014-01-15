@@ -19,7 +19,12 @@ Support.TextEnhancer = {
         match = match.substring(0, match.length - 1);
       }
     }
-
-    return prefix + '<a href="' + match.trim() + '" target="_blank">' + match.trim() + '</a>' + suffix;
+    if(match.trim().match(/\.(jpeg|jpg|gif|png)$/) != null){
+      linkInner = '<a class="act-imageLink" style="background-image:url(' + match.trim() + ')" href="' + match.trim() + '" target="_blank">' + '</a>'
+    }
+    else{
+      linkInner = '<a href="' + match.trim() + '" target="_blank">' + match.trim() + '</a>'
+    }
+    return prefix + linkInner + suffix;
   }
 }
