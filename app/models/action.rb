@@ -59,9 +59,8 @@ class Action < ActiveRecord::Base
   #   e.msg_id
   #   # => ArgumentError
   def method_missing(meth, *args, &block)
-    super
-    if respond_to? id
-      send(id,*args)
+    if respond_to? meth
+      super
     else
 
       # Our actual method_missing body. Yay, Rails 4!
