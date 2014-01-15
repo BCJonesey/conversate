@@ -72,17 +72,6 @@
     margin:0;
     padding:0;
   }
-
-
-  li.user-reminder{
-    display:none;
-  }
-
-  input{
-    border:none;
-    background-color: transparent;
-    outline:none;
-  }
 }
 
 
@@ -96,17 +85,26 @@
   margin-top:-0.7rem;
   margin-left:3rem;
 }
-
-.participant-remove{
-  display: none;
+.act-participants-list{
+  width: 66%;
+  .ellipsis();
+  color:#888;
+  font-size:0.8rem;
 }
-
-.act-participants.editing {
-  .participant-remove {
-    display: inline;
-    cursor: pointer;
+.act-participant{
+  display:inline;
+  list-style: none;
+  font-size:0.8rem;
+  &:after{
+    content:", ";
   }
+  &:last-child:after{
+    content: none;
+  }
+
 }
+
+
 
 .act-list{
   background-color: white;
