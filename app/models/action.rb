@@ -59,24 +59,31 @@ class Action < ActiveRecord::Base
   #   e.msg_id
   #   # => ArgumentError
   def method_missing(meth, *args, &block)
-    name = meth.to_s
-    setter = name.end_with? '='
-    name = name[0...-1] if setter
-    if !@json.nil? && @json.has_key?(name)
-      if setter
-        @json[name] = args[0]
-      else
-        value = @json[name]
-        if value.nil? && DEFAULTS_BY_TYPE[self.type].has_key?(name)
-          DEFAULTS_BY_TYPE[self.type][name]
-        else
-          value
-        end
-      end
-    elsif DEFAULTS_BY_TYPE[self.type].has_key?(name)
-      DEFAULTS_BY_TYPE[self.type][name]
+    super
+    if respond_to? id
+      send(id,*args)
     else
-      super meth, args, block
+
+      # Our actual method_missing body. Yay, Rails 4!
+      name = meth.to_s
+      setter = name.end_with? '='
+      name = name[0...-1] if setter
+
+      if !@json.nil? && @json.has_key?(name)
+        if setter
+          @json[name] = args[0]
+        else
+          value = @json[name]
+          if value.nil? && DEFAULTS_BY_TYPE[self.type].has_key?(name)
+            DEFAULTS_BY_TYPE[self.type][name]
+          else
+            value
+          end
+        end
+      elsif DEFAULTS_BY_TYPE[self.type].has_key?(name)
+        DEFAULTS_BY_TYPE[self.type][name]
+      end
+
     end
   end
 
