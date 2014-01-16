@@ -1,0 +1,91 @@
+@import 'variables.css.less';
+@import 'mixins.css.less';
+
+.act-participants{
+  position: relative;
+  min-height:1.5rem;
+  max-height: 1.5rem;
+
+  overflow-y:auto;
+  background-color: @bg-1;
+  border:1px solid transparent;
+  border-bottom-color:@border-color-2;
+  @media(min-width:@bp-1){
+    border-bottom-color:@border-color-1;
+  }
+  padding:0 0.5rem;
+  padding-right:1.5rem;
+  overflow-y:visible;
+  &.editing{
+    max-height: 6.0rem;
+  }
+
+  ul{
+    margin:0;
+    padding:0;
+  }
+}
+
+
+
+
+.act-participants-editor{
+  position: absolute;
+  right:.1rem;
+  top:50%;
+  margin-top:-0.7rem;
+  margin-left:3rem;
+}
+
+.act-participants-editor-toggle,
+.act-participants-editor-toggle i{
+  font-size:0.8rem !important;
+}
+.act-participants-list{
+  width: 66%;
+  .ellipsis();
+  color:#888;
+  font-size:0.8rem;
+}
+.act-participant{
+  display:inline;
+  list-style: none;
+  font-size:0.8rem;
+  &:after{
+    content:", ";
+  }
+  &:last-child:after{
+    content: none;
+  }
+
+}
+
+.act-participants-editor-list{
+  ul, li{
+    list-style-type: none;
+  }
+  padding:0.5rem;
+}
+
+.removable-participant{
+  display:block;
+  padding:0.5rem;
+  color:#666;
+  border-top:@border-1;
+  position:relative;
+  .ellipsis();
+  padding-right:2.0rem;
+  &:last-child{
+    border-bottom:@border-1;
+  }
+}
+.remove-participant{
+  position:absolute;
+  top:0.55rem;
+  right:0.5rem;
+  cursor:pointer;
+  color:#DDD;
+  &:hover{
+    color:#222;
+  }
+}
