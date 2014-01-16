@@ -27,7 +27,7 @@
 }
 
 .autocomplete-options{
-  box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.5);
+  box-shadow: 0 0.25rem 0.25rem rgba(0,0,0,0.5);
   position:absolute;
   top:3.0rem;
   left:0.75rem;
@@ -45,6 +45,9 @@
   .option{
     padding:0.25rem;
     border-bottom: @border-2;
+    &:last-child{
+      border-bottom: none;
+    }
     .ellipsis();
     cursor: pointer;
     font-size:0.9rem;

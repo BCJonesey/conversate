@@ -31,11 +31,17 @@
 
 .act-participants-editor{
   position: absolute;
-  right:.1rem;
+  right:.25rem;
   top:50%;
   margin-top:-0.7rem;
   margin-left:3rem;
 }
+
+.act-participants-editor-wrap{
+  padding-right:0.4rem;
+}
+
+
 
 .act-participants-editor-toggle,
 .act-participants-editor-toggle i{
@@ -65,6 +71,9 @@
     list-style-type: none;
   }
   padding:0.5rem;
+  min-height: 10rem;
+  max-height: 20rem;
+  overflow-y: auto;
 }
 
 .removable-participant{
@@ -88,4 +97,8 @@
   &:hover{
     color:#222;
   }
+}
+
+.act-participants-editor-save-actions{
+  .ui-mobile-only();
 }
