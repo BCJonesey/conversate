@@ -65,33 +65,38 @@
   }
 
 }
-
+.act-participants-editor-autocomplete{
+  //background-color: @bg-1;
+}
 .act-participants-editor-list{
   ul, li{
     list-style-type: none;
   }
-  padding:0.5rem;
-  min-height: 10rem;
+  padding:0 0.5rem 0.1rem;
+  min-height: 2rem;
   max-height: 20rem;
   overflow-y: auto;
+  border-top:@border-1;
+  background-color: white;
 }
 
 .removable-participant{
   display:block;
   padding:0.5rem;
   color:#666;
-  border-top:@border-1;
+  border-bottom:@border-1;
   position:relative;
   .ellipsis();
   padding-right:2.0rem;
   &:last-child{
-    border-bottom:@border-1;
+    //border-bottom:@border-1;
+    border-bottom: none;
   }
 }
 .remove-participant{
   position:absolute;
   top:0.55rem;
-  right:0.5rem;
+  right:0.25rem;
   cursor:pointer;
   color:#DDD;
   &:hover{
