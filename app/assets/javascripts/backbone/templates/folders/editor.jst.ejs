@@ -9,15 +9,19 @@
       </div>
     </div>
     <div class="modal-content ef-window-content inspector">
-      <label for="folder-name">Name</label>
-      <input id="folder-name" type="text" class='ef-name-input'
-             value="<%= folder.escape('name') %>">
-      <label for="folder-participants">Participants</label>
-      <% if(user.get('site_admin')) {%>
-      <label for="folder-email">E-Mail Address</label>
-      <input id="folder-email" type="text" class='ef-email-input'
-             value="<%= folder.escape('email') %>"><span class='ef-email-domain'>@watercoolr.io</span>
-       <% } %>
+      <div class='ef-folder-details'>
+        <label for="folder-name">Name</label>
+        <input id="folder-name" type="text" class='ef-name-input'
+               value="<%= folder.escape('name') %>">
+        <% if(user.get('site_admin')) {%>
+        <label for="folder-email">E-Mail Address</label>
+        <input id="folder-email" type="text" class='ef-email-input'
+               value="<%= folder.escape('email') %>"><span class='ef-email-domain'>@watercoolr.io</span>
+         <% } %>
+      </div>
+      <div class='ef-folder-participants'>
+        <label for="folder-participants">Participants</label>
+      </div>
     </div>
     <div class='modal-content ef-deletion-content hidden'>
       <div class='ef-deletion-message'>
