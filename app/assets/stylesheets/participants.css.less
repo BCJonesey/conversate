@@ -4,19 +4,16 @@
 .participants-removable-list, & ul{
   padding:0;
   list-style-type: none;
+
 }
 
 .removable-participant{
-  color:#666;
-  position:relative;
+  color:#888;
   .remove-participant{
-    position:absolute;
-    top:0.55rem;
-    right:0.25rem;
+    color:#AAA;
     cursor:pointer;
-    color:#DDD;
     &:hover{
-      color:#222;
+      color:#444;
     }
   }
 }
@@ -24,6 +21,33 @@
 
 
 .participants-horizontal{
+  .participants-removable-list{
+    display:inline;
+    margin:0;
+  }
+  .removable-participant{
+    display:inline-block;
+    padding:0.15rem 0.35rem;
+    border:@border-1;
+    background-color: @bg-1;
+    font-size:0.8rem;
+    margin:0.25rem;
+    .remove-participant{
+
+    }
+  }
+  .autocomplete{
+    display:inline-block;
+  }
+  .autocomplete-input{
+    display:inline-block;
+    input{
+      border:none;
+      padding:0;
+      margin:0;
+      box-shadow: none;
+    }
+  }
 
 }
 
@@ -39,6 +63,17 @@
       //border-bottom:@border-1;
       border-bottom: none;
     }
+    color:#666;
+    position:relative;
+    .remove-participant{
+      position:absolute;
+      top:0.55rem;
+      right:0.25rem;
+      cursor:pointer;
+      color:#DDD;
+      &:hover{
+        color:#222;
+      }
+    }
   }
-
 }
