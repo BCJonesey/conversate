@@ -19,12 +19,19 @@ Support.TextEnhancer = {
         match = match.substring(0, match.length - 1);
       }
     }
-    if(match.trim().match(/\.(jpeg|jpg|gif|png)$/) != null){
-      linkInner = '<a class="act-imageLink" style="background-image:url(' + match.trim() + ')" href="' + match.trim() + '" target="_blank">' + '</a>'
+    var linkInner = "";
+    if(match.trim().match(/\.(jpeg|jpg|gif|png|svg)$/) != null){
+      var imgSrc = match.trim();
+      if (/www\.dropbox\.com/.test(imgSrc)) {
+        imgSrc = imgSrc.replace(/www\.dropbox\.com/, 'dl.dropboxusercontent.com');
+      }
+      linkInner = '<a class="act-imageLink" style="background-image:url(' + imgSrc + ')" href="' + imgSrc + '" target="_blank">' + '</a>';
     }
     else{
-      linkInner = '<a href="' + match.trim() + '" target="_blank">' + match.trim() + '</a>'
+      linkInner = '<a href="' + match.trim() + '" target="_blank">' + match.trim() + '</a>';
     }
     return prefix + linkInner + suffix;
   }
 }
+
+
