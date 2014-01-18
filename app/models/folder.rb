@@ -6,7 +6,7 @@ class Folder < ActiveRecord::Base
 
   validates_presence_of :name
 
-  default_scope includes(:users)
+  default_scope { includes(:users) }
 
   def as_json(options)
     json = super(options)
