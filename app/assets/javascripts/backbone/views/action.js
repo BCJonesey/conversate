@@ -43,10 +43,15 @@ Structural.Views.Action = Support.CompositeView.extend({
   },
 
   initialize: function(options) {
-    this.model.on('change', function() {
-      this.reRender();
-      // TODO: If we just set is_current to true, we want to scroll to the message.
-    }, this);
+    // In our current architecture there's no reason for an action to ever change,
+    // so we don't need to do this.  In the future there may be a reason for
+    // models to change, like if they get deleted or edited.  If that's the case
+    // you should solve the problem of firing change events on every model on
+    // every poll that happens when backbone tries to compare our inflated
+    // attributes.
+    // this.model.on('change', function() {
+    //   this.reRender();
+    // }, this);
 
     // If a model gets dumped, like when we try to post while getting actions, this will
     // clean up the duped view.
