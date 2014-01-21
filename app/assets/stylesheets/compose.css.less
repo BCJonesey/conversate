@@ -279,7 +279,7 @@
   background-color: @bg-1;
   border-top:@border-1;
   padding:0.35rem;
-  min-height: 2.75rem;
+  min-height: 3.7rem;
 }
 
 .act-container.not-participating-in .short-form-compose > *{
@@ -290,11 +290,14 @@
   position: relative;
   margin-right:4rem;
   margin-left:2.5rem;
-  textarea{
-    max-height:10rem;
-    min-height: 2.0rem;
-    height:2.0rem;
-  }
+}
+
+.short-form-textarea{
+  .ui-compose-input();
+  overflow-x:hidden;
+  overflow-y:auto;
+  height:3.0rem;
+  transition:height 0.05s ;
 }
 
 .enable-long-form-group{
@@ -313,7 +316,3 @@
   margin-right:0;
 }
 
-.short-form-textarea{
-  .ui-compose-input();
-  overflow:hidden;
-}
