@@ -3,52 +3,52 @@
 @import 'modal.css.less';
 
 .modal-window.ef-window{
-
-//this is to override the participants list visual styles.  it shouldn't be ncessary once that is refactored.
-  .act-participants-join{
-    display:none;
-  }
-  .modal-content{
-    overflow:auto;
-  }
-
-  .act-participants{
-    padding:0.25rem;
-    border:1px solid #CCC;
-    background-color: transparent;
-    &.editing{
-      border-color:#ABC;
-      box-shadow: inset 0 0 5px rgba(0,0,255,0.2);
-      background-color: @modal-input-highlight-background;
-    }
-    .participant-text{
-      //font-size: 1.0rem;
-    }
-  }
-  .participant{
-    margin-bottom: 0.25rem;
-    margin-top: 0.25rem;
-  }
-
-  .token-input{
-    border:none !important;
-    box-shadow:none !important;
-    background-color: transparent !important;
-    height:auto;
-    padding:0 !important;
-    margin:0 !important;
-  }
-  .token-options{
-    z-index: 10;
-  }
-
+  width:40rem;
 }
-
-
 .ef-window-content{
-  overflow:visible !important;
-  // This is to make the autocomplete box show up properly.  If the autocomplete can be made to show more correctly, then this line can be removed.
+  overflow:visible;
+  position: relative;
+  min-height: 20rem;
+  max-height: 25rem;
+
 }
+
+.ef-folder-details{
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:15rem;
+  overflow-y: auto;
+  padding:0.5rem;
+}
+
+.ef-folder-participants{
+  position:absolute;
+  right:0;
+  top:0;
+  bottom:0;
+  width:15rem;
+  border-left:@border-1;
+  padding:0.5rem 0.5rem 0;
+
+  .participants-removable-list{
+    border-top:@border-1;
+    overflow-y: auto;
+    position:absolute;
+    margin:0;
+    bottom:0;
+    right:0;
+    left:0;
+    top:4.5rem;
+    padding:0 0.5rem;
+  }
+  .autocomplete-options{
+    left:0.5rem;
+    top:1.5rem;
+  }
+}
+
 .ef-deletion-message{
   padding:0 0.5rem;
   background-color: white;

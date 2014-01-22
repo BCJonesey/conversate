@@ -1,84 +1,84 @@
 Structural.Views.ParticipantEditor = Support.CompositeView.extend({
-  className: 'act-participants',
+  className: 'btn-group act-participants-editor',
   template: JST.template('participants/editor'),
   initialize: function(options) {
     options = options || {};
     this.participants = options.participants;
     this.addressBook = options.addressBook;
 
-    this.tokens = new Structural.Views.Participants({collection: this.participants});
-    this.tokenOptions = new Structural.Views.AutocompleteOptions({
-      collection: this.addressBook,
-      participants: this.participants
-    });
-    this.tokens.on('moveAutocompleteTarget', this.tokenOptions.moveAutocompleteTarget, this.tokenOptions);
-    this.tokens.on('changeAutocompleteOptions', this.tokenOptions.changeAutocompleteOptions, this.tokenOptions);
-    this.tokens.on('selectAutocompleteTarget', this.selectParticipant, this);
-    this.tokenOptions.on('selectAutocompleteTarget', this.selectParticipant, this);
-    this.tokens.on('update_users', function(added, removed) {
-      this.trigger('update_users', added, removed);
-    }, this);
-
-    this.participants.on('reset', this.reRender, this);
+    Structural.on('clickAnywhere', this.saveAndCloseIfClickOff, this);
+    Structural.on('changeConversation', this.changeConversation, this);
+    Structural.on('clearConversation', this.clearConversation, this);
   },
   render: function() {
     this.$el.html(this.template());
-    this.prependChild(this.tokens);
-    this.appendChildTo(this.tokenOptions, this.$('.token-input-wrap'));
+
+    this.autocomplete = new Structural.Views.Autocomplete({
+      dictionary: this.addressBook,
+      blacklist: this.participants.clone(),
+      addSelectionToBlacklist: true,
+      property: 'name'
+    });
+    this.removableList = new Structural.Views.RemovableParticipantList({
+      collection: this.participants.clone(),
+    });
+
+    this.autocomplete.on('select', this.removableList.add, this.removableList);
+    this.removableList.on('remove', this.autocomplete.removeFromBlacklist, this.autocomplete);
+
+    this.renderChildInto(this.autocomplete, this.$('.act-participants-editor-autocomplete'));
+    this.renderChildInto(this.removableList, this.$('.act-participants-editor-list'));
+
     return this;
   },
-  reRender: function() {
-    this.tokens.collection = this.participants;
-    this.tokens.reset();
-  },
   events: {
-    'click .act-participants-edit': 'enterEditingMode',
-    'click .act-participants-save': 'saveParticipants',
-    'click .act-participants-join': 'addSelfToConversation'
+    'click .act-participants-edit': 'toggleEditor',
+    'click .act-participants-editor-popover .popover-close': 'toggleEditor',
+    'click .act-participants-join': 'joinConversation',
+    'click .act-participants-save': 'saveAndClose'
   },
-  enterEditingMode: function(e) {
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-    this.$('.act-participants-actions, .act-participants-save-actions')
-      .toggleClass('hidden');
-    this.tokens.edit();
-    this.$el.addClass('editing');
-    this.tokens.focus();
 
-    Structural.on('clickAnywhere', this.cancel, this);
-  },
-  saveParticipants: function(e) {
-    e.preventDefault();
-    this.$('.act-participants-actions, .act-participants-save-actions')
-      .toggleClass('hidden');
-    this.tokens.save();
-    this.$el.removeClass('editing');
+  toggleEditor: function(e) {
+    if (e) { e.preventDefault(); }
 
-    Structural.off('clickAnywhere', this.cancel, this);
+    this.$('.act-participants-editor-popover').toggleClass('hidden');
+    this.$('.act-participants-edit').toggleClass('active');
   },
-  addSelfToConversation: function(e) {
-    e.preventDefault();
+  joinConversation: function(e) {
+    if (e) { e.preventDefault(); }
+
     Structural.addSelfToConversation();
   },
-  selectParticipant: function() {
-    this.tokens.addToken(this.tokenOptions.currentOption());
-    this.tokenOptions.clear();
-    this.tokens.focus();
-  },
-  cancel: function(e) {
-    if (!e || ($(e.target).closest('.act-participants').length === 0 &&
-               $(e.target).closest('body').length > 0)) {
-      this.tokens.cancel();
-      this.$el.removeClass('editing');
-      this.$('.act-participants-actions, .act-participants-save-actions')
-        .toggleClass('hidden');
+  saveAndClose: function(e) {
+    if (e) { e.preventDefault(); }
 
-      Structural.off('clickAnywhere', this.cancel, this);
+    var editedParticipants = this.removableList.participants();
+    this.trigger('update_users', editedParticipants);
+    this.participants = editedParticipants;
+
+    this.toggleEditor();
+  },
+  saveAndCloseIfClickOff: function(e) {
+    var target = $(e.target);
+    if (target.closest('.act-participants-editor').length === 0 &&
+        target.closest('body').length !== 0 &&
+        this._isOpen()) {
+      this.saveAndClose();
     }
   },
-  currentParticipants: function() {
-    return this.tokens.currentParticipants();
+
+  changeConversation: function(conversation) {
+    this._replaceParticipants(conversation.get('participants'));
+  },
+  clearConversation: function() {
+    this._replaceParticipants(new Structural.Collections.Participants([]));
+  },
+
+  _isOpen: function() {
+    return !this.$('.act-participants-editor-popover').hasClass('hidden');
+  },
+  _replaceParticipants: function(participants) {
+    this.autocomplete.replaceBlacklist(participants);
+    this.removableList.replace(participants);
   }
 });

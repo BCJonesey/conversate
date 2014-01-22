@@ -181,6 +181,11 @@ var Structural = new (Support.CompositeView.extend({
     this._folder.conversations.fetch(true);
     this.trigger('changeConversation', convo);
   },
+  removeSelfFromConversation: function() {
+    var participant = new Structural.Models.Participant(this._user.attributes);
+    this._conversation.get('participants').remove(participant);
+    this.trigger('changeConversation', this._conversation);
+  },
   createMessageAction: function(text) {
     this._conversation.actions.createMessageAction(text, this._user);
 

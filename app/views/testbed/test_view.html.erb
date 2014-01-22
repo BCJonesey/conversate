@@ -7,7 +7,17 @@ data = {
   folders: [
     { "id": 1,
       "name": "Conversations",
-      "unread_conversations": 3
+      "unread_conversations": 3,
+      "users": [
+        { "id": 2,
+          "name": "Paul Revere",
+          "last_updated_time": 1235123423,
+        },
+        { "id": 4,
+          "name": "Thomas Paine",
+          "last_updated_time": 1613423423,
+        }
+      ]
     },
     { "id": 4,
       "name": "Structural",
@@ -356,6 +366,11 @@ switch(name) {
     var collection = new Structural.Collections.Conversations(data.conversations);
     view = new Structural.Views.ConversationContainer({conversations: collection});
     break;
+  case 'new-conversation':
+    view = new Structural.Views.NewConversation({
+      addressBook: new Structural.Collections.Participants(data.user.address_book)
+    });
+    break;
   case 'folder':
     var model = new Structural.Models.Folder(data.folders[0]);
     view = new Structural.Views.Folder({model: model});
@@ -369,18 +384,23 @@ switch(name) {
     view = new Structural.Views.FolderContainer({folders: collection});
     break;
   case 'folder-editor':
-    view = new Structural.Views.FolderEditor();
+    view = new Structural.Views.FolderEditor({
+      addressBook: new Structural.Collections.Participants(data.user.address_book),
+      user: new Structural.Models.User(data.user)
+    });
+    view._folder = new Structural.Models.Folder(data.folders[0]);
     break;
   case 'title-editor':
     var model = new Structural.Models.Conversation(data.conversations[0]);
     view = new Structural.Views.TitleEditor({conversation: model});
     break;
   case 'participant-editor':
-    var collection = new Structural.Collections.Participants(data.participants);
-    var addresses = new Structural.Collections.Participants(data.user.address_book);
-    view = new Structural.Views.ParticipantEditor({
-      participants: collection,
-      addressBook: addresses
+    var addressBook = new Structural.Collections.Participants(data.user.address_book);
+    var participants = new Structural.Collections.Participants(data.participants);
+    view = new Structural.Views.Participants({
+      participants: participants,
+      addressBook: addressBook,
+      userId: 2
     });
     break;
   case 'update-folders':

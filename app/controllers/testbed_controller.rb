@@ -7,6 +7,7 @@ class TestbedController < ApplicationController
       'conversation',
       'conversation-list',
       'conversation-container',
+      'new-conversation',
       'folder',
       'folder-list',
       'folder-container',
