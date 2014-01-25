@@ -17,7 +17,7 @@ describe Api::V0::UsersController do
       body = JSON.parse(response.body)
       expect(body['email']).to eq('dummyUser@example.com')
       expect(body['full_name']).to eq('Rufio Pan')
-      expect(body['id']).to eq(1)
+      expect(body['id']).to eq(@user.id)
     end
     it "has a correct address book"
   end
@@ -33,7 +33,7 @@ describe Api::V0::UsersController do
       body = JSON.parse(response.body)
       expect(body['email']).to eq('examplio@example.com')
       expect(body['full_name']).to eq("Examplio D'Examparelli")
-      expect(body['id']).to eq(2) # We've created a user already in the before filter.
+      expect(body['id']).not_to eq(@user.id) # We've created a user already in the before filter.
     end
   end
 
@@ -43,13 +43,13 @@ describe Api::V0::UsersController do
             :email => 'newEmail@example.com',
             :full_name => 'Nuevo Nombre',
             :password => 'superDUPERsecretPassword',
-            :id => 1
+            :id => @user.id
       expect(response).to be_success
       expect(response.code).to eq('200')
       body = JSON.parse(response.body)
       expect(body['email']).to eq('newEmail@example.com')
       expect(body['full_name']).to eq('Nuevo Nombre')
-      expect(body['id']).to eq(1)
+      expect(body['id']).to eq(@user.id)
     end
     it 'successfully changes a user password' do
       put :update,
@@ -57,20 +57,20 @@ describe Api::V0::UsersController do
             :full_name => 'Nuevo Nombre',
             :password => 'superDUPERsecretPassword',
             :new_password => 'newestPassword',
-            :id => 1
+            :id => @user.id
       expect(response).to be_success
       expect(response.code).to eq('200')
       body = JSON.parse(response.body)
       expect(body['email']).to eq('newEmail@example.com')
       expect(body['full_name']).to eq('Nuevo Nombre')
-      expect(body['id']).to eq(1)
+      expect(body['id']).to eq(@user.id)
     end
     it 'fails to update an existing user because the password is wrong' do
       put :update,
             :email => 'newEmail@example.com',
             :full_name => 'Nuevo Nombre',
             :password => 'completelyWrongPassword',
-            :id => 1
+            :id => @user.id
       expect(response).not_to be_success
       expect(response.code).to eq('401')
     end
