@@ -39,6 +39,7 @@ Conversate::Application.routes.draw do
       end
       resources :users, :only => [:index, :create, :update]
       resources :admin, :only => [:index]
+      resources :search, :only => [:index]
     end
   end
 
