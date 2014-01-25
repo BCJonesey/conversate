@@ -5,7 +5,8 @@ class MandrillInboundEmail
 
   def initialize(data)
     @data = data
-    @sender = User.find_by_email_insensitive(@data['from_email']) unless @user
+    @sender = User.find_by_email_insensitive(@data['from_email'])
+    initialize_new_user if @sender.nil?
     reply_text = EmailReplyParser.parse_reply(@data['text'])
     @action = Action.new(
       type: 'email_message',
@@ -59,5 +60,10 @@ class MandrillInboundEmail
     conversation.add_participants [@sender], @sender
     conversation.reload
     self.dispatch_to_conversation
+  end
+
+  def initialize_new_user
+    @sender = User.build({email:  @data['from_email'], full_name: @data['from_name'] || "", external: true})
+    raise "Could not create external user" if @sender.nil?
   end
 end
