@@ -12,14 +12,18 @@ Structural.Router = new (Backbone.Router.extend({
     Structural.focus({ folder: Structural._folders.at(0).id });
   },
   conversation: function(slug, id) {
-    Structural.focus({ folder: this._folderIdForConversation(Structural._conversation),
-                       conversation: id });
+    Structural.focus({
+      folder: this._folderIdForConversation(Structural._conversation),
+      conversation: id
+    });
     this._fixSlug('conversation/', slug, '/' + id, Structural._conversation.get('title'));
   },
   message: function(slug, id, messageId) {
-    Structural.focus({ folder: this._folderIdForConversation(Structural._conversation),
-                       conversation: id,
-                       message: messageId });
+    Structural.focus({
+      folder: this._folderIdForConversation(Structural._conversation),
+      conversation: id,
+      message: messageId
+    });
     this._fixSlug('conversation/', slug, '/' + id + '#message' + messageId, Structural._conversation.get('title'));
   },
   folder: function(slug, id) {

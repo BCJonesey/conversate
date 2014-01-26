@@ -25,7 +25,6 @@ Structural.Collections.Actions = Backbone.Collection.extend({
   },
 
   focus: function(id) {
-    // findWhere is coming in backbone 1.0.0.
     var action = this.get(id);
     if(action) {
       action.focus();
