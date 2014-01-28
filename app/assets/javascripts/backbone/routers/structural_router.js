@@ -62,10 +62,6 @@ Structural.Router = new (Backbone.Router.extend({
            this.slugify(conversation.get('title')) +
            '/' + conversation.id;
   },
-  messagePath: function(conversation, message) {
-    return this.conversationPath(conversation) +
-           '#message' + message.id;
-  },
   folderPath: function(folder) {
     return 'folder/' +
            this.slugify(folder.get('name')) +
@@ -88,9 +84,6 @@ Structural.Router = new (Backbone.Router.extend({
   },
   conversationHref: function(conversation) {
     return '/' + this.conversationPath();
-  },
-  messageHref: function(conversation, message) {
-    return '/' + this.messagePath(conversation, message);
   },
   folderHref: function(folder) {
     return '/' + this.folderPath(folder);
