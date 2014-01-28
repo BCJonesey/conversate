@@ -85,5 +85,8 @@ Structural.Views.Action = Support.CompositeView.extend({
   showFullText: function(e) {
     e.preventDefault();
     this.model.collection.trigger('showDetails', this.model);
+  },
+  focused: function() {
+    return this.model.get('focused');
   }
 });
