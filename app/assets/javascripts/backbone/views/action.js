@@ -57,7 +57,13 @@ Structural.Views.Action = Support.CompositeView.extend({
     // clean up the duped view.
     this.model.on('remove', function() {
       this.leave();
-    }, this)
+    }, this);
+
+    this.model.on('change:focused', function() {
+      if (this.model.get('focused')) {
+        this.model.collection.trigger('focusedView', this);
+      }
+    }, this);
   },
   render: function() {
     var template = this.templates[this.model.get('type')];

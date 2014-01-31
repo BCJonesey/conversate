@@ -12,14 +12,18 @@ Structural.Views.Actions = Support.CompositeView.extend({
     collection.on('reset', this.reRender, this);
     collection.on('addedSomeoneElsesMessage', this.scrollDownIfAtBottom, this);
     collection.on('actionsLoadedForFirstTime', this.reRender, this);
+    collection.on('focusedView', this.scrollToTargetAtEarliestOpportunity, this);
   },
   render: function() {
     this.collection.forEach(this.renderAction, this);
-    this.scrollDownAtEarliestOpportunity();
+    this.scrollToTargetAtEarliestOpportunity(this.focusedView);
     return this;
   },
   renderAction: function(action) {
     var view = new Structural.Views.Action({model: action});
+    if (view.focused()) {
+      this.focusedView = view;
+    }
     this.appendChild(view);
   },
   reRender: function() {
@@ -45,25 +49,25 @@ Structural.Views.Actions = Support.CompositeView.extend({
 
   // Sometimes when we want to scroll down the actions list hasn't actually been
   // added to the DOM yet, and you can't scroll things that aren't in the DOM.
-  scrollDownAtEarliestOpportunity: function() {
+  scrollToTargetAtEarliestOpportunity: function(focusedView) {
     var self = this;
-    var scrollUnlessAtBottom = function() {
-      if (self.isAtBottom()) {
+    var scrollUnlessAtTarget = function() {
+      if (self.targetIsOnScreen(focusedView)) {
         clearInterval(self._scrollerIntervalId);
       } else {
-        self.scrollToBottom();
+        self.scrollTargetOnScreen(focusedView);
       }
     };
-    scrollUnlessAtBottom();
+    scrollUnlessAtTarget();
 
     if (this._scrollerIntervalId) {
       clearInterval(this._scrollerIntervalId);
     }
-    this._scrollerIntervalId = setInterval(scrollUnlessAtBottom, 300);
+    this._scrollerIntervalId = setInterval(scrollUnlessAtTarget, 300);
   },
   scrollDownIfAtBottom: function() {
     if (this.isAtBottom()) {
-      this.scrollDownAtEarliestOpportunity();
+      this.scrollToTargetAtEarliestOpportunity();
     }
   }
 });
