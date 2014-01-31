@@ -8,6 +8,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     this.conversationId = options.conversation;
     this.userId = options.user;
     this.on('reset', this._findMyMessages, this);
+    this.on('reset', this._findFocusedMessage, this);
     this.on('add', this.setStateOnNewAction, this);
     this.on('add', function(model, collection, options) {
       this.trigger('unreadCountChanged');
@@ -24,10 +25,23 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     }, this);
   },
 
+  _findFocusedMessage: function() {
+    if (this._idToFocus) {
+      this.forEach(function(action) {
+        if (this._idToFocus == action.id) {
+          action.focus();
+          this._idToFocus = undefined;
+        }
+      }, this);
+    }
+  },
+
   focus: function(id) {
     var action = this.get(id);
     if(action) {
       action.focus();
+    } else {
+      this._idToFocus = id;
     }
 
     this.filter(function(act) { return act.id != id; }).forEach(function(act) {
