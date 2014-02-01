@@ -1,0 +1,22 @@
+<input id="fileupload" type="file" name="files[]" data-url="server/php/" multiple>
+<i id="fileupload" class="fa fa-paperclip"></i>
+
+<script>
+$(function () {
+    $('#fileupload').fileupload({
+        dataType: 'json',
+        done: function (e, data) {
+            $.each(data.result.files, function (index, file) {
+                $('<p/>').text(file.name).appendTo(document.body);
+            });
+        },
+        progressall: function (e, data) {
+          var progress = parseInt(data.loaded / data.total * 100, 10);
+          $('#progress .bar').css(
+              'width',
+              progress + '%'
+          );
+      }
+    });
+});
+</script>
