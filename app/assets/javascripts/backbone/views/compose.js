@@ -13,7 +13,7 @@ Structural.Views.Compose = Support.CompositeView.extend({
     this._short = this.$('.short-form-compose');
     this._long = this.$('.long-form-compose');
     this._fileUpload = new Structural.Views.FileUpload();
-    this.$('.act-compose-short-input').prepend(this._fileUpload.template());
+    this.prependChildTo(this._fileUpload, this.$('.act-compose-short-input'));
 
     return this;
   },
