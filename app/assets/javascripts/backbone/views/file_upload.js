@@ -1,5 +1,5 @@
 Structural.Views.FileUpload = Support.CompositeView.extend({
-  className: 'act-fileupload',
+  className: 'popover-wrap',
   template: JST.template('actions/file_upload'),
   events: {
     'click .act-file-upload-toggle': 'toggleFileUpload',
