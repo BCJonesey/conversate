@@ -1,5 +1,26 @@
-<input id="fileupload" type="file" name="files[]" data-url="server/php/" multiple>
-<i id="fileupload" class="fa fa-paperclip"></i>
+<span class='popover-wrap'>
+
+
+  <a href='#' class='btn-icon' id="fileupload">
+    <i class="fa fa-paperclip"></i>
+  </a>
+
+
+  <div class='act-file-upload-popover popover opens-north-east not-hidden'>
+    <div class='popover-header'>Send a File<a href='#' class='popover-close'><i class='fa fa-times'></i></a></div>
+
+    <div class='popover-content act-file-upload-content form'>
+      <label>File</label>
+      <input id="fileupload" class='act-file-upload-input' type="file" name="files[]" data-url="server/php/" multiple>
+
+      <label>Notes</label>
+      <textarea class='act-file-upload-notes'></textarea>
+    </div>
+
+  </div>
+
+</span>
+
 
 <script>
 $(function () {

@@ -1,0 +1,33 @@
+@import 'variables.css.less';
+@import 'mixins.css.less';
+
+
+.act-file-upload-input-style(){
+  background-color: white;
+  border:@border-2;
+}
+
+.popover.act-file-upload-popover{
+  @media (min-width:@bp-1){
+    width:20rem;
+  }
+}
+
+
+.popover .popover-content.act-file-upload-content{
+  background-color: @bg-1;
+  .act-file-upload-input{
+    .act-file-upload-input-style();
+    width:100%;
+    padding:0.25rem;
+    color:#666;
+    margin-bottom:0.5rem;
+    outline:none;
+  }
+  .act-file-upload-notes{
+    .act-file-upload-input-style();
+    height:4rem;
+    overflow-y: auto;
+    resize:none;
+  }
+}
