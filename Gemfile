@@ -54,6 +54,10 @@ gem "rails_serve_static_assets" # Let's us actually serve our assets with heroku
 # File upload plugin that is pretty. https://github.com/semaperepelitsa/jquery.fileupload-rails
 gem 'jquery.fileupload-rails'
 
+# For making S3 calls. We might eventually have to move the logic out to the client, but let's do the simplest
+# thing first.
+gem 'aws-sdk'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
