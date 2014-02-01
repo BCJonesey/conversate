@@ -12,5 +12,21 @@ Structural.Views.FileUpload = Support.CompositeView.extend({
   },
   render: function() {
     this.$el.html(this.template());
+    $('#fileupload').fileupload({
+        dataType: 'json',
+        done: function (e, data) {
+            console.log('done');
+            $.each(data.result.files, function (index, file) {
+                $('<p/>').text(file.name).appendTo(document.body);
+            });
+        },
+        progressall: function (e, data) {
+          var progress = parseInt(data.loaded / data.total * 100, 10);
+          $('#progress .bar').css(
+              'width',
+              progress + '%'
+          );
+      }
+    });
   }
 });
