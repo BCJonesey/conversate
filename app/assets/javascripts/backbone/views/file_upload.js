@@ -12,10 +12,9 @@ Structural.Views.FileUpload = Support.CompositeView.extend({
   },
   render: function() {
     this.$el.html(this.template());
-    $('#fileupload').fileupload({
+    this.$('#fileupload').fileupload({
         dataType: 'json',
         done: function (e, data) {
-            console.log('done');
             $.each(data.result.files, function (index, file) {
                 $('<p/>').text(file.name).appendTo(document.body);
             });
