@@ -22,7 +22,7 @@ class MandrillInboundEmail
       when /cnv-(\d+)/
         @conversation = Conversation.find($1)
       when /(.*)/
-        @folder = Folder.find_by_email($1)
+        @folder = Folder.find_by_email_insensitive($1)
         @subject = @data['subject']
       else
         Rails.logger.warn "Inbound mail can't match any address pattern."
