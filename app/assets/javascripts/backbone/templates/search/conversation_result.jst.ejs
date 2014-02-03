@@ -1,0 +1,8 @@
+<span class="search-result-title search-result-headline">
+  <!-- TODO: Split this apart on the server, rejoin on client -->
+  <%= result.get('headline') %>
+</span>
+<span class="search-result-participants">
+  <%= _.escape(result.get('conversation_participants')
+                     .join(', ')) %>
+</span>
