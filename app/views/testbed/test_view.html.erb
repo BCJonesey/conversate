@@ -430,6 +430,9 @@ switch(name) {
       addresses: addresses
     });
     break;
+  case 'search':
+    view = new Structural.Views.Search();
+    break;
   case 'structural-bar':
     var model = new Structural.Models.User(data.user);
     view = new Structural.Views.StructuralBar({model: model});
