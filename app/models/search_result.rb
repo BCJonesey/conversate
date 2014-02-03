@@ -28,7 +28,7 @@
       on reading_logs.user_id = users.id
       where search_vector @@ query
       group by act.id, rank, headline, cnv.title, cnv.id
-      order by rank
+      order by rank desc
     ")
 
     results.map {|r| SearchResult.new('action', r) }
