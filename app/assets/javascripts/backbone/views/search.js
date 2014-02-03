@@ -4,16 +4,28 @@ Structural.Views.Search = Support.CompositeView.extend({
   template: JST.template('search/search'),
   initialize: function(options) {
     Structural.on('clickAnywhere', this.hide, this);
+
+    this._input = new Structural.Views.SearchInput();
+    this._results = new Structural.Views.SearchResults();
   },
   render: function() {
     this.$el.html(this.template());
+
+    var content = this.$('.popover-content');
+    this.appendChildTo(this._input, content);
+    this.appendChildTo(this._results, content);
+
+    this._input.on('queryChanged', this._results.search, this._results);
+
     return this;
   },
   events: {
     'click .search-toggle': 'toggleSearch'
   },
 
-  toggleSearch: function() {
+  toggleSearch: function(e) {
+    if (e) { e.preventDefault(); }
+
     this.$('.search-popover').toggleClass('hidden');
     this.$('.search-toggle').toggleClass('active');
   },
