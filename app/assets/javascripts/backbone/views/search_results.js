@@ -9,6 +9,14 @@ Structural.Views.SearchResults = Support.CompositeView.extend({
     this.$el.html(this.template({
       results: this._results
     }));
+
+    this._results.forEach(this.renderResult, this);
+  },
+  renderResult: function(result) {
+    var view = new Structural.Views.SearchResult({
+      model: result
+    });
+    this.appendChildTo(view, this.$('.search-results-list'))
   },
 
   search: function(query) {

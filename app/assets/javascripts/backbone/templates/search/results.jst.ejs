@@ -1,21 +1,6 @@
 <% if (results.length === 0) { %>
   No results
 <% } else { %>
-  <ul>
-    <% results.forEach(function(result) { %>
-      <li>
-        <span class="search-result-title">
-          <%= result.escape('conversation_title') %>
-        </span>
-        <span class="search-result-participants">
-          <%= _.escape(result.get('conversation_participants')
-                             .join(', ')) %>
-        </span>
-        <span class="search-result-headline">
-          <!-- TODO: split this apart on the server, rejoin on client -->
-          <%= result.get('headline') %>
-        </span>
-      </li>
-    <% }) %>
+  <ul class="search-results-list">
   </ul>
 <% } %>
