@@ -5,6 +5,8 @@ Structural.Views.SearchInput = Support.CompositeView.extend({
     this._query = options.query || "";
   },
   render: function() {
-    this.$el.html(this.template());
+    this.$el.html(this.template({
+      query: this._query
+    }));
   }
 });

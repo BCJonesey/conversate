@@ -348,7 +348,159 @@ data = {
         "id": 6
       }
     ]
-  }
+  },
+  searchResults: [
+    {
+      "result_type": "action",
+      "result_id": "266",
+      "rank": "0.0909091",
+      "headline": "<b>tuesday</b> + <b>thursday</b> week.   I know you two boners with real jobs might not be physically",
+      "conversation_title": "Water Cooler Lobby - October 2013",
+      "conversation_participants": [
+        "Sean Kermes",
+        "Ben Jones",
+        "Nick Martin",
+        "William Lubelski"
+      ]
+    },
+    {
+      "result_type": "action",
+      "result_id": "130",
+      "rank": "0.0536278",
+      "headline": "<b>Tuesdays</b> and <b>Thursdays</b>, but I can still probably meet up at the library for a bit on <b>Tuesday</b>",
+      "conversation_title": "Structural Lobby 13.0 ",
+      "conversation_participants": [
+        "Nick Martin",
+        "Sean Kermes",
+        "William Lubelski"
+      ]
+    },
+    {
+      "result_type": "action",
+      "result_id": "76",
+      "rank": "0.047619",
+      "headline": "Would <b>Tuesday</b> and <b>Thursday</b> be too much meeting up?   I'm down to try it.  \"",
+      "conversation_title": "Structural Lobby 5.1",
+      "conversation_participants": [
+        "Sean Kermes",
+        "William Lubelski",
+        "Nick Martin"
+      ]
+    },
+    {
+      "result_type": "action",
+      "result_id": "76",
+      "rank": "0.047619",
+      "headline": "<b>tuesday</b> and <b>thursday</b> just in case.  let me know if you cats can't or down",
+      "conversation_title": "Structural Lobby 5.1",
+      "conversation_participants": [
+        "Nick Martin",
+        "Sean Kermes",
+        "William Lubelski"
+      ]
+    },
+    {
+      "result_type": "action",
+      "result_id": "339",
+      "rank": "0.047619",
+      "headline": "\"<b>Tuesday</b> or <b>thursday</b> works for me.  \"",
+      "conversation_title": "Lobby - December 2013",
+      "conversation_participants": [
+        "Nick Martin",
+        "Ben Jones",
+        "William Lubelski",
+        "Sean Kermes"
+      ]
+    },
+    {
+      "result_type": "action",
+      "result_id": "339",
+      "rank": "0.0322581",
+      "headline": "<b>Thursday</b>, but my <b>Tuesday</b> is open.  \\n\\nAlso, I seem to have injured my back",
+      "conversation_title": "Lobby - December 2013",
+      "conversation_participants": [
+        "Ben Jones",
+        "William Lubelski",
+        "Sean Kermes",
+        "Nick Martin"
+      ]
+    },
+    {
+      "result_type": "action",
+      "result_id": "82",
+      "rank": "0.0196078",
+      "headline": "Look at https://www.dropbox.com/home/Structural/Notes/2013-03-14 for some scans of notes from <b>Tuesday</b>.  We'll talk again <b>Thursday</b>.\"",
+      "conversation_title": "Notes from Tuesday",
+      "conversation_participants": [
+        "Sean Kermes",
+        "Nick Martin",
+        "William Lubelski"
+      ]
+    },
+    {
+      "result_type": "action",
+      "result_id": "95",
+      "rank": "0.0163934",
+      "headline": "room at all for <b>Tuesday</b>.   We have Room 1 on <b>Thursday</b> from 5:30 - 7:00.  \"",
+      "conversation_title": "Structural Lobby 7.0",
+      "conversation_participants": [
+        "William Lubelski",
+        "Nick Martin",
+        "Sean Kermes"
+      ]
+    },
+    {
+      "result_type": "action",
+      "result_id": "266",
+      "rank": "0.0123457",
+      "headline": "lieu of the <b>Tuesday</b> event, I'm down to meet on <b>Thursday</b>.   anyone else interested?    \"",
+      "conversation_title": "Water Cooler Lobby - October 2013",
+      "conversation_participants": [
+        "Nick Martin",
+        "Sean Kermes",
+        "Ben Jones",
+        "William Lubelski"
+      ]
+    },
+    {
+      "result_type": "action",
+      "result_id": "85",
+      "rank": "0.010989",
+      "headline": "reserved 6-8 in Room 2 for <b>Tuesday</b> and 5:30-7 in room 1 for <b>Thursday</b>.\"",
+      "conversation_title": "Structural Lobby 6.0",
+      "conversation_participants": [
+        "Sean Kermes",
+        "William Lubelski",
+        "Nick Martin"
+      ]
+    },
+    {
+      "result_type": "action",
+      "result_id": "339",
+      "rank": "0.00990099",
+      "headline": "<b>Tuesday</b> and Wednesday.  Then I'm back for good, so <b>Thursday</b> and this next weekend",
+      "conversation_title": "Lobby - December 2013",
+      "conversation_participants": [
+        "William Lubelski",
+        "Ben Jones",
+        "Nick Martin",
+        "Sean Kermes"
+      ]
+    },
+    {
+      "result_type": "action",
+      "result_id": "266",
+      "rank": "0.00497512",
+      "headline": "\"WFPL for <b>tuesday</b> is already packed.  I'll probably still do some work and I",
+      "conversation_title": "Water Cooler Lobby - October 2013",
+      "conversation_participants": [
+        "Nick Martin",
+        "Sean Kermes",
+        "Ben Jones",
+        "William Lubelski"
+      ]
+    }
+  ]
 }
 
 var name = '<%= @view_name %>';
@@ -431,7 +583,10 @@ switch(name) {
     });
     break;
   case 'search':
-    view = new Structural.Views.Search();
+    view = new Structural.Views.Search({
+      query: 'tuesday thursday',
+      results: new Structural.Collections.SearchResults(data.searchResults)
+    });
     break;
   case 'structural-bar':
     var model = new Structural.Models.User(data.user);

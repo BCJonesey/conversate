@@ -3,10 +3,16 @@ Structural.Views.Search = Support.CompositeView.extend({
   className: 'search-wrap popover-wrap',
   template: JST.template('search/search'),
   initialize: function(options) {
+    options = options || {}
+
     Structural.on('clickAnywhere', this.hide, this);
 
-    this._input = new Structural.Views.SearchInput();
-    this._results = new Structural.Views.SearchResults();
+    this._input = new Structural.Views.SearchInput({
+      query: options.query
+    });
+    this._results = new Structural.Views.SearchResults({
+      results: options.results
+    });
   },
   render: function() {
     this.$el.html(this.template());
