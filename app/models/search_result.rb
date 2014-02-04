@@ -11,7 +11,7 @@
     @conversation_participants = JSON.load(result['participants'])
   end
 
-  def SearchResult.actions(query)
+  def SearchResult.actions(query, current_user)
     conn = ActiveRecord::Base.connection
     escaped_query = conn.quote(query)
 
@@ -26,7 +26,12 @@
       on cnv.id = reading_logs.conversation_id
       join users
       on reading_logs.user_id = users.id
-      where search_vector @@ query
+      join conversations_folders
+      on cnv.id = conversations_folders.conversation_id
+      join folders_users
+      on folders_users.folder_id = conversations_folders.folder_id
+      where search_vector @@ query and
+            folders_users.user_id = #{current_user.id}
       group by act.id, rank, headline, cnv.title, cnv.id
       order by rank desc
     ")
