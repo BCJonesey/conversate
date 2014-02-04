@@ -4,6 +4,7 @@ Structural.Views.SearchResults = Support.CompositeView.extend({
   initialize: function(options) {
     this._results = options.results ||
                     new Structural.Collections.SearchResults([]);
+    this._results.on('sync', this.render, this);
   },
   render: function() {
     this.$el.html(this.template({
@@ -20,6 +21,6 @@ Structural.Views.SearchResults = Support.CompositeView.extend({
   },
 
   search: function(query) {
-    // TODO: Search
+    this._results.search(query);
   }
 });

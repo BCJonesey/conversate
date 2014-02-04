@@ -9,5 +9,10 @@ Structural.Collections.SearchResults = Backbone.Collection.extend({
   },
   comparator: function(searchResult) {
     return - (searchResult.get('rank'));
+  },
+
+  search: function(query) {
+    this._query = query;
+    this.fetch();
   }
 });
