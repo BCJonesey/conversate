@@ -21,15 +21,15 @@
              cnv.title, cnv.id, json_agg(users.full_name) as participants
       from plainto_tsquery(#{escaped_query}) query, actions as act
       join conversations as cnv
-      on act.conversation_id = cnv.id
+        on act.conversation_id = cnv.id
       join reading_logs
-      on cnv.id = reading_logs.conversation_id
+        on cnv.id = reading_logs.conversation_id
       join users
-      on reading_logs.user_id = users.id
+        on reading_logs.user_id = users.id
       join conversations_folders
-      on cnv.id = conversations_folders.conversation_id
+        on cnv.id = conversations_folders.conversation_id
       join folders_users
-      on folders_users.folder_id = conversations_folders.folder_id
+        on folders_users.folder_id = conversations_folders.folder_id
       where search_vector @@ query and
             folders_users.user_id = #{current_user.id}
       group by act.id, rank, headline, cnv.title, cnv.id
