@@ -656,6 +656,9 @@ switch(name) {
       query: 'tuesday thursday',
       results: new Structural.Collections.SearchResults(data.searchResults)
     });
+
+    // Cheating a little bit here - we want to style the results view.
+    view._results._searchStatus = 'completed';
     break;
   case 'structural-bar':
     var model = new Structural.Models.User(data.user);
