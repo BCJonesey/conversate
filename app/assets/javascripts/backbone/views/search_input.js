@@ -8,5 +8,13 @@ Structural.Views.SearchInput = Support.CompositeView.extend({
     this.$el.html(this.template({
       query: this._query
     }));
-  }
+  },
+  events: {
+    'keyup input': 'queryChanged'
+  },
+
+  queryChanged: _.debounce(function() {
+    this._query = this.$('input').val();
+    this.trigger('queryChanged', this._query);
+  }, 300),
 });
