@@ -1,5 +1,5 @@
 Structural.Views.SearchInput = Support.CompositeView.extend({
-  className: 'search-input',
+  className: 'search-input form',
   template: JST.template('search/input'),
   initialize: function(options) {
     this._query = options.query || "";
