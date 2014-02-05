@@ -18,7 +18,7 @@ class Conversation < ActiveRecord::Base
     unless subdomain.nil?
       subdomain += '.'
     end
-    "cnv-#{self.id}@#{subdomain}watercoolr.io"
+    "cnv-#{self.id}@#{subdomain}watercooler.io"
   end
 
   def set_title(title, user)
