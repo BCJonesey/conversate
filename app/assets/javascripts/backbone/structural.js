@@ -97,8 +97,8 @@ var Structural = new (Support.CompositeView.extend({
       this._folder.conversations.focus(targets.conversation);
     }
 
-    if (targets.message) {
-      this._conversation.actions.focus(targets.message);
+    if (targets.action) {
+      this._conversation.actions.focus(targets.action);
     }
   },
 
