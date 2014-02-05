@@ -3,6 +3,11 @@ class ConversationsController < ApplicationController
   before_filter :require_participation
 
   def show
+    # Due to some slightly unresolved technical/semantic debt, the UI query
+    # string says "message" while the code here is all about actions.  This
+    # should be the only line in the server code that talks about messages.
+    params[:action_id] = params[:message]
+
     @folders = current_user.folders
     @conversation = Conversation.find(params[:id])
     folder = @conversation.folders.keep_if {|t| current_user.folders.include? t }.first

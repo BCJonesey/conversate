@@ -48,10 +48,10 @@ Structural.Models.Action = Backbone.Model.extend({
   },
 
   focus: function() {
-    this.set('is_current', true);
+    this.set('focused', true);
   },
   unfocus: function() {
-    this.set('is_current', false);
+    this.set('focused', false);
   },
   delete: function(user) {
     this.set('type', 'deletion');
