@@ -40,6 +40,8 @@ Structural.Views.SearchResults = Support.CompositeView.extend({
       this._searchStatus = 'noSearch';
     } else if (this._query === oldQuery) {
       return;
+    } else if (this._query.length < this._minimumQueryLength) {
+      return;
     } else {
       this._results.search(this._query);
       this._searchStatus = 'inProgress'
@@ -50,5 +52,7 @@ Structural.Views.SearchResults = Support.CompositeView.extend({
   searchCompleted: function() {
     this._searchStatus = 'completed';
     this.render();
-  }
+  },
+
+  _minimumQueryLength: 3
 });
