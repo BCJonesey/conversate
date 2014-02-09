@@ -31,7 +31,8 @@
 /* Search in progress */
 
 .search-in-progress,
-.search-no-results{
+.search-no-results,
+.search-no-search{
   text-align: center;
   padding:1rem;
   border:@border-1;
@@ -39,10 +40,18 @@
   min-height: 3rem;
   max-height: 6rem;
   color:#AAA;
-  font-size:0.9rem;
+  font-size:1.0rem;
   font-style:italic;
 }
-
+.search-icon{
+  font-size:2.0rem;
+}
+.search-text{
+  display:inline-block;
+  vertical-align: top;
+  padding-top:0.4rem;
+  padding-left:0.25rem;
+}
 
 /* Search Results */
 
@@ -53,13 +62,13 @@
   padding-top:0;
 }
 .search-results-list{
+  margin:0;
   min-height: 10rem;
   max-height: 30rem;
   overflow-x: hidden;
   overflow-y: auto;
-  border:@border-1;
+  //border:@border-1;
   background-color: white;
-  margin:0;
 }
 
 .search-result{
@@ -67,7 +76,7 @@
   padding:0.25rem;
   cursor: pointer;
   &:hover{
-    background-color: rgba(128,128,128,0.05);
+    background-color: #FAFAFA;
   }
 }
 
@@ -88,7 +97,7 @@
 }
 
 .search-result-headline-highlight{
-  padding:1px;
-  background-color: rgba(255,255,0,0.4);
+  padding:1px 2px;
+  background-color: rgba(0,128,255,0.1);
 
 }
