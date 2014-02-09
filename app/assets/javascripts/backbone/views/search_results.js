@@ -33,10 +33,13 @@ Structural.Views.SearchResults = Support.CompositeView.extend({
   },
 
   search: function(query) {
+    var oldQuery = this._query;
     this._query = query.trim();
 
     if (this._query.length === 0) {
       this._searchStatus = 'noSearch';
+    } else if (this._query === oldQuery) {
+      return;
     } else {
       this._results.search(this._query);
       this._searchStatus = 'inProgress'
