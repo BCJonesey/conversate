@@ -8,7 +8,16 @@ Structural.Collections.SearchResults = Backbone.Collection.extend({
 
   },
   comparator: function(searchResult) {
-    return - (searchResult.get('rank'));
+    return -(searchResult.get('rank'));
+  },
+  parse: function(response) {
+    this._queryFromResponse = response.query;
+    return response.results;
+  },
+  set: function(models, options) {
+    if (this._query === this._queryFromResponse) {
+      return this.constructor.__super__.set.call(this, models, options);
+    }
   },
 
   search: function(query) {
