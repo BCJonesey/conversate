@@ -15,6 +15,7 @@ Structural.Views.Actions = Support.CompositeView.extend({
     collection.on('focusedView', this.scrollToTargetAtEarliestOpportunity, this);
   },
   render: function() {
+    this.focusedView = undefined;
     this.collection.forEach(this.renderAction, this);
     this.scrollToTargetAtEarliestOpportunity(this.focusedView);
     return this;
@@ -39,6 +40,11 @@ Structural.Views.Actions = Support.CompositeView.extend({
   changeConversation: function(conversation) {
     this.collection.off(null, null, this);
     this.collection = conversation.actions;
+
+    if (!Structural.Router.isActionFocused()) {
+      this.collection.clearFocus();
+    }
+
     this._wireEvents(this.collection);
     this.reRender();
   },

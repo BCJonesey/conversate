@@ -49,6 +49,13 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     });
   },
 
+  clearFocus: function() {
+    this._idToFocus = undefined;
+    this.forEach(function(act) {
+      act.unfocus();
+    });
+  },
+
   createRetitleAction: function(title, user) {
     this._newAction({
       type: 'retitle',

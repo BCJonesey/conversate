@@ -8,6 +8,7 @@ Structural.Router = new (Backbone.Router.extend({
     'people': 'people'
   },
   index: function() {
+    this._isActionFocused = false;
     Structural.focus({ folder: Structural._folders.at(0).id });
   },
   conversation: function(slug, id, params) {
@@ -16,6 +17,7 @@ Structural.Router = new (Backbone.Router.extend({
     // This should be the only place in the backbone code that talks about
     // messages like this.
     var actionId = params ? params['message'] : undefined;
+    this._isActionFocused = actionId !== undefined;
 
     Structural.focus({
       conversation: id,
@@ -29,12 +31,17 @@ Structural.Router = new (Backbone.Router.extend({
     this._fixSlug('conversation/', slug, suffix, Structural._conversation.get('title'));
   },
   folder: function(slug, id) {
+    this._isActionFocused = false;
     Structural.focus({ folder: id });
     this._fixSlug('folder/', slug, '/' + id, Structural._folders.get(id|0).get('name'));
   },
   profile: function() { },
   admin: function() { },
   people: function() { },
+
+  isActionFocused: function() {
+    return this._isActionFocused;
+  },
 
   _folderIdForConversation: function(conversation) {
     if (_.contains(conversation.get('folder_ids'), Structural._folder.id)) {
