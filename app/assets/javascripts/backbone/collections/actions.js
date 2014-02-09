@@ -27,16 +27,15 @@ Structural.Collections.Actions = Backbone.Collection.extend({
 
   _findFocusedMessage: function() {
     if (this._idToFocus) {
-      this.forEach(function(action) {
-        if (this._idToFocus == action.id) {
-          action.focus();
-          this._idToFocus = undefined;
-        }
-      }, this);
+      var action = this.get(this._idToFocus);
+      if (action) {
+        action.focus();
+      }
     }
   },
 
   focus: function(id) {
+    id = parseInt(id);
     var action = this.get(id);
     if(action) {
       action.focus();
@@ -44,7 +43,8 @@ Structural.Collections.Actions = Backbone.Collection.extend({
       this._idToFocus = id;
     }
 
-    this.filter(function(act) { return act.id != id; }).forEach(function(act) {
+    this.filter(function(act) { return act.isFocused() && act.id != id; })
+        .forEach(function(act) {
       act.unfocus();
     });
   },

@@ -25,6 +25,10 @@ Structural.Views.SearchResults = Support.CompositeView.extend({
     var view = new Structural.Views.SearchResult({
       model: result
     });
+    view.on('resultViewed', function() {
+      this.trigger('resultViewed');
+    }, this);
+
     this.appendChildTo(view, this.$('.search-results-list'))
   },
 

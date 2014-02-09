@@ -119,6 +119,15 @@ var Structural = new (Support.CompositeView.extend({
       this._conversation = conversation;
 
       this.trigger('changeConversation', conversation);
+
+      if (this._actionToViewAfterViewingConversation) {
+        Structural.Router.navigate(
+          Structural.Router.actionPath(
+            this._conversation,
+            this._actionToViewAfterViewingConversation),
+          { trigger: true });
+        this._actionToViewAfterViewingConversation = undefined;
+      }
     }
 
     if (!options.silentResponsiveView) {
@@ -136,13 +145,29 @@ var Structural = new (Support.CompositeView.extend({
 
     this.trigger('showResponsiveActions');
   },
+  viewAction: function(conversation, action) {
+    var targetFolderId = Structural.Router._folderIdForConversation(conversation);
+    if (this._folder.id !== targetFolderId) {
+      var targetFolder = this._folders.get(targetFolderId);
+      this.viewFolder(targetFolder, conversation);
+      this._actionToViewAfterViewingConversation = action;
+    } else if (this._conversation.id !== conversation.id) {
+      var targetConversation = this._folder.conversations.get(conversation.id);
+      this.viewConversationData(targetConversation);
+      Structural.Router.navigate(
+        Structural.Router.actionPath(conversation, action),
+        { trigger: true });
+    }
+
+    this.trigger('showResponsiveActions');
+  },
   clearConversation: function() {
     this.trigger('clearConversation');
     this._conversation = null;
   },
 
-  // Show the first conversation in a specific folder, if able.
-  viewFolder: function(folder) {
+  // Show the target conversation or first in a specific folder, if able.
+  viewFolder: function(folder, targetConversation) {
     var self = this;
     if (folder.id !== this._folder.id) {
       this._folder = folder;
@@ -153,9 +178,10 @@ var Structural = new (Support.CompositeView.extend({
       // We need to clear out our conversation view because we're about to swap.
       self.clearConversation();
 
+      this.conversationToShowAfterFolderChange = targetConversation;
       this.trigger('changeFolder', folder);
       Structural.Router.navigate(Structural.Router.folderPath(folder),
-                                 {trigger: true});
+                               {trigger: true});
     }
 
     this.trigger('showResponsiveConversations');

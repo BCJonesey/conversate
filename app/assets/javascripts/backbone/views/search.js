@@ -13,6 +13,8 @@ Structural.Views.Search = Support.CompositeView.extend({
     this._results = new Structural.Views.SearchResults({
       results: options.results
     });
+
+    this._results.on('resultViewed', this.hide, this);
   },
   render: function() {
     this.$el.html(this.template());
@@ -39,8 +41,9 @@ Structural.Views.Search = Support.CompositeView.extend({
     return !this.$('.search-popover').hasClass('hidden');
   },
   hide: function(e) {
-    var target = $(e.target);
-    if (target.closest('.search-wrap').length === 0 && this.isOpen()) {
+    var target = e ? $(e.target) : undefined;
+    if (!target ||
+        (target.closest('.search-wrap').length === 0 && this.isOpen())) {
       this.toggleSearch();
     }
   }

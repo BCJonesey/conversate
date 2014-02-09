@@ -7,8 +7,10 @@
     @result_id = result['id']
     @rank = result['rank']
     @headline = split_headline(result['headline'])
+    @conversation_id = result['conversation_id']
     @conversation_title = result['title']
     @conversation_participants = JSON.load(result['participants'])
+    @conversation_folders = JSON.load(result['folders']).uniq
   end
 
   def SearchResult.actions(query, current_user)
@@ -18,7 +20,9 @@
     results = conn.exec_query("
       select act.id, ts_rank_cd(search_vector, query, 32) as rank,
              ts_headline((data->'text')::text, query, 'StartSel=\u001E,StopSel=\u001E') as headline,
-             cnv.title, cnv.id, json_agg(users.full_name) as participants
+             cnv.title, cnv.id as conversation_id,
+             json_agg(users.full_name) as participants,
+             json_agg(conversations_folders.folder_id) as folders
       from plainto_tsquery(#{escaped_query}) query, actions as act
       join conversations as cnv
         on act.conversation_id = cnv.id

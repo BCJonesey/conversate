@@ -18,7 +18,6 @@ Structural.Router = new (Backbone.Router.extend({
     var actionId = params ? params['message'] : undefined;
 
     Structural.focus({
-      folder: this._folderIdForConversation(Structural._conversation),
       conversation: id,
       action: actionId
     });
@@ -62,6 +61,10 @@ Structural.Router = new (Backbone.Router.extend({
            this.slugify(conversation.get('title')) +
            '/' + conversation.id;
   },
+  actionPath: function(conversation, action) {
+    return this.conversationPath(conversation) +
+           '?message=' + action.id;
+  },
   folderPath: function(folder) {
     return 'folder/' +
            this.slugify(folder.get('name')) +
@@ -84,6 +87,9 @@ Structural.Router = new (Backbone.Router.extend({
   },
   conversationHref: function(conversation) {
     return '/' + this.conversationPath();
+  },
+  actionHref: function(conversation, action) {
+    return '/' + this.messagePath(conversation, action);
   },
   folderHref: function(folder) {
     return '/' + this.folderPath(folder);
