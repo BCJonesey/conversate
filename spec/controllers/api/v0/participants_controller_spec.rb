@@ -91,7 +91,7 @@ describe Api::V0::ParticipantsController do
       expect(response.code).to eq("404")
     end
     it 'unsuccessfully removes a participant when the participant does not exist.' do
-      delete :destroy, :conversation_id => @conversation.id, :id => 100
+      delete :destroy, :conversation_id => @conversation.id, :id => 10000
       expect(response).not_to be_success
       expect(response.code).to eq("404")
     end
