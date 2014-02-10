@@ -15,6 +15,11 @@ Structural.Collections.SearchResults = Backbone.Collection.extend({
     return response.results;
   },
   set: function(models, options) {
+    if (options.parse) {
+      models = this.parse(models, options);
+      options.parse = false;
+    }
+
     if (this._query === this._queryFromResponse) {
       return this.constructor.__super__.set.call(this, models, options);
     }
