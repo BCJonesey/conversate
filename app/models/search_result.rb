@@ -1,6 +1,7 @@
   class SearchResult
   attr_reader :result_type, :result_id, :rank, :headline,
-              :conversation_title, :conversation_participants
+              :conversation_title, :conversation_participants,
+              :conversation_id, :conversation_folders
 
   def initialize(type, result)
     @result_type = type
