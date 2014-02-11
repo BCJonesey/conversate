@@ -5,6 +5,8 @@ Structural.Views.Search = Support.CompositeView.extend({
   initialize: function(options) {
     options = options || {}
 
+    Structural.on('clickAnywhere', this.hide, this);
+
     this._input = new Structural.Views.SearchInput({
       query: options.query
     });
@@ -12,7 +14,6 @@ Structural.Views.Search = Support.CompositeView.extend({
       results: options.results
     });
 
-    Structural.on('clickAnywhere', this.hideAndClear, this);
     this._results.on('resultViewed', this.hide, this);
   },
   render: function() {
@@ -48,15 +49,6 @@ Structural.Views.Search = Support.CompositeView.extend({
     if (!target ||
         (target.closest('.search-wrap').length === 0 && this.isOpen())) {
       this.toggleSearch();
-      return true;
-    } else {
-      return false;
-    }
-  },
-  hideAndClear: function(e) {
-    if (this.hide(e)) {
-      this._input.clear();
-      this._results.clear();
     }
   }
 });

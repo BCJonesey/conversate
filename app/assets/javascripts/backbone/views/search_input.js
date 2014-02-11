@@ -22,9 +22,4 @@ Structural.Views.SearchInput = Support.CompositeView.extend({
   focus: function() {
     this._input.focus();
   },
-
-  clear: function() {
-    this._query = '';
-    this._input.val('');
-  }
 });
