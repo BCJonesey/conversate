@@ -10,7 +10,7 @@ Structural.Views.StructuralBar = Support.CompositeView.extend({
   render: function() {
     this.$el.html(this.template({user: this.model}));
     var nameEl = this.$('.stb-name');
-    this.insertChildBefore(this._search, nameEl);
+    this.insertChildAfter(this._search, nameEl);
     this.insertChildBefore(this._news, nameEl);
     return this;
   }
