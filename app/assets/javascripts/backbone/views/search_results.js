@@ -54,5 +54,9 @@ Structural.Views.SearchResults = Support.CompositeView.extend({
     this.render();
   },
 
+  clear: function() {
+    this.search('');
+  },
+
   _minimumQueryLength: 3
 });
