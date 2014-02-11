@@ -36,6 +36,10 @@ Structural.Views.Search = Support.CompositeView.extend({
 
     this.$('.search-popover').toggleClass('hidden');
     this.$('.search-toggle').toggleClass('active');
+
+    if (this.isOpen()) {
+      this._input.focus();
+    }
   },
   isOpen: function() {
     return !this.$('.search-popover').hasClass('hidden');
