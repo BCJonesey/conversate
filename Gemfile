@@ -48,8 +48,9 @@ end
 
 gem "ruby-prof"
 
-gem "protected_attributes" # Let's us use the old-style attr_accessible calls.
-gem "rails_serve_static_assets" # Let's us actually serve our assets with heroku on rails 4.
+gem "protected_attributes" # Lets us use the old-style attr_accessible calls.
+gem "rails_serve_static_assets" # Lets us actually serve our assets with heroku on rails 4.
+gem "rails_stdout_logging" # Lets Heroku actually read our logs.
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
