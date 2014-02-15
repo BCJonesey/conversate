@@ -113,8 +113,8 @@
             <%= label_tag 'user[email]', 'Email Address' %>
             <%= email_field_tag 'user[email]' %>
             <% if current_user.site_admin %>
-              <%= label_tag 'user[external]', 'External User?' %>
               <%= check_box_tag 'user[external]', true, false %>
+              <%= label_tag 'user[external]', 'External User?' %>
             <% end %>
             <%= label_tag 'user[password]', 'Initial Password' %>
             <%= text_field_tag 'user[password]' %>
