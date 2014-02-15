@@ -32,7 +32,7 @@ class Folder < ActiveRecord::Base
   end
 
   def self.find_by_email_insensitive(email)
-    Folder.where('lower(email) = ?', email.downcase).first
+    Folder.where("lower(folders.email) = ?", email.downcase).first
   end
 
   def add_users(users_array, user)
