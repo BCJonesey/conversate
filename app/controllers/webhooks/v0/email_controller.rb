@@ -8,7 +8,7 @@ class Webhooks::V0::EmailController < ApplicationController
               email.dispatch
               logger.info "Recieved email from #{email.sender.email} to #{email.recipient}"
               folder = email.to_folder?
-              logger.info "Email routed to #{folder? ? 'folder' : 'conversation'} #{folder ? email.folder.id : email.conversation.id}"
+              logger.info "Email routed to #{folder ? 'folder' : 'conversation'} #{folder ? email.folder.id : email.conversation.id}"
               logger.info "Email_message action id #{email.action.id}"
             end
     rescue
