@@ -41,6 +41,8 @@
       <%= email_field_tag :email, params[:email] %>
       <%= label_tag :password, 'Password' %>
       <%= password_field_tag :password, nil %>
+      <%= label_tag :remember_me, 'Remember me' %>
+      <%= check_box_tag :remember_me, true, false %>
     </div>
     <div class='btn-toolbar-below clearfix'>
       <div class='btn-group pull-right'>
