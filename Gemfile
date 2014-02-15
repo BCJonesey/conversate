@@ -11,6 +11,7 @@ gem 'pg'
 
 group :development do
   gem 'sqlite3'
+  gem 'pry-plus'
 end
 
 group :development, :test do
