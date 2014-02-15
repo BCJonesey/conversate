@@ -6,7 +6,7 @@ Structural.Views.FaviconAndTitle = Support.CompositeView.extend({
     this._title = $('head title');
   },
   render: function() {
-    var iconName = 'watercooler';
+    var iconName = this._readFavicon;
     var title = 'Water Cooler';
 
     if (/localhost/.test(window.location.host)) {
@@ -25,14 +25,17 @@ Structural.Views.FaviconAndTitle = Support.CompositeView.extend({
       preamble = '(' + totalUnreadConversations + ') ';
 
       // Also want to swap to the unread icon.
-      iconName = 'watercooler-unread';
+      iconName = this._unreadFavicon;
     }
 
     // Firefox won't change the icon unless we make an actual new tag.
     var newFavicon = this._favicon.clone();
-    newFavicon.attr('href', '/assets/' + iconName + '.png');
+    newFavicon.attr('href', iconName);
     this._favicon.replaceWith(newFavicon);
     this._favicon = newFavicon;
     this._title.text(preamble + title);
-  }
+  },
+
+  _readFavicon: "<%= asset_path('watercooler.png') %>",
+  _unreadFavicon: "<%= asset_path('watercooler-unread.png') %>"
 });
