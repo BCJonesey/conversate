@@ -49,7 +49,7 @@ end
 gem "ruby-prof"
 
 gem "protected_attributes" # Let's us use the old-style attr_accessible calls.
-gem "rails_12factor" # For Heroku compatibility.
+gem "rails_serve_static_assets" # Let's us actually serve our assets with heroku on rails 4.
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
