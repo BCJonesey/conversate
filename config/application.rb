@@ -56,5 +56,8 @@ module Conversate
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # This feature is deprecated, and we don't use it.  Make warnings go away.
+    config.active_record.disable_implicit_join_references = true
   end
 end
