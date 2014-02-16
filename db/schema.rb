@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131215035807) do
+ActiveRecord::Schema.define(version: 20140216213328) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,11 @@ ActiveRecord::Schema.define(version: 20131215035807) do
   add_index "reading_logs", ["conversation_id"], name: "index_reading_logs_on_conversation_id", using: :btree
   add_index "reading_logs", ["user_id", "conversation_id", "most_recent_viewed"], name: "quick_find_most_reent_viewed", using: :btree
   add_index "reading_logs", ["user_id"], name: "index_reading_logs_on_user_id", using: :btree
+
+  create_table "uploads", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                                        null: false
