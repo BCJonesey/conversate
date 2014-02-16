@@ -28,11 +28,11 @@ class Action < ActiveRecord::Base
   }
 
   after_initialize do |action|
-    action.json = action.data || {}
+    action.json = JSON::load data || {}
   end
 
   before_save do |action|
-    action.data = action.json
+    action.data = action.json.to_json
   end
 
   def message_type?
@@ -133,7 +133,7 @@ class Action < ActiveRecord::Base
 
   def update_data(params)
     self.data = Action::data_for_params(params)
-    self.json = data || {}
+    self.json = JSON::load data || {}
     save
   end
 
