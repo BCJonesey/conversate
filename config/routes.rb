@@ -13,7 +13,7 @@ Conversate::Application.routes.draw do
   resource :session, :only => [:create]
   get 'session/logout' => 'sessions#destroy', :as => 'destroy_sessions'
 
-  get 'conversation/:slug/:id(#message:message_id)' => 'conversations#show',
+  get 'conversation/:slug/:id' => 'conversations#show',
     :as => 'conversation'
   get 'folder/:slug/:id' => 'folders#show', :as => 'folder'
 

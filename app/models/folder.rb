@@ -31,6 +31,10 @@ class Folder < ActiveRecord::Base
     return unread_conversations
   end
 
+  def self.find_by_email_insensitive(email)
+    Folder.where("lower(folders.email) = ?", email.downcase).first
+  end
+
   def add_users(users_array, user)
     users_set = users_array.to_set - self.users.to_set
 

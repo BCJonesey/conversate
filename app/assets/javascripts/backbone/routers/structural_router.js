@@ -2,7 +2,6 @@ Structural.Router = new (Backbone.Router.extend({
   routes: {
     '': 'index',
     'conversation/:slug/:id': 'conversation',
-    'conversation/:slug/:id#message:messageId': 'message',
     'folder/:slug/:id': 'folder',
     'profile': 'profile',
     'admin': 'admin',
@@ -11,16 +10,24 @@ Structural.Router = new (Backbone.Router.extend({
   index: function() {
     Structural.focus({ folder: Structural._folders.at(0).id });
   },
-  conversation: function(slug, id) {
-    Structural.focus({ folder: this._folderIdForConversation(Structural._conversation),
-                       conversation: id });
-    this._fixSlug('conversation/', slug, '/' + id, Structural._conversation.get('title'));
-  },
-  message: function(slug, id, messageId) {
-    Structural.focus({ folder: this._folderIdForConversation(Structural._conversation),
-                       conversation: id,
-                       message: messageId });
-    this._fixSlug('conversation/', slug, '/' + id + '#message' + messageId, Structural._conversation.get('title'));
+  conversation: function(slug, id, params) {
+    // Due to some slightly unresolved technical and semantic debt, the UI
+    // query string says "message" while the code here is all about actions.
+    // This should be the only place in the backbone code that talks about
+    // messages like this.
+    var actionId = params ? params['message'] : undefined;
+
+    Structural.focus({
+      folder: this._folderIdForConversation(Structural._conversation),
+      conversation: id,
+      action: actionId
+    });
+
+    var suffix = '/' + id;
+    if (actionId) {
+      suffix += '?message=' + actionId;
+    }
+    this._fixSlug('conversation/', slug, suffix, Structural._conversation.get('title'));
   },
   folder: function(slug, id) {
     Structural.focus({ folder: id });
@@ -55,10 +62,6 @@ Structural.Router = new (Backbone.Router.extend({
            this.slugify(conversation.get('title')) +
            '/' + conversation.id;
   },
-  messagePath: function(conversation, message) {
-    return this.conversationPath(conversation) +
-           '#message' + message.id;
-  },
   folderPath: function(folder) {
     return 'folder/' +
            this.slugify(folder.get('name')) +
@@ -81,9 +84,6 @@ Structural.Router = new (Backbone.Router.extend({
   },
   conversationHref: function(conversation) {
     return '/' + this.conversationPath();
-  },
-  messageHref: function(conversation, message) {
-    return '/' + this.messagePath(conversation, message);
   },
   folderHref: function(folder) {
     return '/' + this.folderPath(folder);
