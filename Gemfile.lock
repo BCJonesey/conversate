@@ -40,6 +40,10 @@ GEM
     builder (3.1.4)
     childprocess (0.3.9)
       ffi (~> 1.0, >= 1.0.11)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.3)
+      climate_control (>= 0.0.3, < 1.0)
     coderay (1.0.9)
     columnize (0.3.6)
     commonjs (0.2.6)
@@ -113,6 +117,11 @@ GEM
       jwt (~> 0.1.4)
       multi_json (~> 1.0)
       rack (~> 1.2)
+    paperclip (4.1.0)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.5.3)
+      mime-types
     pg (0.16.0)
     polyglot (0.3.3)
     protected_attributes (1.0.5)
@@ -246,6 +255,7 @@ DEPENDENCIES
   less-rails
   mandrill-api
   newrelic_rpm
+  paperclip
   pg
   protected_attributes
   pry-plus

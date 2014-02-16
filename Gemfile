@@ -59,6 +59,9 @@ gem 'jquery.fileupload-rails'
 # thing first.
 gem 'aws-sdk'
 
+# Also for dealing with files.
+gem 'paperclip'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
