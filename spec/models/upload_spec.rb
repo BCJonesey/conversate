@@ -1,5 +1,9 @@
 require 'spec_helper'
 
 describe Upload do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "directly describes a file", :focus => true do
+    upload_file = fixture_file_upload('/files/scream.jpeg', 'image/jpeg')
+    file = Upload.new(:upload => upload_file)
+    expect(file.upload.name).to eq('banzai')
+  end
 end
