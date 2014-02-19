@@ -1,25 +1,26 @@
 <% participants.each(function(p) { %>
-<li class="removable-participant<%= p.get('known') ? "" : " unknown-participant" %>"><%= p.escape('name') %> <% if(!p.get('known')){ %> <span class="unknown-participant-add">(add)</span><% } %><span class="remove-participant"><i class="fa fa-times"></i></span>
-<% if(!p.get('known')){ %> 
-<div class="unknown-participant-add-form">
-	<span> Add <span><%= p.get('email') %></span> to a contact list.</span>
-	<div>
-		<div>Name</div>
-		<div><input type='text' value='<%= p.escape('name') %>'/></div>
+<li class="removable-participant <%= p.get('known') ? "" : " unknown-participant" %>"><%= p.escape('name') %> <% if(!p.get('known')){ %> <span class="unknown-participant-add">(add)</span><% } %><span class="remove-participant"><i class="fa fa-times"></i></span>
+<% if(!p.get('known')){ %>
+
+<div class="act-unknown-participant-add-form form clearfix">
+
+	<div class='help-text'> Add <span><%= p.get('email') %></span> to a contact list.</div>
+
+	<label>Name</label>
+	<input type='text' value='<%= p.escape('name') %>'/>
+
+	<label>Contact List</label>
+	<select>
+		<option value="volvo">Volvo</option>
+	</select>
+
+	<div class='clearfix'>
+		<a href='#' class='btn pull-left'>Cancel</a>
+		<a href='#' class='btn pull-right'>Save</a>
 	</div>
-	<div>
-		<div>Contact List</div>
-		<div>
-			<select>
-				<option value="volvo">Volvo</option>
-			</select>
-		</div>
-	</div>
-	<div>
-		<button>Cancel</button>
-		<button>Save</button>
-	</div>
+
 </div>
+
 <% } %>
 </li>
 <% }) %>
