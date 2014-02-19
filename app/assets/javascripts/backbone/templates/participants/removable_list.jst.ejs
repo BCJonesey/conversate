@@ -1,3 +1,25 @@
 <% participants.each(function(p) { %>
-<li class="removable-participant"><%= p.escape('name') %><span class="remove-participant"><i class="fa fa-times"></i></span></li>
+<li class="removable-participant<%= p.get('known') ? "" : " unknown-participant" %>"><%= p.escape('name') %> <% if(!p.get('known')){ %> <span class="unknown-participant-add">(add)</span><% } %><span class="remove-participant"><i class="fa fa-times"></i></span>
+<% if(!p.get('known')){ %> 
+<div class="unknown-participant-add-form">
+	<span> Add <span><%= p.get('email') %></span> to a contact list.</span>
+	<div>
+		<div>Name</div>
+		<div><input type='text' value='<%= p.escape('name') %>'/></div>
+	</div>
+	<div>
+		<div>Contact List</div>
+		<div>
+			<select>
+				<option value="volvo">Volvo</option>
+			</select>
+		</div>
+	</div>
+	<div>
+		<button>Cancel</button>
+		<button>Save</button>
+	</div>
+</div>
+<% } %>
+</li>
 <% }) %>

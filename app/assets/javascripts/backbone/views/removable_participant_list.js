@@ -9,13 +9,15 @@ Structural.Views.RemovableParticipantList = Support.CompositeView.extend({
     this.$el.html(this.template({participants: this.collection}));
   },
   events: {
-    'click .remove-participant': 'removeParticipant'
+    'click .remove-participant': 'removeParticipant',
+    'click .unknown-participant' : 'showAddContactForm'
   },
-
+  showAddContactForm: function(e)
+  {
+    var model = this.getParticipantFromAction(e);
+  },
   removeParticipant: function(e) {
-    var target = $(e.target).closest('.removable-participant');
-    var index = target.prevAll().length;
-    var model = this.collection.at(index);
+    var model = this.getParticipantFromAction(e);
     this.trigger('remove', model);
     this.collection.remove(model);
     this.render();
@@ -32,5 +34,10 @@ Structural.Views.RemovableParticipantList = Support.CompositeView.extend({
 
   participants: function() {
     return this.collection.clone();
+  },
+  getParticipantFromAction: function(e){
+    var target = $(e.target).closest('.removable-participant');
+    var index = target.prevAll().length;
+    return this.collection.at(index);
   }
 })
