@@ -84,6 +84,7 @@ class User < ActiveRecord::Base
     json = super(:only => [:email, :full_name, :id, :site_admin, :external])
     if options[:include_address_book]
       json['address_book'] = address_book
+      json['contact_lists'] = self.contact_lists
     end
 
     if options[:conversation]
