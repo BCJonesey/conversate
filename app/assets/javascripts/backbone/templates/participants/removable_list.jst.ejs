@@ -11,7 +11,9 @@
 
 	<label>Contact List</label>
 	<select>
-		<option value="volvo">Volvo</option>
+		<% _.each(Structural._user.get('contact_lists'),function(cl) { %>
+		<option value='<%= cl.id %>'><%= cl.name %></option>
+		<% }) %>
 	</select>
 
 	<div class='clearfix'>
