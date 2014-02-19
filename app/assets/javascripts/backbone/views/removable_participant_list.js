@@ -10,7 +10,8 @@ Structural.Views.RemovableParticipantList = Support.CompositeView.extend({
   },
   events: {
     'click .remove-participant': 'removeParticipant',
-    'click .unknown-participant' : 'showAddContactForm'
+    'click .unknown-participant' : 'showAddContactForm',
+    'click .act-add-contact-toggle': 'toggleAddContactForm'
   },
   showAddContactForm: function(e)
   {
@@ -39,5 +40,9 @@ Structural.Views.RemovableParticipantList = Support.CompositeView.extend({
     var target = $(e.target).closest('.removable-participant');
     var index = target.prevAll().length;
     return this.collection.at(index);
+  },
+  toggleAddContactForm: function(e){
+    $(e.target).closest('.removable-participant').find('.act-add-contact-form').toggleClass('hidden');
+
   }
 })

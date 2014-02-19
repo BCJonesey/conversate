@@ -1,28 +1,33 @@
 <% participants.each(function(p) { %>
-<li class="removable-participant <%= p.get('known') ? "" : " unknown-participant" %>"><%= p.escape('name') %> <% if(!p.get('known')){ %> <span class="unknown-participant-add">(add)</span><% } %><span class="remove-participant"><i class="fa fa-times"></i></span>
-<% if(!p.get('known')){ %>
+<li class="removable-participant <%= p.get('known') ? "" : " unknown-participant" %>">
 
-<div class="act-unknown-participant-add-form form clearfix">
-
-	<div class='help-text'> Add <span><%= p.get('email') %></span> to a contact list.</div>
-
-	<label>Name</label>
-	<input type='text' value='<%= p.escape('name') %>'/>
-
-	<label>Contact List</label>
-	<select>
-		<% _.each(Structural._user.get('contact_lists'),function(cl) { %>
-		<option value='<%= cl.id %>'><%= cl.name %></option>
-		<% }) %>
-	</select>
-
-	<div class='clearfix'>
-		<a href='#' class='btn pull-left'>Cancel</a>
-		<a href='#' class='btn pull-right'>Save</a>
+	<div class='removable-participant-info clearfix'>
+		<%= p.escape('name') %> <% if(!p.get('known')){ %> <span class="act-add-contact-toggle">(add)</span><% } %><span class="remove-participant"><i class="fa fa-times"></i></span>
 	</div>
 
-</div>
 
-<% } %>
+	<div class="act-add-contact-form clearfix hidden">
+		<div class='form'>
+			<div class='help-text'> Add <%= p.get('email') %> <br/> to a contact list.</div>
+
+			<label>Name</label>
+			<input type='text' value='<%= p.escape('name') %>'/>
+
+			<label >Contact List</label>
+			<select class='contact-list-select'>
+				<option value='Contact Lists' disabled selected='selected'>Contact Lists...</option>
+				<option value='Poop1'>Fake Option #1</option>
+				<option value='Poop2'>Fake Option #2</option>
+				<% _.each(Structural._user.get('contact_lists'),function(cl) { %>
+				<option value='<%= cl.id %>'><%= cl.name %></option>
+				<% }) %>
+			</select>
+
+			<div class='act-add-contact-form-actions clearfix'>
+				<a href='#' class='btn pull-left'>Cancel</a>
+				<a href='#' class='btn-primary pull-right'>Save</a>
+			</div>
+		</div>
+	</div>
 </li>
 <% }) %>

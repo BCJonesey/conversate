@@ -91,10 +91,13 @@
 .participants-vertical{
   .removable-participant{
     display:block;
-    padding:0.5rem;
+    padding:0;
     border-bottom:@border-1;
+    .removable-participant-info{
+      padding:0.5rem;
+      padding-right: 2.0rem;
+    }
     .ellipsis();
-    padding-right:2.0rem;
     &:last-child{
       //border-bottom:@border-1;
       border-bottom: none;
