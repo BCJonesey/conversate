@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   has_many :actions, :inverse_of => :user
   has_many :group_participations
   has_many :groups, :through => :group_participations
+  has_many :contacts
+  has_many :contact_lists, :through => :contacts 
   has_and_belongs_to_many :folders
   belongs_to :default_folder, class_name: "Folder", foreign_key: "default_folder_id"
 
@@ -53,7 +55,7 @@ class User < ActiveRecord::Base
 
   # Public: returns the users this user knows.
   def address_book
-    users = self.groups.map { |g| g.users }.flatten.uniq - [self]
+    users = self.contact_lists.map { |g| g.users }.flatten.uniq - [self]
 
     address_book = Array.new
     users.map do |user|
