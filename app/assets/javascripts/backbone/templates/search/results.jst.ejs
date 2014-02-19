@@ -1,0 +1,9 @@
+<% if (results.length === 0) { %>
+  <div class="search-no-results">
+    <i class='search-icon fa fa-flag-o'></i>
+    <span class='search-text'> No results for '<%= _.escape(query) %>'</span>
+  </div>
+<% } else { %>
+  <ul class="search-results-list">
+  </ul>
+<% } %>

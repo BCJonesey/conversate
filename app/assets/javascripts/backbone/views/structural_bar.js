@@ -4,11 +4,14 @@ Structural.Views.StructuralBar = Support.CompositeView.extend({
   initialize: function(options) {
     options = options || {};
     this._news = new Structural.Views.News();
+    this._search = new Structural.Views.Search();
   },
 
   render: function() {
     this.$el.html(this.template({user: this.model}));
-    this.insertChildBefore(this._news, this.$('.stb-name'));
+    var nameEl = this.$('.stb-name');
+    this.insertChildAfter(this._search, nameEl);
+    this.insertChildBefore(this._news, nameEl);
     return this;
   }
 });

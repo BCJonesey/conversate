@@ -19,6 +19,7 @@ class TestbedController < ApplicationController
       'action-list',
       'compose',
       'action-container',
+      'search',
       'structural-bar',
       'the-whole-app'
     ]

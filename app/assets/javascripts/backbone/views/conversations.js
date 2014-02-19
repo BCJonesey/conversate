@@ -20,7 +20,7 @@ Structural.Views.Conversations = Support.CompositeView.extend({
     collection.on('add', this.reRender, this);
     collection.on('reset', this.reRender, this);
     collection.on('remove', this.reRender, this);
-    collection.on('conversationsLoadedForFirstTime', this.viewFirstConversation, this);
+    collection.on('conversationsLoadedForFirstTime', this.viewTargetOrFirstConversation, this);
     collection.on('archived', this.reRender, this);
   },
   render: function() {
@@ -64,21 +64,37 @@ Structural.Views.Conversations = Support.CompositeView.extend({
     this.collection = folder.conversations;
     this._wireEvents(this.collection);
 
-    // Attempt to show the first conversation. This gets called always, so will pick up on cached
-    // conversations just fine. However, the conversationsLoadedForFirstTime event will pick up
-    // on conversations that needed fetching for picking the first.
-    this.viewFirstConversation();
+    // Attempt to show the first conversation. This gets called always, so will
+    // pick up on cached conversations just fine. However, the
+    // conversationsLoadedForFirstTime event will pick up on conversations that
+    // needed fetching for picking the first.
+    this.viewTargetOrFirstConversation();
 
     this.reRender();
   },
 
-  // Attempts to show the first conversation. This basically gets called after the conversations
-  // have finished loading, so we can actually pick one to show. We don't want to pick one that
-  // has been archived.
-  viewFirstConversation: function() {
-    conversation = this.collection.findWhere({archived: false});
+  // Attempts to show Structural's target conversation, if it exists and is
+  // in the folder we just switched to.  If either of those are false, attempt
+  // to show the first conversation in the folder. This basically gets called
+  // after the conversations have finished loading, so we can actually pick one
+  /// to show. We don't want to pick one that has been archived.
+  viewTargetOrFirstConversation: function() {
+    var conversation;
+    if (Structural.conversationToShowAfterFolderChange) {
+      conversation = this.collection.get(
+        Structural.conversationToShowAfterFolderChange.id);
+      if (conversation) {
+        Structural.conversationToShowAfterFolderChange = undefined;
+      }
+    }
+
+    if (!conversation) {
+      conversation = this.collection.findWhere({archived: false});
+    }
+
     if (conversation) {
-      Structural.viewConversationData(conversation, {silentResponsiveView: true});
+      Structural.viewConversationData(conversation,
+                                      {silentResponsiveView: true});
       conversation.focus();
     }
   }

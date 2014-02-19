@@ -72,16 +72,12 @@
     padding:0.25rem;
   }
   &.act-msg.act-current {
-    margin-top:1.0rem;
-    border-top:1px solid #EEE !important;
-    border-left:1px solid #EEE !important;
-    border-right:1px solid #EEE !important;
-    background-color: #FFD;
-    .act-text {
-      //color: white;
-    }
+    border:1px solid #ACE !important;
+    box-shadow:0 0.1rem 0.5rem rgba(0,128,255,0.2);
   }
+  .act-msg.act-my-message.act-current{
 
+  }
 }
 
 // These are some real bullshit to adjust the spacing of update messages in relation to regular messages
@@ -144,7 +140,9 @@
   margin-top:0;
 }
 
-.act-msg.act-my-message + .act-msg.act-my-message{
+.act-msg.act-my-message + .act-msg.act-my-message,
+.act-msg.act-current + .act-msg.act-my-message,
+.act-msg.act-my-message + .act-msg.act-current{
   margin-top:1.0rem;
 }
 
