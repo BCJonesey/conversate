@@ -3,7 +3,7 @@ Structural.Views.Toast = Backbone.View.extend({
     var classes = 'toast';
 
     if (this.description) {
-      classes += ' toast-' + description.state;
+      classes += ' toast-' + this.description.state;
     } else {
       classes += ' hidden';
     }
