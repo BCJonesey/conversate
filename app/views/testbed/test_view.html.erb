@@ -660,6 +660,16 @@ switch(name) {
     // Cheating a little bit here - we want to style the results view.
     view._results._searchStatus = 'completed';
     break;
+  case 'toast':
+    var description = {
+      state: 'error',
+      message: 'Water Cooler has lost it\'s connection to the server.  Please refresh the page to reconnect.  (Messages written without a server connection may be lost.)',
+      autoDismiss: false,
+      promptRefresh: true
+    };
+    view = new Structural.Views.Toast();
+    view.description = description;
+    break;
   case 'structural-bar':
     var model = new Structural.Models.User(data.user);
     view = new Structural.Views.StructuralBar({model: model});

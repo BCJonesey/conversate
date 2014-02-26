@@ -1,0 +1,13 @@
+<% if (!autoDismiss) { %>
+  <span class="toast-close">
+    <i class="fa fa-close"></i>
+  </span>
+<% } %>
+<div class="toast-message">
+  <%= message %>
+</div>
+<% if (promptRefresh) { %>
+  <div class="toast-actions">
+    <a href="#" class="btn">Refresh</a>
+  </div>
+<% } %>

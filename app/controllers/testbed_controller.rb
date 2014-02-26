@@ -21,6 +21,7 @@ class TestbedController < ApplicationController
       'action-container',
       'search',
       'structural-bar',
+      'toast',
       'the-whole-app'
     ]
   end
