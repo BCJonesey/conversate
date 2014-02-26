@@ -66,6 +66,9 @@ var Structural = new (Support.CompositeView.extend({
       folders: this._folders
     });
 
+    Structural.Toaster = new Structural.Components.Toaster();
+
+    this.appendChild(Structural.Toaster.view);
     this.appendChild(this._bar);
     this.appendChild(this._watercooler);
     this._faviconAndTitle.render();
