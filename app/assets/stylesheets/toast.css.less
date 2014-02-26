@@ -1,11 +1,26 @@
 @import 'variables.css.less';
 @import 'mixins.css.less';
 
+.toast-wrap{
+  position: fixed;
+  bottom:1rem;
+  right:1rem;
+  left:1rem;
+  text-align: center;
+
+  @media(min-width:@bp-1){
+    bottom:auto;
+    left:auto;
+    top: 1.0rem;
+  }
+
+}
 .toast{
+  max-width:25rem;
+  display:inline-block;
   border:@border-1;
   background-color: @bg-1;
   box-shadow:0 0.25rem 0.5rem rgba(0,0,0,0.2);
-  margin:2rem;
 
   .toast-close{
     float:right;
@@ -13,19 +28,24 @@
   }
 
   .toast-message{
-    padding:0.5rem 0.5rem 0;
+    padding:0.25rem 0.5rem 0;
     font-size:0.9rem;
     color:#888;
     line-height: 1.5;
   }
 
   .toast-actions{
-    padding:0.25rem;
+    padding:0.5rem;
+    text-align: center;
+    @media(min-width:@bp-1){
+      text-align: right;
+    }
   }
+}
 
-  &.toast-error{
+.toast-wrap{
+  &.toast-error .toast{
     background-color: #FEE;
     border-color:#FAA;
-
   }
 }
