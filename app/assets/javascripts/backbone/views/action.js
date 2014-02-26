@@ -66,8 +66,8 @@ Structural.Views.Action = Support.CompositeView.extend({
     this.model.on('change:focused', function() {
       if (this.model.get('focused')) {
         this.model.collection.trigger('focusedView', this);
-        this.reClass();
       }
+      this.reClass();
     }, this);
   },
   render: function() {

@@ -20,13 +20,15 @@ ActiveRecord::Schema.define(version: 20140216214154) do
     t.integer  "conversation_id"
     t.integer  "user_id"
     t.string   "type"
-    t.text     "data"
+    t.json     "data"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.tsvector "search_vector"
   end
 
   add_index "actions", ["conversation_id", "created_at"], name: "index_actions_on_conversation_id_and_created_at", using: :btree
   add_index "actions", ["conversation_id"], name: "index_events_on_conversation_id", using: :btree
+  add_index "actions", ["search_vector"], name: "index_actions_on_search_vector", using: :gin
 
   create_table "conversations", force: true do |t|
     t.string   "title"

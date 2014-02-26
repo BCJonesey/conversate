@@ -21,10 +21,10 @@ describe Api::V0::ActionsController do
                               :full_name => 'Harry Houdini',
                               :password => 'allakhazam')
     @a4 = @conversation.actions.create!(:type => 'update_users',
-                                  :data => '{"added":[{"id":2,"name":"Harry Houdini"}],"removed":[]}',
+                                  :data => '{"added":[{"id":'+@addedUser.id.to_s+',"name":"Harry Houdini"}],"removed":[]}',
                                   :user_id => @user.id)
     @a5 = @conversation.actions.create!(:type => 'move_message',
-                                  :data => '{"message_id":1,"from":{"title":"Whatever","id":1},"to":{"title":"Wherever","id":2}}',
+                                  :data => '{"message_id":'+@a1.id.to_s+',"from":{"title":"Whatever","id":1},"to":{"title":"Wherever","id":2}}',
                                   :user_id => @user.id)
   end
 
