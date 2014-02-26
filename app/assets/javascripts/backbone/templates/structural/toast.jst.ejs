@@ -1,13 +1,15 @@
-<% if (!autoDismiss) { %>
-  <span class="toast-close btn-icon">
-    <i class="fa fa-times"></i>
-  </span>
-<% } %>
-<div class="toast-message">
-  <%= message %>
-</div>
-<% if (promptRefresh) { %>
-  <div class="toast-actions clearfix">
-    <a href="#" class="btn-danger pull-right">Refresh</a>
+<div class='toast'>
+  <% if (!autoDismiss) { %>
+    <span class="toast-close btn-icon">
+      <i class="fa fa-times"></i>
+    </span>
+  <% } %>
+  <div class="toast-message">
+    <%= message %>
   </div>
-<% } %>
+  <% if (promptRefresh) { %>
+    <div class="toast-actions clearfix">
+      <a href="#" class="btn-danger">Refresh</a>
+    </div>
+  <% } %>
+</div>

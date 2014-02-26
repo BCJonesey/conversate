@@ -1,6 +1,6 @@
 Structural.Views.Toast = Backbone.View.extend({
   className: function() {
-    var classes = 'toast';
+    var classes = 'toast-wrap';
 
     if (this.description) {
       classes += ' toast-' + description.state;
