@@ -5,12 +5,14 @@
 //= require_tree ./collections
 //= require_tree ./views
 //= require_tree ./routers
+//= require_tree ./components
 
 var Structural = new (Support.CompositeView.extend({
   Models: {},
   Collections: {},
   Views: {},
   Router: {},
+  Components: {},
 
   initialize: function(options) {
     this.apiPrefix = options.apiPrefix;
