@@ -1,0 +1,31 @@
+@import 'variables.css.less';
+@import 'mixins.css.less';
+
+.toast{
+  border:@border-1;
+  background-color: @bg-1;
+  box-shadow:0 0.25rem 0.5rem rgba(0,0,0,0.2);
+  margin:2rem;
+
+  .toast-close{
+    float:right;
+    display: none;
+  }
+
+  .toast-message{
+    padding:0.5rem 0.5rem 0;
+    font-size:0.9rem;
+    color:#888;
+    line-height: 1.5;
+  }
+
+  .toast-actions{
+    padding:0.25rem;
+  }
+
+  &.toast-error{
+    background-color: #FEE;
+    border-color:#FAA;
+
+  }
+}
