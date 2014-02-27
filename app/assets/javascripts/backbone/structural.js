@@ -1,3 +1,4 @@
+//= require_tree ./monkeypatches
 //= require ./support/support
 //= require_self
 //= require_tree ./templates
