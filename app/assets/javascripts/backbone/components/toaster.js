@@ -7,8 +7,8 @@ Structural.Components.Toaster = function() {
     if (toastDescription.errorType === 'backbone:sync') {
       viewDescription.promptRefresh = true;
       viewDescription.message =
-        "Water Cooler has lost it's connection to the server.  Please refresh" +
-        " the page to reconnection.  (Messages written without a server " +
+        "Water Cooler has lost its connection to the server.  Please refresh" +
+        " the page to reconnect.  (Messages written without a server " +
         "connection may be lost.)";
     }
 
