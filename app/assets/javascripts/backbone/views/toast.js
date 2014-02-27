@@ -25,10 +25,6 @@ Structural.Views.Toast = Backbone.View.extend({
   show: function(description) {
     this.description = description;
     this.render();
-
-    if (this.description.autoDismiss) {
-      setTimeout(_.bind(this.hide, this), this.description.duration);
-    }
   },
   hide: function() {
     this.$el.addClass('hidden');
