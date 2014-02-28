@@ -75,6 +75,18 @@ Structural.Models.Action = Backbone.Model.extend({
     }
     return true;
   },
+  followOnTimeout: 5 * 60 * 1000,
+  isFollowOn: function(previousAction) {
+    var timeSincePrevious = this.get('timestamp') - previousAction.get('timestamp');
+    return previousAction.get('type') === 'message' &&
+           this.get('type') === 'message' &&
+           previousAction.get('user').id === this.get('user').id &&
+           this.get('text').indexOf('\n') < 0 &&
+           timeSincePrevious <= this.followOnTimeout;
+  },
+  followOn: function() {
+    this.set('followOn', true);
+  },
   textSnippet: function(length) {
     var text = this.escape('text');
     if (length >= text.length) {

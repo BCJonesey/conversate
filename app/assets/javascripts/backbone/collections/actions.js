@@ -9,6 +9,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     this.userId = options.user;
     this.on('reset', this._findMyMessages, this);
     this.on('reset', this._findFocusedMessage, this);
+    this.on('reset', this._findFollowOnMessages, this);
     this.on('add', this.setStateOnNewAction, this);
     this.on('add', function(model, collection, options) {
       this.trigger('unreadCountChanged');
@@ -32,6 +33,17 @@ Structural.Collections.Actions = Backbone.Collection.extend({
         action.focus();
       }
     }
+  },
+
+  _findFollowOnMessages: function() {
+    this.forEach(function(action, index) {
+      if (index > 0) {
+        var previous = this.at(index - 1);
+        if (action.isFollowOn(previous)) {
+          action.followOn();
+        }
+      }
+    }, this);
   },
 
   focus: function(id) {
@@ -149,6 +161,14 @@ Structural.Collections.Actions = Backbone.Collection.extend({
   setStateOnNewAction: function(model, collection) {
     if (model.get('user').id === this.userId) {
       model.mine();
+    }
+
+    var index = collection.indexOf(model);
+    if (index > 0) {
+      var previous = collection.at(index - 1);
+      if (model.isFollowOn(previous)) {
+        model.followOn();
+      }
     }
   },
   triggerNewMessage: function(model) {
