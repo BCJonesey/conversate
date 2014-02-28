@@ -57,7 +57,7 @@ Structural.Models.Action = Backbone.Model.extend({
     this.set('type', 'deletion');
     this.set('user', user);
   },
-  isMine: function(){
+  mine: function(){
     this.set('isOwnAction', true);
   },
   isUnread: function(mostRecentEventViewed) {

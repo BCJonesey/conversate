@@ -20,7 +20,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
   _findMyMessages: function() {
     this.forEach(function(action) {
       if (action.get('user').id === this.userId) {
-        action.isMine();
+        action.mine();
       }
     }, this);
   },
@@ -148,7 +148,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
 
   setStateOnNewAction: function(model, collection) {
     if (model.get('user').id === this.userId) {
-      model.isMine();
+      model.mine();
     }
   },
   triggerNewMessage: function(model) {
