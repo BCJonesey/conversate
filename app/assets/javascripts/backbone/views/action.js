@@ -29,6 +29,9 @@ Structural.Views.Action = Support.CompositeView.extend({
     if (this.model.get('focused')) {
       classes += ' act-current';
     }
+    if (this.model.get('followOn')) {
+      classes += ' act-follow-on';
+    }
 
     return classes;
   },
