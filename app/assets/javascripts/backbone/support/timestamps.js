@@ -53,7 +53,9 @@ Support.HumanizedTimestamp = function(property, globalOptions) {
       options = _.defaults(options || {}, globalOptions);
       var date = new Date(this.get(property));
 
-      if(date.getFullYear() === relativeTo.getFullYear() &&
+      if (options.onlyIncludeHourMinute) {
+        return hourMinuteStamp(date);
+      } else if (date.getFullYear() === relativeTo.getFullYear() &&
          date.getMonth() === relativeTo.getMonth() &&
          date.getDate() === relativeTo.getDate()) {
         return hourMinuteStamp(date);
