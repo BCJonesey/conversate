@@ -30,6 +30,14 @@ Structural.Views.Action = Support.CompositeView.extend({
       classes += ' act-current';
     }
 
+    if (this.model.get('followOn')) {
+      classes += ' act-follow-on';
+    }
+
+    if (this.model.get('followOnLongTerm')) {
+      classes += ' act-follow-on-long-term';
+    }
+
     return classes;
   },
 

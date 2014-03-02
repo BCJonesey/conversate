@@ -253,6 +253,44 @@
   }
 }
 
+.act-message.act-follow-on {
+  border-color: transparent;
+  padding-top: 0;
+
+  .act-sender {
+    display: none;
+  }
+
+  .act-info {
+    float: right;
+    padding-left: 0.5rem;
+    padding-top: 0.1rem;
+  }
+
+  .act-text{
+    margin: 0;
+    padding: 0;
+  }
+
+  .act-time {
+    display: none;
+  }
+}
+
+.act-message.act-follow-on.act-follow-on-long-term {
+  .act-time {
+    display: block;
+  }
+}
+
+.act-message.act-my-message + .act-message.act-my-message.act-follow-on {
+  border-top: none;
+  border-left: @border-act-my-message;
+  border-right: @border-act-my-message;
+  border-bottom:@border-act-my-message;
+  margin-top: -1px;
+}
+
 .act-sys{
   font-size:.6rem;
   color:#CCC;

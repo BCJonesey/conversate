@@ -1,3 +1,4 @@
+//= require_tree ./monkeypatches
 //= require ./support/support
 //= require_self
 //= require_tree ./templates
@@ -5,12 +6,14 @@
 //= require_tree ./collections
 //= require_tree ./views
 //= require_tree ./routers
+//= require_tree ./components
 
 var Structural = new (Support.CompositeView.extend({
   Models: {},
   Collections: {},
   Views: {},
   Router: {},
+  Components: {},
 
   initialize: function(options) {
     this.apiPrefix = options.apiPrefix;
@@ -64,6 +67,9 @@ var Structural = new (Support.CompositeView.extend({
       folders: this._folders
     });
 
+    Structural.Toaster = new Structural.Components.Toaster();
+
+    this.appendChild(Structural.Toaster.view);
     this.appendChild(this._bar);
     this.appendChild(this._watercooler);
     this._faviconAndTitle.render();
