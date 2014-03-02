@@ -35,6 +35,8 @@ class Action < ActiveRecord::Base
     action.data = action.json
   end
 
+  after_save :populate_ts_vector
+
   def message_type?
     ['message', 'email_message'].include? self.type
   end
@@ -151,6 +153,16 @@ class Action < ActiveRecord::Base
     # unique. The added viewers are the current viewers plus the set of current viewers with folder changes.
     # Note that it should be impossible to remove users via changes due to the default folder selection.
     return conversation.viewers_and_participants() - params['prior_conversation_users_and_participants']
+  end
+
+  def populate_ts_vector
+    return true unless self.message_type?
+
+    self.search_vector =
+      Action.select("to_tsvector((data->'text')::text) as search_vector")
+            .find(self.id)
+            .search_vector
+    self.save
   end
 
 end
