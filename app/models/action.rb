@@ -160,7 +160,7 @@ class Action < ActiveRecord::Base
 
     quoted = ActiveRecord::Base.connection.quote(self.text);
     self.search_vector =
-      Action.select("*, to_tsvector('#{text}') as search_vector")
+      Action.select("*, to_tsvector(#{quoted}) as search_vector")
             .limit(1)
             .first
             .search_vector
