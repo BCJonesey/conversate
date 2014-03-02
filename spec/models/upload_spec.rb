@@ -8,5 +8,6 @@ describe Upload do
     expect(file.upload_file_name).to eq('scream.jpeg')
     expect(file.upload_content_type).to eq('image/jpeg')
     expect(file.upload_file_size).to eq(9227)
+    expect(file.upload.url).to match(/s3\.amazonaws\.com.*scream\.jpeg/)
   end
 end
