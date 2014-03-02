@@ -35,7 +35,7 @@ class Action < ActiveRecord::Base
     action.data = action.json
   end
 
-  after_save :populate_ts_vector
+  before_save :populate_ts_vector
 
   def message_type?
     ['message', 'email_message'].include? self.type
@@ -158,11 +158,12 @@ class Action < ActiveRecord::Base
   def populate_ts_vector
     return true unless self.message_type?
 
+    quoted = ActiveRecord::Base.connection.quote(self.text);
     self.search_vector =
-      Action.select("to_tsvector((data->'text')::text) as search_vector")
-            .find(self.id)
+      Action.select("*, to_tsvector('#{text}') as search_vector")
+            .limit(1)
+            .first
             .search_vector
-    self.save
   end
 
 end
