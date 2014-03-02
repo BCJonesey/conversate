@@ -34,7 +34,7 @@ Structural.Views.NewConversation = Support.CompositeView.extend({
     'click .send-new-cnv': 'send',
     'click .new-cnv-participants': 'focusParticipantsInput',
     'focus .new-cnv-participants input': 'enterParticipantEditingMode',
-    'blur .new-cnv-participants input': 'leaveParticipantEditingModeOnTab',
+    'focus .new-cnv-body': 'leaveParticipantEditingModeOnTab',
     'focus .new-cnv-title-toolbar input': 'enterTitleEditingMode',
     'blur .new-cnv-title-toolbar input': 'leaveTitleEditingMode'
   },
@@ -74,6 +74,7 @@ Structural.Views.NewConversation = Support.CompositeView.extend({
     }
   },
   enterTitleEditingMode: function(e) {
+    this.leaveParticipantEditingMode();
     this.$('.new-cnv-title-toolbar').addClass('editing');
   },
   leaveTitleEditingMode: function(e) {
@@ -89,9 +90,11 @@ Structural.Views.NewConversation = Support.CompositeView.extend({
       }
     }
   },
+  /* This will stop working how we want if we rearrange or add elements
+     to the tab order in this view.  Unfortunately, the other way I had
+     of checking for tabbing out (looking at the e.relatedTarget property
+     of the blur event) isn't cross-browser. */
   leaveParticipantEditingModeOnTab: function(e) {
-    if (e.relatedTarget) {
-      this.leaveParticipantEditingMode();
-    }
+    this.leaveParticipantEditingMode();
   },
 });
