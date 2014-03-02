@@ -41,6 +41,10 @@ Structural.Collections.Actions = Backbone.Collection.extend({
         var previous = this.at(index - 1);
         if (action.isFollowOn(previous)) {
           action.followOn();
+
+          if (action.isInDifferentTimeBucket(previous)) {
+            action.followOnLongTerm();
+          }
         }
       }
     }, this);
@@ -168,6 +172,10 @@ Structural.Collections.Actions = Backbone.Collection.extend({
       var previous = collection.at(index - 1);
       if (model.isFollowOn(previous)) {
         model.followOn();
+
+        if (model.isInDifferentTimeBucket(previous)) {
+          model.followOnLongTerm();
+        }
       }
     }
   },

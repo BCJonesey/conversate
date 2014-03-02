@@ -84,8 +84,14 @@ Structural.Models.Action = Backbone.Model.extend({
            this.get('text').indexOf('\n') < 0 &&
            timeSincePrevious <= this.followOnTimeout;
   },
+  isInDifferentTimeBucket: function(previousAction) {
+    return Math.floor(this.get('timestamp') / this.followOnTimeout) != Math.floor(previousAction.get('timestamp') / this.followOnTimeout);
+  },
   followOn: function() {
     this.set('followOn', true);
+  },
+  followOnLongTerm: function() {
+    this.set('followOnLongTerm', true);
   },
   textSnippet: function(length) {
     var text = this.escape('text');
