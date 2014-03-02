@@ -4,7 +4,8 @@
 
    The property given should return a number suitable for passing into
    `new Date()`. */
-Support.HumanizedTimestamp = function(property) {
+Support.HumanizedTimestamp = function(property, globalOptions) {
+  globalOptions = globalOptions || {};
   var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug',
                 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -38,9 +39,18 @@ Support.HumanizedTimestamp = function(property) {
            (date.getFullYear() + '').substring(2);
   };
 
+  var stampWithHourMinuteIfOption = function(date, stampFn, options) {
+    var stamp = stampFn(date);
+    if (options.alwaysIncludeHourMinute) {
+      stamp += ' - ' + hourMinuteStamp(date);
+    }
+    return stamp;
+  }
+
   return {
-    humanizedTimestamp: function(relativeTo) {
+    humanizedTimestamp: function(relativeTo, options) {
       relativeTo = relativeTo || new Date();
+      options = _.defaults(options || {}, globalOptions);
       var date = new Date(this.get(property));
 
       if(date.getFullYear() === relativeTo.getFullYear() &&
@@ -49,10 +59,10 @@ Support.HumanizedTimestamp = function(property) {
         return hourMinuteStamp(date);
       }
       else if (date.getFullYear() === relativeTo.getFullYear()) {
-        return monthDateStamp(date);
+        return stampWithHourMinuteIfOption(date, monthDateStamp, options);
       }
       else {
-        return yearMonthDateStamp(date);
+        return stampWithHourMinuteIfOption(date, yearMonthDateStamp, options);
       }
     }
   };

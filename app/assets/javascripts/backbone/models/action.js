@@ -103,5 +103,7 @@ Structural.Models.Action = Backbone.Model.extend({
   }
 });
 
-_.extend(Structural.Models.Action.prototype, Support.HumanizedTimestamp('timestamp'));
+_.extend(Structural.Models.Action.prototype,
+         Support.HumanizedTimestamp('timestamp',
+                                    { alwaysIncludeHourMinute: true }));
 _.extend(Structural.Models.Action.prototype, Support.InflatableModel);
