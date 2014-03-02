@@ -51,7 +51,11 @@ gem "ruby-prof"
 
 gem "protected_attributes" # Lets us use the old-style attr_accessible calls.
 gem "rails_serve_static_assets" # Lets us actually serve our assets with heroku on rails 4.
-gem "rails_stdout_logging" # Lets Heroku actually read our logs.
+
+group :production do
+  gem "rails_stdout_logging" # Lets Heroku actually read our logs. Production only, or you will see much output.
+end
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
