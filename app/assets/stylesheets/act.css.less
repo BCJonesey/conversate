@@ -253,9 +253,6 @@
   }
 }
 
-
-
-
 .act-message.act-follow-on {
   border-color: transparent;
   padding-top: 0;
@@ -267,8 +264,7 @@
   .act-info {
     float: right;
     padding-left: 0.5rem;
-    padding-top:0.1rem;
-
+    padding-top: 0.1rem;
   }
 
   .act-text{
@@ -277,7 +273,12 @@
   }
 }
 
-
+.act-message.act-my-message + .act-message.act-my-message.act-follow-on {
+  border-top: none;
+  border-left: @border-act-my-message;
+  border-right: @border-act-my-message;
+  margin-top: 0;
+}
 
 .act-sys{
   font-size:.6rem;
