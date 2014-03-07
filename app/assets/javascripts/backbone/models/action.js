@@ -66,6 +66,9 @@ Structural.Models.Action = Backbone.Model.extend({
     }
     return this.get('timestamp') > mostRecentEventViewed;
   },
+  markUnread: function() {
+    this.set('is_unread');
+  },
   isFocused: function() {
     return this.get('focused');
   },

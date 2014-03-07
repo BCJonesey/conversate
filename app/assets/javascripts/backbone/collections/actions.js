@@ -10,6 +10,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     this.on('reset', this._findMyMessages, this);
     this.on('reset', this._findFocusedMessage, this);
     this.on('reset', this._findFollowOnMessages, this);
+    this.on('reset', this._findUnreadMessages, this);
     this.on('add', this.setStateOnNewAction, this);
     this.on('add', function(model, collection, options) {
       this.trigger('unreadCountChanged');
@@ -48,6 +49,14 @@ Structural.Collections.Actions = Backbone.Collection.extend({
         }
       }
     }, this);
+  },
+
+  _findUnreadMessages: function() {
+    this.filter(function(action) {
+      return action.isUnread(this.conversation.get('most_recent_viewed'));
+    }).forEach(function(action) {
+      action.markUnread();
+    });
   },
 
   focus: function(id) {
@@ -177,6 +186,10 @@ Structural.Collections.Actions = Backbone.Collection.extend({
           model.followOnLongTerm();
         }
       }
+    }
+
+    if (model.isUnread(this.conversation.get('most_recent_viewed'))) {
+      model.markUnread();
     }
   },
   triggerNewMessage: function(model) {
