@@ -3,7 +3,10 @@ Structural.Models.Conversation = Backbone.Model.extend({
     var self = this;
     this.inflateExtend(this.attributes);
 
-    this.actions = new Structural.Collections.Actions([], {conversation: this.id, user:Structural._user.id});
+    this.actions = new Structural.Collections.Actions([], {
+      conversation: this,
+      user:Structural._user.id
+    });
     this.actions.on('add', function() {
       self.trigger('updated', self);
     })

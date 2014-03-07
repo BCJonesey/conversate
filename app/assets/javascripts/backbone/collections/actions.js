@@ -1,11 +1,11 @@
 Structural.Collections.Actions = Backbone.Collection.extend({
   model: Structural.Models.Action,
   url: function() {
-    return Structural.apiPrefix + '/conversations/' + this.conversationId + '/actions';
+    return Structural.apiPrefix + '/conversations/' + this.conversation.id + '/actions';
   },
   initialize: function(data, options) {
     options = options || {};
-    this.conversationId = options.conversation;
+    this.conversation = options.conversation;
     this.userId = options.user;
     this.on('reset', this._findMyMessages, this);
     this.on('reset', this._findFocusedMessage, this);
@@ -124,7 +124,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
         name: user.get('name'),
         id: user.id
       },
-      conversation_id: this.conversationId,
+      conversation_id: this.conversation.id,
       to: {
         name: folder.get('name'),
         id: folder.id
@@ -203,7 +203,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
   },
 
   fetch: function(options) {
-    if (this.conversationId) {
+    if (this.conversation.id) {
       // http://rockycode.com/blog/backbone-inheritance/
       // God, I fucking hate javascript so much.  Is this really the best there
       // is for basic inheritance?  Should we be using mixins instead?
