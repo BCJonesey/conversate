@@ -59,5 +59,8 @@ module Conversate
 
     # This feature is deprecated, and we don't use it.  Make warnings go away.
     config.active_record.disable_implicit_join_references = true
+
+    # Only for Siege testing.
+    config.allow_forgery_protection = false
   end
 end
