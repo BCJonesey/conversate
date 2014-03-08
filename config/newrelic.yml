@@ -3,11 +3,12 @@
 # Ruby, Java, .NET, PHP, and Python applications with deep visibility and low overhead.
 # For more information, visit www.newrelic.com.
 #
-# Generated February 22, 2013
+# Generated March 08, 2014
 #
 # This configuration file is custom generated for water-cooler Heroku
 
-# Here are the settings that are common to all environments:
+
+# Here are the settings that are common to all environments
 common: &default_settings
   # ============================== LICENSE KEY ===============================
 
@@ -41,15 +42,7 @@ common: &default_settings
   #       - Ajax Service
   #       - All Services
   #
-  # Application Name
-  # Set this to be the name of your application as you'd like it show
-  # up in New Relic.  New Relic will then auto-map instances of your application
-  # into a New Relic "application" on your home dashboard page. If you want
-  # to map this instance into multiple apps, like "AJAX Requests" and
-  # "All UI" then specify a semicolon-separated list of up to three
-  # distinct names.  If you comment this out, it defaults to the
-  # capitalized RAILS_ENV (i.e., Production, Staging, etc)
-  app_name: Watercoolr.io
+  app_name: My Application
 
   # When "true", the agent collects performance data about your
   # application and reports this data to the New Relic service at
@@ -62,7 +55,7 @@ common: &default_settings
   developer_mode: false
 
   # The newrelic agent generates its own log file to keep its logging
-  # information separate from that of your application.  Specify its
+  # information separate from that of your application. Specify its
   # log level here.
   log_level: info
 
@@ -95,7 +88,7 @@ common: &default_settings
   # Proxy settings for connecting to the New Relic server.
   #
   # If a proxy is used, the host setting is required.  Other settings
-  # are optional.  Default port is 8080.
+  # are optional. Default port is 8080.
   #
   # proxy_host: hostname
   # proxy_port: 8080
@@ -126,7 +119,7 @@ common: &default_settings
 
     # Transaction tracer is enabled by default. Set this to false to
     # turn it off. This feature is only available at the Professional
-    # product level.
+    # and above product levels.
     enabled: true
 
     # Threshold in seconds for when to collect a transaction
@@ -154,7 +147,7 @@ common: &default_settings
     # set to false when using other adapters.
     # explain_enabled: true
 
-    # Threshold for query execution time below which query plans will not
+    # Threshold for query execution time below which query plans will
     # not be captured.  Relevant only when `explain_enabled` is true.
     # explain_threshold: 0.5
 
@@ -163,8 +156,8 @@ common: &default_settings
   error_collector:
 
     # Error collector is enabled by default. Set this to false to turn
-    # it off. This feature is only available at the Professional
-    # product level.
+    # it off. This feature is only available at the Professional and above
+    # product levels.
     enabled: true
 
     # Rails Only - tells error collector whether or not to capture a
@@ -175,7 +168,7 @@ common: &default_settings
     # To stop specific errors from reporting to New Relic, set this property
     # to comma-separated values.  Default is to ignore routing errors,
     # which are how 404's get triggered.
-    ignore_errors: ActionController::RoutingError
+    ignore_errors: "ActionController::RoutingError,Sinatra::NotFound"
 
   # If you're interested in capturing memcache keys as though they
   # were SQL uncomment this flag. Note that this does increase
