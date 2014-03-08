@@ -44,7 +44,7 @@
         <%= email_field_tag :email, params[:email] %>
         <%= label_tag :password, 'Password' %>
         <%= password_field_tag :password, nil %>
-        <%= link_to 'Forgot Password', new_password_reset_path, :class => 'login-reset-link' %>
+        <%= link_to 'Reset Password', new_password_reset_path, :class => 'login-reset-link' %>
         <%= check_box_tag :remember_me, true, false %>
         <%= label_tag :remember_me, 'Remember me' %>
       </div>
