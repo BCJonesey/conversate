@@ -26,6 +26,8 @@ Conversate::Application.routes.draw do
   put 'people' => 'groups#edit'
   post 'people' => 'groups#new_user'
 
+
+
   namespace :api do
     namespace :v0 do
       resources :folders, :only => [:index, :create, :update, :destroy] do
@@ -40,6 +42,9 @@ Conversate::Application.routes.draw do
       resources :users, :only => [:index, :create, :update]
       resources :admin, :only => [:index]
       resources :search, :only => [:index]
+      resources :contact_lists do
+        resources :contacts
+      end
     end
   end
 

@@ -4,23 +4,15 @@ Structural.Views.RemovableParticipantList = Support.CompositeView.extend({
   template: JST.template('participants/removable_list'),
   initialize: function(options) {
     this.addAtEnd = options.addAtEnd || false;
+    this.collection.on('remove', this.render, this);
   },
   render: function() {
-    this.$el.html(this.template({participants: this.collection}));
+    this.$el.html(this.template({participants: this.collection, parent:this}));
+    this.collection.forEach(this.renderParticipant, this);
   },
-  events: {
-    'click .remove-participant': 'removeParticipant',
-    'click .unknown-participant' : 'showAddContactForm',
-    'click .act-add-contact-toggle': 'toggleAddContactForm'
-  },
-  showAddContactForm: function(e)
-  {
-    var model = this.getParticipantFromAction(e);
-  },
-  removeParticipant: function(e) {
-    var model = this.getParticipantFromAction(e);
-    this.trigger('remove', model);
-    this.collection.remove(model);
+  removeParticipant: function(participant) {
+    this.trigger('remove', participant);
+    this.collection.remove(participant);
     this.render();
   },
   add: function(model) {
@@ -32,17 +24,8 @@ Structural.Views.RemovableParticipantList = Support.CompositeView.extend({
     this.collection = list.clone();
     this.render();
   },
-
-  participants: function() {
-    return this.collection.clone();
-  },
-  getParticipantFromAction: function(e){
-    var target = $(e.target).closest('.removable-participant');
-    var index = target.prevAll().length;
-    return this.collection.at(index);
-  },
-  toggleAddContactForm: function(e){
-    $(e.target).closest('.removable-participant').find('.act-add-contact-form').toggleClass('hidden');
-
+  renderParticipant: function(participant) {
+    var view = new Structural.Views.RemovableParticipant({model: participant});
+    this.appendChild(view);
   }
 })
