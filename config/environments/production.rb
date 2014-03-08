@@ -67,4 +67,6 @@ Conversate::Application.configure do
 
   # Rails 4 recommendation.
   config.eager_load = true
+
+  config.action_mailer.default_url_options = { :host => "www.watercooler.io" }
 end

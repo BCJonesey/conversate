@@ -30,27 +30,16 @@
 <div class="home-main main">
   <div class="login-form">
     <div class='btn-toolbar'>
-      <span class='toolbar-title'>Welcome to Water Cooler</span>
+      <span class='toolbar-title'>Password Reset</span>
     </div>
-    <%= form_tag session_path, :class => '' do %>
+    <%= form_tag password_resets_path, :method => :post do %>
       <div class='form modal-content'>
-        <% if flash[:alert] %>
-        <div class='login-error-message'><%= flash[:alert]%></div>
-        <% end %>
-        <% if flash[:notice] %>
-        <div class='login-notice-message'><%= flash[:notice]%></div>
-        <% end %>
         <%= label_tag :email, 'Email' %>
         <%= email_field_tag :email, params[:email] %>
-        <%= label_tag :password, 'Password' %>
-        <%= password_field_tag :password, nil %>
-        <%= check_box_tag :remember_me, true, false %>
-        <%= label_tag :remember_me, 'Remember me' %>
-        <%= link_to 'Forgot Password?', new_password_reset_path %>
       </div>
       <div class='btn-toolbar-below clearfix'>
       <div class='btn-group pull-right'>
-        <%= submit_tag 'Sign In', :class => 'btn-primary' %>
+        <%= submit_tag "Reset my password!", :class => 'btn-primary' %>
       </div>
     </div>
     <% end %>
