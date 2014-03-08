@@ -67,4 +67,16 @@ Conversate::Application.configure do
 
   # Rails 4 recommendation.
   config.eager_load = true
+
+  config.action_mailer.default_url_options = { :host => ENV[:MAILER_HOST] }
+
+    config.action_mailer.smtp_settings = {
+    :address   => "smtp.mandrillapp.com",
+    :port      => 587, # ports 587 and 2525 are also supported with STARTTLS
+    :enable_starttls_auto => true, # detects and uses STARTTLS
+    :user_name => ENV[:MANDRILL_USERNAME],
+    :password  => ENV[:MANDRILL_APIKEY], # SMTP password is any valid API key
+    :authentication => 'plain', # Mandrill supports 'plain' or 'login'
+    :domain => ENV[:MANDRILL_DOMAIN], # your domain to identify your server when connecting
+  }
 end
