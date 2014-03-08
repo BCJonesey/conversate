@@ -1,0 +1,3 @@
+http://localhost:3000/api/v0/folders
+http://localhost:3000/api/v0/folders/64/conversations
+http://localhost:3000/api/v0/conversations/435/actions

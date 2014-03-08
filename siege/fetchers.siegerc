@@ -1,0 +1,14 @@
+verbose = true
+timestamp = true
+logging = true
+logfile = ./fetchers.siegelog
+chunked = true
+
+cookies = true
+login-url = http://localhost:3000/session POST email=t1%40example.com&password=a
+
+concurrent = 1
+reps = 1
+file = ./examples-urls.txt
+delay = 1
+internet = false
