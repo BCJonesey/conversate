@@ -31,13 +31,4 @@ Conversate::Application.configure do
   config.eager_load = false
 
   config.action_mailer.default_url_options = { :host => "http://localhost:3000" }
-  config.action_mailer.smtp_settings = {
-    :address   => "smtp.mandrillapp.com",
-    :port      => 25, # ports 587 and 2525 are also supported with STARTTLS
-    :enable_starttls_auto => true, # detects and uses STARTTLS
-    :user_name => "sean.kermes@structur.al",
-    :password  => "NIaJNhmxxJX6uu7_AR0VxA", # SMTP password is any valid API key
-    :authentication => 'login', # Mandrill supports 'plain' or 'login'
-    :domain => 'watercooler.io', # your domain to identify your server when connecting
-  }
 end

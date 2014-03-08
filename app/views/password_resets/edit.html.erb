@@ -1,32 +1,59 @@
-# app/views/password_resets/edit.html.erb
-<h1>Choose a new password</h1>
-<%= form_for @user, :url => password_reset_path(@user), :html => {:method => :put} do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<header>
+  <div class='nav clearfix'>
+    <div class='btn-group pull-left'>
+      <a href="<%= root_path %>" class='nav-item <%= active_on_path marketing_path %>'>Water Cooler</a>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= @user.email %>
+    <div class="btn-group pull-right">
+      <a href="#" class="nav-item nav-item-toggle mkt-sign-in-toggle">Site</a>
+      <div class="login-modal hidden">
+        <%= form_tag speakeasy_path, :class => '' do %>
+        <div class='form modal-content'>
+
+          <%= label_tag :code_word, 'Passcode' %>
+          <%= text_field_tag :code_word, '' %>
+        </div>
+        <div class='clearfix'>
+          <div class='btn-group pull-right'>
+            <%= submit_tag 'Go to Test Site', :class => 'btn btn-primary' %>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password %>
+</header>
+
+
+
+<div class="home-main main">
+  <div class="login-form">
+    <div class='btn-toolbar'>
+      <span class='toolbar-title'>Reset password for <%= @user.email %></span>
+    </div>
+    <%= form_for @user, :url => password_reset_path(@user), :html => {:method => :put} do |f| %>
+      <div class='form modal-content'>
+        <% if flash[:alert] %>
+        <div class='login-error-message'><%= flash[:alert]%></div>
+        <% end %>
+        <% if flash[:notice] %>
+        <div class='login-notice-message'><%= flash[:notice]%></div>
+        <% end %>
+        <% @user.errors.full_messages.each do |msg| %>
+        <div class='login-error-message'><%= msg%></div>
+        <% end %>
+        <%= label_tag :password, 'Password' %>
+        <%= password_field_tag :password, nil %>
+        <%= label_tag :password_confirmation,  'Confirm Password' %>
+        <%= password_field_tag :password_confirmation, nil %>
+        <%= hidden_field_tag :token, @token %>
+      </div>
+      <div class='btn-toolbar-below clearfix'>
+      <div class='btn-group pull-right'>
+        <%= submit_tag 'Set New Password', :class => 'btn-primary' %>
+      </div>
+    </div>
+    <% end %>
   </div>
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation %>
-    <%= hidden_field_tag :token, @token %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>
