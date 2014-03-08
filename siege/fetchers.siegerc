@@ -7,8 +7,8 @@ chunked = true
 cookies = true
 login-url = http://localhost:3000/session POST email=t1%40example.com&password=a
 
-concurrent = 1
-reps = 1
+concurrent = 5
+reps = 100
 file = ./examples-urls.txt
-delay = 1
-internet = false
+delay = 15
+internet = true
