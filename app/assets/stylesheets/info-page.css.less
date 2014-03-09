@@ -1,0 +1,42 @@
+@import "variables.css.less";
+@import "mixins.css.less";
+
+
+.info-page{
+
+
+}
+
+.info-main-description-content{
+  margin:1.0rem auto;
+  max-width: @info-content-width;
+  text-align: center;
+  color:#AAA;
+  padding:0.5rem 1.0rem;
+  line-height: 1.5;
+  a{.link-blue();}
+  @media(min-width:@bp-1){
+    padding:1.5rem 2.5rem;
+  }
+}
+
+
+
+.footer{
+  display:block;
+  color:#CCC;
+  text-align:center;
+  border-top:@border-2;
+  padding:0.35rem 1.0rem 0.5rem;
+  font-size:0.9rem;
+  background-color: #888;
+  line-height: 1.5;
+  a{
+    color:inherit;
+    text-decoration:none;
+    &:hover{
+      text-decoration:underline;
+    }
+  }
+}
+

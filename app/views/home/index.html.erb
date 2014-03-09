@@ -1,25 +1,14 @@
+<div class="info-page info-page-home ui-scrollable">
 
-<header>
-  <div class='nav clearfix'>
-    <div class='btn-group pull-left'>
-      <a href="<%= root_path %>" class='nav-item'>Water Cooler</a>
-    </div>
+  <%=render "shared/header" %>
 
-    <div class="btn-group pull-right">
-      <a href="<%= tour_path %>"
-         class="nav-item nav-item-toggle">
-        Tour
-      </a>
-    </div>
-  </div>
-</header>
+  <div class="home-main main">
 
-<div class="home-main main">
-  <div class="login-form">
-    <div class='btn-toolbar'>
-      <span class='toolbar-title'>Welcome to Water Cooler</span>
-    </div>
-    <%= form_tag session_path, :class => '' do %>
+    <div class="login-form">
+      <div class='btn-toolbar'>
+        <span class='toolbar-title'>Sign In to Water Cooler</span>
+      </div>
+      <%= form_tag session_path, :class => '' do %>
       <div class='form modal-content'>
         <% if flash[:alert] %>
         <div class='login-error-message'><%= flash[:alert]%></div>
@@ -36,10 +25,27 @@
         <%= label_tag :remember_me, 'Remember me' %>
       </div>
       <div class='btn-toolbar-below clearfix'>
-      <div class='btn-group pull-right'>
-        <%= submit_tag 'Sign In', :class => 'btn-primary' %>
+        <div class='btn-group pull-right'>
+          <%= submit_tag 'Sign In', :class => 'btn-primary' %>
+        </div>
       </div>
+      <% end %>
     </div>
-    <% end %>
   </div>
+
+  <div class='info-main-description'>
+    <div class='info-main-description-content'>
+
+      <p>Water Cooler is an app built to make group discussions suck less.  </p>
+
+      <p>We are currently in private beta.  </p>
+
+      <p>If you're interested in checking it out,
+        hit us up at <a href="mailto:structural@structur.al">structural@structur.al</a>.   </p>
+
+    </div>
+  </div>
+
+  <%=render "shared/footer" %>
+
 </div>
