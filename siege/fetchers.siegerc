@@ -7,8 +7,8 @@ chunked = true
 cookies = true
 login-url = http://kuhltank.herokuapp.com/session POST email=skermes%40gmail.com&password=pass@word1
 
-concurrent = 5
-reps = 100
+concurrent = 100
+time = 10M
 file = ./examples-urls.txt
 delay = 15
 internet = true
