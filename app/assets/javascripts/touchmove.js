@@ -1,15 +1,3 @@
-// This should disable body srolling on iOS devices, but allow scrolling on elements with .ui-scrollable.
-
- // $('body').on('touchmove', function (e) {
- //         if (!$('.ui-scrollable').has($(e.target)).length) e.preventDefault();
- // });
-
-
-// This should disable body srolling on iOS devices, but allow scrolling on elements with .ui-scrollable.
-
-//$(document).on("touchmove", function(evt) { evt.preventDefault() });
-//$(document).on("touchmove", ".ui-scrollable", function(evt) { evt.stopPropagation() });
-
 
 var selScrollable = '.ui-scrollable';
 
