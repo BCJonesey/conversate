@@ -5,22 +5,26 @@
     </div>
 
     <div class="btn-group pull-right">
-      <a href="#" class="nav-item nav-item-toggle mkt-sign-in-toggle">Sign In</a>
-      <div class="login-modal hidden">
-        <%= form_tag session_path, :class => '' do %>
-          <div class='form modal-content'>
-            <%= label_tag :email, 'Email' %>
-            <%= email_field_tag :email, params[:email] %>
-            <%= label_tag :password, 'Password' %>
-            <%= password_field_tag :password, nil %>
-          </div>
-          <div class='clearfix'>
-            <div class='btn-group pull-right'>
-              <%= submit_tag 'Sign In', :class => 'btn-primary' %>
+      <% if current_user %>
+        <a href="<%= root_path %>" class="nav-item">Water Cooler</a>
+      <% else %>
+        <a href="#" class="nav-item nav-item-toggle mkt-sign-in-toggle">Sign In</a>
+        <div class="login-modal hidden">
+          <%= form_tag session_path, :class => '' do %>
+            <div class='form modal-content'>
+              <%= label_tag :email, 'Email' %>
+              <%= email_field_tag :email, params[:email] %>
+              <%= label_tag :password, 'Password' %>
+              <%= password_field_tag :password, nil %>
             </div>
-          </div>
-        <% end %>
-      </div>
+            <div class='clearfix'>
+              <div class='btn-group pull-right'>
+                <%= submit_tag 'Sign In', :class => 'btn-primary' %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
 </header>
