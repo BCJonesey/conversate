@@ -3,7 +3,6 @@ Conversate::Application.routes.draw do
   # eating my POSTs too.
   get '/' => 'home#index', :as => 'root'
 
-  get '/intro' => 'marketing#index', :as => 'marketing'
   get '/tour' => 'marketing#tour', :as => 'tour'
   get '/pricing' => 'marketing#pricing', :as => 'pricing'
 

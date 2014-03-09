@@ -1,7 +1,4 @@
 class MarketingController < ApplicationController
-  def index
-  end
-
   def tour
   end
 
