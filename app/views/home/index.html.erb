@@ -6,26 +6,13 @@
     </div>
 
     <div class="btn-group pull-right">
-      <a href="#" class="nav-item nav-item-toggle mkt-sign-in-toggle">Site</a>
-      <div class="login-modal hidden">
-        <%= form_tag speakeasy_path, :class => '' do %>
-        <div class='form modal-content'>
-
-          <%= label_tag :code_word, 'Passcode' %>
-          <%= text_field_tag :code_word, '' %>
-        </div>
-        <div class='clearfix'>
-          <div class='btn-group pull-right'>
-            <%= submit_tag 'Go to Test Site', :class => 'btn btn-primary' %>
-          </div>
-        </div>
-        <% end %>
-      </div>
+      <a href="<%= tour_path %>"
+         class="nav-item nav-item-toggle">
+        Site
+      </a>
     </div>
   </div>
 </header>
-
-
 
 <div class="home-main main">
   <div class="login-form">
