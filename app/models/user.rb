@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
     user.send_me_mail = true if user.external
 
     new_folder = Folder.new
-    new_folder.name = 'My Conversations'
+    new_folder.name = 'Inbox'
     new_folder.users << user
     new_folder.save
     user.default_folder_id = new_folder.id
