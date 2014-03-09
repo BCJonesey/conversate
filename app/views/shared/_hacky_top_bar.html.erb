@@ -8,6 +8,9 @@
       <i class="stb-icon fa fa-group"></i>
       <span class="stb-link-text">People</span>
     </a>
+    <a href="<%= tour_path %>" class="stb-link <%= selected_on_path(tour_path) %>">
+      <span class="stb-link-text">Tour</span>
+    </a>
     <% if current_user.site_admin %>
       <a class="stb-link <%= selected_on_path(admin_path) %>" href="<%= admin_path %>">
         <i class="stb-icon fa fa-dashboard"></i>
