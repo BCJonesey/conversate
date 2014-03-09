@@ -19,7 +19,7 @@
           consecutiveErrors >= ConsecutiveErrorsRequiredToToast) {
         Structural.Toaster.toast({
           state: 'error',
-          errorType: 'backbone:sync'
+          type: 'backbone:sync'
         });
       }
 
@@ -31,6 +31,11 @@
     var originalSuccess = options.success;
     options.success = function(model, resp, options) {
       consecutiveErrors = 0;
+
+      Structural.Toaster.toast({
+        state: 'success',
+        type: 'backbone:sync'
+      });
 
       if (originalSuccess) {
         originalSuccess(model, resp, options);
