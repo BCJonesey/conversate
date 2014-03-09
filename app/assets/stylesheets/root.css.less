@@ -8,15 +8,17 @@
   box-sizing: border-box;
   -moz-box-sizing: border-box;
 }
-
+html, body{
+  margin:0;
+  height:100%;
+}
 body {
   background-color: @backgroundColor;
   color: @textColor;
   padding: 0;
   margin: 0;
   overflow: visible;
-  .body-font;
-  height:100%;
+  .body-font();
 }
 
 h1, h2, h3, h4, h5, h6 {

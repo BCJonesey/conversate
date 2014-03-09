@@ -2,6 +2,6 @@ class MarketingController < ApplicationController
   def tour
   end
 
-  def pricing
+  def beta
   end
 end
