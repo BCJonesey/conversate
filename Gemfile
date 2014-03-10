@@ -37,6 +37,7 @@ gem 'backbone-rails'	# Used for including the backbone.js files and general inte
 gem 'ejs'	# Required for the .ejs templates.
 gem 'newrelic_rpm' # For New Relic analytics.
 gem 'quiet_assets'
+gem 'rack-rewrite' # Allows us to do middleware 301 redirects, like from www to bare sld.
 
 gem 'mandrill-api'
 gem 'email_reply_parser'
