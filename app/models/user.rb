@@ -12,6 +12,10 @@ class User < ActiveRecord::Base
   attr_accessible :email, :full_name, :password, :password_confirmation, :external
 
   validates_confirmation_of :password
+  # We have to allow nil passwords or we wouldn't ever be able to change a
+  # user record.  The database doesn't actually have a password field (just the
+  # encrypted password) so unless we set it explicitly (which would change it)
+  # it's always nil.
   validates :password, length: { minimum: 1 }, allow_nil: true
   validates_presence_of :password, :on => :create, :unless => :external
   validates_presence_of :email
