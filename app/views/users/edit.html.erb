@@ -1,44 +1,79 @@
 <%= render 'shared/hacky_top_bar' %>
 <div class='profile-page ui-scrollable'>
   <div class='profile-update-form'>
+
+    <% if @edit_status == :failure %>
+      <div class="error-messages">
+        <span>Problem updating profile information</span>
+      </div>
+    <% elsif @edit_status == :success %>
+      <div class="success-messages">
+        <span>Profile information successfully updated</span>
+      </div>
+    <% end %>
+
     <div class='btn-toolbar'>
       <div class='btn-group pull-left'>
-        <span class='toolbar-title'>User Profile Information</span>
+        <span class='toolbar-title'>Change your name</span>
       </div>
     </div>
     <%= form_tag users_path, :method => 'put' do %>
-      <div class='form'>
-        <% if @edit_status == :failure %>
-          <div class="error-messages">
-            <span>Something went wrong...</span>
-          </div>
-          <% elsif @edit_status == :success %>
-          <div class="success-messages">
-            <span>Profile information successfully updated</span>
-          </div>
-        <% end %>
-        <%= label_tag :password do %>
-          Original password
-        <% end %>
-        <%= password_field_tag :password %>
-        <%= label_tag :new_password do %>
-          New password (optional)
-        <% end %>
-        <%= password_field_tag :new_password %>
-        <%= label_tag :new_password_confirmation %>
-        <%= password_field_tag :new_password_confirmation %>
+      <div class="form">
         <%= label_tag :full_name %>
         <%= text_field_tag :full_name, @user.full_name %>
-        <% if @user.site_admin %>
-          <%= check_box_tag :send_me_mail, 'yes', @user.send_me_mail %>
-          <%= label_tag :send_me_mail %>
-        <% end %>
       </div>
-      <div class='btn-toolbar-below'>
-        <div class='btn-group pull-right'>
-          <%= submit_tag "Update", :class => "btn btn-primary" %>
+      <div class="btn-toolbar-below">
+        <div class="btn-group pull-right">
+          <%= submit_tag 'Update', :class => 'btn btn-primary' %>
         </div>
       </div>
     <% end %>
+
+    <div class='btn-toolbar'>
+      <div class='btn-group pull-left'>
+        <span class='toolbar-title'>Change your password</span>
+      </div>
+    </div>
+    <%= form_tag users_path, :method => 'put' do %>
+      <div class="form">
+        <%= label_tag :password do %>Original password<% end %>
+        <%= password_field_tag :password %>
+        <%= label_tag :new_password %>
+        <%= password_field_tag :new_password %>
+        <%= label_tag :new_password_confirmation %>
+        <%= password_field_tag :new_password_confirmation %>
+      </div>
+      <div class="btn-toolbar-below">
+        <div class="btn-group pull-right">
+          <%= submit_tag 'Update', :class => 'btn btn-primary' %>
+        </div>
+      </div>
+    <% end %>
+
+    <% if @user.site_admin %>
+      <div class='btn-toolbar'>
+        <div class='btn-group pull-left'>
+          <span class='toolbar-title'>Change your email settings</span>
+        </div>
+      </div>
+      <%= form_tag users_path, :method => 'put' do %>
+        <div class="form">
+          <%= check_box_tag :send_me_mail, 'yes', @user.send_me_mail %>
+          <%= label_tag :send_me_mail %>
+          <%# HTML is the worst, part umpty-billion:  If a checkbox is not
+              checked, it won't be sent to the server at all.  Hence, we need
+              a dummy value to be able to check if the form we're submitting
+              is the email form, which will let us correctly interpret the
+              absence of other checkboxes in this form. %>
+          <%= hidden_field_tag :email_settings_form, true %>
+        </div>
+        <div class="btn-toolbar-below">
+          <div class="btn-group pull-right">
+            <%= submit_tag 'Update', :class => 'btn btn-primary' %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
   </div>
 </div>
