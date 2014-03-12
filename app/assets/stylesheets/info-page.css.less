@@ -1,16 +1,28 @@
 @import "variables.css.less";
 @import "mixins.css.less";
 
-
+.info-page-wrapper{
+  position: absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background-color: #DDD;
+  overflow-y: auto;
+}
 .info-page{
-background-color: white;
   .copy{
     color:#AAA;
   }
 }
 
+.info-main-description{
+  background-color: white;
+  padding:1.0rem;
+}
 .info-main-description-content{
-  margin:1.0rem auto;
+  background-color: white;
+  margin:0 auto;
   max-width: @info-content-width;
   text-align: center;
   color:#AAA;

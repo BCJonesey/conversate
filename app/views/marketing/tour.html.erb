@@ -1,65 +1,66 @@
-<div class='info-page tour-page ui-scrollable'>
+<div class='info-page-wrapper ui-scrollable'>
+<div class='info-page tour-page'>
 
+    <%=render "shared/header" %>
 
-  <%=render "shared/header" %>
+    <div class="main">
+      <div class='copy'>
+        <div class='lead-in'>
+          <span>A tour of Water Cooler</span>
+        </div>
 
-  <div class="main">
-    <div class='copy'>
-      <div class='lead-in'>
-        <span>A tour of Water Cooler</span>
+        <div class='section'>
+          <a href="<%= asset_path 'tour/tour-01-columns.png' %>">
+            <%= image_tag("tour/tour-01-columns.png", :alt => "Water Cooler", :class => "screenshot") %>
+          </a>
+          <div class='tour-caption'>The Basic Layout</div>
+        </div>
+
+        <div class='section'>
+          <a href="<%= asset_path 'tour/tour-02-compose.png' %>">
+            <%= image_tag("tour/tour-02-compose.png", :alt => "Water Cooler", :class => "screenshot") %>
+          </a>
+          <div class='tour-caption'>Replying</div>
+        </div>
+
+        <div class='section'>
+          <a href="<%= asset_path 'tour/tour-03-convoactions.png' %>">
+            <%= image_tag("tour/tour-03-convoactions.png", :alt => "Water Cooler", :class => "screenshot") %>
+          </a>
+          <div class='tour-caption'>Editing Conversations, New Conversations</div>
+        </div>
+
+        <div class='section'>
+          <a href="<%= asset_path 'tour/tour-04-newconvo.png' %>">
+            <%= image_tag("tour/tour-04-newconvo.png", :alt => "Water Cooler", :class => "screenshot") %>
+          </a>
+          <div class='tour-caption'>The Parts of a New Conversation</div>
+        </div>
+
+        <div class='section'>
+          <a href="<%= asset_path 'tour/tour-05-folderactions.png' %>">
+            <%= image_tag("tour/tour-05-folderactions.png", :alt => "Water Cooler", :class => "screenshot") %>
+          </a>
+          <div class='tour-caption'>Folders</div>
+        </div>
+
+        <div class='section'>
+          <a href="<%= asset_path 'tour/tour-06-editorfolder.png' %>">
+            <%= image_tag("tour/tour-06-editorfolder.png", :alt => "Water Cooler", :class => "screenshot") %>
+          </a>
+          <div class='tour-caption'>Editing and Sharing Folders</div>
+        </div>
+
+        <div class='section'>
+          <a href="<%= asset_path 'tour/tour-07-baractions.png' %>">
+            <%= image_tag("tour/tour-07-baractions.png", :alt => "Water Cooler", :class => "screenshot") %>
+          </a>
+          <div class='tour-caption'>Your Profile, and Search</div>
+        </div>
+
       </div>
-
-      <div class='section'>
-        <a href="<%= asset_path 'tour/tour-01-columns.png' %>">
-          <%= image_tag("tour/tour-01-columns.png", :alt => "Water Cooler", :class => "screenshot") %>
-        </a>
-        <div class='tour-caption'>The Basic Layout</div>
-      </div>
-
-      <div class='section'>
-        <a href="<%= asset_path 'tour/tour-02-compose.png' %>">
-          <%= image_tag("tour/tour-02-compose.png", :alt => "Water Cooler", :class => "screenshot") %>
-        </a>
-        <div class='tour-caption'>Replying</div>
-      </div>
-
-      <div class='section'>
-        <a href="<%= asset_path 'tour/tour-03-convoactions.png' %>">
-          <%= image_tag("tour/tour-03-convoactions.png", :alt => "Water Cooler", :class => "screenshot") %>
-        </a>
-        <div class='tour-caption'>Editing Conversations, New Conversations</div>
-      </div>
-
-      <div class='section'>
-        <a href="<%= asset_path 'tour/tour-04-newconvo.png' %>">
-          <%= image_tag("tour/tour-04-newconvo.png", :alt => "Water Cooler", :class => "screenshot") %>
-        </a>
-        <div class='tour-caption'>The Parts of a New Conversation</div>
-      </div>
-
-      <div class='section'>
-        <a href="<%= asset_path 'tour/tour-05-folderactions.png' %>">
-          <%= image_tag("tour/tour-05-folderactions.png", :alt => "Water Cooler", :class => "screenshot") %>
-        </a>
-        <div class='tour-caption'>Folders</div>
-      </div>
-
-      <div class='section'>
-        <a href="<%= asset_path 'tour/tour-06-editorfolder.png' %>">
-          <%= image_tag("tour/tour-06-editorfolder.png", :alt => "Water Cooler", :class => "screenshot") %>
-        </a>
-        <div class='tour-caption'>Editing and Sharing Folders</div>
-      </div>
-
-      <div class='section'>
-        <a href="<%= asset_path 'tour/tour-07-baractions.png' %>">
-          <%= image_tag("tour/tour-07-baractions.png", :alt => "Water Cooler", :class => "screenshot") %>
-        </a>
-        <div class='tour-caption'>Your Profile, and Search</div>
-      </div>
-
     </div>
-  </div>
+</div>
+<%=render "shared/footer" %>
 </div>
 
-<%=render "shared/footer" %>
