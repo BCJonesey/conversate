@@ -71,7 +71,7 @@ Structural.Views.Action = Support.CompositeView.extend({
       this.leave();
     }, this);
 
-    this.model.on('change:focused', function() {
+    this.model.on('change:focused change:is_unread', function() {
       if (this.model.get('focused')) {
         this.model.collection.trigger('focusedView', this);
       }

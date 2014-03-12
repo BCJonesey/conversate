@@ -68,6 +68,10 @@ Structural.Models.Conversation = Backbone.Model.extend({
     self.set('most_recent_viewed', (new Date()).valueOf());
     self.set('unread_count', 0);
 
+    self.actions.forEach(function(action) {
+      action.markRead();
+    });
+
     self.withCurrentUserFromSelf(function(participant) {
       // The server-side function has a side effect in that it will update most recent viewed
       // for this conversation and user, which will be close enough to the time we want.
