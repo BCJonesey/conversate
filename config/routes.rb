@@ -4,7 +4,7 @@ Conversate::Application.routes.draw do
   get '/' => 'home#index', :as => 'root'
 
   get '/tour' => 'marketing#tour', :as => 'tour'
-  get '/beta' => 'marketing#beta', :as => 'beta'
+  get '/about' => 'marketing#about', :as => 'about'
 
   get 'admin' => 'admin#index', :as => 'admin'
   resource :users, :only => [:update]

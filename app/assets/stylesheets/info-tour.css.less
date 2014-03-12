@@ -1,7 +1,7 @@
 @import 'variables.css.less';
 @import 'mixins.css.less';
 
-.tour-page{
+.tour-page, {
 
   .main{
     padding:0;
@@ -10,35 +10,33 @@
     }
   }
 
-  .lead-in{
-    padding:1.0rem;
-    border-bottom:1px solid #DDD;
-    background-color:#FAFAFA;
-    font-size:1.5rem;
-    text-align:center;
-    font-weight: bold;
-  }
 
-  .copy{
-    border:none;
-    @media(min-width:@bp-1){
-      border:1px solid #CCC;
-    }
+  .tour-caption{
     font-size:1.0rem;
-    max-width:@info-content-width;
-    margin:0 auto;
-    background-color: white;
-
-    .tagline{
-      color:#AAA;
-      font-style:italic;
+    padding:0.5rem 0.5rem;
+    text-align: center;
+    @media(min-width:@bp-1){
+      font-size: 1.25rem;
+      padding:1.0rem 2.0rem;
     }
-    .section{
-      padding:2.0rem;
-    }
-    .divider{
+    &:after{
+      content:" ";
+      display:block;
       height:1px;
-      .gradient-ltr(#CCC,white,90%);
+      background:#EEE;
+      margin-top:1.0rem;
+      background:linear-gradient(to left, white 0%, #CCC 50%, white 100%);
+    }
+  }
+}
+
+
+
+.info-about{
+  .main{
+    padding:0;
+    @media(min-width:@bp-1){
+      padding:1.0rem;
     }
   }
 }
