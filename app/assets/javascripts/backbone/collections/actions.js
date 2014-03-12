@@ -54,7 +54,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
   _findUnreadMessages: function() {
     this.filter(function(action) {
       return action.isUnread(this.conversation.get('most_recent_viewed'));
-    }).forEach(function(action) {
+    }, this).forEach(function(action) {
       action.markUnread();
     });
   },
