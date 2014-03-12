@@ -71,11 +71,9 @@ Structural.Models.Conversation = Backbone.Model.extend({
     self.withCurrentUserFromSelf(function(participant) {
       // The server-side function has a side effect in that it will update most recent viewed
       // for this conversation and user, which will be close enough to the time we want.
-      participant.save(
-        {
-          most_recent_viewed: self.get('most_recent_viewed')
-        }
-      );
+      participant.save({
+        most_recent_viewed: self.get('most_recent_viewed')
+      });
     });
     self.trigger('updated', self);
   },
