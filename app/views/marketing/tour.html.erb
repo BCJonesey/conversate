@@ -1,71 +1,66 @@
-<div class='page-wrapper tour-page'>
+<div class='info-page-wrapper ui-scrollable'>
+<div class='info-page tour-page ui-scollable-contents'>
 
-<%=render "shared/header" %>
+    <%=render "shared/header" %>
 
-<div class="main">
+    <div class="main">
+      <div class='copy'>
+        <div class='lead-in'>
+          <span>A tour of Water Cooler</span>
+        </div>
 
-<div class='copy'>
+        <div class='section'>
+          <a href="<%= asset_path 'tour/tour-01-columns.png' %>">
+            <%= image_tag("tour/tour-01-columns.png", :alt => "Water Cooler", :class => "screenshot") %>
+          </a>
+          <div class='tour-caption'>The Basic Layout</div>
+        </div>
 
-<div class='lead-in'>
+        <div class='section'>
+          <a href="<%= asset_path 'tour/tour-02-compose.png' %>">
+            <%= image_tag("tour/tour-02-compose.png", :alt => "Water Cooler", :class => "screenshot") %>
+          </a>
+          <div class='tour-caption'>Replying</div>
+        </div>
 
-<h4>Water Cooler Makes Conversations Easier</h4>
+        <div class='section'>
+          <a href="<%= asset_path 'tour/tour-03-convoactions.png' %>">
+            <%= image_tag("tour/tour-03-convoactions.png", :alt => "Water Cooler", :class => "screenshot") %>
+          </a>
+          <div class='tour-caption'>Editing Conversations, New Conversations</div>
+        </div>
 
-<p>Water Cooler is a web-based program that allows you to send messages to people or groups, chat in real time and rearrange messages within conversations to help you keep your discussions organized, documented and, above all, effective.
+        <div class='section'>
+          <a href="<%= asset_path 'tour/tour-04-newconvo.png' %>">
+            <%= image_tag("tour/tour-04-newconvo.png", :alt => "Water Cooler", :class => "screenshot") %>
+          </a>
+          <div class='tour-caption'>The Parts of a New Conversation</div>
+        </div>
 
-We designed Water Cooler to make text-based communications as easy and smooth as informal conversations in the hallway or, well, around the water cooler.
+        <div class='section'>
+          <a href="<%= asset_path 'tour/tour-05-folderactions.png' %>">
+            <%= image_tag("tour/tour-05-folderactions.png", :alt => "Water Cooler", :class => "screenshot") %>
+          </a>
+          <div class='tour-caption'>Folders</div>
+        </div>
 
-Water Cooler looks a lot like email. It might even feel a lot like email. But under the hood it definitely doesn’t work like email. </p>
+        <div class='section'>
+          <a href="<%= asset_path 'tour/tour-06-editorfolder.png' %>">
+            <%= image_tag("tour/tour-06-editorfolder.png", :alt => "Water Cooler", :class => "screenshot") %>
+          </a>
+          <div class='tour-caption'>Editing and Sharing Folders</div>
+        </div>
 
+        <div class='section'>
+          <a href="<%= asset_path 'tour/tour-07-baractions.png' %>">
+            <%= image_tag("tour/tour-07-baractions.png", :alt => "Water Cooler", :class => "screenshot") %>
+          </a>
+          <div class='tour-caption'>Your Profile, and Search</div>
+        </div>
+
+      </div>
+    </div>
 </div>
-
-<div class='section'>
-
-<h4>Subject lines always relate to messages</h4>
-
-<p>How many times have you had critical discussions on a thread with a subject line lie “Fwd: Re: Re: “? Water Cooler lets you retitle a conversation as it ages. What starts out as “Crazy Idea” might become “New Customer Acquisition Model” as the idea gets more flushed out... or it might stay “Crazy Idea” and get archived because it was actually just a silly idea. You may not always know the best title for a thread when you start it—and Water Cooler is just fine with that.</p>
-
-</div>
-<div class='divider'></div>
-<div class='section'>
-
-<h4>You can't forget to reply all and split the conversation</h4>
-
-<p>When managing email conversations with three or more people, everyone has to always remember to hit reply-all instead of just reply, or some people are going to be out of the loop. </p>
-
-<p>Heaven forbid you want to include a new person on the thread and bring them up to speed. Instead of shuffling messages around and letting each person’s email client stitch the threads back together, Water Cooler makes threads living, breathing creatures. Add a person to thread, and they see the thread like they were always there. </p>
-
-</div>
-<div class='divider'></div>
-<div class='section'>
-
-<h4>The ability to save, share and merge quick instant message conversations</h4>
-
-<p>Instant messaging saves you time—you can shoot out an IM to get a quick answer to a question instead of starting a full email chain. But instant messages aren't easy to save. And you can't combine them with your email unless you want to copy and paste a long back and forth conversation. Water cooler lets you opt to write long messages like emails or quick, type-and-send messages like instant messages. And it lets you do the both in the very same place.</p>
-
-</div>
-<div class='divider'></div>
-<div class='section'>
-
-<h4>Escape the one large hopelessly unmanageable inbox</h4>
-
-<p>Water Cooler revamps how you keep people in the loop. We took the age-old organization system of folders and decided to throw in some magic. Everyone has their own folders for organizing conversations, but folders can also be shared with multiple people. Remember distribution lists? Remember trying to “clean out” your inbox? Remember reading email, never being sure whether it’s going to be an important one or not? </p>
-
-</div>
-<div class='divider'></div>
-<div class='section'>
-
-<h4>Fix mistakes and misinformation</h4>
-
-<p>Once a regular email has been sent with an error, it’s out there forever. You can send a follow up, or a clarification, or a correction, but those can get missed while the original email lives on—and if you later go looking for it, it’s pretty easy to find the incorrect message and not the correction. </p>
-
-<p>In Water Cooler you can delete and move messages after they’ve been sent so that the thread you and your coworkers are looking at has exactly what you need. And does Water Cooler keep track of what’s been deleted or moved with access to that deleted or moved content? Why, of course it does.</p>
-
-</div>
-
-</div>
-
-</div>
-
 <%=render "shared/footer" %>
-
 </div>
+

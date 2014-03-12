@@ -1,54 +1,52 @@
+<div class='info-page-wrapper ui-scrollable'>
+<div class="info-page info-page-home ui-scrollable-contents">
 
-<header>
-  <div class='nav clearfix'>
-    <div class='btn-group pull-left'>
-      <a href="<%= root_path %>" class='nav-item <%= active_on_path marketing_path %>'>Water Cooler</a>
-    </div>
+  <%=render "shared/header" %>
 
-    <div class="btn-group pull-right">
-      <a href="#" class="nav-item nav-item-toggle mkt-sign-in-toggle">Site</a>
-      <div class="login-modal hidden">
-        <%= form_tag speakeasy_path, :class => '' do %>
-        <div class='form modal-content'>
+  <div class="home-main main">
 
-          <%= label_tag :code_word, 'Passcode' %>
-          <%= text_field_tag :code_word, '' %>
-        </div>
-        <div class='clearfix'>
-          <div class='btn-group pull-right'>
-            <%= submit_tag 'Go to Test Site', :class => 'btn btn-primary' %>
-          </div>
-        </div>
-        <% end %>
+    <div class="login-form">
+      <div class='btn-toolbar'>
+        <span class='toolbar-title'>Sign In to Water Cooler</span>
       </div>
-    </div>
-  </div>
-</header>
-
-
-
-<div class="home-main main">
-  <div class="login-form">
-    <div class='btn-toolbar'>
-      <span class='toolbar-title'>Welcome to Water Cooler</span>
-    </div>
-    <%= form_tag session_path, :class => '' do %>
+      <%= form_tag session_path, :class => '' do %>
       <div class='form modal-content'>
         <% if flash[:alert] %>
         <div class='login-error-message'><%= flash[:alert]%></div>
+        <% end %>
+        <% if flash[:notice] %>
+        <div class='login-notice-message'><%= flash[:notice]%></div>
         <% end %>
         <%= label_tag :email, 'Email' %>
         <%= email_field_tag :email, params[:email] %>
         <%= label_tag :password, 'Password' %>
         <%= password_field_tag :password, nil %>
+        <%= link_to 'Reset Password', new_password_reset_path, :class => 'login-reset-link' %>
         <%= check_box_tag :remember_me, true, false %>
         <%= label_tag :remember_me, 'Remember me' %>
       </div>
       <div class='btn-toolbar-below clearfix'>
-      <div class='btn-group pull-right'>
-        <%= submit_tag 'Sign In', :class => 'btn-primary' %>
+        <div class='btn-group pull-right'>
+          <%= submit_tag 'Sign In', :class => 'btn-primary' %>
+        </div>
       </div>
+      <% end %>
     </div>
-    <% end %>
   </div>
+
+  <div class='info-main-description'>
+    <div class='info-main-description-content'>
+
+      <p>Water Cooler is an app built to make group discussions suck less.  </p>
+
+      <p>We are currently in private beta.  </p>
+
+      <p>If you're interested in checking it out,
+        hit us up at <a href="mailto:structural@structur.al">structural@structur.al</a>.   </p>
+
+    </div>
+  </div>
+</div>
+
+<%=render "shared/footer" %>
 </div>

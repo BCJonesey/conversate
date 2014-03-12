@@ -15,11 +15,4 @@ class HomeController < ApplicationController
       end
     end
   end
-
-  def speakeasy
-    session[:code_word] = params[:code_word]
-    redirect_to marketing_url and return if params[:code_word] == SpeakeasyCode
-
-    render :index
-  end
 end

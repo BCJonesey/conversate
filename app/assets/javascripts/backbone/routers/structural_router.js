@@ -89,6 +89,10 @@ Structural.Router = new (Backbone.Router.extend({
   logoutPath: function() {
     return 'session/logout';
   },
+  tourPath: function() {
+    return 'tour';
+  },
+
   indexHref: function() {
     return '/' + this.indexPath();
   },
@@ -112,6 +116,9 @@ Structural.Router = new (Backbone.Router.extend({
   },
   logoutHref: function() {
     return '/' + this.logoutPath();
+  },
+  tourHref: function() {
+    return '/' + this.tourPath();
   },
 
   _fixSlug: function(prefix, slug, suffix, correct) {
