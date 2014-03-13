@@ -36,6 +36,7 @@ Conversate::Application.routes.draw do
       end
       resources :conversations, :only => [:show] do
         get 'unread_count', on: :collection
+        get 'unread', on: :collection
         resources :actions, :only => [:index, :create]
         resources :participants, :only => [:index, :create, :destroy, :update]
       end
