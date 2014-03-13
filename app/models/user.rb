@@ -56,6 +56,10 @@ class User < ActiveRecord::Base
     self.reading_logs.where("unread_count >0").count
   end
 
+  def unread_conversations
+    conversations.find(self.reading_logs.where("unread_count >0").pluck(:conversation_id))
+  end
+
   # Public: returns the users this user knows.
   def address_book
     users = self.groups.map { |g| g.users }.flatten.uniq - [self]
