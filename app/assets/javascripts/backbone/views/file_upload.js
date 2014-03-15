@@ -12,6 +12,7 @@ Structural.Views.FileUpload = Support.CompositeView.extend({
     this.$('.act-file-upload-toggle').toggleClass('active');
   },
   render: function() {
+    var self = this;
     this.$el.html(this.template());
     this.$('#fileupload').fileupload({
       formData: {
@@ -19,9 +20,7 @@ Structural.Views.FileUpload = Support.CompositeView.extend({
       },
       dataType: 'json',
       done: function (e, data) {
-          $.each(data.result.files, function (index, file) {
-              $('<p/>').text(file.name).appendTo(document.body);
-          });
+        self.toggleFileUpload(e);
       },
       progressall: function (e, data) {
         var progress = parseInt(data.loaded / data.total * 100, 10);
