@@ -25,7 +25,25 @@ Structural.Views.Actions = Support.CompositeView.extend({
     if (view.focused()) {
       this.focusedView = view;
     }
-    this.appendChild(view);
+
+    var index = this.collection.indexOf(action);
+    var prevView = undefined;
+
+    if (index > 0) {
+      for (var mi = index - 1; mi >= 0; mi--) {
+        var m = this.collection.at(mi);
+        if (this.childrenByModelClientId[m.cid]) {
+          prevView = this.childrenByModelClientId[m.cid];
+          break;
+        }
+      }
+    }
+
+    if (prevView) {
+      this.insertChildAfter(view, prevView.el);
+    } else {
+      this.appendChild(view);
+    }
   },
   reRender: function() {
     this.clearView();
