@@ -7,7 +7,7 @@ class Api::V0::FilesController < ApplicationController
     file.save
     url = file.upload.url
 
-	conversation = Conversation.find_by_id(112)
+	conversation = Conversation.find_by_id(params[:conversation])
     action = conversation.actions.new(:type => 'message',
                                   :data => '{"text":"' + url + '"}',
                                   :user_id => current_user.id)
