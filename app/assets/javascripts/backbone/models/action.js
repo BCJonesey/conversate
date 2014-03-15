@@ -87,15 +87,11 @@ Structural.Models.Action = Backbone.Model.extend({
   isInDifferentTimeBucket: function(previousAction) {
     return Math.floor(this.get('timestamp') / this.followOnTimeout) != Math.floor(previousAction.get('timestamp') / this.followOnTimeout);
   },
-
-  /* Because of a bug we can't fix in time for people to start using it,
-     we're disabling this feature entirely.  Uncomment these two method bodies
-     when you want to re-enable the feature so you can fix the bug. */
   followOn: function() {
-    // this.set('followOn', true);
+    this.set('followOn', true);
   },
   followOnLongTerm: function() {
-    // this.set('followOnLongTerm', true);
+    this.set('followOnLongTerm', true);
   },
   textSnippet: function(length) {
     var text = this.escape('text');
