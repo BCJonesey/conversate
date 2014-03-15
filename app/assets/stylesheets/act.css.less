@@ -218,19 +218,23 @@
       left: 0;
     }
   }
+  &.act-my-message:before{
+    content: none;
+  }
+
   &.act-unread:before{
     background-color: #08F;
     transition:none;
   }
 }
+
 .act-msg.act-follow-on:before{
   top:0;
 }
-.act-msg.act-follow-on + .act-msg.act-follow-on:before{
+
+.act-msg + .act-msg.act-follow-on:before{
   top:-0.5rem;
 }
-
-
 
 .act-sender{
   font-weight: bold;
