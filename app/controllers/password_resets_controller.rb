@@ -1,6 +1,7 @@
 # app/controllers/password_resets_controller.rb
 class PasswordResetsController < ApplicationController
   skip_before_filter :require_login
+  layout "application_rails"
 
   # request password reset.
   # you get here when the user entered his email in the reset password form and submitted it.

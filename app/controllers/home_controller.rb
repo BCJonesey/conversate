@@ -14,5 +14,6 @@ class HomeController < ApplicationController
         render 'structural/show' and return
       end
     end
+    render layout: "application_rails"   
   end
 end
