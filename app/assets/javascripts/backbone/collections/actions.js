@@ -16,6 +16,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
       this.trigger('unreadCountChanged');
     });
     this.on('add', this.triggerNewMessage, this);
+    this.on('sort', this._findFollowOnMessages, this);
   },
   comparator: 'timestamp',
 
