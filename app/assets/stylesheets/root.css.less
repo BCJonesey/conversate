@@ -8,16 +8,20 @@
   box-sizing: border-box;
   -moz-box-sizing: border-box;
 }
-
+html, body{
+  margin:0;
+  height:100%;
+}
 body {
-  background-color: @backgroundColor;
+  background-color: #DDD;
   color: @textColor;
   padding: 0;
   margin: 0;
   overflow: visible;
-  .body-font;
-  height:100%;
+  .body-font();
 }
+
+// Some body styles  for layout get adjusted in sessions.css.less
 
 h1, h2, h3, h4, h5, h6 {
   font-size:1.0rem;

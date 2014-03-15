@@ -1,0 +1,67 @@
+@import "variables.css.less";
+@import "mixins.css.less";
+
+.logo-link{
+  text-decoration: none;
+  display:inline-block;
+  padding:0;
+  margin-left:0.5rem;
+}
+.logo-image{
+  height: 3.0rem;
+  width: 2.5rem;
+
+}
+.logo-text{
+  display:inline-block;
+  //font-weight: bold;
+  color:#8AC;
+  vertical-align: top;
+  font-size:2.0rem;
+  padding-top:0.25rem;
+  margin-left:0.25rem;
+  text-shadow:0 1px 1px rgba(0,0,0,0.2);
+}
+
+
+.info-header{
+  background-color:white;
+  border-bottom:1px solid #ACF;
+  padding:0.5rem 1.0rem;
+
+  .nav{
+    max-width:@info-content-width;
+    margin:0 auto;
+    z-index: 1;
+  }
+  .nav-group{
+    display:block;
+    text-align: center;
+    @media(min-width:@bp-1){
+      display:inline-block;
+      text-align: left;
+      &.left{float:left;}
+      &.right{float:right;}
+    }
+  }
+  .nav-items{
+    padding-top:0.5rem;
+  }
+  .nav-item.active{
+    //background-color:#F8F8F8;
+    //border-color:#DDD;
+  }
+  .nav-item{
+    display:inline-block;
+    text-decoration: none;
+    font-size:1.25rem;
+    color:#8AC;
+    border:1px solid transparent;
+    padding:0.25rem 0.75rem;
+    cursor:pointer;
+    &:hover{
+      color:#05A;
+    }
+  }
+
+}

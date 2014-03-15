@@ -1,0 +1,98 @@
+@import "variables.css.less";
+@import "mixins.css.less";
+
+.info-page-wrapper{
+  position: absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background-color: #E0F0FF;
+  overflow-y: auto;
+  background-color: transparent;
+}
+.info-page{
+  border-top:1px solid #ACF;
+  background-color: white;
+  @media(min-width:@bp-2){
+    border-top:none;
+
+  }
+  .copy{
+    color:#AAA;
+  }
+}
+
+.info-main-description{
+  background-color: white;
+  padding:1.0rem;
+  border-bottom:1px solid #ACF;
+}
+.info-main-description-content{
+  background-color: white;
+  margin:0 auto;
+  max-width: @info-content-width;
+  text-align: center;
+  color:#AAA;
+  padding:0.5rem 1.0rem;
+  line-height: 1.5;
+  a{.link-blue();}
+  @media(min-width:@bp-1){
+    padding:1.5rem 2.5rem;
+  }
+}
+
+.info-about{
+  .main{
+    border-bottom:1px solid #ACF;
+  }
+  .copy{
+    text-align: center;
+    line-height: 1.7;
+    a{.link-blue();}
+  }
+}
+
+
+.lead-in{
+  padding:1.0rem;
+  border-bottom:1px solid #ACF;
+  @media(min-width:@bp-1){
+    border-bottom-color:#DDD;
+  }
+  background-color:#FAFAFA;
+  font-size:1.5rem;
+  text-align:center;
+  color:black;
+  font-weight: bold;
+}
+
+.copy{
+  border:none;
+  @media(min-width:@bp-1){
+    border:1px solid #CCC;
+  }
+  font-size:1.0rem;
+  max-width:@info-content-width;
+  margin:0 auto;
+  background-color: white;
+
+  .tagline{
+    color:#AAA;
+    font-style:italic;
+  }
+  .section{
+    padding:1.0rem;
+    color:#666;
+    p{
+      font-size: 1.0rem;
+      padding:0.75rem 1.5rem;
+      @media(min-width:@bp-1){
+        font-size: 1.1rem;
+        padding:0.75rem 4.0rem;
+        line-height: 2.0;
+      }
+    }
+  }
+}
+

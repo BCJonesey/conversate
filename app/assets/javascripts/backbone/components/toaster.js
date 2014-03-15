@@ -4,7 +4,7 @@ Structural.Components.Toaster = function() {
   var getViewDescription = function(toastDescription) {
     var viewDescription = {};
     viewDescription.state = toastDescription.state;
-    if (toastDescription.errorType === 'backbone:sync') {
+    if (toastDescription.type === 'backbone:sync') {
       viewDescription.promptRefresh = true;
       viewDescription.message =
         "Water Cooler has lost its connection to the server.  Please refresh" +
@@ -18,7 +18,11 @@ Structural.Components.Toaster = function() {
   this.view = new Structural.Views.Toast();
 
   this.toast = function(toastDescription) {
-    var viewDescription = getViewDescription(toastDescription);
-    this.view.show(viewDescription);
+    if (toastDescription.state === 'error') {
+      var viewDescription = getViewDescription(toastDescription);
+      this.view.show(viewDescription);
+    } else if (toastDescription.state === 'success') {
+      this.view.hide();
+    }
   };
 };

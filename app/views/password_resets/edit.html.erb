@@ -1,0 +1,32 @@
+
+
+<div class="home-main main">
+  <div class="login-form">
+    <div class='btn-toolbar'>
+      <span class='toolbar-title'>Reset password for <%= @user.email %></span>
+    </div>
+    <%= form_for @user, :url => password_reset_path(@user), :html => {:method => :put} do |f| %>
+      <div class='form modal-content'>
+        <% if flash[:alert] %>
+        <div class='login-error-message'><%= flash[:alert]%></div>
+        <% end %>
+        <% if flash[:notice] %>
+        <div class='login-notice-message'><%= flash[:notice]%></div>
+        <% end %>
+        <% @user.errors.full_messages.each do |msg| %>
+        <div class='login-error-message'><%= msg%></div>
+        <% end %>
+        <%= label_tag :password, 'Password' %>
+        <%= password_field_tag :password, nil %>
+        <%= label_tag :password_confirmation,  'Confirm Password' %>
+        <%= password_field_tag :password_confirmation, nil %>
+        <%= hidden_field_tag :token, @token %>
+      </div>
+      <div class='btn-toolbar-below clearfix'>
+      <div class='btn-group pull-right'>
+        <%= submit_tag 'Set New Password', :class => 'btn-primary' %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

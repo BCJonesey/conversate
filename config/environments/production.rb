@@ -69,11 +69,24 @@ Conversate::Application.configure do
   config.eager_load = true
 
   config.paperclip_defaults = {
-  :storage => :s3,
-  :s3_credentials => {
-    :bucket => ENV['S3_BUCKET_NAME'],
-    :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
-    :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+    :storage => :s3,
+    :s3_credentials => {
+      :bucket => ENV['S3_BUCKET_NAME'],
+      :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+    }
   }
-}
+
+  config.action_mailer.default_url_options = { :host => ENV["MAILER_HOST"] }
+
+    config.action_mailer.smtp_settings = {
+    :address   => "smtp.mandrillapp.com",
+    :port      => 587, # ports 587 and 2525 are also supported with STARTTLS
+    :enable_starttls_auto => true, # detects and uses STARTTLS
+    :user_name => ENV["MANDRILL_USERNAME"],
+    :password  => ENV["MANDRILL_APIKEY"], # SMTP password is any valid API key
+    :authentication => 'plain', # Mandrill supports 'plain' or 'login'
+    :domain => ENV["MANDRILL_DOMAIN"], # your domain to identify your server when connecting
+  }
+
 end
