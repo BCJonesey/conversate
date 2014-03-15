@@ -16,44 +16,15 @@ Structural.Views.Actions = Support.CompositeView.extend({
   },
   render: function() {
     this.focusedView = undefined;
-    this.collection.forEach(this.renderActionAlwaysAppend, this);
+    this.collection.forEach(this.renderAction, this);
     this.scrollToTargetAtEarliestOpportunity(this.focusedView);
     return this;
   },
-  _makeNewActionView: function(action) {
+  renderAction: function(action) {
     var view = new Structural.Views.Action({model: action});
     if (view.focused()) {
       this.focusedView = view;
     }
-    return view;
-  },
-  renderAction: function(action) {
-    var view = this._makeNewActionView(action)
-
-    var index = this.collection.indexOf(action);
-    var prevView = undefined;
-
-    // In order to maintain the right follow on ordering, we need to insert
-    // an action after the action most closely previous to it that has a view.
-
-    if (index > 0) {
-      for (var modelIndex = index - 1; modelIndex >= 0; modelIndex--) {
-        var model = this.collection.at(modelIndex);
-        if (this.childrenByModelClientId[model.cid]) {
-          prevView = this.childrenByModelClientId[model.cid];
-          break;
-        }
-      }
-    }
-
-    if (prevView) {
-      this.insertChildAfter(view, prevView.el);
-    } else {
-      this.appendChild(view);
-    }
-  },
-  renderActionAlwaysAppend: function(action) {
-    var view = this._makeNewActionView(action);
     this.appendChild(view);
   },
   reRender: function() {
