@@ -109,6 +109,8 @@ Structural.Views.Action = Support.CompositeView.extend({
     return this.model.get('focused');
   },
   markRead: function() {
-    this.model.collection.markReadUpTo(this.model);
+    if (this.model.get('is_unread')) {
+      this.model.collection.markReadUpTo(this.model);
+    }
   }
 });
