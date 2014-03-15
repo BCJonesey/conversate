@@ -74,6 +74,10 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     });
   },
 
+  markReadUpTo: function(action) {
+    this.conversation.updateMostRecentViewedTo(action.get('timestamp'));
+  },
+
   clearFocus: function() {
     this._idToFocus = undefined;
     this.forEach(function(act) {

@@ -61,14 +61,20 @@ Structural.Models.Conversation = Backbone.Model.extend({
   // Sets our local values immediately and lets the server side participants collection know
   // for persistence. TODO: Most recent viewed is funky enough that it will probably require
   // a refactor at some point.
-  updateMostRecentViewedToNow: function() {
+  updateMostRecentViewedTo: function(time) {
     var self = this;
 
     // We want to basically reset our server-side information.
-    self.set('most_recent_viewed', (new Date()).valueOf());
-    self.set('unread_count', 0);
+    self.set('most_recent_viewed', time);
+    var unreadActions = self.actions.filter(function(act) {
+      return act.get('timestamp') > time;
+    });
+    self.set('unread_count', unreadActions.length);
 
-    self.actions.forEach(function(action) {
+    self.actions.filter(function(action) {
+      return action.get('timestamp') <= time &&
+             action.get('is_unread');
+    }).forEach(function(action) {
       action.markRead();
     });
 
@@ -80,6 +86,9 @@ Structural.Models.Conversation = Backbone.Model.extend({
       });
     });
     self.trigger('updated', self);
+  },
+  updateMostRecentViewedToNow: function() {
+    this.updateMostRecentViewedTo((new Date()).valueOf());
   },
   updateFolderIds: function(added, removed) {
     var self = this;

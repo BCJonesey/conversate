@@ -95,7 +95,7 @@ Structural.Views.Action = Support.CompositeView.extend({
   events: {
     'click .act-delete': 'deleteMessage',
     'click .act-show-full-text': 'showFullText',
-    'mouseover': 'markRead'
+    'click': 'markRead'
   },
   deleteMessage: function(e) {
     e.preventDefault();
@@ -107,5 +107,8 @@ Structural.Views.Action = Support.CompositeView.extend({
   },
   focused: function() {
     return this.model.get('focused');
+  },
+  markRead: function() {
+    this.model.collection.markReadUpTo(this.model);
   }
 });
