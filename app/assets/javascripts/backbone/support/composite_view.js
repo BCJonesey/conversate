@@ -3,7 +3,6 @@
 
 Support.CompositeView = function(options) {
   this.children = _([]);
-  this.childrenByModelClientId = {};
   this.bindings = _([]);
   Backbone.View.apply(this, [options]);
 };
@@ -32,9 +31,6 @@ _.extend(Support.CompositeView.prototype, Backbone.View.prototype, {
   renderChild: function(view) {
     view.render();
     this.children.push(view);
-    if (view.model) {
-      this.childrenByModelClientId[view.model.cid] = view;
-    }
     view.parent = this;
   },
 
@@ -93,9 +89,6 @@ _.extend(Support.CompositeView.prototype, Backbone.View.prototype, {
   _removeChild: function(view) {
     var index = this.children.indexOf(view);
     this.children.splice(index, 1);
-    if (view.model) {
-      this.childrenByModelClientId = _.omit(this.childrenByModelClientId, view.model.cid);
-    }
   }
 });
 

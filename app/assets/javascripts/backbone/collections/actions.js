@@ -1,22 +1,20 @@
 Structural.Collections.Actions = Backbone.Collection.extend({
   model: Structural.Models.Action,
   url: function() {
-    return Structural.apiPrefix + '/conversations/' + this.conversation.id + '/actions';
+    return Structural.apiPrefix + '/conversations/' + this.conversationId + '/actions';
   },
   initialize: function(data, options) {
     options = options || {};
-    this.conversation = options.conversation;
+    this.conversationId = options.conversation;
     this.userId = options.user;
     this.on('reset', this._findMyMessages, this);
     this.on('reset', this._findFocusedMessage, this);
     this.on('reset', this._findFollowOnMessages, this);
-    this.on('reset', this._findUnreadMessages, this);
     this.on('add', this.setStateOnNewAction, this);
     this.on('add', function(model, collection, options) {
       this.trigger('unreadCountChanged');
     });
     this.on('add', this.triggerNewMessage, this);
-    this.on('sort', this._findFollowOnMessages, this);
   },
   comparator: 'timestamp',
 
@@ -52,14 +50,6 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     }, this);
   },
 
-  _findUnreadMessages: function() {
-    this.filter(function(action) {
-      return action.isUnread(this.conversation.get('most_recent_viewed'));
-    }, this).forEach(function(action) {
-      action.markUnread();
-    });
-  },
-
   focus: function(id) {
     id = parseInt(id);
     var action = this.get(id);
@@ -73,10 +63,6 @@ Structural.Collections.Actions = Backbone.Collection.extend({
         .forEach(function(act) {
       act.unfocus();
     });
-  },
-
-  markReadUpTo: function(action) {
-    this.conversation.updateMostRecentViewedTo(action.get('timestamp'));
   },
 
   clearFocus: function() {
@@ -138,7 +124,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
         name: user.get('name'),
         id: user.id
       },
-      conversation_id: this.conversation.id,
+      conversation_id: this.conversationId,
       to: {
         name: folder.get('name'),
         id: folder.id
@@ -192,10 +178,6 @@ Structural.Collections.Actions = Backbone.Collection.extend({
         }
       }
     }
-
-    if (model.isUnread(this.conversation.get('most_recent_viewed'))) {
-      model.markUnread();
-    }
   },
   triggerNewMessage: function(model) {
     if (model.get('type') === 'message' &&
@@ -221,7 +203,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
   },
 
   fetch: function(options) {
-    if (this.conversation.id) {
+    if (this.conversationId) {
       // http://rockycode.com/blog/backbone-inheritance/
       // God, I fucking hate javascript so much.  Is this really the best there
       // is for basic inheritance?  Should we be using mixins instead?
