@@ -16,15 +16,19 @@ Structural.Views.Actions = Support.CompositeView.extend({
   },
   render: function() {
     this.focusedView = undefined;
-    this.collection.forEach(this.renderAction, this);
+    this.collection.forEach(this.renderActionAlwaysAppend, this);
     this.scrollToTargetAtEarliestOpportunity(this.focusedView);
     return this;
   },
-  renderAction: function(action) {
+  _makeNewActionView: function(action) {
     var view = new Structural.Views.Action({model: action});
     if (view.focused()) {
       this.focusedView = view;
     }
+    return view;
+  },
+  renderAction: function(action) {
+    var view = this._makeNewActionView(action)
 
     var index = this.collection.indexOf(action);
     var prevView = undefined;
@@ -44,6 +48,10 @@ Structural.Views.Actions = Support.CompositeView.extend({
     } else {
       this.appendChild(view);
     }
+  },
+  renderActionAlwaysAppend: function(action) {
+    var view = this._makeNewActionView(action);
+    this.appendChild(view);
   },
   reRender: function() {
     this.clearView();
