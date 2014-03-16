@@ -67,6 +67,7 @@
   bottom:3.7rem;
 }
 .act{
+  cursor:default;
   padding:0.125rem;
   @media(min-width:@bp-1){
     padding:0.25rem;
@@ -93,7 +94,7 @@
 .act-msg{
   padding:0.25rem;
   @media(min-width:@bp-1){
-    padding:0.65rem;
+    padding:0.5rem;
   }
 
   z-index:1;
@@ -200,40 +201,84 @@
   box-shadow: 0 0.2rem 0.4rem rgba(0,0,0,0.15);
 }
 
+
+@unread-blue: #80A0C0;
+@unread-width: 6px;
+
+@unread-top: 1.75rem;
+@unread-left: -0.5rem;
+@unread-bottom: -0.25rem;
+
+@unread-follow-top:0.8rem;
+
 .act-msg {
   position:relative;
   z-index: 0;
   color:black;
-  &:before{
-    content: " ";
-    position: absolute;
-    left: -0.25rem;
-    top: 0.25rem;
-    bottom: 0.4rem;
-    background-color: white;
-    width: 2px;
-    margin:0;
-    transition:background-color 0.6s;
-    @media(min-width:@bp-1){
-      left: 0;
-    }
-  }
-  &.act-my-message:before{
-    content: none;
-  }
 
+  /* vertical bar */
+
+  &:before{
+    content:" ";
+    position: absolute;
+    margin-left:3px;
+    bottom:@unread-bottom;
+    left:2*@unread-left/3;
+    @media(min-width:@bp-1){
+      left:@unread-left;
+    }
+    top:@unread-top;
+    background-color: white;
+    border-left:2px solid white;
+    border-bottom:2px solid white;
+    width: 3px;
+    z-index: 1;
+    transition:background-color 0.35s, border-color 0.35s;
+
+  }
+  &.act-follow-on:before{
+    top:-@unread-bottom;
+
+  }
   &.act-unread:before{
-    background-color: #08F;
+    border-color:@unread-blue;
     transition:none;
   }
-}
 
-.act-msg.act-follow-on:before{
-  top:0;
-}
+  /* Dot */
 
-.act-msg + .act-msg.act-follow-on:before{
-  top:-0.5rem;
+  &:after{
+    content: " ";
+    margin:0;
+    position: absolute;
+    left:2*@unread-left/3;
+    @media(min-width:@bp-1){
+      left:@unread-left;
+    }
+    top:@unread-top;
+    margin-bottom:-4px;
+    background-color: white;
+    border:1px solid white;
+    border-radius:4px;
+    width: 8px;
+    height:8px;
+    z-index: 2;
+    transition:background-color 0.35s, border-color 0.35s;
+  }
+
+  &.act-follow-on:after{
+    top:-0.2rem;
+  }
+
+  &.act-unread:after{
+    background-color: #DEF;
+    border-color:@unread-blue;
+    transition:none;
+  }
+  &.act-my-message:before,
+  &.act-my-message:after{
+    content: none;
+  }
 }
 
 .act-sender{
@@ -262,7 +307,8 @@
 }
 
 .act-text{
-  padding:0.3rem 0;
+  padding:0;
+  padding-top:0.25rem;
   color:#444444;
   line-height: 1.5;
   white-space:pre-wrap;
@@ -274,33 +320,36 @@
   }
 }
 
+@padding-follow: 0.25rem;
+
 .act-message.act-follow-on {
   border-color: transparent;
-  padding-top: 0;
+  padding-top: @padding-follow;
+  padding-bottom:@padding-follow;
 
   .act-sender {
     display: none;
   }
-
   .act-info {
     float: right;
     padding-left: 0.5rem;
     padding-top: 0.1rem;
   }
-
   .act-text{
     margin: 0;
     padding: 0;
   }
-
   .act-time {
     display: none;
   }
 }
 
 .act-message.act-follow-on.act-follow-on-long-term {
+  .act-info{
+    float:right;
+  }
   .act-time {
-    display: block;
+    display: inline-block;
   }
 }
 
