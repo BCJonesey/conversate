@@ -21,7 +21,7 @@ Structural.Views.Compose = Support.CompositeView.extend({
     'click a.enable-long-form': 'enableLongForm',
     'click a.disable-long-form': 'disableLongForm',
     'keydown .short-form-compose textarea': 'shortFormType',
-    'focus .short-form-compose': 'shortFormFocus'
+    'click .short-form-compose': 'shortFormFocus'
   },
   newMessageAction: function(e) {
     if (e) { e.preventDefault(); }
