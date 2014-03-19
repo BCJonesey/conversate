@@ -21,6 +21,8 @@ Structural.Views.FileUpload = Support.CompositeView.extend({
       dataType: 'json',
       done: function (e, data) {
         self.toggleFileUpload(e);
+        self.$('.fa-paperclip').toggleClass('hidden');
+        self.$('.fa-spinner').toggleClass('hidden');
       },
       progressall: function (e, data) {
         var progress = parseInt(data.loaded / data.total * 100, 10);
