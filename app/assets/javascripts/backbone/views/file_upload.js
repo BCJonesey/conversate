@@ -21,7 +21,11 @@ Structural.Views.FileUpload = Support.CompositeView.extend({
       dataType: 'json',
       done: function (e, data) {
         self.toggleFileUpload(e);
-        self.$el.toggleClass('is-uploading');
+
+        // Let's set up the spinner to show for 5 seconds.
+        self.$el.addClass('is-uploading').delay(5000).queue(function() {
+          self.$el.removeClass('is-uploading').dequeue();
+        })
       },
       progressall: function (e, data) {
         var progress = parseInt(data.loaded / data.total * 100, 10);
