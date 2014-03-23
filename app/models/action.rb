@@ -10,12 +10,13 @@ class Action < ActiveRecord::Base
   validates_presence_of :type
   validates :type, :inclusion => {
     :in => %w(message email_message deletion retitle update_users update_folders
-              move_message update_viewers email_delivery_error)
+              move_message update_viewers email_delivery_error upload_message)
   }
 
   DEFAULTS_BY_TYPE = {
     'message' => {'text' => ''},
     'email_message' => {'text' => ''},
+    'upload_message' => {'text' => ''},
     'retitle' => {'title' => ''},
     'update_users' => {'added' => [],
                        'removed' => []},
@@ -38,7 +39,7 @@ class Action < ActiveRecord::Base
   before_save :populate_ts_vector
 
   def message_type?
-    ['message', 'email_message'].include? self.type
+    ['message', 'email_message', 'upload_message'].include? self.type
   end
 
   # Public: Access and modify data stored as json in the action record. This will
@@ -103,6 +104,10 @@ class Action < ActiveRecord::Base
   def self.data_for_params(params)
     case params['type']
     when 'message'
+      return {
+        'text' => params['text']
+      }.to_json
+    when 'upload_message'
       return {
         'text' => params['text']
       }.to_json

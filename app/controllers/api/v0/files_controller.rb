@@ -10,7 +10,7 @@ class Api::V0::FilesController < ApplicationController
     # We need to stick in an action just to show this upload.
     # TODO: Check that this conversation is actually accessible by the current user.
     conversation = Conversation.find_by_id(params[:conversation])
-    action = conversation.actions.new(:type => 'message',
+    action = conversation.actions.new(:type => 'upload_message',
                                   :data => '{"text":"' + url + '"}',
                                   :user_id => current_user.id)
 
