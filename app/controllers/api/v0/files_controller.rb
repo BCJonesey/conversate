@@ -11,7 +11,7 @@ class Api::V0::FilesController < ApplicationController
     # TODO: Check that this conversation is actually accessible by the current user.
     conversation = Conversation.find_by_id(params[:conversation])
     action = conversation.actions.new(:type => 'upload_message',
-                                  :data => '{"text":"' + url + '"}',
+                                  :data => '{"text":"' + url + '","notes":"' + params[:notes] + '"}',
                                   :user_id => current_user.id)
 
     action.save

@@ -4,16 +4,23 @@ Structural.Views.FileUpload = Support.CompositeView.extend({
   template: JST.template('actions/file_upload'),
   events: {
     'click .act-file-upload-button-regular': 'toggleFileUpload',
-    'click .act-file-upload-popover .popover-close': 'toggleFileUpload'
+    'click .act-file-upload-popover .popover-close': 'toggleFileUpload',
+    'keydown .act-file-upload-notes': 'keydownUploadNotes'
   },
   toggleFileUpload: function(e){
     e.preventDefault();
     this.$('.act-file-upload-popover').toggleClass('hidden');
     this.$('.act-file-upload-button-regular').toggleClass('active');
   },
+  keydownUploadNotes: function(e) {
+    this.updateFileUpload();
+  },
   render: function() {
-    var self = this;
     this.$el.html(this.template());
+    this.updateFileUpload();
+  },
+  updateFileUpload: function() {
+    var self = this;
     this.$('#fileupload').fileupload({
       formData: {
         conversation: Structural._conversation.id,
