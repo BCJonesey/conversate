@@ -6,12 +6,13 @@ class Api::V0::FilesController < ApplicationController
   	file = Upload.new(:upload => upload_file)
     file.save
     url = file.upload.url
+    file_name = file.upload_file_name
 
     # We need to stick in an action just to show this upload.
     # TODO: Check that this conversation is actually accessible by the current user.
     conversation = Conversation.find_by_id(params[:conversation])
     action = conversation.actions.new(:type => 'upload_message',
-                                  :data => '{"text":"' + url + '","notes":"' + params[:notes] + '"}',
+                                  :data => '{"fileUrl":"' + url + '","notes":"' + params[:notes] + '","fileName":"' + file_name + '"}',
                                   :user_id => current_user.id)
 
     action.save

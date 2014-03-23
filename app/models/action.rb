@@ -16,7 +16,7 @@ class Action < ActiveRecord::Base
   DEFAULTS_BY_TYPE = {
     'message' => {'text' => ''},
     'email_message' => {'text' => ''},
-    'upload_message' => {'text' => '', 'notes' => ''},
+    'upload_message' => {'fileUrl' => '', 'notes' => '', 'fileName' => ''},
     'retitle' => {'title' => ''},
     'update_users' => {'added' => [],
                        'removed' => []},
@@ -109,8 +109,9 @@ class Action < ActiveRecord::Base
       }.to_json
     when 'upload_message'
       return {
-        'text' => params['text'],
-        'notes' => params['notes']
+        'fileUrl' => params['fileUrl'],
+        'notes' => params['notes'],
+        'fileName' => params['fileName']
       }.to_json
     when 'retitle'
       return {
