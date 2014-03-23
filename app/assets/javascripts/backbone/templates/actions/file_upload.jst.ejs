@@ -11,7 +11,10 @@
 
   <div class='popover-content act-file-upload-content form'>
     <label>File</label>
-    <input id="fileupload" class='act-file-upload-input' type="file" name="files[]" data-url="../../../api/v0/files" multiple>
+    <span class="btn btn-success fileinput-button">
+        <span>Add files...</span>
+        <input id="fileupload" class='act-file-upload-input' type="file" name="files[]" data-url="../../../api/v0/files" multiple>
+    </span>
 
     <label>Notes</label>
     <textarea class='act-file-upload-notes'></textarea>
@@ -19,7 +22,7 @@
     <div id="progress">
       <div class="bar" style="width: 0%;"></div>
     </div>
-    <a href='#' class='btn-primary'>Upload File</a>
+    <a href='#' class='act-file-upload-submit btn-primary'>Upload File</a>
 
   </div>
 </div>

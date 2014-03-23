@@ -5,7 +5,14 @@ Structural.Views.FileUpload = Support.CompositeView.extend({
   events: {
     'click .act-file-upload-button-regular': 'toggleFileUpload',
     'click .act-file-upload-popover .popover-close': 'toggleFileUpload',
-    'keyup .act-file-upload-notes': 'keyupUploadNotes'
+    'keyup .act-file-upload-notes': 'keyupUploadNotes',
+    'click .act-file-upload-submit': 'submitFileUpload'
+  },
+  submitFileUpload: function(e) {
+    if (this.uploadData) {
+      this.uploadData.submit();
+      this.uploadData = null;
+    }
   },
   toggleFileUpload: function(e){
     e.preventDefault();
@@ -26,6 +33,7 @@ Structural.Views.FileUpload = Support.CompositeView.extend({
         conversation: Structural._conversation.id,
         notes: self.$('.act-file-upload-notes').val()
       },
+      autoUpload: false,
       dataType: 'json',
       done: function (e, data) {
         self.toggleFileUpload(e);
@@ -43,6 +51,9 @@ Structural.Views.FileUpload = Support.CompositeView.extend({
             'width',
             progress + '%'
         );
+      },
+      add: function (e, data) {
+        self.uploadData = data;
       }
     });
   }
