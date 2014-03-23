@@ -5,6 +5,9 @@ Structural.Models.Folder = Backbone.Model.extend({
     var self = this;
     this.inflateExtend(this.attributes)
 
+    // TODO: This gets us the favicon changes for free, but I don't like the asymmetry. Refactor.
+    self.on('change:unread_conversations', Structural.updateTitleAndFavicon, Structural);
+
     self.conversations = new Structural.Collections.Conversations([], {folderId: self.id});
     self.conversations.on('updated', function(conversation) {
 
@@ -16,8 +19,6 @@ Structural.Models.Folder = Backbone.Model.extend({
         // TODO: Wacky bug, figure out what's up with negative unread counts.
         self.filterNewlyReadConversation(conversation);
       }
-
-      Structural.updateTitleAndFavicon();
 
       self.trigger('updated');
     }, self);
