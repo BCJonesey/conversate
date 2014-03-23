@@ -17,22 +17,20 @@ Structural.Views.Conversation = Support.CompositeView.extend({
       classes += ' cnv-not-participating';
     }
 
+    var unread = this.model.unreadCount();
+    if (unread == 0) {
+      // No class for no unread.
+    } else if (unread <= 5) {
+      classes += ' cnv-unread-count-few';
+    } else if (unread <= 25) {
+      classes += ' cnv-unread-count-some';
+    } else {
+      classes += ' cnv-unread-count-many';
+    }
+
     return classes;
   },
   template: JST.template('conversations/conversation'),
-  helpers: {
-    classForUnreadCount: function(count) {
-      var prefix = 'cnv-unread-count-';
-      var suffix = 'many';
-      if (count <= 5) {
-        suffix = 'few';
-      } else if (count <= 25) {
-        suffix = 'some';
-      }
-
-      return prefix + suffix;
-    }
-  },
   initialize: function(options) {
     options = options || {};
     this.user = options.user;
@@ -42,8 +40,7 @@ Structural.Views.Conversation = Support.CompositeView.extend({
   },
   render: function() {
     this.$el.html(this.template({
-      conversation: this.model,
-      helpers: this.helpers
+      conversation: this.model
     }));
 
     // The first time backbone calls className we don't have some data?

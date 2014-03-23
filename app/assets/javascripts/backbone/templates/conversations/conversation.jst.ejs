@@ -1,7 +1,7 @@
 <div class='cnv-right'>
   <span class='cnv-time'><%= conversation.humanizedTimestamp() %></span>
   <% if (conversation.unreadCount() > 0) { %>
-    <span class='<%= helpers.classForUnreadCount(conversation.unreadCount()) %>'></span>
+    <span class='cnv-unread-indicator'></span>
   <% } %>
 </div>
 
