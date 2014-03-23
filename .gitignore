@@ -17,3 +17,6 @@ tmp
 
 config/database.yml
 *.*~
+app/wc-app.sublime-project
+
+app/wc-app.sublime-workspace

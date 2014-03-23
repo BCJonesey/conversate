@@ -3,7 +3,10 @@ Structural.Models.Conversation = Backbone.Model.extend({
     var self = this;
     this.inflateExtend(this.attributes);
 
-    this.actions = new Structural.Collections.Actions([], {conversation: this.id, user:Structural._user.id});
+    this.actions = new Structural.Collections.Actions([], {
+      conversation: this,
+      user:Structural._user.id
+    });
     this.actions.on('add', function() {
       self.trigger('updated', self);
     })
@@ -58,23 +61,42 @@ Structural.Models.Conversation = Backbone.Model.extend({
   // Sets our local values immediately and lets the server side participants collection know
   // for persistence. TODO: Most recent viewed is funky enough that it will probably require
   // a refactor at some point.
-  updateMostRecentViewedToNow: function() {
+  updateMostRecentViewedTo: function(time) {
     var self = this;
 
+    var newlyReadActions = self.actions.filter(function(action) {
+      return action.get('timestamp') <= time &&
+             action.get('is_unread');
+    });
+    var followOn = newlyReadActions.length > 0 ?
+                   self.actions.findFollowOnGroup(_.last(newlyReadActions)) :
+                   [];
+    var actualLastReadTime = followOn.length > 0 ?
+                             _.last(followOn).get('timestamp') :
+                             time;
+
     // We want to basically reset our server-side information.
-    self.set('most_recent_viewed', (new Date()).valueOf());
-    self.set('unread_count', 0);
+    self.set('most_recent_viewed', actualLastReadTime);
+    self.set('unread_count', this.actions.unreadCount(actualLastReadTime));
+
+    newlyReadActions.forEach(function(action) {
+      action.markRead();
+    });
+    _.each(followOn, function(action) {
+      action.markRead();
+    });
 
     self.withCurrentUserFromSelf(function(participant) {
       // The server-side function has a side effect in that it will update most recent viewed
       // for this conversation and user, which will be close enough to the time we want.
-      participant.save(
-        {
-          most_recent_viewed: self.get('most_recent_viewed')
-        }
-      );
+      participant.save({
+        most_recent_viewed: self.get('most_recent_viewed')
+      });
     });
     self.trigger('updated', self);
+  },
+  updateMostRecentViewedToNow: function() {
+    this.updateMostRecentViewedTo((new Date()).valueOf());
   },
   updateFolderIds: function(added, removed) {
     var self = this;

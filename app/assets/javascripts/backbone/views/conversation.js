@@ -17,6 +17,17 @@ Structural.Views.Conversation = Support.CompositeView.extend({
       classes += ' cnv-not-participating';
     }
 
+    var unread = this.model.unreadCount();
+    if (unread == 0) {
+      // No class for no unread.
+    } else if (unread <= 5) {
+      classes += ' cnv-unread-count-few';
+    } else if (unread <= 25) {
+      classes += ' cnv-unread-count-some';
+    } else {
+      classes += ' cnv-unread-count-many';
+    }
+
     return classes;
   },
   template: JST.template('conversations/conversation'),
@@ -28,7 +39,9 @@ Structural.Views.Conversation = Support.CompositeView.extend({
     Structural.on('changeConversation', this.changeConversation, this);
   },
   render: function() {
-    this.$el.html(this.template({conversation: this.model}));
+    this.$el.html(this.template({
+      conversation: this.model
+    }));
 
     // The first time backbone calls className we don't have some data?
     this.reClass();
