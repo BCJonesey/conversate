@@ -64,17 +64,28 @@ Structural.Models.Conversation = Backbone.Model.extend({
   updateMostRecentViewedTo: function(time) {
     var self = this;
 
+    var newlyReadActions = self.actions.filter(function(action) {
+      return action.get('timestamp') <= time &&
+             action.get('is_unread');
+    });
+    var followOn = newlyReadActions.length > 0 ?
+                   self.actions.findFollowOnGroup(_.last(newlyReadActions)) :
+                   [];
+    var actualLastReadTime = followOn.length > 0 ?
+                             _.last(followOn).get('timestamp') :
+                             time;
+
     // We want to basically reset our server-side information.
-    self.set('most_recent_viewed', time);
+    self.set('most_recent_viewed', actualLastReadTime);
     var unreadActions = self.actions.filter(function(act) {
-      return act.get('timestamp') > time;
+      return act.get('timestamp') > actualLastReadTime;
     });
     self.set('unread_count', unreadActions.length);
 
-    self.actions.filter(function(action) {
-      return action.get('timestamp') <= time &&
-             action.get('is_unread');
-    }).forEach(function(action) {
+    newlyReadActions.forEach(function(action) {
+      action.markRead();
+    });
+    _.each(followOn, function(action) {
       action.markRead();
     });
 
