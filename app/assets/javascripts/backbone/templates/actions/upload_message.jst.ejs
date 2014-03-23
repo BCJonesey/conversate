@@ -1,12 +1,18 @@
 <div class="act-info clearfix">
   <div class="act-info-group pull-right act-msg-details"><span class="i-text act-time"><%= action.humanizedTimestamp(new Date(), { onlyIncludeHourMinute: action.get('followOn') }) %></span></div>
-  <div class="act-info-group pull-left"><span class="act-sender"><%= action.get('user').escape('name') %></span></div>
+  <div class="act-info-group pull-left">
+    <span class="act-sender"><%= action.get('user').escape('name') %></span>
+  </div>
 </div>
-<div class="act-text clearfix"><%= action.get('fileUrl') %></div>
-<div><%= action.get('notes') %></div>
-<div><%= action.get('fileName') %></div>
 
 
-<% /* The enhanced_text property includes link tags and such, so it needs
-      to be escaped when it's created.  If it isn't html safe at this point,
-      it's gone horribly wrong. */ %>
+<div class="act-text clearfix"><i class='act-upload-icon fa fa-fw fa-file'></i><a target='_blank' href="<%= action.get('fileUrl') %>"><%= action.get('fileName') %></a>
+<div class='act-file-upload-notes'><%= action.get('notes') %></div>
+</div>
+
+
+
+<!-- The enhanced_text property includes link tags and such, so it needs
+to be escaped when it's created.  If it isn't html safe at this point,
+it's gone horribly wrong.
+ -->
