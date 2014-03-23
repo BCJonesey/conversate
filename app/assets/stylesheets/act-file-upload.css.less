@@ -31,3 +31,22 @@
     resize:none;
   }
 }
+
+.act-file-upload{
+  .act-file-upload-button-uploading{
+    display:none;
+  }
+  &.is-uploading{
+    .act-file-upload-button-regular{
+      display:none;
+    }
+    .act-file-upload-button-uploading{
+      display:inline;
+    }
+  }
+}
+
+#progress .bar{
+  height:1.0rem;
+  background-color: #80A0C0;
+}
