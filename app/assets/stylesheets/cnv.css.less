@@ -5,13 +5,13 @@
 
 // This does not include styles that control the position, of the converstion list column.  those are with the water-cooler.css.less file and other general layout stuff
 .cnv-list {
-    position: absolute;
-    top: 2.5rem;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    overflow-y: auto;
-    overflow-x:hidden;
+  position: absolute;
+  top: 2.5rem;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  overflow-y: auto;
+  overflow-x:hidden;
 
 }
 .cnv-list-title{
@@ -90,20 +90,47 @@
 }
 .cnv-right{
   float:right;
-  height:2.25rem;
-  font-size:1.75rem;
   border:1px solid transparent;
-  padding-left:0.75rem
+  padding-left:0.75rem;
+  padding-right:0.25rem;
+  margin-top:1.0rem;
 }
+
+.cnv-unread-indicator{
+  border-radius:1px;
+  margin-left:0.1rem;
+  border:0px solid white;
+  line-height: 1.0;
+  vertical-align:top;
+  width:0.35rem;
+  height:1.0rem;
+  display:inline-block;
+}
+
+.cnv-unread-indicator-style(@color-percent){
+  background-color: mix(@unread-blue, white, @color-percent);
+}
+
+.cnv-unread-count-few .cnv-unread-indicator{
+  .cnv-unread-indicator-style(40%);
+}
+.cnv-unread-count-some .cnv-unread-indicator{
+  .cnv-unread-indicator-style(70%);
+}
+.cnv-unread-count-many .cnv-unread-indicator{
+  .cnv-unread-indicator-style(100%);
+}
+
 
 @cnv-time-gray:#CCC;
 
 .cnv-time{
   display:inline-block;
-  padding:0.25rem;
-  font-size:0.65rem;
+  font-size:0.7rem;
+  line-height: 1.0;
   color:@cnv-time-gray;
-  vertical-align:middle;
+  vertical-align:top;
+  margin-top:0.1rem;
 }
 
 .cnv.cnv-not-participating .cnv-time{
