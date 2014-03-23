@@ -75,6 +75,9 @@ Structural.Models.Action = Backbone.Model.extend({
   isFocused: function() {
     return this.get('focused');
   },
+  isMessageType: function() {
+    return _.contains(['message', 'email_message'], this.get('type'));
+  },
   isUpdateFoldersWithoutAdditions: function() {
     if (this.get('type') != 'update_folders' || this.get('addedViewers').length > 0) {
       return false;

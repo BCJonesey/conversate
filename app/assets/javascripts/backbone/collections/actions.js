@@ -215,7 +215,9 @@ Structural.Collections.Actions = Backbone.Collection.extend({
   unreadCount: function(mostRecentEventViewed) {
     var count = 0;
     this.forEach(function(action) {
-      count += action.isUnread(mostRecentEventViewed) ? 1 : 0;
+      if (action.isMessageType()) {
+        count += action.isUnread(mostRecentEventViewed) ? 1 : 0;
+      }
     });
     return count;
   },
