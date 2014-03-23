@@ -221,20 +221,15 @@ Structural.Collections.Actions = Backbone.Collection.extend({
   },
 
   /* A follow on group consists of an action followed by zero or more actions
-     that have 'followOn' set to true.
-
-     NOTE: The returned group does not maintain the order of the actions in
-     the collection. */
+     that have 'followOn' set to true. */
   findFollowOnGroup: function(action) {
     var group = [action];
     var index = this.indexOf(action);
     if (action.get('followOn')) {
       for (var i = index - 1; i >= 0; i--) {
         var act = this.at(i);
-        if (act.get('followOn')) {
-          group.push(act);
-        } else {
-          group.push(act);
+        group.splice(0, 0, act);
+        if (!act.get('followOn')) {
           break;
         }
       }
