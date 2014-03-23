@@ -36,15 +36,13 @@ Structural.Views.Compose = Support.CompositeView.extend({
     $(this._short, this._long).find('textarea').val('');
 
     // The user has actually taken an action which we consider to be a viewing update.
+    Structural.trigger('readConversation', Structural._conversation);
     this.conversation.updateMostRecentViewedToNow();
   },
   enableLongForm: function(e) {
     if (e) { e.preventDefault(); }
     this._long.find('textarea').val(this._short.find('textarea').val());
     this._long.removeClass('hidden');
-
-    // This action is considered to signify having read a conversation.
-    Structural.trigger('readConversation', Structural._conversation);
   },
   disableLongForm: function(e) {
     if (e) { e.preventDefault(); }
@@ -55,11 +53,6 @@ Structural.Views.Compose = Support.CompositeView.extend({
     if (e.which === Support.Keys.enter) {
       this.newMessageAction(e);
     }
-  },
-  shortFormFocus: function(e) {
-
-    // This action is considered to signify having read a conversation.
-    Structural.trigger('readConversation', Structural._conversation);
   },
   changeConversation: function(conversation) {
     this.conversation = conversation;
