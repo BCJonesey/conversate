@@ -6,7 +6,8 @@ namespace :stats do
               .compact
               .map {|name| User.find_by_full_name(name) }
 
-    puts group
-    puts omits
+    users = group.users - omits
+
+    puts users.map{|u| u.name }
   end
 end
