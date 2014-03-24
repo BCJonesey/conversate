@@ -3,7 +3,8 @@ class Statistics
     all_stats = [
       :count,
       :count_conversations,
-      :conversation_length
+      :conversation_length,
+      :user_chattiness
     ]
 
     all_stats.each do |stat|
@@ -36,5 +37,15 @@ class Statistics
     puts "Longest conversation:  #{action_counts.last}"
     puts "Median conversation:   #{median}"
     puts "Shortest conversation: #{action_counts.first}"
+  end
+
+  def Statistics.user_chattiness(users)
+    message_counts = users.map{|u| u.actions.keep_if{|a| a.message_type? }.count }
+                          .sort
+    median = message_counts[message_counts.count / 2]
+
+    puts "Chattiest user: #{message_counts.last} messages"
+    puts "Median user:    #{median} messages"
+    puts "Laconic user:   #{message_counts.first} messages"
   end
 end
