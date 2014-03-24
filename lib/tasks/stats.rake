@@ -7,7 +7,6 @@ namespace :stats do
               .map {|name| User.find_by_full_name(name) }
 
     users = group.users - omits
-
-    puts users.map{|u| u.name }
+    Statistics.run(users)
   end
 end
