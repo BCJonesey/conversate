@@ -46,23 +46,56 @@
   }
 }
 
-#progress .bar{
+.act-file-upload-picker{
+  padding:0.35rem 0.35rem;
+  height:2.2rem;
+  background-color: white;
+  border:@border-2;
+  .ellipsis();
+  position: relative;
+  overflow: hidden;
+  .act-file-upload-picker-link{
+    font-size: 0.8rem;
+    line-height: 1.0;
+    height:auto;
+    margin-left:0;
+  }
+  .act-file-upload-filename{
+    line-height: 1.0;
+    color:#888;
+    font-size:0.8rem;
+    vertical-align: middle;
+    padding-left:0.2rem;
+  }
+  input.act-file-upload-actual-input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    opacity: 0;
+    -ms-filter: 'alpha(opacity=0)';
+    font-size: 200px;
+    direction: ltr;
+    cursor: pointer;
+  }
+}
+
+.act-prgress-bar{
+  border:@border-1;
+  background-color: white;
+  margin:0.5rem 0;
   height:1.0rem;
-  background-color: #80A0C0;
+  .bar{
+    height:1.0rem;
+    background-color: #80A0C0;
+  }
+}
+
+.act-file-upload-toolbar{
+  text-align: right;
 }
 
 .fileinput-button {
   position: relative;
   overflow: hidden;
-}
-.fileinput-button input {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 0;
-  opacity: 0;
-  -ms-filter: 'alpha(opacity=0)';
-  font-size: 200px;
-  direction: ltr;
-  cursor: pointer;
 }

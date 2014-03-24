@@ -11,19 +11,21 @@
 
   <div class='popover-content act-file-upload-content form'>
     <label>File</label>
-    <span class="btn btn-success fileinput-button">
-        <span>Add files...</span>
-        <input id="fileupload" class='act-file-upload-input' type="file" name="files[]" data-url="../../../api/v0/files" multiple>
-    </span>
+    <div class="act-file-upload-picker file fileinput-button">
+        <a href='#' class='btn act-file-upload-picker-link'>Choose a file...</a>
+        <span class='act-file-upload-filename hidden'>File Name Goes Here</span>
+        <input id="fileupload" class='act-file-upload-actual-input' type="file" name="files[]" data-url="../../../api/v0/files" multiple>
+    </div>
 
     <label>Notes</label>
     <textarea class='act-file-upload-notes'></textarea>
 
-    <div id="progress">
+    <div id="progress" class='act-progress-bar'>
       <div class="bar" style="width: 0%;"></div>
     </div>
-    <a href='#' class='act-file-upload-submit btn-primary'>Upload File</a>
-
+    <div class='act-file-upload-toolbar'>
+      <a href='#' class='act-file-upload-submit btn-primary'>Upload File</a>
+    </div>
   </div>
 </div>
 
