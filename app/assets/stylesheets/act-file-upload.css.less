@@ -78,6 +78,17 @@
     direction: ltr;
     cursor: pointer;
   }
+  .act-file-upload-filename {
+      display: none;
+    }
+  &.file-picked{
+    .act-file-upload-picker-link {
+      display: none;
+    }
+    .act-file-upload-filename {
+      display: inline;
+    }
+  }
 }
 
 .act-prgress-bar{

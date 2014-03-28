@@ -52,6 +52,8 @@ Structural.Views.FileUpload = Support.CompositeView.extend({
       },
       add: function (e, data) {
         self.uploadData = data;
+        self.$('.act-file-upload-filename').text(data.files[0].name);
+        self.$('.act-file-upload-picker').addClass('file-picked');
       }
     });
   },
