@@ -40,9 +40,10 @@
     .act-file-upload-button-regular{
       display:none;
     }
-    .act-file-upload-button-uploading{
-      display:inline;
-    }
+    .act-file-upload-button-uploading{display:inline;}
+    .act-file-upload-notes-label,
+    .act-file-upload-notes{display:none;}
+    .act-file-upload-picker{background-color: #F8F8F8;}
   }
 }
 
@@ -91,16 +92,24 @@
   }
 }
 
-.act-prgress-bar{
-  border:@border-1;
-  background-color: white;
-  margin:0.5rem 0;
-  height:1.0rem;
+.act-progress-bar{
+  display:none;
+  border:@border-2;
+  background-color: mix(#80A0C0,white,15%);
+  margin:1.0rem 0;
+  height:2.0rem;
+  padding:0.1rem;
   .bar{
-    height:1.0rem;
+
+    height:100%;
     background-color: #80A0C0;
   }
 }
+
+.act-file-upload.is-uploading .act-progress-bar{
+  display:block;
+}
+
 
 .act-file-upload-toolbar{
   text-align: right;
