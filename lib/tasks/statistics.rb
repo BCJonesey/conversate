@@ -4,7 +4,8 @@ class Statistics
       :count,
       :count_conversations,
       :conversation_length,
-      :user_chattiness
+      :user_chattiness,
+      :messages_per_day
     ]
 
     all_stats.each do |stat|
@@ -47,5 +48,25 @@ class Statistics
     puts "Chattiest user: #{message_counts.last} messages"
     puts "Median user:    #{median} messages"
     puts "Laconic user:   #{message_counts.first} messages"
+  end
+
+  def Statistics.messages_per_day(users)
+    message_dates = users.map{|u| u.actions.keep_if{|a| a.message_type? }}
+                         .flatten
+                         .map{|a| a.created_at }
+                         .map{|t| t.strftime('%Y%j') }
+    date_counts = {}
+    message_dates.each do |date|
+      date_counts[date] = date_counts.fetch(date, 0) + 1
+    end
+
+    puts "Activity for last 30 days:"
+    day = Date.today
+    30.times do
+      human_day = day.strftime('%b %e')
+      day_count = date_counts.fetch(day.strftime('%Y%j'), 0)
+      puts "  #{human_day}: #{day_count} messages"
+      day = day.prev_day
+    end
   end
 end
