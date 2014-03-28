@@ -45,9 +45,9 @@ class Statistics
                          .sort
     median = action_counts[action_counts.count / 2]
 
-    puts "Longest conversation:  #{action_counts.last}"
-    puts "Median conversation:   #{median}"
-    puts "Shortest conversation: #{action_counts.first}"
+    puts "Longest conversation:  #{action_counts.last} actions"
+    puts "Median conversation:   #{median} actions"
+    puts "Shortest conversation: #{action_counts.first} actions"
   end
 
   def Statistics.user_chattiness(users)
