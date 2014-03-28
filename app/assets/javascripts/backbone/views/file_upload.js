@@ -18,7 +18,7 @@ Structural.Views.FileUpload = Support.CompositeView.extend({
     e.preventDefault();
     this.$('.act-file-upload-popover').toggleClass('hidden');
     this.$('.act-file-upload-button-regular').toggleClass('active');
-    self.uploadData = null;
+    this.uploadData = null;
     this.updateProgress(0);
     this.clearFilePicked(e);
   },
