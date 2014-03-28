@@ -26,6 +26,10 @@ Structural.Views.RemovableParticipantList = Support.CompositeView.extend({
   },
   renderParticipant: function(participant) {
     var view = new Structural.Views.RemovableParticipant({model: participant});
+    view.on("removeParticipant", this.removeParticipant, this)
     this.appendChild(view);
+  },
+  participants: function() {
+    return this.collection.clone();
   }
 })
