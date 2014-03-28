@@ -49,6 +49,7 @@ Structural.Views.FileUpload = Support.CompositeView.extend({
         self.toggleFileUpload(e);
         self.$('.act-file-upload-notes').val('');
         self.updateFileUpload();
+        Structural._conversation.actions.fetch();
 
         // Let's set up the spinner to show for 5 seconds.
         self.$el.addClass('is-uploading').delay(5000).queue(function() {
