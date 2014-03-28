@@ -1,7 +1,7 @@
 class Statistics
   def Statistics.run(users)
     all_stats = [
-      :count,
+      :summary,
       :count_conversations,
       :conversation_length,
       :user_chattiness,
@@ -14,8 +14,18 @@ class Statistics
     end
   end
 
-  def Statistics.count(users)
+  def Statistics.summary(users)
+    total_convos = users.map{|u| u.conversations }
+                        .flatten
+                        .uniq
+                        .count
+    total_actions = users.map{|u| u.actions }
+                         .flatten
+                         .count
+
     puts "Total users: #{users.count}"
+    puts "Total conversations: #{total_convos}"
+    puts "Total actions: #{total_actions}"
   end
 
   def Statistics.count_conversations(users)
