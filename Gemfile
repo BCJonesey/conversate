@@ -37,6 +37,7 @@ gem 'backbone-rails'	# Used for including the backbone.js files and general inte
 gem 'ejs'	# Required for the .ejs templates.
 gem 'newrelic_rpm' # For New Relic analytics.
 gem 'quiet_assets'
+gem 'rack-rewrite' # Allows us to do middleware 301 redirects, like from www to bare sld.
 
 gem 'mandrill-api'
 gem 'email_reply_parser'
@@ -51,7 +52,11 @@ gem "ruby-prof"
 
 gem "protected_attributes" # Lets us use the old-style attr_accessible calls.
 gem "rails_serve_static_assets" # Lets us actually serve our assets with heroku on rails 4.
-gem "rails_stdout_logging" # Lets Heroku actually read our logs.
+
+group :production do
+  gem "rails_stdout_logging" # Lets Heroku actually read our logs. Production only, or you will see much output.
+end
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

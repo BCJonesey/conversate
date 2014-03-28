@@ -3,18 +3,15 @@
 
 
 .home-main{
-  position:absolute;
-  top:4rem;
-  bottom:0;
-  overflow-y:auto;
-  right:0;
-  left:0;
+
+  border-bottom:1px solid #ACF;
   .modal-window{
     box-shadow:none;
   }
   .login-form{
-    border:@border-1;
+    border:@border-2;
     @media(min-width:@bp-1){
+      border:@border-1;
       position:relative;
       margin:2rem auto;
       max-width:30rem;
@@ -22,15 +19,7 @@
   }
 }
 
-.login-error-message{
-  background-color:#FFF8F8;
-  border:1px solid #FFD0D0;
-  color:#C88;
-  font-size:1.0rem;
-  padding:0.5rem;
-  margin:0.5rem 0;
-  text-align: center;
-}
+
 
 .speakeasy-form-text{
   padding: 0.25rem;
@@ -42,5 +31,19 @@
   }
   p{
     margin:0.25rem;
+  }
+}
+
+.login-reset-link{
+  display:inline-block;
+  margin-top:0.2rem;
+  margin-right:0.5rem;
+  font-size:0.75rem;
+  float:right;
+  color:#CCC;
+  text-decoration: none;
+  &:hover{
+    color:#888;
+    text-decoration: none;
   }
 }

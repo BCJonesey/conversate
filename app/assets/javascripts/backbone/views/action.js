@@ -30,6 +30,14 @@ Structural.Views.Action = Support.CompositeView.extend({
       classes += ' act-current';
     }
 
+    if (this.model.get('followOn')) {
+      classes += ' act-follow-on';
+    }
+
+    if (this.model.get('followOnLongTerm')) {
+      classes += ' act-follow-on-long-term';
+    }
+
     return classes;
   },
 
@@ -63,7 +71,7 @@ Structural.Views.Action = Support.CompositeView.extend({
       this.leave();
     }, this);
 
-    this.model.on('change:focused', function() {
+    this.model.on('change:focused change:is_unread', function() {
       if (this.model.get('focused')) {
         this.model.collection.trigger('focusedView', this);
       }
@@ -87,7 +95,7 @@ Structural.Views.Action = Support.CompositeView.extend({
   events: {
     'click .act-delete': 'deleteMessage',
     'click .act-show-full-text': 'showFullText',
-    'mouseover': 'markRead'
+    'click': 'markRead'
   },
   deleteMessage: function(e) {
     e.preventDefault();
@@ -99,5 +107,10 @@ Structural.Views.Action = Support.CompositeView.extend({
   },
   focused: function() {
     return this.model.get('focused');
+  },
+  markRead: function() {
+    if (this.model.get('is_unread')) {
+      this.model.collection.markReadUpTo(this.model);
+    }
   }
 });

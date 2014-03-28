@@ -14,12 +14,6 @@ class HomeController < ApplicationController
         render 'structural/show' and return
       end
     end
-  end
-
-  def speakeasy
-    session[:code_word] = params[:code_word]
-    redirect_to marketing_url and return if params[:code_word] == SpeakeasyCode
-
-    render :index
+    render layout: "application_rails"   
   end
 end

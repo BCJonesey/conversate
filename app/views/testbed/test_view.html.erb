@@ -253,7 +253,8 @@ data = {
       },
       timestamp: 1363812634004,
       id: 124,
-      text: "Yo Dawg, that was a message!"
+      text: "Yo Dawg, that was a message!",
+      is_unread: true
     },
     { type: "update_users",
       user: {
@@ -320,6 +321,172 @@ data = {
       timestamp: 1369681679894,
       id: 790,
       text: "Can you hear me Major Tom?  Can you hear me Major Tom?"
+    },
+    { type: "message",
+      user: {
+        name: "The Boss",
+        id: 20
+      },
+      timestamp: 1393551154861,
+      id: 1234,
+      text: "The screen door slams, Mary's dress sways"
+    },
+    { type: "message",
+      user: {
+        name: "The Boss",
+        id: 20
+      },
+      timestamp: 1393551155861,
+      id: 1235,
+      text: "Like a vision she dances across the porch as the radio plays",
+      followOn: true
+    },
+    { type: "message",
+      user: {
+        name: "The Boss",
+        id: 20
+      },
+      timestamp: 1393551156861,
+      id: 1236,
+      text: "Roy Orbison singing for the lonely",
+      followOn: true
+    },
+    { type: "message",
+      user: {
+        name: "The Boss",
+        id: 20
+      },
+      timestamp: 1393551157861,
+      id: 1237,
+      text: "Hey that's me and I want you only",
+      followOn: true
+    },
+    { type: "message",
+      user: {
+        name: "The Boss",
+        id: 20
+      },
+      timestamp: 1393551158861,
+      id: 1238,
+      text: "Don't turn me home again I just can't face myself alone again",
+      followOn: true
+    },
+    { type: "message",
+      user: {
+        name: "Clarence \"The Big Man\" Clemons",
+        id: 21
+      },
+      timestamp: 1393551159861,
+      id: 1239,
+      text: "~~ Saxophone Solo ~~",
+    },
+    { type: "message",
+      user: {
+        name: "The Boss",
+        id: 20
+      },
+      timestamp: 1393551160861,
+      id: 1240,
+      text: "Don't run back inside, darlin', you know just what I'm here for",
+      is_unread: true
+    },
+    { type: "message",
+      user: {
+        name: "The Boss",
+        id: 20
+      },
+      timestamp: 1393551161861,
+      id: 1241,
+      text: "So you're scared and you're thinkin' that maybe we ain't that young anymore",
+      followOn: true,
+      is_unread: true
+    },
+    { type: "message",
+      user: {
+        name: "The Boss",
+        id: 20
+      },
+      timestamp: 1393551162861,
+      id: 1242,
+      text: "Show a little faith there's magic in the night",
+      followOn: true,
+      is_unread: true
+    },
+    { type: "message",
+      user: {
+        name: "The Boss",
+        id: 20
+      },
+      timestamp: 1393551163861,
+      id: 1243,
+      text: "You ain't a beauty but, hey, you're alright",
+      followOn: true,
+      is_unread: true
+    },
+    { type: "message",
+      user: {
+        name: "The Boss",
+        id: 20
+      },
+      timestamp: 1393551164861,
+      id: 1244,
+      text: "Oh, and that's alright by me",
+      followOn: true,
+      is_unread: true
+    },
+    { type: "message",
+      user: {
+        name: "The Boss",
+        id: 20
+      },
+      timestamp: 1393551165861,
+      id: 1245,
+      isOwnAction: true,
+      text: "You can hide 'neath your covers and study your pain\nMake crosses from your lovers, throw roses in the rain\nSpend your summer prayin' in vain\nFor a savior to rise from these streets"
+    },
+    { type: "message",
+      user: {
+        name: "The Boss",
+        id: 20
+      },
+      timestamp: 1393551166861,
+      id: 1246,
+      isOwnAction: true,
+      text: "Well now I'm no hero, that's understood",
+      followOn: true
+    },
+    { type: "message",
+      user: {
+        name: "The Boss",
+        id: 20
+      },
+      timestamp: 1393551167861,
+      id: 1247,
+      isOwnAction: true,
+      text: "All the redemption I can offer, girl, is beneath this dirty hood",
+      followOn: true
+    },
+    { type: "message",
+      user: {
+        name: "The Boss",
+        id: 20
+      },
+      timestamp: 1393551168861,
+      id: 1248,
+      isOwnAction: true,
+      text: "With a chance to make it good somehow",
+      followOn: true
+    },
+    { type: "message",
+      user: {
+        name: "The Boss",
+        id: 20
+      },
+      timestamp: 1393551169861,
+      id: 1249,
+      isOwnAction: true,
+      text: "Hey what else can we do now",
+      followOn: true
     },
   ],
   participants: [
@@ -659,6 +826,16 @@ switch(name) {
 
     // Cheating a little bit here - we want to style the results view.
     view._results._searchStatus = 'completed';
+    break;
+  case 'toast':
+    var description = {
+      state: 'error',
+      message: 'Water Cooler has lost it\'s connection to the server.  Please refresh the page to reconnect.  (Messages written without a server connection may be lost.)',
+      autoDismiss: false,
+      promptRefresh: true
+    };
+    view = new Structural.Views.Toast();
+    view.description = description;
     break;
   case 'structural-bar':
     var model = new Structural.Models.User(data.user);

@@ -35,6 +35,8 @@ class Action < ActiveRecord::Base
     action.data = action.json
   end
 
+  before_save :populate_ts_vector
+
   def message_type?
     ['message', 'email_message'].include? self.type
   end
@@ -151,6 +153,23 @@ class Action < ActiveRecord::Base
     # unique. The added viewers are the current viewers plus the set of current viewers with folder changes.
     # Note that it should be impossible to remove users via changes due to the default folder selection.
     return conversation.viewers_and_participants() - params['prior_conversation_users_and_participants']
+  end
+
+  def populate_ts_vector
+    return true unless self.message_type?
+
+    # This is to allow tests to run.  The test database has no actions, so
+    # the first time this runs it'll throw an exception, and we never get any
+    # actions.  This condition should never be true in production, but without
+    # it the tests fall over pretty bad.
+    return true if Action.count == 0
+
+    quoted = ActiveRecord::Base.connection.quote(self.text);
+    self.search_vector =
+      Action.select("*, to_tsvector(#{quoted}) as search_vector")
+            .limit(1)
+            .first
+            .search_vector
   end
 
 end

@@ -3,10 +3,8 @@ Conversate::Application.routes.draw do
   # eating my POSTs too.
   get '/' => 'home#index', :as => 'root'
 
-  post '/' => 'home#speakeasy', :as => 'speakeasy'
-  get '/intro' => 'marketing#index', :as => 'marketing'
   get '/tour' => 'marketing#tour', :as => 'tour'
-  get '/pricing' => 'marketing#pricing', :as => 'pricing'
+  get '/about' => 'marketing#about', :as => 'about'
 
   get 'admin' => 'admin#index', :as => 'admin'
   resource :users, :only => [:update]
@@ -26,7 +24,11 @@ Conversate::Application.routes.draw do
   put 'people' => 'groups#edit'
   post 'people' => 'groups#new_user'
 
+<<<<<<< HEAD
 
+=======
+  resources :password_resets
+>>>>>>> master
 
   namespace :api do
     namespace :v0 do
@@ -36,6 +38,7 @@ Conversate::Application.routes.draw do
       end
       resources :conversations, :only => [:show] do
         get 'unread_count', on: :collection
+        get 'unread', on: :collection
         resources :actions, :only => [:index, :create]
         resources :participants, :only => [:index, :create, :destroy, :update]
       end

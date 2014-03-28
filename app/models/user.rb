@@ -14,6 +14,11 @@ class User < ActiveRecord::Base
   attr_accessible :email, :full_name, :password, :password_confirmation, :external
 
   validates_confirmation_of :password
+  # We have to allow nil passwords or we wouldn't ever be able to change a
+  # user record.  The database doesn't actually have a password field (just the
+  # encrypted password) so unless we set it explicitly (which would change it)
+  # it's always nil.
+  validates :password, length: { minimum: 1 }, allow_nil: true
   validates_presence_of :password, :on => :create, :unless => :external
   validates_presence_of :email
   validates_uniqueness_of :email, :case_sensitive => false
@@ -26,7 +31,7 @@ class User < ActiveRecord::Base
     user.send_me_mail = true if user.external
 
     new_folder = Folder.new
-    new_folder.name = 'My Conversations'
+    new_folder.name = 'Inbox'
     new_folder.users << user
     new_folder.save
     user.default_folder_id = new_folder.id
@@ -51,6 +56,10 @@ class User < ActiveRecord::Base
 
   def unread_count
     self.reading_logs.where("unread_count >0").count
+  end
+
+  def unread_conversations
+    conversations.find(self.reading_logs.where("unread_count >0").pluck(:conversation_id))
   end
 
   # Public: returns the users this user knows.

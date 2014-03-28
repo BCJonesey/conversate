@@ -1,26 +1,29 @@
 Structural.Collections.Actions = Backbone.Collection.extend({
   model: Structural.Models.Action,
   url: function() {
-    return Structural.apiPrefix + '/conversations/' + this.conversationId + '/actions';
+    return Structural.apiPrefix + '/conversations/' + this.conversation.id + '/actions';
   },
   initialize: function(data, options) {
     options = options || {};
-    this.conversationId = options.conversation;
+    this.conversation = options.conversation;
     this.userId = options.user;
     this.on('reset', this._findMyMessages, this);
     this.on('reset', this._findFocusedMessage, this);
+    this.on('reset', this._findFollowOnMessages, this);
+    this.on('reset', this._findUnreadMessages, this);
     this.on('add', this.setStateOnNewAction, this);
     this.on('add', function(model, collection, options) {
       this.trigger('unreadCountChanged');
     });
     this.on('add', this.triggerNewMessage, this);
+    this.on('sort', this._findFollowOnMessages, this);
   },
   comparator: 'timestamp',
 
   _findMyMessages: function() {
     this.forEach(function(action) {
       if (action.get('user').id === this.userId) {
-        action.isMine();
+        action.mine();
       }
     }, this);
   },
@@ -32,6 +35,29 @@ Structural.Collections.Actions = Backbone.Collection.extend({
         action.focus();
       }
     }
+  },
+
+  _findFollowOnMessages: function() {
+    this.forEach(function(action, index) {
+      if (index > 0) {
+        var previous = this.at(index - 1);
+        if (action.isFollowOn(previous)) {
+          action.followOn();
+
+          if (action.isInDifferentTimeBucket(previous)) {
+            action.followOnLongTerm();
+          }
+        }
+      }
+    }, this);
+  },
+
+  _findUnreadMessages: function() {
+    this.filter(function(action) {
+      return action.isUnread(this.conversation.get('most_recent_viewed'));
+    }, this).forEach(function(action) {
+      action.markUnread();
+    });
   },
 
   focus: function(id) {
@@ -47,6 +73,10 @@ Structural.Collections.Actions = Backbone.Collection.extend({
         .forEach(function(act) {
       act.unfocus();
     });
+  },
+
+  markReadUpTo: function(action) {
+    this.conversation.updateMostRecentViewedTo(action.get('timestamp'));
   },
 
   clearFocus: function() {
@@ -108,7 +138,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
         name: user.get('name'),
         id: user.id
       },
-      conversation_id: this.conversationId,
+      conversation_id: this.conversation.id,
       to: {
         name: folder.get('name'),
         id: folder.id
@@ -148,7 +178,23 @@ Structural.Collections.Actions = Backbone.Collection.extend({
 
   setStateOnNewAction: function(model, collection) {
     if (model.get('user').id === this.userId) {
-      model.isMine();
+      model.mine();
+    }
+
+    var index = collection.indexOf(model);
+    if (index > 0) {
+      var previous = collection.at(index - 1);
+      if (model.isFollowOn(previous)) {
+        model.followOn();
+
+        if (model.isInDifferentTimeBucket(previous)) {
+          model.followOnLongTerm();
+        }
+      }
+    }
+
+    if (model.isUnread(this.conversation.get('most_recent_viewed'))) {
+      model.markUnread();
     }
   },
   triggerNewMessage: function(model) {
@@ -169,13 +215,42 @@ Structural.Collections.Actions = Backbone.Collection.extend({
   unreadCount: function(mostRecentEventViewed) {
     var count = 0;
     this.forEach(function(action) {
-      count += action.isUnread(mostRecentEventViewed) ? 1 : 0;
+      if (action.isMessageType()) {
+        count += action.isUnread(mostRecentEventViewed) ? 1 : 0;
+      }
     });
     return count;
   },
 
+  /* A follow on group consists of an action followed by zero or more actions
+     that have 'followOn' set to true. */
+  findFollowOnGroup: function(action) {
+    var group = [action];
+    var index = this.indexOf(action);
+    if (action.get('followOn')) {
+      for (var i = index - 1; i >= 0; i--) {
+        var act = this.at(i);
+        group.splice(0, 0, act);
+        if (!act.get('followOn')) {
+          break;
+        }
+      }
+    }
+
+    for (var i = index + 1; i < this.length; i++) {
+      var act = this.at(i);
+      if (act.get('followOn')) {
+        group.push(act);
+      } else {
+        break;
+      }
+    }
+
+    return group;
+  },
+
   fetch: function(options) {
-    if (this.conversationId) {
+    if (this.conversation.id) {
       // http://rockycode.com/blog/backbone-inheritance/
       // God, I fucking hate javascript so much.  Is this really the best there
       // is for basic inheritance?  Should we be using mixins instead?

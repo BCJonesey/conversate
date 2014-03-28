@@ -38,9 +38,12 @@ class Api::V0::ParticipantsController < ApplicationController
     user = User.find_by_id(params[:id])
     head :status => 404 and return unless conversation && user
     log = user.reading_logs.where(:conversation_id => conversation.id).first
-    # API sends milliseconds
+    # API sends milliseconds, integer division gets the floor, +1
+    # gets the ceiling.  We ceiling so that the action we clicked's timestamp
+    # is always less than our most_recent_viewed.
     if (params[:most_recent_viewed])
-      log.most_recent_viewed = DateTime.strptime((params[:most_recent_viewed] / 1000).to_s, "%s")
+      most_recent_viewed_in_seconds = (params[:most_recent_viewed] / 1000) + 1
+      log.most_recent_viewed = DateTime.strptime(most_recent_viewed_in_seconds.to_s, "%s")
     end
     log.unread_count = 0
     log.archived = params.has_key?(:archived) ? params[:archived] : log.archived
