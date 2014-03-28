@@ -18,7 +18,16 @@ Structural.Views.FileUpload = Support.CompositeView.extend({
     e.preventDefault();
     this.$('.act-file-upload-popover').toggleClass('hidden');
     this.$('.act-file-upload-button-regular').toggleClass('active');
+    self.uploadData = null;
     this.updateProgress(0);
+    this.clearFilePicked(e);
+  },
+  showFilePicked: function(e, filename) {
+    self.$('.act-file-upload-filename').text(filename);
+    self.$('.act-file-upload-picker').addClass('file-picked');
+  },
+  clearFilePicked: function(e) {
+    self.$('.act-file-upload-picker').removeClass('file-picked');
   },
   keyupUploadNotes: function(e) {
     this.updateFileUpload();
@@ -52,8 +61,7 @@ Structural.Views.FileUpload = Support.CompositeView.extend({
       },
       add: function (e, data) {
         self.uploadData = data;
-        self.$('.act-file-upload-filename').text(data.files[0].name);
-        self.$('.act-file-upload-picker').addClass('file-picked');
+        self.showFilePicked(e, data.files[0].name);
       }
     });
   },
