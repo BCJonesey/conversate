@@ -5,7 +5,7 @@ Structural.Components.FileUploadToaster = function() {
     var viewDescription = {};
     viewDescription.state = toastDescription.state;
     if (toastDescription.type === 'fileupload:upload') {
-      viewDescription.promptRefresh = true;
+      viewDescription.promptRefresh = false;
       viewDescription.message =
         "Water Cooler encountered an error uploading this file, and the upload has not gone through. " +
         "Please try again shortly.";
