@@ -53,6 +53,14 @@ Structural.Views.FileUpload = Support.CompositeView.extend({
           type: 'fileupload:upload',
           state: 'error'
         });
+
+        // Let's turn off the toaster automatically after five seconds.
+        _.delay( function() {
+          Structural.FileUploadToaster.toast({
+            type: 'fileupload:upload',
+            state: 'success'
+          })
+        }, 5000);
       },
       done: function (e, data) {
         self.toggleFileUpload(e);
