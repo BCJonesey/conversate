@@ -14,12 +14,8 @@
     <div class='act-title-editor-popover popover hidden'>
       <div class='popover-header'>Conversation Details<a href='#' class='popover-close'><i class='fa fa-times'></i></a></div>
       <div class='popover-content'>
-        <div class='act-title-editor-title-details form'>
-          <label>Conversation Name</label>
-          <input type='text' class='act-title-input' value="<%= conversation ? conversation.escape('title') : '' %>"/>
-        </div>
         <div class='act-convo-actions menu'>
-          <div class='menu-title'>Actions</div>
+          <div class='menu-title'>Status</div>
           <a href="#" class="menu-item act-archive-cnv" title="Archive Conversation">
             <i class='menu-item-icon fa fa-fw fa-inbox'></i>
             <% if (conversation.get('archived')) { %>
@@ -37,10 +33,13 @@
             <% } %>
           </a>
         </div>
-      </div>
-      <div class='btn-toolbar-below act-title-editor-save-actions'>
-        <div class='btn-group pull-right'>
-          <a href='#' class='act-title-save btn-primary'>Save</a>
+        <div class='menu-title'>Title</div>
+        <div class='act-title-editor-title-details form'>
+          <label>Change Title (for everyone)</label>
+          <input type='text' class='act-title-input' value="<%= conversation ? conversation.escape('title') : '' %>"/>
+          <div class='act-title-editor-save-actions'>
+              <a href='#' class='act-title-save btn'>Update Title</a>
+          </div>
         </div>
       </div>
     </div>
