@@ -8,7 +8,7 @@
 #              fixing the problem.
 module Health
 
-  # User health checkts
+  # User health checks
 
   def Health.user_with_nil_default_folder
     User.where(:default_folder_id => nil).map do |u|
