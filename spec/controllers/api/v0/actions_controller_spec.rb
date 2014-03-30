@@ -243,10 +243,6 @@ describe Api::V0::ActionsController do
       expect(response).not_to be_success
       expect(response.code).to eq("404")
     end
-    it 'successfully adds a upload action', :focus => true do
-      upload_file = fixture_file_upload('/files/scream.jpeg', 'image/jpeg')
-      post :create, :conversation_id => 100, :type => 'upload', :bulkfile => upload_file
-    end
   end
 
 end
