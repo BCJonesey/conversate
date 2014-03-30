@@ -3,8 +3,7 @@ class Api::V0::FilesController < ApplicationController
 
   def create
   	upload_file = params[:files][0]
-  	file = Upload.new(:upload => upload_file)
-    file.save
+  	file = Upload.create!(:upload => upload_file)
     url = file.upload.url
     file_name = file.upload_file_name
 
