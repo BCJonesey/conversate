@@ -47,6 +47,7 @@ class Api::V0::ParticipantsController < ApplicationController
     end
     log.unread_count = 0
     log.archived = params.has_key?(:archived) ? params[:archived] : log.archived
+    log.pinned = params.has_key?(:pinned) ? params[:pinned] : log.pinned
     log.save
     render :json => user.to_json, :status => 204
   end

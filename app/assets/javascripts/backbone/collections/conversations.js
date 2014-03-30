@@ -16,6 +16,9 @@ Structural.Collections.Conversations = Backbone.Collection.extend({
       conversation.on('archived', function(conversation) {
         self.trigger('archived');
       });
+      conversation.on('pinned', function(conversation) {
+        self.trigger('pinned');
+      });
     }, self);
 
     Structural.on('readConversation', function(conversation) {

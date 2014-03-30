@@ -34,6 +34,7 @@ Structural.Views.Conversations = Support.CompositeView.extend({
     collection.on('remove', this.reRender, this);
     collection.on('conversationsLoadedForFirstTime', this.viewTargetOrFirstConversation, this);
     collection.on('archived', this.reRender, this);
+    collection.on('pinned', this.reRender, this);
   },
   render: function() {
     this.$el.empty();
