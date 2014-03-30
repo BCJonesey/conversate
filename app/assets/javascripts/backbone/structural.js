@@ -68,8 +68,10 @@ var Structural = new (Support.CompositeView.extend({
     });
 
     Structural.Toaster = new Structural.Components.Toaster();
+    Structural.FileUploadToaster = new Structural.Components.FileUploadToaster();
 
     this.appendChild(Structural.Toaster.view);
+    this.appendChild(Structural.FileUploadToaster.view);
     this.appendChild(this._bar);
     this.appendChild(this._watercooler);
     this._faviconAndTitle.render();

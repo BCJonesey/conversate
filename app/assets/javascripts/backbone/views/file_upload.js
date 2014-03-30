@@ -47,9 +47,12 @@ Structural.Views.FileUpload = Support.CompositeView.extend({
       autoUpload: false,
       dataType: 'json',
       fail: function(e, data) {
-        console.log('error uploading file');
         self.toggleFileUpload(e);
         self.updateFileUpload();
+        Structural.FileUploadToaster.toast({
+          type: 'fileupload:upload',
+          state: 'error'
+        });
       },
       done: function (e, data) {
         self.toggleFileUpload(e);
