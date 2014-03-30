@@ -10,11 +10,19 @@ Structural.Views.Conversations = Support.CompositeView.extend({
 
     Structural.on('changeFolder', this.changeFolder, this);
 
-    this.sectionRegular = new Structural.Views.ConversationsSection({name: "My Conversations",
-                                                                     user: this.user});
-    this.sectionArchived = new Structural.Views.ConversationsSection({name: "Archive",
-                                                                      user: this.user,
-                                                                      startsCollapsed: true});
+    this.sectionRegular = new Structural.Views.ConversationsSection({
+      name: "My Conversations",
+      user: this.user
+    });
+    this.sectionArchived = new Structural.Views.ConversationsSection({
+      name: "Archive",
+      user: this.user,
+      startsCollapsed: true
+    });
+    this.sectionShared = new Structural.Views.ConversationsSection({
+      name: "Shared Conversations",
+      user: this.user
+    });
   },
   _wireEvents: function(collection) {
     collection.on('add', this.reRender, this);
@@ -30,10 +38,17 @@ Structural.Views.Conversations = Support.CompositeView.extend({
 
     var regularConversations = [];
     var archivedConversations = [];
+    var sharedConversations = [];
 
     this.collection.forEach(function(conversation) {
+      var participant_ids = conversation.get('participants')
+                                        .map(function(p) { return p.id });
+      var includes_user = _.contains(participant_ids, this.user.id);
+
       if (conversation.get('archived')) {
         archivedConversations.push(conversation);
+      } else if (!includes_user) {
+        sharedConversations.push(conversation);
       } else {
         regularConversations.push(conversation);
       }
@@ -44,6 +59,11 @@ Structural.Views.Conversations = Support.CompositeView.extend({
     if (regularConversations.length > 0) {
       this.sectionRegular.collection = regularConversations;
       this.appendChild(this.sectionRegular);
+    }
+
+    if (sharedConversations.length > 0) {
+      this.sectionShared.collection = sharedConversations;
+      this.appendChild(this.sectionShared);
     }
 
     if (archivedConversations.length > 0) {
