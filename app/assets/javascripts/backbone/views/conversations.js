@@ -10,11 +10,15 @@ Structural.Views.Conversations = Support.CompositeView.extend({
 
     Structural.on('changeFolder', this.changeFolder, this);
 
-    this.sectionRegular = new Structural.Views.ConversationsSection({name: "My Conversations",
-                                                                     user: this.user});
-    this.sectionArchived = new Structural.Views.ConversationsSection({name: "Archive",
-                                                                      user: this.user,
-                                                                      startsCollapsed: true});
+    this.sectionRegular = new Structural.Views.ConversationsSection({
+      name: "My Conversations",
+      user: this.user
+    });
+    this.sectionArchived = new Structural.Views.ConversationsSection({
+      name: "Archive",
+      user: this.user,
+      startsCollapsed: true
+    });
   },
   _wireEvents: function(collection) {
     collection.on('add', this.reRender, this);
