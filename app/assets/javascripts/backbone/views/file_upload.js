@@ -11,7 +11,6 @@ Structural.Views.FileUpload = Support.CompositeView.extend({
   submitFileUpload: function(e) {
     if (this.uploadData) {
       this.uploadData.submit();
-      this.uploadData = null;
     }
   },
   toggleFileUpload: function(e){
@@ -62,14 +61,28 @@ Structural.Views.FileUpload = Support.CompositeView.extend({
         Structural.FileUploadToaster.toast(toastOptions);
       },
       done: function (e, data) {
+
+        // Note the filename, then do normal file upload cleanup.
+        var fileName = self.uploadData.files[0].name
         self.toggleFileUpload(e);
         self.updateFileUpload();
+
+        // When the action comes in that is for this upload, we want to stop the spinner right away.
+        Structural._conversation.actions.on('add', function(action) {
+          if (fileName === action.get('fileName') ) {
+            Structural._conversation.actions.off('add', self);
+            self.$el.removeClass('is-uploading')
+          }
+        }, self);
+
+        // Fetch our actions right away, so we can see our upload ASAP.
         Structural._conversation.actions.fetch();
 
-        // Let's set up the spinner to show for 5 seconds.
-        self.$el.addClass('is-uploading').delay(5000).queue(function() {
+        // Let's set up the spinner to show for 20 seconds.
+        self.$el.addClass('is-uploading').delay(20000).queue(function() {
           self.$el.removeClass('is-uploading').dequeue();
-        })
+        });
+
       },
       progressall: function (e, data) {
         var progress = parseInt(data.loaded / data.total * 100, 10);
