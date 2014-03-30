@@ -18,6 +18,7 @@ Structural.Views.FileUpload = Support.CompositeView.extend({
     e.preventDefault();
     this.$('.act-file-upload-popover').toggleClass('hidden');
     this.$('.act-file-upload-button-regular').toggleClass('active');
+    self.$('.act-file-upload-notes').val('');
     this.uploadData = null;
     this.updateProgress(0);
     this.clearFilePicked(e);
@@ -45,9 +46,13 @@ Structural.Views.FileUpload = Support.CompositeView.extend({
       },
       autoUpload: false,
       dataType: 'json',
+      fail: function(e, data) {
+        console.log('error uploading file');
+        self.toggleFileUpload(e);
+        self.updateFileUpload();
+      },
       done: function (e, data) {
         self.toggleFileUpload(e);
-        self.$('.act-file-upload-notes').val('');
         self.updateFileUpload();
         Structural._conversation.actions.fetch();
 
