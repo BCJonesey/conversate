@@ -114,18 +114,30 @@ Structural.Models.Conversation = Backbone.Model.extend({
     // Note that we don't need to trigger an archive event because the model is watching its own state.
     var self = this;
     self.set('archived', ! self.get('archived'));
+
+    if (self.get('archived') && self.get('pinned')) {
+      self.set('pinned', false);
+    }
+
     self.withCurrentUserFromSelf(function(participant) {
       participant.save({
-        archived: self.get('archived')
+        archived: self.get('archived'),
+        pinned: self.get('pinned')
       });
     });
   },
   togglePin: function() {
     var self = this;
     self.set('pinned', !self.get('pinned'));
+
+    if (self.get('pinned') && self.get('archived')) {
+      self.set('archived', false);
+    }
+
     self.withCurrentUserFromSelf(function(participant) {
       participant.save({
-        pinned: self.get('pinned')
+        pinned: self.get('pinned'),
+        archived: self.get('archived')
       });
     });
   },
