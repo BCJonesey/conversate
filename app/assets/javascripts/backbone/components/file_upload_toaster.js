@@ -4,9 +4,12 @@ Structural.Components.FileUploadToaster = function() {
   var getViewDescription = function(toastDescription) {
     var viewDescription = {};
     viewDescription.state = toastDescription.state;
-    if (toastDescription.type === 'fileupload:upload') {
-      viewDescription.promptRefresh = false;
-      viewDescription.promptClose = true;
+    viewDescription.promptRefresh = false;
+    viewDescription.promptClose = true;
+    if (toastDescription.type === 'fileupload:filesize') {
+      viewDescription.message =
+        "Water Cooler cannot upload files greater than 10 megabytes in size.";
+    } else {
       viewDescription.message =
         "Water Cooler encountered an error uploading this file, and the upload has not gone through. " +
         "Please try again shortly.";

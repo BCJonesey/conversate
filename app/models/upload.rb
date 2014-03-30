@@ -3,7 +3,7 @@ class Upload < ActiveRecord::Base
   has_attached_file :upload
   validates_attachment :upload,
     :content_type => { content_type: /.*/ },
-    :size => { less_than: 1.kilobytes }
+    :size => { less_than: 10.megabytes }
 
   attr_accessible :upload
 end

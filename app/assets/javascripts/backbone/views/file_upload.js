@@ -49,10 +49,17 @@ Structural.Views.FileUpload = Support.CompositeView.extend({
       fail: function(e, data) {
         self.toggleFileUpload(e);
         self.updateFileUpload();
-        Structural.FileUploadToaster.toast({
+
+        // Let's set up the toast error message for the user.
+        var toastOptions = {
           type: 'fileupload:upload',
           state: 'error'
-        });
+        }
+        if (data.response().jqXHR.status == 422) {
+          // This file failed file size validation.
+          toastOptions.type = 'fileupload:filesize';
+        }
+        Structural.FileUploadToaster.toast(toastOptions);
       },
       done: function (e, data) {
         self.toggleFileUpload(e);
