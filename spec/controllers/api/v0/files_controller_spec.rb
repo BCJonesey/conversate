@@ -13,7 +13,7 @@ describe Api::V0::FilesController do
     it 'successfully uploads a new file' do
         conversation = @user.conversations.create!()
         conversation.actions.count.should == 0
-        post :create, :conversation => 1, :notes => '', :type => 'upload', :files => upload_file
+        post :create, :conversation => conversation.id, :notes => '', :type => 'upload', :files => upload_file
         expect(response).to be_success
         expect(response.code).to eq("201")
         conversation.actions.count.should == 1
@@ -25,7 +25,7 @@ describe Api::V0::FilesController do
                               :password => 'allakhazam')
         conversation = addedUser.conversations.create!()
         conversation.actions.count.should == 0
-        post :create, :conversation => 2, :notes => '', :type => 'upload', :files => upload_file
+        post :create, :conversation => conversation.id, :notes => '', :type => 'upload', :files => upload_file
         expect(response).not_to be_success
         expect(response.code).to eq("404")
         conversation.actions.count.should == 0
