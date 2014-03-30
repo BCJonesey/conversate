@@ -78,18 +78,18 @@ module Health
   end
 
   def Health.conversation_hidden_from_users
-    hidden_users = []
+    hidden_users_by_convo = {}
     Conversation.all.keep_if do |c|
       c_folders = Set.new(c.folders)
       hidden_from = c.users.keep_if do |u|
         Set.new(u.folders).intersection(c_folders).empty?
       end
-      hidden_users += hidden_from
+      hidden_users_by_convo[c] = hidden_from
       hidden_from.length > 0
     end.map do |c|
       {
         :model => c,
-        :notes => hidden_users.map {|u| u.debug_s }.join(', ')
+        :notes => hidden_users_by_convo[c].map {|u| u.debug_s }.join(', ')
       }
     end
   end
