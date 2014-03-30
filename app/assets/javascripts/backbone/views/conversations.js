@@ -20,7 +20,7 @@ Structural.Views.Conversations = Support.CompositeView.extend({
       startsCollapsed: true
     });
     this.sectionShared = new Structural.Views.ConversationsSection({
-      name: "Shared",
+      name: "Shared Conversations",
       user: this.user
     });
   },
