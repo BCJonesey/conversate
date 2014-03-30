@@ -12,11 +12,6 @@ Structural.Views.Conversation = Support.CompositeView.extend({
       classes += ' cnv-current';
     }
 
-    if (this.model.get('participants') && this.user &&
-        !_(this.model.get('participants').map(function(p) { return p.id; })).contains(this.user.id)) {
-      classes += ' cnv-not-participating';
-    }
-
     var unread = this.model.unreadCount();
     if (unread == 0) {
       // No class for no unread.
