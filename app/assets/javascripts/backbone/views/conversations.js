@@ -23,6 +23,10 @@ Structural.Views.Conversations = Support.CompositeView.extend({
       name: "Shared Conversations",
       user: this.user
     });
+    this.sectionPinned = new Structural.Views.ConversationsSection({
+      name: "Pinned Conversation",
+      user: this.user
+    });
   },
   _wireEvents: function(collection) {
     collection.on('add', this.reRender, this);
@@ -39,13 +43,16 @@ Structural.Views.Conversations = Support.CompositeView.extend({
     var regularConversations = [];
     var archivedConversations = [];
     var sharedConversations = [];
+    var pinnedConversations = [];
 
     this.collection.forEach(function(conversation) {
       var participant_ids = conversation.get('participants')
                                         .map(function(p) { return p.id });
       var includes_user = _.contains(participant_ids, this.user.id);
 
-      if (conversation.get('archived')) {
+      if (conversation.get('pinned')) {
+        pinnedConversations.push(conversation);
+      } else if (conversation.get('archived')) {
         archivedConversations.push(conversation);
       } else if (!includes_user) {
         sharedConversations.push(conversation);
@@ -55,6 +62,11 @@ Structural.Views.Conversations = Support.CompositeView.extend({
     }, this);
 
     // We only want to show a section if there are actually archived conversations.
+
+    if (pinnedConversations.length > 0) {
+      this.sectionPinned.collection = pinnedConversations;
+      this.appendChild(this.sectionPinned);
+    }
 
     if (regularConversations.length > 0) {
       this.sectionRegular.collection = regularConversations;
