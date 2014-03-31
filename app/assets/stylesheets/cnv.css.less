@@ -112,20 +112,18 @@
   line-height: 1.0;
   color:@cnv-time-gray;
   vertical-align:top;
-  //margin-top:0.1rem;
   padding:0.15rem 0.3rem 0.2rem;
   border-radius:0.15rem;
   background-color: white;
-  //border:1px solid white;
 }
 
 .cnv-current .cnv-time{
-  background-color: @cnv-current-blue;
-  //border-color: @cnv-current-blue;
+  @media(min-width:@bp-1){
+    background-color: @cnv-current-blue;
+  }
 }
 .cnv.cnv-unread .cnv-time{
   background-color: mix(@unread-blue,white,100%);
-  //border:1px solid @unread-blue;
   color:white;
 }
 
