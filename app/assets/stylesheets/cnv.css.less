@@ -1,7 +1,7 @@
 @import 'variables.css.less';
 @import 'mixins.css.less';
 
-@cnv-border-color: #EAEAEA;
+@cnv-border-color: #ECECEC;
 @cnv-current-blue: #F0F8FF;
 
 // --- Conversations List --- //
@@ -34,6 +34,13 @@
   .cnv-note{
     display:none;
   }
+  &:last-child{
+    border-bottom: @border-1;
+    margin-bottom:1.0rem;
+  }
+  &:first-child .cnv-divider{
+    border-top:none;
+  }
 }
 
 .cnv-section.is-collapsed{
@@ -48,11 +55,12 @@
 .cnv-divider{
   cursor:pointer;
   .ellipsis();
-  color:#888;
+  color:#AAA;
   font-size: 0.75rem;
   padding: 0.25rem 0.25rem;
-  background-color:#F8F8F8;
-  border-bottom:1px solid @cnv-border-color;
+  background-color:@bg-1;
+  border-top:@border-1;
+  border-bottom:@border-1;
 }
 
 .cnv-note{
@@ -67,7 +75,6 @@
   font-size: 0.75rem;
   padding: 1.0rem;
   text-align: center;
-  border-bottom:1px solid @cnv-border-color;
 }
 
 .cnv {
@@ -76,6 +83,9 @@
   border: none;
   cursor:pointer;
   border-bottom:1px solid @cnv-border-color;
+  &:last-child{
+    border-bottom:none;
+  }
 }
 
 .cnv-unread-indicator{
@@ -89,7 +99,6 @@
 }
 
 .cnv-left {
-  //background-color:white;
   padding: 0.5rem;
   @media(min-width:@bp-2){
     padding: 0.25rem;
@@ -101,18 +110,16 @@
   border:1px solid transparent;
   padding-left:0.75rem;
   padding-right:0.25rem;
-  margin-top:1.0rem;
+  margin-top:1.1rem;
 }
-
-@cnv-time-gray:#CCC;
 
 .cnv-time{
   display:inline-block;
   font-size:0.7rem;
   line-height: 1.0;
-  color:@cnv-time-gray;
+  color:#CCC;
   vertical-align:top;
-  padding:0.15rem 0.3rem 0.2rem;
+  padding:0.2rem 0.3rem 0.2rem;
   border-radius:0.15rem;
   background-color: white;
 }
