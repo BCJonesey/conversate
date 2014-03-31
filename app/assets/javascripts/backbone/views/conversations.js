@@ -24,7 +24,7 @@ Structural.Views.Conversations = Support.CompositeView.extend({
       user: this.user
     });
     this.sectionPinned = new Structural.Views.ConversationsSection({
-      name: "Pinned Conversation",
+      name: "Pinned Conversations",
       user: this.user
     });
   },
