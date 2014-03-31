@@ -1,6 +1,9 @@
 @import 'variables.css.less';
 @import 'mixins.css.less';
 
+@cnv-border-color: #EAEAEA;
+@cnv-current-blue: #F0F8FF;
+
 // --- Conversations List --- //
 
 // This does not include styles that control the position, of the converstion list column.  those are with the water-cooler.css.less file and other general layout stuff
@@ -32,6 +35,7 @@
     display:none;
   }
 }
+
 .cnv-section.is-collapsed{
   .cnv{
     display:none;
@@ -40,54 +44,58 @@
     display:block;
   }
 }
-.cnv-divider{
-  .gradient-ltr(@border-color-1,white,90%);
-  cursor:default;
-  padding-bottom: 1px;
-  .cnv-divider-inner{
-    .gradient-ltr(#F8F8F8,white,90%);
-    .ellipsis();
-    color:#AAA;
-    font-size: 0.75rem;
-    padding: 0.25rem;
-  }
-}
-.cnv-note{
-  .gradient-ltr(@border-color-1,white,90%);
-  cursor:default;
-  padding-bottom: 1px;
-  .cnv-note-inner{
-    background-color: white;
-    .ellipsis();
-    color:#DDD;
-    font-weight: normal;
-    font-size: 0.75rem;
-    padding: 0.75rem;
-    text-align: center;
-  }
 
-}
-.cnv {
-  padding: 0;
-  border: none;
-  padding-bottom: 1px;
-  .gradient-ltr(@border-color-1,white,90%);
+.cnv-divider{
   cursor:pointer;
+  .ellipsis();
+  color:#888;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.25rem;
+  background-color:#F8F8F8;
+  border-bottom:1px solid @cnv-border-color;
+}
+
+.cnv-note{
+  background-color: white;
+  cursor:pointer;
+  padding-bottom: 1px;
+  background-color: white;
+  .ellipsis();
+  color:#DDD;
+  font-weight: normal;
+  font-style: italic;
+  font-size: 0.75rem;
+  padding: 1.0rem;
+  text-align: center;
+  border-bottom:1px solid @cnv-border-color;
+}
+
+.cnv {
+  padding: 0.1rem;
+  margin:0;
+  border: none;
+  cursor:pointer;
+  border-bottom:1px solid @cnv-border-color;
+}
+
+.cnv-unread-indicator{
+  display:none !important;
+}
+
+@media (min-width:@bp-1){
+  .cnv.cnv-current{
+    background-color:@cnv-current-blue;
+  }
 }
 
 .cnv-left {
-  background-color:white;
+  //background-color:white;
   padding: 0.5rem;
   @media(min-width:@bp-2){
     padding: 0.25rem;
   }
-  background-color: white;
 }
-@media (min-width:@bp-1){
-  .cnv.cnv-current .cnv-left{
-    .gradient-ltr(#F0F8FF,white,90%)
-  }
-}
+
 .cnv-right{
   float:right;
   border:1px solid transparent;
@@ -95,32 +103,6 @@
   padding-right:0.25rem;
   margin-top:1.0rem;
 }
-
-.cnv-unread-indicator{
-  border-radius:1px;
-  margin-left:0.1rem;
-  border:0px solid white;
-  line-height: 1.0;
-  vertical-align:top;
-  width:0.35rem;
-  height:1.0rem;
-  display:inline-block;
-}
-
-.cnv-unread-indicator-style(@color-percent){
-  background-color: mix(@unread-blue, white, @color-percent);
-}
-
-.cnv-unread-count-few .cnv-unread-indicator{
-  .cnv-unread-indicator-style(40%);
-}
-.cnv-unread-count-some .cnv-unread-indicator{
-  .cnv-unread-indicator-style(70%);
-}
-.cnv-unread-count-many .cnv-unread-indicator{
-  .cnv-unread-indicator-style(100%);
-}
-
 
 @cnv-time-gray:#CCC;
 
@@ -130,35 +112,33 @@
   line-height: 1.0;
   color:@cnv-time-gray;
   vertical-align:top;
-  margin-top:0.1rem;
+  //margin-top:0.1rem;
+  padding:0.15rem 0.3rem 0.2rem;
+  border-radius:0.15rem;
+  background-color: white;
+  //border:1px solid white;
 }
 
-.cnv.cnv-not-participating .cnv-time{
-  color:mix(@cnv-time-gray,white);
+.cnv-current .cnv-time{
+  background-color: @cnv-current-blue;
+  //border-color: @cnv-current-blue;
 }
-
+.cnv.cnv-unread .cnv-time{
+  background-color: mix(@unread-blue,white,100%);
+  //border:1px solid @unread-blue;
+  color:white;
+}
 
 
 @cnv-participant-gray:#AAA;
 
-@cnv-border-color:#CCC;
-
-// .cnv{
-//   a{
-//     text-decoration: none;
-//   }
-//   padding:.3rem;
-//   border-bottom:1px solid @cnv-border-color;
-// }
 @cnv-title-color:#444444;
 
 .cnv-title{
   .title-font();
   .ellipsis();
+  font-weight: normal;
   color:@cnv-title-color;
-}
-.cnv.cnv-not-participating .cnv-title{
-  color:mix(@cnv-title-color,white);
 }
 
 .cnv-participants{
@@ -166,6 +146,7 @@
   min-height:1.0rem;
   color:@cnv-participant-gray;
   .ellipsis();
+  margin-top:0.3rem;
 }
 .cnv.cnv-not-participating .cnv-participants{
   color:mix(@cnv-participant-gray,white);
@@ -173,40 +154,4 @@
 
 .cnv-participant + .cnv-participant:before{
   content:",  ";
-}
-
-
-
-.loading-placeholder{
-  display:none;
-}
-
-.is-loading .loading-placeholder{
-  margin:4rem 1rem;
-  padding:1rem;
-  color:#CCC;
-  border-top:1px solid #E0E0E0;
-  border-bottom:1px solid #E0E0E0;
-  text-align:center;
-}
-
-.loading-text{
-  font-style:italic;
-  display:inline-block;
-  -webkit-animation-name: pulse;
-  -webkit-animation-duration: 2.5s;
-  -webkit-animation-iteration-count: infinite;
-  -webkit-animation-timing-function: ease-in;
-}
-
-@-webkit-keyframes pulse {
-  0% {
-    color:#EEE;
-  }
-  50%{
-    color:#AAA;
-  }
-  100% {
-    color:#EEE;
-  }
 }
