@@ -16,14 +16,6 @@
       <div class='popover-content'>
         <div class='act-convo-actions menu'>
           <div class='menu-title'>Status</div>
-          <a href="#" class="menu-item act-archive-cnv" title="Archive Conversation">
-            <i class='menu-item-icon fa fa-fw fa-inbox'></i>
-            <% if (conversation.get('archived')) { %>
-            Unarchive Conversation
-            <% } else { %>
-            Archive Conversation
-            <% } %>
-          </a>
           <a href="#" class="menu-item act-pin-cnv" title="Pin Conversation">
             <i class='menu-item-icon fa fa-fw fa-thumb-tack'></i>
             <% if (conversation.get('pinned')) { %>
@@ -32,13 +24,21 @@
             Pin Conversation
             <% } %>
           </a>
+          <a href="#" class="menu-item act-archive-cnv" title="Archive Conversation">
+            <i class='menu-item-icon fa fa-fw fa-inbox'></i>
+            <% if (conversation.get('archived')) { %>
+            Unarchive Conversation
+            <% } else { %>
+            Archive Conversation
+            <% } %>
+          </a>
         </div>
         <div class='menu-title'>Title</div>
         <div class='act-title-editor-title-details form'>
           <label>Change Title (for everyone)</label>
           <input type='text' class='act-title-input' value="<%= conversation ? conversation.escape('title') : '' %>"/>
           <div class='act-title-editor-save-actions'>
-              <a href='#' class='act-title-save btn'>Update Title</a>
+            <a href='#' class='act-title-save btn'>Update Title</a>
           </div>
         </div>
       </div>
