@@ -16,7 +16,10 @@ Structural.Views.ConversationsSection = Support.CompositeView.extend({
         // new conversation or something comes in.
         this.startsCollapsed = false;
       }
-      this.$el.html(this.template({name: this.name}));
+      this.$el.html(this.template({
+        name: this.name,
+        collection: this.collection
+      }));
       this.delegateEvents();
       this.renderConversations(this.collection);
     }
