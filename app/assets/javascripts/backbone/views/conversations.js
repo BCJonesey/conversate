@@ -65,6 +65,7 @@ Structural.Views.Conversations = Support.CompositeView.extend({
     collection.on('conversationsLoadedForFirstTime', this.viewTargetOrFirstConversation, this);
     collection.on('archived', this.reRender, this);
     collection.on('pinned', this.reRender, this);
+    collection.on('focus:conversation', this.showFocusedConversation, this);
   },
   render: function() {
     this.$el.empty();
@@ -139,6 +140,13 @@ Structural.Views.Conversations = Support.CompositeView.extend({
       Structural.viewConversationData(conversation,
                                       {silentResponsiveView: true});
       conversation.focus();
+    }
+  },
+
+  showFocusedConversation: function(conversation) {
+    var section = this.sectionForConversation(conversation);
+    if (section.isCollapsed()) {
+      section.toggleCollapsed();
     }
   }
 });

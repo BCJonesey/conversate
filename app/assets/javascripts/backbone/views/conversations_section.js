@@ -37,7 +37,14 @@ Structural.Views.ConversationsSection = Support.CompositeView.extend({
     this.appendChild(view);
   },
   toggleCollapsed: function(e){
-    $(e.target).closest('.cnv-section').toggleClass('is-collapsed')
+    var targetEl = this.$el;
+    if (e) {
+      targetEl = $(e.target).closest('.cnv-section');
+    }
+    targetEl.toggleClass('is-collapsed')
+  },
+  isCollapsed: function() {
+    return this.$el.hasClass('is-collapsed');
   },
   renderConversations: function(conversations) {
     var self = this;
