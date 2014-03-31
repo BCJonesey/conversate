@@ -10,11 +10,23 @@ Structural.Views.Conversations = Support.CompositeView.extend({
 
     Structural.on('changeFolder', this.changeFolder, this);
 
-    this.sectionRegular = new Structural.Views.ConversationsSection({name: "My Conversations",
-                                                                     user: this.user});
-    this.sectionArchived = new Structural.Views.ConversationsSection({name: "Archive",
-                                                                      user: this.user,
-                                                                      startsCollapsed: true});
+    this.sectionRegular = new Structural.Views.ConversationsSection({
+      name: "My Conversations",
+      user: this.user
+    });
+    this.sectionArchived = new Structural.Views.ConversationsSection({
+      name: "Archive",
+      user: this.user,
+      startsCollapsed: true
+    });
+    this.sectionShared = new Structural.Views.ConversationsSection({
+      name: "Shared Conversations",
+      user: this.user
+    });
+    this.sectionPinned = new Structural.Views.ConversationsSection({
+      name: "Pinned Conversation",
+      user: this.user
+    });
   },
   _wireEvents: function(collection) {
     collection.on('add', this.reRender, this);
@@ -22,6 +34,7 @@ Structural.Views.Conversations = Support.CompositeView.extend({
     collection.on('remove', this.reRender, this);
     collection.on('conversationsLoadedForFirstTime', this.viewTargetOrFirstConversation, this);
     collection.on('archived', this.reRender, this);
+    collection.on('pinned', this.reRender, this);
   },
   render: function() {
     this.$el.empty();
@@ -30,10 +43,20 @@ Structural.Views.Conversations = Support.CompositeView.extend({
 
     var regularConversations = [];
     var archivedConversations = [];
+    var sharedConversations = [];
+    var pinnedConversations = [];
 
     this.collection.forEach(function(conversation) {
-      if (conversation.get('archived')) {
+      var participant_ids = conversation.get('participants')
+                                        .map(function(p) { return p.id });
+      var includes_user = _.contains(participant_ids, this.user.id);
+
+      if (conversation.get('pinned')) {
+        pinnedConversations.push(conversation);
+      } else if (conversation.get('archived')) {
         archivedConversations.push(conversation);
+      } else if (!includes_user) {
+        sharedConversations.push(conversation);
       } else {
         regularConversations.push(conversation);
       }
@@ -41,9 +64,19 @@ Structural.Views.Conversations = Support.CompositeView.extend({
 
     // We only want to show a section if there are actually archived conversations.
 
+    if (pinnedConversations.length > 0) {
+      this.sectionPinned.collection = pinnedConversations;
+      this.appendChild(this.sectionPinned);
+    }
+
     if (regularConversations.length > 0) {
       this.sectionRegular.collection = regularConversations;
       this.appendChild(this.sectionRegular);
+    }
+
+    if (sharedConversations.length > 0) {
+      this.sectionShared.collection = sharedConversations;
+      this.appendChild(this.sectionShared);
     }
 
     if (archivedConversations.length > 0) {
