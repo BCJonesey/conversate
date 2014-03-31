@@ -10,23 +10,53 @@ Structural.Views.Conversations = Support.CompositeView.extend({
 
     Structural.on('changeFolder', this.changeFolder, this);
 
-    this.sectionRegular = new Structural.Views.ConversationsSection({
-      name: "My Conversations",
-      user: this.user
-    });
-    this.sectionArchived = new Structural.Views.ConversationsSection({
-      name: "Archive",
-      user: this.user,
-      startsCollapsed: true
-    });
-    this.sectionShared = new Structural.Views.ConversationsSection({
-      name: "Shared Conversations",
-      user: this.user
-    });
-    this.sectionPinned = new Structural.Views.ConversationsSection({
-      name: "Pinned Conversations",
-      user: this.user
-    });
+    // The viewOrder property is the order that sections show up in the DOM,
+    // the priority property controls the order that we check the section
+    // predicates.  The first section (in priority order) whose predicate is
+    // true for a conversation is the section we put that convo in.
+    this.sections = [
+      new Structural.Views.ConversationsSection({
+        name: 'My Conversations',
+        user: this.user,
+        viewOrder: 2,
+        priority: 4,
+        predicate: function(conversation) {
+          return true;
+        }
+      }),
+      new Structural.Views.ConversationsSection({
+        name: 'Archive',
+        startsCollapsed: true,
+        user: this.user,
+        viewOrder: 4,
+        priority: 2,
+        predicate: function(conversation) {
+          return conversation.get('archived');
+        }
+      }),
+      new Structural.Views.ConversationsSection({
+        name: 'Shared Conversations',
+        user: this.user,
+        viewOrder: 3,
+        priority: 3,
+        predicate: function(conversation) {
+          var participantIds = conversation.get('participants')
+                                           .map(function(p) { return p.id; });
+          // The 'this' reference here is actually the conversation section,
+          // which also has a user property.
+          return !_.contains(participantIds, this.user.id);
+        }
+      }),
+      new Structural.Views.ConversationsSection({
+        name: 'Pinned Conversations',
+        user: this.user,
+        viewOrder: 1,
+        priority: 1,
+        predicate: function(conversation) {
+          return conversation.get('pinned');
+        }
+      })
+    ];
   },
   _wireEvents: function(collection) {
     collection.on('add', this.reRender, this);
@@ -39,52 +69,24 @@ Structural.Views.Conversations = Support.CompositeView.extend({
   render: function() {
     this.$el.empty();
 
-    // TODO: We can almost certainly make this much more generic for n sections.
-
-    var regularConversations = [];
-    var archivedConversations = [];
-    var sharedConversations = [];
-    var pinnedConversations = [];
+    _.forEach(this.sections, function(section) {
+      section.collection = [];
+    });
 
     this.collection.forEach(function(conversation) {
-      var participant_ids = conversation.get('participants')
-                                        .map(function(p) { return p.id });
-      var includes_user = _.contains(participant_ids, this.user.id);
-
-      if (conversation.get('pinned')) {
-        pinnedConversations.push(conversation);
-      } else if (conversation.get('archived')) {
-        archivedConversations.push(conversation);
-      } else if (!includes_user) {
-        sharedConversations.push(conversation);
-      } else {
-        regularConversations.push(conversation);
-      }
+      var section = this.sectionForConversation(conversation);
+      section.collection.push(conversation);
     }, this);
 
-    // We only want to show a section if there are actually archived conversations.
-
-    if (pinnedConversations.length > 0) {
-      this.sectionPinned.collection = pinnedConversations;
-      this.appendChild(this.sectionPinned);
-    }
-
-    if (regularConversations.length > 0) {
-      this.sectionRegular.collection = regularConversations;
-      this.appendChild(this.sectionRegular);
-    }
-
-    if (sharedConversations.length > 0) {
-      this.sectionShared.collection = sharedConversations;
-      this.appendChild(this.sectionShared);
-    }
-
-    if (archivedConversations.length > 0) {
-      this.sectionArchived.collection = archivedConversations;
-      this.appendChild(this.sectionArchived);
-    }
+    var sortedSections = _.sortBy(this.sections, 'viewOrder');
+    _.each(sortedSections, this.renderSection, this);
 
     return this;
+  },
+  renderSection: function(section) {
+    if (section.collection.length > 0) {
+      this.appendChild(section);
+    }
   },
   reRender: function() {
     this.children.forEach(function(child) {
@@ -92,6 +94,14 @@ Structural.Views.Conversations = Support.CompositeView.extend({
     });
     this.render();
   },
+
+  sectionForConversation: function(conversation) {
+    var sortedSections = _.sortBy(this.sections, 'priority');
+    return _.find(sortedSections, function(section) {
+      return section.predicate(conversation);
+    });
+  },
+
   changeFolder: function(folder) {
     this.collection.off(null, null, this);
     this.collection = folder.conversations;

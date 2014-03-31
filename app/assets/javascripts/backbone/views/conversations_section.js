@@ -6,6 +6,9 @@ Structural.Views.ConversationsSection = Support.CompositeView.extend({
     this.collection = []
     this.startsCollapsed = options.startsCollapsed;
     this.user = options.user;
+    this.predicate = options.predicate;
+    this.priority = options.priority;
+    this.viewOrder = options.viewOrder;
   },
   template: JST.template('conversations/conversations-section'),
   render: function() {
