@@ -6,8 +6,8 @@ class Api::V0::FilesController < ApplicationController
     conversation = current_user.conversations.find_by_id(params[:conversation])
     head :status => 404 and return unless conversation
 
-  	upload_file = params[:files][0]
-  	file = Upload.create!(:upload => upload_file)
+    upload_file = params[:files][0]
+    file = Upload.create!(:upload => upload_file)
     url = file.upload.url
     file_name = file.upload_file_name
 
