@@ -14,8 +14,12 @@ class Api::V0::FilesController < ApplicationController
     # We need to stick in an action just to show this upload.
 
     action = conversation.actions.new(:type => 'upload_message',
-                                  :data => '{"fileUrl":"' + url + '","notes":"' + params[:notes] + '","fileName":"' + file_name + '"}',
-                                  :user_id => current_user.id)
+                                      :data => {
+                                        'fileUrl' => url,
+                                        'notes' => params[:notes],
+                                        'fileName' => file_name
+                                      }.to_json,
+                                      :user_id => current_user.id)
 
     action.save
     conversation.handle(action)
