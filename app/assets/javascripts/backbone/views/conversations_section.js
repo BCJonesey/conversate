@@ -3,6 +3,7 @@ Structural.Views.ConversationsSection = Support.CompositeView.extend({
   initialize: function(options) {
     options = options || {};
     this.name = options.name;
+    this.adjective = options.adjective;
     this.collection = []
     this.startsCollapsed = options.startsCollapsed;
     this.user = options.user;
@@ -19,7 +20,11 @@ Structural.Views.ConversationsSection = Support.CompositeView.extend({
         // new conversation or something comes in.
         this.startsCollapsed = false;
       }
-      this.$el.html(this.template({name: this.name}));
+      this.$el.html(this.template({
+        name: this.name,
+        adjective: this.adjective,
+        collection: this.collection
+      }));
       this.delegateEvents();
       this.renderConversations(this.collection);
     }

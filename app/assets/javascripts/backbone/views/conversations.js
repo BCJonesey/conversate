@@ -2,6 +2,7 @@
 
 Structural.Views.Conversations = Support.CompositeView.extend({
   className: 'cnv-list ui-scrollable',
+  emptyTemplate: JST.template('conversations/empty_collection'),
   initialize: function(options) {
     options = options || {};
     this.user = options.user;
@@ -26,6 +27,7 @@ Structural.Views.Conversations = Support.CompositeView.extend({
       }),
       new Structural.Views.ConversationsSection({
         name: 'Archive',
+        adjective: 'Archived',
         startsCollapsed: true,
         user: this.user,
         viewOrder: 4,
@@ -36,6 +38,7 @@ Structural.Views.Conversations = Support.CompositeView.extend({
       }),
       new Structural.Views.ConversationsSection({
         name: 'Shared Conversations',
+        adjective: 'Shared',
         user: this.user,
         viewOrder: 3,
         priority: 3,
@@ -49,6 +52,7 @@ Structural.Views.Conversations = Support.CompositeView.extend({
       }),
       new Structural.Views.ConversationsSection({
         name: 'Pinned Conversations',
+        adjective: 'Pinned',
         user: this.user,
         viewOrder: 1,
         priority: 1,
@@ -74,6 +78,14 @@ Structural.Views.Conversations = Support.CompositeView.extend({
       section.collection = [];
     });
 
+    if (this.collection.length == 0) {
+      this.$el.html(this.emptyTemplate());
+    } else {
+      this.renderConversations();
+    }
+    return this;
+  },
+  renderConversations: function() {
     this.collection.forEach(function(conversation) {
       var section = this.sectionForConversation(conversation);
       section.collection.push(conversation);
