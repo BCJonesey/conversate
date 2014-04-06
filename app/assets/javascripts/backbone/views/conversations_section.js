@@ -34,6 +34,7 @@ Structural.Views.ConversationsSection = Support.CompositeView.extend({
       model: conversation,
       user: this.user
     });
+
     this.appendChild(view);
   },
   toggleCollapsed: function(e){
@@ -51,5 +52,9 @@ Structural.Views.ConversationsSection = Support.CompositeView.extend({
     conversations.forEach(function(conversation) {
       self.renderConversation(conversation);
     });
+  },
+
+  getFocusedView: function(conversation) {
+    return this.childrenByModelClientId[conversation.cid];
   }
 });

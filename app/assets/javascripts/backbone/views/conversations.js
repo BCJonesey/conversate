@@ -148,6 +148,29 @@ Structural.Views.Conversations = Support.CompositeView.extend({
     if (section.isCollapsed()) {
       section.toggleCollapsed();
     }
+
+    var focusedView = section.getFocusedView(conversation);
+    if (focusedView) {
+      this.scrollToTargetAtEarliestOpportunity(focusedView);
+    }
+  },
+
+  scrollToTargetAtEarliestOpportunity: function(focusedView) {
+    var self = this;
+    var scrollUnlessAtTarget = function() {
+      if (self.targetIsOnScreen(focusedView)) {
+        clearInterval(self._scrollerIntervalId);
+      } else {
+        self.scrollTargetOnScreen(focusedView);
+      }
+    }
+    scrollUnlessAtTarget();
+
+    if (this._scrollerIntervalId) {
+      clearInterval(this._scrollerIntervalId);
+    }
+    this._scrollerIntervalId = setInterval(scrollUnlessAtTarget, 300);
   }
 });
 
+_.extend(Structural.Views.Conversations.prototype, Support.Scroller);
