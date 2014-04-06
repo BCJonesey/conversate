@@ -1,16 +1,18 @@
-Structural.Components.Toaster = function() {
+Structural.Components.FileUploadToaster = function() {
 
   // Once we have more toast types, make this more generic.
   var getViewDescription = function(toastDescription) {
     var viewDescription = {};
     viewDescription.state = toastDescription.state;
-    if (toastDescription.type === 'backbone:sync') {
-      viewDescription.promptRefresh = true;
-      viewDescription.promptClose = false;
+    viewDescription.promptRefresh = false;
+    viewDescription.promptClose = true;
+    if (toastDescription.type === 'fileupload:filesize') {
       viewDescription.message =
-        "Water Cooler has lost its connection to the server.  Please refresh" +
-        " the page to reconnect.  (Messages written without a server " +
-        "connection may be lost.)";
+        "Water Cooler cannot upload files greater than 10 megabytes in size.";
+    } else {
+      viewDescription.message =
+        "Water Cooler encountered an error uploading this file, and the upload has not gone through. " +
+        "Please try again shortly.";
     }
 
     return viewDescription;

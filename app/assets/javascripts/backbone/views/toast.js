@@ -22,7 +22,8 @@ Structural.Views.Toast = Backbone.View.extend({
     return this;
   },
   events: {
-    'click .toast-refresh': 'refresh'
+    'click .toast-refresh-btn': 'refresh',
+    'click .toast-close-btn': 'hide'
   },
 
   show: function(description) {

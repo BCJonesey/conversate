@@ -94,6 +94,18 @@ ActiveRecord::Schema.define(version: 20140330183239) do
   add_index "reading_logs", ["user_id", "conversation_id", "most_recent_viewed"], name: "quick_find_most_reent_viewed", using: :btree
   add_index "reading_logs", ["user_id"], name: "index_reading_logs_on_user_id", using: :btree
 
+<<<<<<< HEAD
+=======
+  create_table "uploads", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "upload_file_name"
+    t.string   "upload_content_type"
+    t.integer  "upload_file_size"
+    t.datetime "upload_updated_at"
+  end
+
+>>>>>>> master
   create_table "users", force: true do |t|
     t.string   "email",                                           null: false
     t.string   "crypted_password"

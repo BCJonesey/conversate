@@ -58,6 +58,16 @@ group :production do
 end
 
 
+# File upload plugin that is pretty. https://github.com/semaperepelitsa/jquery.fileupload-rails
+gem 'jquery.fileupload-rails'
+
+# For making S3 calls. We might eventually have to move the logic out to the client, but let's do the simplest
+# thing first.
+gem 'aws-sdk'
+
+# Also for dealing with files.
+gem 'paperclip'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

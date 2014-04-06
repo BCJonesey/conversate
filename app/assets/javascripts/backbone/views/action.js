@@ -3,7 +3,8 @@ Structural.Views.Action = Support.CompositeView.extend({
     var classes = 'act btn-faint-container';
 
     if (this.model.get('type') == 'message' ||
-        this.model.get('type') == 'email_message') {
+        this.model.get('type') == 'email_message' ||
+        this.model.get('type') == 'upload_message') {
       classes += ' act-msg';
     } else {
       classes += ' act-sys';
@@ -44,6 +45,7 @@ Structural.Views.Action = Support.CompositeView.extend({
   templates: {
     'message': JST.template('actions/message'),
     'email_message': JST.template('actions/email_message'),
+    'upload_message': JST.template('actions/upload_message'),
     'update_users': JST.template('actions/update_users'),
     'update_viewers': JST.template('actions/update_viewers'),
     'retitle': JST.template('actions/retitle'),
