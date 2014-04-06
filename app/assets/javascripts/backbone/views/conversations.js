@@ -16,15 +16,18 @@ Structural.Views.Conversations = Support.CompositeView.extend({
     });
     this.sectionArchived = new Structural.Views.ConversationsSection({
       name: "Archive",
+      adjective: 'Archived',
       user: this.user,
       startsCollapsed: true
     });
     this.sectionShared = new Structural.Views.ConversationsSection({
       name: "Shared Conversations",
+      adjective: 'Shared',
       user: this.user
     });
     this.sectionPinned = new Structural.Views.ConversationsSection({
       name: "Pinned Conversations",
+      adjective: 'Pinned',
       user: this.user
     });
   },
