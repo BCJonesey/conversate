@@ -21,19 +21,19 @@ ActiveRecord::Schema.define(version: 20140330183239) do
     t.integer  "user_id"
     t.string   "type"
     t.json     "data"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.tsvector "search_vector"
   end
 
   add_index "actions", ["conversation_id", "created_at"], name: "index_actions_on_conversation_id_and_created_at", using: :btree
-  add_index "actions", ["conversation_id"], name: "index_events_on_conversation_id", using: :btree
+  add_index "actions", ["conversation_id"], name: "index_actions_on_conversation_id", using: :btree
   add_index "actions", ["search_vector"], name: "index_actions_on_search_vector", using: :gin
 
   create_table "conversations", force: true do |t|
     t.string   "title"
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.datetime "most_recent_event", default: '2000-01-01 01:07:19'
   end
 
@@ -42,20 +42,20 @@ ActiveRecord::Schema.define(version: 20140330183239) do
     t.integer "folder_id"
   end
 
-  add_index "conversations_folders", ["conversation_id", "folder_id"], name: "index_conversations_topics_on_conversation_id_and_topic_id", using: :btree
-  add_index "conversations_folders", ["folder_id", "conversation_id"], name: "index_conversations_topics_on_topic_id_and_conversation_id", using: :btree
+  add_index "conversations_folders", ["conversation_id", "folder_id"], name: "index_conversations_folders_on_conversation_id_and_folder_id", using: :btree
+  add_index "conversations_folders", ["folder_id", "conversation_id"], name: "index_conversations_folders_on_folder_id_and_conversation_id", using: :btree
 
   create_table "email_queues", force: true do |t|
     t.integer  "action_id"
     t.integer  "external_user_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "folders", force: true do |t|
     t.string   "name",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "email"
   end
 
@@ -66,8 +66,8 @@ ActiveRecord::Schema.define(version: 20140330183239) do
     t.integer "user_id"
   end
 
-  add_index "folders_users", ["folder_id", "user_id"], name: "index_topics_users_on_topic_id_and_user_id", using: :btree
-  add_index "folders_users", ["user_id", "folder_id"], name: "index_topics_users_on_user_id_and_topic_id", using: :btree
+  add_index "folders_users", ["folder_id", "user_id"], name: "index_folders_users_on_folder_id_and_user_id", using: :btree
+  add_index "folders_users", ["user_id", "folder_id"], name: "index_folders_users_on_user_id_and_folder_id", using: :btree
 
   create_table "group_participations", force: true do |t|
     t.integer "group_id"
@@ -77,8 +77,8 @@ ActiveRecord::Schema.define(version: 20140330183239) do
 
   create_table "groups", force: true do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "reading_logs", force: true do |t|
@@ -94,8 +94,6 @@ ActiveRecord::Schema.define(version: 20140330183239) do
   add_index "reading_logs", ["user_id", "conversation_id", "most_recent_viewed"], name: "quick_find_most_reent_viewed", using: :btree
   add_index "reading_logs", ["user_id"], name: "index_reading_logs_on_user_id", using: :btree
 
-<<<<<<< HEAD
-=======
   create_table "uploads", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -105,13 +103,12 @@ ActiveRecord::Schema.define(version: 20140330183239) do
     t.datetime "upload_updated_at"
   end
 
->>>>>>> master
   create_table "users", force: true do |t|
     t.string   "email",                                           null: false
     t.string   "crypted_password"
     t.string   "salt"
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "remember_me_token"
     t.datetime "remember_me_token_expires_at"
     t.string   "full_name"
