@@ -54,3 +54,16 @@ export AWS_SECRET_ACCESS_KEY=dsfkjhsfkfsdhkjsdfkjhdsafdshjk
 
 You can also set `S3_BUCKET_NAME` to set the bucket to something specific that you have permissions for, but the defaults are sane for
 your environment.
+
+# Redirection
+We redirect users to specific URL's as a part of the rack middleware. Since we have many different possible configurations between dev, kuhltank, and production, we're using a simple string-based scheme. Example:
+```
+export WATERCOOLER_SITE_PROTOCOL="http://"
+export WATERCOOLER_SITE_URL="localcooler.io"
+export WATERCOOLER_SITE_PORT=":3000"
+
+```
+This would result in redirection to `http://localcooler.io:3000` whenever a request hits the server. By default, on a development
+environment, the redirection is to `localhost:3000`. If you need a different protocol/host/port, you can either set up environment
+variables in your ~/.bashrc or specify the piece you wish to change when running the server, like
+`WATERCOOLER_SITE_URL=192.168.1.101 rails s`.
