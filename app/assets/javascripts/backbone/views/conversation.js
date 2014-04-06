@@ -13,14 +13,8 @@ Structural.Views.Conversation = Support.CompositeView.extend({
     }
 
     var unread = this.model.unreadCount();
-    if (unread == 0) {
-      // No class for no unread.
-    } else if (unread <= 5) {
-      classes += ' cnv-unread-count-few';
-    } else if (unread <= 25) {
-      classes += ' cnv-unread-count-some';
-    } else {
-      classes += ' cnv-unread-count-many';
+    if (unread > 0) {
+      classes += ' cnv-unread';
     }
 
     return classes;

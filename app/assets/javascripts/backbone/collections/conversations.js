@@ -40,11 +40,12 @@ Structural.Collections.Conversations = Backbone.Collection.extend({
     var conversation = this.get(id);
     if(conversation) {
       conversation.focus();
+      this.trigger('focus:conversation', conversation);
     }
 
     this.filter(function(cnv) { return cnv.id != id; }).forEach(function(cnv) {
       cnv.unfocus();
-    })
+    });
   },
 
   // The folder associated with these conversations is being viewed.
