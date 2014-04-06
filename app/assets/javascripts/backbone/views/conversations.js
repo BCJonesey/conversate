@@ -2,6 +2,7 @@
 
 Structural.Views.Conversations = Support.CompositeView.extend({
   className: 'cnv-list ui-scrollable',
+  emptyTemplate: JST.template('conversations/empty_collection'),
   initialize: function(options) {
     options = options || {};
     this.user = options.user;
@@ -16,15 +17,18 @@ Structural.Views.Conversations = Support.CompositeView.extend({
     });
     this.sectionArchived = new Structural.Views.ConversationsSection({
       name: "Archive",
+      adjective: 'Archived',
       user: this.user,
       startsCollapsed: true
     });
     this.sectionShared = new Structural.Views.ConversationsSection({
       name: "Shared Conversations",
+      adjective: 'Shared',
       user: this.user
     });
     this.sectionPinned = new Structural.Views.ConversationsSection({
-      name: "Pinned Conversation",
+      name: "Pinned Conversations",
+      adjective: 'Pinned',
       user: this.user
     });
   },
@@ -38,7 +42,14 @@ Structural.Views.Conversations = Support.CompositeView.extend({
   },
   render: function() {
     this.$el.empty();
-
+    if (this.collection.length == 0) {
+      this.$el.html(this.emptyTemplate());
+    } else {
+      this.renderConversations();
+    }
+    return this;
+  },
+  renderConversations: function() {
     // TODO: We can almost certainly make this much more generic for n sections.
 
     var regularConversations = [];
@@ -83,8 +94,6 @@ Structural.Views.Conversations = Support.CompositeView.extend({
       this.sectionArchived.collection = archivedConversations;
       this.appendChild(this.sectionArchived);
     }
-
-    return this;
   },
   reRender: function() {
     this.children.forEach(function(child) {

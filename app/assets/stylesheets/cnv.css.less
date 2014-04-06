@@ -135,6 +135,7 @@
 }
 
 @cnv-participant-gray:#AAA;
+@cnv-border-color:#CCC;
 @cnv-title-color:#444444;
 
 .cnv-title{
@@ -154,4 +155,20 @@
 
 .cnv-participant + .cnv-participant:before{
   content:",  ";
+}
+
+.cnv-placeholder{
+  text-align: center;
+  padding-top:2.0rem;
+  .empty-icon{
+    font-size:3.0rem;
+    color:#CCC;
+  }
+  .empty-text{
+
+    font-size:0.85rem;
+    padding:1.0rem;
+    color:#AAA;
+  }
+
 }
