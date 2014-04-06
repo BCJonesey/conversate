@@ -355,3 +355,14 @@ background-image: linear-gradient(to right, @left-color 0%, @right-color @right-
     display:none !important;
   }
 }
+
+/* Search Results */
+
+@act-search-highlight-color: #FFFFC8;
+
+.search-result-highlight(){
+  background-color: @act-search-highlight-color;
+  border:1px solid mix(black, @act-search-highlight-color,5%);
+  border-bottom:1px solid mix(black, @act-search-highlight-color,8%);
+  border-radius: 0.125rem;
+}
