@@ -11,6 +11,24 @@ Support.Scroller = {
     return belowScrollbar <= 10;
   },
 
+  // Sometimes we want to scroll to a thing before the DOM is totally there and
+  // such.  This is a nasty hack over that.
+  scrollToTargetAtEarliestOpportunity: function(target) {
+    var self = this;
+    var scrollUnlessAtTarget = function() {
+      if (self.targetIsOnScreen(target)) {
+        clearInterval(self._scrollerIntervalId);
+      } else {
+        self.scrollTargetOnScreen(target);
+      }
+    };
+    scrollUnlessAtTarget();
+
+    if (this._scrollerIntervalId) {
+      clearInterval(this._scrollerIntervalId);
+    }
+    this._scrollerIntervalId = setInterval(scrollUnlessAtTarget, 300);
+  },
   scrollTargetOnScreen: function(target) {
     if (target) {
       var targetTop = target.$el.position().top;

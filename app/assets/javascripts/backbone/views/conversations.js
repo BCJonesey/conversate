@@ -153,23 +153,6 @@ Structural.Views.Conversations = Support.CompositeView.extend({
     if (focusedView) {
       this.scrollToTargetAtEarliestOpportunity(focusedView);
     }
-  },
-
-  scrollToTargetAtEarliestOpportunity: function(focusedView) {
-    var self = this;
-    var scrollUnlessAtTarget = function() {
-      if (self.targetIsOnScreen(focusedView)) {
-        clearInterval(self._scrollerIntervalId);
-      } else {
-        self.scrollTargetOnScreen(focusedView);
-      }
-    }
-    scrollUnlessAtTarget();
-
-    if (this._scrollerIntervalId) {
-      clearInterval(this._scrollerIntervalId);
-    }
-    this._scrollerIntervalId = setInterval(scrollUnlessAtTarget, 300);
   }
 });
 
