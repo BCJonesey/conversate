@@ -22,7 +22,7 @@ Support.CollectionFetcher = function(options) {
       return self._intervals[index];
     }
 
-    self._requestFinished = function(collection, response, opts) {
+    self._requestFinished = function(success, collection, response, opts) {
       if (self._lastResponse === opts.xhr.responseText) {
         self._fetchesSinceChange += 1;
       } else {
@@ -31,6 +31,13 @@ Support.CollectionFetcher = function(options) {
 
       self._lastResponse = opts.xhr.responseText;
       self._waitingOnRequest = false;
+
+      if (success && options.success) {
+        options.success(collection, response, opts);
+      } else if (options.error) {
+        options.error(collection, response, opts);
+      }
+
       setTimeout(self._fetchHandler, self._nextTimeoutLength());
     };
 
@@ -44,8 +51,8 @@ Support.CollectionFetcher = function(options) {
         self._collection.fetch({
           remove: false,
           cache: false,
-          success: self._requestFinished,
-          error: self._requestFinished
+          success: self._requestFinished.bind(self, true),
+          error: self._requestFinished.bind(self, false)
         });
         self._waitingOnRequest = true;
       }
