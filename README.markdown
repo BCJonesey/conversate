@@ -67,3 +67,4 @@ This would result in redirection to `http://localcooler.io:3000` whenever a requ
 environment, the redirection is to `localhost:3000`. If you need a different protocol/host/port, you can either set up environment
 variables in your ~/.bashrc or specify the piece you wish to change when running the server, like
 `WATERCOOLER_SITE_URL=192.168.1.101 rails s`.
+balh
