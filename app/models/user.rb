@@ -62,7 +62,7 @@ class User < ActiveRecord::Base
     conversations.find(self.reading_logs.where("unread_count >0").pluck(:conversation_id))
   end
 
-  # Public: returns the users this user knows.
+  # Public: returns the users this user knows. we are depricating this..........
   def address_book
     users = self.contact_lists.map { |g| g.users }.flatten.uniq - [self]
 
@@ -78,6 +78,10 @@ class User < ActiveRecord::Base
     return address_book
   end
 
+  def known_contacts
+    self.contact_lists.map{ |g| g.contacts }.flatten
+  end
+
   def group_admin?(group)
     self.group_participations.where(group_id: group.id).first.group_admin
   end
@@ -91,11 +95,6 @@ class User < ActiveRecord::Base
   # This avoids us writing out passwords, salts, etc. when rendering json.
   def as_json(options={})
     json = super(:only => [:email, :full_name, :id, :site_admin, :external])
-    if options[:include_address_book]
-      json['address_book'] = address_book
-      json['contact_lists'] = self.contact_lists
-    end
-
     if options[:conversation]
       json['most_recent_viewed'] = options[:conversation].most_recent_viewed_for_user(self).msec
     end

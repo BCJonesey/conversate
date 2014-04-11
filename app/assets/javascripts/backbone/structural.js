@@ -25,6 +25,7 @@ var Structural = new (Support.CompositeView.extend({
     // like the current folders, the current folder, the current conversation,
     // and the current user.
     this._user = new Structural.Models.User(bootstrap.user);
+    this._contactLists = new Structural.Collections.ContactLists();
     this._folders = new Structural.Collections.Folders(bootstrap.folders, {
       // This is the only Folders collection that we want to handle events.
       isMainCollection: true
@@ -60,7 +61,6 @@ var Structural = new (Support.CompositeView.extend({
       actions: this._conversation.actions,
       participants: this._participants,
       conversation: this._conversation,
-      addressBook: this._user.get('address_book'),
       user: this._user
     });
     this._faviconAndTitle = new Structural.Views.FaviconAndTitle({
