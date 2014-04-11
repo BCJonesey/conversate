@@ -1,0 +1,121 @@
+@import 'variables.css.less';
+@import 'mixins.css.less';
+
+
+.act-file-upload-input-style(){
+  background-color: white;
+  border:@border-2;
+}
+
+.popover.act-file-upload-popover{
+  @media (min-width:@bp-1){
+    width:20rem;
+  }
+}
+
+
+.popover .popover-content.act-file-upload-content{
+  background-color: @bg-1;
+  .act-file-upload-input{
+    .act-file-upload-input-style();
+    width:100%;
+    padding:0.25rem;
+    color:#666;
+    margin-bottom:0.5rem;
+    outline:none;
+  }
+  .act-file-upload-notes{
+    .act-file-upload-input-style();
+    height:4rem;
+    overflow-y: auto;
+    resize:none;
+  }
+}
+
+.act-file-upload{
+  .act-file-upload-button-uploading{
+    display:none;
+  }
+  &.is-uploading{
+    .act-file-upload-button-regular{
+      display:none;
+    }
+    .act-file-upload-button-uploading{display:inline;}
+    .act-file-upload-notes-label,
+    .act-file-upload-notes{display:none;}
+    .act-file-upload-picker{background-color: #F8F8F8;}
+  }
+}
+
+.act-file-upload-picker{
+  padding:0.35rem 0.35rem;
+  height:2.2rem;
+  background-color: white;
+  border:@border-2;
+  .ellipsis();
+  position: relative;
+  overflow: hidden;
+  .act-file-upload-picker-link{
+    font-size: 0.8rem;
+    line-height: 1.0;
+    height:auto;
+    margin-left:0;
+  }
+  .act-file-upload-filename{
+    line-height: 1.0;
+    color:#888;
+    font-size:0.8rem;
+    vertical-align: middle;
+    padding-left:0.2rem;
+  }
+  input.act-file-upload-actual-input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    opacity: 0;
+    -ms-filter: 'alpha(opacity=0)';
+    font-size: 200px;
+    direction: ltr;
+    cursor: pointer;
+  }
+  .act-file-upload-filename {
+      display: none;
+    }
+  &.file-picked{
+    .act-file-upload-picker-link {
+      display: none;
+    }
+    .act-file-upload-filename {
+      display: inline;
+    }
+  }
+}
+
+.act-progress-bar{
+  display:none;
+  border:@border-2;
+  background-color: mix(#80A0C0,white,15%);
+  margin:1.0rem 0;
+  height:2.0rem;
+  padding:0.1rem;
+  .bar{
+
+    height:100%;
+    background-color: #80A0C0;
+  }
+}
+
+.act-file-upload.is-uploading .act-progress-bar{
+  display:block;
+}
+
+
+.act-file-upload-toolbar{
+  text-align: right;
+}
+
+.fileinput-button {
+  position: relative;
+  overflow: hidden;
+}

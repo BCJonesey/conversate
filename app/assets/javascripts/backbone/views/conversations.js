@@ -2,6 +2,7 @@
 
 Structural.Views.Conversations = Support.CompositeView.extend({
   className: 'cnv-list ui-scrollable',
+  emptyTemplate: JST.template('conversations/empty_collection'),
   initialize: function(options) {
     options = options || {};
     this.user = options.user;
@@ -10,11 +11,56 @@ Structural.Views.Conversations = Support.CompositeView.extend({
 
     Structural.on('changeFolder', this.changeFolder, this);
 
-    this.sectionRegular = new Structural.Views.ConversationsSection({name: "My Conversations",
-                                                                     user: this.user});
-    this.sectionArchived = new Structural.Views.ConversationsSection({name: "Archive",
-                                                                      user: this.user,
-                                                                      startsCollapsed: true});
+    // The viewOrder property is the order that sections show up in the DOM,
+    // the priority property controls the order that we check the section
+    // predicates.  The first section (in priority order) whose predicate is
+    // true for a conversation is the section we put that convo in.
+    this.sections = [
+      new Structural.Views.ConversationsSection({
+        name: 'My Conversations',
+        user: this.user,
+        viewOrder: 2,
+        priority: 4,
+        predicate: function(conversation) {
+          return true;
+        }
+      }),
+      new Structural.Views.ConversationsSection({
+        name: 'Archive',
+        adjective: 'Archived',
+        startsCollapsed: true,
+        user: this.user,
+        viewOrder: 4,
+        priority: 2,
+        predicate: function(conversation) {
+          return conversation.get('archived');
+        }
+      }),
+      new Structural.Views.ConversationsSection({
+        name: 'Shared Conversations',
+        adjective: 'Shared',
+        user: this.user,
+        viewOrder: 3,
+        priority: 3,
+        predicate: function(conversation) {
+          var participantIds = conversation.get('participants')
+                                           .map(function(p) { return p.id; });
+          // The 'this' reference here is actually the conversation section,
+          // which also has a user property.
+          return !_.contains(participantIds, this.user.id);
+        }
+      }),
+      new Structural.Views.ConversationsSection({
+        name: 'Pinned Conversations',
+        adjective: 'Pinned',
+        user: this.user,
+        viewOrder: 1,
+        priority: 1,
+        predicate: function(conversation) {
+          return conversation.get('pinned');
+        }
+      })
+    ];
   },
   _wireEvents: function(collection) {
     collection.on('add', this.reRender, this);
@@ -22,36 +68,38 @@ Structural.Views.Conversations = Support.CompositeView.extend({
     collection.on('remove', this.reRender, this);
     collection.on('conversationsLoadedForFirstTime', this.viewTargetOrFirstConversation, this);
     collection.on('archived', this.reRender, this);
+    collection.on('pinned', this.reRender, this);
+    collection.on('focus:conversation', this.showFocusedConversation, this);
   },
   render: function() {
     this.$el.empty();
 
-    // TODO: We can almost certainly make this much more generic for n sections.
+    _.forEach(this.sections, function(section) {
+      section.collection = [];
+    });
 
-    var regularConversations = [];
-    var archivedConversations = [];
-
+    if (this.collection.length == 0) {
+      this.$el.html(this.emptyTemplate());
+    } else {
+      this.renderConversations();
+    }
+    return this;
+  },
+  renderConversations: function() {
     this.collection.forEach(function(conversation) {
-      if (conversation.get('archived')) {
-        archivedConversations.push(conversation);
-      } else {
-        regularConversations.push(conversation);
-      }
+      var section = this.sectionForConversation(conversation);
+      section.collection.push(conversation);
     }, this);
 
-    // We only want to show a section if there are actually archived conversations.
-
-    if (regularConversations.length > 0) {
-      this.sectionRegular.collection = regularConversations;
-      this.appendChild(this.sectionRegular);
-    }
-
-    if (archivedConversations.length > 0) {
-      this.sectionArchived.collection = archivedConversations;
-      this.appendChild(this.sectionArchived);
-    }
+    var sortedSections = _.sortBy(this.sections, 'viewOrder');
+    _.each(sortedSections, this.renderSection, this);
 
     return this;
+  },
+  renderSection: function(section) {
+    if (section.collection.length > 0) {
+      this.appendChild(section);
+    }
   },
   reRender: function() {
     this.children.forEach(function(child) {
@@ -59,6 +107,14 @@ Structural.Views.Conversations = Support.CompositeView.extend({
     });
     this.render();
   },
+
+  sectionForConversation: function(conversation) {
+    var sortedSections = _.sortBy(this.sections, 'priority');
+    return _.find(sortedSections, function(section) {
+      return section.predicate(conversation);
+    });
+  },
+
   changeFolder: function(folder) {
     this.collection.off(null, null, this);
     this.collection = folder.conversations;
@@ -97,6 +153,19 @@ Structural.Views.Conversations = Support.CompositeView.extend({
                                       {silentResponsiveView: true});
       conversation.focus();
     }
+  },
+
+  showFocusedConversation: function(conversation) {
+    var section = this.sectionForConversation(conversation);
+    if (section.isCollapsed()) {
+      section.toggleCollapsed();
+    }
+
+    var focusedView = section.getFocusedView(conversation);
+    if (focusedView) {
+      this.scrollToTargetAtEarliestOpportunity(focusedView);
+    }
   }
 });
 
+_.extend(Structural.Views.Conversations.prototype, Support.Scroller);

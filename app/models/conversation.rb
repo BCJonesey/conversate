@@ -253,6 +253,7 @@ class Conversation < ActiveRecord::Base
     end
 
     json[:archived] = reading_log ? reading_log.archived : false
+    json[:pinned] = reading_log ? reading_log.pinned : false
 
     return json
   end

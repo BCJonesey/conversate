@@ -31,11 +31,17 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
     'click .act-title-edit': 'toggleTitleEditor',
     'click .act-title-editor-popover .popover-close': 'toggleTitleEditor',
     'click .act-title-save': 'saveAndHide',
-    'click .act-archive-cnv': 'archiveConversation'
+    'click .act-archive-cnv': 'archiveConversation',
+    'click .act-pin-cnv': 'pinConversation'
   },
   archiveConversation: function(e) {
     e.preventDefault();
     this.conversation.toggleArchive();
+    this.render();
+  },
+  pinConversation: function(e) {
+    e.preventDefault();
+    this.conversation.togglePin();
     this.render();
   },
   retitleConversation: function() {

@@ -15,4 +15,5 @@
 //= require underscore
 //= require backbone
 //= require backbone/structural
+//= require jquery.fileupload
 //= require_tree .

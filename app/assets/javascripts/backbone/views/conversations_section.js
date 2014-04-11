@@ -3,9 +3,13 @@ Structural.Views.ConversationsSection = Support.CompositeView.extend({
   initialize: function(options) {
     options = options || {};
     this.name = options.name;
+    this.adjective = options.adjective;
     this.collection = []
     this.startsCollapsed = options.startsCollapsed;
     this.user = options.user;
+    this.predicate = options.predicate;
+    this.priority = options.priority;
+    this.viewOrder = options.viewOrder;
   },
   template: JST.template('conversations/conversations-section'),
   render: function() {
@@ -16,7 +20,11 @@ Structural.Views.ConversationsSection = Support.CompositeView.extend({
         // new conversation or something comes in.
         this.startsCollapsed = false;
       }
-      this.$el.html(this.template({name: this.name}));
+      this.$el.html(this.template({
+        name: this.name,
+        adjective: this.adjective,
+        collection: this.collection
+      }));
       this.delegateEvents();
       this.renderConversations(this.collection);
     }
@@ -31,15 +39,27 @@ Structural.Views.ConversationsSection = Support.CompositeView.extend({
       model: conversation,
       user: this.user
     });
+
     this.appendChild(view);
   },
   toggleCollapsed: function(e){
-    $(e.target).closest('.cnv-section').toggleClass('is-collapsed')
+    var targetEl = this.$el;
+    if (e) {
+      targetEl = $(e.target).closest('.cnv-section');
+    }
+    targetEl.toggleClass('is-collapsed')
+  },
+  isCollapsed: function() {
+    return this.$el.hasClass('is-collapsed');
   },
   renderConversations: function(conversations) {
     var self = this;
     conversations.forEach(function(conversation) {
       self.renderConversation(conversation);
     });
+  },
+
+  getFocusedView: function(conversation) {
+    return this.childrenByModelClientId[conversation.cid];
   }
 });

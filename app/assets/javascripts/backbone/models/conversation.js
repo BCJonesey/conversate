@@ -16,6 +16,9 @@ Structural.Models.Conversation = Backbone.Model.extend({
     this.on('change:archived', function() {
       self.trigger('archived', self);
     });
+    this.on('change:pinned', function() {
+      self.trigger('pinned', self);
+    });
 
     // We want to update our most recent viewed right away if we've been clicked.
     // TODO: Should almost certainly punt this to a controller.
@@ -43,6 +46,7 @@ Structural.Models.Conversation = Backbone.Model.extend({
   focus: function() {
     this.set('is_current', true);
     this.actions.viewActions();
+    this.collection.trigger('focus:conversation', this);
   },
   unfocus: function() {
     this.set('is_current', false);
@@ -111,8 +115,29 @@ Structural.Models.Conversation = Backbone.Model.extend({
     // Note that we don't need to trigger an archive event because the model is watching its own state.
     var self = this;
     self.set('archived', ! self.get('archived'));
+
+    if (self.get('archived') && self.get('pinned')) {
+      self.set('pinned', false);
+    }
+
     self.withCurrentUserFromSelf(function(participant) {
       participant.save({
+        archived: self.get('archived'),
+        pinned: self.get('pinned')
+      });
+    });
+  },
+  togglePin: function() {
+    var self = this;
+    self.set('pinned', !self.get('pinned'));
+
+    if (self.get('pinned') && self.get('archived')) {
+      self.set('archived', false);
+    }
+
+    self.withCurrentUserFromSelf(function(participant) {
+      participant.save({
+        pinned: self.get('pinned'),
         archived: self.get('archived')
       });
     });

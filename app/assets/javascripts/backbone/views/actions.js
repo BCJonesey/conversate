@@ -82,24 +82,6 @@ Structural.Views.Actions = Support.CompositeView.extend({
     this.clearView();
   },
 
-  // Sometimes when we want to scroll down the actions list hasn't actually been
-  // added to the DOM yet, and you can't scroll things that aren't in the DOM.
-  scrollToTargetAtEarliestOpportunity: function(focusedView) {
-    var self = this;
-    var scrollUnlessAtTarget = function() {
-      if (self.targetIsOnScreen(focusedView)) {
-        clearInterval(self._scrollerIntervalId);
-      } else {
-        self.scrollTargetOnScreen(focusedView);
-      }
-    };
-    scrollUnlessAtTarget();
-
-    if (this._scrollerIntervalId) {
-      clearInterval(this._scrollerIntervalId);
-    }
-    this._scrollerIntervalId = setInterval(scrollUnlessAtTarget, 300);
-  },
   scrollDownIfAtBottom: function() {
     if (this.isAtBottom()) {
       this.scrollToTargetAtEarliestOpportunity();

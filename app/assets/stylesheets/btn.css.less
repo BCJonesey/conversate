@@ -192,14 +192,11 @@ They are most useful for floating multiple buttons to one side.  */
 
 
 .btn-group{
-  //font-size: 0;
-  //line-height:@btn-toolbar-height;
   white-space: nowrap;
   .clearfix();
   padding:0;
   & > * {
     display:inline-block;
-    //line-height: 1.0;
     font-size:@btn-font-size;
     vertical-align: top;
   }
@@ -228,6 +225,8 @@ They are most useful for floating multiple buttons to one side.  */
   &:focus{
     position:relative;
     top:1px;
+    color:rgba(0,0,0,0.7);
+
   }
   &.disabled,
   &.disabled{
@@ -245,12 +244,10 @@ They are most useful for floating multiple buttons to one side.  */
 
   .i-text{
     display:inline-block;
-    //vertical-align: middle;
     font-size:@btn-font-size;
     line-height: 1.0;
     height:@btn-height;
     padding-top: @btn-padding-vertical;
-    //background-color:red;
   }
 
   i + .i-text{
