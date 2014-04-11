@@ -17,8 +17,8 @@
 			<div class='contact-list-select-wrap'>
 				<select class='contact-list-select'>
 					<option value='Contact Lists' disabled selected='selected'>Contact Lists...</option>
-					<% _.each(Structural._user.get('contact_lists'),function(cl) { %>
-					<option value='<%= cl.id %>'><%= cl.name %></option>
+					<% Structural._contactLists.each(function(cl) { %>
+					<option value='<%= cl.id %>'><%= cl.get("name") %></option>
 					<% }) %>
 				</select>
 				<i class='select-icon fa fa-sort'></i>

@@ -9,6 +9,6 @@ Structural.Models.Participant = Backbone.Model.extend({
     }
   },
   is_known: function(){
-    return Structural._user && Structural._user.get("address_book") && (Structural._user.id == this.id || Structural._user.get("address_book").get(this.id) !== undefined);
+    return Structural._user.knowsUser(this.id);
   }
 });

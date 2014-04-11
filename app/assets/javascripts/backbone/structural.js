@@ -26,6 +26,7 @@ var Structural = new (Support.CompositeView.extend({
     // and the current user.
     this._user = new Structural.Models.User(bootstrap.user);
     this._contactLists = new Structural.Collections.ContactLists();
+    this._contactLists.fetch({success: function(){Structural._user.rebuildAddressBook();}});
     this._folders = new Structural.Collections.Folders(bootstrap.folders, {
       // This is the only Folders collection that we want to handle events.
       isMainCollection: true
@@ -82,6 +83,7 @@ var Structural = new (Support.CompositeView.extend({
     this.actionsFetcher = new Support.ActionsFetcher(this._conversation.actions);
     this.folderFetcher = new Support.ConversationsFetcher(this._folder.conversations);
     this.foldersFetcher = new Support.FoldersFetcher(this._folders);
+    this.contactsFetcher = new Support.ContactsFetcher(this._contactLists);
 
     // Focus initial folder.
     this._folders.focus(this._folder.id);
