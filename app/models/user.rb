@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
     return false if user.save == false
 
     # External users have no purpose other than to receive mail.
-    user.send_me_mail = true if user.external
+    user.email_setting = 'always' if user.external
 
     new_folder = Folder.new
     new_folder.name = 'Inbox'
