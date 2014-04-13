@@ -15,4 +15,16 @@ namespace :migrate do
       end
     end
   end
+
+  namespace :email do
+    desc 'Converts send_me_mail into email_setting'
+    task send_me_mail_to_email_setting: [:environment] do
+      User.all.each do |user|
+        if user.send_me_mail
+          user.email_setting = 'always'
+          user.save
+        end
+      end
+    end
+  end
 end
