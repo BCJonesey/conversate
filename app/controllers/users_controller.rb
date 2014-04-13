@@ -18,9 +18,8 @@ class UsersController < ApplicationController
     elsif params[:full_name]
       @user.full_name = params[:full_name]
       @edit_status = @user.save ? :success : :failure
-    elsif params[:email_settings_form]
-      send_me_mail_checked = !params[:send_me_mail].nil?
-      @user.send_me_mail = send_me_mail_checked
+    elsif params[:email_setting]
+      @user.email_setting = params[:email_setting]
       @edit_status = @user.save ? :success : :failure
     end
 
