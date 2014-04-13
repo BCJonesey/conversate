@@ -17,7 +17,7 @@
         <span class='toolbar-title'>Change your name</span>
       </div>
     </div>
-    <%= form_tag users_path, :method => 'put' do %>
+    <%= form_tag profile_path, :method => 'put' do %>
       <div class="form">
         <%= label_tag :full_name %>
         <%= text_field_tag :full_name, @user.full_name %>
@@ -34,7 +34,7 @@
         <span class='toolbar-title'>Change your password</span>
       </div>
     </div>
-    <%= form_tag users_path, :method => 'put' do %>
+    <%= form_tag profile_path, :method => 'put' do %>
       <div class="form">
         <%= label_tag :password do %>Original password<% end %>
         <%= password_field_tag :password %>
@@ -55,7 +55,7 @@
         <span class='toolbar-title'>Send email to <%= @user.email %></span>
       </div>
     </div>
-    <%= form_tag users_path, :method => 'put' do %>
+    <%= form_tag profile_path, :method => 'put' do %>
       <div class="form">
         <%= radio_button_tag :email_setting, 'always', @user.email_setting == 'always' %>
         <%= label_tag :email_setting_always, 'Every time someone writes a message in one of my conversations' %>

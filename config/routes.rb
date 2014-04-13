@@ -7,7 +7,6 @@ Conversate::Application.routes.draw do
   get '/about' => 'marketing#about', :as => 'about'
 
   get 'admin' => 'admin#index', :as => 'admin'
-  resource :users, :only => [:update]
   resource :session, :only => [:create]
   get 'session/logout' => 'sessions#destroy', :as => 'destroy_sessions'
 
@@ -19,6 +18,7 @@ Conversate::Application.routes.draw do
   get 'ux/testbed/:view' => 'testbed#test_view', :as  =>'test_view'
 
   get 'profile' => 'users#edit'
+  put 'profile' => 'users#update'
 
   get 'people' => 'groups#index'
   put 'people' => 'groups#edit'
