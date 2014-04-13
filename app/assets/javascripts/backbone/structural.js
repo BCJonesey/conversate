@@ -116,9 +116,7 @@ var Structural = new (Support.CompositeView.extend({
     this._watercooler.moveConversationMode();
   },
   newConversationMode: function() {
-    var view = new Structural.Views.NewConversation({
-      addressBook: this._user.get('address_book')
-    });
+    var view = new Structural.Views.NewConversation();
     this.appendChild(view);
   },
 

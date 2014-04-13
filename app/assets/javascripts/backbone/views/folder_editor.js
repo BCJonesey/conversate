@@ -3,13 +3,12 @@ Structural.Views.FolderEditor = Support.CompositeView.extend({
   template: JST.template('folders/editor'),
   initialize: function(options) {
     options = options || {};
-    this._addressBook = options.addressBook;
     this._user = options.user;
   },
   render: function() {
     if (this._folder) {
       this._autocomplete = new Structural.Views.Autocomplete({
-        dictionary: this._addressBook,
+        dictionary: Structural._user.addressBook(),
         blacklist: this._folder.get('users').clone(),
         addSelectionToBlacklist: true,
         property: 'name'
@@ -20,6 +19,7 @@ Structural.Views.FolderEditor = Support.CompositeView.extend({
 
       this._autocomplete.on('select', this._removableList.add, this._removableList);
       this._removableList.on('remove', this._autocomplete.removeFromBlacklist, this._autocomplete);
+      this.listenTo(Structural._user, 'addressBookUpdated', this._updateAddressBook);
 
       this.$el.html(this.template({folder: this._folder, user: this._user}));
       this.insertChildAfter(this._removableList, this.$('label[for="folder-participants"]'));
@@ -90,5 +90,8 @@ Structural.Views.FolderEditor = Support.CompositeView.extend({
       Structural.deleteFolder(this._folder);
       this.$('.modal-background').addClass('hidden');
     }
+  },
+  _updateAddressBook: function(){
+    this._autocomplete.replaceDictionary(Structural._user.addressBook());
   }
 });

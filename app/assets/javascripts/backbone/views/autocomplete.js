@@ -32,10 +32,13 @@ Structural.Views.Autocomplete = Support.CompositeView.extend({
     this._blacklist.remove(item);
     this._optionsView.removeFromBlacklist(item);
   },
-
   replaceBlacklist: function(blacklist) {
     this._blacklist = blacklist.clone();
     this._optionsView.replaceBlacklist(this._blacklist);
+  },
+  replaceDictionary: function(dictionary) {
+    this._dictionary = dictionary;
+    this._optionsView.replaceCollection(this._dictionary);
   },
 
   cancel: function() {

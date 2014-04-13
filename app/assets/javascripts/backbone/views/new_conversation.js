@@ -4,13 +4,12 @@ Structural.Views.NewConversation = Support.CompositeView.extend({
   initialize: function(options) {
     options = options || {};
     this.participants = new Structural.Collections.Participants([]);
-    this.addressBook = options.addressBook;
 
     Structural.on('clickAnywhere', this.leaveParticipantEditingModeOnClickOff, this);
   },
   render: function() {
     this.autocomplete = new Structural.Views.Autocomplete({
-      dictionary: this.addressBook,
+      dictionary: Structural._user.addressBook(),
       blacklist: this.participants.clone(),
       addSelectionToBlacklist: true,
       property: 'name'
@@ -22,6 +21,7 @@ Structural.Views.NewConversation = Support.CompositeView.extend({
 
     this.autocomplete.on('select', this.removableList.add, this.removableList);
     this.removableList.on('remove', this.autocomplete.removeFromBlacklist, this.autocomplete);
+    this.listenTo(Structural._user, 'addressBookUpdated', this._updateAddressBook);
 
     this.$el.html(this.template());
     this.appendChildTo(this.removableList, this.$('.new-cnv-participants'));
@@ -97,4 +97,7 @@ Structural.Views.NewConversation = Support.CompositeView.extend({
   leaveParticipantEditingModeOnTab: function(e) {
     this.leaveParticipantEditingMode();
   },
+  _updateAddressBook: function(){
+    this.autocomplete.replaceDictionary(Structural._user.addressBook());
+  }
 });

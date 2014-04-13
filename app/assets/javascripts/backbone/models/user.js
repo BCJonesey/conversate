@@ -16,21 +16,22 @@ Structural.Models.User = Backbone.Model.extend({
     return attrs;
   },
   addressBook: function(){
-    return Structural._user.get("addressBook") === undefined ? [] : Structural._user.get("addressBook");
+    return this.get("addressBook") === undefined ? [] : this.get("addressBook");
   },
   knowsUser: function(user_id){
-    return _.indexOf(this.addressBook(), user_id) > -1;
+    return this.addressBook().hasOwnProperty(user_id);
   },
   rebuildAddressBook: function(){
     this.set("addressBook",this.buildAddressBook());
     this.trigger('addressBookUpdated');
   },
   buildAddressBook: function(){
-    if(Structural._contactLists.length == 0)
+    var retVal = {};
+    if(Structural._contactLists.length != 0)
     {
-      return [];
+      Structural._contactLists.each(function(cl){cl.get("contacts").each(function(x){retVal[x.get("user_id")] = {id: x.get("user_id"), name: x.get("user").get("name")}})});
     }
-    return _.flatten(Structural._contactLists.map(function(cl){return cl.get("contacts").map(function(x){return x.get("user_id")})}));
+    return retVal;
   }
 });
 
