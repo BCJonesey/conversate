@@ -59,8 +59,10 @@
       <div class="form">
         <%= radio_button_tag :email_setting, 'always', @user.email_setting == 'always' %>
         <%= label_tag :email_setting_always, 'Every time someone writes a message in one of my conversations' %>
+        <br />
         <%= radio_button_tag :email_setting, 'daily', @user.email_setting == 'daily' %>
         <%= label_tag :email_setting_daily, 'A daily summary of activity on my conversations' %>
+        <br />
         <%= radio_button_tag :email_setting, 'never', @user.email_setting == 'never' %>
         <%= label_tag :email_setting_never, 'Never.  Never ever.' %>
       </div>
