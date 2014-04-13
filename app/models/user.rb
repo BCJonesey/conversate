@@ -20,6 +20,9 @@ class User < ActiveRecord::Base
   validates_presence_of :password, :on => :create, :unless => :external
   validates_presence_of :email
   validates_uniqueness_of :email, :case_sensitive => false
+  validates :email_setting, :inclusion => {
+    :in => %w(always never daily)
+  }
 
   def self.build(params)
     user = User.new(params)
