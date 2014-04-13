@@ -12,6 +12,7 @@ Structural.Views.RemovableParticipant = Support.CompositeView.extend({
   },
   template: JST.template('participants/removable_participant'),
   initialize: function(options) {
+    this.listenTo(Structural._user, 'addressBookUpdated', this.reClass);
   },
   render: function() {
     this.$el.html(this.template({participant: this.model}));
@@ -44,5 +45,8 @@ Structural.Views.RemovableParticipant = Support.CompositeView.extend({
   },
   addContactSuccess: function(){
     this.hideAddContactForm();
+  },
+  reClass: function() {
+    this.el.className = this.className();
   }
 });

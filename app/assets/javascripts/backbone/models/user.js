@@ -23,6 +23,7 @@ Structural.Models.User = Backbone.Model.extend({
   },
   rebuildAddressBook: function(){
     this.set("addressBook",this.buildAddressBook());
+    this.trigger('addressBookUpdated');
   },
   buildAddressBook: function(){
     if(Structural._contactLists.length == 0)
