@@ -38,7 +38,7 @@ Structural.Views.Autocomplete = Support.CompositeView.extend({
   },
   replaceDictionary: function(dictionary) {
     this._dictionary = dictionary;
-    this._optionsView.replaceCollection(this._dictionary);
+    this._optionsView.collection = this._dictionary;
   },
 
   cancel: function() {
