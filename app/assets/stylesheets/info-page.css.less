@@ -167,3 +167,52 @@
   color: #666
 }
 
+.sign-up-style(){
+  padding:0.75rem 1.0rem;
+  font-size:1.0rem;
+  outline:none;
+  margin:0;
+  color:#666;
+  border:1px solid #CCC;
+
+}
+
+.beta-signup-form{
+  padding:0.5rem 1.0rem;
+  .clearfix();
+  border:@border-1;
+  background-color: @bg-1;
+  margin:1.0rem;
+  text-align: center;
+
+  .sign-up-inputs{
+    padding:0.5rem;
+  }
+  .submit-right{
+    float:right;
+    input{
+      .sign-up-style();
+      border-top-right-radius: 0.25rem;
+      border-bottom-right-radius: 0.25rem;
+      border-left:none;
+      cursor:pointer;
+      background-color: #EEE;
+      transition:background-color 0.5s;
+      &:hover{
+        background-color: #DEF;
+      }
+    }
+  }
+  .fill-width{
+    overflow:hidden;
+    width:auto;
+    input{
+      .sign-up-style();
+      width:100%;
+      border-top-left-radius: 0.25rem;
+      border-bottom-left-radius: 0.25rem;
+      margin:0;
+      line-height: 1.0;
+    }
+  }
+}
