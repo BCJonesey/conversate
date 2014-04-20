@@ -100,16 +100,12 @@
   text-align: center;
 }
 
-.pricing-main {
-  height: 10em;
-}
-
 .pricing-block {
   display: inline-block;
   border: 1px solid;
   vertical-align: top;
   height: 100%;
-  width: 12em;
+  //width: 12em;
 }
 
 .pricing-block-title {
@@ -128,3 +124,27 @@
     }
   }
 }
+
+.pricing-table{
+  text-align: center;
+  display:table;
+  width:100%;
+  table-layout: fixed;
+
+  .pricing-main{
+    display:table-row;
+    width:auto;
+  }
+  .pricing-cell{
+    display:table-cell;
+    width:auto;
+    margin:0.5rem;
+    padding:0.5rem;
+    .pricing-cell-content{
+      border:@border-1;
+      background-color: #FAFAFA;
+      border-radius:0.25rem;
+    }
+  }
+}
+
