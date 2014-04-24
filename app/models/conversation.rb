@@ -260,7 +260,7 @@ class Conversation < ActiveRecord::Base
 
   def send_email_for(message)
     self.users.where(send_me_mail: true).each do |user|
-      unless user == message.user && message.type == 'email_message'
+      unless user == message.user
         EmailQueue.push(message, user)
       end
     end
