@@ -21,6 +21,13 @@ class Conversation < ActiveRecord::Base
     "cnv-#{self.id}@#{subdomain}watercooler.io"
   end
 
+  def url
+    slug = self.title.downcase
+                     .gsub(/[ _]/, '-')
+                     .gsub(/[^a-zA-Z0-9-]/, '')
+    "http://watercooler.io/conversation/#{slug}/#{self.id}"
+  end
+
   def set_title(title, user)
     if title
       self.title = title
