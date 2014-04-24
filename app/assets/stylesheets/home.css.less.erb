@@ -7,7 +7,11 @@
   background-color: white !important;
   background-image: url('<%= path_to_image('hero-shaded.jpeg') %>');
   background-size: cover;
-  background-position: 0px -200px;
+  //background-position: 0px -200px;
+  @media(min-width:@bp-2){
+    background-position: center top;
+    background-size: 100% auto;
+  }
 
   .modal-window{
     box-shadow:none;

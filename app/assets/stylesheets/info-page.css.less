@@ -1,6 +1,13 @@
 @import "variables.css.less";
 @import "mixins.css.less";
 
+.home-main.main{
+  padding:0;
+  @media(min-width:@bp-1){
+    padding:1rem;
+  }
+}
+
 .info-page-wrapper{
   position: absolute;
   top:0;
@@ -118,21 +125,32 @@
 
 .jumbo-tron{
   background-color: transparent;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-top:0.5rem;
+  margin-bottom:0.5rem;
+
+  @media(min-width:@bp-1){
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
 
   h1 {
-    font-size: 63px;
+    font-size: 30px;
     font-family: lato;
     color: white;
     margin-bottom: 25px;
     text-align: center;
+    @media(min-width:@bp-1){
+      font-size: 63px;
+    }
   }
   h2 {
-    font-size: 25px;
+    font-size: 16px;
     font-family: lato;
     color: white;
     text-align: center;
+    @media(min-width:@bp-1){
+      font-size: 25px;
+    }
   }
   .beta-signup-form {
     color: white !important;
@@ -187,41 +205,76 @@
   color: #333;
 
   .sign-up-inputs{
+    .clearfix();
     padding:0.5rem;
   }
-  .submit-right{
-    float:right;
-    input{
-      .sign-up-style();
-      border: none;
-      margin-top: 1px;
-      border-top-right-radius: 4.5px;
-      border-bottom-right-radius: 4.5px;
-      cursor:pointer;
-      background-color: #e03e49;
-      color: white;
-      &:hover{
-        background-color: #f04e59;
-      }
-    }
-  }
-  .fill-width{
-    overflow:hidden;
-    width:auto;
-    input{
-      .sign-up-style();
-      width:100%;
-      border-top-left-radius: 0.25rem;
-      border-bottom-left-radius: 0.25rem;
+
+  @signup-radius:0.3rem;
+  @button-width:10rem;
+
+  .input-wrapper{
+    margin:0.5rem;
+    @media(min-width:@bp-1){
       margin:0;
-      line-height: 1.0;
+      margin-right:@button-width;
     }
   }
+  .beta-signup-input{
+    .sign-up-style();
+
+    border-radius: @signup-radius;
+    margin:0;
+    line-height: 1.0;
+    width:100%;
+    &:focus{
+      box-shadow:inset 0 0 3px rgba(0,128,255,0.2);
+      border-color:#2080DD;
+    }
+    @media(min-width:@bp-1){
+      border-right:none;
+      margin:0;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      float:left;
+    }
+  }
+
+
+
+  .beta-signup-submit{
+    .sign-up-style();
+    border-color:rgba(0,0,0,0.1);
+    cursor:pointer;
+    background-color: #2080DD;
+    color: white;
+    border-radius: @signup-radius;
+    &:hover{
+      background-color: #3090DD;
+    }
+    @media(min-width:@bp-1){
+      border-right:none;
+      margin:0;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      width:@button-width;
+      display:inline-block;
+      float:right;
+    }
+  }
+
+
+
+  @media(min-width:@bp-1)
+
+
 }
 
 .info-main-description-explain {
   border: none !important;
-
+  padding:0;
+  ul{
+    padding:0;
+  }
   li {
     list-style: none;
     margin-bottom: 3rem;
@@ -245,5 +298,8 @@
       margin-right: 0;
       margin-left: 4%;
     }
+  }
+  @media(min-width:@bp-1){
+    padding:0.75rem;
   }
 }
