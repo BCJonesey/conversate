@@ -50,29 +50,27 @@
       </div>
     <% end %>
 
-    <% if @user.site_admin %>
-      <div class='btn-toolbar'>
-        <div class='btn-group pull-left'>
-          <span class='toolbar-title'>Change your email settings</span>
+    <div class='btn-toolbar'>
+      <div class='btn-group pull-left'>
+        <span class='toolbar-title'>Change your email settings</span>
+      </div>
+    </div>
+    <%= form_tag users_path, :method => 'put' do %>
+      <div class="form">
+        <%= check_box_tag :send_me_mail, 'yes', @user.send_me_mail %>
+        <%= label_tag :send_me_mail %>
+        <%# HTML is the worst, part umpty-billion:  If a checkbox is not
+            checked, it won't be sent to the server at all.  Hence, we need
+            a dummy value to be able to check if the form we're submitting
+            is the email form, which will let us correctly interpret the
+            absence of other checkboxes in this form. %>
+        <%= hidden_field_tag :email_settings_form, true %>
+      </div>
+      <div class="btn-toolbar-below">
+        <div class="btn-group pull-right">
+          <%= submit_tag 'Update', :class => 'btn btn-primary' %>
         </div>
       </div>
-      <%= form_tag users_path, :method => 'put' do %>
-        <div class="form">
-          <%= check_box_tag :send_me_mail, 'yes', @user.send_me_mail %>
-          <%= label_tag :send_me_mail %>
-          <%# HTML is the worst, part umpty-billion:  If a checkbox is not
-              checked, it won't be sent to the server at all.  Hence, we need
-              a dummy value to be able to check if the form we're submitting
-              is the email form, which will let us correctly interpret the
-              absence of other checkboxes in this form. %>
-          <%= hidden_field_tag :email_settings_form, true %>
-        </div>
-        <div class="btn-toolbar-below">
-          <div class="btn-group pull-right">
-            <%= submit_tag 'Update', :class => 'btn btn-primary' %>
-          </div>
-        </div>
-      <% end %>
     <% end %>
 
   </div>
