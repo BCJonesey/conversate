@@ -68,6 +68,10 @@ gem 'aws-sdk'
 # Also for dealing with files.
 gem 'paperclip'
 
+# For cacheing sanely.
+gem 'memcachier'
+gem 'dalli'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
