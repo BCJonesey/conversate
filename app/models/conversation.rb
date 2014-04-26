@@ -21,6 +21,13 @@ class Conversation < ActiveRecord::Base
     "cnv-#{self.id}@#{subdomain}watercooler.io"
   end
 
+  def url
+    slug = self.title.downcase
+                     .gsub(/[ _]/, '-')
+                     .gsub(/[^a-zA-Z0-9-]/, '')
+    "http://watercooler.io/conversation/#{slug}/#{self.id}"
+  end
+
   def set_title(title, user)
     if title
       self.title = title
@@ -260,7 +267,7 @@ class Conversation < ActiveRecord::Base
 
   def send_email_for(message)
     self.users.where(send_me_mail: true).each do |user|
-      unless user == message.user && message.type == 'email_message'
+      unless user == message.user
         EmailQueue.push(message, user)
       end
     end

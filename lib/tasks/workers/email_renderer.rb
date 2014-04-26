@@ -69,7 +69,8 @@ class EmailRenderer
   end
 
   def render_layout(content, format)
-    render_template(format, 'layout', {:content => content})
+    render_template(format, 'layout', {:content => content,
+                                       :conversation => @conversation})
   end
 
   def render_template(format, template, data)
