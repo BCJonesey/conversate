@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_many :group_participations
   has_many :groups, :through => :group_participations
   has_many :contacts
-  has_many :contact_lists, :through => :contacts 
+  has_many :contact_lists, :through => :contacts
   has_and_belongs_to_many :folders
   belongs_to :default_folder, class_name: "Folder", foreign_key: "default_folder_id"
 
@@ -60,22 +60,6 @@ class User < ActiveRecord::Base
 
   def unread_conversations
     conversations.find(self.reading_logs.where("unread_count >0").pluck(:conversation_id))
-  end
-
-  # Public: returns the users this user knows. we are depricating this..........
-  def address_book
-    users = self.contact_lists.map { |g| g.users }.flatten.uniq - [self]
-
-    address_book = Array.new
-    users.map do |user|
-      addressee = Hash.new
-      addressee['id'] = user.id
-      addressee['full_name'] = user.full_name
-      addressee['email'] = user.email
-      addressee['external'] = user.external
-      address_book.push(addressee)
-    end
-    return address_book
   end
 
   def known_contacts

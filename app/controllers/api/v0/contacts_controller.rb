@@ -19,7 +19,7 @@ class Api::V0::ContactsController < ApplicationController
 
     contact.user_id = params[:user_id]
 
-    if contact.save!
+    if contact.save
       render :json => contact.to_json, :status => 201
     else
       render :status => 500

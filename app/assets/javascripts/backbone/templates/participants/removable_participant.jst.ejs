@@ -1,32 +1,33 @@
 <div class='removable-participant-info clearfix'>
-	<%= participant.escape('name') %>
-	<span class="act-add-contact-toggle">(add)</span>
-	<span class="remove-participant">
-		<i class="fa fa-times"></i></span>
-	</div>
+  <%= participant.escape('name') %>
+  <span class="act-add-contact-toggle">(add)</span>
+  <span class="remove-participant">
+    <i class="fa fa-times"></i>
+  </span>
+</div>
 
 
-	<div class="act-add-contact-form clearfix hidden">
-		<div class='form'>
-			<div class='help-text'> Add <%= participant.get('email') %> <br/> to a contact list.</div>
-			<div class='error-text hidden'>Shit went wrong</div>
-			<label>Name</label>
-			<input type='text' value='<%= participant.escape('name') %>'/>
+<div class="act-add-contact-form clearfix hidden">
+  <div class='form'>
+    <div class='help-text'> Add <%= participant.escape('email') %> <br/> to a contact list.</div>
+    <div class='error-text hidden'>Something went wrong</div>
+    <label>Name</label>
+    <input type='text' value='<%= participant.escape('name') %>'/>
 
-			<label >Contact List</label>
-			<div class='contact-list-select-wrap'>
-				<select class='contact-list-select'>
-					<option value='Contact Lists' disabled selected='selected'>Contact Lists...</option>
-					<% Structural._contactLists.each(function(cl) { %>
-					<option value='<%= cl.id %>'><%= cl.get("name") %></option>
-					<% }) %>
-				</select>
-				<i class='select-icon fa fa-sort'></i>
-			</div>
+    <label >Contact List</label>
+    <div class='contact-list-select-wrap'>
+      <select class='contact-list-select'>
+        <option value='Contact Lists' disabled selected='selected'>Contact Lists...</option>
+        <% Structural._contactLists.each(function(cl) { %>
+        <option value='<%= cl.id %>'><%= cl.escape("name") %></option>
+        <% }) %>
+      </select>
+      <i class='select-icon fa fa-sort'></i>
+    </div>
 
-			<div class='act-add-contact-form-actions clearfix'>
-				<a href='#' class='btn pull-left btn-cancel'>Cancel</a>
-				<a href='#' class='btn-primary pull-right btn-save'>Save</a>
-			</div>
-		</div>
-	</div>
+    <div class='act-add-contact-form-actions clearfix'>
+      <a href='#' class='btn pull-left btn-cancel'>Cancel</a>
+      <a href='#' class='btn-primary pull-right btn-save'>Save</a>
+    </div>
+  </div>
+</div>

@@ -25,7 +25,7 @@ Structural.Views.RemovableParticipant = Support.CompositeView.extend({
     'click .act-add-contact-toggle': 'showAddContactForm'
   },
   removeParticipant: function(e) {
-  	this.trigger("removeParticipant", this.model);
+    this.trigger("removeParticipant", this.model);
   },
   showAddContactForm: function(e){
     this.$el.find('.act-add-contact-form').removeClass('hidden');
@@ -35,7 +35,10 @@ Structural.Views.RemovableParticipant = Support.CompositeView.extend({
     this.$el.find('.act-add-contact-form').addClass('hidden');
   },
   addContact: function(e){
-     var contact = new Structural.Models.Contact({contact_list_id:this.$el.find(".contact-list-select").val(), user_id:this.model.id});
+     var contact = new Structural.Models.Contact({
+      contact_list_id:this.$el.find(".contact-list-select").val(),
+      user_id:this.model.id
+    });
      this.$el.find('.error-text').addClass('hidden');
      var self = this;
      contact.save(null,{error: function(){self.addContactError()},success:function(){self.addContactSuccess()}});

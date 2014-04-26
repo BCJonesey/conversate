@@ -8,8 +8,6 @@ Structural.Models.User = Backbone.Model.extend({
       }
     }
     this.inflateExtend(this.attributes);
-    this.contactLists = new Structural.Collections.ContactLists();
-    this.contactsFetcher = new Support.ContactsFetcher(this.contactLists);
   },
 
   inflateAttributes: function(attrs) {
@@ -29,7 +27,14 @@ Structural.Models.User = Backbone.Model.extend({
     var retVal = {};
     if(Structural._contactLists.length != 0)
     {
-      Structural._contactLists.each(function(cl){cl.get("contacts").each(function(x){retVal[x.get("user_id")] = {id: x.get("user_id"), name: x.get("user").get("name")}})});
+      Structural._contactLists.each(function(cl){
+        cl.get("contacts").each(function(contact){
+          retVal[contact.get("user_id")] = {
+            id: contact.get("user_id"),
+            name: contact.escape("user").escape("name")
+          }
+        })
+      });
     }
     return retVal;
   }
