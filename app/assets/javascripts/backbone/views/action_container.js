@@ -18,7 +18,6 @@ Structural.Views.ActionContainer = Support.CompositeView.extend({
     this.conversation = options.conversation;
     this.participants = options.participants;
     this.actions = options.actions;
-    this.addressBook = options.addressBook;
     this.user = options.user;
     this.folders = options.folders;
 
@@ -28,7 +27,6 @@ Structural.Views.ActionContainer = Support.CompositeView.extend({
     });
     this.participantsView = new Structural.Views.Participants({
       participants: this.participants,
-      addressBook: this.addressBook,
       userId: this.user.id
     });
     this.actionsView = new Structural.Views.Actions({collection: this.actions});

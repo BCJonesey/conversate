@@ -36,6 +36,8 @@
   }
 }
 
+// Don't use .ui-scrollable as a less mixin.
+// There is specific javascript that acts on that class being present in the DOM for scrollable items.
 
 .ui-scrollable{
   -webkit-overflow-scrolling:touch;
@@ -47,5 +49,21 @@
   min-height: 100.5% !important;
 }
 
-// Don't use .ui-scrollable as a less mixin.
-// There is specific javascript that acts on that class being present in the DOM for scrollable items.
+// Basic Utility Classes
+
+.hidden {
+    display:none !important;
+}
+
+.clearfix{
+  .clearfix-mixin();
+}
+
+.pull-right {
+  float: right;
+}
+
+.pull-left {
+  float: left;
+}
+

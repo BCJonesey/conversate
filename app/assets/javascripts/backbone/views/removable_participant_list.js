@@ -4,20 +4,14 @@ Structural.Views.RemovableParticipantList = Support.CompositeView.extend({
   template: JST.template('participants/removable_list'),
   initialize: function(options) {
     this.addAtEnd = options.addAtEnd || false;
+    this.collection.on('remove', this.render, this);
   },
   render: function() {
-    this.$el.html(this.template({participants: this.collection}));
+    this.collection.forEach(this.renderParticipant, this);
   },
-  events: {
-    'click .remove-participant': 'removeParticipant'
-  },
-
-  removeParticipant: function(e) {
-    var target = $(e.target).closest('.removable-participant');
-    var index = target.prevAll().length;
-    var model = this.collection.at(index);
-    this.trigger('remove', model);
-    this.collection.remove(model);
+  removeParticipant: function(participant) {
+    this.trigger('remove', participant);
+    this.collection.remove(participant);
     this.render();
   },
   add: function(model) {
@@ -29,7 +23,11 @@ Structural.Views.RemovableParticipantList = Support.CompositeView.extend({
     this.collection = list.clone();
     this.render();
   },
-
+  renderParticipant: function(participant) {
+    var view = new Structural.Views.RemovableParticipant({model: participant});
+    view.on("removeParticipant", this.removeParticipant, this)
+    this.appendChild(view);
+  },
   participants: function() {
     return this.collection.clone();
   }

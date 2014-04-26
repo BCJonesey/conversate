@@ -6,7 +6,6 @@ Structural.Views.Folders = Support.CompositeView.extend({
     var self = this;
     options = options || {};
 
-    this.addressBook = options.addressBook;
     this.user = options.user;
 
     this.collection.on('add', this.renderFolder, this);
@@ -26,7 +25,6 @@ Structural.Views.Folders = Support.CompositeView.extend({
   },
   render: function() {
     this._folderEditor = new Structural.Views.FolderEditor({
-      addressBook: this.addressBook,
       user: this.user
     });
     this.appendChild(this._folderEditor);

@@ -4,7 +4,6 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
   initialize: function(options) {
     options = options || {};
     this.participants = options.participants;
-    this.addressBook = options.addressBook;
 
     Structural.on('clickAnywhere', this.saveAndCloseIfClickOff, this);
     Structural.on('changeConversation', this.changeConversation, this);
@@ -14,7 +13,7 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
     this.$el.html(this.template());
 
     this.autocomplete = new Structural.Views.Autocomplete({
-      dictionary: this.addressBook,
+      dictionary: Structural._user.addressBook(),
       blacklist: this.participants.clone(),
       addSelectionToBlacklist: true,
       property: 'name'
@@ -25,6 +24,7 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
 
     this.autocomplete.on('select', this.removableList.add, this.removableList);
     this.removableList.on('remove', this.autocomplete.removeFromBlacklist, this.autocomplete);
+    this.listenTo(Structural._user, 'addressBookUpdated', this._updateAddressBook);
 
     this.renderChildInto(this.autocomplete, this.$('.act-participants-editor-autocomplete'));
     this.renderChildInto(this.removableList, this.$('.act-participants-editor-list'));
@@ -73,7 +73,9 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
   clearConversation: function() {
     this._replaceParticipants(new Structural.Collections.Participants([]));
   },
-
+  _updateAddressBook: function(){
+    this.autocomplete.replaceDictionary(Structural._user.addressBook());
+  },
   _isOpen: function() {
     return !this.$('.act-participants-editor-popover').hasClass('hidden');
   },
