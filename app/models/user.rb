@@ -7,7 +7,6 @@ class User < ActiveRecord::Base
   has_many :group_participations
   has_many :groups, :through => :group_participations
   has_many :contacts
-  has_many :contact_lists, :through => :contacts
   has_and_belongs_to_many :folders
   belongs_to :default_folder, class_name: "Folder", foreign_key: "default_folder_id"
 
@@ -26,6 +25,12 @@ class User < ActiveRecord::Base
   def self.build(params)
     user = User.new(params)
     return false if user.save == false
+
+    new_contact_list = ContactList.new
+
+    new_contact_list.name = "My Contact List"
+    new_contact_list.save
+    user.default_contact_list_id = new_contact_list.id
 
     # External users have no purpose other than to receive mail.
     user.send_me_mail = true if user.external
@@ -74,6 +79,14 @@ class User < ActiveRecord::Base
     if (conversation.folders.to_set & self.folders.to_set).empty?
       conversation.folders << self.default_folder
     end
+  end
+
+  def contact_lists
+    self.default_contact_list ? [] : [self.default_contact_list]
+  end
+
+  def default_contact_list
+    ContactList.find(self.default_contact_list_id)
   end
 
   # This avoids us writing out passwords, salts, etc. when rendering json.
