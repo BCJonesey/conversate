@@ -1,6 +1,6 @@
 <% if action.removed.empty? && action.added.count == 1 && action.added[0]['id'] == action.user.id %>
 <%= action.user.name %> joined the thread
-<% if action.added.empty? && action.removed.count == 1 && action.removed[0]['id'] == action.user.id %>
+<% elsif action.added.empty? && action.removed.count == 1 && action.removed[0]['id'] == action.user.id %>
 <%= action.user.name %> left the thread
 <% elsif !action.added.empty? && action.removed.empty? %>
 <%= action.user.name %> added <%= action.added.map {|p| p['name']}.join(', ') %> to the thread
