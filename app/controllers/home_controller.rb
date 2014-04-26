@@ -18,7 +18,8 @@ class HomeController < ApplicationController
   end
 
   def beta_signup
-    flash[:signed_up] = true
+    signup = BetaSignup.new(email: params[:email])
+    flash[:signed_up] = signup.save
     render :index, layout: 'application_rails'
   end
 end
