@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140406205305) do
+ActiveRecord::Schema.define(version: 20140426162137) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,12 @@ ActiveRecord::Schema.define(version: 20140406205305) do
   add_index "actions", ["conversation_id", "created_at"], name: "index_actions_on_conversation_id_and_created_at", using: :btree
   add_index "actions", ["conversation_id"], name: "index_actions_on_conversation_id", using: :btree
   add_index "actions", ["search_vector"], name: "index_actions_on_search_vector", using: :gin
+
+  create_table "beta_signups", force: true do |t|
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "conversations", force: true do |t|
     t.string   "title"
