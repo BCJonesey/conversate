@@ -89,4 +89,7 @@ Conversate::Application.configure do
     :domain => ENV["MANDRILL_DOMAIN"], # your domain to identify your server when connecting
   }
 
+  # For production memcached access.
+  config.cache_store = :dalli_store
+
 end
