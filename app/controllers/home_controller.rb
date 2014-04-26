@@ -14,6 +14,10 @@ class HomeController < ApplicationController
         render 'structural/show' and return
       end
     end
-    render layout: "application_rails"   
+    render layout: "application_rails"
+  end
+
+  def beta_signup
+    render :index
   end
 end
