@@ -15,4 +15,23 @@ namespace :migrate do
       end
     end
   end
+  namespace :contacts do
+    desc "Crates default contact lists for all users"
+    task create_default_lists: [:environment] do
+      User.where(:default_contact_list_id => nil).each do |user|
+        new_contact_list = ContactList.new
+        new_contact_list.name = "My Contact List"
+        if new_contact_list.save
+          user.default_contact_list_id = new_contact_list.id
+          puts("User id: #{user.id} failed to save with new contact list id: #{new_contact_list.id}") unless user.save
+        else
+          puts("failed to create a contact list for user id: #{user.id}")
+        end
+      end
+    end
+    desc "Moves all group contacts into peoples default contact list"
+    task groups_to_contact_lists: [:environment] do
+      puts("did nothing")
+    end
+  end
 end

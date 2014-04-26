@@ -48,6 +48,7 @@ Structural.Views.RemovableParticipant = Support.CompositeView.extend({
   },
   addContactSuccess: function(){
     this.hideAddContactForm();
+    Structural._user.addUserToAddressBook(this.model.id,this.model.escape("name"));
   },
   reRender: function(){
     this.reClass();

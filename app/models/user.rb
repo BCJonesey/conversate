@@ -82,7 +82,7 @@ class User < ActiveRecord::Base
   end
 
   def contact_lists
-    self.default_contact_list ? [] : [self.default_contact_list]
+    self.default_contact_list ? [self.default_contact_list] : []
   end
 
   def default_contact_list
