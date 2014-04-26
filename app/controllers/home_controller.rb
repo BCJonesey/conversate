@@ -18,6 +18,7 @@ class HomeController < ApplicationController
   end
 
   def beta_signup
-    render :index
+    flash[:signed_up] = true
+    render :index, layout: 'application_rails'
   end
 end
