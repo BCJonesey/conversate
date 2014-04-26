@@ -86,7 +86,7 @@ class User < ActiveRecord::Base
   end
 
   def default_contact_list
-    ContactList.find(self.default_contact_list_id)
+    self.default_contact_list_id.nil? ? nil : ContactList.find(self.default_contact_list_id)
   end
 
   # This avoids us writing out passwords, salts, etc. when rendering json.
