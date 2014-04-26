@@ -9,8 +9,7 @@ Structural.Models.ContactList = Backbone.Model.extend({
   },
   inflateAttributes: function(attrs) {
     if (attrs.contacts) {
-      attrs.contacts = this.inflate(Structural.Collections.Contacts,
-       attrs.contacts);
+      attrs.contacts = this.inflate(Structural.Collections.Contacts,attrs.contacts);
     }
     return attrs;
   }

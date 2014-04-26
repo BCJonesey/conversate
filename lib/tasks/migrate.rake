@@ -32,7 +32,15 @@ namespace :migrate do
     desc "Moves all group contacts into peoples default contact list"
     task groups_to_contact_lists: [:environment] do
       User.all.each do |curr_user|
-        curr_user.default_contact_list.contacts << curr_user.groups.map{|g| g.users}.flatten.uniq{|user| user.id}.reject{|user| user.id == curr_user.id}.map{|user| user.contacts.build}
+        curr_user.default_contact_list.contacts << curr_user.groups.map do |g|
+          g.users
+        end.flatten.uniq do |user|
+          user.id
+        end.reject do |user|
+          user.id == curr_user.id
+        end.map do |user|
+          user.contacts.build
+        end
       end
     end
   end

@@ -24,9 +24,7 @@ Structural.Models.User = Backbone.Model.extend({
     this.trigger('addressBookUpdated');
   },
   addUserToAddressBook: function(user_id,user_name){
-    var tempAddressBook = this.addressBook();
-    tempAddressBook[user_id] = this.buildAddressBookEntry(user_id,user_name);
-    this.set("addressBook",tempAddressBook);
+    this.addressBook()[user_id] = this.buildAddressBookEntry(user_id,user_name);
     this.trigger('addressBookUpdated');
   },
   buildAddressBookEntry: function(user_id,user_name){
