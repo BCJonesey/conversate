@@ -11,15 +11,17 @@
   <div class='form'>
     <div class='help-text'> Add <%= participant.escape('email') %> <br/> to a contact list.</div>
     <div class='error-text hidden'>Something went wrong</div>
-    <label>Name</label>
-    <input type='text' value='<%= participant.escape('name') %>'/>
+    <label >Name</label>
+    <input disabled="disabled" type='text' value='<%= participant.escape('name') %>'/>
 
-    <label >Contact List</label>
-    <div class='contact-list-select-wrap'>
+    <label class="hidden" >Contact List</label>
+    <div class='hidden contact-list-select-wrap'>
       <select class='contact-list-select'>
-        <option value='Contact Lists' disabled selected='selected'>Contact Lists...</option>
+        <% if(Structural._contactLists.length > 1) { %>
+          <option value='Contact Lists' disabled selected='selected'>Contact Lists...</option>
+        <% } %>
         <% Structural._contactLists.each(function(cl) { %>
-        <option value='<%= cl.id %>'><%= cl.escape("name") %></option>
+        <option value='<%= cl.id %>' <%= Structural._contactLists.length == 1 ? "selected" : "" %>><%= cl.escape("name") %></option>
         <% }) %>
       </select>
       <i class='select-icon fa fa-sort'></i>
