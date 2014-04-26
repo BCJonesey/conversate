@@ -11,7 +11,7 @@ namespace :migrate do
           update actions
           set search_vector = to_tsvector('english', #{text})
           where id = #{action.id}
-        ")
+          ")
       end
     end
   end
@@ -31,7 +31,9 @@ namespace :migrate do
     end
     desc "Moves all group contacts into peoples default contact list"
     task groups_to_contact_lists: [:environment] do
-      puts("did nothing")
+      User.all.each do |curr_user|
+        curr_user.default_contact_list.contacts << curr_user.groups.map{|g| g.users}.flatten.uniq{|user| user.id}.reject{|user| user.id == curr_user.id}.map{|user| user.contacts.build}
+      end
     end
   end
 end
