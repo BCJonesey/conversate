@@ -19,6 +19,9 @@
   &.known-participant .act-add-contact-toggle{
     display:none;
   }
+  .participant-name{
+    .ellipsis();
+  }
 }
 
 
@@ -32,6 +35,7 @@
     position:relative;
     display:inline-block;
     border:1px solid transparent;
+    border-radius:2px;
     padding:0.15rem 0;
     background-color: @bg-1;
     font-size:0.8rem;
@@ -65,6 +69,9 @@
   .autocomplete-options{
     top:0.5rem;
   }
+  .autocomplete-input{
+    width:0;
+  }
 
   &.editing{
     .removable-participant{
@@ -85,6 +92,9 @@
       right:0.25rem;
       top:50%;
       margin-top:-0.5rem;
+    }
+    .autocomplete-input{
+      width:auto;
     }
   }
 }
