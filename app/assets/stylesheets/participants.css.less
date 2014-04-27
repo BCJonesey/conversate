@@ -38,10 +38,10 @@
     margin:0.25rem;
     margin-right:0;
     margin-left:0;
-    &:after{
+    .participant-name:after{
       content:', ';
     }
-    &:last-child:after{
+    &:last-child .participant-name:after{
       content:none;
     }
     .remove-participant{
@@ -75,7 +75,7 @@
       margin-left:0.25rem;
       margin-right:0.25rem;
       cursor:default;
-      &:after{
+       .participant-name:after{
         content:none;
       }
     }
