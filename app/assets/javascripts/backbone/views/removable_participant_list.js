@@ -7,6 +7,7 @@ Structural.Views.RemovableParticipantList = Support.CompositeView.extend({
     this.collection.on('remove', this.render, this);
   },
   render: function() {
+    this.$el.empty();
     this.collection.forEach(this.renderParticipant, this);
   },
   removeParticipant: function(participant) {
