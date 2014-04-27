@@ -19,6 +19,9 @@
   &.known-participant .act-add-contact-toggle{
     display:none;
   }
+  .participant-name{
+    .ellipsis();
+  }
 }
 
 
@@ -32,16 +35,17 @@
     position:relative;
     display:inline-block;
     border:1px solid transparent;
+    border-radius:2px;
     padding:0.15rem 0;
     background-color: @bg-1;
     font-size:0.8rem;
     margin:0.25rem;
     margin-right:0;
     margin-left:0;
-    &:after{
+    .participant-name:after{
       content:', ';
     }
-    &:last-child:after{
+    &:last-child .participant-name:after{
       content:none;
     }
     .remove-participant{
@@ -65,6 +69,9 @@
   .autocomplete-options{
     top:0.5rem;
   }
+  .autocomplete-input{
+    width:0;
+  }
 
   &.editing{
     .removable-participant{
@@ -75,7 +82,7 @@
       margin-left:0.25rem;
       margin-right:0.25rem;
       cursor:default;
-      &:after{
+       .participant-name:after{
         content:none;
       }
     }
@@ -85,6 +92,9 @@
       right:0.25rem;
       top:50%;
       margin-top:-0.5rem;
+    }
+    .autocomplete-input{
+      width:auto;
     }
   }
 }
