@@ -269,6 +269,27 @@
 
 }
 
+.beta-signin-submit{
+  .sign-up-style();
+  border-color:rgba(0,0,0,0.1);
+  cursor:pointer;
+  background-color: #2080DD;
+  color: white;
+  border-radius: 0.3rem;
+  &:hover{
+    background-color: #3090DD;
+  }
+  @media(min-width:@bp-1){
+    border-right:none;
+    margin:0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    width:10rem;
+    display:inline-block;
+    float:right;
+  }
+}
+
 .info-main-description-explain {
   border: none !important;
   padding:0;
