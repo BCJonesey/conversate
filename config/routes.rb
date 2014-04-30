@@ -26,6 +26,7 @@ Conversate::Application.routes.draw do
   post 'people' => 'groups#new_user'
 
   resources :password_resets
+  resources :account_activations, :only => [:edit, :update]
 
   namespace :api do
     namespace :v0 do

@@ -7,4 +7,18 @@ class UserMailer < ActionMailer::Base
     mail(:to => user.email,
          :subject => "Your password has been reset")
   end
+
+  def activation_needed_email(user)
+    @user = user
+    @url = edit_account_activation_url(user.activation_token)
+    mail(:to => user.email,
+         :subject => 'Welcome to Water Cooler')
+  end
+
+  def activation_success_email(user)
+    @user = user
+    @url = root_url
+    mail(:to => user.email,
+         :subject => 'Water Cooler account activated')
+  end
 end
