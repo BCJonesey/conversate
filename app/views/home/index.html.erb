@@ -1,46 +1,42 @@
 <div class="info-page-home">
+  <div class="home-main main">
 
   <%= content_for :javascript do -%>
-    $('.beta-signin-submit').click(function(e) {
-      $('.login-form').removeClass('hidden');
-      $('.beta-signin-submit').addClass('hidden');
+    $('.beta-sign-in-toggle').click(function(e) {
+      $('.beta-sign-in-form').toggleClass('hidden');
     });
   <% end -%>
 
-  <div class="login-form-btn">
-      <input type='submit' class='beta-signin-submit' value="Sign in" tabindex=2/>
-  </div>
+  <div class="main-top-toolbar">
+    <div class='main-top-toolbar-inner'>
+      <span class='beta-sign-in-toggle'>Sign in</span>
 
-  <div class="login-form hidden">
-      <div class='btn-toolbar'>
-        <span class='toolbar-title'>Sign In to Water Cooler</span>
-      </div>
+    <div class="beta-sign-in-form hidden">
       <%= form_tag session_path, :class => '' do %>
-      <div class='form modal-content'>
-        <% if flash[:alert] %>
-        <div class='login-error-message'><%= flash[:alert]%></div>
-        <% end %>
-        <% if flash[:notice] %>
-        <div class='login-notice-message'><%= flash[:notice]%></div>
-        <% end %>
-        <%= label_tag :email, 'Email' %>
-        <%= email_field_tag :email, params[:email] %>
-        <%= label_tag :password, 'Password' %>
-        <%= password_field_tag :password, nil %>
-        <%= link_to 'Reset Password', new_password_reset_path, :class => 'login-reset-link' %>
-        <%= check_box_tag :remember_me, true, false %>
-        <%= label_tag :remember_me, 'Remember me' %>
-      </div>
-      <div class='btn-toolbar-below clearfix'>
-        <div class='btn-group pull-right'>
-          <%= submit_tag 'Sign In', :class => 'btn-primary' %>
+        <div class='beta-sign-in-content'>
+          <% if flash[:alert] %>
+          <div class='login-error-message'><%= flash[:alert]%></div>
+          <% end %>
+          <% if flash[:notice] %>
+          <div class='login-notice-message'><%= flash[:notice]%></div>
+          <% end %>
+          <%= label_tag :email, 'Email' %>
+          <%= email_field_tag :email, params[:email] %>
+          <%= label_tag :password, 'Password' %>
+          <%= password_field_tag :password, nil %>
+          <%= check_box_tag :remember_me, true, false %>
+          <%= label_tag :remember_me, 'Remember me' %>
+          <%= link_to 'Reset Password', new_password_reset_path, :class => 'beta-sign-in-reset-password-link' %>
         </div>
+        <div class='beta-sign-in-toolbar-bottom'>
+          <%= submit_tag 'Sign In', :class => 'beta-sign-in-button' %>
+        </div>
+        <% end %>
       </div>
-      <% end %>
     </div>
   </div>
 
-  <div class="home-main main">
+
     <div class='info-main-description-content jumbo-tron'>
       <h1>Collaborate Your Way</h1>
       <h2>Organize your conversations the way you want.  Get your team communicating sensibly and hassle-free.</h2>
