@@ -9,7 +9,10 @@
       <div class="form modal-content">
         <% if flash[:activation_error] %>
           <div class="login-error-message">
-            There was an error activating your account.
+            <%= {
+              :password_mismatch => 'Passwords did not match.',
+              :unknown_error => 'There was an error activating your account.'
+            }[flash[:activation_error]] %>
           </div>
         <% end %>
         <%= label_tag :name, 'Name' %>

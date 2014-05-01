@@ -6,8 +6,13 @@ class AccountActivationsController < ApplicationController
   end
 
   def update
-    # TODO: Assert that password and confirmation match
     @user = User.find_by_activation_token(params[:id])
+
+    unless params[:password] == params[:password_confirmation]
+      flash[:activation_error] = :password_mismatch
+      render :edit and return
+    end
+
     @user.password = params[:password]
     @user.full_name = params[:name]
 
@@ -16,7 +21,7 @@ class AccountActivationsController < ApplicationController
       login(@user.email, params[:password])
       redirect_to root_url
     else
-      flash[:activation_error] = true
+      flash[:activation_error] = :unknown_error
       render :edit
     end
   end
