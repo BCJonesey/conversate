@@ -49,6 +49,10 @@ class Api::V0::ParticipantsController < ApplicationController
     log.archived = params.has_key?(:archived) ? params[:archived] : log.archived
     log.pinned = params.has_key?(:pinned) ? params[:pinned] : log.pinned
     log.save
+
+    # Bust the cache - the user has updated what they've seen.
+    Rails.cache.delete("/reading_log/#{user.id}-#{conversation.id}")
+
     render :json => user.to_json, :status => 204
   end
 end

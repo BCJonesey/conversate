@@ -231,7 +231,9 @@ class Conversation < ActiveRecord::Base
 
     # WARNING: Expensive call.
     user = User.includes(:folders).find_by_id(options[:user].id)
-    reading_log = user.reading_logs.where(:conversation_id => self.id).first
+    reading_log = Rails.cache.fetch("/reading_log/#{user.id}-#{self.id}") do
+      user.reading_logs.where(:conversation_id => self.id).first
+    end
     most_recent_viewed = most_recent_viewed_for_reading_log(reading_log)
 
     json[:participants] = participants;

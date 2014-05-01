@@ -16,7 +16,7 @@ namespace :migrate do
     end
   end
   namespace :contacts do
-    desc "Crates default contact lists for all users"
+    desc "Creates default contact lists for all users"
     task create_default_lists: [:environment] do
       User.where(:default_contact_list_id => nil).each do |user|
         new_contact_list = ContactList.new
