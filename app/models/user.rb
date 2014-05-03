@@ -24,6 +24,9 @@ class User < ActiveRecord::Base
   def self.build(params)
     user = User.new(params)
     return false if user.save == false
+    # Apparently save will helpfully nil out the password field and then
+    # complain that the password confirmation field doesn't match.
+    user.password_confirmation = nil
 
     # External users have no purpose other than to receive mail.
     user.send_me_mail = true if user.external
