@@ -18,6 +18,16 @@
   </div>
 
   <div class="beta-signups-table">
+    <% if flash[:promotion_status] == :success %>
+      <div class="login-status-message">
+        User promoted
+      </div>
+    <% elsif flash[:promotion_status] == :failure %>
+      <div class="login-error-message">
+        User could not be promoted
+      </div>
+    <% end %>
+
     <div class="btn-toolbar">
       <div class="btn-group">
         <span class="toolbar-title">Beta Signups</span>
