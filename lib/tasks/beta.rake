@@ -8,45 +8,14 @@ namespace :beta do
     signup = BetaSignup.find_by_email(args[:email])
     if signup
       puts "Promoting #{args[:email]} to a real user"
-
-      password = garbage_password
-      user = User.build({
-        email: args[:email],
-        password: password,
-        password_confirmation: password
-      })
+      user = signup.create_promoted_user
 
       unless user
         puts "Failed to build user for promotion."
         next
       end
 
-      support = User.find(122)
-      welcome_convo = user.default_folder.conversations.create(title: 'Hello')
-      action_params = [
-        { 'type' => 'retitle',
-          'title' => 'Hello'
-        },
-        { 'type' => 'update_users',
-          'added' => [{id: support.id, full_name: support.full_name},
-                      {id: user.id, full_name: user.full_name}],
-          'removed' => nil
-        },
-        { 'type' => 'message',
-          'text' => 'Hey this is support.  Are you supported?'
-        }
-      ]
-      action_params.each do |params|
-        action = welcome_convo.actions.create({
-          type: params['type'],
-          data: Action.data_for_params(params),
-          user_id: support.id
-        })
-        action.save
-        welcome_convo.handle(action)
-      end
-      welcome_convo.most_recent_event = welcome_convo.actions.last.created_at
-      welcome_convo.save
+      signup.create_welcome_conversation(user)
 
       signup.delete
       puts "Promotion succeeded."
