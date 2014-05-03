@@ -337,6 +337,7 @@
   max-width:@info-content-width;
   margin:0 auto;
   position: relative;
+  padding: 0 1.0rem;
 }
 
 .beta-sign-in-toggle{
@@ -352,8 +353,12 @@
   .modal-2();
   position:absolute;
   top:2rem;
-  right:0;
-  width:20rem;
+  right:1.0rem;
+  left:1.0rem;
+  @media(min-width:@bp-1){
+    width:20rem;
+    left:auto;
+  }
 }
 
 .beta-sign-in-toolbar-bottom{
