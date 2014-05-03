@@ -1,11 +1,10 @@
 @import "variables.css.less";
 @import "mixins.css.less";
+@import "modal2.css.less";
+
 
 .home-main.main{
-  padding:0;
-  @media(min-width:@bp-1){
-    padding:1rem;
-  }
+  padding:1.0rem;
 }
 
 .info-page-wrapper{
@@ -288,6 +287,27 @@
 
 }
 
+.beta-signin-submit{
+  .sign-up-style();
+  border-color:rgba(0,0,0,0.1);
+  cursor:pointer;
+  background-color: #2080DD;
+  color: white;
+  border-radius: 0.3rem;
+  &:hover{
+    background-color: #3090DD;
+  }
+  @media(min-width:@bp-1){
+    border-right:none;
+    margin:0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    width:10rem;
+    display:inline-block;
+    float:right;
+  }
+}
+
 .info-main-description-explain {
   border: none !important;
   padding:0;
@@ -321,4 +341,60 @@
   @media(min-width:@bp-1){
     padding:0.75rem;
   }
+}
+
+
+.main-top-toolbar{
+  position: absolute;
+  top:0;
+  left:0;
+  right:0;
+}
+
+.main-top-toolbar-inner{
+  .clearfix();
+  max-width:@info-content-width;
+  margin:0 auto;
+  position: relative;
+  padding: 0 1.0rem;
+}
+
+.beta-sign-in-toggle{
+  float:right;
+  padding:0.25rem 0.5rem;
+  color:white;
+  cursor: pointer;
+}
+
+
+
+.beta-sign-in-form{
+  .modal-2();
+  position:absolute;
+  top:2rem;
+  right:1.0rem;
+  left:1.0rem;
+  @media(min-width:@bp-1){
+    width:20rem;
+    left:auto;
+  }
+}
+
+.beta-sign-in-toolbar-bottom{
+  .modal-2-toolbar();
+  .clearfix();
+}
+
+.beta-sign-in-content{
+  .modal-2-content();
+  .clearfix();
+}
+
+.beta-sign-in-reset-password-link{
+  padding:0.25rem;
+  float:right;
+}
+
+.beta-sign-in-button{
+  .modal-2-button();
 }
