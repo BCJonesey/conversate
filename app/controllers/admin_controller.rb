@@ -3,4 +3,8 @@ class AdminController < ApplicationController
 
   def index
   end
+
+  def promote
+    redirect_to admin_path
+  end
 end

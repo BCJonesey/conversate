@@ -8,6 +8,7 @@ Conversate::Application.routes.draw do
   get '/about' => 'marketing#about', :as => 'about'
 
   get 'admin' => 'admin#index', :as => 'admin'
+  post 'admin/promote/:id' => 'admin#promote', :as => 'promotion'
   resource :users, :only => [:update]
   resource :session, :only => [:create]
   get 'session/logout' => 'sessions#destroy', :as => 'destroy_sessions'

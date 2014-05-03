@@ -2,7 +2,6 @@
 
 <div class="admin-page ui-scrollable">
   <div class='admin-links'>
-
     <div class="btn-toolbar">
       <div class="btn-group">
         <span class="toolbar-title">Helpful Links</span>
@@ -17,6 +16,36 @@
       </li></ul>
     </div>
   </div>
+
+  <div class="beta-signups-table">
+    <div class="btn-toolbar">
+      <div class="btn-group">
+        <span class="toolbar-title">Beta Signups</span>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <td>Email</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <% BetaSignup.all.each do |signup| %>
+          <tr>
+            <td><%= signup.email %></td>
+            <td>
+              <%= form_tag promotion_path(signup.id) do %>
+                <%= submit_tag 'Promote', class: 'btn-primary' %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
   <div class="admin-table">
     <div class="btn-toolbar">
       <div class="btn-group">
