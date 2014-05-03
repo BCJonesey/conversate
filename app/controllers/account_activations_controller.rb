@@ -17,6 +17,7 @@ class AccountActivationsController < ApplicationController
     @user.full_name = params[:name]
 
     if @user.save
+      @user.create_welcome_conversation
       @user.activate!
       login(@user.email, params[:password])
       redirect_to root_url

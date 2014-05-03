@@ -89,6 +89,35 @@ class User < ActiveRecord::Base
     end
   end
 
+  def create_welcome_conversation()
+    support = User.find(122)
+    welcome_convo = self.default_folder.conversations.create(title: 'Hello')
+    action_params = [
+      { 'type' => 'retitle',
+        'title' => 'Hello'
+      },
+      { 'type' => 'update_users',
+        'added' => [{id: support.id, full_name: support.full_name},
+                    {id: self.id, full_name: self.full_name}],
+        'removed' => nil
+      },
+      { 'type' => 'message',
+        'text' => 'Hey this is support.  Are you supported?'
+      }
+    ]
+    action_params.each do |params|
+      action = welcome_convo.actions.create({
+        type: params['type'],
+        data: Action.data_for_params(params),
+        user_id: support.id
+      })
+      action.save
+      welcome_convo.handle(action)
+    end
+    welcome_convo.most_recent_event = welcome_convo.actions.last.created_at
+    welcome_convo.save
+  end
+
   # This avoids us writing out passwords, salts, etc. when rendering json.
   def as_json(options={})
     json = super(:only => [:email, :full_name, :id, :site_admin, :external])

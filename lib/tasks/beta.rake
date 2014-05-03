@@ -1,8 +1,4 @@
 namespace :beta do
-  def garbage_password
-    SecureRandom.uuid
-  end
-
   desc 'Promote a beta signup to a real user'
   task :promote, [:email] => [:environment] do |t, args|
     signup = BetaSignup.find_by_email(args[:email])
@@ -14,8 +10,6 @@ namespace :beta do
         puts "Failed to build user for promotion."
         next
       end
-
-      signup.create_welcome_conversation(user)
 
       signup.delete
       puts "Promotion succeeded."
