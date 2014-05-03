@@ -1,6 +1,7 @@
 <% if flash[:signed_up] %>
   <div class="beta-signup-thankyou">
-    Initiate thanking process...
+    <div class='beta-signup-thankyou-header'>Thanks for signing up</div>
+    <p>If you have any questions, you can contact us at <a href="mailto:structural@structur.al">structural@structur.al</a>.</p>
   </div>
 <% else %>
   <form method="post" action="<%= beta_signup_path %>" class='beta-signup-form'>
