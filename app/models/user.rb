@@ -98,7 +98,7 @@ class User < ActiveRecord::Base
       },
       { 'type' => 'update_users',
         'added' => [{id: support.id, full_name: support.full_name},
-                    {id: self.id, full_name: self.full_name}],
+                    {id: self.id, full_name: self.full_name, email: self.email}],
         'removed' => nil
       },
       { 'type' => 'message',
