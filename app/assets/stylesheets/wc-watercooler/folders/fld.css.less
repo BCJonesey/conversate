@@ -1,0 +1,125 @@
+@import 'mixins.css.less';
+
+// --- Folders --- //
+
+
+.fld-popover-close-button{
+  .ui-tablet-only();
+}
+
+.fld-list{
+  position: absolute;
+  top:@toolbar-height;
+  left:0;
+  right:0;
+  bottom:0;
+  overflow-y:auto;
+  overflow-x:hidden;
+  padding:0.25rem;
+  -webkit-overflow-scrolling:touch;
+}
+.fld-list-title{
+  .ui-mobile-only();
+  .title-font();
+  .ellipsis();
+  text-align: center;
+  position:absolute;
+  left:4rem;
+  right:4rem;
+  top:0.5rem;
+}
+.fld-hint{
+  padding:.3rem;
+  margin:.3rem;
+  border:1px solid #DDD;
+  background-color:#FFF8E8;
+  color:#888;
+  font-size:.8rem;
+}
+
+.fld{
+  padding:0.75rem;
+  color:#888;
+  cursor: pointer;
+  border:1px solid transparent;
+  border-bottom-color:@border-color-1;
+}
+@media (min-width:@bp-1){
+  .fld{
+    margin:0.15rem;
+    padding:0.35rem 0.25rem;
+    border-bottom-color:transparent;
+    border-radius:0.15rem;
+    &.fld-current{
+      border-color:@border-color-1;
+      background-color:#F0F8FF;
+    }
+  }
+}
+
+.fld-label{
+  text-decoration: none;
+  .ellipsis();
+  padding:0.25rem;
+  line-height: 1.0;
+}
+
+.fld-right{
+  float:right;
+  display:inline-block;
+  margin-top:-0.1rem;
+  padding:0.25rem;
+}
+
+.fld-details-toggle{
+  display:none;
+  line-height: 1.0;
+  .ui-desktop-only();
+}
+
+.fld.fld-default .fld-details-toggle,
+.fld.fld-shared .fld-details-toggle,
+.fld.fld-current .fld-details-toggle{
+  display:inline;
+}
+
+.fld-count{
+  display:inline-block;
+  font-weight: normal;
+  .count();
+  padding:0.05rem 0.2rem;
+  margin-left:0.25rem;
+  vertical-align: top;
+  font-size:0.80rem;
+}
+
+.fld-new-button{
+  .ui-desktop-only();
+}
+.fld-new {
+  position: fixed;
+  top:10%;
+  left:10%;
+  z-index: 12;
+  form{
+    margin-left:auto;
+    margin-right:auto;
+    width:15rem;
+    background-color:#EEE;
+    box-shadow:0 0.5rem 1.0rem rgba(0,0,0,0.3);
+    box-sizing:border-box;
+    padding:0.5rem;
+    border:1px solid #CCC;
+  }
+}
+.fld-new-input{
+  width:100%;
+  box-sizing:border-box;
+  border:1px solid #CCC;
+  outline:none;
+  padding:0.35rem;
+  &:focus{
+    border-color:#ABC;
+    box-shadow:inset 0 0 0.5rem rgba(0,128,255,0.3);
+  }
+}

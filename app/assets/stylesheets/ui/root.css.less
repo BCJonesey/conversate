@@ -1,0 +1,59 @@
+// Place all the styles related to all pages here.
+// They will automatically be included in application.css.
+// You can use Less here: http://lesscss.org/
+@import "mixins.css.less";
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+html, body{
+  margin:0;
+  height:100%;
+}
+
+html{
+  font-size:16px;
+  @media(min-width:@bp-3){
+    font-size:18px;
+  }
+  @media(min-width:@bp-4){
+    font-size:20px;
+  }
+}
+
+body {
+  background-color: #DDD;
+  color: @textColor;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  .body-font();
+}
+
+// Some body styles  for layout get adjusted in sessions.css.less
+
+h1, h2, h3, h4, h5, h6 {
+  font-size:1.0rem;
+  .title-font;
+  margin:0;
+}
+
+a {
+  color: @textColor;
+}
+input[type='email'],
+input[type='text'],
+input[type='password'],
+input[type="submit"],
+ textarea{
+  -webkit-appearance:none;
+  border-radius:0;
+}
+
+.test {
+  clear: both;
+}

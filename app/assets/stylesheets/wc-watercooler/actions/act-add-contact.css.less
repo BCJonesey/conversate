@@ -1,0 +1,47 @@
+@import 'mixins.css.less';
+
+.act-add-contact-form{
+  background-color: @bg-1;
+  border:@border-1;
+  margin-bottom:0.5rem;
+  box-shadow: 0 0.25 0.5 rgba(0,0,0,0.3);
+  .help-text{
+    color:#888;
+    font-size:0.75rem;
+    text-align: center;
+    white-space: normal;
+    padding-bottom:0.25rem;
+  }
+  .error-text{
+    background-color:#FFF8F8;
+    border:1px solid #FFD0D0;
+    color:#C88;
+    font-size:1.0rem;
+    padding:0.5rem;
+    margin:0.25rem 0;
+    text-align: center;
+  }
+}
+
+.act-add-contact-toggle{
+  color:#CCC;
+  font-size:0.75rem;
+  display: inline-block;
+  padding:0.1rem;
+  cursor: pointer;
+  &:hover{
+    color:#888;
+  }
+}
+
+.contact-list-select-wrap{
+  position:relative;
+  .select-icon{
+    position:absolute;
+    right:0.5rem;
+    top: 0.9rem;
+    line-height: 1.0;
+    font-size:1.0rem;
+    color:#AAA;
+  }
+}

@@ -1,0 +1,47 @@
+@import 'mixins.css.less';
+
+.profile-page{
+  .full-page();
+  background-color: white;
+}
+
+.profile-update-form{
+  background-color: white;
+  margin:1rem;
+  @media(min-width:@bp-1){
+    margin:2rem auto;
+    max-width:@bp-1;
+  }
+
+  .btn-toolbar, .btn-toolbar-below, .form {
+    border: @border-1;
+  }
+
+  .form {
+    border-top: none;
+    border-bottom: none;
+  }
+
+  .btn-toolbar-below {
+    margin-bottom: 2rem;
+  }
+}
+
+
+.message(){
+  border:1px solid #CCC;
+  border-top-color:#DDD;
+  padding:0.5rem;
+  color:#888;
+  margin:0.5rem 0;
+  background-color: #FAFAFA;
+}
+
+.error-messages{
+  .message();
+  background-color: #FEE;
+}
+.success-messages{
+  .message();
+  background-color: #EFE;
+}

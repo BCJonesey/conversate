@@ -1,0 +1,90 @@
+@import 'mixins.css.less';
+
+.btn-toolbar.act-title{
+  position: relative;
+  padding:0;
+  padding-right:7.5rem;
+}
+@act-title-color:#444444;
+
+.act-move-cnv{
+  .ui-mobile-hidden();
+}
+
+.act-title-input{
+  box-sizing:border-box;
+  background-color:transparent;
+  border:none;
+  width:100%;
+  padding:.25rem 0;
+  padding-left:0.5rem;
+  font-size: 1rem;
+  outline:none;
+  .ellipsis();
+  .title-font();
+  color:@act-title-color;
+}
+@media (max-width: @bp-1){
+
+  .act-title-input{
+    padding-left:2.0rem;
+  }
+}
+
+.act-title-actions,
+.act-title-save-actions{
+  position: absolute;
+  top:.3rem;
+  right:.25rem;
+}
+
+.popover.act-title-editor-popover{
+  @media (min-width:@bp-1){
+    right:0.45rem;
+    width: 20rem;
+  }
+  .popover-content{
+    padding:0;
+  }
+}
+.act-title-editor-title-details{
+  padding:0.5rem;
+}
+.act-title-editor-save-actions{
+  text-align: center;
+}
+
+.act-convo-actions{
+  border-bottom:@border-1;
+
+}
+
+.act-title-editor-wrap{
+  .menu-title{
+    border-bottom:@border-1;
+    background:@bg-1;
+    font-size:0.75rem;
+    font-weight: bold;
+    color:#888;
+    padding:0.25rem 0.75rem;
+  }
+  .menu-item{
+    line-height: 1.0;
+    display:block;
+    text-decoration:none;
+    padding:1.0rem 0.5rem;
+    text-align: left;
+    border-bottom:@border-1;
+    transition:background-color 0.1s;
+  }
+  .menu-item:last-child{
+    border-bottom:none;
+  }
+  .menu-item:hover{
+    background-color: #F0F8FF;
+  }
+  .menu-item-icon{
+    color:#AAA;
+    margin-right:0.25rem;
+  }
+}
