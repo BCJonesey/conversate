@@ -11,6 +11,7 @@ Structural.Views.WaterCooler = Support.CompositeView.extend({
     this.listenTo(Structural,'showResponsiveActions',this.showAct);
     this.listenTo(Structural,'showResponsiveConversations',this.showCnv);
   },
+  template: JST.template('structural/water_cooler'),
   events: {
     'click .act-container .ui-back-button': 'showCnv',
     'click .cnv-container .ui-back-button': 'showFld',
@@ -18,6 +19,7 @@ Structural.Views.WaterCooler = Support.CompositeView.extend({
     'click .fld-popover-close-button':'showCnv'
   },
   render: function() {
+    this.$el.html(this.template());
     this.foldersView = new Structural.Views.FolderContainer({
       folders: this.folders,
       user: this.user
