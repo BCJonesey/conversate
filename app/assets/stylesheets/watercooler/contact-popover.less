@@ -1,3 +1,11 @@
+@import "mixins.css.less";
+
+/* Mixins */
+
+@water-cooler-border-color: #2080DD;
+@water-cooler-button-blue: #2080DD;
+@water-cooler-outline-color: #2080DD;
+
 .z-layer-app(){z-index:100;}
 .z-layer-popover(){z-index:200;}
 .z-layer-modal(){z-index:300;}
@@ -5,22 +13,132 @@
 
 
 .button(){
-
+  border-radius: 0.15rem;
+  background-color:@water-cooler-button-blue;
+  min-width: 10.0rem;
+  cursor: pointer;
+  padding: 0.5rem 1.5rem;
+  color:white;
+  border:none;
+  font-size:1.0rem;
+  transition:background-color 0.25s;
+  outline:none;
+  &:focus,
+  &:hover{
+    background-color:mix(white,@water-cooler-button-blue,20%);
+  }
 }
 
 
-.water-cooler-test-div{
+/* Variables for this file */
+
+@pad: 0.5rem;
+
+/* Actual CSS for contact-popover */
+
+@border-color: #F0F0F0;
+
+.contact-popover{
   .z-layer-popover();
   position: fixed;
   top:10rem;
   left:10rem;
-  height:10rem;
-  width:10rem;
-  border:1px solid blue;
-  background-color: red;
+  width:17rem;
+  border:1px solid @border-color;
+  background-color: white;
+  border-radius:0.35rem;
+  padding:@pad;
+  min-height: 3.0rem;
+  text-align: center;
+  box-shadow: 0 0.2rem 0.75rem rgba(0,0,0,0.4);
 }
 
+.contact-popover-name{
+  .ellipsis();
+  font-weight: bold;
+  font-size:1.2rem;
+}
+
+.contact-popover-email{
+  .ellipsis();
+  font-size:0.85rem;
+  color:#888;
+  margin-top:0.25rem
+}
 
 .contact-popover-add-contact-button{
-
+  .button();
+  margin-top:0.5rem;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.modal-2-label-style(){
+  font-size:0.75rem;
+  color:#888;
+  margin-left:0.25rem;
+}
+
+.modal-2(){
+  padding:0.25rem;
+  border-radius:0.25rem;
+  background-color: white;
+  box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.2);
+}
+
+.modal-2-toolbar(){
+  text-align: center;
+  padding:0.25rem;
+  title{
+    color:#888;
+    font-weight: bold;
+  }
+}
+
+.modal-2-content(){
+  padding:0.5rem;
+  label{
+    .modal-2-label-style();
+  }
+  input{
+    display: block;
+    width:100%;
+    padding:0.5rem;
+    border:1px solid #CCC;
+    background-color:white;
+    border-radius:0.15rem !important;
+    font-size:1.0rem;
+    outline:none;
+    &:focus{
+      border-color:@modal-2-blue;
+    }
+  }
+  input[type='checkbox']{
+    display:inline-block;
+    width:auto;
+  }
+  a{
+    font-size:0.8rem;
+    color:#888;
+    text-decoration: none;
+    outline:none;
+    .modal-2-label-style();
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+}
+
+
