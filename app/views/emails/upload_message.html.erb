@@ -1,0 +1,9 @@
+<tr class="info">
+  <%=quote_cols%>
+  <td class="sender" style="font-weight: bold; font-size;12px;"><b><%= action.user.name %></b></td>
+  <td class="time" style="text-align: right;color: #AAA;font-size: 10px;margin-top: 3px;"><%= spanify_characters(action.created_at.strftime('%-e %b %Y, %-I:%M%P')) %></td>
+</tr>
+<tr>
+  <%=quote_cols%>
+  <td class="act-text" colspan="2"><pre style="font-family:sans-serif; font-size: 12px;white-space: pre-wrap;line-height: 1.75;color: #444; padding-top:5px;"><a href="<%= action.fileUrl %>"><%= action.fileName %></a><%=action.notes%></pre></td>
+</tr>
