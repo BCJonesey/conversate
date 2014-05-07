@@ -319,6 +319,8 @@ class Conversation < ActiveRecord::Base
         handle_message_actions action
       when 'email_message'
         handle_message_actions action
+      when 'upload_message'
+        handle_message_actions action
     end
     save
   end
