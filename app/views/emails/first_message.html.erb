@@ -6,7 +6,7 @@
   <% if action.type == 'upload_message' %>
   <td class="act-text" colspan="2"><pre style="font-family:sans-serif; font-size: 12px;white-space: pre-wrap;line-height: 1.75;color: #444; padding-top:5px;">File: <a href="<%= action.fileUrl %>"><%= action.fileName %></a></pre><pre style="font-family:sans-serif; font-size: 12px;white-space: pre-wrap;line-height: 1.75;color: #444; padding-top:5px;">Notes:  <%=action.notes%></pre></td>
   <% else %>
-  <td colspan="5"><pre style="font-family:sans-serif; font-size: 12px;white-space: pre-wrap;line-height: 1.75;color: #444; padding-top:5px;"><%=action.text%></pre></td>
+  <td colspan="5"><pre style="font-family:sans-serif; font-size: 12px;white-space: pre-wrap;line-height: 1.75;color: #444; padding-top:5px;"><%=action.text%><br/><a href="<%= conversation_url(conversation.slug,conversation.id)%>">View on Water Cooler</a></pre></td>
   <% end %>
 </tr>
 
