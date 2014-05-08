@@ -27,6 +27,13 @@ class Conversation < ActiveRecord::Base
                      .gsub(/[^a-zA-Z0-9-]/, '')
   end
 
+  # For places (like EmailRenderer views) that we don't have access to
+  # route helpers
+  def url
+    Rails.application.routes.url_helpers
+         .conversation_url(self.slug, self.id, host: ENV['MAILER_HOST'])
+  end
+
   def set_title(title, user)
     if title
       self.title = title
