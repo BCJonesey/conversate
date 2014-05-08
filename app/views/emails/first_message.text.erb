@@ -1,8 +1,8 @@
 <% if action.type == 'upload_message' %>
-From: <%= action.user.name %>
-Uploaded: <%= action.created_at.strftime('%A, %B %-e %-I:%M%P') %>
 File:  <%= action.fileUrl %>
+<% unless action.notes.empty?  %>
 Notes:  <%= action.notes %>
+<% end %>
 <% else %>
 <%=action.text%>
 <% end %>
