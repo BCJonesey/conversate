@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "noreply@watercooler.io"
+  default from: "Water Cooler Support <watercooler@structur.al>"
 
   def reset_password_email(user)
     @user = user
