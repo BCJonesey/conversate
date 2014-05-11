@@ -22,6 +22,12 @@ class User < ActiveRecord::Base
   validates_presence_of :email
   validates_uniqueness_of :email, :case_sensitive => false
 
+  SUPPORT_USER_ID = 122
+  # Apparently I can't define a static constant?  I Have to def it?
+  def self.support_user_id
+    SUPPORT_USER_ID
+  end
+
   def self.build(params)
     user = User.new(params)
     return false if user.save == false
@@ -85,7 +91,7 @@ class User < ActiveRecord::Base
   end
 
   def create_welcome_conversation()
-    support = User.find(122)
+    support = User.find(SUPPORT_USER_ID)
     welcome_convo = self.default_folder.conversations.create(title: 'Hello')
     action_params = [
       { 'type' => 'retitle',
