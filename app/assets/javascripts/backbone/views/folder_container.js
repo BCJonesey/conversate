@@ -6,14 +6,12 @@ Structural.Views.FolderContainer = Support.CompositeView.extend({
   initialize: function(options) {
     options = options || {};
     this.folders = options.folders;
-    this.addressBook = options.addressBook;
     this.user = options.user;
   },
   render: function() {
     this.toolbarView = new Structural.Views.FolderToolbar();
     this.listView = new Structural.Views.Folders({
       collection: this.folders,
-      addressBook: this.addressBook,
       user: this.user
     });
     this.inputView = new Structural.Views.NewFolder();

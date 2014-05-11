@@ -7,5 +7,8 @@ Structural.Models.Participant = Backbone.Model.extend({
         this.set('name', this.get('email'));
       }
     }
+  },
+  is_known: function(){
+    return Structural._user.knowsUser(this.id);
   }
 });

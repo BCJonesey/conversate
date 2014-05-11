@@ -36,6 +36,19 @@ ActiveRecord::Schema.define(version: 20140426202759) do
     t.datetime "updated_at"
   end
 
+  create_table "contact_lists", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "contacts", force: true do |t|
+    t.integer  "user_id",         null: false
+    t.integer  "contact_list_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "conversations", force: true do |t|
     t.string   "title"
     t.datetime "created_at",                                        null: false
@@ -127,6 +140,7 @@ ActiveRecord::Schema.define(version: 20140426202759) do
     t.string   "reset_password_token"
     t.datetime "reset_password_token_expires_at"
     t.datetime "reset_password_email_sent_at"
+    t.integer  "default_contact_list_id"
     t.string   "activation_state"
     t.string   "activation_token"
     t.datetime "activation_token_expires_at"

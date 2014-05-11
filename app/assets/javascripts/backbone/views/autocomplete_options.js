@@ -46,8 +46,8 @@ Structural.Views.AutocompleteOptions = Support.CompositeView.extend({
       this._matches = [];
     } else {
       var regex = new RegExp(pattern, 'gi');
-      this._matches = this.collection.filter(function(item) {
-        var isMatch = regex.test(item.get(this._property)) &&
+      this._matches = _.filter(this.collection,function(item) {
+        var isMatch = regex.test(item[this._property]) &&
                       this._blacklist.get(item.id) === undefined;
         // This gets automatically set because we use the 'g' flag.  If we don't
         // zero it it randomly drops matches.

@@ -1,0 +1,94 @@
+@import "ui/mixins.less";
+
+.act-participants{
+  position: relative;
+  min-height:1.5rem;
+  max-height: 1.5rem;
+
+  overflow-y:auto;
+  background-color: @bg-1;
+  border:1px solid transparent;
+  border-bottom-color:@border-color-2;
+  @media(min-width:@bp-1){
+    border-bottom-color:@border-color-1;
+  }
+  padding:0 0.5rem;
+  padding-right:1.5rem;
+  overflow-y:visible;
+  &.editing{
+    max-height: 6.0rem;
+  }
+
+  ul{
+    margin:0;
+    padding:0;
+  }
+}
+
+.popover.act-participants-editor-popover{
+  width:18rem;
+}
+
+.act-participants-editor{
+  position: absolute;
+  right:.25rem;
+  top:50%;
+  margin-top:-0.7rem;
+  margin-left:3rem;
+}
+
+.act-participants-editor-wrap{
+  padding-right:0.4rem;
+}
+
+
+
+.act-participants-edit,
+.act-participants-edit i{
+  font-size:0.8rem !important;
+}
+.act-participants .act-participants-list{
+  list-style-type: none;
+  display:inline-block;
+  margin-top:0.15rem;
+  width: 66%;
+  .ellipsis();
+  color:#888;
+  font-size:0.8rem;
+}
+.act-participant{
+  display:inline;
+  list-style: none;
+  font-size:0.8rem;
+  &:after{
+    content:", ";
+  }
+  &:last-child:after{
+    content: none;
+  }
+
+}
+.act-participants-editor-autocomplete{
+  .autocomplete-input{
+    input{
+      width:100%;
+      display:block;
+      border:none;
+      }
+  }
+}
+.act-participants-editor-list{
+  ul, li{
+    list-style-type: none;
+  }
+  padding:0 0.5rem 0.1rem;
+  min-height: 2rem;
+  max-height: 20rem;
+  overflow-y: auto;
+  border-top:@border-1;
+  background-color: white;
+}
+
+.act-participants-editor-save-actions{
+  .ui-mobile-only();
+}

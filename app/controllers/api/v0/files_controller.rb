@@ -23,6 +23,7 @@ class Api::V0::FilesController < ApplicationController
 
     action.save
     conversation.handle(action)
+    conversation.update_most_recent_event
 
     render :json => {}, :status => 201
   end

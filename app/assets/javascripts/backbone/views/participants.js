@@ -2,7 +2,6 @@ Structural.Views.Participants = Support.CompositeView.extend({
   className: 'act-participants',
   initialize: function(options) {
     this._participants = options.participants;
-    this._addressBook = options.addressBook;
     this._userId = options.userId;
 
     Structural.on('changeConversation', this.changeConversation, this);
@@ -15,8 +14,7 @@ Structural.Views.Participants = Support.CompositeView.extend({
     this.appendChild(this._list);
 
     this._editor = new Structural.Views.ParticipantEditor({
-      participants: this._participants,
-      addressBook: this._addressBook
+      participants: this._participants
     });
     this.appendChild(this._editor);
     this._editor.on('update_users', this.updateUsers, this);
