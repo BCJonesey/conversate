@@ -33,4 +33,8 @@ class Api::V0::UsersController < ApplicationController
     render :json => user.to_json and return
   end
 
+  def contact_lists
+    user = User.find(params[:id])
+    render :json => user.contact_lists.as_json
+  end
 end

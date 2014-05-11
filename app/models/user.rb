@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :actions, :inverse_of => :user
   has_many :group_participations
   has_many :groups, :through => :group_participations
+  has_many :contacts
   has_and_belongs_to_many :folders
   belongs_to :default_folder, class_name: "Folder", foreign_key: "default_folder_id"
 
@@ -24,6 +25,12 @@ class User < ActiveRecord::Base
   def self.build(params)
     user = User.new(params)
     return false if user.save == false
+
+    new_contact_list = ContactList.new
+
+    new_contact_list.name = "My Contact List"
+    new_contact_list.save
+    user.default_contact_list_id = new_contact_list.id
 
     # External users have no purpose other than to receive mail.
     user.send_me_mail = true if user.external
@@ -60,20 +67,8 @@ class User < ActiveRecord::Base
     conversations.find(self.reading_logs.where("unread_count >0").pluck(:conversation_id))
   end
 
-  # Public: returns the users this user knows.
-  def address_book
-    users = self.groups.map { |g| g.users }.flatten.uniq - [self]
-
-    address_book = Array.new
-    users.map do |user|
-      addressee = Hash.new
-      addressee['id'] = user.id
-      addressee['full_name'] = user.full_name
-      addressee['email'] = user.email
-      addressee['external'] = user.external
-      address_book.push(addressee)
-    end
-    return address_book
+  def known_contacts
+    self.contact_lists.map{ |g| g.contacts }.flatten
   end
 
   def group_admin?(group)
@@ -86,13 +81,17 @@ class User < ActiveRecord::Base
     end
   end
 
+  def contact_lists
+    self.default_contact_list ? [self.default_contact_list] : []
+  end
+
+  def default_contact_list
+    self.default_contact_list_id.nil? ? nil : ContactList.find(self.default_contact_list_id)
+  end
+
   # This avoids us writing out passwords, salts, etc. when rendering json.
   def as_json(options={})
     json = super(:only => [:email, :full_name, :id, :site_admin, :external])
-    if options[:include_address_book]
-      json['address_book'] = address_book
-    end
-
     if options[:conversation]
       json['most_recent_viewed'] = options[:conversation].most_recent_viewed_for_user(self).msec
     end

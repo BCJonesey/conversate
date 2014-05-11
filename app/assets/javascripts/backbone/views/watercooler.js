@@ -7,7 +7,6 @@ Structural.Views.WaterCooler = Support.CompositeView.extend({
     this.actions = options.actions;
     this.conversation = options.conversation;
     this.participants = options.participants;
-    this.addressBook = options.addressBook;
     this.user = options.user;
     this.listenTo(Structural,'showResponsiveActions',this.showAct);
     this.listenTo(Structural,'showResponsiveConversations',this.showCnv);
@@ -21,7 +20,6 @@ Structural.Views.WaterCooler = Support.CompositeView.extend({
   render: function() {
     this.foldersView = new Structural.Views.FolderContainer({
       folders: this.folders,
-      addressBook: this.addressBook,
       user: this.user
     });
     this.conversationsView = new Structural.Views.ConversationContainer({
@@ -32,7 +30,6 @@ Structural.Views.WaterCooler = Support.CompositeView.extend({
       actions: this.actions,
       conversation: this.conversation,
       participants: this.participants,
-      addressBook: this.addressBook,
       user: this.user,
       folders: this.folders
     });
