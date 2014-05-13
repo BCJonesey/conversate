@@ -98,44 +98,48 @@ class User < ActiveRecord::Base
     action_params = [
       { 'type' => 'retitle',
         'title' => "Hi #{self.name}, welcome to Water Cooler"
-      },
-      { 'type' => 'update_users',
-        'added' => [{id: support.id, full_name: support.full_name},
-                    {id: self.id, full_name: self.full_name, email: self.email}],
-        'removed' => nil
-      },
-      { 'type' => 'message',
-        'text' => <<-EOS.strip_heredoc
-          Hi #{self.name},
+        },
+        { 'type' => 'update_users',
+          'added' => [{id: support.id, full_name: support.full_name},
+            {id: self.id, full_name: self.full_name, email: self.email}],
+            'removed' => nil
+            },
+            { 'type' => 'message',
+              'text' => <<-EOS.strip_heredoc
+              Hi #{self.name},
 
-          Welcome to Water Cooler.
+              Welcome to Water Cooler.
 
-          If you have any questions, you can reply in this thread and someone will get back to you as fast as we can.
+              If you have any questions, you can reply in this thread and someone will get back to you as fast as we can.
 
-          If you're ever having trouble with Water Cooler, you can send an old fashioned email to watercooler@structur.al and we'll try to help you out.
-        EOS
-      }
-    ]
-    action_params.each do |params|
-      action = welcome_convo.actions.create({
-        type: params['type'],
-        data: Action.data_for_params(params),
-        user_id: support.id
-      })
-      action.save
-      welcome_convo.handle(action)
-    end
-    welcome_convo.most_recent_event = welcome_convo.actions.last.created_at
-    welcome_convo.save
-  end
+              If you're ever having trouble with Water Cooler, you can send an old fashioned email to watercooler@structur.al and we'll try to help you out.
 
-  def contact_lists
-    self.default_contact_list ? [self.default_contact_list] : []
-  end
+              Thanks,
 
-  def default_contact_list
-    self.default_contact_list_id.nil? ? nil : ContactList.find(self.default_contact_list_id)
-  end
+              -The Water Cooler Team
+              EOS
+            }
+          ]
+          action_params.each do |params|
+            action = welcome_convo.actions.create({
+              type: params['type'],
+              data: Action.data_for_params(params),
+              user_id: support.id
+              })
+            action.save
+            welcome_convo.handle(action)
+          end
+          welcome_convo.most_recent_event = welcome_convo.actions.last.created_at
+          welcome_convo.save
+        end
+
+        def contact_lists
+          self.default_contact_list ? [self.default_contact_list] : []
+        end
+
+        def default_contact_list
+          self.default_contact_list_id.nil? ? nil : ContactList.find(self.default_contact_list_id)
+        end
 
   # This avoids us writing out passwords, salts, etc. when rendering json.
   def as_json(options={})
