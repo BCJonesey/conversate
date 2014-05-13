@@ -1,3 +1,5 @@
+require 'active_support/core_ext'
+
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
 
@@ -92,10 +94,10 @@ class User < ActiveRecord::Base
 
   def create_welcome_conversation()
     support = User.find(SUPPORT_USER_ID)
-    welcome_convo = self.default_folder.conversations.create(title: 'Hello')
+    welcome_convo = self.default_folder.conversations.create(title: "Hi #{self.name}, welcome to Water Cooler")
     action_params = [
       { 'type' => 'retitle',
-        'title' => 'Hello'
+        'title' => "Hi #{self.name}, welcome to Water Cooler"
       },
       { 'type' => 'update_users',
         'added' => [{id: support.id, full_name: support.full_name},
@@ -103,7 +105,15 @@ class User < ActiveRecord::Base
         'removed' => nil
       },
       { 'type' => 'message',
-        'text' => 'Hey this is support.  Are you supported?'
+        'text' => <<-EOS.strip_heredoc
+          Hi #{self.name},
+
+          Welcome to Water Cooler.
+
+          If you have any questions, you can reply in this thread and someone will get back to you as fast as we can.
+
+          If you're ever having trouble with Water Cooler, you can send an old fashioned email to watercooler@structur.al and we'll try to help you out.
+        EOS
       }
     ]
     action_params.each do |params|
