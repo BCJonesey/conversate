@@ -56,13 +56,19 @@ ActiveRecord::Schema.define(version: 20140426202759) do
     t.datetime "most_recent_event", default: '2000-01-01 01:07:19'
   end
 
-  create_table "conversations_folders", force: true do |t|
+  create_table "conversations_folders", id: false, force: true do |t|
+    t.integer "id",              default: "nextval('conversations_folders_id_seq'::regclass)", null: false
     t.integer "conversation_id"
     t.integer "folder_id"
   end
 
   add_index "conversations_folders", ["conversation_id", "folder_id"], name: "index_conversations_folders_on_conversation_id_and_folder_id", using: :btree
   add_index "conversations_folders", ["folder_id", "conversation_id"], name: "index_conversations_folders_on_folder_id_and_conversation_id", using: :btree
+
+  create_table "conversations_topics", force: true do |t|
+    t.integer "conversation_id"
+    t.integer "topic_id"
+  end
 
   create_table "email_queues", force: true do |t|
     t.integer  "action_id"
@@ -80,7 +86,8 @@ ActiveRecord::Schema.define(version: 20140426202759) do
 
   add_index "folders", ["email"], name: "index_folders_on_email", using: :btree
 
-  create_table "folders_users", force: true do |t|
+  create_table "folders_users", id: false, force: true do |t|
+    t.integer "id",        default: "nextval('folders_users_id_seq'::regclass)", null: false
     t.integer "folder_id"
     t.integer "user_id"
   end
@@ -112,6 +119,17 @@ ActiveRecord::Schema.define(version: 20140426202759) do
   add_index "reading_logs", ["conversation_id"], name: "index_reading_logs_on_conversation_id", using: :btree
   add_index "reading_logs", ["user_id", "conversation_id", "most_recent_viewed"], name: "quick_find_most_reent_viewed", using: :btree
   add_index "reading_logs", ["user_id"], name: "index_reading_logs_on_user_id", using: :btree
+
+  create_table "topics", force: true do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "topics_users", force: true do |t|
+    t.integer "topic_id"
+    t.integer "user_id"
+  end
 
   create_table "uploads", force: true do |t|
     t.datetime "created_at"
