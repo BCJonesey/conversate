@@ -25,7 +25,7 @@ var Structural = new (Support.CompositeView.extend({
     // like the current folders, the current folder, the current conversation,
     // and the current user.
     this._user = new Structural.Models.User(bootstrap.user);
-    this._contactLists = new Structural.Collections.ContactLists();
+    this._contactLists = new Structural.Collections.ContactLists(bootstrap.ContactLists);
     this._contactLists.fetch({success: function(){Structural._user.rebuildAddressBook();}});
     this._folders = new Structural.Collections.Folders(bootstrap.folders, {
       // This is the only Folders collection that we want to handle events.
@@ -56,6 +56,7 @@ var Structural = new (Support.CompositeView.extend({
 
     // Setup our views with appropriate data settings.
     this._bar = new Structural.Views.StructuralBar({model: this._user});
+    this._people = new Structural.Views.People();
     this._watercooler = new Structural.Views.WaterCooler({
       folders: this._folders,
       conversations: this._folder.conversations,
@@ -75,6 +76,7 @@ var Structural = new (Support.CompositeView.extend({
     this.appendChild(Structural.FileUploadToaster.view);
     this.appendChild(this._bar);
     this.appendChild(this._watercooler);
+    //this.appendChild(this._people);
     this._faviconAndTitle.render();
 
     Backbone.history.start({pushState: true});
@@ -277,5 +279,10 @@ var Structural = new (Support.CompositeView.extend({
     if (this._faviconAndTitle) {
       this._faviconAndTitle.render();
     }
+  },
+  showPeople: function(){
+    this._watercooler.leave();
+    this._people = new Structural.Views.People();
+    this.appendChild(this._people);
   }
 }))({el: $('body'), apiPrefix: '/api/v0'});
