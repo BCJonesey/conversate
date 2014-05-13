@@ -2,7 +2,7 @@
 // folders list.
 
 Structural.Views.ContactListsContainer = Support.CompositeView.extend({
-  className: 'poop',
+  className: 'contact-lists-container',
   initialize: function(options) {
     options = options || {};
   },

@@ -1,7 +1,7 @@
 // A view for an actual folders list.
 
 Structural.Views.Contacts = Support.CompositeView.extend({
-  className: 'poop ui-scrollable',
+  className: 'Contacts ui-scrollable',
   initialize: function(options) {
     var self = this;
   },

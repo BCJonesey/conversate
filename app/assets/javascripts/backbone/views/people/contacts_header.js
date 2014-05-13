@@ -2,9 +2,9 @@
 
 Structural.Views.ContactsBar = Support.CompositeView.extend({
   className: function() {
-    var classes = 'poop';
+    var classes = 'contacts-header';
   },
-  template: JST.template('people/contacts/contacts_bar'),
+  template: JST.template('people/contacts/contacts_header'),
   initialize: function(options) {
     var self = this;
   },

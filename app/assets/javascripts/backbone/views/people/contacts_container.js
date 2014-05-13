@@ -1,7 +1,7 @@
 // A view for the actual conversations list.
 
 Structural.Views.ContactsContainer = Support.CompositeView.extend({
-  className: 'poop',
+  className: 'contacts-container',
   initialize: function(options) {
     options = options || {};
     this.contactList = options.contactList;

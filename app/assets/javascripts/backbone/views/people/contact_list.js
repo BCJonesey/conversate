@@ -1,7 +1,7 @@
 // A view for an actual folder in the folders list.
 
 Structural.Views.ContactList = Support.CompositeView.extend({
-  className: 'poop',
+  className: 'contact-list',
   template: JST.template('people/contact_lists/contact_list'),
   initialize: function(options) {
     var self = this;
