@@ -4,14 +4,14 @@
   position: relative;
   min-height:1.5rem;
   max-height: 1.5rem;
-
+  margin-left:0.5rem;
   overflow-y:auto;
-  background-color: @bg-1;
+  background-color: white;
   border:1px solid transparent;
-  border-bottom-color:@border-color-2;
-  @media(min-width:@bp-1){
-    border-bottom-color:@border-color-1;
-  }
+  border-bottom-color:@c1;
+  // @media(min-width:@bp-1){
+  //   //border-bottom-color:@border-color-1;
+  // }
   padding:0 0.5rem;
   padding-right:1.5rem;
   overflow-y:visible;
@@ -60,6 +60,7 @@
   display:inline;
   list-style: none;
   font-size:0.8rem;
+  color:@c1;
   &:after{
     content:", ";
   }

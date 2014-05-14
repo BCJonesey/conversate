@@ -2,6 +2,24 @@
 
 // --- Actions --- //
 
+@toolbar-color:@c1;
+@icon-color:white;
+
+.act-title{
+  background-color:@toolbar-color;
+  border:none;
+
+  .btn-icon{
+    color:white;
+    &:hover{
+      color:mix(@c1,white,10%);
+    }
+  }
+  .act-title-input{
+    color:white;
+  }
+}
+
 
 // Temporarily remove deletion actions
 .act-deletion {

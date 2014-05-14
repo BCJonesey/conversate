@@ -1,7 +1,5 @@
 @import "ui/mixins.less";
 
-@toolbar-color:@c1;
-@icon-color:white;
 
 .fld-popover-close-button{
   .ui-tablet-only();
@@ -10,16 +8,18 @@
 .fld-container{
 }
 
+@toolbar-color:@c1;
+@icon-color:white;
 
 .fld-toolbar{
   background-color:@toolbar-color;
+  border:none;
   .btn-icon{
     color:white;
     &:hover{
       color:mix(@c1,white,10%);
     }
   }
-
 }
 
 .fld-list{
@@ -45,7 +45,6 @@
 }
 
 .fld-list-title{
-  .ui-mobile-only();
   .title-font();
   .ellipsis();
   text-align: center;
@@ -53,6 +52,10 @@
   left:4rem;
   right:4rem;
   top:0.5rem;
+  color:white;
+  @media(min-width:@bp-1){
+    color:mix(white,@c1,45%);
+  }
 }
 .fld-hint{
   padding:.3rem;

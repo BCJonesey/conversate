@@ -6,6 +6,22 @@
 // --- Conversations List --- //
 
 // This does not include styles that control the position, of the converstion list column.  those are with the water-cooler.css.less file and other general layout stuff
+
+
+@toolbar-color:@c1;
+@icon-color:white;
+
+.cnv-toolbar{
+  border:none;
+  background-color:@toolbar-color;
+  .btn-icon{
+    color:white;
+    &:hover{
+      color:mix(@c1,white,10%);
+    }
+  }
+}
+
 .cnv-list {
   position: absolute;
   top: 2.5rem;
@@ -14,10 +30,12 @@
   bottom: 0;
   overflow-y: auto;
   overflow-x:hidden;
+  @media(min-width:@bp-1){
+    border-right: 1px solid @toolbar-color;
+  }
 
 }
 .cnv-list-title{
-  .ui-mobile-only();
   .title-font();
   .ellipsis();
   text-align: center;
@@ -25,6 +43,10 @@
   left:4rem;
   right:4rem;
   top:0.5rem;
+  color:white;
+  @media(min-width:@bp-1){
+    color:mix(white,@c1,45%);
+  }
 }
 .cnv-new-button{
 }
