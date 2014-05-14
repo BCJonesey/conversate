@@ -10,13 +10,14 @@
   left: 0;
   right: 0;
   bottom: 0;
-  top: @toolbar-height;
+  top:0;
 
-  @media (max-width: @bp-1){
-    top:0;
-  }
+  // top: @toolbar-height;
+  // @media (max-width: @bp-1){
+  //   top:0;
+  // }
 
-& > .fld-container {
+& .fld-container {
   overflow:visible;
   background-color: white;
   position:absolute;
@@ -44,7 +45,7 @@
   }
 }
 
-  & > .cnv-container {
+  & .cnv-container {
     overflow:hidden;
     background-color: white;
     position: absolute;

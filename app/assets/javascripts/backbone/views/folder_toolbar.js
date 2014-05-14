@@ -16,5 +16,6 @@ Structural.Views.FolderToolbar = Support.CompositeView.extend({
   showStm: function(e) {
     e.preventDefault();
     this.$('.structural-menu').toggleClass('hidden');
+    this.$('.toggle-stm-button').toggleClass('active');
   }
 });

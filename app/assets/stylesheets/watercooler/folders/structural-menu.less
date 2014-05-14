@@ -25,8 +25,11 @@
 @tri-width:1.0rem;
 @tri-height:1.0rem;
 
-.toggle-stm-button:hover{
-  color:@c3;
+.toggle-stm-button{
+  &:hover,
+  &.active{
+    color:@c3;
+  }
 }
 
 
@@ -44,10 +47,10 @@
   border-top-left-radius: 0;
   box-shadow: 0.1rem 0.25rem 0.5rem rgba(0,0,0,0.2);
   @media(min-width:@bp-1){
-    top: 6.0rem;
+    top: 3.5rem;
   }
   @media(min-width:@bp-2){
-    top: 5.5rem;
+    top: 3.0rem;
   }
   &:before{
     content:" ";
