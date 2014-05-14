@@ -152,6 +152,11 @@
 @border-color-act-my-message: #EAEAEA;
 @background-color-act-my-message:#FAFAFA;
 
+// --- My Messages --- //
+
+@border-color-act-my-message: mix(@c1,white,25%);
+@background-color-act-my-message:mix(@c1,white,3%);
+
 // --- Pending Messages --- //
 @color-pending:#CCC;
 @border-color-pending: #E8E8E8;
@@ -210,6 +215,7 @@
 .act-msg.act-my-message{
   background-color:@background-color-act-my-message;
   border:@border-act-my-message;
+  border-radius:0.25rem;
   transition: none;
 }
 
@@ -319,6 +325,9 @@
   border:none;
   padding-top: @padding-follow;
   padding-bottom:@padding-follow;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+
 
   .act-sender {
     display: none;
@@ -352,7 +361,7 @@
   border-left: @border-act-my-message;
   border-right: @border-act-my-message;
   border-bottom:@border-act-my-message;
-  margin-top: -1px;
+  margin-top:-0.25rem;
 }
 
 .act-sys{
