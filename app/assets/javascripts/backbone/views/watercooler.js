@@ -14,7 +14,6 @@ Structural.Views.WaterCooler = Support.CompositeView.extend({
   events: {
     'click .act-container .ui-back-button': 'showCnv',
     'click .cnv-container .ui-back-button': 'showFld',
-    'click .fld-container .ui-back-button': 'showStb',
     'click .fld-popover-close-button':'showCnv'
   },
   render: function() {

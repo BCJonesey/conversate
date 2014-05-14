@@ -3,12 +3,15 @@
 
 Structural.Views.FolderContainer = Support.CompositeView.extend({
   className: ' ui-section fld-container visible',
+  template: JST.template('folders/folder_container'),
   initialize: function(options) {
     options = options || {};
     this.folders = options.folders;
     this.user = options.user;
   },
   render: function() {
+    this.$el.html(this.template());
+
     this.toolbarView = new Structural.Views.FolderToolbar();
     this.listView = new Structural.Views.Folders({
       collection: this.folders,

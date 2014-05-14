@@ -2,6 +2,7 @@
 
 Structural.Views.Folders = Support.CompositeView.extend({
   className: 'fld-list ui-scrollable',
+  template: JST.template('folders/folders'),
   initialize: function(options) {
     var self = this;
     options = options || {};
@@ -24,6 +25,8 @@ Structural.Views.Folders = Support.CompositeView.extend({
     })
   },
   render: function() {
+    this.$el.html(this.template());
+
     this._folderEditor = new Structural.Views.FolderEditor({
       user: this.user
     });

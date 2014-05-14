@@ -1,0 +1,118 @@
+@import "ui/mixins.less";
+
+.structural-menu-wrapper{
+
+}
+@c0:#11D9DD;
+@c1:#00C4CC;
+@c2:#E80C58;
+@c3:#072B65;
+@c4:#9AF051;
+
+@background-color:#70C;
+@highlight-color:#CFF;
+
+@bg:@c3;
+@color:white;
+
+@hover-bg:rgba(255,255,255,0.3);
+@hover-color:white;
+
+@select-bg:@c0;
+@select-color:white;
+
+
+@tri-width:1.0rem;
+@tri-height:1.0rem;
+
+.toggle-stm-button:hover{
+  color:@c3;
+}
+
+
+.structural-menu{
+  position: fixed;
+  top:3.0rem;
+  left:1.25rem;
+  min-width:15rem;
+  max-width:@bp-1;
+  max-width:80%;
+  background-color:@bg;
+  z-index: 100;
+  padding:0.25rem 0.5rem;
+  border-radius:0.4rem;
+  border-top-left-radius: 0;
+  box-shadow: 0.1rem 0.25rem 0.5rem rgba(0,0,0,0.2);
+  @media(min-width:@bp-1){
+    top: 6.0rem;
+  }
+  @media(min-width:@bp-2){
+    top: 5.5rem;
+  }
+  &:before{
+    content:" ";
+    position: absolute;
+    top:-@tri-height;
+    left:0;
+    width:@tri-width;
+    height:@tri-height;
+    border-right:@tri-width * 0.9 solid transparent;
+    border-left:none;
+    border-top:none;
+    border-bottom:@tri-height solid @bg;
+
+  }
+  .link{
+    display:block;
+    text-decoration: none;
+    color:@color;
+    display: block;
+    padding:0.5rem;
+    margin:0.5rem 0;
+    border-radius:0.25rem;
+    .ellipsis();
+    .clearfix-mixin();
+    &:hover{
+      background-color:@hover-bg;
+      color:@hover-color;
+    }
+    &.is-selected{
+      background-color:@select-bg;
+      color:@select-color;
+    }
+    .fa{
+      font-size:2.0rem;
+      float:left;
+    }
+    .text{
+      font-size:1.25rem;
+      vertical-align: top;
+      padding:0.25rem;
+      padding-right:1.0rem;
+      display: inline-block;
+      .ellipsis();
+    }
+  }
+  @details-color:mix(@c3,white);
+
+  .details-section{
+    border-top:1px solid @details-color;
+    .username{
+      padding:0.2rem;
+      display: block;
+      text-align: center;
+      font-size:1.0rem;
+      color:@details-color;
+    }
+    .email{
+      padding:0.2rem;
+      display: block;
+      text-align: center;
+      font-size:0.8rem;
+      color:@details-color;
+    }
+  }
+
+
+
+}

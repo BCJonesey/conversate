@@ -6,10 +6,15 @@ Structural.Views.FolderToolbar = Support.CompositeView.extend({
     return this;
   },
   events: {
-    'click a.fld-new-button': 'newFolder'
+    'click a.fld-new-button': 'newFolder',
+    'click .toggle-stm-button': 'showStm'
   },
   newFolder: function(e) {
     e.preventDefault();
     Structural.createNewFolder();
+  },
+  showStm: function(e) {
+    e.preventDefault();
+    this.$('.structural-menu').toggleClass('hidden');
   }
 });
