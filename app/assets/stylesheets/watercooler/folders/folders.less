@@ -1,10 +1,25 @@
 @import "ui/mixins.less";
 
-// --- Folders --- //
-
+@toolbar-color:@c1;
+@icon-color:white;
 
 .fld-popover-close-button{
   .ui-tablet-only();
+}
+
+.fld-container{
+}
+
+
+.fld-toolbar{
+  background-color:@toolbar-color;
+  .btn-icon{
+    color:white;
+    &:hover{
+      color:mix(@c1,white,10%);
+    }
+  }
+
 }
 
 .fld-list{
@@ -17,7 +32,18 @@
   overflow-x:hidden;
   padding:0.25rem;
   -webkit-overflow-scrolling:touch;
+  @media(min-width:@bp-1){
+    border-right:2px solid @toolbar-color;
+    border-bottom:2px solid @toolbar-color;
+  }
+  @media(min-width:@bp-2){
+    border-right:1px solid @toolbar-color;
+    border-bottom:none;
+  }
+
+
 }
+
 .fld-list-title{
   .ui-mobile-only();
   .title-font();
