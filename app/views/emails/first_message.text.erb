@@ -1,5 +1,14 @@
+<% if action.type == 'upload_message' %>
+File:  <%= action.fileUrl %>
+<% unless action.notes.empty?  %>
+Notes:  <%= action.notes %>
+<% end %>
+<% else %>
 <%=action.text%>
+<% end %>
 
 
+---------------------
+<%= conversation.url %>
 ---------------------
 
