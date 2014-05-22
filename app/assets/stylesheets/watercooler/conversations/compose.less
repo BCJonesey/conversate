@@ -219,12 +219,13 @@
 
 // Compose //
 
+
 .short-form-compose {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: @bg-1;
+  background-color: @c1;
   border-top:@border-1;
   padding:0.35rem;
   min-height: 3.7rem;
@@ -245,6 +246,12 @@
   overflow-x:hidden;
   overflow-y:auto;
   height:3.0rem;
+  border-radius: 3px;
+  border-color:mix(black,@c1,10%);
+  &:focus{
+    border-color:mix(black,@c1,30%);
+    //box-shadow: inset 0 0 4px @c1;
+  }
 }
 
 .enable-long-form-group{
@@ -261,5 +268,15 @@
   margin-top:-0.9rem;
   margin-left:0;
   margin-right:0;
+}
+.act-short-form-send.btn-primary{
+  border:none;
+  border-radius:3px;
+  background-color: mix(@c1,white,5%);
+  color:@c1;
+  padding-top:0.35rem;
+  &:hover{
+    background-color: white;
+  }
 }
 
