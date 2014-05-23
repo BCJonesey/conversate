@@ -9,6 +9,8 @@
 
   <div class="main-top-toolbar">
     <div class='main-top-toolbar-inner'>
+      <span class='home-link'>Water Cooler</span>
+      <span class='home-link'>About the Team</span>
       <span class='beta-sign-in-toggle'>Sign in</span>
 
     <div class="beta-sign-in-form hidden">
@@ -40,15 +42,7 @@
     <div class='info-main-description-content jumbo-tron'>
       <h1>Collaborate Your Way</h1>
       <h2>Organize your conversations the way you want.  Get your team communicating sensibly and hassle-free.</h2>
-      <form class='beta-signup-form'>
-        <p>Water Cooler is currently in private beta.  We'll send you an invite as soon we can. </p>
-        <div class='sign-up-inputs'>
-          <div class='input-wrapper'>
-            <input type='email' class='beta-signup-input' placeholder='Email Address' tabindex=1/>
-          </div>
-          <input type='submit' class='beta-signup-submit' value="Sign up" tabindex=2/>
-        </div>
-      </form>
+      <%= render 'signup_form' %>
     </div>
   </div>
 
@@ -105,15 +99,7 @@
         </li>
       </ul>
 
-      <form class='beta-signup-form'>
-        <p>Water Cooler is currently in private beta.  We'll send you an invite as soon we can. </p>
-        <div class='sign-up-inputs'>
-          <div class='input-wrapper'>
-            <input type='email' class='beta-signup-input' placeholder='Email Address' tabindex=1/>
-          </div>
-          <input type='submit' class='beta-signup-submit' class='beta-signup-submit' value="Sign up" tabindex=2/>
-        </div>
-      </form>
+      <%= render 'signup_form' %>
     </div>
   </div>
 

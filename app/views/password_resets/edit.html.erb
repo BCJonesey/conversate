@@ -1,7 +1,5 @@
-
-
-<div class="home-main main">
-  <div class="login-form">
+<div class='pw-reset-container'>
+  <div class='password-reset-dialog'>
     <div class='btn-toolbar'>
       <span class='toolbar-title'>Reset password for <%= @user.email %></span>
     </div>
@@ -23,10 +21,10 @@
         <%= hidden_field_tag :token, @token %>
       </div>
       <div class='btn-toolbar-below clearfix'>
-      <div class='btn-group pull-right'>
-        <%= submit_tag 'Set New Password', :class => 'btn-primary' %>
+        <div class='btn-group pull-right'>
+          <%= submit_tag 'Set New Password', :class => 'btn-primary' %>
+        </div>
       </div>
-    </div>
     <% end %>
   </div>
 </div>

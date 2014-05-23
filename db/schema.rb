@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140426164544) do
+ActiveRecord::Schema.define(version: 20140426202759) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,12 @@ ActiveRecord::Schema.define(version: 20140426164544) do
   add_index "actions", ["conversation_id", "created_at"], name: "index_actions_on_conversation_id_and_created_at", using: :btree
   add_index "actions", ["conversation_id"], name: "index_actions_on_conversation_id", using: :btree
   add_index "actions", ["search_vector"], name: "index_actions_on_search_vector", using: :gin
+
+  create_table "beta_signups", force: true do |t|
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "contact_lists", force: true do |t|
     t.string   "name"
@@ -50,13 +56,19 @@ ActiveRecord::Schema.define(version: 20140426164544) do
     t.datetime "most_recent_event", default: '2000-01-01 01:07:19'
   end
 
-  create_table "conversations_folders", force: true do |t|
+  create_table "conversations_folders", id: false, force: true do |t|
+    t.integer "id",              default: "nextval('conversations_folders_id_seq'::regclass)", null: false
     t.integer "conversation_id"
     t.integer "folder_id"
   end
 
   add_index "conversations_folders", ["conversation_id", "folder_id"], name: "index_conversations_folders_on_conversation_id_and_folder_id", using: :btree
   add_index "conversations_folders", ["folder_id", "conversation_id"], name: "index_conversations_folders_on_folder_id_and_conversation_id", using: :btree
+
+  create_table "conversations_topics", force: true do |t|
+    t.integer "conversation_id"
+    t.integer "topic_id"
+  end
 
   create_table "email_queues", force: true do |t|
     t.integer  "action_id"
@@ -74,7 +86,8 @@ ActiveRecord::Schema.define(version: 20140426164544) do
 
   add_index "folders", ["email"], name: "index_folders_on_email", using: :btree
 
-  create_table "folders_users", force: true do |t|
+  create_table "folders_users", id: false, force: true do |t|
+    t.integer "id",        default: "nextval('folders_users_id_seq'::regclass)", null: false
     t.integer "folder_id"
     t.integer "user_id"
   end
@@ -107,6 +120,17 @@ ActiveRecord::Schema.define(version: 20140426164544) do
   add_index "reading_logs", ["user_id", "conversation_id", "most_recent_viewed"], name: "quick_find_most_reent_viewed", using: :btree
   add_index "reading_logs", ["user_id"], name: "index_reading_logs_on_user_id", using: :btree
 
+  create_table "topics", force: true do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "topics_users", force: true do |t|
+    t.integer "topic_id"
+    t.integer "user_id"
+  end
+
   create_table "uploads", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -135,8 +159,12 @@ ActiveRecord::Schema.define(version: 20140426164544) do
     t.datetime "reset_password_token_expires_at"
     t.datetime "reset_password_email_sent_at"
     t.integer  "default_contact_list_id"
+    t.string   "activation_state"
+    t.string   "activation_token"
+    t.datetime "activation_token_expires_at"
   end
 
+  add_index "users", ["activation_token"], name: "index_users_on_activation_token", using: :btree
   add_index "users", ["remember_me_token"], name: "index_users_on_remember_me_token", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", using: :btree
 

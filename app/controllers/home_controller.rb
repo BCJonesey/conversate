@@ -14,6 +14,12 @@ class HomeController < ApplicationController
         render 'structural/show' and return
       end
     end
-    render layout: "application_rails"   
+    render layout: "application_rails"
+  end
+
+  def beta_signup
+    signup = BetaSignup.new(email: params[:email])
+    flash[:signed_up] = signup.save
+    render :index, layout: 'application_rails'
   end
 end

@@ -155,6 +155,25 @@
   }
 }
 
+.beta-signup-thankyou{
+  border:1px solid rgba(0,0,0,0.8);
+  background-color: rgba(0,0,0,0.6);
+  padding:0.5rem 1.5rem;
+  margin: 1.0rem;
+  border-radius: 0.5rem;
+
+  .beta-signup-thankyou-header{
+    font-weight: bold;
+    color:  white;
+    font-size:1.25rem;
+    text-align: center;
+  }
+  p{
+    color:#CCC;
+    text-align: center;
+  }
+}
+
 .pricing-table{
   text-align: center;
   display:table;
@@ -329,6 +348,7 @@
   top:0;
   left:0;
   right:0;
+  background-color:rgba(0,0,0,0.2);
 }
 
 .main-top-toolbar-inner{
@@ -336,11 +356,17 @@
   max-width:@info-content-width;
   margin:0 auto;
   position: relative;
-  padding: 0 1.0rem;
+  padding: 0.5rem 1.0rem;
 }
 
 .beta-sign-in-toggle{
   float:right;
+  padding:0.25rem 0.5rem;
+  color:white;
+  cursor: pointer;
+}
+.home-link{
+  float:left;
   padding:0.25rem 0.5rem;
   color:white;
   cursor: pointer;
@@ -355,6 +381,8 @@
   right:1.0rem;
   left:1.0rem;
   @media(min-width:@bp-1){
+    top:3.0rem;
+    right:0.5rem;
     width:20rem;
     left:auto;
   }
