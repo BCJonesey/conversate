@@ -27,7 +27,8 @@ Structural.Views.FileUpload = Support.CompositeView.extend({
     this.clearFilePicked(e);
   },
   toggleFileUploadOnClickOff: function(e) {
-    if ($(e.target).closest('.act-file-upload').length === 0) {
+    if ($(e.target).closest('.act-file-upload').length === 0 &&
+        !this.$('.act-file-upload-popover').hasClass('hidden')) {
       this.toggleFileUpload(e);
     }
   },
