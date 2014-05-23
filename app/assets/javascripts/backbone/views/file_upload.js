@@ -2,6 +2,10 @@ Structural.Views.FileUpload = Support.CompositeView.extend({
   tagName: 'span',
   className: 'popover-wrap act-file-upload',
   template: JST.template('actions/file_upload'),
+  initialize: function(options) {
+    Structural.on('clickAnywhere', this.toggleFileUploadOnClickOff, this);
+  },
+
   events: {
     'click .act-file-upload-button-regular': 'toggleFileUpload',
     'click .act-file-upload-popover .popover-close': 'toggleFileUpload',
@@ -21,6 +25,11 @@ Structural.Views.FileUpload = Support.CompositeView.extend({
     this.uploadData = null;
     this.updateProgress(0);
     this.clearFilePicked(e);
+  },
+  toggleFileUploadOnClickOff: function(e) {
+    if ($(e.target).closest('.act-file-upload').length === 0) {
+      this.toggleFileUpload(e);
+    }
   },
   showFilePicked: function(e, filename) {
     self.$('.act-file-upload-filename').text(filename);
