@@ -89,6 +89,6 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
   },
   clearConversation: function() {
     this.conversation = undefined;
-    this.$('input').empty();
+    this.render()
   }
 });
