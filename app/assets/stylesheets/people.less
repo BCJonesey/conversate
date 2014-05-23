@@ -1,0 +1,87 @@
+@import 'variables.css.less';
+@import 'mixins.css.less';
+
+@sidebar-width: 20rem;
+@toolbar-height: 3.0rem;
+
+.water-cooler.people{
+
+  .contact-lists-container{
+    position: absolute;
+    left:0;
+    top:0;
+    bottom:0;
+    width:@sidebar-width;
+
+
+  }
+  .contact-lists{
+    position: absolute;
+    top: @toolbar-height;
+    left:0;
+    right:0;
+    bottom:0;
+    border-right:@border-1;
+    background-color: white;
+    padding:0.5rem;
+  }
+
+  .contact-list{
+    border:@border-1;
+    border-radius:3px;
+    padding:0.5rem;
+  }
+
+
+
+  .contacts-container{
+    position: absolute;
+    right:0;
+    top:0;
+    bottom:0;
+    left:@sidebar-width;
+  }
+
+  .contacts-header{
+    text-align: center;
+    .contact-list-name{
+      display: inline-block;
+      padding-top:1.0rem;
+      color:#888;
+    }
+  }
+  .contacts{
+    position: absolute;
+    top:@toolbar-height;
+    left:0;
+    right:0;
+    bottom:0;
+    display:block;
+    background-color: white;
+    overflow:auto;
+  }
+  .contacts-table{
+    display: table;
+    width:auto;
+  }
+  .contact{
+    display:table-row;
+    border-bottom:@border-1;
+    .name{
+      display:table-cell;
+      padding:0.5rem;
+      text-overflow:ellipsis;
+      max-width:20rem;
+
+    }
+    .email{
+      display:table-cell;
+      padding:0.6rem;
+      font-size:0.8rem;
+      color:#AAA;
+      text-overflow:ellipsis;
+    }
+  }
+
+
+}
