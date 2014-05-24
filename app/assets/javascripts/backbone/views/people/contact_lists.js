@@ -6,7 +6,6 @@ Structural.Views.ContactLists = Support.CompositeView.extend({
     var self = this;
   },
   render: function() {
-
     this.collection.forEach(this.renderContactList, this);
     return this;
   },

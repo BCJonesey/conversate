@@ -1,20 +1,94 @@
 @import 'variables.css.less';
 @import 'mixins.css.less';
 
-@sidebar-width: 20rem;
+// variables
+
+@sidebar-width: 16rem;
 @toolbar-height: 3.0rem;
 
+@h1: #F8FAFF;
+@b1: #F4F4F4;
+
+// Mixins
+
+.people-header(){
+  text-align: center;
+  position: relative;
+  height:@toolbar-height;
+  padding:0;
+  background-color: #DDD;
+
+  .title{
+    display: inline-block;
+    padding-top:0.75rem;
+    padding-right:3.0rem;
+    padding-left: 3.0rem;
+    line-height: 1.0;
+    font-size:1.5rem;
+    color:#888;
+  }
+  .group.left{
+    position: absolute;
+    height:@toolbar-height;
+    top:0;
+    left:0;
+  }
+  .group.right{
+    position: absolute;
+    height:@toolbar-height;
+    top:0;
+    right:0;
+  }
+
+}
+
+.people-icon-button(){
+  text-align: center;
+  margin:0.25rem;
+  border:none;
+  font-size:1.5rem;
+  background-color: transparent;
+  padding:0.4rem;
+  height:2.5rem;
+  border-radius:3px;
+  cursor: pointer;
+  color:#888;
+  outline:none;
+  transition:background-color 0.2s, color 0.2s;
+  &:hover{
+    color:#333;
+    //background-color: rgba(0,0,0,0.2);
+  }
+}
+
+
+// Styles
+
 .water-cooler.people{
+
 
   .contact-lists-container{
     position: absolute;
     left:0;
     top:0;
     bottom:0;
-    width:@sidebar-width;
+    right:0;
+    @media(min-width:@bp-1){
+      right:none;
+      width:@sidebar-width;
+    }
+  }
 
+  .contact-lists-header{
+    .people-header();
 
   }
+
+  .contacts-structural-menu,
+  .contacts-new-contact-list{
+    .people-icon-button();
+  }
+
   .contact-lists{
     position: absolute;
     top: @toolbar-height;
@@ -24,12 +98,24 @@
     border-right:@border-1;
     background-color: white;
     padding:0.5rem;
+    overflow: auto;
   }
 
   .contact-list{
-    border:@border-1;
+    border:1px solid transparent;
     border-radius:3px;
     padding:0.5rem;
+    cursor: pointer;
+    margin-bottom:0.5rem;
+    &:hover{
+      background-color: @b1;
+    }
+
+    &.is-selected,
+    &:first-child{
+      background-color: @h1;
+      border:@border-1;
+    }
   }
 
 
@@ -39,17 +125,24 @@
     right:0;
     top:0;
     bottom:0;
-    left:@sidebar-width;
+    left:0;
+    @media(min-width:@bp-1){
+      left:@sidebar-width;
+    }
   }
 
   .contacts-header{
-    text-align: center;
-    .contact-list-name{
-      display: inline-block;
-      padding-top:1.0rem;
-      color:#888;
+    .people-header();
+
+    .contacts-back-button{
+      .ui-mobile-only();
+      .people-icon-button();
+    }
+    .new-contact-button{
+      .people-icon-button();
     }
   }
+
   .contacts{
     position: absolute;
     top:@toolbar-height;
@@ -59,27 +152,62 @@
     display:block;
     background-color: white;
     overflow:auto;
+
   }
   .contacts-table{
-    display: table;
-    width:auto;
+    @media(min-width:@bp-1){
+      display: table;
+      table-layout: fixed;
+    }
+    width:100%;
+
+  }
+  .contacts-table-headings{
+    .ui-mobile-hidden();
+    display: table-row;
+    .heading{
+      display:table-cell;
+      //text-align: center;
+      color:#888;
+      font-size:0.9rem;
+      padding:0.2rem 0.5rem;
+      background-color: #EEE;
+      border-bottom:@border-1;
+    }
   }
   .contact{
-    display:table-row;
-    border-bottom:@border-1;
+    @media(min-width:@bp-1){
+      display:table-row;
+    }
+    cursor: pointer;
+    &:hover{
+      background-color: @h1;
+    }
     .name{
-      display:table-cell;
-      padding:0.5rem;
+      .ellipsis();
+      padding:0.3rem 1.0rem;
       text-overflow:ellipsis;
-      max-width:20rem;
+      font-size:1.0rem;
+      color:#444;
 
+      @media(min-width:@bp-1){
+        display:table-cell;
+        border-bottom:1px solid @b1;
+        padding:0.5rem;
+        max-width:20rem;
+      }
     }
     .email{
-      display:table-cell;
-      padding:0.6rem;
+      .ellipsis();
+      padding:0.3rem 1.0rem;
       font-size:0.8rem;
       color:#AAA;
       text-overflow:ellipsis;
+      border-bottom:1px solid @b1;
+      @media(min-width:@bp-1){
+        display:table-cell;
+        padding:0.6rem;
+      }
     }
   }
 
