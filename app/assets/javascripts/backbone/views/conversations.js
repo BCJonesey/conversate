@@ -3,12 +3,13 @@
 Structural.Views.Conversations = Support.CompositeView.extend({
   className: 'cnv-list ui-scrollable',
   emptyTemplate: JST.template('conversations/empty_collection'),
+  loadingTemplate: JST.template('conversations/loading_collection'),
   initialize: function(options) {
     options = options || {};
     this.user = options.user;
+    this._loadingConversations = false;
 
     this._wireEvents(this.collection);
-
     Structural.on('changeFolder', this.changeFolder, this);
 
     // The viewOrder property is the order that sections show up in the DOM,
@@ -70,6 +71,7 @@ Structural.Views.Conversations = Support.CompositeView.extend({
     collection.on('archived', this.reRender, this);
     collection.on('pinned', this.reRender, this);
     collection.on('focus:conversation', this.showFocusedConversation, this);
+    collection.on('sync', this._noLongerLoading, this);
   },
   render: function() {
     this.$el.empty();
@@ -78,7 +80,9 @@ Structural.Views.Conversations = Support.CompositeView.extend({
       section.collection = [];
     });
 
-    if (this.collection.length == 0) {
+    if (this._loadingConversations) {
+      this.$el.html(this.loadingTemplate());
+    } else if (this.collection.length == 0) {
       this.$el.html(this.emptyTemplate());
     } else {
       this.renderConversations();
@@ -116,6 +120,8 @@ Structural.Views.Conversations = Support.CompositeView.extend({
   },
 
   changeFolder: function(folder) {
+    this._loadingConversations = true;
+
     this.collection.off(null, null, this);
     this.collection = folder.conversations;
     this._wireEvents(this.collection);
@@ -165,6 +171,11 @@ Structural.Views.Conversations = Support.CompositeView.extend({
     if (focusedView) {
       this.scrollToTargetAtEarliestOpportunity(focusedView);
     }
+  },
+
+  _noLongerLoading: function() {
+    this._loadingConversations = false;
+    this.reRender();
   }
 });
 
