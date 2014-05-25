@@ -1,3 +1,38 @@
+<div class='beta-signin-3'>
+  <%= content_for :javascript do -%>
+  $('.beta-signin-3 .toggle').click(function(e) {
+    $('.beta-sign-in-form').toggleClass('hidden');
+  });
+  <% end -%>
+
+  <div class='beta-signin-3-inner'>
+    <span class='toggle'>Sign in</span>
+
+    <div class="beta-sign-in-form hidden">
+      <%= form_tag session_path, :class => '' do %>
+      <div class='beta-sign-in-content'>
+        <% if flash[:alert] %>
+        <div class='login-error-message'><%= flash[:alert]%></div>
+        <% end %>
+        <% if flash[:notice] %>
+        <div class='login-notice-message'><%= flash[:notice]%></div>
+        <% end %>
+        <%= label_tag :email, 'Email' %>
+        <%= email_field_tag :email, params[:email] %>
+        <%= label_tag :password, 'Password' %>
+        <%= password_field_tag :password, nil %>
+        <%= check_box_tag :remember_me, true, false %>
+        <%= label_tag :remember_me, 'Remember me' %>
+        <%= link_to 'Reset Password', new_password_reset_path, :class => 'beta-sign-in-reset-password-link' %>
+      </div>
+      <div class='beta-sign-in-toolbar-bottom'>
+        <%= submit_tag 'Sign In', :class => 'beta-sign-in-button' %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
 <div class='marketing-page-2'>
   <div class='jumbo outer'>
     <div class='jumbo inner'>
@@ -12,7 +47,7 @@
     <div class='section inner'>
       <div class='heading'>Water Cooler is for <span class='keyword'>discussions</span></div>
 
-      <p>If your communication is screwed up, everything else you’re working on is going to be screwed up.  Water Cooler is for discussing all the things you need to discuss, be the trivial or critical, sublime or mundane.  Use Water Cooler for</p>
+      <p>Water Cooler makes group discussions just work.  big or small, silly or mission critical.  It cuts out the hassle.</p>
 
       <div class='list-leader'>You can discuss: </div>
       <ul>
@@ -30,16 +65,14 @@
     <div class='section inner'>
       <div class='heading'>Discussions should be <span class='keyword'>reliable</span></div>
 
-      <p>Work is really about communication, but the tools we have often make that really difficult.  If you end up missing important messages, can’t search your archive, or you’re always worried about hitting the wrong reply button, then you can’t really trust your tools.</p>
-
-      <p>With Water Cooler, a discussion feels a lot like an email thread, but under the hood it’s really a single place that everyone on it shares, which prevents a lot of the problems and hassle of email chains and other messaging.</p>
+      <p>If you end up missing important messages, can’t search your archive, or you’re always worried about hitting the wrong reply button, then you can’t really trust your tools.</p>
 
       <div class='list-leader'>In Water Cooler you can’t: </div>
       <ul>
         <li>Accidentally hit reply vs. reply-all</li>
         <li>Forget to include someone</li>
         <li>Fall into unending reply-all chains</li>
-        <li>Get stuck with a bad subject lineschool projects with your groups</li>
+        <li>Get stuck with a bad subject lines</li>
       </ul>
       <div class='list-leader'>Because instead, you can:</div>
       <ul>
@@ -54,6 +87,9 @@
     <div class='section inner'>
       <div class='heading'>Water Cooler is for <span class='keyword'>quick chats</span></div>
 
+      <p>Inspiration is fleeting and good ideas need to be heard.</p>
+
+
       <div class='list-leader'>For quick messages:</div>
       <ul>
         <li>Just type and hit enter to send a quick reply</li>
@@ -66,7 +102,7 @@
   <div class='section outer'>
     <div class='section inner'>
 
-      <div class='heading'> Water Cooler is also for <span class='keyword'>big ideas</span></div>
+      <div class='heading'> And also <span class='keyword'>big ideas</span></div>
 
       <p>Some thoughts take five paragraphs.   Not everything fits into a one line chat message or needs to be acted on immediately.  Big ideas work just as well in Water Cooler.</p>
 

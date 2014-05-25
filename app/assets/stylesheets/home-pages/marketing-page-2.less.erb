@@ -1,8 +1,10 @@
 @import "ui/mixins.less";
 
 @width-1:@bp-2 * 0.8;
+@blue: #2080DD;
 
 .marketing-page-2{
+  background: linear-gradient(to bottom, #1e5799 0%, #7db9e8 100%);
   .outer{
     .inner{
       width:auto;
@@ -30,11 +32,13 @@
       text-align: center;
       color:white;
       font-size: 3rem;
+      padding:1.0rem;
     }
     .sub-title{
       text-align: center;
       color:white;
       font-size:1rem;
+      padding:1.0rem;
     }
     @media(min-width:@bp-1){
       .title{
@@ -72,10 +76,26 @@
   .section{
     &.outer:nth-child(2n-1){
       background-color: #FAFCFF;
+      background-color: white;
+    }
 
+    &.outer:nth-child(2n){
+      &, p, .heading{
+        color:white;
+      }
+      .list-leader{
+        color:#FFF;
+      }
+      li{
+        color:#DDD;
+      }
+      .keyword{
+        color:#ACF;
+      }
+      //background-color: rgba(0,128,255,1.0);
     }
     &.outer{
-      border-bottom:1px solid #CCC;
+      border-bottom:1px solid #EEE;
     }
     &.inner{
       padding:1.0rem;
@@ -90,40 +110,82 @@
         font-size:2.5rem;
         padding:0.5rem;
       }
+      @media(min-width:@bp-2){
+        padding:1.0rem;
+        font-size:3.0rem;
+      }
       .keyword{
         font-weight:bold;
         font-style: italic;
-        color:black;
+        color:@blue;
       }
     }
     p{
       font-size:1.0rem;
-      line-height: 1.5;
+      line-height: 1.75;
+      color:#444;
       @media(min-width:@bp-1){
-        padding:1.0rem;
+        padding:1.0rem 0;
         line-height: 2.0;
         font-size:1.25rem;
+      }
+      @media(min-width:@bp-2){
+        font-size:1.5rem;
       }
 
     }
     .list-leader{
       font-size:1.0rem;
-      color:#888;
+      color:#AAA;
       font-style: italic;
+      @media(min-width:@bp-1){
+        font-size:1.1rem;
+      }
+      @media(min-width:@bp-2){
+        font-size:1.3rem;
+      }
     }
     ul{
-      padding-left:0.75rem;
+      padding-left:1.5rem;
       @media(min-width:@bp-1){
-        padding-left:2.0rem;
+        padding-left:2.5rem;
       }
       li{
         padding:0.35rem;
         font-size:0.9rem;
         @media(min-width:@bp-1){
-
-          font-size:1.1rem;
+          font-size:1.0rem;
+        }
+        @media(min-width:@bp-2){
+          font-size:1.2rem;
         }
 
+      }
+    }
+  }
+}
+
+.beta-signin-3{
+  position: absolute;
+  top:0;
+  left:0;
+  right:0;
+
+  .beta-signin-3-inner{
+    //text-align: right;
+    position: relative;
+    @media(min-width:@width-1){
+      width:@width-1;
+      margin:0 auto;
+    }
+    .toggle{
+      display:inline-block;
+      cursor: pointer;
+      float: right;
+      padding-right:1.0rem;
+      color:rgba(255,255,255,0.5);
+      &:hover{
+        color:white;
       }
     }
   }
