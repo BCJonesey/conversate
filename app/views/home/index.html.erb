@@ -1,148 +1,123 @@
-<div class="info-page-home">
-  <div class="home-main main">
-
-  <%= content_for :javascript do -%>
-    $('.beta-sign-in-toggle').click(function(e) {
-      $('.beta-sign-in-form').toggleClass('hidden');
-    });
-  <% end -%>
-
-  <div class="main-top-toolbar">
-    <div class='main-top-toolbar-inner'>
-      <span class='home-link'>Water Cooler</span>
-      <span class='home-link'>About the Team</span>
-      <span class='beta-sign-in-toggle'>Sign in</span>
-
-    <div class="beta-sign-in-form hidden">
-      <%= form_tag session_path, :class => '' do %>
-        <div class='beta-sign-in-content'>
-          <% if flash[:alert] %>
-          <div class='login-error-message'><%= flash[:alert]%></div>
-          <% end %>
-          <% if flash[:notice] %>
-          <div class='login-notice-message'><%= flash[:notice]%></div>
-          <% end %>
-          <%= label_tag :email, 'Email' %>
-          <%= email_field_tag :email, params[:email] %>
-          <%= label_tag :password, 'Password' %>
-          <%= password_field_tag :password, nil %>
-          <%= check_box_tag :remember_me, true, false %>
-          <%= label_tag :remember_me, 'Remember me' %>
-          <%= link_to 'Reset Password', new_password_reset_path, :class => 'beta-sign-in-reset-password-link' %>
-        </div>
-        <div class='beta-sign-in-toolbar-bottom'>
-          <%= submit_tag 'Sign In', :class => 'beta-sign-in-button' %>
-        </div>
-        <% end %>
+<div class='marketing-page-2'>
+  <div class='jumbo outer'>
+    <div class='jumbo inner'>
+      <div class='title'>Water Cooler</div>
+      <div class='sub-title'>Group discussions, hassle-free.</div>
+      <div class='jumbo-signup-box'>
+        <%= render 'signup_form' %>
       </div>
     </div>
   </div>
+  <div class='section outer'>
+    <div class='section inner'>
+      <div class='heading'>Water Cooler is for <span class='keyword'>discussions</span></div>
 
+      <p>If your communication is screwed up, everything else you’re working on is going to be screwed up.  Water Cooler is for discussing all the things you need to discuss, be the trivial or critical, sublime or mundane.  Use Water Cooler for</p>
 
-    <div class='info-main-description-content jumbo-tron'>
-      <h1>Collaborate Your Way</h1>
-      <h2>Organize your conversations the way you want.  Get your team communicating sensibly and hassle-free.</h2>
-      <%= render 'signup_form' %>
-    </div>
-  </div>
-
-  <div class="info-main-description info-main-description-explain">
-    <div class="info-main-description-content">
+      <div class='list-leader'>You can discuss: </div>
       <ul>
-        <li>
-          <p>
-            Chat with only the colleagues you need to without having to blast
-            everyone with reply all.  Water Cooler lets you have a conversation
-            with just the people who need to be in it, but still keep everyone
-            else in the loop.  Gone are the days of your inbox filling up with
-            everyone else's business.
-          </p>
-          <img src="http://www.placehold.it/300x300" />
-        </li>
-        <li>
-          <img src="http://www.placehold.it/300x300" />
-          <p>
-            Group your conversations however they matter to you.  Organize
-            by team, by topic, by client or by whatever lets you get your work
-            done.  Heck, put your conversations in more than one folder if
-            that's your thing.
-          </p>
-        </li>
-        <li>
-          <p>
-            None of us work in a vacuum. Share Water Cooler folders with your
-            team to keep everyone on the same page.  Everyone can read every
-            conversation in a shared folder, even if they aren't chatting in
-            it.  Come back from vacation and skim the record of what happened,
-            or keep up to date on what your team is doing, all without the deluge
-            of unread messages in your inbox.
-          </p>
-          <img src="http://www.placehold.it/300x300" />
-        </li>
-        <li>
-          <img src="http://www.placehold.it/300x300" />
-          <p>
-            Your Water Cooler account is your own. Join as many different ad hoc organizations as you
-            need to get your work done. These organizations are no more than what conversations and topics
-            you've joined to communicate what you need to.
-          </p>
-        </li>
-        <li>
-          <p>
-            Never get stuck on an endless reply-all thread again.  You can
-            remove yourself from any Water Cooler conversation without
-            disrupting anyone else's chatter.  Take yourself off as soon as it's
-            not relevant to you, and you never have to see it again.  Aaah,
-            bliss.
-          </p>
-          <img src="http://www.placehold.it/300x300" />
-        </li>
+        <li>school projects with your groups</li>
+        <li>hobbies with your buddies</li>
+        <li>project coordination with your coworkers</li>
+        <li>or just about anything with your friends</li>
       </ul>
+    </div>
+  </div>
+
+
+
+  <div class='section outer'>
+    <div class='section inner'>
+      <div class='heading'>Discussions should be <span class='keyword'>reliable</span></div>
+
+      <p>Work is really about communication, but the tools we have often make that really difficult.  If you end up missing important messages, can’t search your archive, or you’re always worried about hitting the wrong reply button, then you can’t really trust your tools.</p>
+
+      <p>With Water Cooler, a discussion feels a lot like an email thread, but under the hood it’s really a single place that everyone on it shares, which prevents a lot of the problems and hassle of email chains and other messaging.</p>
+
+      <div class='list-leader'>In Water Cooler you can’t: </div>
+      <ul>
+        <li>Accidentally hit reply vs. reply-all</li>
+        <li>Forget to include someone</li>
+        <li>Fall into unending reply-all chains</li>
+        <li>Get stuck with a bad subject lineschool projects with your groups</li>
+      </ul>
+      <div class='list-leader'>Because instead, you can:</div>
+      <ul>
+        <li>Fix the subject line after you sent a message.</li>
+        <li>Add people to a discussion at any time</li>
+        <li>Remove yourself from a discussion as needed.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class='section outer'>
+    <div class='section inner'>
+      <div class='heading'>Water Cooler is for <span class='keyword'>quick chats</span></div>
+
+      <div class='list-leader'>For quick messages:</div>
+      <ul>
+        <li>Just type and hit enter to send a quick reply</li>
+        <li>Drop in image links and have them appear inline.</li>
+        <li>Keep a few conversations around as rolling “Lobby” spaces for general chatter. [2]</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class='section outer'>
+    <div class='section inner'>
+
+      <div class='heading'> Water Cooler is also for <span class='keyword'>big ideas</span></div>
+
+      <p>Some thoughts take five paragraphs.   Not everything fits into a one line chat message or needs to be acted on immediately.  Big ideas work just as well in Water Cooler.</p>
+
+      <div class='list-leader'>When you’ve got a big idea, you can:</div>
+      <ul>
+        <li>Compose big multi paragraph messages</li>
+        <li>Start a new thread just as easily</li>
+        <li>Retitle and update that thread as your big idea evolves</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class='section outer'>
+    <div class='section inner'>
+
+      <div class='heading'>Big ideas often need a little <span class='keyword'>organization</span></div>
+
+      <p>Unlike collaboration software like sharepoint, you don’t need to know the organizational structure of a project ahead of time.  You might not even need to know you have a project on your hands when you start discussing it.  But your structure will emerge as you go, and Water Cooler works with that.</p>
+
+      <div class='list-leader'>You can easily:</div>
+      <ul>
+        <li>File threads into folders based on their context</li>
+        <li>Pin important conversations and archive old ones.</li>
+        <li>Optionally share folders with teammates</li>
+        <li>Search through old threads</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class='section outer'>
+    <div class='section inner'>
+
+      <div class='heading'>But perhaps most of all, technology needs to be <span class='keyword'>forgiving</span></div>
+
+      <p>In theory, email works fine if everyone uses it the right way.  But last time we checked, no one one the Water Cooler team was infallible, and we bet you and your coworkers and friends aren’t either.   But communications products really require that you get everything right on the first try every time.   We were set up to fail.</p>
+
+      <div class='list-leader'>How familiar do these sound?</div>
+      <ul>
+        <li title='Have fun reading 25 reverse chronological, repeatedly indented messages to figure out what’s up.'>Been looped in late on an email chain</li>
+        <li title='This thread will be called “Re:        ”  forever.'>Forget a subject line</li>
+        <li title='have fun getting someone to take you off of it.'>Get stuck on a reply-all email chain</li>
+        <li title='Start a new thread, but lose all the decisions the group already made.'>Forget someone on a group text</li>
+        <li title='Moral quandary:  send a revision or let it fly and hope for the best?'>Find a typo right after you send a giant message</li>
+      </ul>
+      <p>Little errors add up to affect our productivity, but the developers of Water Cooler believe that the bigger impact is on our own confidence.   Making a dumb error, especially one you can’t go back and fix, makes you feel dumb, and people who feel dumb definitely aren’t working to their full potential.  New technology often just allows us to make more mistakes faster.  Water Cooler embraces that and has tools to fix help those mistakes, so we can just get to back work.</p>
+    </div>
+  </div>
+  <div class='section outer'>
+    <div class='section inner'>
 
       <%= render 'signup_form' %>
     </div>
   </div>
-
-  <div class='info-main-description'>
-    <div class='info-main-description-content info-main-pricing'>
-
-      <h1>Pricing</h1>
-      <div class='pricing-table'>
-        <div class="pricing-main">
-          <div class='pricing-cell'>
-            <div class="pricing-cell-content">
-              <p class="pricing-block-title">Basic</p>
-              <p>Free for a single individual</p>
-              <p>Unlimited conversations</p>
-              <p>Unlimited contacts</p>
-              <p>Up to X folders</p>
-            </div>
-          </div>
-          <div class='pricing-cell'>
-            <div class="pricing-cell-content">
-              <p class="pricing-block-title">Freelancer</p>
-              <p>$4/mo</p>
-              <p>Archive old conversations</p>
-              <p>Leave conversations[?]</p>
-              <p>Create shared folders</p>
-            </div>
-          </div>
-          <div class='pricing-cell'>
-            <div class="pricing-cell-content">
-              <p class="pricing-block-title">Enterprise</p>
-              <p>Call us</p>
-              <p>Security</p>
-              <p>Organizations</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
 </div>
-
-
-
-
