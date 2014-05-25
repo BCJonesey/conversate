@@ -7,6 +7,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     options = options || {};
     this.conversation = options.conversation;
     this.userId = options.user;
+    this.loadingActions = false;
     this.on('reset', this._findMyMessages, this);
     this.on('reset', this._findFocusedMessage, this);
     this.on('reset', this._findFollowOnMessages, this);
@@ -17,6 +18,9 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     });
     this.on('add', this.triggerNewMessage, this);
     this.on('sort', this._findFollowOnMessages, this);
+    this.on('sync', function() {
+      this.loadingActions = false;
+    }, this);
   },
   comparator: 'timestamp',
 
@@ -170,6 +174,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
         self.trigger('actionsLoadedForFirstTime');
       }
     }
+    this.loadingActions = true;
     this.fetch(options);
   },
 
