@@ -76,7 +76,6 @@
   .section{
     &.outer:nth-child(2n-1){
       background-color: #FAFCFF;
-      background-color: white;
     }
 
     &.outer:nth-child(2n){
@@ -159,7 +158,9 @@
         @media(min-width:@bp-2){
           font-size:1.2rem;
         }
-
+        &.tipped{
+          cursor: default;
+        }
       }
     }
   }
