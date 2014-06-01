@@ -3,12 +3,16 @@ Structural.Views.ActionContainer = Support.CompositeView.extend({
     var classes = 'ui-section act-container';
 
     if (!this.participants ||
-        !_(this.participants.map(function(p) { return p.id; })).contains(this.user.id)) {
+               !_(this.participants.map(function(p) { return p.id; })).contains(this.user.id)) {
       classes += ' not-participating-in';
     }
 
     if (this.$el && this.$el.hasClass('visible')){
       classes += ' visible'
+    }
+
+    if (!this.conversation || !this.conversation.id) {
+      classes += ' no-conversation';
     }
 
     return classes;
@@ -68,6 +72,7 @@ Structural.Views.ActionContainer = Support.CompositeView.extend({
       this.participants.off(null, null, this);
       this.participants = undefined;
     }
+    this.conversation = undefined;
     this.reClass();
   },
   scrollToBottom: function() {
