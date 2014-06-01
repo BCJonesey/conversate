@@ -1,6 +1,7 @@
 Structural.Views.Actions = Support.CompositeView.extend({
   className: 'act-list ui-scrollable',
   noConversationTemplate: JST.template('actions/no_conversation'),
+  loadingActionsTemplate: JST.template('actions/loading'),
   initialize: function(options) {
     this._wireEvents(this.collection);
 
@@ -15,6 +16,7 @@ Structural.Views.Actions = Support.CompositeView.extend({
     collection.on('addedSomeoneElsesMessage', this.scrollDownIfAtBottom, this);
     collection.on('actionsLoadedForFirstTime', this.reRender, this);
     collection.on('focusedView', this.scrollToTargetAtEarliestOpportunity, this);
+    collection.on('doneLoading', this.reRender, this);
   },
   render: function() {
     this.focusedView = undefined;

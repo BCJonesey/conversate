@@ -20,6 +20,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     this.on('sort', this._findFollowOnMessages, this);
     this.on('sync', function() {
       this.loadingActions = false;
+      this.trigger('doneLoading');
     }, this);
   },
   comparator: 'timestamp',
