@@ -4,6 +4,7 @@ Structural.Views.ContactLists = Support.CompositeView.extend({
   className: 'contact-lists ui-scrollable',
   initialize: function(options) {
     var self = this;
+    this.listenTo(Structural._user, 'addressBookUpdated', this.rerender);
   },
   render: function() {
     this.collection.forEach(this.renderContactList, this);

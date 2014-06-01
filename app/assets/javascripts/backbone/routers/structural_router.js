@@ -37,7 +37,9 @@ Structural.Router = new (Backbone.Router.extend({
   },
   profile: function() { },
   admin: function() { },
-  people: function() { },
+  people: function() {
+    Structural.showPeople();
+  },
 
   isActionFocused: function() {
     return this._isActionFocused;

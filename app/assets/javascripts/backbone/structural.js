@@ -32,9 +32,13 @@ var Structural = new (Support.CompositeView.extend({
       isMainCollection: true
     });
 
+    // We do not bootstrap the "people" information so this value will start at null
+    this._selectedContactListId = null;
+
     // We pass the folder over, but we should let it come from the collection.
     this._folder = this._folders.where({id: bootstrap.folder.id})[0];
     this._folder.conversations.set(bootstrap.conversations);
+
 
     // Instantiate the current conversation or a sane default.
     this._conversation = this._folder.conversations.where({id: bootstrap.conversation.id})[0];

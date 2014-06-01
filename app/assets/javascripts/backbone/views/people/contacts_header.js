@@ -10,7 +10,7 @@ Structural.Views.ContactsBar = Support.CompositeView.extend({
     var self = this;
   },
   render: function() {
-    this.$el.html(this.template());
+    this.$el.html(this.template({ contactList: this.model }));
     return this;
   }
 });
