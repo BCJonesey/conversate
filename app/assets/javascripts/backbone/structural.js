@@ -288,5 +288,6 @@ var Structural = new (Support.CompositeView.extend({
     this._watercooler.leave();
     this._people = new Structural.Views.People();
     this.appendChild(this._people);
+    Structural.Router.navigate('people');
   }
 }))({el: $('body'), apiPrefix: '/api/v0'});
