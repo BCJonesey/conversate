@@ -7,8 +7,10 @@ Structural.Views.Actions = Support.CompositeView.extend({
 
     Structural.on('changeConversation', this.changeConversation, this);
     Structural.on('clearConversation', this.clearConversation, this);
+    Structural.on('noConversationToView', this.noConversation, this);
 
     this._noConversationSelected = false;
+    this._loadingActions = false;
   },
   _wireEvents: function(collection) {
     collection.on('add', this.renderAction, this);
@@ -21,10 +23,10 @@ Structural.Views.Actions = Support.CompositeView.extend({
   render: function() {
     this.focusedView = undefined;
 
-    if (this._noConversationSelected) {
-      this.$el.html(this.noConversationTemplate());
-    } else if (this.collection.loadingActions) {
+    if (this._loadingActions) {
       this.$el.html(this.loadingActionsTemplate());
+    } else if (this._noConversationSelected) {
+      this.$el.html(this.noConversationTemplate());
     } else {
       this.collection.forEach(this.renderActionAlwaysAppend, this);
       this.scrollToTargetAtEarliestOpportunity(this.focusedView);
@@ -80,6 +82,7 @@ Structural.Views.Actions = Support.CompositeView.extend({
   changeConversation: function(conversation) {
     this.collection.off(null, null, this);
     this.collection = conversation.actions;
+    this._loadingActions = false;
     this._noConversationSelected = false;
 
     if (!Structural.Router.isActionFocused()) {
@@ -91,6 +94,12 @@ Structural.Views.Actions = Support.CompositeView.extend({
   },
   clearConversation: function() {
     this.collection.off(null, null, this);
+    this._loadingActions = true;
+    this._noConversationSelected = false;
+    this.reRender();
+  },
+  noConversation: function() {
+    this._loadingActions = false;
     this._noConversationSelected = true;
     this.reRender();
   },

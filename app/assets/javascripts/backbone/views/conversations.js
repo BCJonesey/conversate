@@ -159,6 +159,12 @@ Structural.Views.Conversations = Support.CompositeView.extend({
                                       {silentResponsiveView: true});
       conversation.focus();
     }
+
+    // This is kind of awkward but it lets the action view pick up on the fact
+    // that it's not going to have anything to see.
+    if (!this.collection.neverBeenFetched && this.collection.length === 0) {
+      Structural.trigger('noConversationToView');
+    }
   },
 
   showFocusedConversation: function(conversation) {
