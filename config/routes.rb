@@ -20,9 +20,7 @@ Conversate::Application.routes.draw do
 
   get 'profile' => 'users#edit'
 
-  get 'people' => 'groups#index'
-  put 'people' => 'groups#edit'
-  post 'people' => 'groups#new_user'
+  get '/people' => 'contacts#index'
 
   resources :password_resets
 

@@ -5,7 +5,7 @@ Structural.Views.Contacts = Support.CompositeView.extend({
   className: 'contacts ui-scrollable',
   initialize: function(options) {
     var self = this;
-    this.listenTo(Structural._user, 'addressBookUpdated', this.rerender);
+    this.listenTo(Structural._user, 'addressBookUpdated', this.reRender);
   },
   render: function() {
     this.$el.html(this.template());
