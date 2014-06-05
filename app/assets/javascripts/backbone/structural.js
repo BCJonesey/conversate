@@ -285,8 +285,19 @@ var Structural = new (Support.CompositeView.extend({
     }
   },
   showPeople: function(){
+    if (!this._people) {
+      this._people = new Structural.Views.People();
+    }
+
     this._watercooler.leave();
-    this._people = new Structural.Views.People();
     this.appendChild(this._people);
+  },
+  showWaterCooler: function(focus) {
+    // Assume that this._watercooler got instantiated in start().
+    if (this._people) {
+      this._people.leave();
+    }
+    this.appendChild(this._watercooler);
+    this.focus(focus);
   }
 }))({el: $('body'), apiPrefix: '/api/v0'});

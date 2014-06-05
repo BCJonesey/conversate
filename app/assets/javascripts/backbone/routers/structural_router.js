@@ -9,7 +9,7 @@ Structural.Router = new (Backbone.Router.extend({
   },
   index: function() {
     this._isActionFocused = false;
-    Structural.focus({ folder: Structural._folders.at(0).id });
+    Structural.showWaterCooler({ folder: Structural._folders.at(0).id });
   },
   conversation: function(slug, id, params) {
     // Due to some slightly unresolved technical and semantic debt, the UI
@@ -19,7 +19,7 @@ Structural.Router = new (Backbone.Router.extend({
     var actionId = params ? params['message'] : undefined;
     this._isActionFocused = actionId !== undefined;
 
-    Structural.focus({
+    Structural.showWaterCooler({
       conversation: id,
       action: actionId
     });
@@ -32,7 +32,7 @@ Structural.Router = new (Backbone.Router.extend({
   },
   folder: function(slug, id) {
     this._isActionFocused = false;
-    Structural.focus({ folder: id });
+    Structural.showWaterCooler({ folder: id });
     this._fixSlug('folder/', slug, '/' + id, Structural._folders.get(id|0).get('name'));
   },
   profile: function() { },

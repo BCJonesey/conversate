@@ -13,5 +13,23 @@ Structural.Views.StructuralBar = Support.CompositeView.extend({
     this.insertChildAfter(this._search, nameEl);
     this.insertChildBefore(this._news, nameEl);
     return this;
+  },
+
+  events: {
+    'click .stb-link-watercooler': 'navigateToWaterCooler',
+    'click .stb-link-people': 'navigateToPeople'
+  },
+
+  navigateToWaterCooler: function(e) {
+    e.preventDefault();
+    this._navigateTo(Structural.Router.indexPath());
+  },
+  navigateToPeople: function(e) {
+    e.preventDefault();
+    this._navigateTo(Structural.Router.peoplePath());
+  },
+
+  _navigateTo: function(path) {
+    Structural.Router.navigate(path, {trigger: true});
   }
 });
