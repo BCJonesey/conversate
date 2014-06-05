@@ -20,6 +20,8 @@ Conversate::Application.routes.draw do
 
   get 'profile' => 'users#edit'
 
+  get '/people' => 'contacts#index'
+
   resources :password_resets
 
   namespace :api do
