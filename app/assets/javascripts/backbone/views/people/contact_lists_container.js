@@ -10,7 +10,7 @@ Structural.Views.ContactListsContainer = Support.CompositeView.extend({
     this.bar = new Structural.Views.ContactsListsBar();
     this.appendChild(this.bar);
 
-    this.listView = new Structural.Views.ContactLists({collection: Structural._contactLists});
+    this.listView = new Structural.Views.ContactLists();
     this.appendChild(this.listView);
   }
 });
