@@ -1,11 +1,16 @@
 Structural.Views.Actions = Support.CompositeView.extend({
   className: 'act-list ui-scrollable',
+  noConversationTemplate: JST.template('actions/no_conversation'),
+  loadingActionsTemplate: JST.template('actions/loading'),
   initialize: function(options) {
     this._wireEvents(this.collection);
 
     Structural.on('changeConversation', this.changeConversation, this);
     Structural.on('clearConversation', this.clearConversation, this);
+    Structural.on('noConversationToView', this.noConversation, this);
 
+    this._noConversationSelected = false;
+    this._loadingActions = false;
   },
   _wireEvents: function(collection) {
     collection.on('add', this.renderAction, this);
@@ -13,11 +18,19 @@ Structural.Views.Actions = Support.CompositeView.extend({
     collection.on('addedSomeoneElsesMessage', this.scrollDownIfAtBottom, this);
     collection.on('actionsLoadedForFirstTime', this.reRender, this);
     collection.on('focusedView', this.scrollToTargetAtEarliestOpportunity, this);
+    collection.on('doneLoading', this.reRender, this);
   },
   render: function() {
     this.focusedView = undefined;
-    this.collection.forEach(this.renderActionAlwaysAppend, this);
-    this.scrollToTargetAtEarliestOpportunity(this.focusedView);
+
+    if (this._loadingActions) {
+      this.$el.html(this.loadingActionsTemplate());
+    } else if (this._noConversationSelected) {
+      this.$el.html(this.noConversationTemplate());
+    } else {
+      this.collection.forEach(this.renderActionAlwaysAppend, this);
+      this.scrollToTargetAtEarliestOpportunity(this.focusedView);
+    }
     return this;
   },
   _makeNewActionView: function(action) {
@@ -69,6 +82,8 @@ Structural.Views.Actions = Support.CompositeView.extend({
   changeConversation: function(conversation) {
     this.collection.off(null, null, this);
     this.collection = conversation.actions;
+    this._loadingActions = false;
+    this._noConversationSelected = false;
 
     if (!Structural.Router.isActionFocused()) {
       this.collection.clearFocus();
@@ -79,7 +94,14 @@ Structural.Views.Actions = Support.CompositeView.extend({
   },
   clearConversation: function() {
     this.collection.off(null, null, this);
-    this.clearView();
+    this._loadingActions = true;
+    this._noConversationSelected = false;
+    this.reRender();
+  },
+  noConversation: function() {
+    this._loadingActions = false;
+    this._noConversationSelected = true;
+    this.reRender();
   },
 
   scrollDownIfAtBottom: function() {
