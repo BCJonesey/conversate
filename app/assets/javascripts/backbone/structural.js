@@ -25,7 +25,7 @@ var Structural = new (Support.CompositeView.extend({
     // like the current folders, the current folder, the current conversation,
     // and the current user.
     this._user = new Structural.Models.User(bootstrap.user);
-    this._contactLists = new Structural.Collections.ContactLists(bootstrap.ContactLists);
+    this._contactLists = new Structural.Collections.ContactLists();
     this._contactLists.fetch({success: function(){Structural._user.rebuildAddressBook();}});
     this._folders = new Structural.Collections.Folders(bootstrap.folders, {
       // This is the only Folders collection that we want to handle events.
