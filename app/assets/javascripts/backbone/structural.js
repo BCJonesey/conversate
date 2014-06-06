@@ -60,7 +60,6 @@ var Structural = new (Support.CompositeView.extend({
 
     // Setup our views with appropriate data settings.
     this._bar = new Structural.Views.StructuralBar({model: this._user});
-    this._people = new Structural.Views.People();
     this._watercooler = new Structural.Views.WaterCooler({
       folders: this._folders,
       conversations: this._folder.conversations,
@@ -80,7 +79,6 @@ var Structural = new (Support.CompositeView.extend({
     this.appendChild(Structural.FileUploadToaster.view);
     this.appendChild(this._bar);
     this.appendChild(this._watercooler);
-    //this.appendChild(this._people);
     this._faviconAndTitle.render();
 
     Backbone.history.start({pushState: true});

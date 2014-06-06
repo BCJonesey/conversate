@@ -1,6 +1,7 @@
 Structural.Views.People = Support.CompositeView.extend({
   className: 'people water-cooler',
   initialize: function(options) {
+    this.checkIfContactListSelected();
     this.listenTo(Structural._user, 'addressBookUpdated', this.checkIfContactListSelected);
   },
   render: function() {
@@ -13,7 +14,7 @@ Structural.Views.People = Support.CompositeView.extend({
   checkIfContactListSelected: function(){
     if(!Structural._selectedContactListId && Structural._contactLists.length > 0){
       Structural._selectedContactListId = Structural._contactLists.at(0).id;
-      Structural._people.trigger('switchContactList');
+      this.trigger('switchContactList');
     }
   }
 });
