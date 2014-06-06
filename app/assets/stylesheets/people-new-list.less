@@ -61,6 +61,30 @@
   }
 
   .contents{
+    .abs-pos-fill();
+    background-color: #F8F8F8;
+    top:3.0rem;
+    bottom:3.0rem;
+    padding:0.75rem;
+    overflow: auto;
+    text-align: left;
+    label{
+      display: block;
+      font-size:0.8rem;
+      color:#888;
+      margin-left:0.25rem;
+    }
+    input{
+      display: block;
+      width:100%;
+      padding:0.5rem;
+      border:1px solid #CCC;
+      outline:none;
+      font-size:1.0rem;
+      &:focus{
+        border-color:blue;
+      }
+    }
     .contact-list-name-input{
       display:block;
       width: 100%;
