@@ -1,6 +1,9 @@
 @import 'variables.css.less';
 @import 'mixins.css.less';
 
+@blue2: #1e5799;
+@blue: #3090DD;
+
 .button(@color:#888){
   font-size:1.0rem;
   color:white;
@@ -12,7 +15,7 @@
   outline:none;
   background-color: @color;
   &:hover{
-    background-color: (mix(white, @color, 50%))
+    background-color: (mix(white, @color, 25%))
   }
 }
 
@@ -31,16 +34,16 @@
   margin: 4.0rem auto;
   width:30rem;
   height: 20rem;
-  border:@border-2;
+  border:@border-3;
   background-color: @bg-1;
   border-radius:3px;
-
+  overflow: hidden;
   .group.right{
     position: absolute;
     right:0;
     top:0;
     bottom:0;
-    padding:0.35rem 0.35rem 0;
+    padding:0.4rem 0.35rem 0;
   }
 
   .header{
@@ -49,6 +52,7 @@
     height:3.0rem;
     border-bottom:@border-2;
     background-color: @bg-2;
+    padding:0;
     .contact-list-title{
       display:inline-block;
       font-size:1.5rem;
@@ -58,6 +62,8 @@
   }
   .close-button{
     .button();
+    color:#666;
+    background-color: transparent;
   }
 
   .contents{
@@ -82,7 +88,7 @@
       outline:none;
       font-size:1.0rem;
       &:focus{
-        border-color:blue;
+        border-color:@blue;
       }
     }
     .contact-list-name-input{
@@ -100,7 +106,6 @@
     height:3.0rem;
   }
   .contact-list-edit-save-button{
-    .button(@color:blue;);
-
+    .button(@color:@blue);
   }
 }
