@@ -10,6 +10,7 @@ Structural.Router = new (Backbone.Router.extend({
   index: function() {
     this._isActionFocused = false;
     Structural.showWaterCooler({ folder: Structural._folders.at(0).id });
+    this.triggerRouteChange('watercooler');
   },
   conversation: function(slug, id, params) {
     // Due to some slightly unresolved technical and semantic debt, the UI
@@ -29,16 +30,19 @@ Structural.Router = new (Backbone.Router.extend({
       suffix += '?message=' + actionId;
     }
     this._fixSlug('conversation/', slug, suffix, Structural._conversation.get('title'));
+    this.triggerRouteChange('watercooler');
   },
   folder: function(slug, id) {
     this._isActionFocused = false;
     Structural.showWaterCooler({ folder: id });
     this._fixSlug('folder/', slug, '/' + id, Structural._folders.get(id|0).get('name'));
+    this.triggerRouteChange('watercooler');
   },
   profile: function() { },
   admin: function() { },
   people: function() {
     Structural.showPeople();
+    this.triggerRouteChange('people');
   },
 
   isActionFocused: function() {
@@ -58,6 +62,10 @@ Structural.Router = new (Backbone.Router.extend({
     return encodeURIComponent(s.toLowerCase()
                                .replace(/[ _]/g, '-')
                                .replace(/[^a-zA-Z0-9-]/g, ''));
+  },
+
+  triggerRouteChange: function(routeGroup) {
+    this.trigger('routeChange', routeGroup);
   },
 
   /* *Path functions are suitable for passing to Structural.Router.navigate,

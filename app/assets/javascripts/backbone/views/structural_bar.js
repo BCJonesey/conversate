@@ -5,6 +5,8 @@ Structural.Views.StructuralBar = Support.CompositeView.extend({
     options = options || {};
     this._news = new Structural.Views.News();
     this._search = new Structural.Views.Search();
+
+    this.listenTo(Structural.Router, 'routeChange', this._updateButtonSelection);
   },
 
   render: function() {
@@ -31,5 +33,14 @@ Structural.Views.StructuralBar = Support.CompositeView.extend({
 
   _navigateTo: function(path) {
     Structural.Router.navigate(path, {trigger: true});
+  },
+  _updateButtonSelection: function(routeGroup) {
+    if (routeGroup === 'watercooler') {
+      this.$('.stb-link-watercooler').addClass('stb-selected');
+      this.$('.stb-link-people').removeClass('stb-selected');
+    } else if (routeGroup === 'people') {
+      this.$('.stb-link-watercooler').removeClass('stb-selected');
+      this.$('.stb-link-people').addClass('stb-selected');
+    }
   }
 });
