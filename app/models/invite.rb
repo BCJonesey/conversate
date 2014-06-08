@@ -1,3 +1,5 @@
 class Invite < ActiveRecord::Base
-    validates :email, presence: true, format: /@/
+  attr_accessor :email, :user_id
+  validates :email, presence: true, format: /@/
+  validates :user_id, presence: true, numericality: {:only_integer => true}
 end
