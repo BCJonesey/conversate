@@ -36,7 +36,9 @@ var Structural = new (Support.CompositeView.extend({
     this._selectedContactListId = null;
 
     // We pass the folder over, but we should let it come from the collection.
-    this._folder = this._folders.where({id: bootstrap.folder.id})[0];
+    this._folder = bootstrap.folder ?
+                    this._folders.where({id: bootstrap.folder.id})[0] :
+                    new Structural.Models.Folder();
     this._folder.conversations.set(bootstrap.conversations);
 
 
