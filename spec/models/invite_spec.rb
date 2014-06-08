@@ -13,8 +13,8 @@ describe Invite do
     invite.valid?.should_not be_true
   end
 
-  it "should allow a email with some text" do
-    invite.email = "blahrg"
+  it "should allow a email with one @" do
+    invite.email = "blahrg@example.com"
     invite.valid?.should be_true
   end
 
