@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 20140608185210) do
   end
 
   create_table "invites", force: true do |t|
+    t.integer  "user_id",    null: false
     t.string   "email",      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
