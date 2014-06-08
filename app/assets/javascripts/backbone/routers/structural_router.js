@@ -5,7 +5,8 @@ Structural.Router = new (Backbone.Router.extend({
     'folder/:slug/:id': 'folder',
     'profile': 'profile',
     'admin': 'admin',
-    'people': 'people'
+    'people': 'people',
+    'people/contact-lists/:id': 'contactList'
   },
   index: function() {
     this._isActionFocused = false;
@@ -38,6 +39,10 @@ Structural.Router = new (Backbone.Router.extend({
   profile: function() { },
   admin: function() { },
   people: function() {
+    Structural.showPeople();
+  },
+  contactList: function(id) {
+    // TODO: Ben, do something with this id or whatever.
     Structural.showPeople();
   },
 

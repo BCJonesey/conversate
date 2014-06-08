@@ -11,4 +11,15 @@ class ContactsController < ApplicationController
 
     render 'structural/show' and return
   end
+
+  def show_list
+    @folder = current_user.folders.first
+    @folders = current_user.folders
+    @conversation = nil
+    @conversations = []
+    @actions = nil
+    @participants = nil
+
+    render 'structural/show' and return
+  end
 end

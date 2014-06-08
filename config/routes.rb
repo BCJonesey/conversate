@@ -21,6 +21,7 @@ Conversate::Application.routes.draw do
   get 'profile' => 'users#edit'
 
   get '/people' => 'contacts#index'
+  get '/people/contact-lists/:id' => 'contacts#show_list'
 
   resources :password_resets
 
