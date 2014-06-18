@@ -17,9 +17,6 @@ Structural.Views.ContactList = Support.CompositeView.extend({
     return this;
   },
   showContactList: function(){
-    if(Structural._selectedContactListId != this.model.id){
-      Structural._selectedContactListId = this.model.id;
-      Structural._people.trigger('switchContactList');
-    }
+    this.model.show();
   }
 });
