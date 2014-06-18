@@ -284,7 +284,11 @@ var Structural = new (Support.CompositeView.extend({
       this._faviconAndTitle.render();
     }
   },
-  showPeople: function(){
+  showPeople: function(options){
+    // TODO BEN - options.contactListId will either be undefined (we loaded
+    // on the /people route) or a number (we loaded on /people/contact-lists/X).
+    // What to do with that is up to you.
+
     if (!this._people) {
       this._people = new Structural.Views.People();
     }

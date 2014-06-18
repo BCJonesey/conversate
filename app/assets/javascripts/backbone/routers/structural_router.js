@@ -39,11 +39,12 @@ Structural.Router = new (Backbone.Router.extend({
   profile: function() { },
   admin: function() { },
   people: function() {
-    Structural.showPeople();
+    Structural.showPeople({});
   },
   contactList: function(id) {
-    // TODO: Ben, do something with this id or whatever.
-    Structural.showPeople();
+    Structural.showPeople({
+      contactListId: id
+    });
   },
 
   isActionFocused: function() {
