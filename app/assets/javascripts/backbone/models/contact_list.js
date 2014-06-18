@@ -25,6 +25,8 @@ Structural.Models.ContactList = Backbone.Model.extend({
       if (Structural._people) {
         Structural._people.trigger('switchContactList');
       }
+
+      Structural.Router.navigate(Structural.Router.contactListPath(this));
     }
   }
 });
