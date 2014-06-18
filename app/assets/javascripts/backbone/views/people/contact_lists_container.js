@@ -12,5 +12,8 @@ Structural.Views.ContactListsContainer = Support.CompositeView.extend({
 
     this.listView = new Structural.Views.ContactLists();
     this.appendChild(this.listView);
+
+    this.editor = new Structural.Views.ContactListEditor();
+    this.appendChild(this.editor)
   }
 });
