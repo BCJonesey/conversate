@@ -93,6 +93,9 @@ Structural.Router = new (Backbone.Router.extend({
   peoplePath: function() {
     return 'people';
   },
+  contactListPath: function(contactList) {
+    return this.peoplePath() + '/contact-lists/' + contactList.id;
+  },
   logoutPath: function() {
     return 'session/logout';
   },
@@ -120,6 +123,9 @@ Structural.Router = new (Backbone.Router.extend({
   },
   peopleHref: function() {
     return '/' + this.peoplePath();
+  },
+  contactListHref: function(contactList) {
+    return '/' + this.contactListPath(contactList);
   },
   logoutHref: function() {
     return '/' + this.logoutPath();
