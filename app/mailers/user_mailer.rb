@@ -8,4 +8,9 @@ class UserMailer < ActionMailer::Base
     mail(:to => user.email,
          :subject => "Your password has been reset")
   end
+
+  def send_invite(email)
+    mail(:to => email,
+      :subject => "Welcome to Watercooler!")
+  end
 end
