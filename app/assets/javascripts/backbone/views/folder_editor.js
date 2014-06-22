@@ -1,5 +1,12 @@
 Structural.Views.FolderEditor = Support.CompositeView.extend({
-  className: 'fld-editor',
+  className: function() {
+    var classes = 'fld-editor';
+    if (this._folder && this._folder.isShared()) {
+      classes += ' fld-editor-shared';
+    }
+
+    return classes;
+  },
   template: JST.template('folders/editor'),
   initialize: function(options) {
     options = options || {};
@@ -30,6 +37,9 @@ Structural.Views.FolderEditor = Support.CompositeView.extend({
     }
     return this;
   },
+  reClass: function() {
+    this.el.className = this.className();
+  },
 
   events: {
     'click .ef-save-button': 'save',
@@ -42,6 +52,7 @@ Structural.Views.FolderEditor = Support.CompositeView.extend({
   show: function(folder) {
     this._folder = folder;
     this.render();
+    this.reClass();
     this.$('.modal-background').removeClass('hidden');
   },
   showDeleteWarning: function(e){
