@@ -7,23 +7,26 @@ Structural.Views.FolderEditor = Support.CompositeView.extend({
   },
   render: function() {
     if (this._folder) {
-      this._autocomplete = new Structural.Views.Autocomplete({
-        dictionary: Structural._user.addressBook(),
-        blacklist: this._folder.get('users').clone(),
-        addSelectionToBlacklist: true,
-        property: 'name'
-      });
-      this._removableList = new Structural.Views.RemovableParticipantList({
-        collection: this._folder.get('users').clone()
-      });
-
-      this._autocomplete.on('select', this._removableList.add, this._removableList);
-      this._removableList.on('remove', this._autocomplete.removeFromBlacklist, this._autocomplete);
-      this.listenTo(Structural._user, 'addressBookUpdated', this._updateAddressBook);
-
       this.$el.html(this.template({folder: this._folder, user: this._user}));
-      this.insertChildAfter(this._removableList, this.$('label[for="folder-participants"]'));
-      this.insertChildAfter(this._autocomplete, this.$('label[for="folder-participants"]'));
+
+      if (this._folder.isShared()) {
+        this._autocomplete = new Structural.Views.Autocomplete({
+          dictionary: Structural._user.addressBook(),
+          blacklist: this._folder.get('users').clone(),
+          addSelectionToBlacklist: true,
+          property: 'name'
+        });
+        this._removableList = new Structural.Views.RemovableParticipantList({
+          collection: this._folder.get('users').clone()
+        });
+
+        this._autocomplete.on('select', this._removableList.add, this._removableList);
+        this._removableList.on('remove', this._autocomplete.removeFromBlacklist, this._autocomplete);
+        this.listenTo(Structural._user, 'addressBookUpdated', this._updateAddressBook);
+
+        this.insertChildAfter(this._removableList, this.$('label[for="folder-participants"]'));
+        this.insertChildAfter(this._autocomplete, this.$('label[for="folder-participants"]'));
+      }
     }
     return this;
   },

@@ -19,9 +19,11 @@
                value="<%= folder.escape('email') %>"><span class='ef-email-domain'>@watercooler.io</span>
          <% } %>
       </div>
-      <div class='ef-folder-participants participants-vertical'>
-        <label for="folder-participants">Participants</label>
-      </div>
+      <% if (folder.isShared()) { %>
+        <div class='ef-folder-participants participants-vertical'>
+          <label for="folder-participants">Participants</label>
+        </div>
+      <% } %>
     </div>
     <div class='modal-content ef-deletion-content hidden'>
       <div class='ef-deletion-message'>
