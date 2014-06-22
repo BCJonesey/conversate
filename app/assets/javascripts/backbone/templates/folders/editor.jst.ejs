@@ -18,6 +18,8 @@
         <input id="folder-email" type="text" class='ef-email-input'
                value="<%= folder.escape('email') %>"><span class='ef-email-domain'>@watercooler.io</span>
          <% } %>
+         <input type="checkbox" id="folder-shared" />
+         <label for="folder-shared">Share this folder</label>
       </div>
       <% if (folder.isShared()) { %>
         <div class='ef-folder-participants participants-vertical'>
