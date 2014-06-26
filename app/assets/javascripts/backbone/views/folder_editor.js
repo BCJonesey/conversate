@@ -1,7 +1,7 @@
 Structural.Views.FolderEditor = Support.CompositeView.extend({
   className: function() {
     var classes = 'fld-editor';
-    if (this._folder && this._folder.isShared()) {
+    if (this._isShared) {
       classes += ' fld-editor-shared';
     }
 
@@ -14,9 +14,13 @@ Structural.Views.FolderEditor = Support.CompositeView.extend({
   },
   render: function() {
     if (this._folder) {
-      this.$el.html(this.template({folder: this._folder, user: this._user}));
+      this.$el.html(this.template({
+        folder: this._folder,
+        user: this._user,
+        isShared: this._isShared
+      }));
 
-      if (this._folder.isShared()) {
+      if (this._isShared) {
         this._autocomplete = new Structural.Views.Autocomplete({
           dictionary: Structural._user.addressBook(),
           blacklist: this._folder.get('users').clone(),
@@ -51,6 +55,7 @@ Structural.Views.FolderEditor = Support.CompositeView.extend({
 
   show: function(folder) {
     this._folder = folder;
+    this._isShared = this._folder.isShared();
     this.render();
     this.reClass();
     this.$('.modal-background').removeClass('hidden');
