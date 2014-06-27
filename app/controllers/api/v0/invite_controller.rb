@@ -1,4 +1,5 @@
 class Api::V0::InviteController < ApplicationController
+  before_filter :require_login
 
   def create
     invite = Invite.create(:email => params[:email], :user_id => params[:user_id])
