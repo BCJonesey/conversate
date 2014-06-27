@@ -20,6 +20,7 @@ describe Api::V0::InviteController do
       body = JSON.parse(response.body)
       expect(body['email']).to eq('bob@example.com')
       expect(body['user_id']).to eq(@user.id)
+      expect(Invite.count).to eq(1)
     end
 
     it "should remove one invite from a user on success" do
