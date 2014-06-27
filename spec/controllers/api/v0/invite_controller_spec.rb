@@ -13,6 +13,7 @@ describe Api::V0::InviteController do
   context "create" do
 
     it "should be able to make an invite" do
+      @user.invite_count = 10
       post :create, :email => 'bob@example.com'
       expect(response).to be_success
       expect(response.code).to eq('201')
@@ -35,6 +36,14 @@ describe Api::V0::InviteController do
       expect(response).not_to be_success
       expect(response.code).to eq('500')
       expect(@user.invite_count).to eq 10
+    end
+
+    it "should not send an invite from a user who has none left" do
+      @user.invite_count = 0
+      post :create, :email => 'bob@example.com'
+      expect(response).not_to be_success
+      expect(response.code).to eq('500')
+      expect(@user.invite_count).to eq 0
     end
 
   end
