@@ -23,7 +23,7 @@ class HomeController < ApplicationController
     flash[:signed_up] = success
 
     if success
-      BetaSignupMailer.beta_signup_email(beta_signup).deliver
+      BetaSignupMailer.beta_signup_email(signup).deliver
     end
 
     render :index, layout: 'application_rails'
