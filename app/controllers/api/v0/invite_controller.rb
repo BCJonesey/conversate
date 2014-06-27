@@ -6,7 +6,11 @@ class Api::V0::InviteController < ApplicationController
     head :status => 500 and return if invite.errors.count > 0
     render :json => invite, :status => 201
 
-    UserMailer.send_invite(invite.email).deliver
+    begin
+      UserMailer.send_invite(invite.email).deliver
+    rescue Exception
+      head :status => 500 and return
+    end
 
     # If we've successfully sent an email, we want to remove one of the user's invites.
     current_user.invite_count -= 1

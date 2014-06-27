@@ -18,7 +18,7 @@ describe Api::V0::InviteController do
       expect(response.code).to eq('201')
       body = JSON.parse(response.body)
       expect(body['email']).to eq('bob@example.com')
-      expect(body['user_id']).to eq(1)
+      expect(body['user_id']).to eq(@user.id)
     end
 
     it "should remove one invite from a user on success" do
@@ -26,6 +26,15 @@ describe Api::V0::InviteController do
       expect(@user.invite_count).to eq 10
       post :create, :email => 'bob@example.com'
       expect(@user.invite_count).to eq 9
+    end
+
+    it "should not remove one invite from a user on not actually sending an email" do
+      @user.invite_count = 10
+      expect(@user.invite_count).to eq 10
+      post :create, :email => 'bob'
+      expect(response).not_to be_success
+      expect(response.code).to eq('500')
+      expect(@user.invite_count).to eq 10
     end
 
   end
