@@ -2,6 +2,13 @@ require 'spec_helper'
 
 describe Api::V0::InviteController do
 
+  before(:each) do
+    @user = User.create!(:email => 'dummyUser@example.com',
+                          :full_name => 'Rufio Pan',
+                          :password => 'superDUPERsecretPassword')
+    login_user
+  end
+
   context "create" do
 
     it "should be able to make an invite" do
