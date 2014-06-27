@@ -47,10 +47,11 @@ Structural.Views.FolderEditor = Support.CompositeView.extend({
 
   events: {
     'click .ef-save-button': 'save',
-    'click .ef-delete-button':'delete',
-    'click .ef-trash-button':'showDeleteWarning',
-    'click .ef-deletion-cancel':'hideDeleteWarning',
-    'click .ef-deletion-confirmation':'toggleDeleteButton'
+    'click .ef-delete-button': 'delete',
+    'click .ef-trash-button': 'showDeleteWarning',
+    'click .ef-deletion-cancel': 'hideDeleteWarning',
+    'click .ef-deletion-confirmation': 'toggleDeleteButton',
+    'click .ef-share-folder': 'shareFolder'
   },
 
   show: function(folder) {
@@ -86,6 +87,12 @@ Structural.Views.FolderEditor = Support.CompositeView.extend({
     } else {
       this.hideDeleteButton();
     }
+  },
+  shareFolder: function() {
+    this._isShared = true;
+    this.render();
+    this.reClass();
+    this.$('.modal-background').removeClass('hidden');
   },
   save: function(e) {
     e.preventDefault();
