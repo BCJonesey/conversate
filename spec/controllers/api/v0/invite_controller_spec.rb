@@ -28,6 +28,7 @@ describe Api::V0::InviteController do
       expect(@user.invite_count).to eq 10
       post :create, :email => 'bob@example.com'
       expect(@user.invite_count).to eq 9
+      expect(Invite.count).to eq(1)
     end
 
     it "should not remove one invite from a user on not actually sending an email" do
@@ -37,6 +38,7 @@ describe Api::V0::InviteController do
       expect(response).not_to be_success
       expect(response.code).to eq('500')
       expect(@user.invite_count).to eq 10
+      expect(Invite.count).to eq(0)
     end
 
     it "should not send an invite from a user who has none left" do
@@ -45,6 +47,7 @@ describe Api::V0::InviteController do
       expect(response).not_to be_success
       expect(response.code).to eq('500')
       expect(@user.invite_count).to eq 0
+      expect(Invite.count).to eq(0)
     end
 
   end
