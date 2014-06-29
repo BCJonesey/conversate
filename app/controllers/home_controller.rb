@@ -19,7 +19,13 @@ class HomeController < ApplicationController
 
   def beta_signup
     signup = BetaSignup.new(email: params[:email])
-    flash[:signed_up] = signup.save
+    success = signup.save
+    flash[:signed_up] = success
+
+    if success
+      BetaSignupMailer.beta_signup_email(signup).deliver
+    end
+
     render :index, layout: 'application_rails'
   end
 end
