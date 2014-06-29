@@ -85,12 +85,13 @@ _.extend(Support.CompositeView.prototype, Backbone.View.prototype, {
   },
 
   reClass: function() {
-    this.el.className = this.className();
+    this.el.className = _.isFunction(this.className) ? this.className() : this.className
   },
 
   reRender: function() {
     this.$el.empty();
     this.render();
+    this.reClass();
   },
 
   _removeFromParent: function() {

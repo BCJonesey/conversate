@@ -5,6 +5,7 @@ Structural.Views.ContactList = Support.CompositeView.extend({
     return 'contact-list ' + (this.model.id == Structural._selectedContactListId ? "is-selected" : "");
   },
   events: {
+    'click .cl-details-toggle': 'editContactList',
     'click': 'showContactList'
   },
   template: JST.template('people/contact_lists/contact_list'),
@@ -18,5 +19,8 @@ Structural.Views.ContactList = Support.CompositeView.extend({
   },
   showContactList: function(){
     this.model.show();
+  },
+  editContactList: function(){
+    this.parent.parent.showEditor(this.model);
   }
 });

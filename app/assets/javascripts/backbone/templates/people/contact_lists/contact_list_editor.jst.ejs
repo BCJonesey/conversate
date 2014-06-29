@@ -1,6 +1,6 @@
 <div class='contact-list-edit-box'>
   <div class='header'>
-    <span class='contact-list-title'>[Contact List Name]</span>
+    <span class='contact-list-title'><%= contactList.escape('name') %></span>
     <div class='group right'>
       <button class='close-button'>
         <i class='fa fa-times'></i>
@@ -10,9 +10,11 @@
 
   <div class='contents'>
     <label>Contact List Name</label>
-    <input class='contact-list-name-input'/>
+    <input class='contact-list-name-input' value="<%= contactList.escape('name') %>"/>
 
   </div>
+
+  <div class='errors hidden' />
 
   <div class='bottom-toolbar'>
     <div class='group right'>
