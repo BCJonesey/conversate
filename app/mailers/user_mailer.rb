@@ -9,11 +9,6 @@ class UserMailer < ActionMailer::Base
          :subject => "Your password has been reset")
   end
 
-  def send_invite(email)
-    mail(:to => email,
-      :subject => "Welcome to Watercooler!")
-  end
-
   def activation_needed_email(user)
     @user = user
     @url  = "http://0.0.0.0:3000/users/#{user.activation_token}/activate"
