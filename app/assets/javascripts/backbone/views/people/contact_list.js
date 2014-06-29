@@ -11,6 +11,7 @@ Structural.Views.ContactList = Support.CompositeView.extend({
   template: JST.template('people/contact_lists/contact_list'),
   initialize: function(options) {
     var self = this;
+    this.listenTo(this.model, "sync", this.reRender)
     this.listenTo(Structural._people, 'switchContactList', this.reClass);
   },
   render: function() {
