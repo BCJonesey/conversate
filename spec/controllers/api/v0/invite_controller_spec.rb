@@ -50,6 +50,13 @@ describe Api::V0::InviteController do
       expect(Invite.count).to eq(0)
     end
 
+    it "should create a user for the invite" do
+      @user.invite_count = 1
+      user_count = User.count
+      post :create, :email => 'bob@example.com'
+      expect(User.count).to eq user_count + 1
+    end
+
   end
 
 end
