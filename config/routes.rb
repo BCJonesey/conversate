@@ -47,6 +47,7 @@ Conversate::Application.routes.draw do
       resources :contact_lists do
         resources :contacts
       end
+      resources :invite, :only => [:create]
     end
   end
 
