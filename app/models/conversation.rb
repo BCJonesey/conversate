@@ -21,11 +21,17 @@ class Conversation < ActiveRecord::Base
     "cnv-#{self.id}@#{subdomain}watercooler.io"
   end
 
-  def url
+  def slug
     slug = self.title.downcase
                      .gsub(/[ _]/, '-')
                      .gsub(/[^a-zA-Z0-9-]/, '')
-    "http://watercooler.io/conversation/#{slug}/#{self.id}"
+  end
+
+  # For places (like EmailRenderer views) that we don't have access to
+  # route helpers
+  def url
+    Rails.application.routes.url_helpers
+         .conversation_url(self.slug, self.id, host: ENV['MAILER_HOST'])
   end
 
   def set_title(title, user)
@@ -318,6 +324,8 @@ class Conversation < ActiveRecord::Base
       when 'message'
         handle_message_actions action
       when 'email_message'
+        handle_message_actions action
+      when 'upload_message'
         handle_message_actions action
     end
     save

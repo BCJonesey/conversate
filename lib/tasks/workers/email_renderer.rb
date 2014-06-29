@@ -51,7 +51,8 @@ class EmailRenderer
 
   def render_action(action, format)
     render_template(format, action.type, {:action => action,
-                                          :current_user => @current_user})
+                                          :current_user => @current_user,
+                                          :conversation => @conversation})
   end
 
   def render_separator(format)
@@ -60,7 +61,8 @@ class EmailRenderer
 
   def render_first_message(action, format)
     render_template(format, 'first_message', {:action => action,
-                                              :current_user => @current_user})
+                                              :current_user => @current_user,
+                                              :conversation => @conversation})
   end
 
   def render_participation_header(format)

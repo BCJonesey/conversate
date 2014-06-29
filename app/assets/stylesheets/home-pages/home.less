@@ -1,0 +1,47 @@
+@import "ui/mixins.less";
+
+.home-main{
+
+  border-bottom:1px solid #ACF;
+  .modal-window{
+    box-shadow:none;
+  }
+  .login-form{
+    border:@border-2;
+    @media(min-width:@bp-1){
+      border:@border-1;
+      position:relative;
+      margin:2rem auto;
+      max-width:30rem;
+    }
+  }
+}
+
+
+
+.speakeasy-form-text{
+  padding: 0.25rem;
+  text-align: center;
+  font-size:0.75rem;
+  color:#888;
+  a{
+    .link-blue();
+  }
+  p{
+    margin:0.25rem;
+  }
+}
+
+.login-reset-link{
+  display:inline-block;
+  margin-top:0.2rem;
+  margin-right:0.5rem;
+  font-size:0.75rem;
+  float:right;
+  color:#CCC;
+  text-decoration: none;
+  &:hover{
+    color:#888;
+    text-decoration: none;
+  }
+}

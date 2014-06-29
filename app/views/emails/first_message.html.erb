@@ -3,17 +3,21 @@
 </tr>
 
 <tr>
+  <% if action.type == 'upload_message' %>
+  <td colspan="5"><pre style="font-family:sans-serif; font-size: 12px;white-space: pre-wrap;line-height: 1.75;color: #444; padding-top:5px;">File: <a href="<%= action.fileUrl %>"><%= action.fileName %></a></pre><% unless action.notes.empty? %><pre style="font-family:sans-serif; font-size: 12px;white-space: pre-wrap;line-height: 1.75;color: #444; padding-top:5px;">Notes:  <%=action.notes%></pre><% end %></td>
+  <% else %>
   <td colspan="5"><pre style="font-family:sans-serif; font-size: 12px;white-space: pre-wrap;line-height: 1.75;color: #444; padding-top:5px;"><%=action.text%></pre></td>
+  <% end %>
 </tr>
 
-<tr height = '16px'>
-  <td colspan="5"></td>
-</tr>
+<tr height = '16px'><td colspan="5"></td></tr>
 
-<tr>
-  <td colspan='5' height = '1px' bgcolor = '#CCC' style='height:1px;'></td>
-</tr>
+<tr><td colspan="5">
+  <pre style="text-align:center; font-family:sans-serif; font-size: 12px;"><a href="<%= conversation.url %>">View on Water Cooler</a></pre>
+</td></tr>
 
-<tr height = '10px'>
-  <td colspan='5'></td>
-</tr>
+<tr height = '16px'><td colspan='5'></td></tr>
+
+<tr><td colspan='5' height = '1px' bgcolor = '#CCC' style='height:1px;'></td></tr>
+
+<tr height = '16px'><td colspan='5'></td></tr>

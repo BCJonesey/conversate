@@ -4,7 +4,7 @@ Structural.Views.UpdateFoldersDialog = Support.CompositeView.extend({
   initialize: function(options) {
     options = options || {};
     this.folders = options.folders;
-    this.folder_ids = options.conversation.get('folder_ids') || [];
+    this.folder_ids = options.conversation ? options.conversation.get('folder_ids') || [] : [];
     this.original_folder_ids = _.clone(this.folder_ids);
     Structural.on('clickAnywhere', this.hideIfClickOff, this);
     this.folders.each(function(folder) {
