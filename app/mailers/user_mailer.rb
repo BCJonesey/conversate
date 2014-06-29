@@ -11,9 +11,12 @@ class UserMailer < ActionMailer::Base
 
   def activation_needed_email(user)
     @user = user
-    @url  = "http://0.0.0.0:3000/users/#{user.activation_token}/activate"
-    mail(:to => user.email,
-       :subject => "Welcome to My Awesome Site")
+    case user.creation_source
+    when :invite
+      activation_invite_email(user)
+    else
+      activation_web_email(user)
+    end
   end
 
   def activation_success_email(user)
@@ -22,4 +25,14 @@ class UserMailer < ActionMailer::Base
     mail(:to => user.email,
          :subject => "Your account is now activated")
   end
+
+  private
+
+  def activation_invite_email(user)
+    @url  = "http://0.0.0.0:3000/users/#{user.activation_token}/activate"
+    mail(:to => user.email,
+       :subject => "You've been invited to Watercooler.io!",
+       :template_name => :activation_invite_email)
+  end
+
 end
