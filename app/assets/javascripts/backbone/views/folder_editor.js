@@ -2,7 +2,7 @@ Structural.Views.FolderEditor = Support.CompositeView.extend({
   className: function() {
     var classes = 'fld-editor';
     if (this._isShared) {
-      classes += ' fld-editor-shared';
+      classes += ' is-shared';
     }
 
     return classes;

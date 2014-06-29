@@ -10,7 +10,7 @@
   }
 }
 
-.fld-editor-shared {
+.fld-editor.is-shared {
   .modal-window.ef-window{
     width:@details-width + @participant-width;
   }
@@ -19,7 +19,7 @@
 .ef-window-content{
   overflow:visible;
   position: relative;
-  min-height: 20rem;
+  min-height: 10rem;
   max-height: 25rem;
 }
 
@@ -32,36 +32,45 @@
   overflow-y: auto;
   padding:0.5rem;
 }
-
-.fld-editor-shared .ef-folder-details {
-  right: @participant-width;
+.ef-share-folder{
+  .body-font(@size: 0.7rem)
 }
 
-.fld-editor-shared .ef-folder-participants{
-  position:absolute;
-  right:0;
-  top:0;
-  bottom:0;
-  width:@participant-width;
-  border-left:@border-1;
-  padding:0.5rem 0.5rem 0;
+.fld-editor.is-shared{
+  .ef-folder-details{
+    right: @participant-width;
+  }
+  .ef-window-content{
+    min-height: 20.0rem;
 
-  .participants-removable-list{
-    border-top:@border-1;
-    overflow-y: auto;
+  }
+  .ef-folder-participants{
     position:absolute;
-    margin:0;
-    bottom:0;
     right:0;
-    left:0;
-    top:4.5rem;
-    padding:0 0.5rem;
-  }
-  .autocomplete-options{
-    left:0.5rem;
-    top:1.5rem;
+    top:0;
+    bottom:0;
+    width:@participant-width;
+    border-left:@border-1;
+    padding:0.5rem 0.5rem 0;
+
+    .participants-removable-list{
+      border-top:@border-1;
+      overflow-y: auto;
+      position:absolute;
+      margin:0;
+      bottom:0;
+      right:0;
+      left:0;
+      top:4.5rem;
+      padding:0 0.5rem;
+    }
+    .autocomplete-options{
+      left:0.5rem;
+      top:1.5rem;
+    }
   }
 }
+
 
 .ef-deletion-message{
   padding:0 0.5rem;
