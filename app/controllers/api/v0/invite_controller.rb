@@ -4,10 +4,11 @@ class Api::V0::InviteController < ApplicationController
   def create
 
     # Users must have invites left.
-    head :status => 500 and return unless current_user.invite_count > 0
+    #head :status => 500 and return unless current_user.invite_count > 0
 
     # Let's create a new user for this invite.
-    user = User.create!(:email => params[:email])
+    # TODO: Make sure email is unique.
+    user = User.create!(:email => params[:email], :password => "test")
 
     # Let's create our invite.
     # TODO: Update invite to refer to our newly created user.
@@ -23,7 +24,7 @@ class Api::V0::InviteController < ApplicationController
     # end
 
     # If we've successfully sent an email, we want to remove one of the user's invites.
-    current_user.invite_count -= 1
+    #current_user.invite_count -= 1
 
     render :json => invite, :status => 201
   end
