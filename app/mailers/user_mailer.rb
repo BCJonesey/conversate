@@ -35,4 +35,11 @@ class UserMailer < ActionMailer::Base
        :template_name => :activation_invite_email)
   end
 
+  def activation_web_email(user)
+    @url  = "http://0.0.0.0:3000/users/#{user.activation_token}/activate"
+    mail(:to => user.email,
+       :subject => "You've signed up for Watercooler.io!",
+       :template_name => :activation_web_email)
+  end
+
 end
