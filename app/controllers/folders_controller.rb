@@ -10,8 +10,14 @@ class FoldersController < ApplicationController
                            .joins(:reading_logs)
                            .where('reading_logs.user_id' => current_user.id)
                            .order('most_recent_event DESC')
+
     @conversation = @conversations
-                      .where('reading_logs.archived' => false)[0]
+                      .where('reading_logs.pinned' => true)[0]
+    if @conversation.nil?
+      @conversation = @conversations
+                        .where('reading_logs.archived' => false)[0]
+    end
+
     @actions = @conversation ? @conversation.actions : nil
     @participants = @conversation ? @conversation.participants : nil
 
