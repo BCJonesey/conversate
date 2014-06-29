@@ -19,7 +19,6 @@ class Api::V0::ContactListsController < ApplicationController
     if @contact_list.save
       render :json => @contact_list
     else
-      binding.pry
       render :json => @contact_list.errors, :status => :error
     end
   end
