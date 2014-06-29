@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe HomeController do
   before(:all) do
-    BetaSignup.delete_all
+    # BetaSignup.delete_all
   end
 
   describe 'POST #beta_signup' do
