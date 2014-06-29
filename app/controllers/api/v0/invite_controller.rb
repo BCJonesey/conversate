@@ -7,7 +7,7 @@ class Api::V0::InviteController < ApplicationController
     head :status => 500 and return unless current_user.invite_count > 0
 
     # Let's create a new user for this invite.
-    user = User.create!(:email => params[:email], :password => "test")
+    user = User.create!(:email => params[:email], :password => "test", :creation_source => :invite)
 
     # Let's create our invite.
     invite = Invite.create(:email => params[:email], :user_id => current_user.id)

@@ -57,6 +57,13 @@ describe Api::V0::InviteController do
       expect(User.count).to eq user_count + 1
     end
 
+    it "should create a user that has a creation_source of invite" do
+      @user.invite_count = 1
+      post :create, :email => 'bob@example.com'
+      user = User.where(:email => 'bob@example.com').first
+      expect(user.creation_source).to eq 'invite'
+    end
+
   end
 
 end
