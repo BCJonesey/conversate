@@ -15,6 +15,10 @@ Structural.Views.Folder = Support.CompositeView.extend({
       classes += ' fld-unread';
     }
 
+    if (this.model.get('users').length > 1){
+      classes += ' is-shared';
+    }
+
     return classes;
   },
   template: JST.template('folders/folder'),
