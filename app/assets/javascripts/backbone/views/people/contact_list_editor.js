@@ -30,7 +30,14 @@ Structural.Views.ContactListEditor = Support.CompositeView.extend({
   save: function(){
     this.clearErrors();
     var name = this.$('.contact-list-name-input').val();
-    this.model.save({name: name},{success:this.saveSucess.bind(this),error:this.saveError.bind(this), patch: true});
+    this.model.save({
+      name: name
+    },{
+      success: this.saveSucess.bind(this),
+      error: this.saveError.bind(this),
+      patch: true,
+      noToastOnError: true
+    });
   },
   clearErrors: function(){
     this.$('.errors').text("");
