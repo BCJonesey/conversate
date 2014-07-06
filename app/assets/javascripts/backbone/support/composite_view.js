@@ -29,6 +29,10 @@ _.extend(Support.CompositeView.prototype, Backbone.View.prototype, {
     this.bindings = _([]);
   },
 
+  isAttachedToViewTree: function() {
+    return !!this.parent;
+  },
+
   renderChild: function(view) {
     view.render();
     this.children.push(view);
@@ -97,6 +101,7 @@ _.extend(Support.CompositeView.prototype, Backbone.View.prototype, {
   _removeFromParent: function() {
     if (this.parent) {
       this.parent._removeChild(this);
+      this.parent = undefined;
     }
   },
 
