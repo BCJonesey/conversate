@@ -294,14 +294,21 @@ var Structural = new (Support.CompositeView.extend({
     }
 
     this._watercooler.leave();
-    this.appendChild(this._people);
+
+    if (!this._people.isAttachedToViewTree()) {
+      this.appendChild(this._people);
+    }
   },
   showWaterCooler: function(focus) {
     // Assume that this._watercooler got instantiated in start().
     if (this._people) {
       this._people.leave();
     }
-    this.appendChild(this._watercooler);
+
+    if (!this._watercooler.isAttachedToViewTree()) {
+      this.appendChild(this._watercooler);
+    }
+
     this.focus(focus);
   }
 }))({el: $('body'), apiPrefix: '/api/v0'});
