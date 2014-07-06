@@ -1,6 +1,3 @@
-// A view for the folders toolbar and a container for the actual
-// folders list.
-
 Structural.Views.ContactListsContainer = Support.CompositeView.extend({
   className: 'contact-lists-container',
   initialize: function(options) {
