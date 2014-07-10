@@ -1,5 +1,12 @@
 Structural.Views.FolderEditor = Support.CompositeView.extend({
-  className: 'fld-editor',
+  className: function() {
+    var classes = 'fld-editor';
+    if (this._isShared) {
+      classes += ' is-shared';
+    }
+
+    return classes;
+  },
   template: JST.template('folders/editor'),
   initialize: function(options) {
     options = options || {};
@@ -7,38 +14,51 @@ Structural.Views.FolderEditor = Support.CompositeView.extend({
   },
   render: function() {
     if (this._folder) {
-      this._autocomplete = new Structural.Views.Autocomplete({
-        dictionary: Structural._user.addressBook(),
-        blacklist: this._folder.get('users').clone(),
-        addSelectionToBlacklist: true,
-        property: 'name'
-      });
-      this._removableList = new Structural.Views.RemovableParticipantList({
-        collection: this._folder.get('users').clone()
-      });
+      this.$el.html(this.template({
+        folder: this._folder,
+        user: this._user,
+        isShared: this._isShared
+      }));
 
-      this._autocomplete.on('select', this._removableList.add, this._removableList);
-      this._removableList.on('remove', this._autocomplete.removeFromBlacklist, this._autocomplete);
-      this.listenTo(Structural._user, 'addressBookUpdated', this._updateAddressBook);
+      if (this._isShared) {
+        this._autocomplete = new Structural.Views.Autocomplete({
+          dictionary: Structural._user.addressBook(),
+          blacklist: this._folder.get('users').clone(),
+          addSelectionToBlacklist: true,
+          property: 'name'
+        });
+        this._removableList = new Structural.Views.RemovableParticipantList({
+          collection: this._folder.get('users').clone()
+        });
 
-      this.$el.html(this.template({folder: this._folder, user: this._user}));
-      this.insertChildAfter(this._removableList, this.$('label[for="folder-participants"]'));
-      this.insertChildAfter(this._autocomplete, this.$('label[for="folder-participants"]'));
+        this._autocomplete.on('select', this._removableList.add, this._removableList);
+        this._removableList.on('remove', this._autocomplete.removeFromBlacklist, this._autocomplete);
+        this.listenTo(Structural._user, 'addressBookUpdated', this._updateAddressBook);
+
+        this.insertChildAfter(this._removableList, this.$('label[for="folder-participants"]'));
+        this.insertChildAfter(this._autocomplete, this.$('label[for="folder-participants"]'));
+      }
     }
     return this;
+  },
+  reClass: function() {
+    this.el.className = this.className();
   },
 
   events: {
     'click .ef-save-button': 'save',
-    'click .ef-delete-button':'delete',
-    'click .ef-trash-button':'showDeleteWarning',
-    'click .ef-deletion-cancel':'hideDeleteWarning',
-    'click .ef-deletion-confirmation':'toggleDeleteButton'
+    'click .ef-delete-button': 'delete',
+    'click .ef-trash-button': 'showDeleteWarning',
+    'click .ef-deletion-cancel': 'hideDeleteWarning',
+    'click .ef-deletion-confirmation': 'toggleDeleteButton',
+    'click .ef-share-folder': 'shareFolder'
   },
 
   show: function(folder) {
     this._folder = folder;
+    this._isShared = this._folder.isShared();
     this.render();
+    this.reClass();
     this.$('.modal-background').removeClass('hidden');
   },
   showDeleteWarning: function(e){
@@ -67,6 +87,12 @@ Structural.Views.FolderEditor = Support.CompositeView.extend({
     } else {
       this.hideDeleteButton();
     }
+  },
+  shareFolder: function() {
+    this._isShared = true;
+    this.render();
+    this.reClass();
+    this.$('.modal-background').removeClass('hidden');
   },
   save: function(e) {
     e.preventDefault();

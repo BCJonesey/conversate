@@ -17,11 +17,16 @@
         <label for="folder-email">E-Mail Address</label>
         <input id="folder-email" type="text" class='ef-email-input'
                value="<%= folder.escape('email') %>"><span class='ef-email-domain'>@watercooler.io</span>
-         <% } %>
+        <% } %>
+        <% if (!isShared) { %>
+          <input type="button" value="Share this folder" class="ef-share-folder btn" />
+        <% } %>
       </div>
-      <div class='ef-folder-participants participants-vertical'>
-        <label for="folder-participants">Participants</label>
-      </div>
+      <% if (isShared) { %>
+        <div class='ef-folder-participants participants-vertical'>
+          <label for="folder-participants">Participants</label>
+        </div>
+      <% } %>
     </div>
     <div class='modal-content ef-deletion-content hidden'>
       <div class='ef-deletion-message'>
