@@ -15,7 +15,7 @@ Structural.Views.Folder = Support.CompositeView.extend({
       classes += ' fld-unread';
     }
 
-    if (this.model.get('users').length > 1){
+    if (this.model.isShared()){
       classes += ' is-shared';
     }
 
