@@ -1,4 +1,4 @@
-// A view for an actual folder in the folders list.
+// A view for an actual contact in the contacts list.
 
 Structural.Views.Contact = Support.CompositeView.extend({
   className: "contact",

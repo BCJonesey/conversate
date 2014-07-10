@@ -1,4 +1,4 @@
-// A view for an actual folder in the folders list.
+// A view for the header of the contact_lists list.
 
 Structural.Views.ContactsListsBar = Support.CompositeView.extend({
   className: function() {

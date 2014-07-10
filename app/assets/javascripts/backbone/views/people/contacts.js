@@ -1,4 +1,4 @@
-// A view for an actual folders list.
+// A view for an actual contact_lists list.
 
 Structural.Views.Contacts = Support.CompositeView.extend({
   template: JST.template('people/contacts/contacts'),

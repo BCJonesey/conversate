@@ -1,12 +1,10 @@
 class Api::V0::ContactListsController < ApplicationController
   before_filter :require_login_api
 
-  # Note that this is always on a url like /folders/1/conversations.
   def index
     render :status => :error
   end
 
-  # Note that this is always on a url like /folders/1/conversations.
   def create
     render :status => :error
   end
