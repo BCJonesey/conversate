@@ -151,6 +151,10 @@ Structural.Views.Conversations = Support.CompositeView.extend({
     }
 
     if (!conversation) {
+      conversation = this.collection.findWhere({pinned: true});
+    }
+
+    if (!conversation) {
       conversation = this.collection.findWhere({archived: false});
     }
 
