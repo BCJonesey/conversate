@@ -29,6 +29,10 @@ _.extend(Support.CompositeView.prototype, Backbone.View.prototype, {
     this.bindings = _([]);
   },
 
+  isAttachedToViewTree: function() {
+    return !!this.parent;
+  },
+
   renderChild: function(view) {
     view.render();
     this.children.push(view);
@@ -84,9 +88,20 @@ _.extend(Support.CompositeView.prototype, Backbone.View.prototype, {
     });
   },
 
+  reClass: function() {
+    this.el.className = _.isFunction(this.className) ? this.className() : this.className
+  },
+
+  reRender: function() {
+    this.$el.empty();
+    this.render();
+    this.reClass();
+  },
+
   _removeFromParent: function() {
     if (this.parent) {
       this.parent._removeChild(this);
+      this.parent = undefined;
     }
   },
 

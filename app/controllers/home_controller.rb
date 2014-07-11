@@ -5,7 +5,8 @@ class HomeController < ApplicationController
       if folder
         redirect_to folder_path(folder.slug, folder.id) and return
       else
-        @folders = Folder.all
+        @folder = nil
+        @folders = []
         @conversation = nil
         @conversations = []
         @actions = nil
@@ -14,6 +15,6 @@ class HomeController < ApplicationController
         render 'structural/show' and return
       end
     end
-    render layout: "application_rails"   
+    render layout: "application_rails"
   end
 end

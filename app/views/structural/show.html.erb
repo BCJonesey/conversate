@@ -1,6 +1,7 @@
 <%= content_for :javascript do -%>
 
 (function() {
+  var contactLists = <%= current_user.contact_lists.to_json.html_safe  %>;
   var folders = <%= json_with_user(@folders) %>;
   var folder = <%= json_with_user(@folder) %>;
   var conversations = <%= json_with_user(@conversations) %>;
@@ -19,7 +20,8 @@
     actions: actions,
     conversation: conversation,
     participants: participants,
-    user: user
+    user: user,
+    contactLists: contactLists
   };
 })();
 

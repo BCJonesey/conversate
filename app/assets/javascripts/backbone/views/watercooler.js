@@ -8,16 +8,7 @@ Structural.Views.WaterCooler = Support.CompositeView.extend({
     this.conversation = options.conversation;
     this.participants = options.participants;
     this.user = options.user;
-    this.listenTo(Structural,'showResponsiveActions',this.showAct);
-    this.listenTo(Structural,'showResponsiveConversations',this.showCnv);
-  },
-  events: {
-    'click .act-container .ui-back-button': 'showCnv',
-    'click .cnv-container .ui-back-button': 'showFld',
-    'click .fld-container .ui-back-button': 'showStb',
-    'click .fld-popover-close-button':'showCnv'
-  },
-  render: function() {
+
     this.foldersView = new Structural.Views.FolderContainer({
       folders: this.folders,
       user: this.user
@@ -34,6 +25,16 @@ Structural.Views.WaterCooler = Support.CompositeView.extend({
       folders: this.folders
     });
 
+    this.listenTo(Structural,'showResponsiveActions',this.showAct);
+    this.listenTo(Structural,'showResponsiveConversations',this.showCnv);
+  },
+  events: {
+    'click .act-container .ui-back-button': 'showCnv',
+    'click .cnv-container .ui-back-button': 'showFld',
+    'click .fld-container .ui-back-button': 'showStb',
+    'click .fld-popover-close-button':'showCnv'
+  },
+  render: function() {
     this.appendChild(this.foldersView);
     this.appendChild(this.conversationsView);
     this.appendChild(this.actionsView);
