@@ -47,6 +47,12 @@
   }
 }
 
+.act-container.no-conversation {
+  .act-participants-editor {
+    display: none !important;
+  }
+}
+
 /* Participants Editor stuff is in act-edit-participants.css.less */
 
 
@@ -376,5 +382,23 @@
   }
   &.target{
     background-color:#EAEAEA;
+  }
+}
+
+.act-placeholder {
+  text-align: center;
+  padding-top: 2.0rem;
+
+  .empty-icon, .loading-icon {
+    display:inline;
+    font-size: 1.0rem;
+    color: #DDD;
+  }
+
+  .empty-text, .loading-text {
+    display: inline;
+    font-size: 1.5rem;
+    padding: 1.0rem;
+    color: #DDD;
   }
 }

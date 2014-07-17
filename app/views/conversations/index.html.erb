@@ -1,5 +1,6 @@
 <%= content_for :javascript do -%>
 
+var contactLists = <%= current_user.contact_lists.as_json %>;
 var folders = <%= current_user.folders.to_json(:user => current_user).html_safe %>;
 var conversations = <%= @opened_folder.conversations.to_json(:user => current_user).html_safe %>;
 var user = <%= current_user.to_json().html_safe %>;
@@ -19,7 +20,8 @@ var bootstrap = {
   actions: actions,
   participants: participants,
   conversation: conversation,
-  user: user
+  user: user,
+  contactLists: contactLists
 };
 
 Structural.start(bootstrap);

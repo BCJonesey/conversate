@@ -5,7 +5,8 @@ class HomeController < ApplicationController
       if folder
         redirect_to folder_path(folder.slug, folder.id) and return
       else
-        @folders = Folder.all
+        @folder = nil
+        @folders = []
         @conversation = nil
         @conversations = []
         @actions = nil

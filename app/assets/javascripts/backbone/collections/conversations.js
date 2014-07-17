@@ -7,6 +7,7 @@ Structural.Collections.Conversations = Backbone.Collection.extend({
     var self = this;
     options = options || {};
     this.folderId = options.folderId;
+    this.neverBeenFetched = true;
 
     // We want to bind updates on our conversations so that we can alert our folders too.
     self.on('add', function(conversation) {
@@ -57,6 +58,7 @@ Structural.Collections.Conversations = Backbone.Collection.extend({
 
       // We want to let our views know they can select a conversation since we're loading them lazily.
       options.success = function() {
+        self.neverBeenFetched = false;
         self.trigger('conversationsLoadedForFirstTime');
       }
     }
@@ -69,5 +71,11 @@ Structural.Collections.Conversations = Backbone.Collection.extend({
       count += conversation.unreadCount() > 0 ? 1 : 0;
     });
     return count;
+  },
+
+  fetch: function(options) {
+    if (this.folderId) {
+      return this.constructor.__super__.fetch.call(this, options);
+    }
   }
 });

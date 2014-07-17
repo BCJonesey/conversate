@@ -7,6 +7,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     options = options || {};
     this.conversation = options.conversation;
     this.userId = options.user;
+
     this.on('reset', this._findMyMessages, this);
     this.on('reset', this._findFocusedMessage, this);
     this.on('reset', this._findFollowOnMessages, this);
@@ -170,6 +171,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
         self.trigger('actionsLoadedForFirstTime');
       }
     }
+
     this.fetch(options);
   },
 
@@ -198,7 +200,7 @@ Structural.Collections.Actions = Backbone.Collection.extend({
     }
   },
   triggerNewMessage: function(model) {
-    if (model.get('type') === 'message' &&
+    if (model.isMessageType() &&
         model.get('user').id !== this.userId) {
       this.trigger('addedSomeoneElsesMessage')
     }

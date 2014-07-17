@@ -1,8 +1,20 @@
 <div class='fld-right'>
-  <a class='btn-faint fld-details-toggle'href='#'><i class='fa fa-info-circle'></i></a>
+  <% if (folder.get('is_current')) { %>
+    <a class='btn-faint fld-details-toggle'href='#'>
+      <i class='fa fa-info-circle'></i>
+    </a>
+  <% } %>
   <% if (folder.unreadConversationCount() > 0) { %>
     <span class='fld-count'><%= folder.unreadConversationCount() %></span>
   <% } %>
 </div>
 
-<span class='fld-label'> <%= folder.escape('name') %> </span>
+
+<span class="fld-icon-wrap">
+  <i class="fa fa-folder-o fld-icon-base"></i>
+  <% if (folder.get('users').length > 1) {%>
+    <i class="fa fa-rss fa-rotate-270 fld-icon-annotation"></i>
+  <% } %>
+</span>
+
+<span class='fld-label'><%= folder.escape('name') %> </span>

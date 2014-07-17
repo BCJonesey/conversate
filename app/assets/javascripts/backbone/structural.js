@@ -32,9 +32,15 @@ var Structural = new (Support.CompositeView.extend({
       isMainCollection: true
     });
 
+    // We do not bootstrap the "people" information so this value will start at null
+    this._selectedContactListId = null;
+
     // We pass the folder over, but we should let it come from the collection.
-    this._folder = this._folders.where({id: bootstrap.folder.id})[0];
+    this._folder = bootstrap.folder ?
+                    this._folders.where({id: bootstrap.folder.id})[0] :
+                    new Structural.Models.Folder();
     this._folder.conversations.set(bootstrap.conversations);
+
 
     // Instantiate the current conversation or a sane default.
     this._conversation = this._folder.conversations.where({id: bootstrap.conversation.id})[0];
@@ -277,5 +283,31 @@ var Structural = new (Support.CompositeView.extend({
     if (this._faviconAndTitle) {
       this._faviconAndTitle.render();
     }
+  },
+  showPeople: function(options){
+    if(options.contactListId){
+      this._selectedContactListId = options.contactListId;
+    }
+    if (!this._people) {
+      this._people = new Structural.Views.People();
+    }
+
+    this._watercooler.leave();
+
+    if (!this._people.isAttachedToViewTree()) {
+      this.appendChild(this._people);
+    }
+  },
+  showWaterCooler: function(focus) {
+    // Assume that this._watercooler got instantiated in start().
+    if (this._people) {
+      this._people.leave();
+    }
+
+    if (!this._watercooler.isAttachedToViewTree()) {
+      this.appendChild(this._watercooler);
+    }
+
+    this.focus(focus);
   }
 }))({el: $('body'), apiPrefix: '/api/v0'});

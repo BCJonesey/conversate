@@ -77,6 +77,9 @@ Structural.Models.Folder = Backbone.Model.extend({
 
     this.set('unread_conversations', filteredUnreadConversations);
   },
+  isShared: function() {
+    return this.get('users').length > 1;
+  },
 
   update: function(name, participants, email) {
     if(email != null){

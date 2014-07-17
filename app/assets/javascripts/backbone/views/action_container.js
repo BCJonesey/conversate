@@ -2,13 +2,17 @@ Structural.Views.ActionContainer = Support.CompositeView.extend({
   className: function() {
     var classes = 'ui-section act-container';
 
-    if (this.participants &&
-        !_(this.participants.map(function(p) { return p.id; })).contains(this.user.id)) {
+    if (!this.participants ||
+               !_(this.participants.map(function(p) { return p.id; })).contains(this.user.id)) {
       classes += ' not-participating-in';
     }
 
     if (this.$el && this.$el.hasClass('visible')){
       classes += ' visible'
+    }
+
+    if (!this.conversation || !this.conversation.id) {
+      classes += ' no-conversation';
     }
 
     return classes;
@@ -39,6 +43,7 @@ Structural.Views.ActionContainer = Support.CompositeView.extend({
     this.participantsView.on('update_users', Structural.createUpdateUserAction, Structural);
 
     Structural.on('changeConversation', this.changeConversation, this);
+    Structural.on('clearConversation', this.clearConversation, this);
   },
   render: function() {
     this.appendChild(this.detailsView);
@@ -56,7 +61,6 @@ Structural.Views.ActionContainer = Support.CompositeView.extend({
   // TODO: Seems a little funky that we're holding onto so much information about our
   // current coversation, but c'est la vie.
   changeConversation: function(conversation) {
-    this.participants.off(null, null, this);
     this.conversation = conversation;
     this.participants = conversation.get("participants");
     this.reClass();
@@ -64,8 +68,12 @@ Structural.Views.ActionContainer = Support.CompositeView.extend({
     this.conversation.actions.on('showDetails', this.detailsView.show, this.detailsView);
   },
   clearConversation: function() {
-    this.titleView.clearConversation();
-    this.composeView.clearConversation();
+    if (this.participants) {
+      this.participants.off(null, null, this);
+      this.participants = undefined;
+    }
+    this.conversation = undefined;
+    this.reClass();
   },
   scrollToBottom: function() {
     this.actionsView.scrollToBottom();
