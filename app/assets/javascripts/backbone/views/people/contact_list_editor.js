@@ -75,7 +75,7 @@ Structural.Views.ContactListEditor = Support.CompositeView.extend({
     this.close();
   },
   saveError: function(){
-    this.$('.errors').text("Problem Saving Folder");
+    this.$('.errors').text("Problem Saving Contact List");
     this.$('.errors').removeClass("hidden");
   }
 });
