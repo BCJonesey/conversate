@@ -15,6 +15,22 @@ Structural.Views.ContactListEditor = Support.CompositeView.extend({
   render:function(){
     if(this.model){
       this.$el.html(this.template({ contactList: this.model }));
+
+      this.autocomplete = new Structural.Views.Autocomplete({
+        dictionary: Structural._user.addressBook(),
+        blacklist: new Structural.Collections.Participants([]),
+        addSelectionToBlacklist: true,
+        property: 'name'
+      });
+      this.removableList = new Structural.Views.RemovableParticipantList({
+        collection: new Structural.Collections.Participants([])
+      });
+
+      this.autocomplete.on('select', this.removableList.add, this.removableList);
+      this.removableList.on('remove', this.autocomplete.removeFromBlacklist, this.autocomplete);
+
+      this.insertChildAfter(this.removableList, this.$('label[for="contact-list-participants"]'));
+      this.insertChildAfter(this.autocomplete, this.$('label[for="contact-list-participants"]'));
     }
   },
   showEditor: function(contact_list){
