@@ -10,37 +10,49 @@ Structural.Views.ContactListEditor = Support.CompositeView.extend({
   },
   events: {
     'click .close-button': 'close',
+    'click .cl-share-contact-list-btn': 'share',
     'click .contact-list-edit-save-button': 'save'
   },
   render:function(){
     if(this.model){
-      this.$el.html(this.template({ contactList: this.model }));
+      this.$el.html(this.template({
+        contactList: this.model,
+        isShared: this.isShared
+      }));
 
-      this.autocomplete = new Structural.Views.Autocomplete({
-        dictionary: Structural._user.addressBook(),
-        blacklist: new Structural.Collections.Participants([]),
-        addSelectionToBlacklist: true,
-        property: 'name'
-      });
-      this.removableList = new Structural.Views.RemovableParticipantList({
-        collection: new Structural.Collections.Participants([])
-      });
+      if (this.isShared) {
+        this.autocomplete = new Structural.Views.Autocomplete({
+          dictionary: Structural._user.addressBook(),
+          blacklist: new Structural.Collections.Participants([]),
+          addSelectionToBlacklist: true,
+          property: 'name'
+        });
+        this.removableList = new Structural.Views.RemovableParticipantList({
+          collection: new Structural.Collections.Participants([])
+        });
 
-      this.autocomplete.on('select', this.removableList.add, this.removableList);
-      this.removableList.on('remove', this.autocomplete.removeFromBlacklist, this.autocomplete);
+        this.autocomplete.on('select', this.removableList.add, this.removableList);
+        this.removableList.on('remove', this.autocomplete.removeFromBlacklist, this.autocomplete);
 
-      this.insertChildAfter(this.removableList, this.$('label[for="contact-list-participants"]'));
-      this.insertChildAfter(this.autocomplete, this.$('label[for="contact-list-participants"]'));
+        this.insertChildAfter(this.removableList, this.$('label[for="contact-list-participants"]'));
+        this.insertChildAfter(this.autocomplete, this.$('label[for="contact-list-participants"]'));
+      }
     }
   },
-  showEditor: function(contact_list){
-    this.model = contact_list;
+  showEditor: function(contactList){
+    this.model = contactList;
     this.shown = true;
+    var participants = contactList.get('participants');
+    this.isShared = participants !== undefined && participants.length > 0;
     this.reRender();
   },
   close: function(){
     this.model = null;
     this.shown = false;
+    this.reRender();
+  },
+  share: function() {
+    this.isShared = true;
     this.reRender();
   },
   save: function(){

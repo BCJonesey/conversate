@@ -13,9 +13,13 @@
     <label>Contact List Name</label>
     <input class='contact-list-name-input' value="<%= contactList.escape('name') %>"/>
 
-    <div class="cl-contact-list-participants participants-vertical">
-      <label for="contact-list-participants">Participants</label>
-    </div>
+    <% if (isShared) { %>
+      <div class="cl-contact-list-participants participants-vertical">
+        <label for="contact-list-participants">Participants</label>
+      </div>
+    <% } else { %>
+      <input type="button" value="Share this contact list" class="cl-share-contact-list-btn" />
+    <% } %>
   </div>
 
   <div class='bottom-toolbar'>
