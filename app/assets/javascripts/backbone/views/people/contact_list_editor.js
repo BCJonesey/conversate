@@ -23,19 +23,24 @@ Structural.Views.ContactListEditor = Support.CompositeView.extend({
       if (this.isShared) {
         this.autocomplete = new Structural.Views.Autocomplete({
           dictionary: Structural._user.addressBook(),
-          blacklist: new Structural.Collections.Participants([]),
+          blacklist: this.model.get('participants'),
           addSelectionToBlacklist: true,
           property: 'name'
         });
         this.removableList = new Structural.Views.RemovableParticipantList({
-          collection: new Structural.Collections.Participants([])
+          collection: this.model.get('participants')
         });
 
         this.autocomplete.on('select', this.removableList.add, this.removableList);
         this.removableList.on('remove', this.autocomplete.removeFromBlacklist, this.autocomplete);
 
-        this.insertChildAfter(this.removableList, this.$('label[for="contact-list-participants"]'));
-        this.insertChildAfter(this.autocomplete, this.$('label[for="contact-list-participants"]'));
+        this.model.get('participants').fetch({
+          success: function() {
+            this.$('.cl-placeholder').remove();
+            this.insertChildAfter(this.removableList, this.$('label[for="contact-list-participants"]'));
+            this.insertChildAfter(this.autocomplete, this.$('label[for="contact-list-participants"]'));
+          }.bind(this)
+        });
       }
     }
   },

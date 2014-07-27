@@ -16,6 +16,10 @@
     <% if (isShared) { %>
       <div class="cl-contact-list-participants participants-vertical">
         <label for="contact-list-participants">Participants</label>
+        <div class="cl-placeholder">
+          <i class="fa fa-fw fa-cog fa-spin loading-icon"></i>
+          <div class="loading-text">Loading...</div>
+        </div>
       </div>
     <% } else { %>
       <input type="button" value="Share this contact list" class="cl-share-contact-list-btn" />
