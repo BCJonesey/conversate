@@ -58,9 +58,15 @@ Structural.Views.ContactListEditor = Support.CompositeView.extend({
   save: function(){
     this.clearErrors();
     var name = this.$('.contact-list-name-input').val();
-    this.model.save({
+    var savedAttrs = {
       name: name
-    },{
+    };
+
+    if (this.isShared) {
+      savedAttrs.participants = this.removableList.participants();
+    }
+
+    this.model.save(savedAttrs, {
       success: this.saveSucess.bind(this),
       error: this.saveError.bind(this),
       patch: true,
