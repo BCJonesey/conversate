@@ -14,7 +14,8 @@
     text-overflow:ellipsis;
 
   }
-  .admin-table, .admin-links{
+
+  .admin-table, .admin-links, .beta-signups-table {
     border:@border-1;
     margin:1rem;
     @media( min-width:@bp-1){
@@ -28,6 +29,10 @@
     @media(min-width:@bp-2){
       max-width:@bp-2 - 1.0rem;
     }
+  }
+
+  .beta-signups-table form {
+    text-align: right;
   }
 
   .full-page();

@@ -1,0 +1,16 @@
+<% if flash[:signed_up] %>
+  <div class="beta-signup-thankyou">
+    <div class='beta-signup-thankyou-header'>Thanks for signing up</div>
+    <p>If you have any questions, you can contact us at <a href="mailto:watercooler@structur.al">watercooler@structur.al</a>.</p>
+  </div>
+<% else %>
+  <form method="post" action="<%= beta_signup_path %>" class='beta-signup-form'>
+    <p>Water Cooler is currently in private beta.  We'll send you an invite as soon we can. </p>
+    <div class='sign-up-inputs'>
+      <div class='input-wrapper'>
+        <input type='email' class='beta-signup-input' placeholder='Email Address' tabindex=1 name="email"/>
+      </div>
+      <input type='submit' class='beta-signup-submit' value="Sign up" tabindex=2/>
+    </div>
+  </form>
+<% end %>
