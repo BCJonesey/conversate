@@ -6,7 +6,8 @@ class BetaSignup < ActiveRecord::Base
     user = User.build({
       email: self.email,
       password: password,
-      password_confirmation: password
+      password_confirmation: password,
+      invite_count: 5
     })
 
     # This is kind of a strange line, but User::build will return a falsey

@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :folders
   belongs_to :default_folder, class_name: "Folder", foreign_key: "default_folder_id"
 
-  attr_accessible :email, :full_name, :password, :password_confirmation, :external, :creation_source
+  attr_accessible :email, :full_name, :password, :password_confirmation, :external, :creation_source, :invite_count
 
   validates_confirmation_of :password
   # We have to allow nil passwords or we wouldn't ever be able to change a
