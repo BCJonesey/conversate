@@ -15,6 +15,8 @@ class AdminController < ApplicationController
       flash[:promotion_status] = :failure
     end
 
+    UserMailer.activation_needed_email(user).deliver
+
     redirect_to admin_path
   end
 end

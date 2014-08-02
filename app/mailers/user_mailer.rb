@@ -29,6 +29,9 @@ class UserMailer < ActionMailer::Base
   private
 
   def activation_invite_email(user)
+    invite = Invite.where(:user_id => user.id).first
+    inviter_user = User.find(invite.inviter_id)
+    @inviter = inviter_user.full_name
     mail(:to => user.email,
        :subject => "You've been invited to Watercooler.io!",
        :template_name => :activation_invite_email)

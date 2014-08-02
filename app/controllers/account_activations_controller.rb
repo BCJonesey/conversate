@@ -25,5 +25,7 @@ class AccountActivationsController < ApplicationController
       flash[:activation_error] = :unknown_error
       render :edit
     end
+
+    UserMailer.activation_success_email(@user).deliver
   end
 end
