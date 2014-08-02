@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140727171215) do
+ActiveRecord::Schema.define(version: 20140802161258) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -134,7 +134,6 @@ ActiveRecord::Schema.define(version: 20140727171215) do
     t.datetime "remember_me_token_expires_at"
     t.string   "full_name"
     t.boolean  "site_admin",                      default: false
-    t.integer  "invited_by"
     t.integer  "default_folder_id"
     t.boolean  "removed",                         default: false
     t.boolean  "external",                        default: false
