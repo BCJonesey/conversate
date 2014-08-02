@@ -26,13 +26,6 @@ class UserMailer < ActionMailer::Base
          :subject => 'Water Cooler: Welcome to Water Cooler')
   end
 
-  def activation_success_email(user)
-    @user = user
-    @url  = "http://0.0.0.0:3000/login"
-    mail(:to => user.email,
-         :subject => "Your account is now activated")
-  end
-
   private
 
   def activation_invite_email(user)
