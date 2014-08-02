@@ -5,6 +5,8 @@ Structural.Views.Autocomplete = Support.CompositeView.extend({
     this._blacklist = options.blacklist;
     this._addSelectionToBlacklist = options.addSelectionToBlacklist;
     this._property = options.property;
+    this._inputContainer = options.inputContainer;
+    this._optionsContainer = options.optionsContainer;
 
     this._optionsView = new Structural.Views.AutocompleteOptions({
       collection: this._dictionary,
@@ -18,8 +20,17 @@ Structural.Views.Autocomplete = Support.CompositeView.extend({
     this._wireViewEvents(this._optionsView, this._inputView);
   },
   render: function() {
-    this.appendChild(this._inputView);
-    this.appendChild(this._optionsView);
+    if (this._inputContainer) {
+      this.appendChildTo(this._inputView, this._inputContainer);
+    } else {
+      this.appendChild(this._inputView);
+    }
+
+    if (this._optionsContainer) {
+      this.appendChildTo(this._optionsView, this._optionsContainer);
+    } else {
+      this.appendChild(this._optionsView);
+    }
     return this;
   },
 

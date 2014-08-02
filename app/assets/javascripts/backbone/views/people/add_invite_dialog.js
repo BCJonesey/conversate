@@ -6,6 +6,15 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
   },
   render: function() {
     this.$el.html(this.template({}));
+    this.autocomplete = new Structural.Views.Autocomplete({
+      dictionary: Structural._user.addressBook(),
+      blacklist: new Structural.Collections.Participants([]),
+      addSelectionToBlacklist: false,
+      property: 'name',
+      inputContainer: this.$('.contact-input'),
+      optionsContainer: this.$('.contacts-list')
+    });
+    this.appendChild(this.autocomplete);
     return this;
   },
   events: {
