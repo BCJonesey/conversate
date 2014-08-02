@@ -11,8 +11,12 @@ class UserMailer < ActionMailer::Base
   def activation_needed_email(user)
     @user = user
     @url = edit_account_activation_url(user.activation_token)
-    mail(:to => user.email,
-         :subject => 'Water Cooler: Welcome to the Beta')
+    case user.creation_source
+    when :invite
+      activation_invite_email(user)
+    else
+      activation_web_email(user)
+    end
   end
 
   def activation_success_email(user)
@@ -20,16 +24,6 @@ class UserMailer < ActionMailer::Base
     @url = root_url
     mail(:to => user.email,
          :subject => 'Water Cooler: Welcome to Water Cooler')
-  end
-
-  def activation_needed_email(user)
-    @user = user
-    case user.creation_source
-    when :invite
-      activation_invite_email(user)
-    else
-      activation_web_email(user)
-    end
   end
 
   def activation_success_email(user)
@@ -42,17 +36,15 @@ class UserMailer < ActionMailer::Base
   private
 
   def activation_invite_email(user)
-    @url  = "http://0.0.0.0:3000/users/#{user.activation_token}/activate"
     mail(:to => user.email,
        :subject => "You've been invited to Watercooler.io!",
        :template_name => :activation_invite_email)
   end
 
   def activation_web_email(user)
-    @url  = "http://0.0.0.0:3000/users/#{user.activation_token}/activate"
     mail(:to => user.email,
-       :subject => "You've signed up for Watercooler.io!",
-       :template_name => :activation_web_email)
+      :subject => 'Water Cooler: Welcome to the Beta',
+      :template_name => :activation_web_email)
   end
 
 end
