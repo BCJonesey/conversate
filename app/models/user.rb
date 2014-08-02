@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
 
+  has_many :participants
   has_many :reading_logs
   has_many :conversations, :through => :reading_logs
   has_many :actions, :inverse_of => :user
