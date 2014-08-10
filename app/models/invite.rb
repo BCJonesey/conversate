@@ -32,15 +32,18 @@ class Invite < ActiveRecord::Base
 
     invite.user = user
 
+    return invite unless invite.save
+
     begin
-      UserMailer.activation_needed_email(user).deliver
+      UserMailer.activation_invite_email(invite).deliver
     rescue
+      invite.destroy!
       invite.errors.add(:user, "Could not send invitation email") and return invite
     end
 
-    return invite unless invite.save
 
-    # Once we secessfully added an invitation, add the inviter to the invitee's contact list, and vice-versa
+
+    # Once we sucessfully added an invitation, add the inviter to the invitee's contact list, and vice-versa
     contact = user.default_contact_list.contacts.build()
     contact.user = inviter
     contact.save
