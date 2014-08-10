@@ -28,7 +28,7 @@ class Invite < ActiveRecord::Base
     # Let's create a new user for this invite if we need to.
     user = User.build(:email => invitee_email, :password => SecureRandom.uuid, :creation_source => :invite) if user.nil?
 
-    invite.errors.add(:user, "User could not be found or created")  and return invite if user.errors.count > 0
+    invite.errors.add(:user, "User could not be found or created")  and return invite unless user
 
     invite.user = user
 
