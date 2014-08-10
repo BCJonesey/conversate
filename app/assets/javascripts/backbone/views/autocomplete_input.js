@@ -33,6 +33,10 @@ Structural.Views.AutocompleteInput = Support.CompositeView.extend({
     }
   },
 
+  text: function() {
+    return this._input.val();
+  },
+
   preventSubmit: function(e) {
     if (e.which === Support.Keys.enter) {
       e.preventDefault();

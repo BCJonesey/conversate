@@ -57,6 +57,7 @@ Structural.Views.AutocompleteOptions = Support.CompositeView.extend({
     }
     this._targetIndex = 0;
     this.render();
+    this.trigger('optionsUpdated', this._matches);
   },
   targetUp: function() {
     this._scrollTargetIndex(-1);

@@ -57,12 +57,19 @@ Structural.Views.Autocomplete = Support.CompositeView.extend({
     this._inputView.clear();
   },
 
+  text: function() {
+    return this._inputView.text();
+  },
+
   _wireViewEvents: function(optionsView, inputView) {
     inputView.on('textChanged', optionsView.updateOptionsList, optionsView);
     inputView.on('up', optionsView.targetUp, optionsView);
     inputView.on('down', optionsView.targetDown, optionsView);
     inputView.on('select', this._select, this);
     optionsView.on('select', this._select, this);
+    optionsView.on('optionsUpdated', function(options) {
+      this.trigger('optionsUpdated', options);
+    }, this);
     Structural.on('clickAnywhere', this._cancelIfClickOff, this);
   },
 
