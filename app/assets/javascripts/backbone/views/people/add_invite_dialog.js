@@ -47,7 +47,10 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
 
   inviteContact: function(e) {
     e.preventDefault();
-    // TODO: actually submit
+    var invite = new Structural.Models.Invite({
+      email: this.currentText
+    });
+    invite.save();
     this.toggleAddInvite();
   },
 
@@ -59,7 +62,8 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
   showHideInviteContacts: function() {
     if (this.showInviteInsteadOfOptions) {
       this.$('.contacts-list').addClass('hidden');
-      this.$('.invite-contact input').val('Invite ' + this.autocomplete.text());
+      this.currentText = this.autocomplete.text();
+      this.$('.invite-contact input').val('Invite ' + this.currentText);
       this.$('.invite-contact').removeClass('hidden');
     } else {
       this.$('.contacts-list').removeClass('hidden');
