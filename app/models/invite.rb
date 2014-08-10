@@ -1,8 +1,10 @@
 class Invite < ActiveRecord::Base
-  attr_accessible :email, :user_id, :inviter_id
-  validates :user_id, presence: true, numericality: {:only_integer => true}, , uniqueness: { scope: :inviter_id, message: "A user can only invite a specfic person once" }
+  attr_accessible :user_id, :inviter_id
+  validates :user_id, presence: true, numericality: {:only_integer => true}, uniqueness: { scope: :inviter_id, message: "A user can only invite a specfic person once" }
   validates :inviter_id, presence: true, numericality: {:only_integer => true}
 
+  belongs_to :user
+  belongs_to :inviter, class_name: "User"
 
   # Builds an invite.
   # Params:
@@ -36,7 +38,7 @@ class Invite < ActiveRecord::Base
       invite.errors.add(:user, "Could not send invitation email") and return invite
     end
 
-    return invite unless invite.save!
+    return invite unless invite.save
 
     # Once we secessfully added an invitation, add the inviter to the invitee's contact list, and vice-versa
     contact = user.default_contact_list.contacts.build()
