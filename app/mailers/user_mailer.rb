@@ -26,7 +26,7 @@ class UserMailer < ActionMailer::Base
   def activation_invite_email(invite)
     @url = edit_account_activation_url(invite.user.activation_token)
     @inviter = invite.inviter.full_name
-    mail(:to => user.email,
+    mail(:to => invite.user.email,
        :subject => "You've been invited to Watercooler.io!",
        :template_name => :activation_invite_email)
   end
