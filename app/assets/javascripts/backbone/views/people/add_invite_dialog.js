@@ -29,11 +29,13 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
   },
   events: {
     'click .contacts-add-invite': 'toggleAddInvite',
-    'click .popover-close': 'toggleAddInvite'
+    'click .popover-close': 'toggleAddInvite',
+    'submit .invite-contact-form': 'inviteContact'
   },
 
   toggleAddInvite: function(e) {
-    e.preventDefault();
+    if (e) { e.preventDefault(); }
+
     this.$('.contacts-add-invite-popover').toggleClass('hidden');
   },
   closeOnClickOff: function(e) {
@@ -41,6 +43,12 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
     if (target.closest('.contacts-add-invite-wrap').length === 0) {
       this.$('.contacts-add-invite-popover').addClass('hidden');
     }
+  },
+
+  inviteContact: function(e) {
+    e.preventDefault();
+    // TODO: actually submit
+    this.toggleAddInvite();
   },
 
   showInviteOnNoOptions: function(options) {
@@ -51,6 +59,7 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
   showHideInviteContacts: function() {
     if (this.showInviteInsteadOfOptions) {
       this.$('.contacts-list').addClass('hidden');
+      this.$('.invite-contact input').val('Invite ' + this.autocomplete.text());
       this.$('.invite-contact').removeClass('hidden');
     } else {
       this.$('.contacts-list').removeClass('hidden');
