@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   # it's always nil.
   validates :password, length: { minimum: 1 }, allow_nil: true
   validates_presence_of :password, :on => :create, :unless => :external
-  validates_presence_of :email
+  validates :email, presence: true , format: /@/
   validates_uniqueness_of :email, :case_sensitive => false
 
   SUPPORT_USER_ID = 122
