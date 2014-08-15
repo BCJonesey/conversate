@@ -17,6 +17,7 @@ class BetaSignup < ActiveRecord::Base
     support_contact = user.default_contact_list.contacts.build
     support_contact.user_id = User.support_user_id
     support_contact.save
+    return user
   end
 
   private
