@@ -11,11 +11,10 @@ class AdminController < ApplicationController
     if user
       flash[:promotion_status] = :success
       signup.delete
+      UserMailer.activation_needed_email(user).deliver
     else
       flash[:promotion_status] = :failure
     end
-
-    UserMailer.activation_needed_email(user).deliver
 
     redirect_to admin_path
   end
