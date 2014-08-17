@@ -1,0 +1,32 @@
+<div class='activation-container'>
+  <div class='activation-dialog'>
+    <div class="btn-toolbar activation-toolbar">
+      <span class="toolbar-title">
+        Activate account for <%= @user.email %>
+      </span>
+    </div>
+    <%= form_tag account_activation_path(@user.activation_token), method: 'PUT' do %>
+      <div class="form modal-content">
+        <% if flash[:activation_error] %>
+          <div class="login-error-message">
+            <%= {
+              :password_mismatch => 'Passwords did not match.',
+              :unknown_error => 'There was an error activating your account.'
+            }[flash[:activation_error]] %>
+          </div>
+        <% end %>
+        <%= label_tag :name, 'Name' %>
+        <%= text_field_tag :name, @user.full_name %>
+        <%= label_tag :password, 'Password' %>
+        <%= password_field_tag :password, nil %>
+        <%= label_tag :password_confirmation, 'Confirm Password' %>
+        <%= password_field_tag :password_confirmation, nil %>
+      </div>
+      <div class="btn-toolbar-below clearfix">
+        <div class="btn-group pull-right">
+          <%= submit_tag "Activate Account", :class => "btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

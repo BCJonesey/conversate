@@ -1,23 +1,31 @@
 @import "ui/mixins.less";
 
 .home-main{
+  background-color: white !important;
+  background-image: url('<%= path_to_image('hero-shaded.jpeg') %>');
+  background-size: cover;
+  //background-position: 0px -200px;
+  @media(min-width:@bp-2){
+    background-position: center top;
+    background-size: 100% auto;
+  }
 
-  border-bottom:1px solid #ACF;
   .modal-window{
     box-shadow:none;
   }
-  .login-form{
+
+}
+
+.login-form{
     border:@border-2;
+    float: right;
     @media(min-width:@bp-1){
       border:@border-1;
       position:relative;
       margin:2rem auto;
-      max-width:30rem;
+      max-width:50rem;
     }
   }
-}
-
-
 
 .speakeasy-form-text{
   padding: 0.25rem;

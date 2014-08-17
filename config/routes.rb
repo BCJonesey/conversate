@@ -2,11 +2,13 @@ Conversate::Application.routes.draw do
   # The docs say that the root matcher here only grabs GET, but I swear it was
   # eating my POSTs too.
   get '/' => 'home#index', :as => 'root'
+  post '/' => 'home#beta_signup', :as => 'beta_signup'
 
   get '/tour' => 'marketing#tour', :as => 'tour'
   get '/about' => 'marketing#about', :as => 'about'
 
   get 'admin' => 'admin#index', :as => 'admin'
+  post 'admin/promote/:id' => 'admin#promote', :as => 'promotion'
   resource :users, :only => [:update]
   resource :session, :only => [:create]
   get 'session/logout' => 'sessions#destroy', :as => 'destroy_sessions'
@@ -24,6 +26,7 @@ Conversate::Application.routes.draw do
   get '/people/contact-lists/:id' => 'contacts#show_list'
 
   resources :password_resets
+  resources :account_activations, :only => [:edit, :update]
 
   namespace :api do
     namespace :v0 do
@@ -46,6 +49,7 @@ Conversate::Application.routes.draw do
       resources :contact_lists do
         resources :contacts
       end
+      resources :invite, :only => [:create]
     end
   end
 
@@ -111,4 +115,5 @@ Conversate::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
+
 end

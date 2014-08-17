@@ -1,0 +1,206 @@
+@import "ui/mixins.less";
+
+@width-1:50rem;
+@blue: #2080DD;
+
+.marketing-page-2{
+  background: linear-gradient(to bottom, #1e5799 0%, #7db9e8 100%);
+  .outer{
+    .inner{
+      width:auto;
+      margin:0;
+      @media(min-width:@width-1){
+        width:@width-1;
+        margin:0 auto;
+      }
+    }
+  }
+
+  .jumbo.outer{
+    background-color: #bba49a;
+    background-image: url('<%= path_to_image('hero-shaded-3.jpeg') %>');
+    background-size: cover;
+    //background-position: 0px -200px;
+    @media(min-width:@width-1){
+      background-position: center top;
+      background-size: 100% auto;
+    }
+  }
+
+  .jumbo{
+    .title{
+      text-align: center;
+      color:white;
+      font-size: 3rem;
+      padding:1.0rem;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    }
+    .sub-title{
+      text-align: center;
+      color:white;
+      font-size:1rem;
+      padding:1.0rem;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    }
+    @media(min-width:@bp-1){
+      .title{
+        font-size: 5rem;
+      }
+      .sub-title{
+        font-size:2rem;
+      }
+    }
+    @media(min-width:@bp-2){
+      .title{
+        font-size: 7rem;
+      }
+      .sub-title{
+        font-size:3rem;
+      }
+    }
+  }
+  .jumbo.inner{
+    padding:0 1.0rem 1.0rem;
+  }
+
+  .jumbo-signup-box{
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 0.5rem;
+    form{
+      margin:0;
+      @media(min-width:@bp-1){
+        margin:1.0rem;
+      }
+    }
+    p{
+      color:white;
+    }
+    @media(min-width:@bp-2){
+      width:@bp-2*0.65;
+      margin-left:auto;
+      margin-right:auto;
+    }
+  }
+  .section{
+    &.outer:nth-child(2n-1){
+      background-color: #FAFCFF;
+    }
+
+    &.outer:nth-child(2n){
+      &, p, .heading{
+        color:white;
+      }
+      .list-leader{
+        color:#FFF;
+      }
+      li{
+        color:#DDD;
+      }
+      .keyword{
+        color:#ACF;
+      }
+      //background-color: rgba(0,128,255,1.0);
+    }
+    &.outer{
+      //border-bottom:1px solid #EEE;
+    }
+    &.inner{
+      padding:1.0rem;
+    }
+    .heading{
+      text-align: center;
+      color:#888;
+      font-size:1.5rem;
+      line-height: 1.5;
+      padding:0.25rem 0;
+      @media(min-width:@bp-1){
+        font-size:2.5rem;
+        padding:1.0rem;
+      }
+      @media(min-width:@bp-2){
+        font-size:3.0rem;
+      }
+      .keyword{
+        font-weight:bold;
+        font-style: italic;
+        color:@blue;
+      }
+    }
+    p{
+      font-size:1.0rem;
+      line-height: 1.75;
+      color:#444;
+      @media(min-width:@bp-1){
+        padding:1.0rem 0;
+        line-height: 2.0;
+        font-size:1.25rem;
+      }
+      @media(min-width:@bp-2){
+        font-size:1.5rem;
+      }
+
+    }
+    .list-leader{
+      font-size:1.0rem;
+      color:#AAA;
+      font-style: italic;
+      @media(min-width:@bp-1){
+        font-size:1.2rem;
+      }
+      @media(min-width:@bp-2){
+        font-size:1.4rem;
+      }
+    }
+    ul{
+      padding-left:1.5rem;
+      @media(min-width:@bp-1){
+        padding-left:2.5rem;
+      }
+      li{
+        padding:0.35rem;
+        font-size:0.9rem;
+        @media(min-width:@bp-1){
+          font-size:1.1rem;
+        }
+        @media(min-width:@bp-2){
+          font-size:1.3rem;
+        }
+        &.tipped{
+          cursor: default;
+        }
+        .note{
+          padding: 0.25rem 1.0rem;
+          font-size:0.8em;
+          color:#BBB;
+          font-style: italic;
+        }
+      }
+    }
+  }
+}
+
+.beta-signin-3{
+  position: absolute;
+  top:0;
+  left:0;
+  right:0;
+
+  .beta-signin-3-inner{
+    //text-align: right;
+    position: relative;
+    @media(min-width:@width-1){
+      width:@width-1;
+      margin:0 auto;
+    }
+    .toggle{
+      display:inline-block;
+      cursor: pointer;
+      float: right;
+      padding-right:1.0rem;
+      color:rgba(255,255,255,0.5);
+      &:hover{
+        color:white;
+      }
+    }
+  }
+}
