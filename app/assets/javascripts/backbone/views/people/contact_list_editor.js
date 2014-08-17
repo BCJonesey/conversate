@@ -1,6 +1,6 @@
 Structural.Views.ContactListEditor = Support.CompositeView.extend({
   className: function(){
-    return 'contact-list-edit-box-wrap ' + (this.shown ? "" : "hidden");
+    return 'contact-list-edit-box-wrap' + (this.shown ? "" : " hidden") + (this.isShared ? " is-shared" : "");
   },
   template: JST.template('people/contact_lists/contact_list_editor'),
   initialize: function(options) {
