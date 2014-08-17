@@ -10,16 +10,45 @@ Structural.Views.ContactListEditor = Support.CompositeView.extend({
   },
   events: {
     'click .close-button': 'close',
+    'click .cl-share-contact-list-btn': 'share',
     'click .contact-list-edit-save-button': 'save'
   },
   render:function(){
     if(this.model){
-      this.$el.html(this.template({ contactList: this.model }));
+      this.$el.html(this.template({
+        contactList: this.model,
+        isShared: this.isShared
+      }));
+
+      if (this.isShared) {
+        this.autocomplete = new Structural.Views.Autocomplete({
+          dictionary: Structural._user.addressBook(),
+          blacklist: this.model.get('participants'),
+          addSelectionToBlacklist: true,
+          property: 'name'
+        });
+        this.removableList = new Structural.Views.RemovableParticipantList({
+          collection: this.model.get('participants')
+        });
+
+        this.autocomplete.on('select', this.removableList.add, this.removableList);
+        this.removableList.on('remove', this.autocomplete.removeFromBlacklist, this.autocomplete);
+
+        this.model.get('participants').fetch({
+          success: function() {
+            this.$('.cl-placeholder').remove();
+            this.insertChildAfter(this.removableList, this.$('label[for="contact-list-participants"]'));
+            this.insertChildAfter(this.autocomplete, this.$('label[for="contact-list-participants"]'));
+          }.bind(this)
+        });
+      }
     }
   },
-  showEditor: function(contact_list){
-    this.model = contact_list;
+  showEditor: function(contactList){
+    this.model = contactList;
     this.shown = true;
+    var participants = contactList.get('participants');
+    this.isShared = participants !== undefined && participants.length > 0;
     this.reRender();
   },
   close: function(){
@@ -27,12 +56,22 @@ Structural.Views.ContactListEditor = Support.CompositeView.extend({
     this.shown = false;
     this.reRender();
   },
+  share: function() {
+    this.isShared = true;
+    this.reRender();
+  },
   save: function(){
     this.clearErrors();
     var name = this.$('.contact-list-name-input').val();
-    this.model.save({
+    var savedAttrs = {
       name: name
-    },{
+    };
+
+    if (this.isShared) {
+      savedAttrs.participants = this.removableList.participants();
+    }
+
+    this.model.save(savedAttrs, {
       success: this.saveSucess.bind(this),
       error: this.saveError.bind(this),
       patch: true,
@@ -47,7 +86,7 @@ Structural.Views.ContactListEditor = Support.CompositeView.extend({
     this.close();
   },
   saveError: function(){
-    this.$('.errors').text("Problem Saving Folder");
+    this.$('.errors').text("Problem Saving Contact List");
     this.$('.errors').removeClass("hidden");
   }
 });

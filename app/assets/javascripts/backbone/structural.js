@@ -55,9 +55,10 @@ var Structural = new (Support.CompositeView.extend({
 
     // TODO: Refactor to be like other things instead of a singleton collection.
     this._participants = new Structural.Collections.Participants(
-      bootstrap.participants,
-      // TODO: Is this even necessary now?
-      {conversation: this._conversation ? this._conversation.id : undefined}
+      bootstrap.participants, {
+        id: this._conversation ? this._conversation.id : undefined,
+        type: 'conversation'
+      }
     );
 
     // Setup our views with appropriate data settings.
