@@ -135,7 +135,11 @@ class User < ActiveRecord::Base
         end
 
         def contact_lists
-          self.default_contact_list ? [self.default_contact_list] : []
+           shared_contact_lists + (self.default_contact_list ? [self.default_contact_list] : [])
+        end
+
+        def shared_contact_lists
+          self.participants.includes(:participatable).where(participatable_type: "ContactList").map { |p| p.participatable }
         end
 
         def default_contact_list
