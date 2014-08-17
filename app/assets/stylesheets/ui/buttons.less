@@ -1,5 +1,8 @@
 @import "ui/mixins.less";
 
+@primary-blue: #1e5799;
+
+
 .btn{
   font-size: 1rem;
   height:1.7rem;
@@ -16,6 +19,7 @@
   text-decoration:none;
   border:1px solid #CCC;
   background-color:#F0F0F0;
+  border-radius:2px;
   color:#444;
   .button-shadow(0.2);
   cursor:pointer;
@@ -36,8 +40,9 @@
 
 .btn-primary{
   .btn();
-	border-color: #AAA;
   background-color:#7AD;
+  background-color: @primary-blue;
+	border-color: mix(black,@primary-blue,10%);
   color:white;
 	.button-shadow(0.4);
   &:hover,
@@ -45,6 +50,8 @@
   &:focus{
     background-color:#8BE;
     border-color:#9AC;
+    background-color:mix(white,@primary-blue,10%);
+    border-color:@primary-blue;
   }
   &.disabled{
     background-color: #ABC;
@@ -155,6 +162,8 @@ They are most useful for floating multiple buttons to one side.  */
 .btn-toolbar-style{
   box-sizing:border-box;
   border:1px solid transparent;
+  border-left:none;
+  border-right:none;
   background-color: @bg-1;
   padding:0.3rem .45rem;
   display: block;
@@ -209,20 +218,18 @@ They are most useful for floating multiple buttons to one side.  */
   margin:0;
   margin-left:.25rem;
   margin-right:.25rem;
-
   color:#AAA;
-
+  transition: color 0.35s;
   &:hover,
   &.hover{
     color:rgba(0,0,0,0.7);
-    transition: color 0.35s;
   }
   &.active,
   &:active,
   &:focus{
     position:relative;
     top:1px;
-    color:rgba(0,0,0,0.7);
+    color: #1e5799;
 
   }
   &.disabled,

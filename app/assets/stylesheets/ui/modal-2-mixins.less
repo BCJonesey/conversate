@@ -1,0 +1,73 @@
+@modal-2-blue: #2080DD;
+
+.modal-2-label-style(){
+  font-size:0.75rem;
+  color:#888;
+  margin-left:0.25rem;
+}
+
+.modal-2(){
+  padding:0.25rem;
+  border-radius:0.25rem;
+  background-color: white;
+  box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.2);
+}
+
+.modal-2-toolbar(){
+  text-align: center;
+  padding:0.25rem;
+  title{
+    color:#888;
+    font-weight: bold;
+  }
+}
+
+.modal-2-content(){
+  padding:0.5rem;
+  label{
+    .modal-2-label-style();
+  }
+  input{
+    display: block;
+    width:100%;
+    padding:0.5rem;
+    border:1px solid #CCC;
+    background-color:white;
+    border-radius:0.15rem !important;
+    font-size:1.0rem;
+    outline:none;
+    &:focus{
+      border-color:@modal-2-blue;
+    }
+  }
+  input[type='checkbox']{
+    display:inline-block;
+    width:auto;
+  }
+  a{
+    font-size:0.8rem;
+    color:#888;
+    text-decoration: none;
+    outline:none;
+    .modal-2-label-style();
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+}
+
+
+.modal-2-button(){
+  border-radius: 0.15rem !important;
+  background-color:@modal-2-blue;
+  min-width: 10.0rem;
+  cursor: pointer;
+  padding: 0.5rem 1.5rem;
+  color:white;
+  border:none;
+  font-size:1.0rem;
+  &:focus,
+  &:hover{
+    background-color:mix(white,@modal-2-blue,20%);
+  }
+}

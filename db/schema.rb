@@ -11,7 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140802161258) do
+
+ActiveRecord::Schema.define(version: 20140810180823) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +30,12 @@ ActiveRecord::Schema.define(version: 20140802161258) do
   add_index "actions", ["conversation_id", "created_at"], name: "index_actions_on_conversation_id_and_created_at", using: :btree
   add_index "actions", ["conversation_id"], name: "index_actions_on_conversation_id", using: :btree
   add_index "actions", ["search_vector"], name: "index_actions_on_search_vector", using: :gin
+
+  create_table "beta_signups", force: true do |t|
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "contact_lists", force: true do |t|
     t.string   "name"
@@ -102,6 +109,13 @@ ActiveRecord::Schema.define(version: 20140802161258) do
     t.datetime "updated_at"
   end
 
+  create_table "invites", force: true do |t|
+    t.integer  "user_id",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "inviter_id"
+  end
+
   create_table "reading_logs", force: true do |t|
     t.integer  "conversation_id"
     t.integer  "user_id"
@@ -142,8 +156,14 @@ ActiveRecord::Schema.define(version: 20140802161258) do
     t.datetime "reset_password_token_expires_at"
     t.datetime "reset_password_email_sent_at"
     t.integer  "default_contact_list_id"
+    t.integer  "invite_count",                    default: 0
+    t.string   "activation_state"
+    t.string   "activation_token"
+    t.datetime "activation_token_expires_at"
+    t.string   "creation_source",                 default: "web"
   end
 
+  add_index "users", ["activation_token"], name: "index_users_on_activation_token", using: :btree
   add_index "users", ["remember_me_token"], name: "index_users_on_remember_me_token", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", using: :btree
 

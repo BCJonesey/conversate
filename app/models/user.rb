@@ -1,3 +1,5 @@
+require 'active_support/core_ext'
+
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
 
@@ -11,7 +13,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :folders
   belongs_to :default_folder, class_name: "Folder", foreign_key: "default_folder_id"
 
-  attr_accessible :email, :full_name, :password, :password_confirmation, :external
+  attr_accessible :email, :full_name, :password, :password_confirmation, :external, :creation_source, :invite_count
 
   validates_confirmation_of :password
   # We have to allow nil passwords or we wouldn't ever be able to change a
@@ -20,12 +22,21 @@ class User < ActiveRecord::Base
   # it's always nil.
   validates :password, length: { minimum: 1 }, allow_nil: true
   validates_presence_of :password, :on => :create, :unless => :external
-  validates_presence_of :email
+  validates :email, presence: true , format: /@/
   validates_uniqueness_of :email, :case_sensitive => false
+
+  SUPPORT_USER_ID = 122
+  # Apparently I can't define a static constant?  I Have to def it?
+  def self.support_user_id
+    SUPPORT_USER_ID
+  end
 
   def self.build(params)
     user = User.new(params)
     return false if user.save == false
+    # Apparently save will helpfully nil out the password field and then
+    # complain that the password confirmation field doesn't match.
+    user.password_confirmation = nil
 
     new_contact_list = ContactList.new
 
@@ -51,7 +62,7 @@ class User < ActiveRecord::Base
   end
 
   def name
-    full_name.empty? ? email : full_name
+    full_name.nil? || full_name.empty? ? email : full_name
   end
 
   def update_most_recent_viewed(conversation)
@@ -82,13 +93,54 @@ class User < ActiveRecord::Base
     end
   end
 
-  def contact_lists
-    self.default_contact_list ? [self.default_contact_list] : []
-  end
+  def create_welcome_conversation()
+    support = User.find(SUPPORT_USER_ID)
+    welcome_convo = self.default_folder.conversations.create(title: "Hi #{self.name}, welcome to Water Cooler")
+    action_params = [
+      { 'type' => 'retitle',
+        'title' => "Hi #{self.name}, welcome to Water Cooler"
+        },
+        { 'type' => 'update_users',
+          'added' => [{id: support.id, full_name: support.full_name},
+            {id: self.id, full_name: self.full_name, email: self.email}],
+            'removed' => nil
+            },
+            { 'type' => 'message',
+              'text' => <<-EOS.strip_heredoc
+              Hi #{self.name},
 
-  def default_contact_list
-    self.default_contact_list_id.nil? ? nil : ContactList.find(self.default_contact_list_id)
-  end
+              Welcome to Water Cooler.
+
+              If you have any questions, you can reply in this thread and someone will get back to you as fast as we can.
+
+              If you're ever having trouble with Water Cooler, you can send an old fashioned email to watercooler@structur.al and we'll try to help you out.
+
+              Thanks,
+
+              -The Water Cooler Team
+              EOS
+            }
+          ]
+          action_params.each do |params|
+            action = welcome_convo.actions.create({
+              type: params['type'],
+              data: Action.data_for_params(params),
+              user_id: support.id
+              })
+            action.save
+            welcome_convo.handle(action)
+          end
+          welcome_convo.most_recent_event = welcome_convo.actions.last.created_at
+          welcome_convo.save
+        end
+
+        def contact_lists
+          self.default_contact_list ? [self.default_contact_list] : []
+        end
+
+        def default_contact_list
+          self.default_contact_list_id.nil? ? nil : ContactList.find(self.default_contact_list_id)
+        end
 
   # This avoids us writing out passwords, salts, etc. when rendering json.
   def as_json(options={})
