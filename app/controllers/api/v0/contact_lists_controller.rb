@@ -16,7 +16,7 @@ class Api::V0::ContactListsController < ApplicationController
     end
     if @contact_list.save
       # do this better later
-      @contact_list.participants.clear
+      @contact_list.participants.destroy_all
       params[:participants].each{ |p| @contact_list.participants.build(:user_id => p[:id]).save}
       render :json => @contact_list
     else
