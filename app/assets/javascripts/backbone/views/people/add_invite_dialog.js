@@ -41,7 +41,8 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
   },
   closeOnClickOff: function(e) {
     var target = $(e.target);
-    if (target.closest('.contacts-add-invite-wrap').length === 0) {
+    if (target.parents().length > 0 &&
+        target.closest('.contacts-add-invite-wrap').length === 0) {
       this.$('.contacts-add-invite-popover').addClass('hidden');
     }
   },
@@ -74,6 +75,7 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
     });
     newContact.save();
     this._addContactToList(newContact);
+    this.toggleAddInvite();
   },
 
   _addContactToList: function(contact) {
