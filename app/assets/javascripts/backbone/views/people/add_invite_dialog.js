@@ -20,6 +20,7 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
         optionsContainer: this.$('.contacts-list')
       });
       this.autocomplete.on('optionsUpdated', this.showInviteOnNoOptions, this);
+      this.autocomplete.on('select', this.addExistingUser, this);
     }
 
     this.appendChild(this.autocomplete);
@@ -52,6 +53,14 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
     });
     invite.save();
     this.toggleAddInvite();
+  },
+  addExistingUser: function(user) {
+    // /api/v0/contact_lists/ID/contacts POST id
+    var newContact = new Structural.Models.Contact({
+      contact_list_id: Structural._selectedContactListId,
+      user_id: user.id
+    });
+    newContact.save();
   },
 
   showInviteOnNoOptions: function(options) {
