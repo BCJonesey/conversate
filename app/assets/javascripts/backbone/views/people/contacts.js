@@ -4,12 +4,14 @@ Structural.Views.Contacts = Support.CompositeView.extend({
   template: JST.template('people/contacts/contacts'),
   className: 'contacts ui-scrollable',
   initialize: function(options) {
-    var self = this;
+    this.contactListId = options.contactListId;
     this.listenTo(Structural._user, 'addressBookUpdated', this.reRender);
   },
   render: function() {
     this.$el.html(this.template());
-    this.collection.forEach(this.renderContact, this);
+    Structural._contactLists.get(this.contactListId)
+                            .get('contacts')
+                            .forEach(this.renderContact, this);
     return this;
   },
   renderContact: function(contact) {

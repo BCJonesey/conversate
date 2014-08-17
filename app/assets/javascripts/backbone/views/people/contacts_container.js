@@ -17,9 +17,13 @@ Structural.Views.ContactsContainer = Support.CompositeView.extend({
   render: function() {
     this.$el.empty();
     if(Structural._selectedContactListId){
-      this.contactsBar = new Structural.Views.ContactsBar({model: Structural._contactLists.get(Structural._selectedContactListId)});
+      this.contactsBar = new Structural.Views.ContactsBar({
+        model: Structural._contactLists.get(Structural._selectedContactListId)
+      });
       this.appendChild(this.contactsBar);
-      this.contacts = new Structural.Views.Contacts({collection: Structural._contactLists.get(Structural._selectedContactListId).get("contacts")});
+      this.contacts = new Structural.Views.Contacts({
+        contactListId: Structural._selectedContactListId
+      });
       this.appendChild(this.contacts);
     }
     return this;
