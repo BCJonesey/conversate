@@ -63,10 +63,7 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
         name: email
       }
     });
-    Structural._contactLists.get(Structural._selectedContactListId)
-                            .get('contacts')
-                            .add(contact);
-    Structural._user.rebuildAddressBook();
+    this._addContactToList(contact);
     this.toggleAddInvite();
   },
   addExistingUser: function(user) {
@@ -76,9 +73,13 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
       user: user
     });
     newContact.save();
+    this._addContactToList(newContact);
+  },
+
+  _addContactToList: function(contact) {
     Structural._contactLists.get(Structural._selectedContactListId)
                             .get('contacts')
-                            .add(newContact);
+                            .add(contact);
     Structural._user.rebuildAddressBook();
   },
 
