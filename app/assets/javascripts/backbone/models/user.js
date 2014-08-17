@@ -42,7 +42,9 @@ Structural.Models.User = Backbone.Model.extend({
     {
       Structural._contactLists.each(function(cl){
         cl.get("contacts").each(function(contact){
-          retVal[contact.get("user_id")] = self.buildAddressBookEntry(contact.get("user_id"),contact.get("user").escape("name"));
+          var id = contact.get('user_id');
+          var name = contact.get('user').escape('name');
+          retVal[contact.get("user_id")] = self.buildAddressBookEntry(id, name);
         })
       });
     }

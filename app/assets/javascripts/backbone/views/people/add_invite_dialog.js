@@ -57,9 +57,14 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
   addExistingUser: function(user) {
     var newContact = new Structural.Models.Contact({
       contact_list_id: Structural._selectedContactListId,
-      user_id: user.id
+      user_id: user.id,
+      user: user
     });
     newContact.save();
+    Structural._contactLists.get(Structural._selectedContactListId)
+                            .get('contacts')
+                            .add(newContact);
+    Structural._user.rebuildAddressBook();
   },
 
   showInviteOnNoOptions: function(options) {
