@@ -55,7 +55,6 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
     this.toggleAddInvite();
   },
   addExistingUser: function(user) {
-    // /api/v0/contact_lists/ID/contacts POST id
     var newContact = new Structural.Models.Contact({
       contact_list_id: Structural._selectedContactListId,
       user_id: user.id
