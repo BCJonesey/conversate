@@ -25,6 +25,7 @@ class Api::V0::ContactListsController < ApplicationController
     end
     if @contact_list.save
       # do this better later
+      # in the future we will want to update only the changed values
       @contact_list.participants.destroy_all
       params[:participants].each{ |p| @contact_list.participants.build(:user_id => p[:id]).save} if params[:participants]
       render :json => @contact_list
