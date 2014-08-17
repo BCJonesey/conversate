@@ -84,6 +84,8 @@ Structural.Views.ContactListEditor = Support.CompositeView.extend({
     this.$('.errors').addClass("hidden");
   },
   saveSucess: function(){
+    // run dat fetcher
+    Structural.contactsFetcher.runNow();
     this.close();
   },
   saveError: function(){
