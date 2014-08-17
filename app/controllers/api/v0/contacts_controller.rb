@@ -22,7 +22,7 @@ class Api::V0::ContactsController < ApplicationController
     if contact.save
       render :json => contact.to_json, :status => 201
     else
-      render :status => 500
+      head :status => 500 and return
     end
   end
 end
