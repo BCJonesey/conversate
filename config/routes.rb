@@ -30,6 +30,9 @@ Conversate::Application.routes.draw do
 
   namespace :api do
     namespace :v0 do
+      concern :participatable do
+        resources :participants, controller: 'participants_concern'
+      end
       resources :folders, :only => [:index, :create, :update, :destroy] do
         post 'users', :on => :member
         resources :conversations, :only => [:index, :create]
@@ -46,7 +49,7 @@ Conversate::Application.routes.draw do
       resources :admin, :only => [:index]
       resources :files, :only => [:create]
       resources :search, :only => [:index]
-      resources :contact_lists do
+      resources :contact_lists, concerns: :participatable do
         resources :contacts
       end
       resources :invite, :only => [:create]

@@ -11,7 +11,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 20140810180823) do
 
   # These are extensions that must be enabled in order to support this database
@@ -101,19 +100,19 @@ ActiveRecord::Schema.define(version: 20140810180823) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "invites", force: true do |t|
+    t.integer  "user_id",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "inviter_id"
+  end
+
   create_table "participants", force: true do |t|
     t.integer  "participatable_id"
     t.string   "participatable_type"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "invites", force: true do |t|
-    t.integer  "user_id",    null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "inviter_id"
   end
 
   create_table "reading_logs", force: true do |t|

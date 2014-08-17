@@ -15,6 +15,9 @@ class Api::V0::ContactListsController < ApplicationController
       @contact_list.name = params[:contact_list][:name]
     end
     if @contact_list.save
+      # do this better later
+      @contact_list.participants.clear
+      params[:participants].each{ |p| @contact_list.participants.build(:user_id => p[:id]).save}
       render :json => @contact_list
     else
       render :json => @contact_list.errors, :status => :error
