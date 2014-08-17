@@ -7,12 +7,6 @@ Structural.Views.ContactsContainer = Support.CompositeView.extend({
     this.contactList = options.contactList;
 
     this.listenTo(Structural._people, 'switchContactList', this.reRender);
-
-    // The viewOrder property is the order that sections show up in the DOM,
-    // the priority property controls the order that we check the section
-    // predicates.  The first section (in priority order) whose predicate is
-    // true for a conversation is the section we put that convo in.
-
   },
   render: function() {
     this.$el.empty();
