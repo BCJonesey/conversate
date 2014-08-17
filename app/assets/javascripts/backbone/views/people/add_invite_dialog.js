@@ -38,13 +38,24 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
     if (e) { e.preventDefault(); }
 
     this.$('.contacts-add-invite-popover').toggleClass('hidden');
+    if (this.$('.contacts-add-invite-popover').hasClass('hidden')) {
+      this.hideSpinner();
+      this.hideError();
+    }
   },
   closeOnClickOff: function(e) {
     var target = $(e.target);
     if (target.parents().length > 0 &&
         target.closest('.contacts-add-invite-wrap').length === 0) {
       this.$('.contacts-add-invite-popover').addClass('hidden');
+      this.hideSpinner();
+      this.hideError()
     }
+  },
+  close: function() {
+    this.$('.contacts-add-invite-popover').addClass('hidden');
+    this.hideSpinner();
+    this.hideError();
   },
 
   inviteContact: function(e) {
@@ -53,7 +64,11 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
     var invite = new Structural.Models.Invite({
       email: email
     });
-    invite.save();
+    invite.save({}, {
+      success: this.close.bind(this),
+      error: this.showError.bind(this)
+    });
+    this.showSpinner();
 
     var contact = new Structural.Models.Contact({
       contact_list_id: Structural._selectedContactListId,
@@ -65,7 +80,6 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
       }
     });
     this._addContactToList(contact);
-    this.toggleAddInvite();
   },
   addExistingUser: function(user) {
     var newContact = new Structural.Models.Contact({
@@ -73,9 +87,12 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
       user_id: user.id,
       user: user
     });
-    newContact.save();
+    newContact.save({}, {
+      success: this.close.bind(this),
+      error: this.showError.bind(this)
+    });
+    this.showSpinner();
     this._addContactToList(newContact);
-    this.toggleAddInvite();
   },
 
   _addContactToList: function(contact) {
@@ -100,5 +117,18 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
       this.$('.contacts-list').removeClass('hidden');
       this.$('.invite-contact').addClass('hidden');
     }
+  },
+  showSpinner: function() {
+    this.$('.spinner').removeClass('hidden');
+  },
+  hideSpinner: function() {
+    this.$('.spinner').addClass('hidden');
+  },
+  showError: function() {
+    this.hideSpinner();
+    this.$('.error').removeClass('hidden');
+  },
+  hideError: function() {
+    this.$('.error').addClass('hidden');
   }
 })
