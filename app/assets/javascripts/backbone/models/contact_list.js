@@ -12,7 +12,6 @@ Structural.Models.ContactList = Backbone.Model.extend({
       attrs.contacts = this.inflate(Structural.Collections.Contacts,attrs.contacts);
     }
 
-    // TODO: Initialize this correctly.
     attrs.participants = new Structural.Collections.Participants([], {
       id: this.id,
       type: 'contact_list'
