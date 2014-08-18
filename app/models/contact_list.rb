@@ -8,6 +8,7 @@ class ContactList < ActiveRecord::Base
 	def as_json(options={})
 		json = super
 		json['contacts'] = self.contacts.as_json
+    json['participants'] = self.participants.includes(:user).map{|p| p.user}
 		return json
 	end
 end
