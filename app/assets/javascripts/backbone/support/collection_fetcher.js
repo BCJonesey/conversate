@@ -17,14 +17,10 @@ Support.CollectionFetcher = function(options) {
       self._intervals = [min, min, min].concat(steps);
     }
 
-    self.runNow = function(){
-      self._fetchHandler();
-    };
-
     self._nextTimeoutLength = function() {
       var index = Math.min(self._intervals.length - 1, Math.max(0, self._fetchesSinceChange));
       return self._intervals[index];
-    };
+    }
 
     self._requestFinished = function(success, collection, response, opts) {
       if (self._lastResponse === opts.xhr.responseText) {
