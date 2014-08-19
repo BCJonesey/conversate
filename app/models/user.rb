@@ -3,7 +3,6 @@ require 'active_support/core_ext'
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
 
-  has_many :participants
   has_many :reading_logs
   has_many :conversations, :through => :reading_logs
   has_many :actions, :inverse_of => :user
@@ -137,11 +136,7 @@ class User < ActiveRecord::Base
         end
 
         def contact_lists
-           shared_contact_lists + (self.default_contact_list ? [self.default_contact_list] : [])
-        end
-
-        def shared_contact_lists
-          self.participants.includes(:participatable).where(participatable_type: "ContactList").map { |p| p.participatable }
+          self.default_contact_list ? [self.default_contact_list] : []
         end
 
         def default_contact_list
