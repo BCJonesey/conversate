@@ -10,7 +10,9 @@ Structural.Views.AutocompleteInput = Support.CompositeView.extend({
   },
 
   clear: function() {
-    this._input.val('');
+    if (this._input) {
+      this._input.val('');
+    }
   },
 
   events: {
