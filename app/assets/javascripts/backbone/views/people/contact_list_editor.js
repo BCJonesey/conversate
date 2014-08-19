@@ -21,8 +21,6 @@ Structural.Views.ContactListEditor = Support.CompositeView.extend({
       }));
 
       if (this.isShared) {
-
-
         this.model.get('participants').fetch({
           success: function() {
             this.autocomplete = new Structural.Views.Autocomplete({
