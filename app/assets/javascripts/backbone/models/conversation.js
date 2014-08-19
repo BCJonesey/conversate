@@ -38,7 +38,8 @@ Structural.Models.Conversation = Backbone.Model.extend({
     if (attrs.participants) {
       attrs.participants = this.inflate(Structural.Collections.Participants,
                                         attrs.participants,
-                                        { conversation: attrs.id });
+                                        { id: attrs.id,
+                                          type: 'conversation' });
     }
     return attrs;
   },
