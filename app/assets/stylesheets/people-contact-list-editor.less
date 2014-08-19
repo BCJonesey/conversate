@@ -27,23 +27,42 @@
   right:0;
   bottom:0;
   background-color: rgba(0,0,0,0.2);
-}
 
-.contact-list-edit-box{
-  position: relative;
-  margin: 4.0rem auto;
-  width:30rem;
-  height: 20rem;
-  border:@border-3;
-  background-color: @bg-1;
-  border-radius:3px;
-  overflow: hidden;
-  .group.right{
-    position: absolute;
-    right:0;
-    top:0;
-    bottom:0;
-    padding:0.4rem 0.35rem 0;
+  .contact-list-edit-box{
+    position: relative;
+    margin: 4.0rem auto;
+    width:30rem;
+    height: 20rem;
+    border:@border-3;
+    background-color: @bg-1;
+    border-radius:3px;
+    overflow: hidden;
+    .group.right{
+      position: absolute;
+      right:0;
+      top:0;
+      bottom:0;
+      padding:0.4rem 0.35rem 0;
+    }
+    .main-info{
+      width: 28rem;
+      padding: 0.25rem;
+    }
+  }
+  &.is-shared .contact-list-edit-box{
+    width: 45rem;
+    height: 26rem;
+    .cl-contact-list-participants{
+      position:absolute;
+      top:0;
+      right:0;
+      bottom:0;
+      width: 15rem;
+      overflow:auto;
+      background-color: white;
+      padding: 0.5rem;
+      border-left: @border-1;
+    }
   }
 
   .header{
@@ -104,6 +123,11 @@
       width: 100%;
     }
   }
+
+  .cl-share-contact-list-btn{
+    margin: 0.5rem;
+  }
+
   .bottom-toolbar{
     border-top:@border-2;
     background-color: @bg-2;

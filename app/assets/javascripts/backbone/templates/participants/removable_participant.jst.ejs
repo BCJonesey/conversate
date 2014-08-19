@@ -15,8 +15,8 @@
     <label >Name</label>
     <input disabled="disabled" type='text' value='<%= participant.escape('name') %>'/>
 
-    <label class="hidden" >Contact List</label>
-    <div class='hidden contact-list-select-wrap'>
+    <label>Contact List</label>
+    <div class='contact-list-select-wrap'>
       <select class='contact-list-select'>
         <% if(Structural._contactLists.length > 1) { %>
           <option value='Contact Lists' disabled selected='selected'>Contact Lists...</option>
