@@ -10,8 +10,22 @@
 
   <div class='contents'>
     <div class='errors hidden'></div>
-    <label>Contact List Name</label>
-    <input class='contact-list-name-input' value="<%= contactList.escape('name') %>"/>
+    <div class='main-info'>
+      <label>Contact List Name</label>
+      <input class='contact-list-name-input' value="<%= contactList.escape('name') %>"/>
+      <% if(contactList.id && !isShared) { %>
+        <button class=" btn cl-share-contact-list-btn">Share this contact list</button>
+      <% } %>
+    </div>
+    <% if(contactList.id && isShared){ %>
+      <div class="cl-contact-list-participants participants-vertical">
+        <label for="contact-list-participants">Participants</label>
+        <div class="cl-placeholder">
+          <i class="fa fa-fw fa-cog fa-spin loading-icon"></i>
+          <div class="loading-text">Loading...</div>
+        </div>
+      </div>
+    <% } %>
   </div>
 
   <div class='bottom-toolbar'>

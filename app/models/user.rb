@@ -3,6 +3,7 @@ require 'active_support/core_ext'
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
 
+  has_many :participants
   has_many :reading_logs
   has_many :conversations, :through => :reading_logs
   has_many :actions, :inverse_of => :user
@@ -106,17 +107,19 @@ class User < ActiveRecord::Base
             },
             { 'type' => 'message',
               'text' => <<-EOS.strip_heredoc
-              Hi #{self.name},
+              Hi #{self.name}, Welcome to Water Cooler.
 
-              Welcome to Water Cooler.
-
-              If you have any questions, you can reply in this thread and someone will get back to you as fast as we can.
+              If you have any questions, you can reply to this message and someone from the Water Cooler will get back to you as soon as we can.
 
               If you're ever having trouble with Water Cooler, you can send an old fashioned email to watercooler@structur.al and we'll try to help you out.
 
               Thanks,
 
               -The Water Cooler Team
+
+              P.S.  If you're using chrome, we have a little notifier extension to let you know when you have unread Water Cooler messages.
+
+              https://chrome.google.com/webstore/detail/watercooler/iojmggbopjbgmkhceojpkdlkjndpfpbb
               EOS
             }
           ]
@@ -134,7 +137,11 @@ class User < ActiveRecord::Base
         end
 
         def contact_lists
-          self.default_contact_list ? [self.default_contact_list] : []
+           shared_contact_lists + (self.default_contact_list ? [self.default_contact_list] : [])
+        end
+
+        def shared_contact_lists
+          self.participants.includes(:participatable).where(participatable_type: "ContactList").map { |p| p.participatable }
         end
 
         def default_contact_list
