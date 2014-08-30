@@ -31,7 +31,7 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
   events: {
     'click .contacts-add-invite': 'toggleAddInvite',
     'click .popover-close': 'toggleAddInvite',
-    'submit .invite-contact-form': 'inviteContact'
+    'click .invite-contact button': 'inviteContact'
   },
 
   toggleAddInvite: function(e) {
@@ -133,27 +133,27 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
       this.$('.contacts-list').addClass('hidden');
       this.currentText = this.autocomplete.text();
       this.showSpinner();
-      this.$('.add-contact-form').addClass('hidden');
-      this.$('.invite-contact-form').addClass('hidden');
+      this.$('.add-contact').addClass('hidden');
+      this.$('.invite-contact').addClass('hidden');
       this.searchForContactByEmail(
         this.currentText,
         function(contact) {
           this.hideSpinner();
           console.log(contact);
-          this.$('.add-contact-form input').val('Add ' + contact.get('name'));
-          this.$('.add-contact-form').removeClass('hidden');
-          this.$('.invite-contact-form').addClass('hidden');
+          this.$('.add-contact button').text('Add ' + contact.get('name'));
+          this.$('.add-contact').removeClass('hidden');
+          this.$('.invite-contact').addClass('hidden');
         },
         function() {
           this.hideSpinner();
-          this.$('.invite-contact-form input').val('Invite ' + this.currentText);
-          this.$('.add-contact-form').addClass('hidden');
-          this.$('.invite-contact-form').removeClass('hidden');
+          this.$('.invite-contact button').text('Invite ' + this.currentText);
+          this.$('.add-contact').addClass('hidden');
+          this.$('.invite-contact').removeClass('hidden');
         });
     } else {
       this.$('.contacts-list').removeClass('hidden');
-      this.$('.invite-contact-form').addClass('hidden');
-      this.$('.add-contact-form').addClass('hidden');
+      this.$('.invite-contact').addClass('hidden');
+      this.$('.add-contact').addClass('hidden');
     }
   },
   showSpinner: function() {
