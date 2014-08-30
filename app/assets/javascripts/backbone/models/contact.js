@@ -8,6 +8,12 @@ Structural.Models.Contact = Backbone.Model.extend({
   initialize: function(attributes, options) {
     var self = this;
     this.inflateExtend(this.attributes);
+    if (!this.get('name')) {
+      var name = this.get('full_name') ?
+                 this.get('full_name') :
+                 this.get('email');
+      this.set('name', name)
+    }
   },
   parse: function (response, options) {
     return this.inflateReturn(response);
