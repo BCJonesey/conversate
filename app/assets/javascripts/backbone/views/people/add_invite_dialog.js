@@ -106,22 +106,18 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
     // This really doesn't correspond to a Backbone model, so we're dropping
     // down to raw ajax.
     $.ajax({
-      url: Structural.Router.userLookupHref(),
+      url: Structural.Router.userLookupHref(email),
       dataType: 'json',
       context: this,
       success: function(data) {
-        found.call(this, data);
-        // console.log(this);
-        // console.log(data);
-        // console.log('success');
+        var contact = new Structural.Models.Contact(data);
+        found.call(this, contact);
       },
       error: function() {
         notFound.call(this);
-        // console.log(this);
-        // console.log('error');
       }
     })
-  }, 500),
+  }, 1000),
 
   showInviteOnNoOptions: function(options) {
     this.showInviteInsteadOfOptions = options.length === 0 &&
@@ -130,20 +126,28 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
   },
   showHideInviteContacts: function() {
     if (this.showInviteInsteadOfOptions) {
+      if (this.currentText === this.autocomplete.text()) {
+        return;
+      }
+
       this.$('.contacts-list').addClass('hidden');
       this.currentText = this.autocomplete.text();
       this.showSpinner();
+      this.$('.add-contact-form').addClass('hidden');
+      this.$('.invite-contact-form').addClass('hidden');
       this.searchForContactByEmail(
         this.currentText,
-        function(user) {
+        function(contact) {
           this.hideSpinner();
-          this.$('.add-contact-form input').val('Add ' + user.name);
+          console.log(contact);
+          this.$('.add-contact-form input').val('Add ' + contact.get('name'));
           this.$('.add-contact-form').removeClass('hidden');
+          this.$('.invite-contact-form').addClass('hidden');
         },
         function() {
-          console.log('not found');
           this.hideSpinner();
           this.$('.invite-contact-form input').val('Invite ' + this.currentText);
+          this.$('.add-contact-form').addClass('hidden');
           this.$('.invite-contact-form').removeClass('hidden');
         });
     } else {
