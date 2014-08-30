@@ -4,8 +4,8 @@ Structural.Views.Participants = Support.CompositeView.extend({
     this._participants = options.participants;
     this._userId = options.userId;
 
-    Structural.on('changeConversation', this.changeConversation, this);
-    Structural.on('clearConversation', this.clearConversation, this);
+    this.listenTo(Structural, 'changeConversation', this.changeConversation, this);
+    this.listenTo(Structural, 'clearConversation', this.clearConversation, this);
   },
   render: function() {
     this._list = new Structural.Views.ParticipantList({

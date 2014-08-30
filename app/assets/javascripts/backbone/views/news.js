@@ -3,7 +3,7 @@ Structural.Views.News = Support.CompositeView.extend({
   className: 'wc-news-wrap popover-wrap',
   template: JST.template('structural/news'),
   initialize: function(options) {
-    Structural.on('clickAnywhere', this.hide, this);
+    this.listenTo(Structural, 'clickAnywhere', this.hide, this);
   },
   render: function() {
     this.$el.html(this.template());
