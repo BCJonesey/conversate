@@ -31,7 +31,8 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
   events: {
     'click .contacts-add-invite': 'toggleAddInvite',
     'click .popover-close': 'toggleAddInvite',
-    'click .invite-contact button': 'inviteContact'
+    'click .invite-contact button': 'inviteContact',
+    'click .add-contact button': 'addFoundUser'
   },
 
   toggleAddInvite: function(e) {
@@ -94,6 +95,9 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
     this.showSpinner();
     this._addContactToList(newContact);
   },
+  addFoundUser: function() {
+    this.addExistingUser(this.foundUser);
+  },
 
   _addContactToList: function(contact) {
     Structural._contactLists.get(Structural._selectedContactListId)
@@ -110,8 +114,8 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
       dataType: 'json',
       context: this,
       success: function(data) {
-        var contact = new Structural.Models.Contact(data);
-        found.call(this, contact);
+        var user = new Structural.Models.Participant(data);
+        found.call(this, user);
       },
       error: function() {
         notFound.call(this);
@@ -137,12 +141,12 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
       this.$('.invite-contact').addClass('hidden');
       this.searchForContactByEmail(
         this.currentText,
-        function(contact) {
+        function(user) {
           this.hideSpinner();
-          console.log(contact);
-          this.$('.add-contact button').text('Add ' + contact.get('name'));
+          this.$('.add-contact button').text('Add ' + user.get('name'));
           this.$('.add-contact').removeClass('hidden');
           this.$('.invite-contact').addClass('hidden');
+          this.foundUser = user;
         },
         function() {
           this.hideSpinner();
