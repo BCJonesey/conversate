@@ -3,8 +3,8 @@ Structural.Views.ParticipantList = Support.CompositeView.extend({
   className: 'act-participants-list',
   template: JST.template('participants/list'),
   initialize: function(options) {
-    Structural.on('changeConversation', this.changeConversation, this);
-    Structural.on('clearConversation', this.clearConversation, this);
+    this.listenTo(Structural, 'changeConversation', this.changeConversation, this);
+    this.listenTo(Structural, 'clearConversation', this.clearConversation, this);
   },
   render: function() {
     this.$el.html(this.template({participants: this.collection}));

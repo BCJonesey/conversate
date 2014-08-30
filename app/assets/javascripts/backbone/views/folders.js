@@ -34,6 +34,7 @@ Structural.Views.Folders = Support.CompositeView.extend({
   reRender: function() {
     this.children.forEach(function(child) {
       child.leave();
+      child = null;
     });
     this._folderEditor.unbind();
     this._folderEditor.remove();

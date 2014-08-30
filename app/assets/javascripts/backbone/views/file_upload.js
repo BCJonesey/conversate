@@ -3,7 +3,7 @@ Structural.Views.FileUpload = Support.CompositeView.extend({
   className: 'popover-wrap act-file-upload',
   template: JST.template('actions/file_upload'),
   initialize: function(options) {
-    Structural.on('clickAnywhere', this.toggleFileUploadOnClickOff, this);
+    this.listenTo(Structural, 'clickAnywhere', this.toggleFileUploadOnClickOff, this);
   },
 
   events: {

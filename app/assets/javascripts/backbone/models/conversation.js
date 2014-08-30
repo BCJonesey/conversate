@@ -22,7 +22,7 @@ Structural.Models.Conversation = Backbone.Model.extend({
 
     // We want to update our most recent viewed right away if we've been clicked.
     // TODO: Should almost certainly punt this to a controller.
-    Structural.on('readConversation', function(conversation) {
+    this.listenTo(Structural, 'readConversation', function(conversation) {
       if (conversation === self) {
         // This has the side effect that we'll also redraw for free.
         self.updateMostRecentViewedToNow();

@@ -5,9 +5,9 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
     options = options || {};
     this.conversation = options.conversation;
     this.folders = options.folders;
-    Structural.on('changeConversation', this.changeConversation, this);
-    Structural.on('clearConversation', this.clearConversation, this);
-    Structural.on('clickAnywhere', this.saveAndHideAnywhere, this);
+    this.listenTo(Structural, 'changeConversation', this.changeConversation, this);
+    this.listenTo(Structural, 'clearConversation', this.clearConversation, this);
+    this.listenTo(Structural, 'clickAnywhere', this.saveAndHideAnywhere, this);
     this.conversation.on('archived', this.reRender, this);
   },
   render: function() {
@@ -23,6 +23,7 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
   reRender: function() {
     this.children.forEach(function(child) {
       child.leave();
+      child = null;
     });
     this.render();
   },

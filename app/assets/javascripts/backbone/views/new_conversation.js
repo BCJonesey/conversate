@@ -5,7 +5,7 @@ Structural.Views.NewConversation = Support.CompositeView.extend({
     options = options || {};
     this.participants = new Structural.Collections.Participants([]);
 
-    Structural.on('clickAnywhere', this.leaveParticipantEditingModeOnClickOff, this);
+    this.listenTo(Structural, 'clickAnywhere', this.leaveParticipantEditingModeOnClickOff, this);
   },
   render: function() {
     this.autocomplete = new Structural.Views.Autocomplete({

@@ -22,7 +22,7 @@ Structural.Collections.Conversations = Backbone.Collection.extend({
       });
     }, self);
 
-    Structural.on('readConversation', function(conversation) {
+    this.listenTo(Structural, 'readConversation', function(conversation) {
 
       // Let's see if a conversation in a different folder is one of ours too,
       // and was just read.

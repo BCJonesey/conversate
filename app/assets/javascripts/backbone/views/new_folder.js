@@ -16,7 +16,7 @@ Structural.Views.NewFolder = Support.CompositeView.extend({
   },
   edit: function() {
     this.$el.removeClass('hidden');
-    Structural.on('clickAnywhere', this.cancel, this);
+    this.listenTo(Structural, 'clickAnywhere', this.cancel, this);
     this.inpt.focus();
   },
   cancel: function(e) {
