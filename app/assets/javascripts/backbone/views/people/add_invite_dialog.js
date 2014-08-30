@@ -61,16 +61,11 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
 
   inviteContact: function(e) {
     e.preventDefault();
+
     var email = this.currentText;
     var invite = new Structural.Models.Invite({
       email: email
     });
-    invite.save({}, {
-      success: this.close.bind(this),
-      error: this.showError.bind(this)
-    });
-    this.showSpinner();
-
     var contact = new Structural.Models.Contact({
       contact_list_id: Structural._selectedContactListId,
       user_id: undefined,
@@ -80,7 +75,15 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
         name: email
       }
     });
-    this._addContactToList(contact);
+
+    invite.save({}, {
+      success: function() {
+        this._addContactToList(contact);
+        this.close();
+      }.bind(this),
+      error: this.showError.bind(this)
+    });
+    this.showSpinner();
   },
   addExistingUser: function(user) {
     var newContact = new Structural.Models.Contact({
