@@ -23,15 +23,16 @@ Structural.Models.User = Backbone.Model.extend({
     this.set("addressBook",this.buildAddressBook());
     this.trigger('addressBookUpdated');
   },
-  addUserToAddressBook: function(user_id,user_name){
-    this.addressBook()[user_id] = this.buildAddressBookEntry(user_id,user_name);
+  addUserToAddressBook: function(user){
+    this.addressBook()[user.id] = this.buildAddressBookEntry(user);
     this.trigger('addressBookUpdated');
   },
-  buildAddressBookEntry: function(user_id,user_name){
+  buildAddressBookEntry: function(user){
     var entry =
     {
-      id: user_id,
-      name: user_name
+      id: user.id,
+      name: user.escape('name'),
+      email: user.escape('email')
     };
     return entry;
   },
@@ -42,9 +43,8 @@ Structural.Models.User = Backbone.Model.extend({
     {
       Structural._contactLists.each(function(cl){
         cl.get("contacts").each(function(contact){
-          var id = contact.get('user_id');
-          var name = contact.get('user').escape('name');
-          retVal[contact.get("user_id")] = self.buildAddressBookEntry(id, name);
+          var user = contact.get('user');
+          retVal[user.id] = self.buildAddressBookEntry(user);
         })
       });
     }
