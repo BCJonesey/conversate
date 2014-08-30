@@ -5,9 +5,9 @@ Structural.Views.Actions = Support.CompositeView.extend({
   initialize: function(options) {
     this._wireEvents(this.collection);
 
-    Structural.on('changeConversation', this.changeConversation, this);
-    Structural.on('clearConversation', this.clearConversation, this);
-    Structural.on('noConversationToView', this.noConversation, this);
+    this.listenTo(Structural, 'changeConversation', this.changeConversation);
+    this.listenTo(Structural, 'clearConversation', this.clearConversation);
+    this.listenTo(Structural, 'noConversationToView', this.noConversation);
 
     this._noConversationSelected = false;
     this._loadingActions = false;

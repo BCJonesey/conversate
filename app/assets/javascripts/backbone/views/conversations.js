@@ -10,7 +10,7 @@ Structural.Views.Conversations = Support.CompositeView.extend({
     this._loadingConversations = false;
 
     this._wireEvents(this.collection);
-    Structural.on('changeFolder', this.changeFolder, this);
+    this.listenTo(Structural, 'changeFolder', this.changeFolder, this);
 
     // The viewOrder property is the order that sections show up in the DOM,
     // the priority property controls the order that we check the section

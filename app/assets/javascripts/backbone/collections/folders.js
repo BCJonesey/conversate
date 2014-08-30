@@ -16,8 +16,8 @@ Structural.Collections.Folders = Backbone.Collection.extend({
         })
       }, self);
 
-      Structural.on('changeConversation', this.focusAlternates, this);
-      Structural.on('clearConversation', this.focusAlternates, this);
+      this.listenTo(Structural, 'changeConversation', this.focusAlternates);
+      this.listenTo(Structural, 'clearConversation', this.focusAlternates);
     }
   },
 

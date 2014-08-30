@@ -24,10 +24,10 @@ Structural.Models.Folder = Backbone.Model.extend({
     }, self);
 
     // We should listen for one of our conversations being read in a different folder.
-    Structural.on('readConversation', function(conversation) {
+    this.listenTo(Structural, 'readConversation', function(conversation) {
       self.filterNewlyReadConversation(conversation);
       self.trigger('updated');
-    }, self);
+    });
   },
 
   parse: function (response, options) {
