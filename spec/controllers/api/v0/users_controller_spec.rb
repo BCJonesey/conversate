@@ -98,6 +98,11 @@ describe Api::V0::UsersController do
       expect(response.code).to eq('404')
     end
 
+    it 'cannot find users if an email is not passed in' do
+      get :look_up
+      expect(response.code).to eq('404')
+    end
+
   end
 
 
