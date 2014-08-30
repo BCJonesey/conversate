@@ -102,6 +102,27 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
     Structural._user.rebuildAddressBook();
   },
 
+  searchForContactByEmail: _.debounce(function(email, found, notFound) {
+    // This really doesn't correspond to a Backbone model, so we're dropping
+    // down to raw ajax.
+    $.ajax({
+      url: Structural.Router.userLookupHref(),
+      dataType: 'json',
+      context: this,
+      success: function(data) {
+        found.call(this, data);
+        // console.log(this);
+        // console.log(data);
+        // console.log('success');
+      },
+      error: function() {
+        notFound.call(this);
+        // console.log(this);
+        // console.log('error');
+      }
+    })
+  }, 500),
+
   showInviteOnNoOptions: function(options) {
     this.showInviteInsteadOfOptions = options.length === 0 &&
                                       this.autocomplete.text().length > 0;
@@ -111,11 +132,24 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
     if (this.showInviteInsteadOfOptions) {
       this.$('.contacts-list').addClass('hidden');
       this.currentText = this.autocomplete.text();
-      this.$('.invite-contact input').val('Invite ' + this.currentText);
-      this.$('.invite-contact').removeClass('hidden');
+      this.showSpinner();
+      this.searchForContactByEmail(
+        this.currentText,
+        function(user) {
+          this.hideSpinner();
+          this.$('.add-contact-form input').val('Add ' + user.name);
+          this.$('.add-contact-form').removeClass('hidden');
+        },
+        function() {
+          console.log('not found');
+          this.hideSpinner();
+          this.$('.invite-contact-form input').val('Invite ' + this.currentText);
+          this.$('.invite-contact-form').removeClass('hidden');
+        });
     } else {
       this.$('.contacts-list').removeClass('hidden');
-      this.$('.invite-contact').addClass('hidden');
+      this.$('.invite-contact-form').addClass('hidden');
+      this.$('.add-contact-form').addClass('hidden');
     }
   },
   showSpinner: function() {
