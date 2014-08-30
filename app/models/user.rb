@@ -150,9 +150,13 @@ class User < ActiveRecord::Base
 
   # This avoids us writing out passwords, salts, etc. when rendering json.
   def as_json(options={})
-    json = super(:only => [:email, :full_name, :id, :site_admin, :external])
-    if options[:conversation]
-      json['most_recent_viewed'] = options[:conversation].most_recent_viewed_for_user(self).msec
+    if options[:for_contact]
+      json = super(:only => [:email, :full_name, :id])
+    else
+      json = super(:only => [:email, :full_name, :id, :site_admin, :external])
+      if options[:conversation]
+        json['most_recent_viewed'] = options[:conversation].most_recent_viewed_for_user(self).msec
+      end
     end
 
     return json

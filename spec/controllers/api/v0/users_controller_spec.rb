@@ -19,7 +19,6 @@ describe Api::V0::UsersController do
       expect(body['full_name']).to eq('Rufio Pan')
       expect(body['id']).to eq(@user.id)
     end
-    it "has a correct address book"
   end
 
   describe 'POST #create' do
@@ -75,5 +74,31 @@ describe Api::V0::UsersController do
       expect(response.code).to eq('401')
     end
   end
+
+  describe 'GET #look_up' do
+    before(:each) do
+      @found_user = User.create!(:email => 'shittyuser@example.com',
+                            :full_name => 'Cest Lavie',
+                            :password => 'shittyPassword')
+    end
+    it 'finds the user if they exist' do
+      get :look_up,
+        :email => 'shittyuser@example.com'
+      expect(response).to be_success
+      body = JSON.parse(response.body)
+      expect(body['id']).to eq(@found_user.id)
+      expect(body['email']).to eq('shittyuser@example.com')
+      expect(body['full_name']).to eq('Cest Lavie')
+      expect(body.keys).to eq(["id", "email", "full_name"])
+    end
+
+    it 'cannot find users that do not exist' do
+      get :look_up,
+        :email => 'crappyuser@example.com'
+      expect(response.code).to eq('404')
+    end
+
+  end
+
 
 end
