@@ -38,7 +38,7 @@ class Api::V0::UsersController < ApplicationController
     render :json => user.contact_lists.as_json
   end
 
-  def look_up
+  def lookup
     user = params[:email].nil? ? nil : User.find_by_email(params[:email])
     if user.nil?
       head :status => 404
