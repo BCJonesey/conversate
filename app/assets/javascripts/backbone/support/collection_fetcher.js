@@ -64,7 +64,7 @@ Support.CollectionFetcher = function(options) {
     setTimeout(self._fetchHandler, self._nextTimeoutLength());
 
     if (options.event) {
-      self.listenTo(Structural, options.event, function(eventArg) {
+      Structural.on(options.event, function(eventArg) {
         self._collection = options.collFunc(eventArg);
       });
     }
