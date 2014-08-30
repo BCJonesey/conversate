@@ -104,7 +104,7 @@ Structural.Router = new (Backbone.Router.extend({
     return 'tour';
   },
   userLookupPath: function(email) {
-    return 'users/lookup?email=' + email;
+    return 'api/v0/users/lookup?email=' + email;
   },
 
   indexHref: function() {
