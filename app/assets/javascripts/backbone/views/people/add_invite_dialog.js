@@ -40,6 +40,8 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
 
     this.$('.contacts-add-invite-popover').toggleClass('hidden');
     if (this.$('.contacts-add-invite-popover').hasClass('hidden')) {
+      this.$('.add-contact').addClass('hidden');
+      this.$('.invite-contact').addClass('hidden');
       this.hideSpinner();
       this.hideError();
     }
@@ -48,13 +50,14 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
     var target = $(e.target);
     if (target.parents().length > 0 &&
         target.closest('.contacts-add-invite-wrap').length === 0) {
-      this.$('.contacts-add-invite-popover').addClass('hidden');
-      this.hideSpinner();
-      this.hideError()
+      this.close();
     }
   },
   close: function() {
+    this.currentText = '';
     this.$('.contacts-add-invite-popover').addClass('hidden');
+    this.$('.add-contact').addClass('hidden');
+    this.$('.invite-contact').addClass('hidden');
     this.hideSpinner();
     this.hideError();
   },
