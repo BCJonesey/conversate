@@ -23,6 +23,7 @@ Structural.Views.TitleEditor = Support.CompositeView.extend({
   reRender: function() {
     this.children.forEach(function(child) {
       child.leave();
+      child = null;
     });
     this.render();
   },
