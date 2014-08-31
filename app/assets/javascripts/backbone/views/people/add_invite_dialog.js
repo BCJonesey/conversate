@@ -144,6 +144,7 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
 
       this.$('.contacts-list').addClass('hidden');
       this.currentText = this.autocomplete.text();
+      this.hideError();
       this.showSpinner();
       this.$('.add-contact').addClass('hidden');
       this.$('.invite-contact').addClass('hidden');
