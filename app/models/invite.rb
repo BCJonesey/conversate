@@ -48,14 +48,14 @@ class Invite < ActiveRecord::Base
       invite.errors.add(:user, "Could not send invitation email") and return invite
     end
 
-
-
     # Once we sucessfully added an invitation, add the inviter to the invitee's contact list, and vice-versa
     contact = user.default_contact_list.contacts.build()
     contact.user = inviter
     contact.save
 
-    contact = inviter.default_contact_list.contacts.build()
+    inviter_contact_list = ContactList.find(params[:invited_into_contact_list])
+    inviter_contact_list = inviter.default_contact_list unless inviter_contact_list
+    contact = inviter_contact_list.contacts.build()
     contact.user = user
     contact.save
 

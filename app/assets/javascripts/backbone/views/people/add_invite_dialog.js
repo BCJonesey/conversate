@@ -67,7 +67,8 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
 
     var email = this.currentText;
     var invite = new Structural.Models.Invite({
-      email: email
+      email: email,
+      contact_list_id: Structural._selectedContactListId
     });
     var contact = new Structural.Models.Contact({
       contact_list_id: Structural._selectedContactListId,
