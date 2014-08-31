@@ -223,6 +223,7 @@
   }
 
   .contacts-add-invite-popover {
+    width: 20rem;
     .popover-content {
       overflow-y: auto;
       min-height: 5.0rem;
@@ -254,22 +255,26 @@
         width: 100%;
         font-size: 1.0rem;
         border-radius: 0.25rem;
+        padding: 0.5rem;
       }
     }
     .add-contact-error,
     .invite-contact-explanation,
+    .no-invites-left-explanation,
     .add-contact-explanation{
       margin: 0.5rem 0;
-      padding: 0.5rem;
+      padding: 0.5rem 0.25rem;
       font-size: 0.8rem;
       border: 1px solid transparent;
       border-radius: 0.25rem;
+      white-space: pre-line;
     }
     .add-contact-explanation{
       background-color: #DEF;
       border: 1px solid blue;
       color: darkblue;
     }
+    .no-invites-left-explanation,
     .invite-contact-explanation{
       background-color: #FFD;
       border: 1px solid goldenrod;
@@ -286,8 +291,9 @@
       font-size: 2.0rem;
     }
     .invite-contact button[disabled=disabled]{
-      color: #CCC;
-      background-color: #ACE;
+      color: #EEE;
+      border-color: #68A;
+      background-color: #9AC;
     }
 
 
