@@ -159,6 +159,7 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
         function() {
           this.hideSpinner();
           this.$('.invite-contact button').text('Invite ' + this.currentText);
+          this.$('.contact-email').text(this.currentText);
           this.$('.add-contact').addClass('hidden');
           this.$('.invite-contact').removeClass('hidden');
         });
