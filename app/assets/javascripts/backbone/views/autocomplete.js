@@ -70,7 +70,7 @@ Structural.Views.Autocomplete = Support.CompositeView.extend({
     optionsView.on('optionsUpdated', function(options) {
       this.trigger('optionsUpdated', options);
     }, this);
-    Structural.on('clickAnywhere', this._cancelIfClickOff, this);
+    this.listenTo(Structural, 'clickAnywhere', this._cancelIfClickOff, this);
   },
 
   _select: function() {

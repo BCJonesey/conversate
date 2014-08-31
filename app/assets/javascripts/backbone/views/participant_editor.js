@@ -5,9 +5,9 @@ Structural.Views.ParticipantEditor = Support.CompositeView.extend({
     options = options || {};
     this.participants = options.participants;
 
-    Structural.on('clickAnywhere', this.saveAndCloseIfClickOff, this);
-    Structural.on('changeConversation', this.changeConversation, this);
-    Structural.on('clearConversation', this.clearConversation, this);
+    this.listenTo(Structural, 'clickAnywhere', this.saveAndCloseIfClickOff, this);
+    this.listenTo(Structural, 'changeConversation', this.changeConversation, this);
+    this.listenTo(Structural, 'clearConversation', this.clearConversation, this);
   },
   render: function() {
     this.$el.html(this.template());

@@ -42,8 +42,8 @@ Structural.Views.ActionContainer = Support.CompositeView.extend({
     this.titleView.on('change_title', Structural.createRetitleAction, Structural);
     this.participantsView.on('update_users', Structural.createUpdateUserAction, Structural);
 
-    Structural.on('changeConversation', this.changeConversation, this);
-    Structural.on('clearConversation', this.clearConversation, this);
+    this.listenTo(Structural, 'changeConversation', this.changeConversation, this);
+    this.listenTo(Structural, 'clearConversation', this.clearConversation, this);
   },
   render: function() {
     this.appendChild(this.detailsView);

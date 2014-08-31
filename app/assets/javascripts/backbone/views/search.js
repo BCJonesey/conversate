@@ -5,7 +5,7 @@ Structural.Views.Search = Support.CompositeView.extend({
   initialize: function(options) {
     options = options || {}
 
-    Structural.on('clickAnywhere', this.hide, this);
+    this.listenTo(Structural, 'clickAnywhere', this.hide, this);
 
     this._input = new Structural.Views.SearchInput({
       query: options.query

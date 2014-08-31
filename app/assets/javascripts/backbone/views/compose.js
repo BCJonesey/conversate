@@ -5,7 +5,7 @@ Structural.Views.Compose = Support.CompositeView.extend({
     options = options || {};
     this.conversation = options.conversation;
 
-    Structural.on('changeConversation', this.changeConversation, this);
+    this.listenTo(Structural, 'changeConversation', this.changeConversation, this);
   },
   render: function() {
     this.$el.html(this.template({conversation: this.conversation}));
