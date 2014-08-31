@@ -256,20 +256,40 @@
         border-radius: 0.25rem;
       }
     }
+    .add-contact-error,
+    .invite-contact-explanation,
+    .add-contact-explanation{
+      margin: 0.5rem 0;
+      padding: 0.5rem;
+      font-size: 0.8rem;
+      border: 1px solid transparent;
+      border-radius: 0.25rem;
+    }
+    .add-contact-explanation{
+      background-color: #DEF;
+      border: 1px solid blue;
+      color: darkblue;
+    }
+    .invite-contact-explanation{
+      background-color: #FFD;
+      border: 1px solid goldenrod;
+      color: goldenrod;
+    }
+    .add-contact-error{
+      background-color: #FEE;
+      border: 1px solid red;
+      color: @red;
+    }
     .spinner{
       color: #CCC;
       padding: 0.75rem;
       font-size: 2.0rem;
     }
-    .add-contact-error{
-      margin: 0.5rem;
-      padding: 0.5rem;
-      font-size: 0.8rem;
-      background-color: #FEE;
-      border: 1px solid red;
-      color: @red;
-      border-radius: 0.25rem;
+    .invite-contact button[disabled=disabled]{
+      color: #CCC;
+      background-color: #ACE;
     }
+
 
     .contacts-list {
       .autocomplete-options {
