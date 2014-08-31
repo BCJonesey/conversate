@@ -162,6 +162,17 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
           this.$('.invite-contact button').text('Invite ' + this.currentText);
           this.$('.contact-email').text(this.currentText);
           this.$('.invite-count').text(Structural._user.escape('invite_count'));
+
+          if (Structural._user.get('invite_count') === 0) {
+            this.$('.invite-contact-explanation').addClass('hidden');
+            this.$('.no-invites-left-explanation').removeClass('hidden');
+            this.$('.invite-contact button').attr('disabled', true);
+          } else {
+            this.$('.invite-contact-explanation').removeClass('hidden');
+            this.$('.no-invites-left-explanation').addClass('hidden');
+            this.$('.invite-contact button').attr('disabled', null);
+          }
+
           this.$('.add-contact').addClass('hidden');
           this.$('.invite-contact').removeClass('hidden');
         });
