@@ -156,7 +156,8 @@ class User < ActiveRecord::Base
     if options[:for_contact]
       json = super(:only => [:email, :full_name, :id])
     else
-      json = super(:only => [:email, :full_name, :id, :site_admin, :external])
+      json = super(:only => [:email, :full_name, :id, :site_admin, :external,
+                             :invite_count])
       if options[:conversation]
         json['most_recent_viewed'] = options[:conversation].most_recent_viewed_for_user(self).msec
       end
