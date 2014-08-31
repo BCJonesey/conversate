@@ -49,6 +49,11 @@ Structural.Models.User = Backbone.Model.extend({
       });
     }
     return retVal;
+  },
+
+  useInvite: function() {
+    var newInviteCount = this.get('invite_count') - 1;
+    this.set('invite_count', newInviteCount);
   }
 });
 

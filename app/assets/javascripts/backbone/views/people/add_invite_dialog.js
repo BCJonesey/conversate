@@ -82,6 +82,7 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
     invite.save({}, {
       success: function() {
         this._addContactToList(contact);
+        Structural._user.useInvite();
         this.close();
       }.bind(this),
       error: this.showError.bind(this)
@@ -160,6 +161,7 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
           this.hideSpinner();
           this.$('.invite-contact button').text('Invite ' + this.currentText);
           this.$('.contact-email').text(this.currentText);
+          this.$('.invite-count').text(Structural._user.escape('invite_count'));
           this.$('.add-contact').addClass('hidden');
           this.$('.invite-contact').removeClass('hidden');
         });
