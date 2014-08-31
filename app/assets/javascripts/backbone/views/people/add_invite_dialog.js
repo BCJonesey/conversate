@@ -179,9 +179,9 @@ Structural.Views.AddInviteDialog = Support.CompositeView.extend({
   },
   showError: function() {
     this.hideSpinner();
-    this.$('.error').removeClass('hidden');
+    this.$('.add-contact-error').removeClass('hidden');
   },
   hideError: function() {
-    this.$('.error').addClass('hidden');
+    this.$('.add-contact-error').addClass('hidden');
   }
 })
