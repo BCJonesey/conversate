@@ -44,6 +44,7 @@ Conversate::Application.routes.draw do
         resources :participants, :only => [:index, :create, :destroy, :update]
       end
       resources :users, :only => [:index, :create, :update] do
+        get 'lookup', :on => :collection
         get 'contact_lists', :on => :member
       end
       resources :admin, :only => [:index]

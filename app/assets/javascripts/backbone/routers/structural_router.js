@@ -103,6 +103,9 @@ Structural.Router = new (Backbone.Router.extend({
   tourPath: function() {
     return 'tour';
   },
+  userLookupPath: function(email) {
+    return 'api/v0/users/lookup?email=' + email;
+  },
 
   indexHref: function() {
     return '/' + this.indexPath();
@@ -133,6 +136,9 @@ Structural.Router = new (Backbone.Router.extend({
   },
   tourHref: function() {
     return '/' + this.tourPath();
+  },
+  userLookupHref: function(email) {
+    return '/' + this.userLookupPath(email);
   },
 
   _fixSlug: function(prefix, slug, suffix, correct) {

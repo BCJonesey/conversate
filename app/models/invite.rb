@@ -26,7 +26,14 @@ class Invite < ActiveRecord::Base
     user = User.find_by_email(invitee_email)
 
     # Let's create a new user for this invite if we need to.
-    user = User.build(:email => invitee_email, :password => SecureRandom.uuid, :creation_source => :invite) if user.nil?
+    if user.nil?
+      user = User.build(:email => invitee_email,
+                        :password => SecureRandom.uuid,
+                        :creation_source => :invite)
+      support_contact = user.default_contact_list.contacts.build
+      support_contact.user_id = User.support_user_id
+      support_contact.save
+    end
 
     invite.errors.add(:user, "User could not be found or created")  and return invite unless user
 
@@ -41,14 +48,14 @@ class Invite < ActiveRecord::Base
       invite.errors.add(:user, "Could not send invitation email") and return invite
     end
 
-
-
     # Once we sucessfully added an invitation, add the inviter to the invitee's contact list, and vice-versa
     contact = user.default_contact_list.contacts.build()
     contact.user = inviter
     contact.save
 
-    contact = inviter.default_contact_list.contacts.build()
+    inviter_contact_list = ContactList.find(params[:invited_into_contact_list])
+    inviter_contact_list = inviter.default_contact_list unless inviter_contact_list
+    contact = inviter_contact_list.contacts.build()
     contact.user = user
     contact.save
 
