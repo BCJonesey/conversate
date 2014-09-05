@@ -9,11 +9,19 @@ Support.CompositeView = function(options) {
 };
 
 _.extend(Support.CompositeView.prototype, Backbone.View.prototype, {
-  leave: function() {
+  leave: function(options) {
+    options = options || {}
+
     this.unbind();
     this.unbindFromAll();
-    this.remove();
-    this._leaveChildren();
+
+    if (options['keepEvents']) {
+      this.$el.remove()
+    } else {
+      this.remove();
+    }
+
+    this._leaveChildren(options);
     this._removeFromParent();
   },
 
@@ -80,10 +88,10 @@ _.extend(Support.CompositeView.prototype, Backbone.View.prototype, {
     $(sibling).after(view.el);
   },
 
-  _leaveChildren: function() {
+  _leaveChildren: function(options) {
     this.children.chain().clone().each(function(view) {
       if (view.leave) {
-        view.leave();
+        view.leave(options);
       }
     });
   },
