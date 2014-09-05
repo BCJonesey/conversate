@@ -293,7 +293,7 @@ var Structural = new (Support.CompositeView.extend({
       this._people = new Structural.Views.People();
     }
 
-    this._watercooler.leave();
+    this._watercooler.leave({ keepEvents: true });
 
     if (!this._people.isAttachedToViewTree()) {
       this.appendChild(this._people);
