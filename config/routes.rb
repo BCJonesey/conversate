@@ -2,7 +2,7 @@ Conversate::Application.routes.draw do
   # The docs say that the root matcher here only grabs GET, but I swear it was
   # eating my POSTs too.
   get '/' => 'home#index', :as => 'root'
-  post '/' => 'home#beta_signup', :as => 'beta_signup'
+  post '/checkout' => 'home#stripe', :as => 'stripe'
 
   get '/tour' => 'marketing#tour', :as => 'tour'
   get '/about' => 'marketing#about', :as => 'about'

@@ -1,8 +1,8 @@
-<p>Signup with Watercooler today!</p>
-<form action="" method="POST">
+<p style="text-align: center; padding-top: 10px">Signup with Watercooler today!</p>
+<form action="checkout" method="POST" style="text-align: center; padding-bottom: 10px">
   <script
     src="https://checkout.stripe.com/checkout.js" class="stripe-button beta-signup-submit"
-    data-key="pk_test_lxLgzq8Fz4b4XKF5Jtnw1TCC"
+    data-key="<%= ENV['STRIPE_PUBLIC_KEY'] %>"
     data-amount="2000"
     data-name="Watercooler"
     data-description="Subscription ($20.00)"
