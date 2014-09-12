@@ -7,11 +7,16 @@ class MandrillInboundEmail
     @data = data
     @sender = User.find_by_email_insensitive(@data['from_email'])
     initialize_new_user if @sender.nil?
-    reply_text = EmailReplyParser.parse_reply(@data['text'])
+
+    raw_text = @data['text'] ?
+               @data['text'] :
+               ReverseMarkdown.convert(@data['html'], unknown_tags: :bypass)
+
+    reply_text = EmailReplyParser.parse_reply(raw_text)
     @action = Action.new(
       type: 'email_message',
       data: { text: reply_text,
-              full_text: @data['text'] }.to_json,
+              full_text: raw_text }.to_json,
       user_id: @sender.id
     )
     CNV_REGEX =~ @data['email']
