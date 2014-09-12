@@ -7,6 +7,12 @@ describe Webhooks::V0::EmailController, focus: true do
                         password: 'a')
     @support_folder = @sean.folders.create(name: 'Support',
                                            email: 'water-cooler-support')
+
+    @stuart = User.create(email: 'Stuart.Parker@kbcc.cuny.edu',
+                          full_name: 'Stuart Parker',
+                          password: 'a')
+    @structural_folder = @stuart.folders.create(name: 'Structural',
+                                                email: 'structural')
   end
 
   describe 'POST #mandrill_inbound' do
@@ -18,6 +24,16 @@ describe Webhooks::V0::EmailController, focus: true do
 
       message = convo.actions.where(type: 'email_message').first
       message.text.should eq 'This is the body of the email'
+    end
+
+    it 'ingests a message from KBCC' do
+      post :mandrill_inbound, mandrill_events: KBCC_MESSAGE
+
+      convo = @structural_folder.conversations.order('created_at DESC').first
+      convo.title.should eq 'Test'
+
+      message = convo.actions.where(type: 'email_message').first
+      message.text.should match /Here is a test message/
     end
   end
 
@@ -98,5 +114,87 @@ describe Webhooks::V0::EmailController, focus: true do
        \"tags\":[],
        \"sender\":null,
        \"template\":null
+}}]"
+
+  KBCC_MESSAGE = "[{\"event\":\"inbound\",
+     \"ts\":1398087505,
+     \"msg\":{\"raw_msg\":\"Received: from gateway.kingsborough.edu (unknown [198.83.119.108])\\n\\tby ip-10-220-3-120 (Postfix) with ESMTPS id A9A2F2012F\\n\\tfor <structural@watercooler.io>; Mon, 21 Apr 2014 13:38:24 +0000 (UTC)\\nReceived: from mail85b.kbcc.cuny.edu ([172.16.0.96])\\n\\tby gateway.kingsborough.edu (8.14.5\\/8.14.5) with ESMTP id s3LDcNHN000308\\n\\tfor <structural@watercooler.io>; Mon, 21 Apr 2014 09:38:23 -0400\\nX-Disclaimed: 1\\nMIME-Version: 1.0\\nSensitivity: \\nImportance: Normal\\nX-Priority: 3 (Normal)\\nIn-Reply-To: \\nReferences: \\nSubject: \\nFrom: Stuart.Parker@kbcc.cuny.edu\\nTo: structural@watercooler.io\\nMessage-ID: <OF5604CDE9.7A01CD88-ON85257CC1.004AEC47-85257CC1.004AEC4C@kbcc.cuny.edu>\\nDate: Mon, 21 Apr 2014 09:38:21 -0400\\nX-Mailer: Lotus Domino Web Server Release 9.0.1 HF193 January 23, 2014\\nX-MIMETrack: Serialize by HTTP Server on Mail85b\\/SVR\\/Kingsborough(Release 9.0.1 HF193|January\\n23, 2014) at 04\\/21\\/2014 09:38:21 AM,\\n\\tSerialize complete at 04\\/21\\/2014 09:38:21 AM,\\n\\tItemize by HTTP Server on Mail85b\\/SVR\\/Kingsborough(Release 9.0.1 HF193|January\\n 23, 2014) at 04\\/21\\/2014 09:38:21 AM,\\n\\tSerialize by Router on Mail85b\\/SVR\\/Kingsborough(Release 9.0.1 HF193|January\\n 23, 2014) at 04\\/21\\/2014 09:38:21 AM\\nX-KeepSent: 5604CDE9:7A01CD88-85257CC1:004AEC47;\\n type=4; name=$KeepSent\\nContent-Transfer-Encoding: quoted-printable\\nContent-Type: text\\/html;\\n\\tcharset=ISO-8859-1\\nX-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0 suspectscore=2 phishscore=0\\n adultscore=0 bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1\\n engine=7.0.1-1402240000 definitions=main-1404210223\\nX-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:5.11.96,1.0.14,0.0.0000\\n definitions=2014-04-21_01:2014-04-21,2014-04-20,1970-01-01 signatures=0\\n\\n<font face=3D\\\"Default Sans Serif,Verdana,Arial,Helvetica,sans-serif\\\" size=\\n=3D\\\"2\\\"><div>Here is a test message. &nbsp;I am just catching up on details =\\nafter working to finish two articles and get them out the door.<\\/div><div><=\\nbr><\\/div><div><br>Stuart Parker<br>Assistant Professor of Sociology<br>Depa=\\nrtment of Behavioral Sciences<br>Kingsborough Community College, The City U=\\nniversity of New York<\\/div><div><br><br><hr><br><font size=3D\\\"2\\\" font=3D\\\"\\\" =\\ncolor=3D\\\"DARK RED\\\"><br><p>-------------------------------------------------=\\n---------------------------------------------------------------<br>This ele=\\nctronic message transmission contains information that may be proprietary, =\\nconfidential and\\/or privileged. The information is intended only for the us=\\ne of the individual(s) or entity named above. If you are not the intended r=\\necipient, be aware that any disclosure, copying or distribution or use of t=\\nhe contents of this information is prohibited. If you have received this el=\\nectronic transmission in error, please delete it and any copies, and notify=\\n the sender immediately by replying to the address listed in the \\\"From:\\\" fi=\\neld. If you do not want to receive email from this source please contact po=\\nstmaster@kbcc.cuny.edu AND include the original message to be removed from.=\\n Thank you.<\\/p><br><font><br><br><\\/font><\\/font><\\/div><\\/font>\",
+     \"headers\":{
+       \"Received\":[
+          \"from gateway.kingsborough.edu (unknown [198.83.119.108]) by ip-10-220-3-120 (Postfix) with ESMTPS id A9A2F2012F for <structural@watercooler.io>; Mon, 21 Apr 2014 13:38:24 +0000 (UTC)\",
+          \"from mail85b.kbcc.cuny.edu ([172.16.0.96]) by gateway.kingsborough.edu (8.14.5\\/8.14.5) with ESMTP id s3LDcNHN000308 for <structural@watercooler.io>; Mon, 21 Apr 2014 09:38:23 -0400\"
+       ],
+       \"X-Disclaimed\":\"1\",
+       \"Mime-Version\":\"1.0\",
+       \"Sensitivity\":\"\",
+       \"Importance\":\"Normal\",
+       \"X-Priority\":\"3 (Normal)\",
+       \"In-Reply-To\":\"\",
+       \"References\":\"\",
+       \"Subject\":\"\",
+       \"From\":\"Stuart.Parker@kbcc.cuny.edu\",
+       \"To\":\"structural@watercooler.io\",
+       \"Message-Id\":\"<OF5604CDE9.7A01CD88-ON85257CC1.004AEC47-85257CC1.004AEC4C@kbcc.cuny.edu>\",
+       \"Date\":\"Mon, 21 Apr 2014 09:38:21 -0400\",
+       \"X-Mailer\":\"Lotus Domino Web Server Release 9.0.1 HF193 January 23, 2014\",
+       \"X-Mimetrack\":\"Serialize by HTTP Server on Mail85b\\/SVR\\/Kingsborough(Release 9.0.1 HF193|January 23, 2014) at 04\\/21\\/2014 09:38:21 AM, Serialize complete at 04\\/21\\/2014 09:38:21 AM, Itemize by HTTP Server on Mail85b\\/SVR\\/Kingsborough(Release 9.0.1 HF193|January 23, 2014) at 04\\/21\\/2014 09:38:21 AM, Serialize by Router on Mail85b\\/SVR\\/Kingsborough(Release 9.0.1 HF193|January 23, 2014) at 04\\/21\\/2014 09:38:21 AM\",
+       \"X-Keepsent\":\"5604CDE9:7A01CD88-85257CC1:004AEC47; type=4; name=$KeepSent\",
+       \"Content-Transfer-Encoding\":\"quoted-printable\",
+       \"Content-Type\":\"text\\/html; charset=ISO-8859-1\",
+       \"X-Proofpoint-Spam-Details\":\"rule=notspam policy=default score=0 spamscore=0 suspectscore=2 phishscore=0 adultscore=0 bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1 engine=7.0.1-1402240000 definitions=main-1404210223\",
+       \"X-Proofpoint-Virus-Version\":\"vendor=fsecure engine=2.50.10432:5.11.96,1.0.14,0.0.0000 definitions=2014-04-21_01:2014-04-21,2014-04-20,1970-01-01 signatures=0\"
+      },
+       \"html\":\"<font face=\\\"Default Sans Serif,Verdana,Arial,Helvetica,sans-serif\\\" size=\\\"2\\\"><div>Here is a test message. &nbsp;I am just catching up on details after working to finish two articles and get them out the door.<\\/div><div><br><\\/div><div><br>Stuart Parker<br>Assistant Professor of Sociology<br>Department of Behavioral Sciences<br>Kingsborough Community College, The City University of New York<\\/div><div><br><br><hr><br><font size=\\\"2\\\" font=\\\"\\\" color=\\\"DARK RED\\\"><br><p>----------------------------------------------------------------------------------------------------------------<br>This electronic message transmission contains information that may be proprietary, confidential and\\/or privileged. The information is intended only for the use of the individual(s) or entity named above. If you are not the intended recipient, be aware that any disclosure, copying or distribution or use of the contents of this information is prohibited. If you have received this electronic transmission in error, please delete it and any copies, and notify the sender immediately by replying to the address listed in the \\\"From:\\\" field. If you do not want to receive email from this source please contact postmaster@kbcc.cuny.edu AND include the original message to be removed from. Thank you.<\\/p><br><font><br><br><\\/font><\\/font><\\/div><\\/font>\",
+       \"from_email\":\"Stuart.Parker@kbcc.cuny.edu\",
+       \"to\":[[\"structural@watercooler.io\",null]],
+       \"subject\":\"Test\",
+       \"spf\":{
+          \"result\":\"pass\",
+          \"detail\":\"sender SPF authorized\"
+       },
+       \"spam_report\":{
+          \"score\":3,
+          \"matched_rules\":[
+            {\"name\":\"URIBL_BLOCKED\",
+             \"score\":0,
+             \"description\":\"ADMINISTRATOR NOTICE: The query to URIBL was blocked.\"
+            },
+            {\"name\":null,
+             \"score\":0,
+             \"description\":null
+            },
+            {\"name\":\"more\",
+             \"score\":0,
+             \"description\":\"information.\"
+            },
+            {\"name\":\"cuny.edu]\",
+             \"score\":0,
+             \"description\":null
+            },
+            {\"name\":\"HTML_MESSAGE\",
+             \"score\":0,\"description\":\"BODY: HTML included in message\"
+            },
+            {\"name\":\"MIME_HTML_ONLY\",
+             \"score\":1.1,
+             \"description\":\"BODY: Message only has text\\/html MIME parts\"
+            },
+            {\"name\":\"HTML_MIME_NO_HTML_TAG\",
+             \"score\":0.6,
+             \"description\":\"HTML-only message, but there is no HTML tag\"
+            },
+            {\"name\":\"RDNS_NONE\",
+             \"score\":1.3,
+             \"description\":\"Delivered to internal network by a host with no rDNS\"
+            }
+          ]
+      },
+      \"dkim\":{
+        \"signed\":false,
+        \"valid\":false
+      },
+      \"email\":\"structural@watercooler.io\",
+      \"tags\":[],
+      \"sender\":null,
+      \"template\":null
 }}]"
 end
