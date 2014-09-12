@@ -40,6 +40,7 @@ gem 'rack-rewrite' # Allows us to do middleware 301 redirects, like from www to 
 
 gem 'mandrill-api'
 gem 'email_reply_parser'
+gem 'reverse_markdown'
 
 group :test, :development do
   gem "rspec-rails", "~> 2.0"
