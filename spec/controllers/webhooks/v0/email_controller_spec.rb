@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Webhooks::V0::EmailController, focus: true do
+describe Webhooks::V0::EmailController do
   before(:all) do
     @sean = User.create(email: 'skermes@gmail.com',
                         full_name: 'Sean Kermes',
