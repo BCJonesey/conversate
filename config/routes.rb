@@ -1,4 +1,5 @@
 Conversate::Application.routes.draw do
+  mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   # The docs say that the root matcher here only grabs GET, but I swear it was
   # eating my POSTs too.
   get '/' => 'home#index', :as => 'root'

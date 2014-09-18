@@ -46,6 +46,7 @@ group :test, :development do
   gem "rspec-rails", "~> 2.0"
   gem "yaml_db"
   gem 'thin'  # A minimalist web server. Heroku likes it.
+  gem 'jasmine-rails'
 end
 
 gem "ruby-prof"
