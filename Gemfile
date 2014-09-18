@@ -32,8 +32,7 @@ gem 'jquery-rails'
 
 gem 'sorcery'	# For login and security.
 gem 'unicorn' # A magick web server. The horns are used for dark incantations.
-gem 'backbone-rails'	# Used for including the backbone.js files and general integration.
-gem 'ejs'	# Required for the .ejs templates.
+gem 'react-rails', '~> 0.11.1.0'	# Used for including the react.js files.
 gem 'newrelic_rpm' # For New Relic analytics.
 gem 'quiet_assets'
 gem 'rack-rewrite' # Allows us to do middleware 301 redirects, like from www to bare sld.

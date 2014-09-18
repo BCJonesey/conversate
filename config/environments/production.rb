@@ -68,6 +68,8 @@ Conversate::Application.configure do
   # Rails 4 recommendation.
   config.eager_load = true
 
+  config.react.variant = :production
+
   config.paperclip_defaults = {
     :storage => :s3,
     :s3_credentials => {
