@@ -17,5 +17,6 @@
 //= require jquery.fileupload
 //
 //= require react
+//= require lodash
 //
 //= require_tree .
