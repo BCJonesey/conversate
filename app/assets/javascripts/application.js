@@ -19,4 +19,5 @@
 //= require react
 //= require lodash
 //
-//= require_tree .
+//= require ./structural/structural
+//= require_directory .
