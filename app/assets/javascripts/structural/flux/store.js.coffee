@@ -9,20 +9,18 @@ Store = (options) ->
     options.initialize.call(@)
 
   if options.dispatches
-    _.forEach(options.dispatches, (callbackSpec, action) =>
-      assert(not @dispatcherIdsByAction[action]
-             'Each store can only register one callback for each action.')
+    _.forEach(options.dispatches, (callbackDescription) =>
+      {action, after, callback} = callbackDescription
 
-      callback = callbackSpec
-      if callbackSpec instanceof Array
-        [stores..., callback] = callbackSpec
+      assert(not @dispatcherIdsByAction[action.action]
+             'Each store can only register one callback for each action.')
 
       if typeof callback == 'string'
         callback = @[callback]
       callback = callback.bind(@)
 
-      id = Structural.Flux.Dispatcher.register(@, action, stores, callback)
-      @dispatcherIdsByAction[action] = id
+      id = Structural.Flux.Dispatcher.register(@, action.action, after, callback)
+      @dispatcherIdsByAction[action.action] = id
     )
 
   @
