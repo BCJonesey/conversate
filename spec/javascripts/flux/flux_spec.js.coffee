@@ -7,6 +7,7 @@ describe 'Flux', ->
       dispatchDuringDispatch: new Structural.Flux.Action -> {}
       circle: new Structural.Flux.Action -> {}
       badPrereq: new Structural.Flux.Action -> {}
+      effect: new Structural.Flux.Action -> {}
 
     @NameStore = new Structural.Flux.Store
       initialize: ->
@@ -111,6 +112,16 @@ describe 'Flux', ->
     expect(@StoreOne.data).toBe(4)
     expect(@StoreTwo.data).toBe(16)
     expect(@StoreThree.data).toBe(64)
+
+  it 'can send an action to a side effect', ->
+    effected = false
+    MyEffect = new Structural.Flux.SideEffect
+      action: @Actions.effect
+      effect: (payload) -> effected = true
+
+    Structural.Flux.Dispatcher.dispatch @Actions.effect()
+
+    expect(effected).toBe(true)
 
   it 'fails when store prerequisites have a circular dependency', ->
     sendCircularDep = ->
