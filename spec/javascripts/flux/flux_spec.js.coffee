@@ -140,3 +140,17 @@ describe 'Flux', ->
       Structural.Flux.Dispatcher.dispatch @Actions.dispatchDuringDispatch()
 
     expect(sendDispatchDuringDispatch).toThrow()
+
+  it 'fails when creating a side effect with no action', ->
+    makeBadSideEffect = ->
+      new Structural.Flux.SideEffect
+        effect: (payload) ->
+
+    expect(makeBadSideEffect).toThrow()
+
+  it 'failes when creating a side effect with no effect', ->
+    makeBadSideEffect = ->
+      new Structural.Flux.SideEffect
+        action: @Actions.effect
+
+    expect(makeBadSideEffect).toThrow()
