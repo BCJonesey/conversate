@@ -39,7 +39,7 @@ class Api::V0::UsersController < ApplicationController
   end
 
   def lookup
-    user = params[:email].nil? ? nil : User.find_by_email(params[:email])
+    user = params[:email].nil? ? nil : User.find_by_email_insensitive(params[:email])
     if user.nil?
       head :status => 404
     else
