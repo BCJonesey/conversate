@@ -1,4 +1,4 @@
-describe 'Stores and Dispatchers', ->
+describe 'Flux', ->
   beforeEach ->
     @Actions =
       changeName: new Structural.Flux.Action (name) -> {name: name}
@@ -112,19 +112,19 @@ describe 'Stores and Dispatchers', ->
     expect(@StoreTwo.data).toBe(16)
     expect(@StoreThree.data).toBe(64)
 
-  it 'fail when store prerequisites have a circular dependency', ->
+  it 'fails when store prerequisites have a circular dependency', ->
     sendCircularDep = ->
       Structural.Flux.Dispatcher.dispatch @Actions.circle()
 
     expect(sendCircularDep).toThrow()
 
-  it 'fail when prerequisite store does not handle action', ->
+  it 'fails when prerequisite store does not handle action', ->
     sendBadPrereq = ->
       Structural.Flux.Dispatcher.dispatch @Actions.badPrereq()
 
     expect(sendBadPrereq).toThrow()
 
-  it 'fail when dispatching during dispatch', ->
+  it 'fails when dispatching during dispatch', ->
     sendDispatchDuringDispatch = ->
       Structural.Flux.Dispatcher.dispatch @Actions.dispatchDuringDispatch()
 
