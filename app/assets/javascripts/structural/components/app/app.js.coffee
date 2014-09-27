@@ -1,7 +1,10 @@
 {div} = React.DOM
 
 App = React.createClass
+  displayName: 'App'
   render: ->
-    div {}, 'Oh look a component'
+    div {},
+      Structural.Components.StructuralBar(),
+      Structural.Components.WaterCooler()
 
 Structural.Components.App = App
