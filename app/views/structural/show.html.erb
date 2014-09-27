@@ -23,6 +23,10 @@
     user: user,
     contactLists: contactLists
   };
+
+  document.addEventListener('DOMContentLoaded', function() {
+    React.renderComponent(Structural.Components.App(), document.body);
+  });
 })();
 
 <% end -%>
