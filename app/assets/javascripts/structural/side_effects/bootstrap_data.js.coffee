@@ -9,7 +9,5 @@ BootstrapData = new Structural.Flux.SideEffect
     activeConversationId = if bootstrap.conversation then bootstrap.conversation.id else null
 
     _.defer ->
-      Structural.Flux.Dispatcher.dispatch(
-        Structural.Actions.UpdateConversationList(conversations))
-      Structural.Flux.Dispatcher.dispatch(
-        Structural.Actions.UpdateActiveConversation(activeConversationId))
+      Structural.Actions.UpdateConversationList(conversations)
+      Structural.Actions.UpdateActiveConversation(activeConversationId)

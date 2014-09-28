@@ -4,10 +4,14 @@
 
 Structural.Actions = {}
 
-Structural.Actions.StartApp = new Structural.Flux.Action -> {}
+Structural.Actions.StartApp = new Structural.Flux.Action(
+  'Start App',
+   -> {})
 
 Structural.Actions.UpdateConversationList = new Structural.Flux.Action(
+  'Update Conversation List'
   (conversations) -> {conversations: conversations})
 
 Structural.Actions.UpdateActiveConversation = new Structural.Flux.Action(
+  'Update Active Conversation'
   (activeConversationId) -> {activeConversationId: activeConversationId})
