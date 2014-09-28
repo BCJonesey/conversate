@@ -6,10 +6,10 @@ ActionList = React.createClass
   getDefaultProps: -> messages: []
 
   render: ->
+
     messages = _.map(@props.messages, ((message) ->
-      div className: 'message', key: message.id,
-        "THIS IS A MESSAGE!!!"
-    ), this)
+      Structural.Components.Message(message: message, key: message.id)
+    ),this)
 
     div className: 'act-list ui-scrollable',
       messages

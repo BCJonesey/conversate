@@ -93,6 +93,12 @@ describe 'Flux', ->
     Structural.Flux.Dispatcher.register(
       @StoreOne, @Actions.circle.fluxName, [@StoreThree], ->)
 
+    @StoreWithAPI = new Structural.Flux.Store
+      initialize: ->
+        @data = {foo: 'Foo'}
+      getFoo: ->
+        @data.foo
+
   it 'can send an action to a store', ->
     @Actions.changeName('Alice')
 
@@ -131,6 +137,9 @@ describe 'Flux', ->
     @Actions.changeName.send(payload)
 
     expect(@NameStore.name).toBe('Dave')
+
+  it 'can call other functions on a store', ->
+    expect(@StoreWithAPI.getFoo()).toBe('Foo')
 
   it 'fails when store prerequisites have a circular dependency', ->
     sendCircularDep = -> @Actions.circle()

@@ -1,9 +1,16 @@
 {assert} = Structural.Support
 
+bindToContextIfFunction = (context) ->
+  (objValue, srcValue) ->
+    if srcValue instanceof Function
+      srcValue.bind(context)
+    else
+      srcValue
+
 Store = (options) ->
   @dispatcherIdsByAction = {}
   @callbacks = []
-  _.assign(@, _.omit(options, 'initialize', 'dispatches'))
+  _.assign(this, _.omit(options, 'initialize', 'dispatches'), bindToContextIfFunction(this))
 
   if options.initialize
     options.initialize.call(@)
@@ -25,11 +32,21 @@ Store = (options) ->
 
   this
 
-Store.prototype.listen = (callback) ->
+Store.prototype.register = (callback) ->
   @callbacks.push(callback)
 
-Store.prototype.ignore = (callback) ->
+Store.prototype.unregister = (callback) ->
   @callbacks = _.reject(@callbacks, (cb) -> cb == callback)
+
+# register/unregister are completely general, this is tailed for React mixins.
+Store.prototype.listen = (callbackName) ->
+  store = this
+  return {
+    componentDidMount: ->
+      store.register(this[callbackName])
+    componentWillUnmount: ->
+      store.unregister(this[callbackName])
+  }
 
 Store.prototype.trigger = ->
   _.forEach(@callbacks, (callback) -> callback())

@@ -3,20 +3,15 @@
 
 ActionPane = React.createClass
   displayName: 'Action Pane'
+  mixins: [
+    ConversationsStore.listen('updateConversation')
+    ActiveConversationStore.listen('updateConversation')
+    MessagesStore.listen('onMessagesChange')
+  ]
 
   getInitialState: ->
     conversation: undefined
     messages: MessagesStore.messages
-
-  componentDidMount: ->
-    ConversationsStore.listen(@updateConversation)
-    ActiveConversationStore.listen(@updateConversation)
-    MessagesStore.listen(@onMessagesChange)
-
-  componentWillUnmount: ->
-    ConversationsStore.ignore(@updateConversation)
-    ActiveConversationStore.ignore(@updateConversation)
-    MessagesStore.ignore(@updateConversation)
 
   updateConversation: ->
     if ActiveConversationStore.activeConversationId
