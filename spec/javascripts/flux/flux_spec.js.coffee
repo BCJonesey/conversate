@@ -163,7 +163,7 @@ describe 'Flux', ->
 
     expect(makeBadSideEffect).toThrow()
 
-  it 'faills when creating a side effect with no effect', ->
+  it 'fails when creating a side effect with no effect', ->
     makeBadSideEffect = ->
       new Structural.Flux.SideEffect
         action: @Actions.effect
