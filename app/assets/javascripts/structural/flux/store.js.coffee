@@ -32,10 +32,10 @@ Store = (options) ->
 
   this
 
-Store.prototype.listen = (callback) ->
+Store.prototype.register = (callback) ->
   @callbacks.push(callback)
 
-Store.prototype.ignore = (callback) ->
+Store.prototype.unregister = (callback) ->
   @callbacks = _.reject(@callbacks, (cb) -> cb == callback)
 
 Store.prototype.trigger = ->
