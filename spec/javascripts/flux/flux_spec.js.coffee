@@ -1,13 +1,16 @@
 describe 'Flux', ->
   beforeEach ->
     @Actions =
-      changeName: new Structural.Flux.Action (name) -> {name: name}
-      changeNameViaFn: new Structural.Flux.Action (name) -> {name: name}
-      run: new Structural.Flux.Action -> {}
-      dispatchDuringDispatch: new Structural.Flux.Action -> {}
-      circle: new Structural.Flux.Action -> {}
-      badPrereq: new Structural.Flux.Action -> {}
-      effect: new Structural.Flux.Action -> {}
+      changeName: new Structural.Flux.Action 'changeName',
+                                             (name) -> {name: name}
+      changeNameViaFn: new Structural.Flux.Action 'changeNameViaFn',
+                                                  (name) -> {name: name}
+      run: new Structural.Flux.Action 'run', -> {}
+      dispatchDuringDispatch:
+        new Structural.Flux.Action 'dispatchDuringDispatch', -> {}
+      circle: new Structural.Flux.Action 'circle', -> {}
+      badPrereq: new Structural.Flux.Action 'badPrereq', -> {}
+      effect: new Structural.Flux.Action 'effect', -> {}
 
     @NameStore = new Structural.Flux.Store
       initialize: ->
@@ -91,23 +94,23 @@ describe 'Flux', ->
       @StoreOne, @Actions.circle.action, [@StoreThree], ->)
 
   it 'can send an action to a store', ->
-    Structural.Flux.Dispatcher.dispatch @Actions.changeName('Alice')
+    @Actions.changeName('Alice')
 
     expect(@NameStore.name).toBe('Alice')
 
   it 'can send an action to a store via named function', ->
-    Structural.Flux.Dispatcher.dispatch @Actions.changeName('Bob')
+    @Actions.changeName('Bob')
 
     expect(@NameStore.name).toBe('Bob')
 
   it 'can send an action to multiple stores', ->
-    Structural.Flux.Dispatcher.dispatch @Actions.changeName('Charlie')
+    @Actions.changeName('Charlie')
 
     expect(@NameStore.name).toBe('Charlie')
     expect(@OtherNameStore.name).toBe('Other Charlie')
 
   it 'can have one store wait for another', ->
-    Structural.Flux.Dispatcher.dispatch @Actions.run()
+    @Actions.run()
 
     expect(@StoreOne.data).toBe(4)
     expect(@StoreTwo.data).toBe(16)
@@ -119,25 +122,28 @@ describe 'Flux', ->
       action: @Actions.effect
       effect: (payload) -> effected = true
 
-    Structural.Flux.Dispatcher.dispatch @Actions.effect()
+    @Actions.effect()
 
     expect(effected).toBe(true)
 
+  it 'can send an action in two steps.', ->
+    payload = @Actions.changeName.buildPayload('Dave')
+    @Actions.changeName.send(payload)
+
+    expect(@NameStore.name).toBe('Dave')
+
   it 'fails when store prerequisites have a circular dependency', ->
-    sendCircularDep = ->
-      Structural.Flux.Dispatcher.dispatch @Actions.circle()
+    sendCircularDep = -> @Actions.circle()
 
     expect(sendCircularDep).toThrow()
 
   it 'fails when prerequisite store does not handle action', ->
-    sendBadPrereq = ->
-      Structural.Flux.Dispatcher.dispatch @Actions.badPrereq()
+    sendBadPrereq = -> @Actions.badPrereq()
 
     expect(sendBadPrereq).toThrow()
 
   it 'fails when dispatching during dispatch', ->
-    sendDispatchDuringDispatch = ->
-      Structural.Flux.Dispatcher.dispatch @Actions.dispatchDuringDispatch()
+    sendDispatchDuringDispatch = -> @Actions.dispatchDuringDispatch()
 
     expect(sendDispatchDuringDispatch).toThrow()
 
@@ -148,7 +154,7 @@ describe 'Flux', ->
 
     expect(makeBadSideEffect).toThrow()
 
-  it 'failes when creating a side effect with no effect', ->
+  it 'faills when creating a side effect with no effect', ->
     makeBadSideEffect = ->
       new Structural.Flux.SideEffect
         action: @Actions.effect
