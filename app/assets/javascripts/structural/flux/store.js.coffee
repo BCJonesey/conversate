@@ -1,9 +1,16 @@
 {assert} = Structural.Support
 
+bindToContextIfFunction = (context) ->
+  (objValue, srcValue) ->
+    if srcValue instanceof Function
+      srcValue.bind(context)
+    else
+      srcValue
+
 Store = (options) ->
   @dispatcherIdsByAction = {}
   @callbacks = []
-  _.assign(@, _.omit(options, 'initialize', 'dispatches'))
+  _.assign(this, _.omit(options, 'initialize', 'dispatches'), bindToContextIfFunction(this))
 
   if options.initialize
     options.initialize.call(@)
