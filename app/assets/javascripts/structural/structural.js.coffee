@@ -14,4 +14,4 @@ window.Structural = {}
 
 Structural.startApp = ->
   React.renderComponent(Structural.Components.App(), document.body)
-  Structural.Flux.Dispatcher.dispatch(Structural.Actions.StartApp())
+  Structural.Actions.StartApp()
