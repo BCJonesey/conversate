@@ -41,11 +41,12 @@ Store.prototype.unregister = (callback) ->
 # register/unregister are completely general, this is tailed for React mixins.
 Store.prototype.listen = (callbackName) ->
   store = this
-  return
+  return {
     componentDidMount: ->
       store.register(this[callbackName])
     componentWillUnmount: ->
       store.unregister(this[callbackName])
+  }
 
 Store.prototype.trigger = ->
   _.forEach(@callbacks, (callback) -> callback())

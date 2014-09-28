@@ -1,5 +1,4 @@
 {ConversationsStore, ActiveConversationStore} = Structural.Stores
-{ListenToStore} = Structural.Flux
 {div} = React.DOM
 
 ActionPane = React.createClass
@@ -7,8 +6,8 @@ ActionPane = React.createClass
   getInitialState: ->
     {conversation: undefined}
   mixins: [
-    ListenToStore(ConversationsStore, 'updateConversation')
-    ListenToStore(ActiveConversationStore, 'updateConversation')
+    ConversationsStore.listen('updateConversation')
+    ActiveConversationStore.listen('updateConversation')
   ]
   render: ->
     div {className: 'ui-section act-container'},
