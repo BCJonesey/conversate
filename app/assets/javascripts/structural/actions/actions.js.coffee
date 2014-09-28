@@ -15,3 +15,8 @@ Structural.Actions.UpdateConversationList = new Structural.Flux.Action(
 Structural.Actions.UpdateActiveConversation = new Structural.Flux.Action(
   'Update Active Conversation'
   (activeConversationId) -> {activeConversationId: activeConversationId})
+
+Structural.Actions.UpdateMessagesList = new Structural.Flux.Action(
+  'Update Messages List'
+  (messages) -> {messages: messages}
+)
