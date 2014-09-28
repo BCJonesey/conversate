@@ -91,7 +91,7 @@ describe 'Flux', ->
         }
       ]
     Structural.Flux.Dispatcher.register(
-      @StoreOne, @Actions.circle.action, [@StoreThree], ->)
+      @StoreOne, @Actions.circle.fluxName, [@StoreThree], ->)
 
   it 'can send an action to a store', ->
     @Actions.changeName('Alice')

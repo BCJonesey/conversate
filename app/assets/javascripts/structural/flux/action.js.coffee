@@ -14,7 +14,7 @@ Action = (name, ctor) ->
   actionFn.buildPayload = buildPayload
   actionFn.send = send
 
-  actionFn.action = name
+  actionFn.fluxName = name
   actionFn.toString = -> name
 
   actionFn

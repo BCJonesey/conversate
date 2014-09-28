@@ -12,9 +12,9 @@ SideEffect = (options) ->
     effect = this[effect]
   effect = effect.bind(this)
 
-  id = Structural.Flux.Dispatcher.register(this, action.action, [], effect)
+  id = Structural.Flux.Dispatcher.register(this, action.fluxName, [], effect)
   @dispatcherIdsByAction = {}
-  @dispatcherIdsByAction[action.action] = id
+  @dispatcherIdsByAction[action.fluxName] = id
 
   this
 
