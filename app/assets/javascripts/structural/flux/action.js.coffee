@@ -1,17 +1,22 @@
-prefix = 'Action_ID_'
-lastId = 1
-nextId = -> prefix + lastId++
-
-Action = (ctor) ->
-  id = nextId()
-  fn = ->
+Action = (name, ctor) ->
+  buildPayload = ->
     payload = ctor.apply(null, arguments)
-    payload.action = id
+    payload.action = name
     payload
 
-  fn.action = id
-  fn.prototype.toString = -> id
+  send = (payload) ->
+    Structural.Flux.Dispatcher.dispatch(payload)
 
-  fn
+  actionFn = ->
+    payload = buildPayload.apply(null, arguments)
+    send(payload)
+
+  actionFn.buildPayload = buildPayload
+  actionFn.send = send
+
+  actionFn.action = name
+  actionFn.toString = -> name
+
+  actionFn
 
 Structural.Flux.Action = Action
