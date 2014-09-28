@@ -1,8 +1,10 @@
-{div} = React.DOM
+{div, span} = React.DOM
 
 ConversationEditorBar = React.createClass
   displayName: 'Conversation Editor Bar'
   render: ->
-    div {className: 'btn-toolbar act-title'}
+    title = if @props.conversation then @props.conversation.title else ''
+    div {className: 'btn-toolbar act-title'},
+      span {className: 'act-title-input'}, title
 
 Structural.Components.ConversationEditorBar = ConversationEditorBar
