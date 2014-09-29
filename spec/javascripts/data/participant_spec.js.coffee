@@ -20,3 +20,12 @@ describe 'Participant', ->
       id: 94
 
     expect(Structural.Data.Participant.name(hasBoth)).toBe('Cassie')
+
+  it 'knows people\'s names that have a name', ->
+    onlyName =
+      name: 'Dave',
+      full_name: 'David'
+      email: 'dave@example.com'
+      id: 91
+
+    expect(Structural.Data.Participant.name(onlyName)).toBe('Dave')
