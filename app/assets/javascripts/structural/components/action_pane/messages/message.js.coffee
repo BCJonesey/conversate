@@ -1,14 +1,14 @@
 {div} = React.DOM
 
 Message = React.createClass
-  displayName: 'Retitle Message View'
+  displayName: 'Abstract Message'
 
   getDefaultProps: -> message: {}
 
   render: ->
     switch @props.message.type
       when 'retitle' then view = Structural.Components.RetitleMessage
-      else view = Structural.Components.RetitleMessage
+      else view = Structural.Components.UnknownMessage
 
     view(message: @props.message)
 

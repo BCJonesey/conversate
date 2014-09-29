@@ -1,7 +1,7 @@
 {div} = React.DOM
 
 RetitleMessage = React.createClass
-  displayName: 'Retitle Message View'
+  displayName: 'Retitle Message'
 
   getDefaultProps: -> message: {}
 
