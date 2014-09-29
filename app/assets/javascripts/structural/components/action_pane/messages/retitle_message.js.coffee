@@ -7,7 +7,8 @@ RetitleMessage = React.createClass
 
   render: ->
     message = @props.message
+    name = Structural.Data.Participant.name(message.user)
     div className: 'message retitle-message',
-      message.title
+      "#{name} titled the conversation #{message.title}"
 
 Structural.Components.RetitleMessage = RetitleMessage
