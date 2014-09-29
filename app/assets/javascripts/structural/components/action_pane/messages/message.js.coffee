@@ -6,9 +6,13 @@ Message = React.createClass
   getDefaultProps: -> message: {}
 
   render: ->
-    switch @props.message.type
-      when 'retitle' then view = Structural.Components.RetitleMessage
-      else view = Structural.Components.UnknownMessage
+    viewTypes =
+      retitle: Structural.Components.RetitleMessage
+
+    if @props.message.type of viewTypes
+      view = viewTypes[@props.message.type]
+    else
+      view = Structural.Components.UnknownMessage
 
     view(message: @props.message)
 
