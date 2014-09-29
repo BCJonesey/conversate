@@ -3,7 +3,7 @@
 Participant = React.createClass
   displayName: 'Participant List Item',
   render: ->
-    name = if @props.participant.full_name then @props.participant.full_name else @props.participant.email
+    name = Structural.Data.Participant.name(@props.participant)
     li {className: 'act-participant'}, name
 
 
