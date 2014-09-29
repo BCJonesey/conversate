@@ -6,7 +6,7 @@ describe 'Participant', ->
 
     expect(Structural.Data.Participant.name(onlyHasName)).toBe('Alice')
 
-  it 'knows people\'s names that only hvae emails', ->
+  it 'knows people\'s names that only have emails', ->
     onlyHasEmail =
       email: 'bob@example.com'
       id: 43
