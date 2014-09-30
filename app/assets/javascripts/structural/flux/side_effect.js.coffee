@@ -10,7 +10,7 @@ SideEffect = (options) ->
 
   if typeof effect == 'string'
     effect = this[effect]
-  effect = effect.bind(this)
+  effect = _.defer.bind(this, effect)
 
   id = Structural.Flux.Dispatcher.register(this, action.fluxName, [], effect)
   @dispatcherIdsByAction = {}

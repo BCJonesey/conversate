@@ -122,7 +122,7 @@ describe 'Flux', ->
     expect(@StoreTwo.data).toBe(16)
     expect(@StoreThree.data).toBe(64)
 
-  it 'can send an action to a side effect', ->
+  it 'can send an action to a side effect', (done) ->
     effected = false
     MyEffect = new Structural.Flux.SideEffect
       action: @Actions.effect
@@ -130,7 +130,14 @@ describe 'Flux', ->
 
     @Actions.effect()
 
-    expect(effected).toBe(true)
+    # SideEffects execute after the current call stack is done, so in order to
+    # test that they worked, we also have to bounce off the call stack.  This
+    # is kind of a hack, but it works.
+    test = ->
+      expect(effected).toBe(true)
+      done()
+
+    setTimeout(test, 100)
 
   it 'can send an action in two steps.', ->
     payload = @Actions.changeName.buildPayload('Dave')
