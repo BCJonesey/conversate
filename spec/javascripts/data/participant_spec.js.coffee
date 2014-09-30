@@ -1,4 +1,4 @@
-describe 'Participant', ->
+describe 'Data.Participant', ->
   it 'knows people\'s names that only have names', ->
     onlyHasName =
       full_name: 'Alice'

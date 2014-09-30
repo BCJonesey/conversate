@@ -1,4 +1,4 @@
-describe 'Time', ->
+describe 'Data.Time', ->
   {timestampToHumanizedTimestr} = Structural.Data.Time
 
   beforeEach ->
