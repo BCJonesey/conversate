@@ -6,6 +6,6 @@ WaterCooler = React.createClass
     div {className: 'water-cooler'},
       Structural.Components.FolderPane(),
       Structural.Components.ConversationPane(),
-      Structural.Components.ActionPane()
+      Structural.Components.MessagesPane()
 
 Structural.Components.WaterCooler = WaterCooler

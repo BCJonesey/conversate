@@ -1,6 +1,6 @@
 {div} = React.DOM
 
-ActionList = React.createClass
+MessagesList = React.createClass
   displayName: 'Action List'
 
   getDefaultProps: -> messages: []
@@ -15,4 +15,4 @@ ActionList = React.createClass
       messages
 
 
-Structural.Components.ActionList = ActionList
+Structural.Components.MessagesList = MessagesList

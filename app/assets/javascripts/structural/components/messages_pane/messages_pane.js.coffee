@@ -1,7 +1,7 @@
 {Messages, Conversations, ActiveConversation} = Structural.Stores
 {div} = React.DOM
 
-ActionPane = React.createClass
+MessagesPane = React.createClass
   displayName: 'Action Pane'
   mixins: [
     Conversations.listen('updateConversation')
@@ -27,8 +27,8 @@ ActionPane = React.createClass
       Structural.Components.ParticipantsEditorBar(
         conversation: @state.conversation
       )
-      Structural.Components.ActionList(messages: @state.messages)
+      Structural.Components.MessagesList(messages: @state.messages)
       Structural.Components.Compose()
 
 
-Structural.Components.ActionPane = ActionPane
+Structural.Components.MessagesPane = MessagesPane
