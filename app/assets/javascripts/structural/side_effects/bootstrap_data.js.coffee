@@ -10,7 +10,6 @@ BootstrapData = new Structural.Flux.SideEffect
 
     messages = bootstrap.actions
 
-    _.defer ->
-      Structural.Actions.UpdateConversationList(conversations)
-      Structural.Actions.UpdateActiveConversation(activeConversationId)
-      Structural.Actions.UpdateMessagesList(messages)
+    Structural.Actions.UpdateConversationList(conversations)
+    Structural.Actions.UpdateActiveConversation(activeConversationId)
+    Structural.Actions.UpdateMessagesList(messages)
