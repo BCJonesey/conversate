@@ -15,7 +15,7 @@ ActionPane = React.createClass
 
   updateConversation: ->
     if ActiveConversationStore.activeConversationId
-      @setState({conversation: ConversationsStore.conversations[ActiveConversationStore.activeConversationId]})
+      @setState({conversation: ConversationsStore.conversationById(ActiveConversationStore.id())})
 
   onMessagesChange: ->
     @setState messages: MessagesStore.sortedMessages()

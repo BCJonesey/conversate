@@ -12,4 +12,7 @@ ActiveConversationStore = new Structural.Flux.Store
     @activeConversationId = payload.activeConversationId
     @trigger()
 
+  id: ->
+    @activeConversationId
+
 Structural.Stores.ActiveConversationStore = ActiveConversationStore
