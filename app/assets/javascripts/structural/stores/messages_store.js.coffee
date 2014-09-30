@@ -1,6 +1,6 @@
 {hashToSortedArray} = Structural.Data.Collection
 
-MessagesStore = new Structural.Flux.Store
+Messages = new Structural.Flux.Store
   displayName: 'Messages Store'
 
   initialize: ->
@@ -15,7 +15,7 @@ MessagesStore = new Structural.Flux.Store
     @messages = payload.messages
     @trigger()
 
-  sortedMessages: ->
-    hashToSortedArray(@messages)
+  chronologicalOrder: ->
+    hashToSortedArray(@messages, 'timestamp')
 
-Structural.Stores.MessagesStore = MessagesStore
+Structural.Stores.Messages = Messages

@@ -1,24 +1,23 @@
-{MessagesStore, ConversationsStore, ActiveConversationStore} = Structural.Stores
+{Messages, Conversations, ActiveConversation} = Structural.Stores
 {div} = React.DOM
 
 ActionPane = React.createClass
   displayName: 'Action Pane'
   mixins: [
-    ConversationsStore.listen('updateConversation')
-    ActiveConversationStore.listen('updateConversation')
-    MessagesStore.listen('onMessagesChange')
+    Conversations.listen('updateConversation')
+    ActiveConversation.listen('updateConversation')
+    Messages.listen('onMessagesChange')
   ]
 
   getInitialState: ->
-    conversation: undefined
-    messages: MessagesStore.sortedMessages()
+    conversation: Conversations.byId(ActiveConversation.id())
+    messages: Messages.chronologicalOrder()
 
   updateConversation: ->
-    if ActiveConversationStore.activeConversationId
-      @setState({conversation: ConversationsStore.conversationById(ActiveConversationStore.id())})
+    @setState({conversation: Conversations.byId(ActiveConversation.id())})
 
   onMessagesChange: ->
-    @setState messages: MessagesStore.sortedMessages()
+    @setState messages: Messages.chronologicalOrder()
 
   render: ->
     div {className: 'ui-section act-container'},

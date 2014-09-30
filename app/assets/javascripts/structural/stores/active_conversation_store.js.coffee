@@ -1,4 +1,4 @@
-ActiveConversationStore = new Structural.Flux.Store
+ActiveConversation = new Structural.Flux.Store
   displayName: 'Active Conversation Store'
   initialize: ->
     @activeConversationId = null
@@ -15,4 +15,4 @@ ActiveConversationStore = new Structural.Flux.Store
   id: ->
     @activeConversationId
 
-Structural.Stores.ActiveConversationStore = ActiveConversationStore
+Structural.Stores.ActiveConversation = ActiveConversation

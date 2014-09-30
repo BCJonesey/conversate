@@ -1,4 +1,4 @@
-ConversationsStore = new Structural.Flux.Store
+Conversations = new Structural.Flux.Store
   displayName: 'Conversations Store'
   initialize: ->
     @conversations = {}
@@ -12,7 +12,7 @@ ConversationsStore = new Structural.Flux.Store
     @conversations = payload.conversations
     @trigger()
 
-  conversationById: (id) ->
+  byId: (id) ->
     @conversations[id]
 
-Structural.Stores.ConversationsStore = ConversationsStore
+Structural.Stores.Conversations = Conversations
