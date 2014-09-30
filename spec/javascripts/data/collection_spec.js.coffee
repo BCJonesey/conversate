@@ -1,4 +1,46 @@
 describe 'Data.Collection', ->
+  describe 'hashToSortedArray', ->
+    {hashToSortedArray} = Structural.Data.Collection
+
+    it 'converts an empty hash to an empty array', ->
+      expect(hashToSortedArray({}, '')).toEqual([])
+
+    it 'converts a hash into a sorted array', ->
+      hash =
+        10:
+          timestamp: 5
+          user: 'Alice'
+        20:
+          timestamp: 2
+          user: 'Bob'
+        30:
+          timestamp: 8
+          user: 'Charlie'
+        40:
+          timestamp: 1
+          user: 'Deandra'
+
+      sorted = [
+        {
+          timestamp: 1
+          user: 'Deandra'
+        }
+        {
+          timestamp: 2
+          user: 'Bob'
+        }
+        {
+          timestamp: 5
+          user: 'Alice'
+        }
+        {
+          timestamp: 8
+          user: 'Charlie'
+        }
+      ]
+
+      expect(hashToSortedArray(hash, 'timestamp')).toEqual(sorted)
+
   describe 'arrayToIndexedHash', ->
     {arrayToIndexedHash} = Structural.Data.Collection
     arr = [
