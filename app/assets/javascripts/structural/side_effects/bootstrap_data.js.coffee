@@ -8,7 +8,7 @@ BootstrapData = new Structural.Flux.SideEffect
     conversations = arrayToIndexedHash(bootstrap.conversations)
     activeConversationId = if bootstrap.conversation then bootstrap.conversation.id else null
 
-    messages = bootstrap.actions
+    messages = arrayToIndexedHash(bootstrap.actions)
 
     Structural.Actions.UpdateConversationList(conversations)
     Structural.Actions.UpdateActiveConversation(activeConversationId)

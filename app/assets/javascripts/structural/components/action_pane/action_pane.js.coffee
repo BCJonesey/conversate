@@ -11,14 +11,14 @@ ActionPane = React.createClass
 
   getInitialState: ->
     conversation: undefined
-    messages: MessagesStore.messages
+    messages: MessagesStore.sortedMessages()
 
   updateConversation: ->
     if ActiveConversationStore.activeConversationId
       @setState({conversation: ConversationsStore.conversations[ActiveConversationStore.activeConversationId]})
 
   onMessagesChange: ->
-    @setState messages: MessagesStore.messages
+    @setState messages: MessagesStore.sortedMessages()
 
   render: ->
     div {className: 'ui-section act-container'},

@@ -1,7 +1,10 @@
-Structural.Stores.MessagesStore = new Structural.Flux.Store
+{hashToSortedArray} = Structural.Data.Collection
+
+MessagesStore = new Structural.Flux.Store
   displayName: 'Messages Store'
 
-  initialize: -> @messages = []
+  initialize: ->
+    @messages = {}
 
   dispatches: [{
     action: Structural.Actions.UpdateMessagesList
@@ -12,4 +15,7 @@ Structural.Stores.MessagesStore = new Structural.Flux.Store
     @messages = payload.messages
     @trigger()
 
+  sortedMessages: ->
+    hashToSortedArray(@messages)
 
+Structural.Stores.MessagesStore = MessagesStore
