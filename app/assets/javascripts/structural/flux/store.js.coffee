@@ -38,7 +38,7 @@ Store.prototype.register = (callback) ->
 Store.prototype.unregister = (callback) ->
   @callbacks = _.reject(@callbacks, (cb) -> cb == callback)
 
-# register/unregister are completely general, this is tailed for React mixins.
+# register/unregister are completely general, this is tailored for React mixins.
 Store.prototype.listen = (callbackName) ->
   store = this
   return
