@@ -1,6 +1,7 @@
 #= require_self
 #= require ./support/support
 #= require ./flux/flux
+#= require ./data/data
 #= require ./actions/actions
 #= require ./stores/stores
 #= require ./components/components
