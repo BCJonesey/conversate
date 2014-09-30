@@ -21,13 +21,13 @@ ActionPane = React.createClass
 
   render: ->
     div {className: 'ui-section act-container'},
-      Structural.Components.ConversationEditorBar({
+      Structural.Components.ConversationEditorBar(
         conversation: @state.conversation
-      })
-      Structural.Components.ParticipantsEditorBar({
+      )
+      Structural.Components.ParticipantsEditorBar(
         conversation: @state.conversation
-      })
-      Structural.Components.ActionList(messages:@state.messages)
+      )
+      Structural.Components.ActionList(messages: @state.messages)
       Structural.Components.Compose()
 
 
