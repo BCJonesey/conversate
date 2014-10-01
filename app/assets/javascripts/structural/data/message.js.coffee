@@ -1,5 +1,19 @@
 fiveMinutesInMilliseconds = 5 * 60 * 1000
 
+# Operations used later in distillRawMessages
+appendFollowOnOperation = {
+  condition: (distilled, message) ->
+    prevMessage = _.last(distilled)
+    prevMessage and Message.isFollowOn(message, prevMessage)
+  operation: (distilled, message) ->
+    prevMessage = _.last(distilled)
+    Message.appendFollowOn(prevMessage, message)
+}
+appendMessageOperation = {
+  condition: (distilled, message) -> true
+  operation: (distilled, message) -> distilled.push(message)
+}
+
 Message = {
   isMessageType: (message) ->
     message.type in ['message', 'email_message', 'upload_message']
@@ -27,14 +41,17 @@ Message = {
     # out into the original raw messages.
     cloned = _.cloneDeep(rawMessages)
 
+    operations = [
+      appendFollowOnOperation
+      appendMessageOperation
+    ]
+
     _.reduce(cloned,
              (distilled, message) ->
-              prevMessage = _.last(distilled)
-              if prevMessage and Message.isFollowOn(message, prevMessage)
-                Message.appendFollowOn(prevMessage, message)
-              else
-                distilled.push(message)
-              distilled
+              for operation in operations
+                if operation.condition(distilled, message)
+                  operation.operation(distilled, message)
+                  return distilled;
              [])
 }
 
