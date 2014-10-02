@@ -11,13 +11,13 @@ MessagesPane = React.createClass
 
   getInitialState: ->
     conversation: Conversations.byId(ActiveConversation.id())
-    messages: Messages.chronologicalOrder()
+    messages: Messages.distilled()
 
   updateConversation: ->
     @setState({conversation: Conversations.byId(ActiveConversation.id())})
 
   onMessagesChange: ->
-    @setState messages: Messages.chronologicalOrder()
+    @setState messages: Messages.distilled()
 
   render: ->
     div {className: 'ui-section act-container'},

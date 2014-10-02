@@ -1,5 +1,3 @@
-fiveMinutesInMilliseconds = 5 * 60 * 1000
-
 # Operations used later in distillRawMessages
 appendFollowOnOperation = {
   condition: (distilled, message) ->
@@ -22,7 +20,7 @@ Message = {
     Message.isMessageType(message) and
     Message.isMessageType(prevMessage) and
     message.user.id == prevMessage.user.id and
-    (Message.latestTimestamp(message)- Message.latestTimestamp(prevMessage)) < fiveMinutesInMilliseconds
+    (Message.latestTimestamp(message)- Message.latestTimestamp(prevMessage)) < Structural.Data.Time.fiveMinutesInMilliseconds
 
   appendFollowOn: (message, followOn) ->
     if not message.followOns

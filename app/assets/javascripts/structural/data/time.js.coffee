@@ -2,6 +2,8 @@ monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
               'Oct', 'Nov', 'Dec']
 
 Time = {
+  fiveMinutesInMilliseconds: 5 * 60 * 1000
+
   isSameDay: (dateOne, dateTwo) ->
     dateOne.getFullYear() == dateTwo.getFullYear() and
     dateOne.getMonth() == dateTwo.getMonth() and
