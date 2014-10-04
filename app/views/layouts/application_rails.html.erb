@@ -1,14 +1,16 @@
 <%= render 'layouts/header' %>
-<div class='info-page-wrapper ui-scrollable'>
-<div class="info-page ui-scrollable-contents">
+<div class="rails-page">
+  <div class='info-page-wrapper ui-scrollable'>
+    <div class="info-page ui-scrollable-contents">
 
-  <%=render "shared/header" %>
+      <%=render "shared/header" %>
 
-<%= yield %>
+      <%= yield %>
 
-</div>
+    </div>
 
-<%=render "shared/footer" %>
+    <%=render "shared/footer" %>
+  </div>
 </div>
 
 <%= render 'layouts/footer' %>

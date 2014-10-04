@@ -1,32 +1,33 @@
 @import "ui/mixins.less";
 
-
 @footer-height:2.0rem;
 
-.info-page{
-  min-height: 100%;
-  margin-bottom:-@footer-height;
-  &:after {
-    content: " ";
-    display: block;
-    height:@footer-height;
+.rails-page {
+  .info-page{
+    min-height: 100%;
+    margin-bottom:-@footer-height;
+    &:after {
+      content: " ";
+      display: block;
+      height:@footer-height;
+    }
   }
-}
 
-.footer{
-  display:block;
-  color:#CCC;
-  text-align:center;
-  border-top:@border-2;
-  padding:0.35rem 1.0rem 0.5rem;
-  font-size:0.9rem;
-  background-color: #888;
-  height:@footer-height;
-  a{
-    color:inherit;
-    text-decoration:none;
-    &:hover{
-      text-decoration:underline;
+  .footer{
+    display:block;
+    color:#CCC;
+    text-align:center;
+    border-top:@border-2;
+    padding:0.35rem 1.0rem 0.5rem;
+    font-size:0.9rem;
+    background-color: #888;
+    height:@footer-height;
+    a{
+      color:inherit;
+      text-decoration:none;
+      &:hover{
+        text-decoration:underline;
+      }
     }
   }
 }

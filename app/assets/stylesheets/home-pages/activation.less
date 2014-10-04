@@ -1,20 +1,22 @@
 @import "ui/mixins.less";
 
-.activation-container{
-  padding:1.0rem;
-  @media(min-width:@bp-1){
-    width:35rem;
-    margin:0 auto;
-    padding: 3.0rem;
+.rails-page {
+  .activation-container{
+    padding:1.0rem;
+    @media(min-width:@bp-1){
+      width:35rem;
+      margin:0 auto;
+      padding: 3.0rem;
+    }
   }
-}
 
-.activation-dialog{
-  border:@border-2;
-  @media(min-width:@bp-1){
-    border:@border-1;
-  }
-  .activation-toolbar{
-    .ellipsis();
+  .activation-dialog{
+    border:@border-2;
+    @media(min-width:@bp-1){
+      border:@border-1;
+    }
+    .activation-toolbar{
+      .ellipsis();
+    }
   }
 }

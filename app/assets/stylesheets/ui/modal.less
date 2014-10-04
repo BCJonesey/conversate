@@ -1,94 +1,94 @@
 @import "ui/mixins.less";
 
-.modal-background {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(0,0,0,.4);
-  overflow-y:auto;
-  z-index:2;
-
-}
-
-.modal-window{
-  margin:5rem auto 1.0rem;
-  width:30rem;
-  background-color:white;
-  border:@border-1;
-  box-shadow: 0 1rem 2rem rgba(0,0,0,0.15);
-  @media (max-width:@bp-2){
-    margin:0;
-    width:auto;
-    position:absolute;
-    top:1rem;
-    left:1rem;
-    right:1rem;
+.rails-page {
+  .modal-background {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0,.4);
+    overflow-y:auto;
+    z-index:2;
 
   }
-}
 
-.modal-message {
-  .modal-window;
-}
+  .modal-window{
+    margin:5rem auto 1.0rem;
+    width:30rem;
+    background-color:white;
+    border:@border-1;
+    box-shadow: 0 1rem 2rem rgba(0,0,0,0.15);
+    @media (max-width:@bp-2){
+      margin:0;
+      width:auto;
+      position:absolute;
+      top:1rem;
+      left:1rem;
+      right:1rem;
 
-.modal-title{
-  .title-font();
-}
-@modal-input-border-color:#D8D8D8;
-@modal-input-highlight-background:white;
-
-.modal-content{
-  background-color: white;
-  padding:0.5rem;
-  overflow-x:hidden;
-  overflow-y:auto;
-  color:#666;
-  max-height: 20rem;
-  p{
-    margin:0;
-    margin-top:1.0rem;
-    &:first-child{
-      margin-top:0;
     }
   }
 
-  input[type='email'],
-  input[type='text'],
-  input[type='password']{
-    display: block;
+  .modal-message {
+    .modal-window;
   }
 
-  label {
-    padding-left: .25em;
-    font-size:0.75rem;
-    color:#888;
+  .modal-title{
+    .title-font();
   }
-}
+  @modal-input-border-color:#D8D8D8;
+  @modal-input-highlight-background:white;
 
-.modal-content.inspector{
-  input[type='email'],
-  input[type='text'],
-  input[type='password'],
-  textarea{
-    font-size: 1rem;
-    border: 1px solid @modal-input-border-color;
-    .body-font;
-    outline:none;
-    color:#888;
-    width: 100%;
-    padding: .5em;
+  .modal-content{
     background-color: white;
-    margin-bottom: 10px;
+    padding:0.5rem;
+    overflow-x:hidden;
+    overflow-y:auto;
+    color:#666;
+    max-height: 20rem;
+    p{
+      margin:0;
+      margin-top:1.0rem;
+      &:first-child{
+        margin-top:0;
+      }
+    }
 
-    &:focus {
-      color:#444;
-      border-color:#ABC;
-      box-shadow: inset 0 0 5px rgba(0,128,255,0.2);
+    input[type='email'],
+    input[type='text'],
+    input[type='password']{
+      display: block;
+    }
+
+    label {
+      padding-left: .25em;
+      font-size:0.75rem;
+      color:#888;
+    }
+  }
+
+  .modal-content.inspector{
+    input[type='email'],
+    input[type='text'],
+    input[type='password'],
+    textarea{
+      font-size: 1rem;
+      border: 1px solid @modal-input-border-color;
+      .body-font;
+      outline:none;
+      color:#888;
+      width: 100%;
+      padding: .5em;
       background-color: white;
+      margin-bottom: 10px;
+
+      &:focus {
+        color:#444;
+        border-color:#ABC;
+        box-shadow: inset 0 0 5px rgba(0,128,255,0.2);
+        background-color: white;
+      }
     }
   }
 }
-
-
