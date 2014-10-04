@@ -7,6 +7,9 @@
 @folder-pane-width: 15rem;
 @conversation-pane-width: 20rem;
 
+// TODO: It's probably worth splitting this file apart into layout (just the
+// positioning bits) and styling (borders and colors and shit.)
+
 .watercooler-pane(@offset) {
   background-color: white;
   position: absolute;
@@ -21,7 +24,6 @@
   .watercooler-pane(@offset);
   right: @offset + @width;
 }
-
 
 .structural-bar {
   background-color: @stb-background;
