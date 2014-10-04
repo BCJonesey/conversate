@@ -1,5 +1,22 @@
 @import "structural/variables.less";
 
-.standard-border {
+.conversation-title-font() {
+  font-family: 'Oswald';
+}
+
+.standard-border() {
   border: @standard-border;
+}
+
+.standard-border-bottom() {
+  border-bottom: @standard-border;
+}
+
+@button-toolbar-height: 2.5rem;
+@button-toolbar-padding: 0.3rem 0.45rem;
+.button-toolbar() {
+  position: relative;
+  height: @button-toolbar-height;
+  padding: @button-toolbar-padding;
+  background-color: @standard-background-color;
 }
