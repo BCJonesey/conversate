@@ -1,9 +1,30 @@
 @import "structural/mixins.less";
 
+@conversation-title-editor-height: 2.5rem;
+@conversation-participant-editor-height: 1.5rem;
+
 .message-pane {
   .conversation-editor {
-    .button-toolbar();
+    .button-toolbar(@conversation-title-editor-height);
     .standard-border-bottom();
     .conversation-title-font();
+  }
+
+  .conversation-participants-editor {
+    .button-toolbar(@conversation-participant-editor-height);
+    .standard-border-bottom();
+
+    .conversation-participants-list {
+      .inline-list();
+      .small-light-font();
+
+      .conversation-participant:before {
+        content: ", ";
+      }
+
+      .conversation-participant:first-child:before {
+        content: "";
+      }
+    }
   }
 }

@@ -4,6 +4,11 @@
   font-family: 'Oswald';
 }
 
+.small-light-font() {
+  font-size: 0.8rem;
+  color: @light-font-color;
+}
+
 .standard-border() {
   border: @standard-border;
 }
@@ -14,9 +19,19 @@
 
 @button-toolbar-height: 2.5rem;
 @button-toolbar-padding: 0.3rem 0.45rem;
-.button-toolbar() {
+.button-toolbar(@height: @button-toolbar-height) {
   position: relative;
-  height: @button-toolbar-height;
+  height: @height;
   padding: @button-toolbar-padding;
   background-color: @standard-background-color;
+}
+
+.inline-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    display: inline-block;
+  }
 }
