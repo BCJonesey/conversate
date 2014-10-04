@@ -3,6 +3,6 @@
 FolderPane = React.createClass
   displayName: 'Folder Pane'
   render: ->
-    div {className: 'ui-section fld-container'}
+    div {className: 'folder-pane'}
 
 Structural.Components.FolderPane = FolderPane

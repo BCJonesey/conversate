@@ -1,0 +1,20 @@
+@import "structural/variables.less";
+
+.standard-border {
+  border: @standard-border;
+}
+
+.watercooler-pane(@offset) {
+  background-color: white;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: @offset;
+  right: 0;
+  .standard-border();
+}
+
+.watercooler-pane(@offset, @width) {
+  .watercooler-pane(@offset);
+  right: @offset + @width;
+}

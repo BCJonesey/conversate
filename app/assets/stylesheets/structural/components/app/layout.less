@@ -1,0 +1,49 @@
+@import "structural/mixins.less";
+@import "structural/variables.less";
+
+@stb-background: @primary-color;
+@stb-height: 2.5rem;
+
+@folder-pane-width: 15rem;
+@conversation-pane-width: 20rem;
+
+.watercooler-pane(@offset) {
+  background-color: white;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: @offset;
+  right: 0;
+  .standard-border();
+}
+
+.watercooler-pane(@offset, @width) {
+  .watercooler-pane(@offset);
+  right: @offset + @width;
+}
+
+
+.structural-bar {
+  background-color: @stb-background;
+  height: @stb-height;
+}
+
+.water-cooler {
+  position: absolute;
+  top: @stb-height;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.folder-pane {
+  .watercooler-pane(0, @folder-pane-width);
+}
+
+.conversation-pane {
+  .watercooler-pane(@folder-pane-width, @conversation-pane-width);
+}
+
+.message-pane {
+  .watercooler-pane(@folder-pane-width + @conversation-pane-width);
+}

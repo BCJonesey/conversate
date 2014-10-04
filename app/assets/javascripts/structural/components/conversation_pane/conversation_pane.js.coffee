@@ -3,6 +3,6 @@
 ConversationPane = React.createClass
   displayName: 'Conversation Pane'
   render: ->
-    div {className: 'ui-section cnv-container'}
+    div {className: 'conversation-pane'}
 
 Structural.Components.ConversationPane = ConversationPane

@@ -20,7 +20,7 @@ MessagesPane = React.createClass
     @setState messages: Messages.distilled()
 
   render: ->
-    div {className: 'ui-section act-container'},
+    div {className: 'message-pane'},
       Structural.Components.ConversationEditorBar(
         conversation: @state.conversation
       )
