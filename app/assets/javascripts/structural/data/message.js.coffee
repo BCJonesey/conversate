@@ -51,6 +51,11 @@ Message = {
                   operation.operation(distilled, message)
                   return distilled;
              [])
+
+  isUsersMessage: (message, user) ->
+    # Coercing to boolean here so that we don't return whatever user is when
+    # the and short-circuits.
+    !!(user and (message.user.id == user.id))
 }
 
 Structural.Data.Message = Message

@@ -1,4 +1,16 @@
 describe 'Data.Message', ->
+  describe 'isUsersMessage', ->
+    {isUsersMessage} = Structural.Data.Message
+
+    it 'returns false when the user doesn\'t exist', ->
+      expect(isUsersMessage({user: {id: 1}}, undefined)).toBe(false)
+
+    it 'returns true when the message\'s user id matches the user\'s', ->
+      expect(isUsersMessage({user: {id: 1}}, {id: 1})).toBe(true)
+
+    it 'returns false when the ids don\'t match', ->
+      expect(isUsersMessage({user: {id: 1}}, {id: 2})).toBe(false)
+
   describe 'latestTimestamp', ->
     {latestTimestamp} = Structural.Data.Message
 
