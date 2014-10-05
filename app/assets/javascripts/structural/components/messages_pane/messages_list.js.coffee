@@ -7,9 +7,13 @@ MessagesList = React.createClass
 
   render: ->
 
-    messages = _.map(@props.messages, ((message) ->
-      Structural.Components.Message(message: message, key: message.id)
-    ),this)
+    messages = _.map(@props.messages, (message) =>
+      Structural.Components.Message(
+        message: message,
+        currentUser: @props.currentUser
+        key: message.id
+      )
+    )
 
     div className: 'messages-list',
       messages

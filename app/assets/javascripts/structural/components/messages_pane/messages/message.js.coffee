@@ -16,6 +16,6 @@ Message = React.createClass
     else
       view = Structural.Components.UnknownMessage
 
-    view(message: @props.message)
+    view(message: @props.message, currentUser: @props.currentUser)
 
 Structural.Components.Message = Message

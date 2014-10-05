@@ -1,4 +1,5 @@
 {timestampToHumanizedTimestr, fiveMinutesInMilliseconds} = Structural.Data.Time
+{isUsersMessage} = Structural.Data.Message
 {div} = React.DOM
 
 MessageMessage = React.createClass
@@ -18,7 +19,11 @@ MessageMessage = React.createClass
           lastTimestamp = followOn.timestamp
         followOns.push div {className: 'message-text'}, followOn.text
 
-    div {className: 'message-message'},
+    klass = 'message-message'
+    if isUsersMessage(@props.message, @props.currentUser)
+      klass = "#{klass} current-users-message"
+
+    div {className: klass},
       div {className: 'message-info'},
         div {className: 'message-details'}, messageTimeStr
         div {className: 'message-sender'}, senderName

@@ -1,4 +1,4 @@
-{Messages, Conversations, ActiveConversation} = Structural.Stores
+{Messages, Conversations, ActiveConversation, CurrentUser} = Structural.Stores
 {div} = React.DOM
 
 MessagesPane = React.createClass
@@ -7,17 +7,22 @@ MessagesPane = React.createClass
     Conversations.listen('updateConversation')
     ActiveConversation.listen('updateConversation')
     Messages.listen('onMessagesChange')
+    CurrentUser.listen('updateUser')
   ]
 
   getInitialState: ->
     conversation: Conversations.byId(ActiveConversation.id())
     messages: Messages.distilled()
+    currentUser: CurrentUser.getUser()
 
   updateConversation: ->
     @setState({conversation: Conversations.byId(ActiveConversation.id())})
 
   onMessagesChange: ->
     @setState messages: Messages.distilled()
+
+  updateUser: ->
+    @setState({currentUser: CurrentUser.getUser()})
 
   render: ->
     div {className: 'message-pane'},
@@ -27,7 +32,10 @@ MessagesPane = React.createClass
       Structural.Components.ParticipantsEditorBar(
         conversation: @state.conversation
       )
-      Structural.Components.MessagesList(messages: @state.messages)
+      Structural.Components.MessagesList(
+        messages: @state.messages
+        currentUser: @state.currentUser
+      )
       Structural.Components.Compose()
 
 
