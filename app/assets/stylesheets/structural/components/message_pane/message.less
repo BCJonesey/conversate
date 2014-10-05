@@ -1,3 +1,4 @@
+@import "structural/variables.less";
 @import "structural/mixins.less";
 
 @breathing-room: 0.5rem;
@@ -7,15 +8,23 @@
   text-align: center;
 
   & + .message-message {
-    .standard-border-top()
+    margin-top: @breathing-room;
+  }
+
+  &:first-child {
+    margin-top: @breathing-room;
   }
 }
 
 .user-message() {
+  .standard-border-top();
+
   margin: @breathing-room;
+  margin-top: 0;
   padding: @breathing-room;
 
   white-space: pre-line;
+  word-break: break-word;
 
   .message-info {
     margin-bottom: @breathing-room;
@@ -42,4 +51,9 @@
 
 .message-message {
   .user-message();
+}
+
+.unknown-message {
+  .system-message();
+  color: @error-color;
 }
