@@ -3,7 +3,6 @@
 Compose = React.createClass
   displayName: 'Compose'
   render: ->
-    div {className: 'act-compose'},
-      Structural.Components.ShortFormCompose()
+    div {className: 'message-compose-bar'}
 
 Structural.Components.Compose = Compose

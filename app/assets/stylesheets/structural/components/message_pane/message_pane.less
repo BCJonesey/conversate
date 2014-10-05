@@ -2,6 +2,7 @@
 
 @conversation-title-editor-height: 2.5rem;
 @conversation-participant-editor-height: 1.5rem;
+@compose-height: 3.7rem;
 
 .message-pane {
   .conversation-editor {
@@ -26,5 +27,15 @@
         content: "";
       }
     }
+  }
+
+  .message-compose-bar {
+    .button-toolbar(@compose-height);
+    .standard-border-top();
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
   }
 }

@@ -11,7 +11,7 @@ MessagesList = React.createClass
       Structural.Components.Message(message: message, key: message.id)
     ),this)
 
-    div className: 'act-list ui-scrollable',
+    div className: 'messages-list',
       messages
 
 
