@@ -1,0 +1,45 @@
+@import "structural/mixins.less";
+
+@breathing-room: 0.5rem;
+
+.system-message() {
+  .small-light-font();
+  text-align: center;
+
+  & + .message-message {
+    .standard-border-top()
+  }
+}
+
+.user-message() {
+  margin: @breathing-room;
+  padding: @breathing-room;
+
+  white-space: pre-line;
+
+  .message-info {
+    margin-bottom: @breathing-room;
+
+    .message-sender {
+      font-weight: bold;
+    }
+
+    .message-details {
+      .small-light-font();
+      float: right;
+    }
+  }
+
+  .message-text {
+    margin-bottom: 1rem;
+  }
+}
+
+.retitle-message,
+.update-users-message {
+  .system-message();
+}
+
+.message-message {
+  .user-message();
+}

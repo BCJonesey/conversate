@@ -25,7 +25,7 @@ UpdateUsersMessage = React.createClass
       if addedNames.length > 0
         removedStr = "and #{removedStr}"
 
-    div({className: 'message update-users-message'}
+    div({className: 'update-users-message'}
       "#{name} #{addedStr} #{removedStr}")
 
 Structural.Components.UpdateUsersMessage = UpdateUsersMessage

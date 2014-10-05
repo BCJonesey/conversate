@@ -18,7 +18,7 @@ MessageMessage = React.createClass
           lastTimestamp = followOn.timestamp
         followOns.push div {className: 'message-text'}, followOn.text
 
-    div {className: 'message message-message'},
+    div {className: 'message-message'},
       div {className: 'message-info'},
         div {className: 'message-details'}, messageTimeStr
         div {className: 'message-sender'}, senderName
