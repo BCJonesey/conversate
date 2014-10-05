@@ -42,6 +42,15 @@
   .message-text {
     margin-bottom: 1rem;
   }
+
+  &.current-users-message {
+    .standard-border();
+    background-color: @standard-background-color;
+
+    &+ .message-message:not(.current-users-message) {
+      border: none;
+    }
+  }
 }
 
 .retitle-message,
