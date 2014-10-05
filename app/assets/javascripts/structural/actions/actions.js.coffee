@@ -20,3 +20,8 @@ Structural.Actions.UpdateMessagesList = new Structural.Flux.Action(
   'Update Messages List'
   (messages) -> {messages: messages}
 )
+
+Structural.Actions.UpdateCurrentUser = new Structural.Flux.Action(
+  'Update Current User'
+  (user) -> {user: user}
+)
