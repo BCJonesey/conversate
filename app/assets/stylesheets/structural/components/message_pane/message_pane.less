@@ -29,6 +29,16 @@
     }
   }
 
+  .messages-list {
+    position: absolute;
+    top: @conversation-title-editor-height + @conversation-participant-editor-height;
+    bottom: @compose-height;
+    left: 0;
+    right: 0;
+
+    overflow: auto;
+  }
+
   .message-compose-bar {
     .button-toolbar(@compose-height);
     .standard-border-top();
