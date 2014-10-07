@@ -4,6 +4,8 @@
 
 Structural.Actions = {}
 
+{buildMessage} = Structural.Data.Message
+
 Structural.Actions.StartApp = new Structural.Flux.Action(
   'Start App',
    -> {})
@@ -24,4 +26,13 @@ Structural.Actions.UpdateMessagesList = new Structural.Flux.Action(
 Structural.Actions.UpdateCurrentUser = new Structural.Flux.Action(
   'Update Current User'
   (user) -> {user: user}
+)
+
+lastMsgTempId = 1
+nextMsgTempId = -> "Temporary_Message_ID_#{lastMsgTempId++}"
+Structural.Actions.SendMessage = new Structural.Flux.Action(
+  'Send Message'
+  (user, text) ->
+    message: buildMessage(user, text)
+    temporaryId: nextMsgTempId()
 )

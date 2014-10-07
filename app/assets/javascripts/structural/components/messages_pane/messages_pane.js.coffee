@@ -36,7 +36,9 @@ MessagesPane = React.createClass
         messages: @state.messages
         currentUser: @state.currentUser
       )
-      Structural.Components.Compose()
+      Structural.Components.Compose(
+        currentUser: @state.currentUser
+      )
 
 
 Structural.Components.MessagesPane = MessagesPane

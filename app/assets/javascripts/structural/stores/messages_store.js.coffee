@@ -1,5 +1,5 @@
 {hashToSortedArray} = Structural.Data.Collection
-{distillRawMessages} = Structural.Data.Message
+{distillRawMessages, buildMessage} = Structural.Data.Message
 
 Messages = new Structural.Flux.Store
   displayName: 'Messages Store'
@@ -7,13 +7,23 @@ Messages = new Structural.Flux.Store
   initialize: ->
     @rawMessages = {}
 
-  dispatches: [{
-    action: Structural.Actions.UpdateMessagesList
-    callback: 'updateMessagesList'
-  }]
+  dispatches: [
+    {
+      action: Structural.Actions.UpdateMessagesList
+      callback: 'updateMessagesList'
+    }
+    {
+      action: Structural.Actions.SendMessage
+      callback: 'appendTemporaryMessage'
+    }
+  ]
 
   updateMessagesList: (payload) ->
     @rawMessages = payload.messages
+    @trigger()
+
+  appendTemporaryMessage: (payload) ->
+    @rawMessages[payload.temporaryId] = payload.message
     @trigger()
 
   chronologicalOrder: ->
