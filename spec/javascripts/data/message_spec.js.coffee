@@ -1,4 +1,42 @@
 describe 'Data.Message', ->
+  describe 'buildMessage', ->
+    {buildMessage} = Structural.Data.Message
+
+    beforeEach ->
+      rightNow = new Date(2014, 10, 7, 14, 15)
+      spyOn(window, 'Date').andReturn(rightNow)
+      @rightNowTimestamp = rightNow.valueOf()
+
+    it 'builds a message with default type', ->
+      expected =
+        type: 'message'
+        user:
+          id: 10
+          email: 'alice@example.com'
+        text: 'Testing testing'
+        timestamp: @rightNowTimestamp
+
+      user =
+        id: 10
+        email: 'alice@example.com'
+
+      expect(buildMessage(user, 'Testing testing')).toEqual(expected)
+
+    it 'builds a message with the supplied type', ->
+      expected =
+        type: 'email_message'
+        user:
+          id: 20
+          email: 'bob@example.com'
+        text: 'Hey everyone'
+        timestamp: @rightNowTimestamp
+
+      user =
+        id: 20
+        email: 'bob@example.com'
+
+      expect(buildMessage(user, 'Hey everyone', 'email_message')).toEqual(expected)
+
   describe 'isUsersMessage', ->
     {isUsersMessage} = Structural.Data.Message
 

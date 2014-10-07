@@ -56,6 +56,15 @@ Message = {
     # Coercing to boolean here so that we don't return whatever user is when
     # the and short-circuits.
     !!(user and (message.user.id == user.id))
+
+  buildMessage: (user, text, type) ->
+    type = type || 'message'
+    return {
+      type: type
+      user: user
+      text: text
+      timestamp: (new Date()).valueOf()
+    }
 }
 
 Structural.Data.Message = Message
