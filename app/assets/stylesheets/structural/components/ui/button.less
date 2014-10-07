@@ -1,0 +1,35 @@
+@import "structural/variables.less";
+
+@button-height: 1.7rem;
+@button-padding: 0.1rem 0.6rem;
+@button-margin: 0 0.25rem;
+@button-shadow-size: 0.2rem;
+@button-click-travel: 1px;
+
+@standard-button-background: #e0e0e0;
+@standard-button-border: #aaaaaa;
+@standard-button-hover-background: #D8E8F8;
+
+.button {
+  display: inline-block;
+  height: @button-height;
+  padding: @button-padding;
+  margin: @button-margin;
+  text-align: center;
+  &:active {
+    box-shadow: none;
+    position: relative;
+    top: @button-click-travel;
+  }
+
+  background-color: @standard-button-background;
+  border: 1px solid @standard-button-border;
+  box-shadow: 0 @button-shadow-size @button-shadow-size -@button-shadow-size rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  &:hover,
+  &:focus {
+    background-color: @standard-button-hover-background;
+  }
+
+  cursor: pointer;
+}
