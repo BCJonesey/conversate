@@ -9,8 +9,14 @@
 @standard-button-background: #e0e0e0;
 @standard-button-border: #aaaaaa;
 @standard-button-hover-background: #D8E8F8;
+@standard-button-text-color: inherit;
 
-.button {
+@primary-button-background: @primary-color;
+@primary-button-border: darken(@primary-button-background, 10%);
+@primary-button-hover-background: lighten(@primary-button-background, 10%);
+@primary-button-text-color: white;
+
+.button-style(@background, @hover-background, @border, @text-color) {
   display: inline-block;
   height: @button-height;
   padding: @button-padding;
@@ -22,14 +28,23 @@
     top: @button-click-travel;
   }
 
-  background-color: @standard-button-background;
-  border: 1px solid @standard-button-border;
+  background-color: @background;
+  border: 1px solid @border;
   box-shadow: 0 @button-shadow-size @button-shadow-size -@button-shadow-size rgba(0, 0, 0, 0.2);
   border-radius: 2px;
+  color: @text-color;
   &:hover,
   &:focus {
-    background-color: @standard-button-hover-background;
+    background-color: @hover-background;
   }
 
   cursor: pointer;
+}
+
+.button {
+  .button-style(@standard-button-background, @standard-button-hover-background, @standard-button-border, @standard-button-text-color);
+}
+
+.button-primary {
+  .button-style(@primary-button-background, @primary-button-hover-background, @primary-button-border, @primary-button-text-color);
 }

@@ -3,7 +3,8 @@
 Button = React.createClass
   displayName: 'Button'
   render: ->
-    a {className: 'button', onClick: @onClick},
+    klass = @props.className || 'button'
+    a {className: klass, onClick: @onClick},
       @props.children
 
   onClick: (e) ->
