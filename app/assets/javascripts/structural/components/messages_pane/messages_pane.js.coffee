@@ -38,6 +38,7 @@ MessagesPane = React.createClass
       )
       Structural.Components.Compose(
         currentUser: @state.currentUser
+        conversation: @state.conversation
       )
 
 

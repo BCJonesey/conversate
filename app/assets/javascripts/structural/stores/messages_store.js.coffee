@@ -16,6 +16,10 @@ Messages = new Structural.Flux.Store
       action: Structural.Actions.SendMessage
       callback: 'appendTemporaryMessage'
     }
+    {
+      action: Structural.Actions.SendMessageSuccess
+      callback: 'replaceTemporaryMessage'
+    }
   ]
 
   updateMessagesList: (payload) ->
@@ -24,6 +28,11 @@ Messages = new Structural.Flux.Store
 
   appendTemporaryMessage: (payload) ->
     @rawMessages[payload.temporaryId] = payload.message
+    @trigger()
+
+  replaceTemporaryMessage: (payload) ->
+    @rawMessages[payload.message.id] = payload.message
+    delete @rawMessages[payload.temporaryId]
     @trigger()
 
   chronologicalOrder: ->

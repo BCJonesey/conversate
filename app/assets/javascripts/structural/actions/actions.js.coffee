@@ -32,7 +32,21 @@ lastMsgTempId = 1
 nextMsgTempId = -> "Temporary_Message_ID_#{lastMsgTempId++}"
 Structural.Actions.SendMessage = new Structural.Flux.Action(
   'Send Message'
-  (user, text) ->
+  (user, text, conversation) ->
     message: buildMessage(user, text)
     temporaryId: nextMsgTempId()
+    conversation: conversation
+)
+
+Structural.Actions.SendMessageSuccess = new Structural.Flux.Action(
+  'Send Message Success'
+  (temporaryId, message) ->
+    temporaryId: temporaryId,
+    message: message
+)
+
+Structural.Actions.SendMessageFailed = new Structural.Flux.Action(
+  'Send Messaged Failed'
+  (temporaryId) ->
+    temporaryId: temporaryId
 )

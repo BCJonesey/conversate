@@ -14,3 +14,5 @@ BootstrapData = new Structural.Flux.SideEffect
     Structural.Actions.UpdateActiveConversation(activeConversationId)
     Structural.Actions.UpdateMessagesList(messages)
     Structural.Actions.UpdateCurrentUser(bootstrap.user)
+
+Structural.SideEffects.BootstrapData = BootstrapData
