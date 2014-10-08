@@ -11,7 +11,6 @@ Http = {
     xhr.responseType = 'json'
     xhr.setRequestHeader('Accept', 'application/json, text/javascript, */*; q=0.01')
     xhr.setRequestHeader('Content-Type', 'application/json')
-    xhr.setRequestHeader('Content-Length', requestBody.length)
     xhr.setRequestHeader('X-CSRF-Token', authenticityToken)
 
     xhr.onreadystatechange = (xhrEvent) ->
