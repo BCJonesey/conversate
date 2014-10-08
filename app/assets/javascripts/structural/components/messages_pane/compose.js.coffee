@@ -6,9 +6,22 @@ Compose = React.createClass
   getInitialState: ->
     text: ''
   render: ->
+    if @state.text == ''
+      action = undefined
+    else
+      action = SendMessage
+
     div {className: 'message-compose-bar'},
-      textarea {className: 'message-text-input', value: @state.text, onChange: @setText}
-      Structural.Components.PrimaryButton {action: SendMessage, actionArgs: [@props.currentUser, @state.text, @props.conversation]}, "Send"
+      textarea {
+        className: 'message-text-input'
+        value: @state.text
+        onChange: @setText
+      }
+      Structural.Components.PrimaryButton {
+        action: action
+        actionArgs: [@props.currentUser, @state.text, @props.conversation]
+      }, "Send"
+
   setText: (event) ->
     @setState
       text: event.target.value
