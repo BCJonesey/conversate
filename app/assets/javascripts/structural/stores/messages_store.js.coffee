@@ -23,7 +23,9 @@ Messages = new Structural.Flux.Store
   ]
 
   updateMessagesList: (payload) ->
-    @rawMessages = payload.messages
+    # Assign here instead of clobbering so that we don't lose track of
+    # temporary messages.
+    _.assign(@rawMessages, payload.messages)
     @trigger()
 
   appendTemporaryMessage: (payload) ->
