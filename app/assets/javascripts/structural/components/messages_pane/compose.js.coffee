@@ -1,6 +1,8 @@
 {SendMessage} = Structural.Actions
 {div, textarea} = React.DOM
 
+endsWithNewline = /\n$/
+
 Compose = React.createClass
   displayName: 'Compose'
   getInitialState: ->
@@ -23,7 +25,12 @@ Compose = React.createClass
       }, "Send"
 
   setText: (event) ->
-    @setState
-      text: event.target.value
+    value = event.target.value
+    if endsWithNewline.test(value)
+      text = value.substr(0, value.length - 1)
+      SendMessage(@props.currentUser, text, @props.conversation)
+    else
+      @setState
+        text: value
 
 Structural.Components.Compose = Compose
