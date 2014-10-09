@@ -10,6 +10,9 @@ Button = React.createClass
   onClick: (e) ->
     e.preventDefault()
 
+    if @props.onClick
+      @props.onClick(e)
+
     if @props.action
       args = @props.actionArgs || []
       @props.action.apply(null, args)

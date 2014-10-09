@@ -20,17 +20,18 @@ Compose = React.createClass
         onChange: @setText
       }
       Structural.Components.PrimaryButton {
-        action: action
-        actionArgs: [@props.currentUser, @state.text, @props.conversation]
+        onClick: @sendMessage
       }, "Send"
 
   setText: (event) ->
     value = event.target.value
     if endsWithNewline.test(value)
-      text = value.substr(0, value.length - 1)
-      SendMessage(@props.currentUser, text, @props.conversation)
+      @sendMessage()
     else
-      @setState
-        text: value
+      @setState(text: value)
+
+  sendMessage: ->
+    SendMessage(@props.currentUser, @state.text, @props.conversation)
+    @setState(text: '')
 
 Structural.Components.Compose = Compose
