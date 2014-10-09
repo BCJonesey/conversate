@@ -1,37 +1,36 @@
 {SendMessage} = Structural.Actions
 {div, textarea} = React.DOM
 
-endsWithNewline = /\n$/
-
 Compose = React.createClass
   displayName: 'Compose'
   getInitialState: ->
     text: ''
   render: ->
-    if @state.text == ''
-      action = undefined
-    else
-      action = SendMessage
-
     div {className: 'message-compose-bar'},
       textarea {
         className: 'message-text-input'
         value: @state.text
         onChange: @setText
+        onKeyDown: @sendOnEnter
       }
       Structural.Components.PrimaryButton {
         onClick: @sendMessage
       }, "Send"
 
   setText: (event) ->
-    value = event.target.value
-    if endsWithNewline.test(value)
+    # This function runs after sendOnEnter, and if we don't strip it out,
+    # we'll end up appending a stray newline to the input after sending
+    # a mesage
+    value = event.target.value.replace(/\r?\n/g, '')
+    @setState(text: value)
+
+  sendOnEnter: (event) ->
+    if event.key == 'Enter'
       @sendMessage()
-    else
-      @setState(text: value)
 
   sendMessage: ->
-    SendMessage(@props.currentUser, @state.text, @props.conversation)
-    @setState(text: '')
+    if @state.text != ''
+      SendMessage(@props.currentUser, @state.text, @props.conversation)
+      @setState(text: '')
 
 Structural.Components.Compose = Compose
