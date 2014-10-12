@@ -1,4 +1,4 @@
-SendMessage = new Structural.Flux.SideEffect
+SendMessage = new Hippodrome.SideEffect
   action: Structural.Actions.SendMessage
   effect: (payload) ->
     success = _.partial(Structural.Actions.SendMessageSuccess, payload.temporaryId)

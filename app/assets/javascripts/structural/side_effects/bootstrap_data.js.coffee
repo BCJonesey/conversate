@@ -1,6 +1,6 @@
 {arrayToIndexedHash} = Structural.Data.Collection
 
-BootstrapData = new Structural.Flux.SideEffect
+BootstrapData = new Hippodrome.SideEffect
   action: Structural.Actions.StartApp
   effect: (payload) ->
     # This is a much more convenient way to store conversations for components

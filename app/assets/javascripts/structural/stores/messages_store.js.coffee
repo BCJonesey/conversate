@@ -1,7 +1,7 @@
 {hashToSortedArray} = Structural.Data.Collection
 {distillRawMessages, buildMessage} = Structural.Data.Message
 
-Messages = new Structural.Flux.Store
+Messages = new Hippodrome.Store
   displayName: 'Messages Store'
 
   initialize: ->

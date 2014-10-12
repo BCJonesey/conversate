@@ -1,4 +1,4 @@
-Conversations = new Structural.Flux.Store
+Conversations = new Hippodrome.Store
   displayName: 'Conversations Store'
   initialize: ->
     @conversations = {}

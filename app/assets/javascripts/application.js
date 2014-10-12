@@ -18,6 +18,7 @@
 //
 //= require react
 //= require lodash
+//= require hippodrome
 //
 //= require ./structural/structural
 //= require_directory .

@@ -1,4 +1,4 @@
-CurrentUser = new Structural.Flux.Store
+CurrentUser = new Hippodrome.Store
   initialize: ->
     @user = null
 
