@@ -23,7 +23,7 @@ class Invite < ActiveRecord::Base
     invitee_email = params[:invitee_email]
 
     # Find the invited user if they exist
-    user = User.find_by_email(invitee_email)
+    user = User.find_by_email_insensitive(invitee_email)
 
     # Let's create a new user for this invite if we need to.
     if user.nil?

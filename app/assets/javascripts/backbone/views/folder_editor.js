@@ -104,7 +104,10 @@ Structural.Views.FolderEditor = Support.CompositeView.extend({
       }
       if (name.length === 0) { return; }
 
-      var participants = this._removableList.participants();
+      var participants;
+      if (this._removableList) {
+        participants = this._removableList.participants();
+      }
 
       this._folder.update(name, participants, email);
       this.$('.modal-background').addClass('hidden');

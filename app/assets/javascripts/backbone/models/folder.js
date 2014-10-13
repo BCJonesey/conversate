@@ -86,7 +86,11 @@ Structural.Models.Folder = Backbone.Model.extend({
       this.set('email', email);
     }
     this.set('name', name);
-    this.set('users', participants);
+
+    if (participants) {
+      this.set('users', participants);
+    }
+
     this.save();
   }
 });
