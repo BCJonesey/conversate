@@ -18,6 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   def try_device_login
-    @current_user = request.headers["X-Watercooler-User"] ? User.find(request.headers["X-Watercooler-User"]) : nil
+    device_api_key = request.headers['X-Watercooler-Device-Api-Key']
+    @current_user = device_api_key ? Device.find_by_device_api_key(device_api_key).user : nil
   end
 end
