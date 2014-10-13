@@ -12,10 +12,10 @@ class ApplicationController < ActionController::Base
 
   def require_login_api
     try_device_login unless logged_in?
-		if !logged_in?
-			render :text => "401 Not Logged In", :status => :unauthorized
-		end
-	end
+    if !logged_in?
+      render :text => "401 Not Logged In", :status => :unauthorized
+    end
+  end
 
   def try_device_login
     @current_user = request.headers["X-Watercooler-User"] ? User.find(request.headers["X-Watercooler-User"]) : nil
