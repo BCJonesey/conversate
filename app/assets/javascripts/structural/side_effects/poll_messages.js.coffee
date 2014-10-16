@@ -1,4 +1,5 @@
 {Conversations, ActiveConversation} = Structural.Stores
+{arrayToIndexedHash} = Structural.Data.Collection
 
 POLL_INTERVAL = 5 * 1000
 
@@ -7,7 +8,7 @@ PollMessages = new Hippodrome.SideEffect
   effect: (payload) ->
     doPoll = ->
       success = (data) ->
-        Structural.Actions.UpdateMessagesList(data)
+        Structural.Actions.UpdateMessagesList(arrayToIndexedHash(data))
         setTimeout(doPoll, POLL_INTERVAL)
       error = ->
         setTimeout(doPoll, POLL_INTERVAL)
