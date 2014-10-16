@@ -4,8 +4,6 @@ authenticityToken = document.getElementsByName('csrf-token')[0].content
 
 Http = {
   request: (method, url, data, success, error) ->
-    requestBody = JSON.stringify(data)
-
     xhr = new XMLHttpRequest()
     xhr.open(method, url)
     xhr.responseType = 'json'
