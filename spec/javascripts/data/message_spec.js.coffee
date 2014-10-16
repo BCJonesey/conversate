@@ -1,4 +1,29 @@
 describe 'Data.Message', ->
+  describe 'isUnread', ->
+    {isUnread} = Structural.Data.Message
+
+    it 'is unread when it\'s later', ->
+      msg =
+        text: 'Heyo'
+        timestamp: 12345
+
+      convo =
+        title: 'My Convo'
+        most_recent_viewed: 12333
+
+      expect(isUnread(msg, convo)).toBe(true)
+
+    it 'is not unread when it\'s earlier', ->
+      msg =
+        text: 'Heyo'
+        timestamp: 12333
+
+      convo =
+        title: 'My Convo'
+        most_recent_viewed: 12345
+
+      expect(isUnread(msg, convo)).toBe(false)
+
   describe 'buildMessage', ->
     {buildMessage} = Structural.Data.Message
 

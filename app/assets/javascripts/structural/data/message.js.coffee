@@ -22,6 +22,9 @@ Message = {
     message.user.id == prevMessage.user.id and
     (Message.latestTimestamp(message)- Message.latestTimestamp(prevMessage)) < Structural.Data.Time.fiveMinutesInMilliseconds
 
+  isUnread: (message, conversation) ->
+    message.timestamp > conversation.most_recent_viewed
+
   appendFollowOn: (message, followOn) ->
     if not message.followOns
       message.followOns = []
