@@ -16,7 +16,7 @@ MessageMessage = React.createClass
             }
           lastTimestamp = followOn.timestamp
 
-        followOns.push div {className: 'message-text'}, followOn.text
+        followOns.push Structural.Components.MessageText { message: followOn }
 
     klass = 'message-message'
     if isUsersMessage(@props.message, @props.currentUser)
@@ -29,7 +29,7 @@ MessageMessage = React.createClass
         alwaysIncludeHourMinute: true
         message: @props.message
       }
-      div {className: 'message-text'}, @props.message.text
+      Structural.Components.MessageText { message: @props.message }
       followOns
 
 Structural.Components.MessageMessage = MessageMessage
