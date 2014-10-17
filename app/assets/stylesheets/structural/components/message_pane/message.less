@@ -2,6 +2,8 @@
 @import "structural/mixins.less";
 
 @breathing-room: 0.5rem;
+@unread-indicator-color: #80a0c0;
+@unread-indicator-width: 2px;
 
 .system-message() {
   .small-light-font();
@@ -40,10 +42,11 @@
   }
 
   .message-text {
-    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    position: relative;
 
     &:last-child {
-      margin-bottom: 0;
+      padding-bottom: 0;
     }
   }
 
@@ -53,6 +56,18 @@
 
     &+ .message-message:not(.current-users-message) {
       border: none;
+    }
+  }
+
+  &:not(.current-users-message) {
+    .unread-message-text:before {
+      content: "";
+      position: absolute;
+      width: @unread-indicator-width;
+      top: 0;
+      bottom: 0;
+      left: -@breathing-room;
+      background-color: @unread-indicator-color;
     }
   }
 }
