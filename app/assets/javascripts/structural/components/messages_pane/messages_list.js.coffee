@@ -11,6 +11,7 @@ MessagesList = React.createClass
       Structural.Components.Message(
         message: message,
         currentUser: @props.currentUser
+        conversation: @props.conversation
         key: message.id
       )
     )

@@ -7,7 +7,7 @@ MessageMessage = React.createClass
     if @props.message.followOns
       followOns = []
       lastTimestamp = @props.message.timestamp
-      _.forEach @props.message.followOns, (followOn) ->
+      _.forEach @props.message.followOns, (followOn) =>
         if (followOn.timestamp - lastTimestamp) > fiveMinutesInMilliseconds
           followOns.push Structural.Components.MessageInfo {
               includeTime: true
@@ -16,7 +16,10 @@ MessageMessage = React.createClass
             }
           lastTimestamp = followOn.timestamp
 
-        followOns.push Structural.Components.MessageText { message: followOn }
+        followOns.push Structural.Components.MessageText {
+          message: followOn
+          conversation: @props.conversation
+        }
 
     klass = 'message-message'
     if isUsersMessage(@props.message, @props.currentUser)
@@ -29,7 +32,10 @@ MessageMessage = React.createClass
         alwaysIncludeHourMinute: true
         message: @props.message
       }
-      Structural.Components.MessageText { message: @props.message }
+      Structural.Components.MessageText {
+        message: @props.message
+        conversation: @props.conversation
+      }
       followOns
 
 Structural.Components.MessageMessage = MessageMessage
