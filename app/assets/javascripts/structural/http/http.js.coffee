@@ -24,6 +24,9 @@ Http = {
   post: (url, data, success, error) ->
     Http.request('post', url, data, success, error)
 
+  put: (url, data, success, error) ->
+    Http.request('put', url, data, success, error)
+
   get: (url, success, error) ->
     Http.request('get', url, undefined, success, error)
 }
