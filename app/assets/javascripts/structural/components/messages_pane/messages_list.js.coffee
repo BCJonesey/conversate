@@ -1,12 +1,11 @@
 {div} = React.DOM
 
 MessagesList = React.createClass
-  displayName: 'Action List'
+  displayName: 'Messages List'
 
   getDefaultProps: -> messages: []
 
   render: ->
-
     messages = _.map(@props.messages, (message) =>
       Structural.Components.Message(
         message: message,
