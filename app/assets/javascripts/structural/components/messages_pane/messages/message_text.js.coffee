@@ -9,6 +9,11 @@ MessageText = React.createClass
     if unread
       klass = "#{klass} unread-message-text"
 
-    div {className: klass}, @props.message.text
+    div {className: klass, onClick: @onClick}, @props.message.text
+
+  onClick: ->
+    unread = isUnread(@props.message, @props.conversation)
+    if unread
+      Structural.Actions.MarkRead(@props.message, @props.conversation)
 
 Structural.Components.MessageText = MessageText

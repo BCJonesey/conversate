@@ -50,3 +50,10 @@ Structural.Actions.SendMessageFailed = new Hippodrome.Action(
   (temporaryId) ->
     temporaryId: temporaryId
 )
+
+Structural.Actions.MarkRead = new Hippodrome.Action(
+  'Mark Read'
+  (message, conversation) ->
+    message: message
+    conversation: conversation
+)
