@@ -1,7 +1,20 @@
 {div} = React.DOM
 
+# In chromium at least, the scroll top plus node height is consistently one
+# pixel less than the scroll height.
+SCROLL_FUDGE = 5
+
 MessagesList = React.createClass
   displayName: 'Messages List'
+
+  componentWillUpdate: ->
+    dom = @getDOMNode()
+    scrollBottom = dom.scrollTop + dom.clientHeight + SCROLL_FUDGE
+    @pinned = scrollBottom >= dom.scrollHeight
+  componentDidUpdate: ->
+    if @pinned
+      dom = @getDOMNode()
+      dom.scrollTop = dom.scrollHeight
 
   getDefaultProps: -> messages: []
 
