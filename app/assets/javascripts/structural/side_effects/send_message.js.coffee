@@ -5,4 +5,6 @@ SendMessage = new Hippodrome.SideEffect
     error = -> Structural.Actions.SendMessageFailed(payload.temporaryId)
     Structural.Api.Messages.newMessage(payload.message, payload.conversation, success, error)
 
+    Structural.Actions.MarkRead(payload.message, payload.conversation)
+
 Structural.SideEffects.SendMessage = SendMessage
