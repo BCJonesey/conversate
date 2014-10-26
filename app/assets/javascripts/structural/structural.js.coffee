@@ -4,7 +4,7 @@
 #= require ./data/data
 #= require ./actions/actions
 #= require ./stores/stores
-#= require ./side_effects/side_effects
+#= require ./side_effects/deferred_tasks
 #= require ./components/components
 #
 #= require_tree .
