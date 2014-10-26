@@ -16,12 +16,13 @@ Conversations = new Hippodrome.Store
   updateConversationList: (payload) ->
     @conversations = payload.conversations
     @trigger()
+
   updateMostRecentViewed: (payload) ->
     convo = @byId(payload.conversation.id)
     convo.most_recent_viewed = payload.message.timestamp
     @trigger()
 
-  byId: (id) ->
-    @conversations[id]
+  public:
+    byId: (id) -> @conversations[id]
 
 Structural.Stores.Conversations = Conversations

@@ -13,7 +13,7 @@ CurrentUser = new Hippodrome.Store
     @user = payload.user
     @trigger()
 
-  getUser: ->
-    @user
+  public:
+    getUser: -> @user
 
 Structural.Stores.CurrentUser = CurrentUser

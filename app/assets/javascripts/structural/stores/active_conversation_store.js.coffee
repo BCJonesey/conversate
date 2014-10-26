@@ -12,7 +12,7 @@ ActiveConversation = new Hippodrome.Store
     @activeConversationId = payload.activeConversationId
     @trigger()
 
-  id: ->
-    @activeConversationId
+  public:
+    id: -> @activeConversationId
 
 Structural.Stores.ActiveConversation = ActiveConversation

@@ -37,10 +37,11 @@ Messages = new Hippodrome.Store
     delete @rawMessages[payload.temporaryId]
     @trigger()
 
-  chronologicalOrder: ->
-    hashToSortedArray(@rawMessages, 'timestamp')
+  public:
+    chronologicalOrder: ->
+      hashToSortedArray(@rawMessages, 'timestamp')
 
-  distilled: ->
-    distillRawMessages(@chronologicalOrder())
+    distilled: ->
+      distillRawMessages(@chronologicalOrder())
 
 Structural.Stores.Messages = Messages
