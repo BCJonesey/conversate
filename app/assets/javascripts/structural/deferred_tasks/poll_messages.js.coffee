@@ -3,9 +3,9 @@
 
 POLL_INTERVAL = 5 * 1000
 
-PollMessages = new Hippodrome.SideEffect
+PollMessages = new Hippodrome.DeferredTask
   action: Structural.Actions.StartApp
-  effect: (payload) ->
+  task: (payload) ->
     doPoll = ->
       success = (data) ->
         Structural.Actions.UpdateMessagesList(arrayToIndexedHash(data))
@@ -17,3 +17,5 @@ PollMessages = new Hippodrome.SideEffect
       Structural.Api.Messages.index(activeConversation, success, error)
 
     setTimeout(doPoll, POLL_INTERVAL)
+
+Structural.Tasks.PollMessages = PollMessages

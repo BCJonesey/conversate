@@ -1,8 +1,8 @@
 {arrayToIndexedHash} = Structural.Data.Collection
 
-BootstrapData = new Hippodrome.SideEffect
+BootstrapData = new Hippodrome.DeferredTask
   action: Structural.Actions.StartApp
-  effect: (payload) ->
+  task: (payload) ->
     # This is a much more convenient way to store conversations for components
     # to pull them out of the stores.  I think.
     conversations = arrayToIndexedHash(bootstrap.conversations)
@@ -15,4 +15,4 @@ BootstrapData = new Hippodrome.SideEffect
     Structural.Actions.UpdateMessagesList(messages)
     Structural.Actions.UpdateCurrentUser(bootstrap.user)
 
-Structural.SideEffects.BootstrapData = BootstrapData
+Structural.Tasks.BootstrapData = BootstrapData

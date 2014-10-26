@@ -1,9 +1,9 @@
 {updateMostRecentViewed} = Structural.Api.Conversations
 {Conversations, CurrentUser} = Structural.Stores
 
-MarkRead = new Hippodrome.SideEffect
+MarkRead = new Hippodrome.DeferredTask
   action: Structural.Actions.MarkRead
-  effect: (payload) ->
+  task: (payload) ->
     convo = Conversations.byId(payload.conversation.id)
     user = CurrentUser.getUser()
 
@@ -13,4 +13,4 @@ MarkRead = new Hippodrome.SideEffect
     error = ->
     updateMostRecentViewed(convo, user, success, error)
 
-Structural.SideEffects.MarkRead = MarkRead
+Structural.Tasks.MarkRead = MarkRead
