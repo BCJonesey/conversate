@@ -3,6 +3,7 @@
 {div} = React.DOM
 
 MessageMessage = React.createClass
+  displayName: 'Message Message Message'
   render: ->
     if @props.message.followOns
       followOns = []
