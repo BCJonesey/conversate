@@ -1,0 +1,11 @@
+@import "structural/variables.less";
+@import "structural/mixins.less";
+
+@conversation-actions-height: @standard-toolbar-height;
+
+.conversation-pane {
+  .conversation-actions {
+    .button-toolbar(@conversation-actions-height);
+    .standard-border-bottom();
+  }
+}
