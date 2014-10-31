@@ -2,10 +2,17 @@
 @import "structural/mixins.less";
 
 @conversation-actions-height: @standard-toolbar-height;
+@list-section-title-height: @small-toolbar-height;
 
 .conversation-pane {
   .conversation-actions {
     .button-toolbar(@conversation-actions-height);
     .standard-border-bottom();
+  }
+
+  .conversation-list-section-title {
+    .button-toolbar(@list-section-title-height);
+    .standard-border-bottom();
+    .small-light-font();
   }
 }
