@@ -39,6 +39,7 @@
         <tr>
           <td>Email</td>
           <td></td>
+          <td></td>
         </tr>
       </thead>
       <tbody>
@@ -48,6 +49,11 @@
             <td>
               <%= form_tag promotion_path(signup.id) do %>
                 <%= submit_tag 'Promote', class: 'btn-primary' %>
+              <% end %>
+            </td>
+            <td>
+              <%= form_tag remove_from_beta_path(signup.id) do %>
+                <%= submit_tag 'Remove', class: 'btn' %>
               <% end %>
             </td>
           </tr>
