@@ -1,3 +1,5 @@
+{hashToSortedArray} = Structural.Data.Collection
+
 Conversations = new Hippodrome.Store
   displayName: 'Conversations Store'
   initialize: ->
@@ -24,5 +26,6 @@ Conversations = new Hippodrome.Store
 
   public:
     byId: (id) -> @conversations[id]
+    chronologicalOrder: -> hashToSortedArray(@conversations, 'most_recent_event')
 
 Structural.Stores.Conversations = Conversations

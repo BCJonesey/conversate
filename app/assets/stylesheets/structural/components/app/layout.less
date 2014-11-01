@@ -17,12 +17,13 @@
   bottom: 0;
   left: @offset;
   right: 0;
-  .standard-border();
+  .standard-border-right();
 }
 
 .watercooler-pane(@offset, @width) {
   .watercooler-pane(@offset);
-  right: @offset + @width;
+  right: auto;
+  width: @width;
 }
 
 .structural-bar {
