@@ -15,6 +15,10 @@ class HomeController < ApplicationController
         render 'structural/show' and return
       end
     end
+
+    binding.pry
+
+    @referrer = request.referrer
     render layout: "application_rails"
   end
 
