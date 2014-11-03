@@ -20,4 +20,13 @@ module AdminHelper
     sentence = name.to_s.gsub('_', ' ')
     capitalize ? sentence.capitalize : sentence
   end
+
+  def referrers_with_counts
+    referrers = {}
+    referrers.default = 0
+    BetaSignup.all.each do |signup|
+      referrers[signup.referrer] += 1
+    end
+    referrers
+  end
 end

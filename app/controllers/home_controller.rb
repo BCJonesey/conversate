@@ -15,11 +15,13 @@ class HomeController < ApplicationController
         render 'structural/show' and return
       end
     end
+
+    @referrer = params[:refer] ? params[:refer] : request.referrer
     render layout: "application_rails"
   end
 
   def beta_signup
-    signup = BetaSignup.new(email: params[:email])
+    signup = BetaSignup.new(email: params[:email], referrer: params[:referrer])
     success = signup.save
     flash[:signed_up] = success
 

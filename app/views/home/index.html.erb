@@ -39,7 +39,7 @@
       <div class='title'>Water Cooler</div>
       <div class='sub-title'>Group discussions, hassle-free</div>
       <div class='jumbo-signup-box'>
-        <%= render 'signup_form' %>
+        <%= render partial: 'signup_form', locals: {referrer: @referrer} %>
       </div>
     </div>
   </div>
@@ -145,7 +145,7 @@
   <div class='section outer'>
     <div class='section inner'>
 
-      <%= render 'signup_form' %>
+      <%= render partial: 'signup_form', locals: {referrer: @referrer} %>
     </div>
   </div>
 </div>
