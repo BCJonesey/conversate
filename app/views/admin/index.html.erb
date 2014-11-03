@@ -102,15 +102,8 @@
         </tr>
       </thead>
       <tbody>
-        <% all_database_models.each do |model| %>
-          <tr>
-            <td><%= model.name %></td>
-            <td><%= model.count %></td>
-          </tr>
-        <% end %>
         <tr>
-          <td>Total</td>
-          <td><%= all_database_models.collect {|m| m.count }.sum %></td>
+          <td>Table temporarily removed for perf reasons.</td>
         </tr>
       </tbody>
     </table>
@@ -131,13 +124,9 @@
         </tr>
       </thead>
       <tbody>
-        <% failed_health_tests.each do |test| %>
-          <tr>
-            <td><%= test[:model].debug_s %></td>
-            <td><%= test_s(test[:test]) %></td>
-            <td><%= test[:notes] %></td>
-          </tr>
-        <% end %>
+        <tr>
+          <td>Table temporarily removed for perf reasons</td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -155,11 +144,9 @@
         </tr>
       </thead>
       <tbody>
-        <% health_tests.each do |test| %>
-          <tr>
-            <td><%= test_s(test, true) %></td>
-          </tr>
-        <% end %>
+        <tr>
+          <td>Table temporarily removed for perf reasons</td>
+        </tr>
       </tbody>
   </div>
 </div>
