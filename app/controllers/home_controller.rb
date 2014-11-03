@@ -16,8 +16,6 @@ class HomeController < ApplicationController
       end
     end
 
-    binding.pry
-
     @referrer = request.referrer
     render layout: "application_rails"
   end
