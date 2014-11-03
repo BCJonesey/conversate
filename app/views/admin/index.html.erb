@@ -38,6 +38,7 @@
       <thead>
         <tr>
           <td>Email</td>
+          <td>Referrer</td>
           <td></td>
           <td></td>
         </tr>
@@ -46,6 +47,7 @@
         <% BetaSignup.all.each do |signup| %>
           <tr>
             <td><%= signup.email %></td>
+            <td><%= signup.referrer %></td>
             <td>
               <%= form_tag promotion_path(signup.id) do %>
                 <%= submit_tag 'Promote', class: 'btn-primary' %>

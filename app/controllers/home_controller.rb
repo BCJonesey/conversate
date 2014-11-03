@@ -21,7 +21,7 @@ class HomeController < ApplicationController
   end
 
   def beta_signup
-    signup = BetaSignup.new(email: params[:email])
+    signup = BetaSignup.new(email: params[:email], referrer: params[:referrer])
     success = signup.save
     flash[:signed_up] = success
 
