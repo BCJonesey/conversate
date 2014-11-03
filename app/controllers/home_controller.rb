@@ -16,7 +16,7 @@ class HomeController < ApplicationController
       end
     end
 
-    @referrer = request.referrer
+    @referrer = params[:refer] ? params[:refer] : request.referrer
     render layout: "application_rails"
   end
 
