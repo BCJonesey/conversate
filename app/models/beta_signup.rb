@@ -1,5 +1,5 @@
 class BetaSignup < ActiveRecord::Base
-  attr_accessible :email
+  attr_accessible :email, :referrer
 
   def create_promoted_user
     password = garbage_password

@@ -10,6 +10,7 @@ Conversate::Application.routes.draw do
 
   get 'admin' => 'admin#index', :as => 'admin'
   post 'admin/promote/:id' => 'admin#promote', :as => 'promotion'
+  post 'admin/remove_from_beta/:id' => 'admin#remove_from_beta', :as => 'remove_from_beta'
   resource :users, :only => [:update]
   resource :session, :only => [:create]
   get 'session/logout' => 'sessions#destroy', :as => 'destroy_sessions'
