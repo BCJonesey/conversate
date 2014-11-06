@@ -5,8 +5,12 @@ ConversationListSection = React.createClass
   render: ->
     {Conversation} = Structural.Components
 
-    convos = _.map(@props.conversations,
-                  (c) -> Conversation({conversation: c, key: c.id}))
+    makeConversation = (c) =>
+      Conversation({
+        conversation: c
+        activeConversation: @props.activeConversation
+        key: c.id})
+    convos = _.map(@props.conversations, makeConversation)
 
     div {className: 'conversation-list-section'},
       div({className: 'conversation-list-section-title'}, @props.title),

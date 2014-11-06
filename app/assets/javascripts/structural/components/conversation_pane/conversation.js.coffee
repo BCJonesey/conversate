@@ -8,7 +8,11 @@ Conversation = React.createClass
 
     timestr = timestampToHumanizedTimestr(@props.conversation.most_recent_event)
 
-    div {className: 'conversation'},
+    classes = ['conversation']
+    if @props.conversation.id == @props.activeConversation
+      classes.push('active-conversation')
+
+    div {className: classes.join(' ')},
       div({className: 'conversation-title'}, @props.conversation.title),
       InlineParticipantList({
         participants: @props.conversation.participants,

@@ -21,9 +21,21 @@ ConversationList = React.createClass
     sharedConvos = _.filter(@props.conversations, inSharedSection)
 
     div {className: 'conversation-list'},
-      Section({title: 'Pinned Conversations', conversations: pinnedConvos})
-      Section({title: 'My Conversations', conversations: myConvos})
-      Section({title: 'Shared Conversations', conversations: sharedConvos})
-      Section({title: 'Archive', conversations: archivedConvos})
+      Section({
+        title: 'Pinned Conversations'
+        conversations: pinnedConvos
+        activeConversation: @props.activeConversation})
+      Section({
+        title: 'My Conversations'
+        conversations: myConvos
+        activeConversation: @props.activeConversation})
+      Section({
+        title: 'Shared Conversations'
+        conversations: sharedConvos
+        activeConversation: @props.activeConversation})
+      Section({
+        title: 'Archive'
+        conversations: archivedConvos
+        activeConversation: @props.activeConversation})
 
 Structural.Components.ConversationList = ConversationList
