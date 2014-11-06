@@ -8,7 +8,7 @@ EmptySectionMessage = React.createClass
       # The default section is empty.  Saying "this folder has no conversations"
       # is probably wrong, and "what's a conversation" is the wrong question to
       # ask.  This is awkward and special-cased, but that's life.
-      message = ''
+      message = 'All the conversations here are shared, archived or pinned.'
       prompt = 'how do I start a conversation?'
     else
       message = "This folder doesn't have any #{@props.adjective} conversations."
