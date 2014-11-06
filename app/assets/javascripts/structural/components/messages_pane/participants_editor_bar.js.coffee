@@ -10,14 +10,16 @@ Participant = React.createClass
 ParticipantsEditorBar = React.createClass
   displayName: 'ParticipantsEditorBar'
   render: ->
+    {InlineParticipantList} = Structural.Components
+
     if @props.conversation
-      participants = _.map(@props.conversation.participants,
-                           (p) -> Participant({participant: p, key: p.id}))
+      participants = @props.conversation.participants
     else
       participants = []
 
     div {className: 'conversation-participants-editor'},
-      ul {className: 'conversation-participants-list'},
-        participants
+      InlineParticipantList({
+        participants: participants,
+        className: 'conversation-participants-list'})
 
 Structural.Components.ParticipantsEditorBar = ParticipantsEditorBar

@@ -1,0 +1,13 @@
+@import "structural/mixins.less";
+
+.inline-participant-list {
+  .inline-list();
+
+  .participant:before {
+    content: ", ";
+  }
+
+  .participant:first-child:before {
+    content: "";
+  }
+}
