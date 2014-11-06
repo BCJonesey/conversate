@@ -21,6 +21,30 @@
     .small-light-font();
   }
 
+  .empty-section-message {
+    .small-light-font();
+    .standard-border-bottom();
+    text-align: center;
+    font-style: italic;
+    padding: 1rem 0;
+
+    .prompt {
+      margin-top: 0.25rem;
+      color: @link-font-color;
+      cursor: pointer;
+
+      &:before {
+        content: "(";
+        color: @light-font-color;
+      }
+
+      &:after {
+        content: ")";
+        color: @light-font-color;
+      }
+    }
+  }
+
   .conversation {
     .standard-border-bottom();
     padding: 0.5rem;

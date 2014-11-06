@@ -23,18 +23,22 @@ ConversationList = React.createClass
     div {className: 'conversation-list'},
       Section({
         title: 'Pinned Conversations'
+        adjective: 'pinned'
         conversations: pinnedConvos
         activeConversation: @props.activeConversation})
       Section({
         title: 'My Conversations'
+        adjective: ''
         conversations: myConvos
         activeConversation: @props.activeConversation})
       Section({
         title: 'Shared Conversations'
+        adjective: 'shared'
         conversations: sharedConvos
         activeConversation: @props.activeConversation})
       Section({
         title: 'Archive'
+        adjective: 'archived'
         conversations: archivedConvos
         activeConversation: @props.activeConversation})
 
