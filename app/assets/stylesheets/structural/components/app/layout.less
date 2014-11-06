@@ -12,11 +12,8 @@
 
 .watercooler-pane(@offset) {
   background-color: white;
-  position: absolute;
-  top: 0;
-  bottom: 0;
+  .absolute-fill-y();
   left: @offset;
-  right: 0;
   .standard-border-right();
 }
 

@@ -31,12 +31,7 @@
   }
 
   .messages-list {
-    position: absolute;
-    top: @conversation-title-editor-height + @conversation-participant-editor-height;
-    bottom: @compose-height;
-    left: 0;
-    right: 0;
-
+    .absolute-fill-y(@top: @conversation-title-editor-height + @conversation-participant-editor-height, @bottom: @compose-height);
     overflow-y: scroll;
   }
 

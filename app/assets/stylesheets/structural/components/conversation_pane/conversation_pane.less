@@ -10,6 +10,11 @@
     .standard-border-bottom();
   }
 
+  .conversation-list {
+    .absolute-fill-y(@top: @conversation-actions-height);
+    overflow-y: scroll;
+  }
+
   .conversation-list-section-title {
     .button-toolbar(@list-section-title-height);
     .standard-border-bottom();

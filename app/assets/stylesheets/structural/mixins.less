@@ -34,7 +34,7 @@
   background-color: @standard-background-color;
 }
 
-.inline-list {
+.inline-list() {
   list-style-type: none;
   padding: 0;
   margin: 0;
@@ -42,4 +42,12 @@
   li {
     display: inline-block;
   }
+}
+
+.absolute-fill-y(@top: 0, @bottom: 0) {
+  position: absolute;
+  top: @top;
+  left: 0;
+  right: 0;
+  bottom: @bottom;
 }
