@@ -40,6 +40,7 @@ ConversationList = React.createClass
         title: 'Archive'
         adjective: 'archived'
         conversations: archivedConvos
-        activeConversation: @props.activeConversation})
+        activeConversation: @props.activeConversation
+        startCollapsed: true})
 
 Structural.Components.ConversationList = ConversationList

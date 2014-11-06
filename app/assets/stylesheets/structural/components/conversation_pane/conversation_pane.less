@@ -19,14 +19,19 @@
     .button-toolbar(@list-section-title-height);
     .standard-border-bottom();
     .small-light-font();
+    cursor: pointer;
   }
 
-  .empty-section-message {
+  .conversation-section-message() {
     .small-light-font();
     .standard-border-bottom();
     text-align: center;
     font-style: italic;
     padding: 1rem 0;
+  }
+
+  .empty-section-message {
+    .conversation-section-message();
 
     .prompt {
       margin-top: 0.25rem;
@@ -43,6 +48,11 @@
         color: @light-font-color;
       }
     }
+  }
+
+  .collapsed-section-message {
+    .conversation-section-message();
+    cursor: pointer;
   }
 
   .conversation {
