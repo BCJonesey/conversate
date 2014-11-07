@@ -24,6 +24,12 @@
   .messages-list {
     .absolute-fill-y(@top: @conversation-title-editor-height + @conversation-participant-editor-height, @bottom: @compose-height);
     overflow-y: scroll;
+
+    .loading-messages {
+      .loading-font();
+      text-align: center;
+      margin-top: 6rem;
+    }
   }
 
   .message-compose-bar {

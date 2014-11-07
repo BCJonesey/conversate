@@ -20,7 +20,11 @@ MessagesPane = React.createClass
     }
 
   updateConversation: ->
-    @setState(conversation: Conversations.byId(ActiveConversation.id()))
+    conversation = Conversations.byId(ActiveConversation.id())
+    @setState(
+      conversation: conversation
+      messages: Messages.distilled(conversation)
+    )
 
   onMessagesChange: ->
     @setState(messages: Messages.distilled(@state.conversation))

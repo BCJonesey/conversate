@@ -22,17 +22,19 @@ MessagesList = React.createClass
   getDefaultProps: -> messages: []
 
   render: ->
-    messages = _.map(@props.messages, (message) =>
-      Structural.Components.Message(
-        message: message,
-        currentUser: @props.currentUser
-        conversation: @props.conversation
-        key: message.id
-      )
-    )
+    if @props.messages.length == 0
+      contents = Structural.Components.LoadingMessages()
+    else
+      makeMessage = (message) =>
+        Structural.Components.Message(
+          message: message,
+          currentUser: @props.currentUser
+          conversation: @props.conversation
+          key: message.id
+        )
+      contents = _.map(@props.messages, makeMessage)
 
-    div className: 'messages-list',
-      messages
+    div className: 'messages-list', contents
 
 
 Structural.Components.MessagesList = MessagesList
