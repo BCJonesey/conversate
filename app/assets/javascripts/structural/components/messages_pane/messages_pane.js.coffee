@@ -11,18 +11,22 @@ MessagesPane = React.createClass
   ]
 
   getInitialState: ->
-    conversation: Conversations.byId(ActiveConversation.id())
-    messages: Messages.distilled()
-    currentUser: CurrentUser.getUser()
+    conversation = Conversations.byId(ActiveConversation.id())
+
+    return {
+      conversation: conversation
+      messages: Messages.distilled(conversation)
+      currentUser: CurrentUser.getUser()
+    }
 
   updateConversation: ->
-    @setState({conversation: Conversations.byId(ActiveConversation.id())})
+    @setState(conversation: Conversations.byId(ActiveConversation.id()))
 
   onMessagesChange: ->
-    @setState messages: Messages.distilled()
+    @setState(messages: Messages.distilled(@state.conversation))
 
   updateUser: ->
-    @setState({currentUser: CurrentUser.getUser()})
+    @setState(currentUser: CurrentUser.getUser())
 
   render: ->
     div {className: 'message-pane'},

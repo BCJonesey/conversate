@@ -12,7 +12,7 @@ BootstrapData = new Hippodrome.DeferredTask
 
     Structural.Actions.UpdateConversationList(conversations)
     Structural.Actions.UpdateActiveConversation(activeConversationId)
-    Structural.Actions.UpdateMessagesList(messages)
+    Structural.Actions.UpdateMessagesList(messages, bootstrap.conversation)
     Structural.Actions.UpdateCurrentUser(bootstrap.user)
 
 Structural.Tasks.BootstrapData = BootstrapData

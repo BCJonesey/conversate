@@ -5,7 +5,7 @@ Messages = new Hippodrome.Store
   displayName: 'Messages Store'
 
   initialize: ->
-    @rawMessages = {}
+    @rawMessagesByConversation = {}
 
   dispatches: [
     {
@@ -22,26 +22,41 @@ Messages = new Hippodrome.Store
     }
   ]
 
+  messagesForConversation: (conversation) ->
+    if not conversation
+      return {}
+
+    if not @rawMessagesByConversation[conversation.id]
+      @rawMessagesByConversation[conversation.id] = {}
+
+    @rawMessagesByConversation[conversation.id]
+
   updateMessagesList: (payload) ->
     # Assign here instead of clobbering so that we don't lose track of
     # temporary messages.
-    _.assign(@rawMessages, payload.messages)
+    _.assign(@messagesForConversation(payload.conversation),
+             payload.messages)
     @trigger()
 
   appendTemporaryMessage: (payload) ->
-    @rawMessages[payload.temporaryId] = payload.message
+    messages = @messagesForConversation(payload.conversation)
+    mesages[payload.temporaryId] = payload.message
     @trigger()
 
   replaceTemporaryMessage: (payload) ->
-    @rawMessages[payload.message.id] = payload.message
-    delete @rawMessages[payload.temporaryId]
+    messages = @messagesForConversation(payload.conversation)
+    messages[payload.message.id] = payload.message
+    delete messages[payload.temporaryId]
     @trigger()
 
   public:
-    chronologicalOrder: ->
-      hashToSortedArray(@rawMessages, 'timestamp')
+    chronologicalOrder: (conversation) ->
+      if not conversation
+        []
+      else
+        hashToSortedArray(@messagesForConversation(conversation), 'timestamp')
 
-    distilled: ->
-      distillRawMessages(@chronologicalOrder())
+    distilled: (conversation) ->
+      distillRawMessages(@chronologicalOrder(conversation))
 
 Structural.Stores.Messages = Messages

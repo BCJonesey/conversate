@@ -20,7 +20,9 @@ Structural.Actions.UpdateActiveConversation = new Hippodrome.Action(
 
 Structural.Actions.UpdateMessagesList = new Hippodrome.Action(
   'Update Messages List'
-  (messages) -> {messages: messages}
+  (messages, conversation) ->
+    messages: messages,
+    conversation: conversation
 )
 
 Structural.Actions.UpdateCurrentUser = new Hippodrome.Action(
@@ -40,15 +42,17 @@ Structural.Actions.SendMessage = new Hippodrome.Action(
 
 Structural.Actions.SendMessageSuccess = new Hippodrome.Action(
   'Send Message Success'
-  (temporaryId, message) ->
+  (temporaryId, message, conversation) ->
     temporaryId: temporaryId,
     message: message
+    conversation: conversation
 )
 
 Structural.Actions.SendMessageFailed = new Hippodrome.Action(
   'Send Messaged Failed'
-  (temporaryId) ->
+  (temporaryId, conversation) ->
     temporaryId: temporaryId
+    conversation: conversation
 )
 
 Structural.Actions.MarkRead = new Hippodrome.Action(
