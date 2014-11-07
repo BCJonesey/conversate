@@ -1,5 +1,5 @@
 {timestampToHumanizedTimestr} = Structural.Data.Time
-{div} = React.DOM
+{div, a} = React.DOM
 
 Conversation = React.createClass
   displayName: 'Conversation'
@@ -12,11 +12,14 @@ Conversation = React.createClass
     if @props.conversation.id == @props.activeConversation
       classes.push('active-conversation')
 
-    div {className: classes.join(' ')},
+    a {className: classes.join(' '), href: '#', onClick: @viewConversation},
       div({className: 'conversation-title'}, @props.conversation.title),
       InlineParticipantList({
         participants: @props.conversation.participants,
         className: 'conversation-participants'})
       div({className: 'conversation-time'}, timestr)
+
+  viewConversation: (event) ->
+    event.preventDefault()
 
 Structural.Components.Conversation = Conversation

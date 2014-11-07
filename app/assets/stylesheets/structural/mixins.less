@@ -2,6 +2,7 @@
 
 .conversation-title-font() {
   font-family: 'Oswald';
+  color: @standard-font-color;
 }
 
 .small-light-font() {
@@ -50,4 +51,14 @@
   left: 0;
   right: 0;
   bottom: @bottom;
+}
+
+.unstyled-anchor() {
+  color: @standard-font-color;
+  text-decoration: none;
+
+  &:hover, &:active, &:visited {
+    color: @standard-font-color;
+    text-decoration: none;
+  }
 }
