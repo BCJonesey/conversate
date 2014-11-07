@@ -1,4 +1,5 @@
 {timestampToHumanizedTimestr} = Structural.Data.Time
+{UpdateActiveConversation} = Structural.Actions
 {div, a} = React.DOM
 
 Conversation = React.createClass
@@ -21,5 +22,6 @@ Conversation = React.createClass
 
   viewConversation: (event) ->
     event.preventDefault()
+    UpdateActiveConversation(@props.conversation.id)
 
 Structural.Components.Conversation = Conversation
