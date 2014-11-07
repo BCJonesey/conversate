@@ -21,7 +21,8 @@ Conversation = React.createClass
       div({className: 'conversation-time'}, timestr)
 
   viewConversation: (event) ->
-    event.preventDefault()
-    UpdateActiveConversation(@props.conversation.id)
+    if event.button == 0 # Left Click
+      event.preventDefault()
+      UpdateActiveConversation(@props.conversation.id)
 
 Structural.Components.Conversation = Conversation
