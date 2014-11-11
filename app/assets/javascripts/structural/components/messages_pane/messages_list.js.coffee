@@ -7,9 +7,6 @@ SCROLL_FUDGE = 5
 MessagesList = React.createClass
   displayName: 'Messages List'
 
-  componentDidMount: ->
-    dom = @getDOMNode()
-    dom.scrollTop = dom.scrollHeight
   componentWillUpdate: ->
     dom = @getDOMNode()
     scrollBottom = dom.scrollTop + dom.offsetHeight + SCROLL_FUDGE
