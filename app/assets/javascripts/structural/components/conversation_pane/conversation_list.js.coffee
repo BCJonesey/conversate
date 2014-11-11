@@ -3,6 +3,26 @@
 
 ConversationList = React.createClass
   displayName: 'Conversation List'
+
+  componentDidUpdate: ->
+    dom = @getDOMNode()
+    # There should only ever be one active conversation.  If there's more than
+    # one, something's gone very wrong.
+    active = _.first(dom.getElementsByClassName('active-conversation'))
+
+    if not active
+      return
+
+    activeTop = active.offsetTop
+    activeBottom = activeTop + active.clientHeight
+    scrollTop = dom.scrollTop
+    scrollBottom = scrollTop + dom.clientHeight
+
+    if activeBottom >= scrollTop and activeTop <= scrollBottom
+      return
+
+    dom.scrollTop = Math.max(0, activeTop - (dom.clientHeight / 2))
+
   render: ->
     Section = Structural.Components.ConversationListSection
 
