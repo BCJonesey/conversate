@@ -40,7 +40,7 @@ Messages = new Hippodrome.Store
 
   appendTemporaryMessage: (payload) ->
     messages = @messagesForConversation(payload.conversation)
-    mesages[payload.temporaryId] = payload.message
+    messages[payload.temporaryId] = payload.message
     @trigger()
 
   replaceTemporaryMessage: (payload) ->
