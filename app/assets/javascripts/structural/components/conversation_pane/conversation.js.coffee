@@ -13,7 +13,9 @@ Conversation = React.createClass
     if @props.conversation.id == @props.activeConversation
       classes.push('active-conversation')
 
-    a {className: classes.join(' '), href: '#', onClick: @viewConversation},
+    url = Structural.UrlFactory.conversation(@props.conversation)
+
+    a {className: classes.join(' '), href: url, onClick: @viewConversation},
       div({className: 'conversation-title'}, @props.conversation.title),
       InlineParticipantList({
         participants: @props.conversation.participants,
