@@ -1,0 +1,11 @@
+@import "structural/variables.less";
+@import "structural/mixins.less";
+
+@folder-actions-height: @standard-toolbar-height;
+
+.folder-pane {
+  .folder-actions {
+    .button-toolbar(@folder-actions-height);
+    .standard-border-bottom();
+  }
+}
