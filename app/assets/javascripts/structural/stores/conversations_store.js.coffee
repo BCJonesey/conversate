@@ -3,7 +3,7 @@
 Conversations = new Hippodrome.Store
   displayName: 'Conversations Store'
   initialize: ->
-    @conversations = {}
+    @conversationsByFolder = {}
   dispatches: [
     {
       action: Structural.Actions.UpdateConversationList
@@ -15,18 +15,32 @@ Conversations = new Hippodrome.Store
     }
   ]
 
+  conversationsForFolder: (folder) ->
+    if not folder
+      return {}
+
+    if not @conversationsByFolder[folder.id]
+      @conversationsByFolder[folder.id] = {}
+
+    @conversationsByFolder[folder.id]
+
   updateConversationList: (payload) ->
-    @conversations = payload.conversations
+    # Assign instead of clobbering so that we can support temporary
+    # (i.e., newly-created) conversations later.
+    _.assign(@conversationsForFolder(payload.folder),
+             payload.conversations)
     @trigger()
 
   updateMostRecentViewed: (payload) ->
-    convo = @byId(payload.conversation.id)
+    convo = @byId(payload.folder, payload.conversation.id)
     convo.most_recent_viewed = payload.message.timestamp
     @trigger()
 
   public:
-    byId: (id) -> @conversations[id]
-    chronologicalOrder: ->
-      hashToSortedArray(@conversations, 'most_recent_event', Order.Descending)
+    byId: (folder, id) -> @conversationsForFolder(folder)[id]
+    chronologicalOrder: (folder) ->
+      hashToSortedArray(@conversationsForFolder(folder),
+                        'most_recent_event',
+                        Order.Descending)
 
 Structural.Stores.Conversations = Conversations

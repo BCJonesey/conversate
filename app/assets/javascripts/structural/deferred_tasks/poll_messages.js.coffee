@@ -1,4 +1,4 @@
-{Conversations, ActiveConversation} = Structural.Stores
+{Conversations, ActiveConversation, Folders, ActiveFolder} = Structural.Stores
 {arrayToIndexedHash} = Structural.Data.Collection
 
 POLL_INTERVAL = 5 * 1000
@@ -7,7 +7,12 @@ PollMessages = new Hippodrome.DeferredTask
   action: Structural.Actions.StartApp
   task: (payload) ->
     doPoll = ->
-      activeConversation = Conversations.byId(ActiveConversation.id())
+      activeFolder = Folders.byId(ActiveFolder.id())
+      activeConversation = Conversations.byId(activeFolder, ActiveConversation.id())
+
+      if not activeConversation
+        setTimeout(doPoll, POLL_INTERVAL)
+        return
 
       success = (data) ->
         Structural.Actions.UpdateMessagesList(arrayToIndexedHash(data), activeConversation)

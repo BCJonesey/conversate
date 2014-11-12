@@ -14,6 +14,6 @@ MessageText = React.createClass
   onClick: ->
     unread = isUnread(@props.message, @props.conversation)
     if unread
-      Structural.Actions.MarkRead(@props.message, @props.conversation)
+      Structural.Actions.MarkRead(@props.message, @props.conversation, @props.folder)
 
 Structural.Components.MessageText = MessageText

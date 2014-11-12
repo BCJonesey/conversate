@@ -11,6 +11,8 @@ UrlFactory = {
 
   Api: {
     _apiUrl: (suffix) -> "/api/v0#{suffix}"
+    folderConversations: (folder) ->
+      UrlFactory.Api._apiUrl("/folders/#{folder.id}/conversations")
     conversationMessages: (conversation) ->
       UrlFactory.Api._apiUrl("/conversations/#{conversation.id}/actions")
     conversationParticipants: (conversation, user) ->

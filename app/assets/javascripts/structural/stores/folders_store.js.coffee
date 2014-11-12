@@ -14,6 +14,8 @@ Folders = new Hippodrome.Store
     @trigger()
 
   public:
+    byId: (id) ->
+      @folders[id]
     asList: ->
       hashToSortedArray(@folders, 'id')
 

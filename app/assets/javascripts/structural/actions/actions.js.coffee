@@ -22,7 +22,10 @@ Structural.Actions.UpdateActiveFolder = new Hippodrome.Action(
 
 Structural.Actions.UpdateConversationList = new Hippodrome.Action(
   'Update Conversation List'
-  (conversations) -> {conversations: conversations})
+  (conversations, folder) ->
+    conversations: conversations
+    folder: folder
+)
 
 Structural.Actions.UpdateActiveConversation = new Hippodrome.Action(
   'Update Active Conversation'
@@ -67,7 +70,8 @@ Structural.Actions.SendMessageFailed = new Hippodrome.Action(
 
 Structural.Actions.MarkRead = new Hippodrome.Action(
   'Mark Read'
-  (message, conversation) ->
+  (message, conversation, folder) ->
     message: message
     conversation: conversation
+    folder: folder
 )

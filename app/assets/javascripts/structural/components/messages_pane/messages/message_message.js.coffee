@@ -36,6 +36,7 @@ MessageMessage = React.createClass
       Structural.Components.MessageText {
         message: @props.message
         conversation: @props.conversation
+        folder: @props.folder
       }
       followOns
 

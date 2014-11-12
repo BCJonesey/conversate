@@ -20,6 +20,7 @@ Message = React.createClass
       message: @props.message
       currentUser: @props.currentUser
       conversation: @props.conversation
+      folder: @props.folder
     }
 
 Structural.Components.Message = Message

@@ -27,6 +27,7 @@ MessagesList = React.createClass
           message: message,
           currentUser: @props.currentUser
           conversation: @props.conversation
+          folder: @props.folder
           key: message.id
         )
       contents = _.map(@props.messages, makeMessage)
