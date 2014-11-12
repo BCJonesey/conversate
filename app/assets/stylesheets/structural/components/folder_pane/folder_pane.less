@@ -27,8 +27,20 @@
       background-color: @active-background-color;
     }
 
-    .folder-icon {
+    .folder-icon, .folder-icon-shared {
+      width: 1.5rem;
       margin-right: 0.5rem;
+    }
+
+    .folder-icon-shared {
+      position: relative;
+
+      .shared-icon-plus {
+        position: absolute;
+        font-size: 0.5rem;
+        top: 0.5rem;
+        left: 0.75rem;
+      }
     }
 
     .folder-name {

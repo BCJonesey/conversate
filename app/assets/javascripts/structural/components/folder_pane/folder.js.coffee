@@ -3,7 +3,7 @@
 Folder = React.createClass
   displayName: 'Folder'
   render: ->
-    {Icon} = Structural.Components
+    {FolderIcon} = Structural.Components
 
     classes = ['folder']
     if @props.folder.id == @props.activeFolder
@@ -12,7 +12,7 @@ Folder = React.createClass
     url = Structural.UrlFactory.folder(@props.folder)
 
     a {className: classes.join(' '), href: url, onClick: @viewFolder},
-      Icon({name: 'folder-o', className: 'folder-icon'})
+      FolderIcon({folder: @props.folder})
       div({className: 'folder-name'}, @props.folder.name)
 
   viewFolder: (event) ->
