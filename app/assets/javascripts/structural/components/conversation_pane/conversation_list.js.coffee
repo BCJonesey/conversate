@@ -21,7 +21,7 @@ ConversationList = React.createClass
     if activeBottom >= scrollTop and activeTop <= scrollBottom
       return
 
-    dom.scrollTop = Math.max(0, activeTop - (dom.clientHeight / 2))
+    dom.scrollTop = activeTop - (dom.clientHeight / 2)
 
   render: ->
     {ConversationListSection, LoadingConversations} = Structural.Components
