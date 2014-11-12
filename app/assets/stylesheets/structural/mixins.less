@@ -58,12 +58,18 @@
   bottom: @bottom;
 }
 
-.unstyled-anchor() {
-  color: @standard-font-color;
+.unstyled-anchor(@color: @standard-font-color) {
+  color: @color;
   text-decoration: none;
 
   &:hover, &:active, &:visited {
-    color: @standard-font-color;
+    color: @color;
     text-decoration: none;
   }
+}
+
+.one-line-truncated() {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

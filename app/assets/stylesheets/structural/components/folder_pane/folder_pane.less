@@ -8,4 +8,26 @@
     .button-toolbar(@folder-actions-height);
     .standard-border-bottom();
   }
+
+  .folder-list {
+    .absolute-fill-y(@top: @folder-actions-height);
+    overflow-y: scroll;
+  }
+
+  .folder {
+    .unstyled-anchor(@light-font-color);
+    .one-line-truncated();
+    display: block;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    font-size: 1.1rem;
+
+    .folder-icon {
+      margin-right: 0.5rem;
+    }
+
+    .folder-name {
+      display: inline-block;
+    }
+  }
 }
