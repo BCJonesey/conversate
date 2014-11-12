@@ -19,7 +19,7 @@ MessagesList = React.createClass
   getDefaultProps: -> messages: []
 
   render: ->
-    if @props.messages.length == 0
+    if @props.loading
       contents = Structural.Components.LoadingMessages()
     else
       makeMessage = (message) =>

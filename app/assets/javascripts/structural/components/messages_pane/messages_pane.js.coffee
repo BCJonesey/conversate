@@ -1,5 +1,5 @@
 {Messages, Conversations, ActiveConversation, CurrentUser, Folders,
- ActiveFolder} = Structural.Stores
+ ActiveFolder, MessagesState} = Structural.Stores
 {div} = React.DOM
 
 MessagesPane = React.createClass
@@ -11,6 +11,7 @@ MessagesPane = React.createClass
     ActiveConversation.listen('updateConversation')
     Messages.listen('onMessagesChange')
     CurrentUser.listen('updateUser')
+    MessagesState.listen('updateMessagesState')
   ]
 
   getInitialState: ->
@@ -22,6 +23,7 @@ MessagesPane = React.createClass
       conversation: conversation
       messages: Messages.distilled(conversation)
       currentUser: CurrentUser.getUser()
+      loading: MessagesState.isLoading()
     }
 
   updateConversation: ->
@@ -32,12 +34,12 @@ MessagesPane = React.createClass
       conversation: conversation
       messages: Messages.distilled(conversation)
     )
-
   onMessagesChange: ->
     @setState(messages: Messages.distilled(@state.conversation))
-
   updateUser: ->
     @setState(currentUser: CurrentUser.getUser())
+  updateMessagesState: ->
+    @setState(loading: MessagesState.isLoading())
 
   render: ->
     div {className: 'message-pane'},
@@ -49,6 +51,7 @@ MessagesPane = React.createClass
       )
       Structural.Components.MessagesList(
         messages: @state.messages
+        loading: @state.loading
         currentUser: @state.currentUser
         conversation: @state.conversation
         folder: @state.folder
