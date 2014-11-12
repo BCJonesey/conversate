@@ -5,7 +5,10 @@ FolderList = React.createClass
   render: ->
     {Folder} = Structural.Components
 
-    folders = _.map(@props.folders, (f) -> Folder({folder: f, key: f.id}))
+    folders = _.map(@props.folders, (f) => Folder({
+      folder: f,
+      activeFolder: @props.activeFolder
+      key: f.id}))
 
     div {className: 'folder-list'}, folders
 

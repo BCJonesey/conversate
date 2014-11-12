@@ -5,7 +5,13 @@ Folder = React.createClass
   render: ->
     {Icon} = Structural.Components
 
-    a {className: 'folder', href: '#', onClick: @viewFolder},
+    classes = ['folder']
+    if @props.folder.id == @props.activeFolder
+      classes.push('active-folder')
+
+    url = Structural.UrlFactory.folder(@props.folder)
+
+    a {className: classes.join(' '), href: url, onClick: @viewFolder},
       Icon({name: 'folder-o', className: 'folder-icon'})
       div({className: 'folder-name'}, @props.folder.name)
 

@@ -15,6 +15,11 @@ Structural.Actions.UpdateFolderList = new Hippodrome.Action(
   (folders) -> {folders:folders}
 )
 
+Structural.Actions.UpdateActiveFolder = new Hippodrome.Action(
+  'Update Active Folder'
+  (activeFolderId) -> {activeFolderId: activeFolderId}
+)
+
 Structural.Actions.UpdateConversationList = new Hippodrome.Action(
   'Update Conversation List'
   (conversations) -> {conversations: conversations})

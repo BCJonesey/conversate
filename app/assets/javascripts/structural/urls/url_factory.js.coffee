@@ -4,6 +4,8 @@ slugify = (s) ->
                       .replace(/[^A-Za-z0-9-]/g, ''))
 
 UrlFactory = {
+  folder: (folder) ->
+    "/folder/#{slugify(folder.name)}/#{folder.id}"
   conversation: (conversation) ->
     "/conversation/#{slugify(conversation.title)}/#{conversation.id}"
 
