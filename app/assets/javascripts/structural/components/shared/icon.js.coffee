@@ -10,6 +10,9 @@ Icon = React.createClass
     if @props.inverse
       classes.push('fa-inverse')
 
+    if @props.spin
+      classes.push('fa-spin')
+
     className = _.compact(classes).join(' ')
     i {className: className}
 

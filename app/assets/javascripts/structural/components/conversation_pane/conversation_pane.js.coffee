@@ -1,5 +1,5 @@
 {Conversations, CurrentUser, ActiveConversation, Folders,
- ActiveFolder} = Structural.Stores
+ ActiveFolder, ConversationsState} = Structural.Stores
 {div} = React.DOM
 
 ConversationPane = React.createClass
@@ -10,6 +10,7 @@ ConversationPane = React.createClass
     ActiveConversation.listen('updateActiveConversation')
     Folders.listen('updateConversations')
     ActiveFolder.listen('updateConversations')
+    ConversationsState.listen('updateConversationsState')
   ]
 
   getInitialState: ->
@@ -18,6 +19,7 @@ ConversationPane = React.createClass
     conversations: Conversations.chronologicalOrder(folder)
     user: CurrentUser.getUser()
     activeConversation: ActiveConversation.id()
+    loading: ConversationsState.isLoading()
 
   updateConversations: ->
     folder = Folders.byId(ActiveFolder.id())
@@ -26,6 +28,8 @@ ConversationPane = React.createClass
     @setState(user: CurrentUser.getUser())
   updateActiveConversation: ->
     @setState(activeConversation: ActiveConversation.id())
+  updateConversationsState: ->
+    @setState(loading: ConversationsState.isLoading())
 
   render: ->
     {ConversationList} = Structural.Components
@@ -34,6 +38,7 @@ ConversationPane = React.createClass
       Structural.Components.ConversationActions(),
       ConversationList({
         conversations: @state.conversations
+        loading: @state.loading
         user: @state.user
         activeConversation: @state.activeConversation})
 

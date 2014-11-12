@@ -24,7 +24,10 @@ ConversationList = React.createClass
     dom.scrollTop = Math.max(0, activeTop - (dom.clientHeight / 2))
 
   render: ->
-    Section = Structural.Components.ConversationListSection
+    {ConversationListSection, LoadingConversations} = Structural.Components
+
+    if @props.loading
+      return LoadingConversations()
 
     inPinnedSection = (c) -> isPinned(c)
     inArchivedSection = (c) -> isArchived(c) and not isPinned(c)
@@ -41,22 +44,22 @@ ConversationList = React.createClass
     sharedConvos = _.filter(@props.conversations, inSharedSection)
 
     div {className: 'conversation-list'},
-      Section({
+      ConversationListSection({
         title: 'Pinned Conversations'
         adjective: 'pinned'
         conversations: pinnedConvos
         activeConversation: @props.activeConversation})
-      Section({
+      ConversationListSection({
         title: 'My Conversations'
         adjective: ''
         conversations: myConvos
         activeConversation: @props.activeConversation})
-      Section({
+      ConversationListSection({
         title: 'Shared Conversations'
         adjective: 'shared'
         conversations: sharedConvos
         activeConversation: @props.activeConversation})
-      Section({
+      ConversationListSection({
         title: 'Archive'
         adjective: 'archived'
         conversations: archivedConvos
