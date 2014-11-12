@@ -10,6 +10,11 @@ Structural.Actions.StartApp = new Hippodrome.Action(
   'Start App',
    -> {})
 
+Structural.Actions.UpdateFolderList = new Hippodrome.Action(
+  'Update Folder List'
+  (folders) -> {folders:folders}
+)
+
 Structural.Actions.UpdateConversationList = new Hippodrome.Action(
   'Update Conversation List'
   (conversations) -> {conversations: conversations})
