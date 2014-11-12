@@ -1,3 +1,4 @@
+{UpdateActiveFolder} = Structural.Actions
 {div, a} = React.DOM
 
 Folder = React.createClass
@@ -18,6 +19,6 @@ Folder = React.createClass
   viewFolder: (event) ->
     if event.button == 0 # Left Click
       event.preventDefault()
-      # TODO: Folder View Action
+      UpdateActiveFolder(@props.folder.id)
 
 Structural.Components.Folder = Folder
