@@ -24,6 +24,7 @@ MessagesPane = React.createClass
       messages: Messages.distilled(conversation)
       currentUser: CurrentUser.getUser()
       loading: MessagesState.isLoading()
+      none: MessagesState.isNone()
     }
 
   updateConversation: ->
@@ -39,7 +40,10 @@ MessagesPane = React.createClass
   updateUser: ->
     @setState(currentUser: CurrentUser.getUser())
   updateMessagesState: ->
-    @setState(loading: MessagesState.isLoading())
+    @setState(
+      loading: MessagesState.isLoading()
+      none: MessagesState.isNone()
+    )
 
   render: ->
     div {className: 'message-pane'},
@@ -52,6 +56,7 @@ MessagesPane = React.createClass
       Structural.Components.MessagesList(
         messages: @state.messages
         loading: @state.loading
+        none: @state.none
         currentUser: @state.currentUser
         conversation: @state.conversation
         folder: @state.folder

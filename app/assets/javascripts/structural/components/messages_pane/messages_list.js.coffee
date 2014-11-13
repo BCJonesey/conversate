@@ -21,6 +21,8 @@ MessagesList = React.createClass
   render: ->
     if @props.loading
       contents = Structural.Components.LoadingMessages()
+    else if @props.none
+      contents = undefined
     else
       makeMessage = (message) =>
         Structural.Components.Message(

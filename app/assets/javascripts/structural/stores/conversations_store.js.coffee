@@ -42,5 +42,7 @@ Conversations = new Hippodrome.Store
       hashToSortedArray(@conversationsForFolder(folder),
                         'most_recent_event',
                         Order.Descending)
+    isEmpty: (folder) ->
+      _.size(@conversationsForFolder(folder)) == 0
 
 Structural.Stores.Conversations = Conversations
