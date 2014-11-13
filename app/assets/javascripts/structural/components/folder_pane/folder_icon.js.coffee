@@ -10,6 +10,6 @@ FolderIcon = React.createClass
         Icon({name: 'user', className: 'shared-icon-user'})
         Icon({name: 'plus', className: 'shared-icon-plus'})
     else
-      Icon({name: 'folder-o', className: 'folder-icon'})
+      Icon({name: 'folder-open', className: 'folder-icon'})
 
 Structural.Components.FolderIcon = FolderIcon
