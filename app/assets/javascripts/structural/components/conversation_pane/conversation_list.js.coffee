@@ -33,10 +33,14 @@ ConversationList = React.createClass
         dom.scrollTop = activeTop - (dom.clientHeight / 2)
 
   render: ->
-    {ConversationListSection, LoadingConversations} = Structural.Components
+    {ConversationListSection, LoadingConversations,
+     NoConversations} = Structural.Components
 
     if @props.loading
       return LoadingConversations()
+
+    if @props.conversations.length == 0
+      return NoConversations()
 
     inPinnedSection = (c) -> isPinned(c)
     inArchivedSection = (c) -> isArchived(c) and not isPinned(c)
