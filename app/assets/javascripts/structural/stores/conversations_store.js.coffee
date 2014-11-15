@@ -45,4 +45,13 @@ Conversations = new Hippodrome.Store
     isEmpty: (folder) ->
       _.size(@conversationsForFolder(folder)) == 0
 
+    # This is potentially real slow.  Don't call it unless you really really
+    # have to.
+    findFolderId: (id) ->
+      id = '' + id
+      for folderId in _.keys(@conversationsByFolder)
+        for conversationId in _.keys(@conversationsByFolder[folderId])
+          if conversationId == id
+            return folderId
+
 Structural.Stores.Conversations = Conversations

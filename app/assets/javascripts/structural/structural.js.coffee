@@ -1,5 +1,5 @@
 #= require_self
-#= require ./urls/url_factory
+#= require ./urls/urls
 #= require ./http/http
 #= require ./api/api
 #= require ./data/data

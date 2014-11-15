@@ -14,7 +14,7 @@ ActiveConversation = new Hippodrome.Store
   }]
 
   updateActiveConversationId: (payload) ->
-    @activeConversationId = payload.activeConversationId
+    @activeConversationId = Number(payload.activeConversationId)
     @trigger()
   pickFirstIdIfNotThere: (payload) ->
     if not payload.conversations[@activeConversationId]

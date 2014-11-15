@@ -10,7 +10,7 @@ Folder = React.createClass
     if @props.folder.id == @props.activeFolder
       classes.push('active-folder')
 
-    url = Structural.UrlFactory.folder(@props.folder)
+    url = Structural.Urls.UrlFactory.folder(@props.folder)
 
     a {className: classes.join(' '), href: url, onClick: @viewFolder},
       FolderIcon({folder: @props.folder})

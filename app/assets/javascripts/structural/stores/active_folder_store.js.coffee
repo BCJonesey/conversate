@@ -7,7 +7,7 @@ ActiveFolder = new Hippodrome.Store
     callback: 'updateActiveFolderId'
   }]
   updateActiveFolderId: (payload) ->
-    @activeFolderId = payload.activeFolderId
+    @activeFolderId = Number(payload.activeFolderId)
     @trigger()
 
   public:

@@ -20,4 +20,4 @@ UrlFactory = {
   }
 }
 
-Structural.UrlFactory = UrlFactory
+Structural.Urls.UrlFactory = UrlFactory
