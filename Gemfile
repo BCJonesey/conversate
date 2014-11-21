@@ -13,10 +13,6 @@ group :development do
   gem 'sqlite3'
 end
 
-group :development, :test do
-  gem 'jasmine'
-end
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -51,6 +47,7 @@ group :test, :development do
   gem "rspec-rails", "~> 2.0"
   gem "yaml_db"
   gem 'thin'  # A minimalist web server. Heroku likes it.
+  gem 'jasmine-core', '~> 2.1.2'
   gem 'jasmine-rails'
 end
 

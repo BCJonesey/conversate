@@ -32,8 +32,6 @@ GEM
       uuidtools (~> 2.1)
     bcrypt-ruby (3.0.1)
     builder (3.1.4)
-    childprocess (0.3.9)
-      ffi (~> 1.0, >= 1.0.11)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.3)
@@ -57,19 +55,13 @@ GEM
     execjs (2.2.2)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
-    ffi (1.9.0)
     hike (1.2.3)
     hippodrome (0.1.4)
       lodash-rails (~> 2.4.1)
       railties (~> 4.0)
     httpauth (0.2.0)
     i18n (0.6.11)
-    jasmine (1.3.2)
-      jasmine-core (~> 1.3.1)
-      rack (~> 1.0)
-      rspec (>= 1.3.1)
-      selenium-webdriver (>= 0.1.3)
-    jasmine-core (1.3.1)
+    jasmine-core (2.1.2)
     jasmine-rails (0.10.2)
       jasmine-core (>= 1.3, < 3.0)
       phantomjs
@@ -165,10 +157,6 @@ GEM
     ref (1.0.5)
     reverse_markdown (0.5.1)
       nokogiri
-    rspec (2.14.1)
-      rspec-core (~> 2.14.0)
-      rspec-expectations (~> 2.14.0)
-      rspec-mocks (~> 2.14.0)
     rspec-core (2.14.5)
     rspec-expectations (2.14.2)
       diff-lcs (>= 1.1.3, < 2.0)
@@ -181,18 +169,12 @@ GEM
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
     ruby-prof (0.13.0)
-    rubyzip (0.9.9)
-    selenium-webdriver (2.35.0)
-      childprocess (>= 0.2.5)
-      multi_json (~> 1.0)
-      rubyzip
-      websocket (~> 1.0.4)
     slop (3.4.6)
     sorcery (0.8.2)
       bcrypt-ruby (~> 3.0.0)
       oauth (~> 0.4.4)
       oauth2 (~> 0.8.0)
-    sprockets (2.12.0)
+    sprockets (2.12.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
@@ -224,7 +206,6 @@ GEM
       rack
       raindrops (~> 0.7)
     uuidtools (2.1.4)
-    websocket (1.0.7)
     yaml_db (0.2.3)
 
 PLATFORMS
@@ -236,7 +217,7 @@ DEPENDENCIES
   dalli
   email_reply_parser
   hippodrome
-  jasmine
+  jasmine-core (~> 2.1.2)
   jasmine-rails
   jquery-rails
   jquery.fileupload-rails

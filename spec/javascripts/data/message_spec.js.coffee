@@ -29,7 +29,7 @@ describe 'Data.Message', ->
 
     beforeEach ->
       rightNow = new Date(2014, 10, 7, 14, 15)
-      spyOn(window, 'Date').andReturn(rightNow)
+      spyOn(window, 'Date').and.returnValue(rightNow)
       @rightNowTimestamp = rightNow.valueOf()
 
     it 'builds a message with default type', ->
