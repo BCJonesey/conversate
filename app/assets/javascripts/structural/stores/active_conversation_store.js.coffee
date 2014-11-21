@@ -9,7 +9,7 @@ ActiveConversation = new Hippodrome.Store
     callback: 'updateActiveConversationId'
   }, {
     action: Structural.Actions.UpdateConversationList
-    callback: 'pickFirstIdIfNotThere'
+    callback: 'pickFirstIdIfNotInConversationList'
     after: [Structural.Stores.Conversations]
   }, {
     action: Structural.Actions.UpdateActiveFolder
@@ -19,7 +19,7 @@ ActiveConversation = new Hippodrome.Store
   updateActiveConversationId: (payload) ->
     @activeConversationId = Number(payload.activeConversationId)
     @trigger()
-  pickFirstIdIfNotThere: (payload) ->
+  pickFirstIdIfNotInConversationList: (payload) ->
     if not payload.conversations[@activeConversationId]
       activeFolder = Structural.Stores.Folders.byId(Structural.Stores.ActiveFolder.id())
       firstConvo = _.first(Structural.Stores.Conversations.chronologicalOrder(activeFolder))
