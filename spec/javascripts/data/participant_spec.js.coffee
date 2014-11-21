@@ -1,4 +1,9 @@
 describe 'Data.Participant', ->
+  it 'knows the name of people that don\'t exist', ->
+    expect(Structural.Data.Participant.name(undefined)).toBe('')
+    expect(Structural.Data.Participant.name(null)).toBe('')
+
+
   it 'knows people\'s names that only have names', ->
     onlyHasName =
       full_name: 'Alice'

@@ -1,6 +1,8 @@
 Participant = {
   name: (participant) ->
-    if participant.name
+    if not participant
+      ''
+    else if participant.name
       participant.name
     else if participant.full_name
       participant.full_name
