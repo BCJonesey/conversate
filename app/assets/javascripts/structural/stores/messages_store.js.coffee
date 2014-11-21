@@ -59,4 +59,7 @@ Messages = new Hippodrome.Store
     distilled: (conversation) ->
       distillRawMessages(@chronologicalOrder(conversation))
 
+    isEmpty: (conversation) ->
+      _.size(@messagesForConversation(conversation)) == 0
+
 Structural.Stores.Messages = Messages

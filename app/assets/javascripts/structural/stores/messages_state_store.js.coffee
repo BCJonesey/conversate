@@ -1,4 +1,5 @@
-#= ./conversations_store
+#= require ./conversations_store
+#= require ./active_conversation_store
 
 MessagesState = new Hippodrome.Store
   displayName: 'Messages State'
@@ -9,10 +10,11 @@ MessagesState = new Hippodrome.Store
     callback: 'loaded'
   }, {
     action: Structural.Actions.UpdateActiveConversation
-    callback: 'loading'
+    callback: 'loadingConversation'
   }, {
     action: Structural.Actions.UpdateActiveFolder
-    callback: 'loading'
+    callback: 'loadingFolder'
+    after: [Structural.Stores.ActiveConversation]
   }, {
     action: Structural.Actions.UpdateConversationList
     callback: 'noneOnEmpty'
@@ -22,9 +24,18 @@ MessagesState = new Hippodrome.Store
   loaded: (payload) ->
     @state = 'loaded'
     @trigger()
-  loading: (payload) ->
-    @state = 'loading'
-    @trigger()
+  loadingConversation: (payload) ->
+    activeFolder = Structural.Stores.Folders.byId(Structural.Stores.ActiveFolder.id())
+    activeConvo = Structural.Stores.Conversations.byId(activeFolder, payload.activeConversationId)
+    if Structural.Stores.Messages.isEmpty(activeConvo)
+      @state = 'loading'
+      @trigger()
+  loadingFolder: (payload) ->
+    activeFolder = Structural.Stores.Folders.byId(payload.activeFolderId)
+    activeConvo = Structural.Stores.Conversations.byId(activeFolder, Structural.Stores.ActiveConversation.id())
+    if Structural.Stores.Messages.isEmpty(activeConvo)
+      @state = 'loading'
+      @trigger()
   noneOnEmpty: (payload) ->
     if Structural.Stores.Conversations.isEmpty(payload.folder)
       @state = 'none'

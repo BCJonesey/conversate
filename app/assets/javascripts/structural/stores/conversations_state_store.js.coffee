@@ -14,8 +14,10 @@ ConversationsState = new Hippodrome.Store
     @state = 'loaded'
     @trigger()
   loading: (payload) ->
-    @state = 'loading'
-    @trigger()
+    folder = Structural.Stores.Folders.byId(payload.activeFolderId)
+    if Structural.Stores.Conversations.isEmpty(folder)
+      @state = 'loading'
+      @trigger()
 
   public:
     isLoading: -> @state == 'loading'
