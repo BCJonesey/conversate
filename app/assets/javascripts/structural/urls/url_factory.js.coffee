@@ -9,6 +9,11 @@ UrlFactory = {
   conversation: (conversation) ->
     "/conversation/#{slugify(conversation.title)}/#{conversation.id}"
 
+  tour: -> '/tour'
+  admin: -> '/admin'
+  profile: -> '/profile'
+  logout: -> '/session/logout'
+
   Api: {
     _apiUrl: (suffix) -> "/api/v0#{suffix}"
     folderConversations: (folder) ->

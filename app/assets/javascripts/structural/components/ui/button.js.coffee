@@ -4,16 +4,16 @@ Button = React.createClass
   displayName: 'Button'
   render: ->
     klass = @props.className || 'button'
-    a {className: klass, onClick: @onClick},
+    a {className: klass, onClick: @onClick, href: @props.href},
       @props.children
 
   onClick: (e) ->
-    e.preventDefault()
-
     if @props.onClick
+      e.preventDefault()
       @props.onClick(e)
 
     if @props.action
+      e.preventDefault()
       args = @props.actionArgs || []
       @props.action.apply(null, args)
 

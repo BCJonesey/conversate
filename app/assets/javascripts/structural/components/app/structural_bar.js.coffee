@@ -1,5 +1,6 @@
 {CurrentUser} = Structural.Stores
 {name} = Structural.Data.Participant
+{UrlFactory} = Structural.Urls
 {div, span} = React.DOM
 
 StructuralBar = React.createClass
@@ -19,14 +20,14 @@ StructuralBar = React.createClass
       div {className: 'left'},
         BarButton({active: true, icon: 'comment'}, 'Water Cooler'),
         BarButton({icon: 'users'}, 'People'),
-        BarButton({}, 'Tour'),
-        BarButton({icon: 'dashboard'}, 'Admin'),
+        BarButton({href: UrlFactory.tour()}, 'Tour'),
+        BarButton({icon: 'dashboard', href: UrlFactory.admin()}, 'Admin'),
 
       div {className: 'right'},
         BarButton({icon: 'pied-piper-alt'}),
         span({className: 'stb-text'}, name(@state.user)),
         BarButton({icon: 'search'}),
-        BarButton({icon: 'user'}),
-        BarButton({icon: 'sign-out'})
+        BarButton({icon: 'user', href: UrlFactory.profile()}),
+        BarButton({icon: 'sign-out', href: UrlFactory.logout()})
 
 Structural.Components.StructuralBar = StructuralBar
