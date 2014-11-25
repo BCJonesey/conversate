@@ -73,5 +73,23 @@
       </div>
     <% end %>
 
+    <% if @user.site_admin %>
+      <div class="btn-toolbar">
+        <div class="btn-group pull-left">
+          <span class="toolbar-title">Devices</span>
+        </div>
+      </div>
+      <% @user.devices.each do |device| %>
+        <%= form_tag do %>
+          <div class="form">
+            <span class="device-description"><%= device.description %></span>
+            <span class="device-key"><%= device.device_api_key %></span>
+          </div>
+        <% end %>
+      <% end %>
+      <div class="btn-toolbar-below">
+      </div>
+    <% end %>
+
   </div>
 </div>
