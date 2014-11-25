@@ -8,7 +8,7 @@ class Api::V0::DeviceApiKeyController < ApplicationController
     end
 
     if user
-      device = Device.new_device_for(user)
+      device = Device.new_device_for(user, params[:description])
       render :json => device
     else
       error = { :status => 401, :error => "Bad username or password" }
