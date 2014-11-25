@@ -18,4 +18,10 @@ class AdminController < ApplicationController
 
     redirect_to admin_path
   end
+
+  def remove_from_beta
+    signup = BetaSignup.find(params[:id])
+    signup.delete
+    redirect_to admin_path
+  end
 end
