@@ -55,6 +55,7 @@ Conversate::Application.routes.draw do
         resources :contacts
       end
       resources :invite, :only => [:create]
+      resources :device_api_key, :only => [:create]
     end
   end
 

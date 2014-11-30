@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141101220756) do
+ActiveRecord::Schema.define(version: 20141125203832) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,14 @@ ActiveRecord::Schema.define(version: 20141101220756) do
 
   add_index "conversations_folders", ["conversation_id", "folder_id"], name: "index_conversations_folders_on_conversation_id_and_folder_id", using: :btree
   add_index "conversations_folders", ["folder_id", "conversation_id"], name: "index_conversations_folders_on_folder_id_and_conversation_id", using: :btree
+
+  create_table "devices", force: true do |t|
+    t.integer  "user_id"
+    t.string   "device_api_key"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "description",    default: "Unknown Device"
+  end
 
   create_table "email_queues", force: true do |t|
     t.integer  "action_id"
