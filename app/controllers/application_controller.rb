@@ -19,6 +19,7 @@ class ApplicationController < ActionController::Base
 
   def try_device_login
     device_api_key = request.headers['X-Watercooler-Device-Api-Key']
-    @current_user = device_api_key ? Device.find_by_device_api_key(device_api_key).user : nil
+    device_key = device_api_key ? Device.find_by_device_api_key(device_api_key) : nil
+    auto_login(device_key.user) unless device_key.nil?
   end
 end
