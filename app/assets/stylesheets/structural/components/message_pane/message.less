@@ -5,6 +5,11 @@
 @unread-indicator-color: #80a0c0;
 @unread-indicator-width: 2px;
 
+@image-height: 13rem;
+@image-width: 20rem;
+@image-background-color: @standard-background-color;
+@image-shadow-color: @standard-shadow-color;
+
 .system-message() {
   .small-light-font();
   text-align: center;
@@ -47,6 +52,26 @@
 
     &:last-child {
       padding-bottom: 0;
+    }
+
+    .message-link {
+      .unstyled-anchor(@link-font-color);
+    }
+
+    .message-image-link {
+      .standard-border();
+
+      height: @image-height;
+      max-width: @image-width;
+      display: block;
+      background-repeat: no-repeat;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      background-color: @image-background-color;
+      margin: @breathing-room 0;
+      box-shadow: 0 0.2rem 0.4rem @image-shadow-color;
     }
   }
 
