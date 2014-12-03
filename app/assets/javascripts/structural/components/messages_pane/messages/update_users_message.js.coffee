@@ -1,12 +1,5 @@
+{listAsReadableString} = Structural.Data.English
 {div} = React.DOM
-
-listAsReadableString = (list) ->
-  if list.length == 0
-    ""
-  else if list.length == 1
-    list[0]
-  else
-    "#{list.slice(0, list.length - 1).join(', ')} and #{list[list.length - 1]}"
 
 UpdateUsersMessage = React.createClass
   render: ->
