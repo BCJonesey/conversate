@@ -236,3 +236,55 @@ describe 'Data.Message', ->
       ]
 
       expect(distillRawMessages(followOns)).toEqual(distilled)
+
+    it 'ignores deletions, update_folders and move_message', ->
+      messages = [
+        {
+          type: 'deletion'
+          id: 2
+        }
+        {
+          type: 'message'
+          id: 3
+          text: 'First'
+          timestamp: 12345
+          user:
+            id: 1
+        }
+        {
+          type: 'update_folders'
+          id: 4
+        }
+        {
+          type: 'message'
+          id: 5
+          text: 'Second'
+          timestamp: 12349
+          user:
+            id: 2
+        }
+        {
+          type: 'move_message'
+          id: 6
+        }
+      ]
+      distilled = [
+        {
+          type: 'message'
+          id: 3
+          text: 'First'
+          timestamp: 12345
+          user:
+            id: 1
+        }
+        {
+          type: 'message'
+          id: 5
+          text: 'Second'
+          timestamp: 12349
+          user:
+            id: 2
+        }
+      ]
+
+      expect(distillRawMessages(messages)).toEqual(distilled)

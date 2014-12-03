@@ -7,6 +7,10 @@ appendFollowOnOperation = {
     prevMessage = _.last(distilled)
     Message.appendFollowOn(prevMessage, message)
 }
+ignoreMessageOperation ={
+  condition: (distilled, message) -> message.type in Message.ignoredTypes
+  operation: (distilled, message) ->
+}
 appendMessageOperation = {
   condition: (distilled, message) -> true
   operation: (distilled, message) -> distilled.push(message)
@@ -15,6 +19,8 @@ appendMessageOperation = {
 Message = {
   isMessageType: (message) ->
     message.type in ['message', 'email_message', 'upload_message']
+
+  ignoredTypes: ['deletion', 'update_folders', 'move_message']
 
   isFollowOn: (message, prevMessage) ->
     Message.isMessageType(message) and
@@ -44,6 +50,7 @@ Message = {
 
     operations = [
       appendFollowOnOperation
+      ignoreMessageOperation
       appendMessageOperation
     ]
 
