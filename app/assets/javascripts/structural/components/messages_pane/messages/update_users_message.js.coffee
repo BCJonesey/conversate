@@ -2,6 +2,7 @@
 {div} = React.DOM
 
 UpdateUsersMessage = React.createClass
+  displayName: 'Update Users Message'
   render: ->
     addedNames = _.map(@props.message.added, Structural.Data.Participant.name)
     removedNames = _.map(@props.message.removed, Structural.Data.Participant.name)
