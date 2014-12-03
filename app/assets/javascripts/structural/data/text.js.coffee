@@ -29,6 +29,22 @@ Text = {
         {type: 'url', urlType: urlType, value: part}
 
     annotated
+
+  smallPreview: (text, maxChars = 25) ->
+    words = text.split(/\s+/)
+    preview = words[0]
+    words = words.slice(1)
+
+    for word in words
+      if (preview.length + word.length + 1) > maxChars
+        break
+
+      preview += " #{word}"
+
+    if preview.length < text.length
+      preview = "#{preview}..."
+
+    preview
 }
 
 Structural.Data.Text = Text
