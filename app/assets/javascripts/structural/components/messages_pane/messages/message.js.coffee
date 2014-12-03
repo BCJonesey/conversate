@@ -7,9 +7,9 @@ Message = React.createClass
 
   render: ->
     viewTypes =
+      message: Structural.Components.MessageMessage
       retitle: Structural.Components.RetitleMessage
       update_users: Structural.Components.UpdateUsersMessage
-      message: Structural.Components.MessageMessage
 
     if @props.message.type of viewTypes
       view = viewTypes[@props.message.type]

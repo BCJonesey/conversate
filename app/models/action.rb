@@ -9,8 +9,8 @@ class Action < ActiveRecord::Base
   validates_presence_of :user_id
   validates_presence_of :type
   validates :type, :inclusion => {
-    :in => %w(message email_message deletion retitle update_users update_folders
-              move_message update_viewers email_delivery_error upload_message)
+    :in => %w(deletion email_delivery_error email_message message move_message
+              retitle update_folders update_users update_viewers upload_message)
   }
 
   DEFAULTS_BY_TYPE = {
