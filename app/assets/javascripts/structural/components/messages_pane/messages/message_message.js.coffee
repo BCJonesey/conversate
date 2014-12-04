@@ -16,6 +16,10 @@ MessageMessage = React.createClass
               message: followOn
             }
           lastTimestamp = followOn.timestamp
+        else if followOn.type == 'email_message'
+          followOns.push Structural.Components.MessageInfo {
+            message: followOn
+          }
 
         followOns.push Structural.Components.MessageText {
           message: followOn

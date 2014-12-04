@@ -8,6 +8,7 @@ Message = React.createClass
   render: ->
     viewTypes =
       email_delivery_error: Structural.Components.EmailDeliveryErrorMessage
+      email_message: Structural.Components.MessageMessage
       message: Structural.Components.MessageMessage
       retitle: Structural.Components.RetitleMessage
       update_users: Structural.Components.UpdateUsersMessage

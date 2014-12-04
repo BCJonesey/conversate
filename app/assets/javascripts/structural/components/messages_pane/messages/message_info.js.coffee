@@ -3,6 +3,8 @@
 
 MessageInfo = React.createClass
   render: ->
+    {Icon} = Structural.Components
+
     if @props.includeSender
       name = Structural.Data.Participant.name(@props.message.user)
       sender = div {className: 'message-sender'}, name
@@ -13,10 +15,12 @@ MessageInfo = React.createClass
       timestr = timestampToHumanizedTimestr(@props.message.timestamp,
                                             new Date(),
                                             @props)
-      time = div {className: 'message-details'}, timestr
+
+    if @props.message.type == 'email_message'
+      fullText = Icon {name: 'envelope-o', className: 'full-email-text'}
 
     div {className: 'message-info'},
-      time
+      div({className: 'message-details'}, fullText, timestr)
       sender
 
 Structural.Components.MessageInfo = MessageInfo
