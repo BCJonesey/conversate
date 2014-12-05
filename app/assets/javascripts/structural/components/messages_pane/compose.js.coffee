@@ -10,6 +10,7 @@ Compose = React.createClass
       Structural.Components.ModalTrigger({
         className: 'long-form-trigger'
         content: 'Long Form Compose TBD'
+        title: if @props.conversation then @props.conversation.title else ''
       }, Structural.Components.Icon({name: 'edit'}))
       textarea {
         className: 'message-text-input'

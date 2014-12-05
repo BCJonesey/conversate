@@ -1,6 +1,8 @@
 @import "structural/variables.less";
 @import "structural/mixins.less";
 
+@modal-top-offset: 5rem;
+
 .modal-hidden {
   display: none;
 }
@@ -17,6 +19,18 @@
 
 .modal {
   display: inline-block;
-  margin: 5rem auto 0 auto;
+  margin: @modal-top-offset auto 0 auto;
+  text-align: left;
   background-color: white;
+  .standard-border();
+
+  .modal-title-bar {
+    .button-toolbar();
+    .standard-border-bottom();
+    .title-font();
+
+    a {
+      float: right;
+    }
+  }
 }

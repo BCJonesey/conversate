@@ -6,6 +6,6 @@ ModalTrigger = React.createClass
     div {className: @props.className, onClick: @onClick}, @props.children
 
   onClick: ->
-    Structural.Actions.OpenModal(@props.content)
+    Structural.Actions.OpenModal(@props.content, @props.title)
 
 Structural.Components.ModalTrigger = ModalTrigger

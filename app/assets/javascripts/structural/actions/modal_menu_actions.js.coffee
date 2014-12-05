@@ -1,5 +1,6 @@
 Structural.Actions.OpenModal = new Hippodrome.Action(
   'Open Modal',
-  (content) ->
+  (content, title) ->
     content: content
+    title: title
 )
