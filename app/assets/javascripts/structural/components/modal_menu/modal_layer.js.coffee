@@ -21,7 +21,7 @@ ModalLayer = React.createClass
         div {className: 'modal'},
           div({className: 'modal-title-bar'},
               @state.title,
-              Button({}, 'Close')),
+              Button({action: Structural.Actions.CloseModal}, 'Close')),
           @state.content
     else
       div {className: 'modal-hidden'}

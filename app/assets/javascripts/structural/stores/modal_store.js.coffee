@@ -7,12 +7,20 @@ Modal = new Hippodrome.Store
   dispatches: [{
     action: Structural.Actions.OpenModal
     callback: 'openModal'
+  }, {
+    action: Structural.Actions.CloseModal
+    callback: 'closeModal'
   }]
 
   openModal: (payload) ->
     @_open = true
     @_content = payload.content
     @_title = payload.title
+    @trigger()
+  closeModal: (payload) ->
+    @_open = false
+    @_content = undefined
+    @_title = undefined
     @trigger()
 
   public:

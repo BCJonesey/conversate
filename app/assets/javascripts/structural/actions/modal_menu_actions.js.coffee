@@ -4,3 +4,8 @@ Structural.Actions.OpenModal = new Hippodrome.Action(
     content: content
     title: title
 )
+
+Structural.Actions.CloseModal = new Hippodrome.Action(
+  'Close Modal',
+  () -> {}
+)
