@@ -17,7 +17,7 @@ ModalLayer = React.createClass
     {Icon, Button} = Structural.Components
 
     if @state.open
-      div {className: 'modal-screen'},
+      div {className: 'modal-screen', ref: 'screen', onClick: @closeOnClickOff},
         div {className: 'modal'},
           div({className: 'modal-title-bar'},
               @state.title,
@@ -25,5 +25,9 @@ ModalLayer = React.createClass
           @state.content
     else
       div {className: 'modal-hidden'}
+
+  closeOnClickOff: (event) ->
+    if event.target == @refs.screen.getDOMNode()
+      Structural.Actions.CloseModal()
 
 Structural.Components.ModalLayer = ModalLayer
