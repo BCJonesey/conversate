@@ -14,7 +14,8 @@ ModalLayer = React.createClass
 
   render: ->
     if @state.open
-      div {className: 'modal'}, @state.content
+      div {className: 'modal-screen'},
+        div {className: 'modal'}, @state.content
     else
       div {className: 'modal-hidden'}
 
