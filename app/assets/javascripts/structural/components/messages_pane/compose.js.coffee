@@ -6,10 +6,12 @@ Compose = React.createClass
   getInitialState: ->
     text: ''
   render: ->
+    {LongFormCompose} = Structural.Components
+
     div {className: 'message-compose-bar'},
       Structural.Components.ModalTrigger({
         className: 'long-form-trigger'
-        content: 'Long Form Compose TBD'
+        content: LongFormCompose()
         title: if @props.conversation then @props.conversation.title else ''
       }, Structural.Components.Icon({name: 'edit'}))
       textarea {
