@@ -14,14 +14,14 @@ ModalLayer = React.createClass
     @setState(open: Modal.open(), content: Modal.content(), title: Modal.title())
 
   render: ->
-    {Icon, Button} = Structural.Components
+    {IconButton} = Structural.Components
 
     if @state.open
       div {className: 'modal-screen', ref: 'screen', onClick: @closeOnClickOff},
         div {className: 'modal'},
           div({className: 'modal-title-bar'},
               @state.title,
-              Button({action: Structural.Actions.CloseModal}, 'Close')),
+              IconButton({action: Structural.Actions.CloseModal, icon: 'times'})),
           @state.content
     else
       div {className: 'modal-hidden'}

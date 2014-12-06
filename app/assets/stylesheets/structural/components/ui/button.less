@@ -10,18 +10,27 @@
 @standard-button-border: #aaaaaa;
 @standard-button-hover-background: #D8E8F8;
 @standard-button-text-color: inherit;
+@standard-button-shadow-color: @standard-shadow-color;
 
 @primary-button-background: @primary-color;
 @primary-button-border: darken(@primary-button-background, 10%);
 @primary-button-hover-background: lighten(@primary-button-background, 10%);
 @primary-button-text-color: white;
+@primary-button-shadow-color: @standard-shadow-color;
 
 @bar-button-background: transparent;
 @bar-button-border: transparent;
 @bar-button-hover-background: transparent;
 @bar-button-text-color: white;
+@bar-button-shadow-color: transparent;
 
-.button-style(@background, @hover-background, @border, @text-color) {
+@icon-button-background: transparent;
+@icon-button-border: transparent;
+@icon-button-hover-background: transparent;
+@icon-button-text-color: inherit;
+@icon-button-shadow-color: transparent;
+
+.button-style(@background, @hover-background, @border, @text-color, @shadow-color) {
   display: inline-block;
   height: @button-height;
   padding: @button-padding;
@@ -35,7 +44,7 @@
 
   background-color: @background;
   border: 1px solid @border;
-  box-shadow: 0 @button-shadow-size @button-shadow-size -@button-shadow-size rgba(0, 0, 0, 0.2);
+  box-shadow: 0 @button-shadow-size @button-shadow-size -@button-shadow-size @shadow-color;
   border-radius: 2px;
   color: @text-color;
   &:hover,
@@ -52,15 +61,15 @@
 }
 
 .button {
-  .button-style(@standard-button-background, @standard-button-hover-background, @standard-button-border, @standard-button-text-color);
+  .button-style(@standard-button-background, @standard-button-hover-background, @standard-button-border, @standard-button-text-color, @standard-button-shadow-color);
 }
 
 .button-primary {
-  .button-style(@primary-button-background, @primary-button-hover-background, @primary-button-border, @primary-button-text-color);
+  .button-style(@primary-button-background, @primary-button-hover-background, @primary-button-border, @primary-button-text-color, @primary-button-shadow-color);
 }
 
 .bar-button-style() {
-  .button-style(@bar-button-background, @bar-button-hover-background, @bar-button-border, @bar-button-text-color);
+  .button-style(@bar-button-background, @bar-button-hover-background, @bar-button-border, @bar-button-text-color, @bar-button-shadow-color);
   font-weight: bold;
   font-size: 1.25rem;
 
@@ -80,4 +89,14 @@
 
 .button-stb-active {
   .bar-button-style();
+}
+
+.button-icon {
+  .button-style(@icon-button-background, @icon-button-hover-background, @icon-button-border, @icon-button-text-color, @icon-button-shadow-color);
+  opacity: 0.8;
+  padding: 0;
+
+  &:hover {
+    opacity: 1;
+  }
 }
