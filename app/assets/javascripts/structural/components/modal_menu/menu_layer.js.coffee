@@ -19,4 +19,8 @@ MenuLayer = React.createClass
     else
       div {className: 'menu-hidden'}
 
+  closeOnClickOff: (event) ->
+    if event.target == @refs.screen.getDOMNode()
+      Structural.Actions.CloseMenu()
+
 Structural.Components.MenuLayer = MenuLayer

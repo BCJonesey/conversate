@@ -16,3 +16,8 @@ Structural.Actions.OpenMenu = new Hippodrome.Action(
     content: content
     node: node
 )
+
+Structural.Actions.CloseMenu = new Hippodrome.Action(
+  'Close Menu'
+  () -> {}
+)

@@ -8,12 +8,20 @@ Menu = new Hippodrome.Store
   dispatches: [{
     action: Structural.Actions.OpenMenu
     callback: 'openMenu'
+  }, {
+    action: Structural.Actions.CloseMenu
+    callback: 'closeMenu'
   }]
 
   openMenu: (payload) ->
     @_open = true
     @_content = payload.content
     @_node = payload.node
+    @trigger()
+  closeMenu: (payload) ->
+    @_open = false
+    @_content = undefined
+    @_node = undefined
     @trigger()
 
   public:
