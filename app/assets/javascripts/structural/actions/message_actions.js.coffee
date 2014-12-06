@@ -1,3 +1,5 @@
+{buildMessage} = Structural.Data.Message
+
 Structural.Actions.UpdateMessagesList = new Hippodrome.Action(
   'Update Messages List'
   (messages, conversation) ->

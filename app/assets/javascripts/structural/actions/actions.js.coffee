@@ -3,8 +3,6 @@
 
 Structural.Actions = {}
 
-{buildMessage} = Structural.Data.Message
-
 Structural.Actions.StartApp = new Hippodrome.Action(
   'Start App',
    -> {})

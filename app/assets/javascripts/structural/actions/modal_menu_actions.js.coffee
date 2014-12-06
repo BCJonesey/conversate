@@ -9,3 +9,10 @@ Structural.Actions.CloseModal = new Hippodrome.Action(
   'Close Modal',
   () -> {}
 )
+
+Structural.Actions.OpenMenu = new Hippodrome.Action(
+  'Open Menu',
+  (content, node) ->
+    content: content
+    node: node
+)
