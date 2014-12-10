@@ -20,3 +20,30 @@
     float: right;
   }
 }
+
+@news-header-height: @small-toolbar-height;
+@news-width: 15rem;
+
+.news {
+  width: @news-width;
+
+  .news-header {
+    .small-light-font();
+    .standard-border-bottom();
+    background-color: @standard-background-color;
+    padding: 0.1rem 0.25rem;
+
+    .date {
+      float: right;
+    }
+  }
+
+  .news-block {
+    .small-light-font();
+    padding: 0.5rem;
+
+    a {
+      .unstyled-anchor(@link-font-color);
+    }
+  }
+}
