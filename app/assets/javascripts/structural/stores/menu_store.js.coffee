@@ -4,6 +4,7 @@ Menu = new Hippodrome.Store
     @_open = false
     @_content = undefined
     @_node = undefined
+    @_title = undefined
 
   dispatches: [{
     action: Structural.Actions.OpenMenu
@@ -17,16 +18,19 @@ Menu = new Hippodrome.Store
     @_open = true
     @_content = payload.content
     @_node = payload.node
+    @_title = payload.title
     @trigger()
   closeMenu: (payload) ->
     @_open = false
     @_content = undefined
     @_node = undefined
+    @_title = undefined
     @trigger()
 
   public:
     open: () -> @_open
     content: () -> @_content
+    title: () -> @_title
     direction: () ->
       if not @_node
         return undefined

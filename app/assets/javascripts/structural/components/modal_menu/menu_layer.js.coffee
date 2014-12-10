@@ -18,7 +18,9 @@ MenuLayer = React.createClass
       div {className: 'menu-screen', ref: 'screen', onClick: @closeOnClickOff},
         div {className: menuClass, style: Menu.position()},
           div({className: 'menu-pointer'}),
+          div({className: 'menu-title'}, Menu.title())
           Menu.content()
+          div({className: 'menu-bumper'})
     else
       div {className: 'menu-hidden'}
 

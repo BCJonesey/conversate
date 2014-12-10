@@ -24,8 +24,11 @@ StructuralBar = React.createClass
         BarButton({icon: 'dashboard', href: UrlFactory.admin()}, 'Admin'),
 
       div {className: 'right'},
-        MenuTrigger({className: 'news', content: 'Some News Y\'all'},
-                    BarButton({icon: 'pied-piper-alt'})),
+        MenuTrigger({
+          className: 'news'
+          title: 'Water Cooler News'
+          content: 'Some News Y\'all'
+        }, BarButton({icon: 'pied-piper-alt'})),
         span({className: 'stb-text'}, name(@state.user)),
         BarButton({icon: 'search'}),
         BarButton({icon: 'user', href: UrlFactory.profile()}),

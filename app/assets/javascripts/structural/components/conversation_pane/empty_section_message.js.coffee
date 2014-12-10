@@ -20,6 +20,7 @@ EmptySectionMessage = React.createClass
       div({className: 'message'}, message)
       MenuTrigger({
         className: 'prompt'
+        title: 'Stuufff'
         content: 'This is what a message are.  Blergy blah spleeeee'
       }, prompt)
 

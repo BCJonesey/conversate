@@ -54,22 +54,38 @@
 @pointer-edge-offset: 0.5rem;
 @border-width: 1px;
 
+@menu-title-background-color: #DBDBDB;
+@menu-border-color: #BBBBBB;
+
 .menu {
-  .standard-border();
+  border: 1px solid @menu-border-color;
   position: absolute;
   background-color: white;
   box-shadow: 0 .5rem 1rem 0 @standard-shadow-color;
+
+  .menu-title {
+    .title-font();
+    background-color: @menu-title-background-color;
+    border-bottom: 1px solid @menu-border-color;
+    text-align: center;
+  }
+
+  .menu-bumper {
+    .standard-border-top();
+    background-color: @standard-background-color;
+    height: 0.5rem;
+  }
 
   &.left-up, &.right-up {
     margin-bottom: @menu-yoffset;
 
     .menu-pointer:after {
-      border-top: @pointer-size solid white;
+      border-top: @pointer-size solid @standard-background-color;
       bottom: -@pointer-size-in-px;
     }
 
     .menu-pointer:before {
-      border-top: @pointer-size solid @standard-border-color;
+      border-top: @pointer-size solid @menu-border-color;
       bottom: -(@pointer-size-in-px + @border-width);
     }
   }
@@ -86,12 +102,12 @@
     margin-top: @menu-yoffset;
 
     .menu-pointer:after {
-      border-bottom: @pointer-size solid white;
+      border-bottom: @pointer-size solid @menu-title-background-color;
       top: -@pointer-size-in-px;
     }
 
     .menu-pointer:before {
-      border-bottom: @pointer-size solid @standard-border-color;
+      border-bottom: @pointer-size solid @menu-border-color;
       top: -(@pointer-size-in-px + @border-width);
     }
   }
