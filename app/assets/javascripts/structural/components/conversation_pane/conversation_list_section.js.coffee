@@ -10,7 +10,10 @@ ConversationListSection = React.createClass
      CollapsedSectionMessage} = Structural.Components
 
     if @props.conversations.length == 0
-      contents = EmptySectionMessage({adjective: @props.adjective})
+      contents = EmptySectionMessage({
+        adjective: @props.adjective
+        description: @props.description
+      })
     else if not @state.open
       onClick = @open
       contents = CollapsedSectionMessage({

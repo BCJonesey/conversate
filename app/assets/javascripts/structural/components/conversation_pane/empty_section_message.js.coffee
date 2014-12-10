@@ -1,5 +1,6 @@
 {div} = React.DOM
 {articleFor} = Structural.Data.English
+{capitalize} = Structural.Data.Text
 
 EmptySectionMessage = React.createClass
   displayName: 'Empty Section Message'
@@ -11,17 +12,19 @@ EmptySectionMessage = React.createClass
       # is probably wrong, and "what's a conversation" is the wrong question to
       # ask.  This is awkward and special-cased, but that's life.
       message = 'All the conversations here are shared, archived or pinned.'
-      prompt = 'how do I start a conversation?'
+      prompt = undefined
     else
       message = "This folder doesn't have any #{@props.adjective} conversations."
-      prompt = "what's #{articleFor(@props.adjective)} #{@props.adjective} conversation?"
+      promptText = "what's #{articleFor(@props.adjective)} #{@props.adjective}
+                    conversation?"
+      prompt = MenuTrigger({
+        className: 'prompt'
+        title: "#{capitalize(@props.adjective)} Conversations"
+        content: div({className: 'empty-section-description'}, @props.description)
+      }, promptText)
 
     div {className: 'empty-section-message'},
       div({className: 'message'}, message)
-      MenuTrigger({
-        className: 'prompt'
-        title: 'Stuufff'
-        content: 'This is what a message are.  Blergy blah spleeeee'
-      }, prompt)
+      prompt
 
 Structural.Components.EmptySectionMessage = EmptySectionMessage

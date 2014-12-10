@@ -60,6 +60,11 @@ ConversationList = React.createClass
       ConversationListSection({
         title: 'Pinned Conversations'
         adjective: 'pinned'
+        description: "Pinned conversations stay in this top section so you can
+                      find them easily.  They're for things you're actively
+                      working on or conversation you need to follow up on.  Pin
+                      or un-pin a conversation using the conversation menu near
+                      the top left."
         conversations: pinnedConvos
         activeConversation: @props.activeConversation})
       ConversationListSection({
@@ -70,11 +75,23 @@ ConversationList = React.createClass
       ConversationListSection({
         title: 'Shared Conversations'
         adjective: 'shared'
+        description: "Shared conversations are any conversations that are in
+                      this folder but you aren't participating in.  Use them to
+                      keep track of what your teammates are working on without
+                      having to get bombarded with notifications.  You can join
+                      or leave a conversation at any time."
         conversations: sharedConvos
         activeConversation: @props.activeConversation})
       ConversationListSection({
         title: 'Archive'
         adjective: 'archived'
+        description: "Archived conversations are any that you don't need to pay
+                      attention to anymore.  The archived conversations section
+                      is collapsed by default so you can ignore it, but they'll
+                      still show up in searches.  If someone starts talking in a
+                      conversation you've archived, it'll get un-archived
+                      automatically, so don't worry about missing important
+                      messages."
         conversations: archivedConvos
         activeConversation: @props.activeConversation
         startCollapsed: true})
