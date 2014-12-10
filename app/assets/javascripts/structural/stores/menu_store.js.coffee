@@ -50,15 +50,16 @@ Menu = new Hippodrome.Store
         'right-down'
     position: () ->
       viewportWidth = window.innerWidth
+      viewportHeight = window.innerHeight
       rect = @_node.getBoundingClientRect()
       dir = @direction()
 
       if dir == 'left-up'
-        {right: (viewportWidth - rect.right), bottom: rect.top}
+        {right: (viewportWidth - rect.right), bottom: (viewportHeight - rect.top)}
       else if dir == 'left-down'
         {right: (viewportWidth - rect.right), top: rect.bottom}
       else if dir == 'right-up'
-        {left: rect.left, bottom: rect.top}
+        {left: rect.left, bottom: (viewportHeight - rect.top)}
       else
         {left: rect.left, top: rect.bottom}
 

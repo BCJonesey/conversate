@@ -13,8 +13,11 @@ MenuLayer = React.createClass
 
   render: ->
     if @state.open
+      menuClass = "menu #{Menu.direction()}"
+
       div {className: 'menu-screen', ref: 'screen', onClick: @closeOnClickOff},
-        div {className: 'menu', style: Menu.position()},
+        div {className: menuClass, style: Menu.position()},
+          div({className: 'menu-pointer'}),
           Menu.content()
     else
       div {className: 'menu-hidden'}

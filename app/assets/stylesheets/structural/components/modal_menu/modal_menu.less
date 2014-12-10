@@ -47,9 +47,80 @@
   bottom: 0;
 }
 
+@menu-yoffset: 0.75rem;
+@menu-xoffset: 0.5rem;
+@pointer-size: 0.5rem;
+@pointer-size-in-px: 9px;
+@pointer-edge-offset: 0.5rem;
+@border-width: 1px;
+
 .menu {
   .standard-border();
   position: absolute;
   background-color: white;
-  box-shadow: 0 0 1rem 0.25rem @standard-shadow-color;
+  box-shadow: 0 .5rem 1rem 0 @standard-shadow-color;
+
+  &.left-up, &.right-up {
+    margin-bottom: @menu-yoffset;
+
+    .menu-pointer:after {
+      border-top: @pointer-size solid white;
+      bottom: -@pointer-size-in-px;
+    }
+
+    .menu-pointer:before {
+      border-top: @pointer-size solid @standard-border-color;
+      bottom: -(@pointer-size-in-px + @border-width);
+    }
+  }
+
+  &.right-up, &.right-down {
+    margin-left: @menu-xoffset;
+
+    .menu-pointer:after, .menu-pointer:before {
+      left: @pointer-edge-offset;
+    }
+  }
+
+  &.left-down, &.right-down {
+    margin-top: @menu-yoffset;
+
+    .menu-pointer:after {
+      border-bottom: @pointer-size solid white;
+      top: -@pointer-size-in-px;
+    }
+
+    .menu-pointer:before {
+      border-bottom: @pointer-size solid @standard-border-color;
+      top: -(@pointer-size-in-px + @border-width);
+    }
+  }
+
+  &.left-up, &.left-down {
+    margin-right: @menu-xoffset;
+
+    .menu-pointer:after, .menu-pointer:before {
+      right: @pointer-edge-offset;
+    }
+  }
+
+  .menu-pointer {
+    &:after {
+      content: '';
+
+      border-left: @pointer-size solid transparent;
+      border-right: @pointer-size solid transparent;
+
+      position: absolute;
+    }
+
+    &:before {
+      content: '';
+
+      border-left: @pointer-size solid transparent;
+      border-right: @pointer-size solid transparent;
+
+      position: absolute;
+    }
+  }
 }

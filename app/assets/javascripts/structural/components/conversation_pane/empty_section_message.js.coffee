@@ -4,6 +4,8 @@
 EmptySectionMessage = React.createClass
   displayName: 'Empty Section Message'
   render: ->
+    {MenuTrigger} = Structural.Components
+
     if @props.adjective == ''
       # The default section is empty.  Saying "this folder has no conversations"
       # is probably wrong, and "what's a conversation" is the wrong question to
@@ -16,6 +18,9 @@ EmptySectionMessage = React.createClass
 
     div {className: 'empty-section-message'},
       div({className: 'message'}, message)
-      div({className: 'prompt'}, prompt)
+      MenuTrigger({
+        className: 'prompt'
+        content: 'This is what a message are.  Blergy blah spleeeee'
+      }, prompt)
 
 Structural.Components.EmptySectionMessage = EmptySectionMessage
