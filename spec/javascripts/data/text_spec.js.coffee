@@ -48,7 +48,20 @@ describe 'Data.Text', ->
       expect(smallPreview('1 3 5 7 9')).toEqual('1 3 5 7 9')
 
     it 'shows the first word if that word is longer than max chars', ->
-      expect(smallPreview('123456789 12 3 4 5', 5)).toEqual('123456789')
+      expect(smallPreview('123456789 12 3 4 5', 5)).toEqual('123456789...')
 
     it 'uses an ellipsis if the preview is shorter than the text', ->
       expect(smallPreview('the quick brown fox jumps over', 12)).toEqual('the quick...')
+
+  describe 'capitalize', ->
+    {capitalize} = Structural.Data.Text
+
+    it 'returns empty string if given undefined', ->
+      expect(capitalize(undefined)).toBe('')
+    it 'returns empty string if given empty string', ->
+      expect(capitalize('')).toBe('')
+    it 'uppercases the first letter', ->
+      expect(capitalize('alice')).toBe('Alice')
+      expect(capitalize('Alice')).toBe('Alice')
+      expect(capitalize('bob charlie')).toBe('Bob charlie')
+      expect(capitalize('BOB CHARLIE')).toBe('BOB CHARLIE')

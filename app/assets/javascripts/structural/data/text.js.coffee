@@ -45,6 +45,13 @@ Text = {
       preview = "#{preview}..."
 
     preview
+
+  capitalize: (text) ->
+    if not text or text.length < 1
+      ''
+    else
+      firstLetter = text.substring(0, 1)
+      "#{firstLetter.toUpperCase()}#{text.substring(1)}"
 }
 
 Structural.Data.Text = Text
