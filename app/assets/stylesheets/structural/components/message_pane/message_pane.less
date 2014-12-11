@@ -41,8 +41,24 @@
     right: 0;
     bottom: 0;
 
-    .long-form-trigger {
+    .long-form-trigger, .upload-trigger {
       display: inline-block;
+      font-size: 2rem;
+      vertical-align: top;
+      margin-top: 0.3rem;
+    }
+
+    textarea {
+      .standard-border();
+      .standard-font();
+      .focusable-input();
+      font-size: 1rem;
+      width: calc(100% - 17rem);
+    }
+
+    .button-primary {
+      vertical-align: top;
+      margin-top: 0.7rem;
     }
   }
 }

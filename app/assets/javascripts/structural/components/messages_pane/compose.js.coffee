@@ -6,21 +6,27 @@ Compose = React.createClass
   getInitialState: ->
     text: ''
   render: ->
-    {LongFormCompose} = Structural.Components
+    {LongFormCompose, ModalTrigger, MenuTrigger, IconButton,
+     PrimaryButton} = Structural.Components
 
     div {className: 'message-compose-bar'},
-      Structural.Components.ModalTrigger({
+      ModalTrigger({
         className: 'long-form-trigger'
         content: LongFormCompose()
         title: if @props.conversation then @props.conversation.title else ''
-      }, Structural.Components.Icon({name: 'edit'}))
+      }, IconButton({icon: 'edit'}))
+      MenuTrigger({
+        className: 'upload-trigger'
+        content: 'Upload TBD',
+        title: 'Upload a File'
+      }, IconButton({icon: 'paperclip'}))
       textarea {
         className: 'message-text-input'
         value: @state.text
         onChange: @setText
         onKeyDown: @sendOnEnter
       }
-      Structural.Components.PrimaryButton {
+      PrimaryButton {
         onClick: @sendMessage
       }, "Send"
 

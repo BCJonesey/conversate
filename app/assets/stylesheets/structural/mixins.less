@@ -1,7 +1,12 @@
 @import "structural/variables.less";
 
+.standard-font() {
+  font-family: 'Lato', sans-serif;
+  color: @standard-font-color;
+}
+
 .title-font() {
-  font-family: 'Oswald';
+  font-family: 'Oswald', sans-serif;
   color: @standard-font-color;
 }
 
@@ -76,4 +81,13 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.focusable-input() {
+  outline: none;
+
+  &:focus {
+    border-color: @primary-color;
+    box-shadow: inset 0 0 0.5rem fade(@primary-color, 20%);
+  }
 }
