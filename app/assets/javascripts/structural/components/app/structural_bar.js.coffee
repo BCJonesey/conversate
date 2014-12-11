@@ -16,12 +16,15 @@ StructuralBar = React.createClass
   render: ->
     {BarButton, MenuTrigger, News} = Structural.Components
 
+    if @state.user and @state.user.site_admin
+      adminButton = BarButton({icon: 'dashboard', href: UrlFactory.admin()}, 'Admin')
+
     div {className: 'structural-bar'},
       div {className: 'left'},
         BarButton({active: true, icon: 'comment'}, 'Water Cooler'),
         BarButton({icon: 'users'}, 'People'),
         BarButton({href: UrlFactory.tour()}, 'Tour'),
-        BarButton({icon: 'dashboard', href: UrlFactory.admin()}, 'Admin'),
+        adminButton,
 
       div {className: 'right'},
         MenuTrigger({
