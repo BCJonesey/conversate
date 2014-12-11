@@ -5,6 +5,8 @@ LongFormCompose = React.createClass
   displayName: 'Long Form Compose'
   getInitialState: ->
     text: @props.text
+  componentDidMount: ->
+    @refs.input.getDOMNode().focus()
   render: ->
     {Button, PrimaryButton} = Structural.Components
 
@@ -13,6 +15,7 @@ LongFormCompose = React.createClass
         className: 'long-form-input'
         value: @state.text
         onChange: @setText
+        ref: 'input'
       }),
       div {className: 'long-form-actions'},
         Button({action: CloseModal}, 'Cancel'),
