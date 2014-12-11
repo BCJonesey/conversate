@@ -1,4 +1,4 @@
-{CloseModal} = Structural.Actions
+{CloseModal, SendMessage} = Structural.Actions
 {div, textarea} = React.DOM
 
 LongFormCompose = React.createClass
@@ -16,9 +16,14 @@ LongFormCompose = React.createClass
       }),
       div {className: 'long-form-actions'},
         Button({action: CloseModal}, 'Cancel'),
-        PrimaryButton({}, 'Send')
+        PrimaryButton({onClick: @sendAndClose}, 'Send')
 
   setText: (event) ->
-    @setState(text: value)
+    @setState(text: event.target.value)
+
+  sendAndClose: (event) ->
+    if @state.text != ''
+      SendMessage(@props.currentUser, @state.text, @props.conversation)
+      CloseModal()
 
 Structural.Components.LongFormCompose = LongFormCompose
