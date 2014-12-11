@@ -1,3 +1,4 @@
+{CloseModal} = Structural.Actions
 {div, textarea} = React.DOM
 
 LongFormCompose = React.createClass
@@ -14,7 +15,7 @@ LongFormCompose = React.createClass
         onChange: @setText
       }),
       div {className: 'long-form-actions'},
-        Button({}, 'Cancel'),
+        Button({action: CloseModal}, 'Cancel'),
         PrimaryButton({}, 'Send')
 
   setText: (event) ->
