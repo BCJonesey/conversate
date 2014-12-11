@@ -25,5 +25,6 @@ LongFormCompose = React.createClass
     if @state.text != ''
       SendMessage(@props.currentUser, @state.text, @props.conversation)
       CloseModal()
+      @props.afterSend()
 
 Structural.Components.LongFormCompose = LongFormCompose

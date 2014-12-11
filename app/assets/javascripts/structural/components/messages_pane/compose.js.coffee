@@ -16,6 +16,7 @@ Compose = React.createClass
           text: @state.text
           currentUser: @props.currentUser
           conversation: @props.conversation
+          afterSend: @clearText
         })
         title: if @props.conversation then @props.conversation.title else ''
       }, IconButton({icon: 'edit'}))
@@ -48,6 +49,9 @@ Compose = React.createClass
   sendMessage: ->
     if @state.text != ''
       SendMessage(@props.currentUser, @state.text, @props.conversation)
-      @setState(text: '')
+      @clearText()
+
+  clearText: ->
+    @setState(text: '')
 
 Structural.Components.Compose = Compose
