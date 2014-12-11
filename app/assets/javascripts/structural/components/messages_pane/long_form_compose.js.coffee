@@ -6,7 +6,7 @@ LongFormCompose = React.createClass
     {Button, PrimaryButton} = Structural.Components
 
     div {className: 'long-form-compose'},
-      textarea({className: 'long-form-input'}),
+      textarea({className: 'long-form-input', value: @props.text}),
       div {className: 'long-form-actions'},
         Button({}, 'Cancel'),
         PrimaryButton({}, 'Send')

@@ -12,7 +12,7 @@ Compose = React.createClass
     div {className: 'message-compose-bar'},
       ModalTrigger({
         className: 'long-form-trigger'
-        content: LongFormCompose()
+        content: LongFormCompose({text: @state.text})
         title: if @props.conversation then @props.conversation.title else ''
       }, IconButton({icon: 'edit'}))
       MenuTrigger({
