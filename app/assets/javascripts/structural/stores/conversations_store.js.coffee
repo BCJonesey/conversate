@@ -16,6 +16,9 @@ Conversations = new Hippodrome.Store
   }, {
     action: Structural.Actions.ArchiveUnarchiveConversation
     callback: 'archiveUnarchive'
+  }, {
+    action: Structural.Actions.RetitleConversation
+    callback: 'retitle'
   }]
 
   conversationsForFolder: (folder) ->
@@ -53,6 +56,11 @@ Conversations = new Hippodrome.Store
     if payload.archived
       convo.pinned = false
 
+    @trigger()
+
+  retitle: (payload) ->
+    convo = @byId(payload.folder, payload.conversation.id)
+    convo.title = payload.title
     @trigger()
 
   public:

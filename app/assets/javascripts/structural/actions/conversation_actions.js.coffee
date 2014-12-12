@@ -1,3 +1,6 @@
+{buildMessage} = Structural.Data.Message
+{nextId} = Structural.Data.TemporaryIdFactory
+
 Structural.Actions.UpdateConversationList = new Hippodrome.Action(
   'Update Conversation List'
   (conversations, folder) ->
@@ -22,6 +25,17 @@ Structural.Actions.ArchiveUnarchiveConversation = new Hippodrome.Action(
   'Archive Unarchive Conversation'
   (archived, conversation, folder, user) ->
     archived: archived
+    conversation: conversation
+    folder: folder
+    user: user
+)
+
+Structural.Actions.RetitleConversation = new Hippodrome.Action(
+  'Retitle Conversation'
+  (title, conversation, folder, user) ->
+    title: title
+    message: buildMessage(user, {title: title}, 'retitle')
+    temporaryId: nextId()
     conversation: conversation
     folder: folder
     user: user

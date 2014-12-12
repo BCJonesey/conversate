@@ -67,14 +67,14 @@ Message = {
     # the and short-circuits.
     !!(user and (message.user.id == user.id))
 
-  buildMessage: (user, text, type) ->
+  buildMessage: (user, props, type) ->
     type = type || 'message'
-    return {
+    message = {
       type: type
       user: user
-      text: text
       timestamp: (new Date()).valueOf()
     }
+    _.assign(message, props)
 }
 
 Structural.Data.Message = Message

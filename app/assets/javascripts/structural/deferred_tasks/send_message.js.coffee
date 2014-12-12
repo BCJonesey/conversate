@@ -3,8 +3,14 @@
 {newMessage} = Structural.Api.Messages
 
 SendMessage = new Hippodrome.DeferredTask
-  action: Structural.Actions.SendMessage
-  task: (payload) ->
+  dispatches: [{
+    action: Structural.Actions.SendMessage
+    callback: 'send'
+  }, {
+    action: Structural.Actions.RetitleConversation
+    callback: 'send'
+  }]
+  send: (payload) ->
     activeFolder = Folders.byId(ActiveFolder.id())
 
     success = (response) ->

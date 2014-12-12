@@ -7,20 +7,19 @@ Messages = new Hippodrome.Store
   initialize: ->
     @rawMessagesByConversation = {}
 
-  dispatches: [
-    {
-      action: Structural.Actions.UpdateMessagesList
-      callback: 'updateMessagesList'
-    }
-    {
-      action: Structural.Actions.SendMessage
-      callback: 'appendTemporaryMessage'
-    }
-    {
-      action: Structural.Actions.SendMessageSuccess
-      callback: 'replaceTemporaryMessage'
-    }
-  ]
+  dispatches: [{
+    action: Structural.Actions.UpdateMessagesList
+    callback: 'updateMessagesList'
+  }, {
+    action: Structural.Actions.SendMessage
+    callback: 'appendTemporaryMessage'
+  }, {
+    action: Structural.Actions.SendMessageSuccess
+    callback: 'replaceTemporaryMessage'
+  }, {
+    action: Structural.Actions.RetitleConversation
+    callback: 'appendTemporaryMessage'
+  }]
 
   messagesForConversation: (conversation) ->
     if not conversation

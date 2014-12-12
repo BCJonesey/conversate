@@ -1,4 +1,5 @@
 {buildMessage} = Structural.Data.Message
+{nextId} = Structural.Data.TemporaryIdFactory
 
 Structural.Actions.UpdateMessagesList = new Hippodrome.Action(
   'Update Messages List'
@@ -7,13 +8,11 @@ Structural.Actions.UpdateMessagesList = new Hippodrome.Action(
     conversation: conversation
 )
 
-lastMsgTempId = 1
-nextMsgTempId = -> "Temporary_Message_ID_#{lastMsgTempId++}"
 Structural.Actions.SendMessage = new Hippodrome.Action(
   'Send Message'
   (user, text, conversation) ->
-    message: buildMessage(user, text)
-    temporaryId: nextMsgTempId()
+    message: buildMessage(user, {text: text})
+    temporaryId: nextId()
     conversation: conversation
 )
 

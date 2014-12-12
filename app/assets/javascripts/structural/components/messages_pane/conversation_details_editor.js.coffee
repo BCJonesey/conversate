@@ -1,8 +1,11 @@
-{PinUnpinConversation, ArchiveUnarchiveConversation} = Structural.Actions
+{PinUnpinConversation, ArchiveUnarchiveConversation, RetitleConversation} = Structural.Actions
 {div, label, input} = React.DOM
 
 ConversationDetailsEditor = React.createClass
   displayName: 'Conversation Details Editor'
+  getInitialState: ->
+    title: @props.conversation.title
+
   render: ->
     {Icon, Button} = Structural.Components
 
@@ -19,8 +22,19 @@ ConversationDetailsEditor = React.createClass
       div({className: 'section-header'}, 'Title')
       div({className: 'change-title'},
         label({htmlFor: 'conversation-title-input'}, 'Change title (for everyone)')
-        input({type: 'text', id: 'conversation-title-input', value: @props.conversation.title, onChange: () -> })
-        Button({}, 'Update Title'))
+        input({
+          type: 'text'
+          id: 'conversation-title-input'
+          value: @state.title
+          onChange: @setTitle
+        })
+        Button({
+          action: RetitleConversation
+          actionArgs: [@state.title, @props.conversation, @props.folder, @props.currentUser]
+        }, 'Update Title'))
+
+  setTitle: (event) ->
+    @setState(title: event.target.value)
 
   pinUnpin: (event) ->
     PinUnpinConversation(not @props.conversation.pinned, @props.conversation, @props.folder, @props.currentUser)
