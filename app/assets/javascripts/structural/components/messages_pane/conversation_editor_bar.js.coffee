@@ -3,8 +3,20 @@
 ConversationEditorBar = React.createClass
   displayName: 'Conversation Editor Bar'
   render: ->
+    {MenuTrigger, IconButton} = Structural.Components
+
     title = if @props.conversation then @props.conversation.title else ''
     div {className: 'conversation-editor'},
-      span {className: 'conversation-title'}, title
+      span({className: 'conversation-title'}, title),
+      MenuTrigger({
+        className: 'details-editor-trigger'
+        title: 'Conversation Details'
+        content: 'Details TBD'
+      }, IconButton({icon: 'chevron-down'}))
+      MenuTrigger({
+        className: 'conversation-folders-trigger'
+        title: 'Folders'
+        content: 'Folders TBD'
+      }, IconButton({icon: 'folder-open-o'}))
 
 Structural.Components.ConversationEditorBar = ConversationEditorBar
