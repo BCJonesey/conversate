@@ -9,6 +9,9 @@ UpdateConversationForUser = new Hippodrome.DeferredTask
   }, {
     action: Structural.Actions.PinUnpinConversation
     callback: 'updateConversation'
+  }, {
+    action: Structural.Actions.ArchiveUnarchiveConversation
+    callback: 'updateConversation'
   }]
 
   updateConversation: (payload) ->

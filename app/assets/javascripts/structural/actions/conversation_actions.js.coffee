@@ -17,3 +17,12 @@ Structural.Actions.PinUnpinConversation = new Hippodrome.Action(
     folder: folder
     user: user
 )
+
+Structural.Actions.ArchiveUnarchiveConversation = new Hippodrome.Action(
+  'Archive Unarchive Conversation'
+  (archived, conversation, folder, user) ->
+    archived: archived
+    conversation: conversation
+    folder: folder
+    user: user
+)

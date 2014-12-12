@@ -1,4 +1,4 @@
-{PinUnpinConversation} = Structural.Actions
+{PinUnpinConversation, ArchiveUnarchiveConversation} = Structural.Actions
 {div, label, input} = React.DOM
 
 ConversationDetailsEditor = React.createClass
@@ -12,7 +12,7 @@ ConversationDetailsEditor = React.createClass
         Icon({name: 'thumb-tack'})
         if @props.conversation.pinned then 'Unpin' else 'Pin'
         ' Conversation')
-      div({className: 'archive-unarchive'},
+      div({className: 'archive-unarchive', onClick: @archiveUnarchive},
         Icon({name: 'inbox'})
         if @props.conversation.archived then 'Unarchive' else 'Archive'
         ' Conversation')
@@ -24,5 +24,7 @@ ConversationDetailsEditor = React.createClass
 
   pinUnpin: (event) ->
     PinUnpinConversation(not @props.conversation.pinned, @props.conversation, @props.folder, @props.currentUser)
+  archiveUnarchive: (event) ->
+    ArchiveUnarchiveConversation(not @props.conversation.archived, @props.conversation, @props.folder, @props.currentUser)
 
 Structural.Components.ConversationDetailsEditor = ConversationDetailsEditor

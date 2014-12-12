@@ -13,6 +13,9 @@ Conversations = new Hippodrome.Store
   }, {
     action: Structural.Actions.PinUnpinConversation
     callback: 'pinUnpin'
+  }, {
+    action: Structural.Actions.ArchiveUnarchiveConversation
+    callback: 'archiveUnarchive'
   }]
 
   conversationsForFolder: (folder) ->
@@ -39,6 +42,17 @@ Conversations = new Hippodrome.Store
   pinUnpin: (payload) ->
     convo = @byId(payload.folder, payload.conversation.id)
     convo.pinned = payload.pinned
+    if payload.pinned
+      convo.archived = false
+
+    @trigger()
+
+  archiveUnarchive: (payload) ->
+    convo = @byId(payload.folder, payload.conversation.id)
+    convo.archived = payload.archived
+    if payload.archived
+      convo.pinned = false
+
     @trigger()
 
   public:
