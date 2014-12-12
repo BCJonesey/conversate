@@ -1,0 +1,50 @@
+@import "structural/variables.less";
+@import "structural/mixins.less";
+
+.conversation-details-editor {
+  .section-header {
+    .button-toolbar(@small-toolbar-height);
+    .small-light-font();
+    .standard-border-bottom();
+  }
+
+  .pin-unpin, .archive-unarchive {
+    .standard-border-bottom();
+    padding: 1rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: @active-background-color;
+    }
+
+    .fa {
+      color: @light-font-color;
+      padding-right: 0.5rem;
+    }
+  }
+
+  .change-title {
+    padding: 0.5rem;
+    text-align: center;
+
+    label {
+      .small-light-font();
+      display: block;
+      text-align: left;
+    }
+
+    input {
+      .standard-border();
+      .focusable-input();
+      .standard-font();
+      font-size: 1rem;
+      padding: 0.5rem;
+      width: 15rem;
+      display: block;
+    }
+
+    .button {
+      margin: 0.5rem 0;
+    }
+  }
+}
