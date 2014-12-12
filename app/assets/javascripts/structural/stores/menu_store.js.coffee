@@ -10,6 +10,9 @@ Menu = new Hippodrome.Store
     action: Structural.Actions.OpenMenu
     callback: 'openMenu'
   }, {
+    action: Structural.Actions.ReplaceMenuContent
+    callback: 'replaceMenu'
+  }, {
     action: Structural.Actions.CloseMenu
     callback: 'closeMenu'
   }]
@@ -20,6 +23,10 @@ Menu = new Hippodrome.Store
     @_node = payload.node
     @_title = payload.title
     @trigger()
+  replaceMenu: (payload) ->
+    if @_open
+      @_content = payload.content
+      @trigger()
   closeMenu: (payload) ->
     @_open = false
     @_content = undefined

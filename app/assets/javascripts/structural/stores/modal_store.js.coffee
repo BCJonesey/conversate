@@ -8,6 +8,9 @@ Modal = new Hippodrome.Store
     action: Structural.Actions.OpenModal
     callback: 'openModal'
   }, {
+    action: Structural.Actions.ReplaceModalContent
+    callback: 'replaceModal'
+  }, {
     action: Structural.Actions.CloseModal
     callback: 'closeModal'
   }]
@@ -17,6 +20,10 @@ Modal = new Hippodrome.Store
     @_content = payload.content
     @_title = payload.title
     @trigger()
+  replaceModal: (payload) ->
+    if @_open
+      @_content = payload.content
+      @trigger()
   closeModal: (payload) ->
     @_open = false
     @_content = undefined
