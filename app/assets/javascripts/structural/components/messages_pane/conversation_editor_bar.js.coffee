@@ -11,7 +11,11 @@ ConversationEditorBar = React.createClass
       MenuTrigger({
         className: 'details-editor-trigger'
         title: 'Conversation Details'
-        content: ConversationDetailsEditor({conversation: @props.conversation})
+        content: ConversationDetailsEditor({
+          conversation: @props.conversation
+          folder: @props.folder
+          currentUser: @props.currentUser
+        })
       }, IconButton({icon: 'chevron-down'}))
       MenuTrigger({
         className: 'conversation-folders-trigger'

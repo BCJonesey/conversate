@@ -1,3 +1,4 @@
+{PinUnpinConversation} = Structural.Actions
 {div, label, input} = React.DOM
 
 ConversationDetailsEditor = React.createClass
@@ -7,7 +8,7 @@ ConversationDetailsEditor = React.createClass
 
     div {className: 'conversation-details-editor'},
       div({className: 'section-header'}, 'Status')
-      div({className: 'pin-unpin'},
+      div({className: 'pin-unpin', onClick: @pinUnpin},
         Icon({name: 'thumb-tack'})
         if @props.conversation.pinned then 'Unpin' else 'Pin'
         ' Conversation')
@@ -17,8 +18,11 @@ ConversationDetailsEditor = React.createClass
         ' Conversation')
       div({className: 'section-header'}, 'Title')
       div({className: 'change-title'},
-        label({for: 'conversation-title-input'}, 'Change title (for everyone)')
+        label({htmlFor: 'conversation-title-input'}, 'Change title (for everyone)')
         input({type: 'text', id: 'conversation-title-input', value: @props.conversation.title})
         Button({}, 'Update Title'))
+
+  pinUnpin: (event) ->
+    PinUnpinConversation(not @props.conversation.pinned, @props.conversation, @props.folder, @props.currentUser)
 
 Structural.Components.ConversationDetailsEditor = ConversationDetailsEditor

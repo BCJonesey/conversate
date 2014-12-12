@@ -4,16 +4,16 @@ Conversations = new Hippodrome.Store
   displayName: 'Conversations Store'
   initialize: ->
     @conversationsByFolder = {}
-  dispatches: [
-    {
-      action: Structural.Actions.UpdateConversationList
-      callback: 'updateConversationList'
-    }
-    {
-      action: Structural.Actions.MarkRead
-      callback: 'updateMostRecentViewed'
-    }
-  ]
+  dispatches: [{
+    action: Structural.Actions.UpdateConversationList
+    callback: 'updateConversationList'
+  },{
+    action: Structural.Actions.MarkRead
+    callback: 'updateMostRecentViewed'
+  }, {
+    action: Structural.Actions.PinUnpinConversation
+    callback: 'pinUnpin'
+  }]
 
   conversationsForFolder: (folder) ->
     if not folder
@@ -34,6 +34,11 @@ Conversations = new Hippodrome.Store
   updateMostRecentViewed: (payload) ->
     convo = @byId(payload.folder, payload.conversation.id)
     convo.most_recent_viewed = payload.message.timestamp
+    @trigger()
+
+  pinUnpin: (payload) ->
+    convo = @byId(payload.folder, payload.conversation.id)
+    convo.pinned = payload.pinned
     @trigger()
 
   public:

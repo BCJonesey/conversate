@@ -49,6 +49,8 @@ MessagesPane = React.createClass
     div {className: 'message-pane'},
       Structural.Components.ConversationEditorBar(
         conversation: @state.conversation
+        folder: @state.folder
+        currentUser: @state.currentUser
       )
       Structural.Components.ParticipantsEditorBar(
         conversation: @state.conversation

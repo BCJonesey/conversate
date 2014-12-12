@@ -8,3 +8,12 @@ Structural.Actions.UpdateConversationList = new Hippodrome.Action(
 Structural.Actions.UpdateActiveConversation = new Hippodrome.Action(
   'Update Active Conversation'
   (activeConversationId) -> {activeConversationId: activeConversationId})
+
+Structural.Actions.PinUnpinConversation = new Hippodrome.Action(
+  'Pin Unpin Conversation'
+  (pinned, conversation, folder, user) ->
+    pinned: pinned
+    conversation: conversation
+    folder: folder
+    user: user
+)
