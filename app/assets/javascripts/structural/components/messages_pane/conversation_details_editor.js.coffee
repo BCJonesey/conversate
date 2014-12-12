@@ -19,7 +19,7 @@ ConversationDetailsEditor = React.createClass
       div({className: 'section-header'}, 'Title')
       div({className: 'change-title'},
         label({htmlFor: 'conversation-title-input'}, 'Change title (for everyone)')
-        input({type: 'text', id: 'conversation-title-input', value: @props.conversation.title})
+        input({type: 'text', id: 'conversation-title-input', value: @props.conversation.title, onChange: () -> })
         Button({}, 'Update Title'))
 
   pinUnpin: (event) ->
