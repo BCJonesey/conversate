@@ -1,0 +1,27 @@
+@import "structural/variables.less";
+@import "structural/mixins.less";
+
+@list-max-height: 30rem;
+
+.conversation-folders-editor {
+  max-height: @list-max-height;
+  overflow-y: scroll;
+
+  .folder-checkbox, .folder-checkbox-checked {
+    .standard-border-bottom();
+    padding: 0.5rem;
+    cursor: pointer;
+
+    &:last-child {
+      border: none;
+    }
+
+    .fa {
+      padding-right: 0.5rem;
+    }
+  }
+
+  .folder-checkbox:hover, .folder-checkbox-checked {
+    background-color: @active-background-color;
+  }
+}
