@@ -75,9 +75,11 @@ Conversations = new Hippodrome.Store
     convo = payload.conversation
     for folder in payload.added
       @conversationsForFolder(folder)[convo.id] = convo
+      convo.folder_ids.push(folder.id)
 
     for folder in payload.removed
       delete @conversationsForFolder(folder)[convo.id]
+      convo.folder_ids = _.without(convo.folder_ids, folder.id)
 
     @trigger()
 
