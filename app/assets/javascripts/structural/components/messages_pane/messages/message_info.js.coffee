@@ -3,7 +3,7 @@
 
 MessageInfo = React.createClass
   render: ->
-    {Icon} = Structural.Components
+    {Icon, ModalTrigger, FullEmailText} = Structural.Components
 
     if @props.includeSender
       name = Structural.Data.Participant.name(@props.message.user)
@@ -17,7 +17,12 @@ MessageInfo = React.createClass
                                             @props)
 
     if @props.message.type == 'email_message'
-      fullText = Icon {name: 'envelope-o', className: 'full-email-text'}
+      name = Structural.Data.Participant.name(@props.message.user)
+      fullText = ModalTrigger({
+        className: 'full-email-text'
+        title: "#{name}'s Email Message"
+        content: FullEmailText({message: @props.message})
+      }, Icon({name: 'envelope-o'}))
 
     div {className: 'message-info'},
       div({className: 'message-details'}, fullText, timestr)
