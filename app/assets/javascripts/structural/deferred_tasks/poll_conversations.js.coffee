@@ -13,10 +13,9 @@ PollConversations = new Hippodrome.DeferredTask
       success = (data) ->
         # This is our attempt to not send out of date API responses to the
         # stores
-        if Conversations.lastActionId() != lastConversationAction
-          return
+        if Conversations.lastActionId() == lastConversationAction
+          UpdateConversationList(arrayToIndexedHash(data), activeFolder)
 
-        UpdateConversationList(arrayToIndexedHash(data), activeFolder)
         setTimeout(doPoll, POLL_INTERVAL)
       error = ->
         setTimeout(doPoll, POLL_INTERVAL)
