@@ -22,6 +22,7 @@ ConversationEditorBar = React.createClass
         className: 'conversation-folders-trigger'
         title: 'Folders'
         content: ConversationFoldersEditor({
+          currentFolder: @props.currentFolder
           folders: @props.folders
           conversation: @props.conversation
         })

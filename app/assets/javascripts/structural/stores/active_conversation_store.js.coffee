@@ -14,6 +14,9 @@ ActiveConversation = new Hippodrome.Store
   }, {
     action: Structural.Actions.UpdateActiveFolder
     callback: 'pickFirstIdIfNotInFolder'
+  }, {
+    action: Structural.Actions.UpdateFolders
+    callback: 'pickFirstIfRemoved'
   }]
 
   updateActiveConversationId: (payload) ->
@@ -31,6 +34,13 @@ ActiveConversation = new Hippodrome.Store
     if not Structural.Stores.Conversations.byId(activeFolder, @activeConversationId)
       conversationsList = Structural.Stores.Conversations.chronologicalOrder(activeFolder)
       firstConvo = _.first(conversationsList)
+
+      @activeConversationId = if firstConvo then firstConvo.id else undefined
+      @trigger()
+  pickFirstIfRemoved: (payload) ->
+    if payload.folder.id in _.pluck(payload.removed, 'id')
+      conversationList = Structural.Stores.Conversations.chronologicalOrder(payload.folder)
+      firstConvo = _.first(conversationList)
 
       @activeConversationId = if firstConvo then firstConvo.id else undefined
       @trigger()

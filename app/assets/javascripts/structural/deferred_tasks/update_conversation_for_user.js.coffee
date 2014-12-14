@@ -16,8 +16,13 @@ UpdateConversationForUser = new Hippodrome.DeferredTask
 
   updateConversation: (payload) ->
     convo = Conversations.byId(payload.folder, payload.conversation.id)
-    user = CurrentUser.getUser()
 
-    success = ->
-    error = ->
-    updateConversationForUser(convo, user, success, error)
+    # In the case where this gets triggered because of an update folders message
+    # that removes the conversation from the active folder, we don't have a
+    # quick way to get to the conversation anymore, so screw it.
+    if convo
+      user = CurrentUser.getUser()
+
+      success = ->
+      error = ->
+      updateConversationForUser(convo, user, success, error)

@@ -1,3 +1,4 @@
+{Folders} = Structural.Stores
 {div, span} = React.DOM
 
 FolderCheckbox = React.createClass
@@ -23,6 +24,18 @@ ConversationFoldersEditor = React.createClass
   displayName: 'Conversation Folders Editor'
   getInitialState: ->
     folderIds: @props.conversation.folder_ids
+
+  componentWillUnmount: () ->
+    addedIds = _.difference(@state.folderIds, @props.conversation.folder_ids)
+    removedIds = _.difference(@props.conversation.folder_ids, @state.folderIds)
+
+    if addedIds.length == 0 and removedIds.length == 0
+      return
+
+    added = _.map(addedIds, (id) -> Folders.byId(id))
+    removed = _.map(removedIds, (id) -> Folders.byId(id))
+    Structural.Actions.UpdateFolders(added, removed, @props.conversation, @props.currentFolder, @props.currentUser)
+
   render: ->
     checkBoxes = _.map @props.folders, (folder) =>
       FolderCheckbox({

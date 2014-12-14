@@ -19,6 +19,9 @@ Conversations = new Hippodrome.Store
   }, {
     action: Structural.Actions.RetitleConversation
     callback: 'retitle'
+  }, {
+    action: Structural.Actions.UpdateFolders
+    callback: 'updateFolders'
   }]
 
   conversationsForFolder: (folder) ->
@@ -39,8 +42,13 @@ Conversations = new Hippodrome.Store
 
   updateMostRecentViewed: (payload) ->
     convo = @byId(payload.folder, payload.conversation.id)
-    convo.most_recent_viewed = payload.message.timestamp
-    @trigger()
+
+    # In the case where this gets triggered because of an update folders message
+    # that removes the conversation from the active folder, we don't have a
+    # quick way to get to the conversation anymore, so screw it.
+    if convo
+      convo.most_recent_viewed = payload.message.timestamp
+      @trigger()
 
   pinUnpin: (payload) ->
     convo = @byId(payload.folder, payload.conversation.id)
@@ -61,6 +69,16 @@ Conversations = new Hippodrome.Store
   retitle: (payload) ->
     convo = @byId(payload.folder, payload.conversation.id)
     convo.title = payload.title
+    @trigger()
+
+  updateFolders: (payload) ->
+    convo = payload.conversation
+    for folder in payload.added
+      @conversationsForFolder(folder)[convo.id] = convo
+
+    for folder in payload.removed
+      delete @conversationsForFolder(folder)[convo.id]
+
     @trigger()
 
   public:

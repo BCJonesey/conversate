@@ -9,6 +9,9 @@ SendMessage = new Hippodrome.DeferredTask
   }, {
     action: Structural.Actions.RetitleConversation
     callback: 'send'
+  }, {
+    action: Structural.Actions.UpdateFolders
+    callback: 'send'
   }]
   send: (payload) ->
     activeFolder = Folders.byId(ActiveFolder.id())

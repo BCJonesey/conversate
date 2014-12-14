@@ -40,3 +40,15 @@ Structural.Actions.RetitleConversation = new Hippodrome.Action(
     folder: folder
     user: user
 )
+
+Structural.Actions.UpdateFolders = new Hippodrome.Action(
+  'Update Folders'
+  (added, removed, conversation, folder, user) ->
+    added: added
+    removed: removed
+    message: buildMessage(user, {added: added, removed: removed}, 'update_folders')
+    temporaryId: nextId()
+    conversation: conversation
+    folder: folder
+    user: user
+)

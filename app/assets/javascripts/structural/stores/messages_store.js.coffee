@@ -19,6 +19,9 @@ Messages = new Hippodrome.Store
   }, {
     action: Structural.Actions.RetitleConversation
     callback: 'appendTemporaryMessage'
+  }, {
+    action: Structural.Actions.UpdateFolders
+    callback: 'appendTemporaryMessage'
   }]
 
   messagesForConversation: (conversation) ->
