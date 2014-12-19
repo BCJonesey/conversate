@@ -45,7 +45,7 @@ describe 'Data.Message', ->
         id: 10
         email: 'alice@example.com'
 
-      expect(buildMessage(user, 'Testing testing')).toEqual(expected)
+      expect(buildMessage(user, {text: 'Testing testing'})).toEqual(expected)
 
     it 'builds a message with the supplied type', ->
       expected =
@@ -60,7 +60,7 @@ describe 'Data.Message', ->
         id: 20
         email: 'bob@example.com'
 
-      expect(buildMessage(user, 'Hey everyone', 'email_message')).toEqual(expected)
+      expect(buildMessage(user, {text: 'Hey everyone'}, 'email_message')).toEqual(expected)
 
   describe 'isUsersMessage', ->
     {isUsersMessage} = Structural.Data.Message
