@@ -1,0 +1,21 @@
+@import "structural/variables.less";
+@import "structural/mixins.less";
+
+.conversation-participants-editor {
+  .participant-list {
+    .participant {
+      .standard-border-bottom();
+      margin: 0 0.5rem;
+      padding: 0.5rem 0 0.5rem 0.5rem;
+
+      &:last-child {
+        border: none;
+        margin-bottom: 0;
+      }
+
+      .remove-participant {
+        float: right;
+      }
+    }
+  }
+}

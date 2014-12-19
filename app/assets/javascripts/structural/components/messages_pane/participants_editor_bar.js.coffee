@@ -10,7 +10,7 @@ Participant = React.createClass
 ParticipantsEditorBar = React.createClass
   displayName: 'ParticipantsEditorBar'
   render: ->
-    {InlineParticipantList, MenuTrigger, IconButton} = Structural.Components
+    {InlineParticipantList, MenuTrigger, IconButton, ConversationParticipantsEditor} = Structural.Components
 
     if @props.conversation
       participants = @props.conversation.participants
@@ -24,7 +24,7 @@ ParticipantsEditorBar = React.createClass
       MenuTrigger({
         className: 'participant-editor-trigger'
         title: 'Participants'
-        content: 'Participants TBD'
+        content: ConversationParticipantsEditor({conversation: @props.conversation})
       }, IconButton({icon: 'plus'}))
 
 Structural.Components.ParticipantsEditorBar = ParticipantsEditorBar
