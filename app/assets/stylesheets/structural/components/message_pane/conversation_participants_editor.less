@@ -2,7 +2,15 @@
 @import "structural/mixins.less";
 
 .conversation-participants-editor {
+  .participant-input {
+    font-size: 1rem;
+    border: none;
+    padding: 0.5rem;
+  }
+
   .participant-list {
+    .standard-border-top();
+
     .participant {
       .standard-border-bottom();
       margin: 0 0.5rem;
