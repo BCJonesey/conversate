@@ -5,13 +5,14 @@
 MenuTrigger = React.createClass
   displayName: 'Menu Trigger'
   mixins: [
-    Menu.listen('menuUpdate')
+    Menu.listenWith('menuUpdate')
   ]
-  getInitialState: ->
-    active: false
-    open: Menu.open()
+
   menuUpdate: ->
-    @setState(open: Menu.open(), active: @state.active and Menu.open())
+    return {
+      open: Menu.open()
+      active: @state and @state.active and Menu.open()
+    }
 
   componentDidUpdate: (prevProps, prevState) ->
     if @state.active

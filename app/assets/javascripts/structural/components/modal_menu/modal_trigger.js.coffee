@@ -5,13 +5,13 @@
 ModalTrigger = React.createClass
   displayName: 'Modal Trigger'
   mixins: [
-    Modal.listen('modalUpdate')
+    Modal.listenWith('modalUpdate')
   ]
-  getInitialState: ->
-    active: false
-    open: Modal.open()
   modalUpdate: ->
-    @setState(open: Modal.open(), active: @state.active and Modal.open())
+    return {
+      open: Modal.open()
+      active: @state and @state.active and Modal.open()
+    }
 
   componentDidUpdate: (prevProps, prevState) ->
     if @state.active

@@ -4,12 +4,8 @@
 MenuLayer = React.createClass
   displayName: 'Menu Layer'
   mixins: [
-    Menu.listen('updateMenu')
+    Menu.listen('open', Menu.open)
   ]
-  getInitialState: ->
-    open: Menu.open()
-  updateMenu: ->
-    @setState(open: Menu.open())
 
   render: ->
     if @state.open

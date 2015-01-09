@@ -9,7 +9,7 @@ Messages = Hippodrome.createStore
 
     @dispatch(Structural.Actions.UpdateMessagesList).to(@updateMessagesList)
     @dispatch(Structural.Actions.SendMessage).to(@appendTemporaryMessage)
-    @dispatch(Structrual.Actions.SendMessageSuccess)
+    @dispatch(Structural.Actions.SendMessageSuccess)
       .to(@replaceTemporaryMessage)
     @dispatch(Structural.Actions.RetitleConversation)
       .to(@appendTemporaryMessage)

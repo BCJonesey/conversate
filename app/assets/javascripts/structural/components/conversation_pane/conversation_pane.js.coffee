@@ -5,31 +5,19 @@
 ConversationPane = React.createClass
   displayName: 'Conversation Pane'
   mixins: [
-    Conversations.listen('updateConversations')
-    CurrentUser.listen('updateUser')
-    ActiveConversation.listen('updateActiveConversation')
-    Folders.listen('updateConversations')
-    ActiveFolder.listen('updateConversations')
-    ConversationsState.listen('updateConversationsState')
+    Conversations.listenWith('updateConversations')
+    ActiveFolder.listenWith('updateConversations')
+    Folders.listenWith('updateConversations')
+    CurrentUser.listen('user', CurrentUser.getUser)
+    ActiveConversation.listen('activeConversation', ActiveConversation.id)
+    ConversationsState.listen('loading', ConversationsState.isLoading)
   ]
-
-  getInitialState: ->
-    folder = Folders.byId(ActiveFolder.id())
-
-    conversations: Conversations.chronologicalOrder(folder)
-    user: CurrentUser.getUser()
-    activeConversation: ActiveConversation.id()
-    loading: ConversationsState.isLoading()
 
   updateConversations: ->
     folder = Folders.byId(ActiveFolder.id())
-    @setState(conversations: Conversations.chronologicalOrder(folder))
-  updateUser: ->
-    @setState(user: CurrentUser.getUser())
-  updateActiveConversation: ->
-    @setState(activeConversation: ActiveConversation.id())
-  updateConversationsState: ->
-    @setState(loading: ConversationsState.isLoading())
+    return {
+      conversations: Conversations.chronologicalOrder(folder)
+    }
 
   render: ->
     {ConversationList} = Structural.Components

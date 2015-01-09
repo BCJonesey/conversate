@@ -6,12 +6,8 @@
 StructuralBar = React.createClass
   displayName: 'Structural Bar'
   mixins: [
-    CurrentUser.listen('updateUser')
+    CurrentUser.listen('user', CurrentUser.getUser)
   ]
-  getInitialState: ->
-    user: CurrentUser.getUser()
-  updateUser: ->
-    @setState(user: CurrentUser.getUser())
 
   render: ->
     {BarButton, MenuTrigger, News} = Structural.Components

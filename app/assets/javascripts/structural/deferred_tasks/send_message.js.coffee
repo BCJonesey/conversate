@@ -2,7 +2,7 @@
 {SendMessageSuccess, SendMessageFailed, MarkRead} = Structural.Actions
 {newMessage} = Structural.Api.Messages
 
-SendMessage = new Hippodrome.DeferredTask
+SendMessage = Hippodrome.createDeferredTask
   initialize: (options) ->
     @dispatch(Structural.Actions.SendMessage).to(@send)
     @dispatch(Structural.Actions.RetitleConversation).to(@send)

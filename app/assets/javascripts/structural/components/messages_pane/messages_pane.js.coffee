@@ -5,45 +5,32 @@
 MessagesPane = React.createClass
   displayName: 'Action Pane'
   mixins: [
-    Folders.listen('updateConversation')
-    ActiveFolder.listen('updateConversation')
-    Conversations.listen('updateConversation')
-    ActiveConversation.listen('updateConversation')
-    Messages.listen('onMessagesChange')
-    CurrentUser.listen('updateUser')
-    MessagesState.listen('updateMessagesState')
+    Folders.listenWith('updateConversation')
+    ActiveFolder.listenWith('updateConversation')
+    Conversations.listenWith('updateConversation')
+    ActiveConversation.listenWith('updateConversation')
+    Messages.listen('messages', () -> Messages.distilled(@state.conversation))
+    CurrentUser.listen('currentUser', CurrentUser.getUser())
+    MessagesState.listenWith('updateMessagesState')
   ]
-
-  getInitialState: ->
-    folder = Folders.byId(ActiveFolder.id())
-    conversation = Conversations.byId(folder, ActiveConversation.id())
-
-    return {
-      folder: folder
-      conversation: conversation
-      messages: Messages.distilled(conversation)
-      currentUser: CurrentUser.getUser()
-      loading: MessagesState.isLoading()
-      none: MessagesState.isNone()
-    }
 
   updateConversation: ->
     folder = Folders.byId(ActiveFolder.id())
     conversation = Conversations.byId(folder, ActiveConversation.id())
-    @setState(
+    return {
       folder: folder
       conversation: conversation
       messages: Messages.distilled(conversation)
-    )
+    }
   onMessagesChange: ->
     @setState(messages: Messages.distilled(@state.conversation))
   updateUser: ->
     @setState(currentUser: CurrentUser.getUser())
   updateMessagesState: ->
-    @setState(
+    return {
       loading: MessagesState.isLoading()
       none: MessagesState.isNone()
-    )
+    }
 
   render: ->
     div {className: 'message-pane'},

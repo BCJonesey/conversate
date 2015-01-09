@@ -3,7 +3,7 @@
 
 POLL_INTERVAL = 5 * 1000
 
-PollMessages = Hippodrome.createDeferredTasks
+PollMessages = Hippodrome.createDeferredTask
   initialize: (options) ->
     doPoll = ->
       activeFolder = Folders.byId(ActiveFolder.id())

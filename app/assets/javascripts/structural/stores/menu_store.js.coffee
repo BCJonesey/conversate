@@ -1,4 +1,4 @@
-Menu = new Hippodrome.Store
+Menu = Hippodrome.createStore
   displayName: 'Menu Store'
   initialize: ->
     @_open = false

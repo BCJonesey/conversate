@@ -4,14 +4,8 @@
 ModalLayer = React.createClass
   displayName: 'Modal Layer'
   mixins: [
-    Modal.listen('updateModal')
+    Modal.listen('open', Modal.open)
   ]
-  getInitialState: ->
-    open: Modal.open()
-    content: Modal.content()
-    title: Modal.title()
-  updateModal: ->
-    @setState(open: Modal.open(), content: Modal.content(), title: Modal.title())
 
   render: ->
     {IconButton} = Structural.Components
@@ -20,9 +14,9 @@ ModalLayer = React.createClass
       div {className: 'modal-screen', ref: 'screen', onClick: @closeOnClickOff},
         div {className: 'modal'},
           div({className: 'modal-title-bar'},
-              @state.title,
+              Modal.title(),
               IconButton({action: Structural.Actions.CloseModal, icon: 'times'})),
-          @state.content
+          Modal.content()
     else
       div {className: 'modal-hidden'}
 
