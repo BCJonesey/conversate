@@ -1,11 +1,10 @@
-ActiveFolder = new Hippodrome.Store
+ActiveFolder = Hippodrome.createStore
   displayName: 'Active Folder Store'
   initialize: ->
     @activeFolderId = null
-  dispatches: [{
-    action: Structural.Actions.UpdateActiveFolder
-    callback: 'updateActiveFolderId'
-  }]
+
+    @dispatch(Structural.Actions.UpdateActiveFolder).to(@updateActiveFolderId)
+
   updateActiveFolderId: (payload) ->
     @activeFolderId = Number(payload.activeFolderId)
     @trigger()

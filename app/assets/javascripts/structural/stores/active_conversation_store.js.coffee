@@ -1,23 +1,18 @@
 #= require ./conversations_store
 
-ActiveConversation = new Hippodrome.Store
+ActiveConversation = Hippodrome.createStore
   displayName: 'Active Conversation Store'
   initialize: ->
     @activeConversationId = null
-  dispatches: [{
-    action: Structural.Actions.UpdateActiveConversation
-    callback: 'updateActiveConversationId'
-  }, {
-    action: Structural.Actions.UpdateConversationList
-    callback: 'pickFirstIdIfNotInConversationList'
-    after: [Structural.Stores.Conversations]
-  }, {
-    action: Structural.Actions.UpdateActiveFolder
-    callback: 'pickFirstIdIfNotInFolder'
-  }, {
-    action: Structural.Actions.UpdateFolders
-    callback: 'pickFirstIfRemoved'
-  }]
+
+    @dispatch(Structural.Actions.UpdateActiveConversation)
+      .to(@updateActiveConversationId)
+    @dispatch(Structural.Actions.UpdateConversationList)
+      .after(Structural.Stores.Conversations)
+      .to(@pickFirstIdIfNotInConversationList)
+    @dispatch(Structural.Actions.UpdateActiveFolder)
+      .to(@pickFirstIdIfNotInFolder)
+    @dispatch(Structural.Actions.UpdateFolders).to(@pickFirstIfRemoved)
 
   updateActiveConversationId: (payload) ->
     @activeConversationId = Number(payload.activeConversationId)

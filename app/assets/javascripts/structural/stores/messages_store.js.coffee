@@ -1,28 +1,19 @@
 {hashToSortedArray} = Structural.Data.Collection
 {distillRawMessages, buildMessage} = Structural.Data.Message
 
-Messages = new Hippodrome.Store
+Messages = Hippodrome.createStore
   displayName: 'Messages Store'
 
   initialize: ->
     @rawMessagesByConversation = {}
 
-  dispatches: [{
-    action: Structural.Actions.UpdateMessagesList
-    callback: 'updateMessagesList'
-  }, {
-    action: Structural.Actions.SendMessage
-    callback: 'appendTemporaryMessage'
-  }, {
-    action: Structural.Actions.SendMessageSuccess
-    callback: 'replaceTemporaryMessage'
-  }, {
-    action: Structural.Actions.RetitleConversation
-    callback: 'appendTemporaryMessage'
-  }, {
-    action: Structural.Actions.UpdateFolders
-    callback: 'appendTemporaryMessage'
-  }]
+    @dispatch(Structural.Actions.UpdateMessagesList).to(@updateMessagesList)
+    @dispatch(Structural.Actions.SendMessage).to(@appendTemporaryMessage)
+    @dispatch(Structrual.Actions.SendMessageSuccess)
+      .to(@replaceTemporaryMessage)
+    @dispatch(Structural.Actions.RetitleConversation)
+      .to(@appendTemporaryMessage)
+    @dispatch(Structural.Actions.UpdateFolders).to(@appendTemporaryMessage)
 
   messagesForConversation: (conversation) ->
     if not conversation

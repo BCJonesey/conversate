@@ -1,28 +1,18 @@
 {hashToSortedArray, Order} = Structural.Data.Collection
 
-Conversations = new Hippodrome.Store
+Conversations = Hippodrome.createStore
   displayName: 'Conversations Store'
   initialize: ->
     @conversationsByFolder = {}
-  dispatches: [{
-    action: Structural.Actions.UpdateConversationList
-    callback: 'updateConversationList'
-  },{
-    action: Structural.Actions.MarkRead
-    callback: 'updateMostRecentViewed'
-  }, {
-    action: Structural.Actions.PinUnpinConversation
-    callback: 'pinUnpin'
-  }, {
-    action: Structural.Actions.ArchiveUnarchiveConversation
-    callback: 'archiveUnarchive'
-  }, {
-    action: Structural.Actions.RetitleConversation
-    callback: 'retitle'
-  }, {
-    action: Structural.Actions.UpdateFolders
-    callback: 'updateFolders'
-  }]
+
+    @dispatch(Structural.Actions.UpdateConversationList)
+      .to(@updateConversationList)
+    @dispatch(Structural.Actions.MarkRead).to(@updateMostRecentViewed)
+    @dispatch(Structural.Actions.PinUnpinConversation).to(@pinUnpin)
+    @dispatch(Structural.Actions.ArchiveUnarchiveConversation)
+      .to(@archiveUnarchive)
+    @dispatch(Structural.Actions.RetitleConversation).to(@retitle)
+    @dispatch(Structural.Actions.UpdateFolders).to(@updateFolders)
 
   conversationsForFolder: (folder) ->
     if not folder

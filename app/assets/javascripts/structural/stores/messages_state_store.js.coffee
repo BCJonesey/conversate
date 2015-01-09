@@ -1,25 +1,20 @@
 #= require ./conversations_store
 #= require ./active_conversation_store
 
-MessagesState = new Hippodrome.Store
+MessagesState = Hippodrome.createStore
   displayName: 'Messages State'
   initialize: ->
     @state = 'loading'
-  dispatches: [{
-    action: Structural.Actions.UpdateMessagesList
-    callback: 'loaded'
-  }, {
-    action: Structural.Actions.UpdateActiveConversation
-    callback: 'loadingConversation'
-  }, {
-    action: Structural.Actions.UpdateActiveFolder
-    callback: 'loadingFolder'
-    after: [Structural.Stores.ActiveConversation]
-  }, {
-    action: Structural.Actions.UpdateConversationList
-    callback: 'noneOnEmpty'
-    after: [Structural.Stores.Conversations]
-  }]
+
+    @dispatch(Structural.Actions.UpdateMessagesList).to(@loaded)
+    @dispatch(Structural.Actions.UpdateActiveConversation)
+      .to(@loadingConversation)
+    @dispatch(Structural.Actions.UpdateActiveFolder)
+      .after(Structural.Stores.ActiveConversation)
+      .to(@loadingFolder)
+    @dispatch(Structural.Actions.UpdateConversationList)
+      .after(Structural.Stores.Conversations)
+      .to(@noneOnEmpty)
 
   loaded: (payload) ->
     @state = 'loaded'

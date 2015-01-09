@@ -1,14 +1,10 @@
-ConversationsState = new Hippodrome.Store
+ConversationsState = Hippodrome.createStore
   displayName: 'Conversation State'
   initialize: ->
     @state = 'loading'
-  dispatches: [{
-    action: Structural.Actions.UpdateConversationList
-    callback: 'loaded'
-  }, {
-    action: Structural.Actions.UpdateActiveFolder
-    callback: 'loading'
-  }]
+
+    @dispatch(Structural.Actions.UpdateConversationList).to(@loaded)
+    @dispatch(Structural.Actions.UpdateActiveFolder).to(@loading)
 
   loaded: (payload) ->
     @state = 'loaded'

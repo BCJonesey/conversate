@@ -1,19 +1,13 @@
-Modal = new Hippodrome.Store
+Modal = Hippodrome.createStore
   displayName: 'Modal Store'
   initialize: ->
     @_open = false
     @_content = undefined
     @_title = undefined
-  dispatches: [{
-    action: Structural.Actions.OpenModal
-    callback: 'openModal'
-  }, {
-    action: Structural.Actions.ReplaceModalContent
-    callback: 'replaceModal'
-  }, {
-    action: Structural.Actions.CloseModal
-    callback: 'closeModal'
-  }]
+
+    @dispatch(Structural.Actions.OpenModal).to(@openModal)
+    @dispatch(Structural.Actions.ReplaceModalContent).to(@replaceModal)
+    @dispatch(Structural.Actions.CloseModal).to(@closeModal)
 
   openModal: (payload) ->
     @_open = true

@@ -1,13 +1,11 @@
 {hashToSortedArray} = Structural.Data.Collection
 
-Folders = new Hippodrome.Store
+Folders = Hippodrome.createStore
   displayName: 'Folders Store'
   initialize: ->
     @folders = {}
-  dispatches: [{
-    action: Structural.Actions.UpdateFolderList
-    callback: 'updateFolderList'
-  }]
+
+    @dispatch(Structural.Actions.UpdateFolderList).to(@updateFolderList)
 
   updateFolderList: (payload) ->
     @folders = payload.folders

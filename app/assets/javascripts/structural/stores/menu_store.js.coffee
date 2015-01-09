@@ -6,16 +6,9 @@ Menu = new Hippodrome.Store
     @_node = undefined
     @_title = undefined
 
-  dispatches: [{
-    action: Structural.Actions.OpenMenu
-    callback: 'openMenu'
-  }, {
-    action: Structural.Actions.ReplaceMenuContent
-    callback: 'replaceMenu'
-  }, {
-    action: Structural.Actions.CloseMenu
-    callback: 'closeMenu'
-  }]
+    @dispatch(Structural.Actions.OpenMenu).to(@openMenu)
+    @dispatch(Structural.Actions.ReplaceMenuContent).to(@replaceMenu)
+    @dispatch(Structural.Actions.CloseMenu).to(@closeMenu)
 
   openMenu: (payload) ->
     @_open = true

@@ -1,13 +1,8 @@
-CurrentUser = new Hippodrome.Store
+CurrentUser = Hippodrome.createStore
   initialize: ->
     @user = null
 
-  dispatches: [
-    {
-      action: Structural.Actions.UpdateCurrentUser
-      callback: 'updateCurrentUser'
-    }
-  ]
+    @dispatch(Structural.Actions.UpdateCurrentUser).to(@updateCurrentUser)
 
   updateCurrentUser: (payload) ->
     @user = payload.user
