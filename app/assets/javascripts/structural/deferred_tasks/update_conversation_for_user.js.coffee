@@ -1,18 +1,13 @@
 {updateConversationForUser} = Structural.Api.Conversations
 {Conversations, CurrentUser} = Structural.Stores
 
-UpdateConversationForUser = new Hippodrome.DeferredTask
+UpdateConversationForUser = Hippodrome.createDeferredTask
   displayName: 'Update Conversation For User'
-  dispatches: [{
-    action: Structural.Actions.MarkRead
-    callback: 'updateConversation'
-  }, {
-    action: Structural.Actions.PinUnpinConversation
-    callback: 'updateConversation'
-  }, {
-    action: Structural.Actions.ArchiveUnarchiveConversation
-    callback: 'updateConversation'
-  }]
+  initialize: (options) ->
+    @dispatch(Structural.Actions.MarkRead).to(@updateConversation)
+    @dispatch(Structural.Actions.PinUnpinConversation).to(@updateConversation)
+    @dispatch(Structural.Actions.ArchiveUnarchiveConversation)
+      .to(@updateConversation)
 
   updateConversation: (payload) ->
     convo = Conversations.byId(payload.folder, payload.conversation.id)

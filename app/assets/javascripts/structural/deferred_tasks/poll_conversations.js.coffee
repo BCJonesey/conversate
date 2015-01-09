@@ -4,9 +4,8 @@
 
 POLL_INTERVAL = 5 * 1000
 
-PollConversations = new Hippodrome.DeferredTask
-  action: Structural.Actions.StartApp
-  task: (payload) ->
+PollConversations = Hippodrome.createDeferredTask
+  initialize: (options) ->
     doPoll = ->
       activeFolder = Folders.byId(ActiveFolder.id())
 

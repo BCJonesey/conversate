@@ -1,8 +1,7 @@
 {arrayToIndexedHash} = Structural.Data.Collection
 
-BootstrapData = new Hippodrome.DeferredTask
-  action: Structural.Actions.StartApp
-  task: (payload) ->
+BootstrapData = Hippodrome.createDeferredTask
+  initialize: (options) ->
     folders = arrayToIndexedHash(bootstrap.folders)
     activeFolderId = if bootstrap.folder then bootstrap.folder.id else null
     conversations = arrayToIndexedHash(bootstrap.conversations)

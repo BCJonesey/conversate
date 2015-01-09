@@ -1,18 +1,14 @@
 {UrlFactory, UrlReader} = Structural.Urls
 {Conversations, Folders, ActiveFolder} = Structural.Stores
 
-ChangeUrl = new Hippodrome.DeferredTask
+ChangeUrl = Hippodrome.createDeferredTask
   displayName: 'Change Url'
-  dispatches: [{
-    action: Structural.Actions.StartApp
-    callback: 'setupPopstateEvent'
-  }, {
-    action: Structural.Actions.UpdateActiveFolder
-    callback: 'setFolderUrl'
-  }, {
-    action: Structural.Actions.UpdateActiveConversation
-    callback: 'setConversationUrl'
-  }]
+  initialize: (options) ->
+    @dispatch(Structural.Actions.UpdateActiveFolder).to(@setFolderUrl)
+    @dispatch(Structural.Actions.UpdateActiveConversation)
+      .to(@setConversationUrl)
+
+    @setupPopstateEvent(options)
 
   push: (url) ->
     window.history.pushState(null, '', url)
