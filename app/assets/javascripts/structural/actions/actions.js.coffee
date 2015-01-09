@@ -3,11 +3,6 @@
 
 Structural.Actions = {}
 
-Structural.Actions.StartApp = new Hippodrome.Action(
-  'Start App',
-   -> {})
-
-Structural.Actions.UpdateCurrentUser = new Hippodrome.Action(
-  'Update Current User'
-  (user) -> {user: user}
-)
+Structural.Actions.UpdateCurrentUser = Hippodrome.createAction
+  displayName: 'Update Current User'
+  build: (user) -> {user: user}

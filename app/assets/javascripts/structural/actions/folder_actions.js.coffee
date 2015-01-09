@@ -1,9 +1,7 @@
-Structural.Actions.UpdateFolderList = new Hippodrome.Action(
-  'Update Folder List'
-  (folders) -> {folders:folders}
-)
+Structural.Actions.UpdateFolderList = Hippodrome.createAction
+  displayName: 'Update Folder List'
+  build: (folders) -> {folders:folders}
 
-Structural.Actions.UpdateActiveFolder = new Hippodrome.Action(
-  'Update Active Folder'
-  (activeFolderId) -> {activeFolderId: activeFolderId}
-)
+Structural.Actions.UpdateActiveFolder = Hippodrome.createAction
+  displayName: 'Update Active Folder'
+  build: (activeFolderId) -> {activeFolderId: activeFolderId}

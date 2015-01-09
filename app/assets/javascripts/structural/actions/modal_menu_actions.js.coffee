@@ -1,36 +1,30 @@
-Structural.Actions.OpenModal = new Hippodrome.Action(
-  'Open Modal',
-  (content, title) ->
+Structural.Actions.OpenModal = Hippodrome.createAction
+  displayName: 'Open Modal'
+  build: (content, title) ->
     content: content
     title: title
-)
 
-Structural.Actions.ReplaceModalContent = new Hippodrome.Action(
-  'Replace Modal Content',
-  (content) ->
+Structural.Actions.ReplaceModalContent = Hippodrome.createAction
+  displayName: 'Replace Modal Content'
+  build: (content) ->
     content: content
-)
 
-Structural.Actions.CloseModal = new Hippodrome.Action(
-  'Close Modal',
-  () -> {}
-)
+Structural.Actions.CloseModal = Hippodrome.createAction
+  displayName: 'Close Modal'
+  build: () -> {}
 
-Structural.Actions.OpenMenu = new Hippodrome.Action(
-  'Open Menu',
-  (content, title, node) ->
+Structural.Actions.OpenMenu = Hippodrome.createAction
+  displayName: 'Open Menu'
+  build: (content, title, node) ->
     content: content
     title: title
     node: node
-)
 
-Structural.Actions.ReplaceMenuContent = new Hippodrome.Action(
-  'Replace Menu Content'
-  (content) ->
+Structural.Actions.ReplaceMenuContent = Hippodrome.createAction
+  displayName: 'Replace Menu Content'
+  build: (content) ->
     content: content
-)
 
-Structural.Actions.CloseMenu = new Hippodrome.Action(
-  'Close Menu'
-  () -> {}
-)
+Structural.Actions.CloseMenu = Hippodrome.createAction
+  displayName: 'Close Menu'
+  build: () -> {}
