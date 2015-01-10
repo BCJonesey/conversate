@@ -83,7 +83,7 @@
     }
   }
   .section{
-    &.outer:nth-child(2n-1){
+    &.outer:nth-child(2n+1){
       background-color: #FAFCFF;
     }
 
@@ -177,6 +177,19 @@
         }
       }
     }
+  }
+
+  .front-page-screenshot{
+    display:block;
+    width:100%;
+    margin:0.2rem 0.1rem;
+    //cursor:pointer;
+    border: 1px solid #CCC;
+  }
+  .front-page-caption{
+    margin-top: 1.0rem;
+    text-align: center;
+    font-style: italic;
   }
 }
 
