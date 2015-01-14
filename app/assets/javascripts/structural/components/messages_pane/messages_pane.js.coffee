@@ -10,7 +10,7 @@ MessagesPane = React.createClass
     Conversations.listenWith('updateConversation')
     ActiveConversation.listenWith('updateConversation')
     Messages.listen('messages', () -> Messages.distilled(@state.conversation))
-    CurrentUser.listen('currentUser', CurrentUser.getUser())
+    CurrentUser.listen('currentUser', CurrentUser.getUser)
     MessagesState.listenWith('updateMessagesState')
   ]
 
@@ -22,10 +22,6 @@ MessagesPane = React.createClass
       conversation: conversation
       messages: Messages.distilled(conversation)
     }
-  onMessagesChange: ->
-    @setState(messages: Messages.distilled(@state.conversation))
-  updateUser: ->
-    @setState(currentUser: CurrentUser.getUser())
   updateMessagesState: ->
     return {
       loading: MessagesState.isLoading()
