@@ -1,4 +1,4 @@
-{Folders, ActiveFolder, Conversations} = Structural.Stores
+{Folders, ActiveFolder, Conversations, ActiveConversation} = Structural.Stores
 {UpdateConversationList} = Structural.Actions
 {arrayToIndexedHash} = Structural.Data.Collection
 
@@ -12,14 +12,14 @@ PollConversations = Hippodrome.createDeferredTask
       success = (data) ->
         # This is our attempt to not send out of date API responses to the
         # stores
-        if Conversations.lastActionId() == lastConversationAction
+        if ActiveConversation.id() == activeConversationId
           UpdateConversationList(arrayToIndexedHash(data), activeFolder)
 
         setTimeout(doPoll, POLL_INTERVAL)
       error = ->
         setTimeout(doPoll, POLL_INTERVAL)
 
-      lastConversationAction = Conversations.lastActionId()
+      activeConversationId = ActiveConversation.id()
       Structural.Api.Conversations.index(activeFolder, success, error)
 
     setTimeout(doPoll, POLL_INTERVAL)
