@@ -9,7 +9,7 @@ MessagesPane = React.createClass
     ActiveFolder.listenWith('updateConversation')
     Conversations.listenWith('updateConversation')
     ActiveConversation.listenWith('updateConversation')
-    Messages.listen('messages', () -> Messages.distilled(@state.conversation))
+    Messages.listenWith('updateConversation')
     CurrentUser.listen('currentUser', CurrentUser.getUser)
     MessagesState.listenWith('updateMessagesState')
   ]

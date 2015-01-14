@@ -15,10 +15,10 @@ MenuTrigger = React.createClass
     }
 
   componentDidUpdate: (prevProps, prevState) ->
-    if @state.active
+    if @state and @state.active
       _.defer(() => ReplaceMenuContent(@props.content, @props.title, @getDOMNode()))
   render: ->
-    className = "#{@props.className} #{if @state.active then 'active-trigger' else ''}"
+    className = "#{@props.className} #{if @state and @state.active then 'active-trigger' else ''}"
     span {className: className, onClick: @onClick}, @props.children
 
   onClick: ->

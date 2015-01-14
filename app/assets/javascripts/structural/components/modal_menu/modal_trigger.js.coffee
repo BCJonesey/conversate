@@ -7,6 +7,7 @@ ModalTrigger = React.createClass
   mixins: [
     Modal.listenWith('modalUpdate')
   ]
+
   modalUpdate: ->
     return {
       open: Modal.open()
