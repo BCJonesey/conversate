@@ -1,4 +1,4 @@
-{CurrentUser} = Structural.Stores
+{CurrentUser, Folders} = Structural.Stores
 {name} = Structural.Data.Participant
 {UrlFactory} = Structural.Urls
 {div, span} = React.DOM
@@ -15,14 +15,25 @@ StructuralBar = React.createClass
     if @state.user and @state.user.site_admin
       adminButton = BarButton({icon: 'dashboard', href: UrlFactory.admin()}, 'Admin')
 
+    firstFolder = _.first(Folders.asList())
+    if firstFolder
+      firstFolderId = firstFolder.id
+
     div {className: 'structural-bar'},
       div {className: 'left'},
         BarButton({
-          href: UrlFactory.waterCooler(),
+          href: UrlFactory.waterCooler()
           active: true
           icon: 'comment'
+          action: Structural.Actions.UpdateActiveFolder
+          actionArgs: [firstFolderId]
         }, 'Water Cooler'),
-        BarButton({href: UrlFactory.people(), icon: 'users'}, 'People'),
+        BarButton({
+          href: UrlFactory.people()
+          icon: 'users'
+          action: Structural.Actions.UpdateActiveContactList
+          actionArgs: []
+        }, 'People'),
         BarButton({href: UrlFactory.tour()}, 'Tour'),
         adminButton,
 
