@@ -9,6 +9,9 @@ UrlFactory = {
   conversation: (conversation) ->
     "/conversation/#{slugify(conversation.title)}/#{conversation.id}"
 
+  waterCooler: -> '/'
+  people: -> '/people'
+
   tour: -> '/tour'
   admin: -> '/admin'
   profile: -> '/profile'

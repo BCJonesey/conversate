@@ -17,8 +17,12 @@ StructuralBar = React.createClass
 
     div {className: 'structural-bar'},
       div {className: 'left'},
-        BarButton({active: true, icon: 'comment'}, 'Water Cooler'),
-        BarButton({icon: 'users'}, 'People'),
+        BarButton({
+          href: UrlFactory.waterCooler(),
+          active: true
+          icon: 'comment'
+        }, 'Water Cooler'),
+        BarButton({href: UrlFactory.people(), icon: 'users'}, 'People'),
         BarButton({href: UrlFactory.tour()}, 'Tour'),
         adminButton,
 
