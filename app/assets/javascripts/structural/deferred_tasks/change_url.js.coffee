@@ -23,6 +23,8 @@ ChangeUrl = Hippodrome.createDeferredTask
         Structural.Actions.UpdateActiveFolder(folderId)
 
       Structural.Actions.UpdateActiveConversation(url.id)
+    else if url.type == 'people'
+      Structural.Actions.UpdateActiveContactList(url.contactListId)
 
     # TODO: 404 stuff
 

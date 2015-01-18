@@ -17,6 +17,11 @@ UrlReader = {
         slug: segments[1]
         id: Number(segments[2])
       }
+    else if segments[0] == 'people'
+      return {
+        type: 'people'
+        contactListId: Number(segments[2])
+      }
     else
       return {
         type: '404'
