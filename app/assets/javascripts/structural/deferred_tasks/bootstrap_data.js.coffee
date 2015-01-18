@@ -10,9 +10,7 @@ BootstrapData = Hippodrome.createDeferredTask
     messages = arrayToIndexedHash(bootstrap.actions)
 
     Structural.Actions.UpdateFolderList(folders)
-    Structural.Actions.UpdateActiveFolder(activeFolderId)
     Structural.Actions.UpdateConversationList(conversations, bootstrap.folder)
-    Structural.Actions.UpdateActiveConversation(activeConversationId)
     Structural.Actions.UpdateMessagesList(messages, bootstrap.conversation)
     Structural.Actions.UpdateCurrentUser(bootstrap.user)
 
