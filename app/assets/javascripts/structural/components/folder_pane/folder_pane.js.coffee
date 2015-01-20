@@ -16,4 +16,4 @@ FolderPane = React.createClass
         activeFolder: @state.activeFolder
       })
 
-Structural.Components.FolderPane = FolderPane
+Structural.Components.FolderPane = React.createFactory(FolderPane)

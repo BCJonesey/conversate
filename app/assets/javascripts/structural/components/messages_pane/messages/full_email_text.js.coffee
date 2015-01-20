@@ -6,4 +6,4 @@ FullEmailText = React.createClass
     div {className: 'full-email-text-content'},
       @props.message.full_text
 
-Structural.Components.FullEmailText = FullEmailText
+Structural.Components.FullEmailText = React.createFactory(FullEmailText)

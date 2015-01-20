@@ -16,4 +16,4 @@ Icon = React.createClass
     className = _.compact(classes).join(' ')
     i {className: className}
 
-Structural.Components.Icon = Icon
+Structural.Components.Icon = React.createFactory(Icon)

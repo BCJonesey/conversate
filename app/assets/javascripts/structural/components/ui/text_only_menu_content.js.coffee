@@ -5,4 +5,5 @@ TextOnlyMenuContent = React.createClass
   render: ->
     div {className: 'text-only-menu-content'}, @props.children
 
-Structural.Components.TextOnlyMenuContent = TextOnlyMenuContent
+Structural.Components.TextOnlyMenuContent =
+  React.createFactory(TextOnlyMenuContent)

@@ -17,4 +17,4 @@ Button = React.createClass
       args = @props.actionArgs || []
       @props.action.apply(null, args)
 
-Structural.Components.Button = Button
+Structural.Components.Button = React.createFactory(Button)

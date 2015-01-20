@@ -11,4 +11,4 @@ RetitleMessage = React.createClass
     div className: 'retitle-message',
       "#{name} titled the conversation \"#{message.title}\""
 
-Structural.Components.RetitleMessage = RetitleMessage
+Structural.Components.RetitleMessage = React.createFactory(RetitleMessage)

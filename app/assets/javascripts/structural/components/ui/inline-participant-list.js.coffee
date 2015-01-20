@@ -1,10 +1,11 @@
 {ul, li} = React.DOM
 
-InlineParticipant = React.createClass
+InlineParticipantClass = React.createClass
   displayName: 'Inline Participant List Item'
   render: ->
     name = Structural.Data.Participant.name(@props.participant)
     li {className: 'participant'}, name
+InlineParticipant = React.createFactory(InlineParticipantClass)
 
 InlineParticipantList = React.createClass
   displayName: 'Inline Participant List'
@@ -15,4 +16,5 @@ InlineParticipantList = React.createClass
     className = ['inline-participant-list', @props.className].join(' ')
     ul {className: className}, participants
 
-Structural.Components.InlineParticipantList = InlineParticipantList
+Structural.Components.InlineParticipantList =
+  React.createFactory(InlineParticipantList)

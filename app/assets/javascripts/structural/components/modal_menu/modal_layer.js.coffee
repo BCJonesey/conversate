@@ -24,4 +24,4 @@ ModalLayer = React.createClass
     if event.target == @refs.screen.getDOMNode()
       Structural.Actions.CloseModal()
 
-Structural.Components.ModalLayer = ModalLayer
+Structural.Components.ModalLayer = React.createFactory(ModalLayer)

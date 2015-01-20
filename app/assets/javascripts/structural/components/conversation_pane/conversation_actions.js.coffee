@@ -5,4 +5,5 @@ ConversationActions = React.createClass
   render: ->
     div {className: 'conversation-actions'}
 
-Structural.Components.ConversationActions = ConversationActions
+Structural.Components.ConversationActions =
+  React.createFactory(ConversationActions)

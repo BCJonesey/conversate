@@ -28,4 +28,4 @@ MessageInfo = React.createClass
       div({className: 'message-details'}, fullText, timestr)
       sender
 
-Structural.Components.MessageInfo = MessageInfo
+Structural.Components.MessageInfo = React.createFactory(MessageInfo)

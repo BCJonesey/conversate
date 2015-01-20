@@ -36,5 +36,4 @@ MessagesList = React.createClass
 
     div className: 'messages-list', contents
 
-
-Structural.Components.MessagesList = MessagesList
+Structural.Components.MessagesList = React.createFactory(MessagesList)

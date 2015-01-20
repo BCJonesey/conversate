@@ -7,4 +7,4 @@ UnknownMessage = React.createClass
     div({className: 'message unknown-message'},
       "unknown message type: #{@props.message.type}")
 
-Structural.Components.UnknownMessage = UnknownMessage
+Structural.Components.UnknownMessage = React.createFactory(UnknownMessage)

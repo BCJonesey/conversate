@@ -19,4 +19,4 @@ MessageImageLink = React.createClass
 
     a(props)
 
-Structural.Components.MessageImageLink = MessageImageLink
+Structural.Components.MessageImageLink = React.createFactory(MessageImageLink)

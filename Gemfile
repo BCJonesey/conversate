@@ -29,7 +29,7 @@ gem 'jquery-rails'
 gem 'sorcery'	# For login and security.
 gem 'unicorn' # A magick web server. The horns are used for dark incantations.
 
-gem 'react-rails', '~> 0.11.1.0'	# Used for including the react.js files.
+gem 'react-rails', '~> 0.12.2.0'	# Used for including the react.js files.
 gem 'coffee-rails' # For that sweet, sweet extra syntax
 gem 'lodash-rails'
 # It's ours!  We wrote it!

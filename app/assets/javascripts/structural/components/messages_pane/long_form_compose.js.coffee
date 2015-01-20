@@ -30,4 +30,4 @@ LongFormCompose = React.createClass
       CloseModal()
       @props.afterSend()
 
-Structural.Components.LongFormCompose = LongFormCompose
+Structural.Components.LongFormCompose = React.createFactory(LongFormCompose)

@@ -27,4 +27,5 @@ ParticipantsEditorBar = React.createClass
         content: ConversationParticipantsEditor({conversation: @props.conversation})
       }, IconButton({icon: 'plus'}))
 
-Structural.Components.ParticipantsEditorBar = ParticipantsEditorBar
+Structural.Components.ParticipantsEditorBar =
+  React.createFactory(ParticipantsEditorBar)

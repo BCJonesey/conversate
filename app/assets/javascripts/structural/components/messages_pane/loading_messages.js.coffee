@@ -5,4 +5,4 @@ LoadingMessages = React.createClass
   render: ->
     div {className: 'loading-messages'}, 'Loading...'
 
-Structural.Components.LoadingMessages = LoadingMessages
+Structural.Components.LoadingMessages = React.createFactory(LoadingMessages)

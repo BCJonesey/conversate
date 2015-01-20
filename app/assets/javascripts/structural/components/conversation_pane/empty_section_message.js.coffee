@@ -27,4 +27,5 @@ EmptySectionMessage = React.createClass
       div({className: 'message'}, message)
       prompt
 
-Structural.Components.EmptySectionMessage = EmptySectionMessage
+Structural.Components.EmptySectionMessage =
+  React.createFactory(EmptySectionMessage)

@@ -6,4 +6,5 @@ CollapsedSectionMessage = React.createClass
     div {className: 'collapsed-section-message', onClick: @props.onClick},
       "#{@props.conversations.length} #{@props.adjective} conversations"
 
-Structural.Components.CollapsedSectionMessage = CollapsedSectionMessage
+Structural.Components.CollapsedSectionMessage =
+  React.createFactory(CollapsedSectionMessage)

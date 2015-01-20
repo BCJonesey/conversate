@@ -30,4 +30,4 @@ ConversationPane = React.createClass
         user: @state.user
         activeConversation: @state.activeConversation})
 
-Structural.Components.ConversationPane = ConversationPane
+Structural.Components.ConversationPane = React.createFactory(ConversationPane)

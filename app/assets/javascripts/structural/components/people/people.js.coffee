@@ -5,4 +5,4 @@ People = React.createClass
   render: ->
     div {}, 'People Tab TBD'
 
-Structural.Components.People = People
+Structural.Components.People = React.createFactory(People)

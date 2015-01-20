@@ -21,4 +21,4 @@ Folder = React.createClass
       event.preventDefault()
       UpdateActiveFolder(@props.folder.id)
 
-Structural.Components.Folder = Folder
+Structural.Components.Folder = React.createFactory(Folder)

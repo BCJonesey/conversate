@@ -27,4 +27,4 @@ Conversation = React.createClass
       event.preventDefault()
       UpdateActiveConversation(@props.conversation.id)
 
-Structural.Components.Conversation = Conversation
+Structural.Components.Conversation = React.createFactory(Conversation)

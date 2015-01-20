@@ -23,4 +23,5 @@ UpdateViewersMessage = React.createClass
     div {className: 'update-viewers-message'},
       "#{userName} #{addedStr} #{removedStr}"
 
-Structural.Components.UpdateViewersMessage = UpdateViewersMessage
+Structural.Components.UpdateViewersMessage =
+  React.createFactory(UpdateViewersMessage)

@@ -25,4 +25,4 @@ News = React.createClass
                      a({href: 'http://structur.al'}, 'http://structur.al'),
                      '.')
 
-Structural.Components.News = News
+Structural.Components.News = React.createFactory(News)

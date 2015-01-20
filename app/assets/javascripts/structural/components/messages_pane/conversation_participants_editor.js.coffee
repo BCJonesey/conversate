@@ -16,4 +16,5 @@ ConversationParticipantsEditor = React.createClass
       })
       div {className: 'participant-list'}, participants
 
-Structural.Components.ConversationParticipantsEditor = ConversationParticipantsEditor
+Structural.Components.ConversationParticipantsEditor =
+  React.createFactory(ConversationParticipantsEditor)

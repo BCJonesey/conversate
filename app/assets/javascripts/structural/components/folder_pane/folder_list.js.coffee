@@ -32,4 +32,4 @@ FolderList = React.createClass
 
     div {className: 'folder-list'}, folders
 
-Structural.Components.FolderList = FolderList
+Structural.Components.FolderList = React.createFactory(FolderList)

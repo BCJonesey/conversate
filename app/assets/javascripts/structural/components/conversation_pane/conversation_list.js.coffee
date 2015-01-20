@@ -96,4 +96,4 @@ ConversationList = React.createClass
         activeConversation: @props.activeConversation
         startCollapsed: true})
 
-Structural.Components.ConversationList = ConversationList
+Structural.Components.ConversationList = React.createFactory(ConversationList)

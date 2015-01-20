@@ -17,4 +17,4 @@ AutocompleteInput = React.createClass
   onChange: (event) ->
     @setState(query: event.target.value)
 
-Structural.Components.AutocompleteInput = AutocompleteInput
+Structural.Components.AutocompleteInput = React.createFactory(AutocompleteInput)

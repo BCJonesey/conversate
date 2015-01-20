@@ -9,4 +9,5 @@ LoadingConversations = React.createClass
       Icon({name: 'gear', spin: true})
       div({className: 'loading-message'}, 'Loading...')
 
-Structural.Components.LoadingConversations = LoadingConversations
+Structural.Components.LoadingConversations =
+  React.createFactory(LoadingConversations)

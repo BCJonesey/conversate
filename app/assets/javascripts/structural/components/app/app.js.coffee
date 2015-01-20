@@ -20,4 +20,4 @@ App = React.createClass
       Structural.Components.ModalLayer(),
       Structural.Components.MenuLayer()
 
-Structural.Components.App = App
+Structural.Components.App = React.createFactory(App)

@@ -12,4 +12,5 @@ EmailDeliveryErrorMessage = React.createClass
     message = "Failed to send email to #{recipient} for #{user}'s message \"#{preview}\""
     div {className: 'email-delivery-error-message'}, message
 
-Structural.Components.EmailDeliveryErrorMessage = EmailDeliveryErrorMessage
+Structural.Components.EmailDeliveryErrorMessage =
+  React.createFactory(EmailDeliveryErrorMessage)

@@ -8,4 +8,4 @@ IconStack = React.createClass
 
     span {className: className}, @props.children
 
-Structural.Components.IconStack = IconStack
+Structural.Components.IconStack = React.createFactory(IconStack)

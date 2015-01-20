@@ -16,4 +16,4 @@ NoConversations = React.createClass
         content: TextOnlyMenuContent({}, menuMessage)
       }, 'how do I start a new conversation?')
 
-Structural.Components.NoConversations = NoConversations
+Structural.Components.NoConversations = React.createFactory(NoConversations)

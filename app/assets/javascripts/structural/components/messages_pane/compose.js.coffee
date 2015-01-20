@@ -54,4 +54,4 @@ Compose = React.createClass
   clearText: ->
     @setState(text: '')
 
-Structural.Components.Compose = Compose
+Structural.Components.Compose = React.createFactory(Compose)

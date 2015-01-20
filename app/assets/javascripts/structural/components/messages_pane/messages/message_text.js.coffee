@@ -46,4 +46,4 @@ MessageText = React.createClass
     if unread
       Structural.Actions.MarkRead(@props.message, @props.conversation, @props.folder)
 
-Structural.Components.MessageText = MessageText
+Structural.Components.MessageText = React.createFactory(MessageText)

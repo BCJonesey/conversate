@@ -5,4 +5,4 @@ ShortFormCompose = React.createClass
   render: ->
     div {className: 'short-form-compose clearfix'}
 
-Structural.Components.ShortFormCompose = ShortFormCompose
+Structural.Components.ShortFormCompose = React.createFactory(ShortFormCompose)

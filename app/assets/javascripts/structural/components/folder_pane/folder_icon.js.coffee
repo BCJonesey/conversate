@@ -12,4 +12,4 @@ FolderIcon = React.createClass
     else
       Icon({name: 'folder-open', className: 'folder-icon'})
 
-Structural.Components.FolderIcon = FolderIcon
+Structural.Components.FolderIcon = React.createFactory(FolderIcon)

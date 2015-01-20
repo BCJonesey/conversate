@@ -62,4 +62,5 @@ ConversationFoldersEditor = React.createClass
     if @state.folderIds.length > 1
       @setState(folderIds: _.without(@state.folderIds, folder.id))
 
-Structural.Components.ConversationFoldersEditor = ConversationFoldersEditor
+Structural.Components.ConversationFoldersEditor =
+  React.createFactory(ConversationFoldersEditor)

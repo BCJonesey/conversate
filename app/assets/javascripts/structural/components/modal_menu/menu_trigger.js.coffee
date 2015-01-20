@@ -25,4 +25,4 @@ MenuTrigger = React.createClass
     OpenMenu(@props.content, @props.title, @getDOMNode())
     @setState(active: true)
 
-Structural.Components.MenuTrigger = MenuTrigger
+Structural.Components.MenuTrigger = React.createFactory(MenuTrigger)

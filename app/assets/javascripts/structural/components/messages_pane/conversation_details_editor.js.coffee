@@ -41,4 +41,5 @@ ConversationDetailsEditor = React.createClass
   archiveUnarchive: (event) ->
     ArchiveUnarchiveConversation(not @props.conversation.archived, @props.conversation, @props.folder, @props.currentUser)
 
-Structural.Components.ConversationDetailsEditor = ConversationDetailsEditor
+Structural.Components.ConversationDetailsEditor =
+  React.createFactory(ConversationDetailsEditor)

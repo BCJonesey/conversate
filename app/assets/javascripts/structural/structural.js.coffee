@@ -17,4 +17,4 @@ window.Structural = {}
 
 Structural.startApp = ->
   Hippodrome.start()
-  React.renderComponent(Structural.Components.App(), document.body)
+  React.render(Structural.Components.App(), document.body)

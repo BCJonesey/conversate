@@ -25,4 +25,4 @@ ModalTrigger = React.createClass
     OpenModal(@props.content, @props.title)
     @setState(active: true)
 
-Structural.Components.ModalTrigger = ModalTrigger
+Structural.Components.ModalTrigger = React.createFactory(ModalTrigger)

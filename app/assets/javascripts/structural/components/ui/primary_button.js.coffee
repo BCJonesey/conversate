@@ -1,7 +1,7 @@
 PrimaryButton = React.createClass
   displayName: 'Primary Button'
   render: ->
-    @transferPropsTo(
-      Structural.Components.Button({className: 'button-primary'}, @props.children))
+    props = _.assign(@props, 'button-primary')
+    Structural.Components.Button(props, @props.children)
 
-Structural.Components.PrimaryButton = PrimaryButton
+Structural.Components.PrimaryButton = React.createFactory(PrimaryButton)

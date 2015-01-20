@@ -3,6 +3,7 @@ IconButton = React.createClass
   render: ->
     {Button, Icon} = Structural.Components
 
-    @transferPropsTo(Button({className: 'button-icon'}, Icon({name: @props.icon})))
+    props = _.assign(@props, {className: 'button-icon'})
+    Button(props, Icon({name: @props.icon}))
 
-Structural.Components.IconButton = IconButton
+Structural.Components.IconButton = React.createFactory(IconButton)

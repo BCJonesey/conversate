@@ -36,4 +36,5 @@ ConversationListSection = React.createClass
   open: -> @setState(open: true)
   close: -> @setState(open: false)
 
-Structural.Components.ConversationListSection = ConversationListSection
+Structural.Components.ConversationListSection =
+  React.createFactory(ConversationListSection)

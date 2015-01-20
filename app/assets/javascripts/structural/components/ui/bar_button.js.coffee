@@ -6,6 +6,7 @@ BarButton = React.createClass
     klass = if @props.active then 'button-stb-active' else 'button-stb'
     icon = if @props.icon then Icon({name: @props.icon}) else undefined
 
-    @transferPropsTo(Button({className: klass}, icon, @props.children))
+    props = _.assign(@props, {className: klass})
+    Button(props, icon, @props.children)
 
-Structural.Components.BarButton = BarButton
+Structural.Components.BarButton = React.createFactory(BarButton)

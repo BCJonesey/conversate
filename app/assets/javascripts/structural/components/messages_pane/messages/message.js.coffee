@@ -27,4 +27,4 @@ Message = React.createClass
       folder: @props.folder
     }
 
-Structural.Components.Message = Message
+Structural.Components.Message = React.createFactory(Message)

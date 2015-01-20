@@ -53,4 +53,4 @@ MessagesPane = React.createClass
       )
 
 
-Structural.Components.MessagesPane = MessagesPane
+Structural.Components.MessagesPane = React.createFactory(MessagesPane)

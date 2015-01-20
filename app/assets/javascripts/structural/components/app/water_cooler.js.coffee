@@ -8,4 +8,4 @@ WaterCooler = React.createClass
       Structural.Components.ConversationPane(),
       Structural.Components.MessagesPane()
 
-Structural.Components.WaterCooler = WaterCooler
+Structural.Components.WaterCooler = React.createFactory(WaterCooler)

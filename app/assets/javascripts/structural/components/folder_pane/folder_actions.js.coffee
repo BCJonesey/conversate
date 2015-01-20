@@ -5,4 +5,4 @@ FolderActions = React.createClass
   render: ->
     div {className: 'folder-actions'}
 
-Structural.Components.FolderActions = FolderActions
+Structural.Components.FolderActions = React.createFactory(FolderActions)

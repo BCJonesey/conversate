@@ -28,4 +28,5 @@ ConversationEditorBar = React.createClass
         })
       }, IconButton({icon: 'folder-open-o'}))
 
-Structural.Components.ConversationEditorBar = ConversationEditorBar
+Structural.Components.ConversationEditorBar =
+  React.createFactory(ConversationEditorBar)

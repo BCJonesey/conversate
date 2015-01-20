@@ -45,4 +45,4 @@ MessageMessage = React.createClass
       }
       followOns
 
-Structural.Components.MessageMessage = MessageMessage
+Structural.Components.MessageMessage = React.createFactory(MessageMessage)

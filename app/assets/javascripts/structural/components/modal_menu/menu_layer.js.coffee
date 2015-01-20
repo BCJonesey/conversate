@@ -24,4 +24,4 @@ MenuLayer = React.createClass
     if event.target == @refs.screen.getDOMNode()
       Structural.Actions.CloseMenu()
 
-Structural.Components.MenuLayer = MenuLayer
+Structural.Components.MenuLayer = React.createFactory(MenuLayer)

@@ -22,4 +22,5 @@ UpdateUsersMessage = React.createClass
     div({className: 'update-users-message'}
       "#{name} #{addedStr} #{removedStr}")
 
-Structural.Components.UpdateUsersMessage = UpdateUsersMessage
+Structural.Components.UpdateUsersMessage =
+  React.createFactory(UpdateUsersMessage)

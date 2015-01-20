@@ -48,4 +48,4 @@ StructuralBar = React.createClass
         BarButton({icon: 'user', href: UrlFactory.profile()}),
         BarButton({icon: 'sign-out', href: UrlFactory.logout()})
 
-Structural.Components.StructuralBar = StructuralBar
+Structural.Components.StructuralBar = React.createFactory(StructuralBar)
