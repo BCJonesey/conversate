@@ -14,17 +14,20 @@ MessageMessage = React.createClass
               includeTime: true
               onlyIncludeHourMinute: true
               message: followOn
+              key: "info_#{followOn.id}"
             }
           lastTimestamp = followOn.timestamp
         else if followOn.type == 'email_message'
           followOns.push Structural.Components.MessageInfo {
             message: followOn
+            key: "info_#{followOn.id}"
           }
 
         followOns.push Structural.Components.MessageText {
           message: followOn
           conversation: @props.conversation
           folder: @props.folder
+          key: "text_#{followOn.id}"
         }
 
     klass = 'message-message'
