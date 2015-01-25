@@ -7,6 +7,8 @@ ChangeUrl = Hippodrome.createDeferredTask
     @dispatch(Structural.Actions.UpdateActiveFolder).to(@setFolderUrl)
     @dispatch(Structural.Actions.UpdateActiveConversation)
       .to(@setConversationUrl)
+    @dispatch(Structural.Actions.UpdateActiveContactList)
+      .to(@setContactListUrl)
 
     @setupPopstateEvent(options)
 
@@ -39,5 +41,8 @@ ChangeUrl = Hippodrome.createDeferredTask
     folder = Folders.byId(ActiveFolder.id())
     conversation = Conversations.byId(folder, payload.activeConversationId)
     @push(UrlFactory.conversation(conversation))
+  setContactListUrl: (payload) ->
+    # TODO: Actually have data
+    @push('/people')
 
 Structural.Tasks.ChangeUrl = ChangeUrl
