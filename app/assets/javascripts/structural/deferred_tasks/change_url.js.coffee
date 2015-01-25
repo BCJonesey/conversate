@@ -1,5 +1,5 @@
 {UrlFactory, UrlReader} = Structural.Urls
-{Conversations, Folders, ActiveFolder} = Structural.Stores
+{Conversations, Folders, ActiveFolder, ContactLists} = Structural.Stores
 
 ChangeUrl = Hippodrome.createDeferredTask
   displayName: 'Change Url'
@@ -42,7 +42,7 @@ ChangeUrl = Hippodrome.createDeferredTask
     conversation = Conversations.byId(folder, payload.activeConversationId)
     @push(UrlFactory.conversation(conversation))
   setContactListUrl: (payload) ->
-    # TODO: Actually have data
-    @push('/people')
+    contactList = ContactLists.byId(payload.contactListId)
+    @push(UrlFactory.contactList(contactList))
 
 Structural.Tasks.ChangeUrl = ChangeUrl
