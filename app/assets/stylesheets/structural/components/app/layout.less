@@ -6,6 +6,8 @@
 @folder-pane-width: 15rem;
 @conversation-pane-width: 20rem;
 
+@contact-lists-width: 15rem;
+
 // TODO: It's probably worth splitting this file apart into layout (just the
 // positioning bits) and styling (borders and colors and shit.)
 
@@ -44,4 +46,20 @@
 
 .message-pane {
   .watercooler-pane(@folder-pane-width + @conversation-pane-width);
+}
+
+.people {
+  position: absolute;
+  top: @stb-height;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.contact-lists {
+  .watercooler-pane(0, @contact-lists-width);
+}
+
+.contacts {
+  .watercooler-pane(@contact-lists-width);
 }
