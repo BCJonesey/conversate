@@ -25,6 +25,8 @@ UrlFactory = {
       UrlFactory.Api._apiUrl("/conversations/#{conversation.id}/actions")
     conversationParticipants: (conversation, user) ->
       UrlFactory.Api._apiUrl("/conversations/#{conversation.id}/participants/#{user.id}")
+    userContactLists: (user) ->
+      UrlFactory.Api._apiUrl("/users/#{user.id}/contact_lists")
   }
 }
 
