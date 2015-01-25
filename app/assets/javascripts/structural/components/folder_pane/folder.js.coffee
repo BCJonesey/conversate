@@ -1,4 +1,5 @@
 {UpdateActiveFolder} = Structural.Actions
+{Mouse} = Structural.Data
 {div, a} = React.DOM
 
 Folder = React.createClass
@@ -17,7 +18,7 @@ Folder = React.createClass
       div({className: 'folder-name'}, @props.folder.name)
 
   viewFolder: (event) ->
-    if event.button == 0 # Left Click
+    if event.button == Mouse.LeftClick
       event.preventDefault()
       UpdateActiveFolder(@props.folder.id)
 

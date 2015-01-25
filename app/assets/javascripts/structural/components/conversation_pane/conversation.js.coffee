@@ -1,5 +1,6 @@
 {timestampToHumanizedTimestr} = Structural.Data.Time
 {UpdateActiveConversation} = Structural.Actions
+{Mouse} = Structural.Data
 {div, a} = React.DOM
 
 Conversation = React.createClass
@@ -23,7 +24,7 @@ Conversation = React.createClass
       div({className: 'conversation-time'}, timestr)
 
   viewConversation: (event) ->
-    if event.button == 0 # Left Click
+    if event.button == Mouse.LeftClick
       event.preventDefault()
       UpdateActiveConversation(@props.conversation.id)
 

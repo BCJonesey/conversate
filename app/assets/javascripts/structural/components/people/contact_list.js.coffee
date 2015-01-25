@@ -1,5 +1,6 @@
 {UrlFactory} = Structural.Urls
 {UpdateActiveContactList} = Structural.Actions
+{Mouse} = Structural.Data
 {div, a} = React.DOM
 
 ContactList = React.createClass
@@ -18,7 +19,7 @@ ContactList = React.createClass
       Icon({name: 'info-circle', className: 'contact-list-info'})
 
   onClick: (event) ->
-    if event.button == 0
+    if event.button == Mouse.LeftClick
       event.preventDefault()
       if @props.activeListId != @props.contactList.id
         UpdateActiveContactList(@props.contactList.id)
