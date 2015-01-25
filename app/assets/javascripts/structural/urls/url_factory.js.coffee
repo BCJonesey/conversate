@@ -11,6 +11,7 @@ UrlFactory = {
 
   waterCooler: -> '/'
   people: -> '/people'
+  contactList: (list) -> "/people/contact-lists/#{list.id}"
 
   tour: -> '/tour'
   admin: -> '/admin'

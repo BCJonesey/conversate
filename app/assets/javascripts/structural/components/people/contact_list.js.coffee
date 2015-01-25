@@ -1,5 +1,6 @@
+{UrlFactory} = Structural.Urls
 {UpdateActiveContactList} = Structural.Actions
-{div} = React.DOM
+{div, a} = React.DOM
 
 ContactList = React.createClass
   displayName: 'Contact List'
@@ -10,12 +11,16 @@ ContactList = React.createClass
     if @props.activeListId == @props.contactList.id
       klass = "#{klass} active-contact-list"
 
-    div {className: klass, onClick: @onClick},
+    url = UrlFactory.contactList(@props.contactList)
+
+    a {className: klass, href: url, onClick: @onClick},
       @props.contactList.name
       Icon({name: 'info-circle', className: 'contact-list-info'})
 
   onClick: (event) ->
-    if @props.activeListId != @props.contactList.id
-      UpdateActiveContactList(@props.contactList.id)
+    if event.button == 0
+      event.preventDefault()
+      if @props.activeListId != @props.contactList.id
+        UpdateActiveContactList(@props.contactList.id)
 
 Structural.Components.ContactList = React.createFactory(ContactList)
