@@ -9,6 +9,10 @@ PollConversations = Hippodrome.createDeferredTask
     doPoll = ->
       activeFolder = Folders.byId(ActiveFolder.id())
 
+      if not activeFolder
+        setTimeout(doPoll, POLL_INTERVAL)
+        return
+
       success = (data) ->
         # This is our attempt to not send out of date API responses to the
         # stores
