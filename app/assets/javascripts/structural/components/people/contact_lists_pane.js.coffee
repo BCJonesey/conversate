@@ -1,4 +1,4 @@
-{ContactLists} = Structural.Stores
+{ContactLists, ActiveContactList} = Structural.Stores
 {div} = React.DOM
 
 ContactListsPane = React.createClass
@@ -6,14 +6,16 @@ ContactListsPane = React.createClass
 
   mixins: [
     ContactLists.listen('lists', ContactLists.asList)
+    ActiveContactList.listen('activeListId', ActiveContactList.id)
   ]
 
   render: ->
     {ContactListsToolbar, ContactList} = Structural.Components
 
-    lists = _.map @state.lists, (list) ->
+    lists = _.map @state.lists, (list) =>
       ContactList {
         contactList: list
+        activeListId: @state.activeListId
         key: list.id
       }
 
