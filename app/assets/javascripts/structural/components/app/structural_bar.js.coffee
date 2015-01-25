@@ -23,13 +23,14 @@ StructuralBar = React.createClass
       div {className: 'left'},
         BarButton({
           href: UrlFactory.waterCooler()
-          active: true
+          active: @props.mainView == 'watercooler'
           icon: 'comment'
           action: Structural.Actions.UpdateActiveFolder
           actionArgs: [firstFolderId]
         }, 'Water Cooler'),
         BarButton({
           href: UrlFactory.people()
+          active: @props.mainView == 'people'
           icon: 'users'
           action: Structural.Actions.UpdateActiveContactList
           actionArgs: []

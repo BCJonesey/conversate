@@ -15,7 +15,9 @@ App = React.createClass
       mainView = Structural.Components.People()
 
     div {},
-      Structural.Components.StructuralBar(),
+      Structural.Components.StructuralBar({
+        mainView: @state.mainView
+      }),
       mainView,
       Structural.Components.ModalLayer(),
       Structural.Components.MenuLayer()
