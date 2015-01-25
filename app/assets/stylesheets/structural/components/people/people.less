@@ -1,9 +1,26 @@
 @import "structural/variables.less";
 @import "structural/mixins.less";
 
-.contact-lists-toolbar {
-  .button-toolbar();
-  .standard-border-bottom();
+.contact-lists-pane {
+  .contact-lists-toolbar {
+    .button-toolbar();
+    .standard-border-bottom();
+  }
+
+  .contact-list {
+    .unstyled-anchor(@light-font-color);
+    .one-line-truncated();
+    border: 1px solid transparent;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    font-size: 1.1rem;
+
+    .contact-list-info {
+      .small-light-font();
+      float: right;
+      margin-top: 0.25rem;
+    }
+  }
 }
 
 .contacts-toolbar {
