@@ -43,6 +43,6 @@ ChangeUrl = Hippodrome.createDeferredTask
     @push(UrlFactory.conversation(conversation))
   setContactListUrl: (payload) ->
     contactList = ContactLists.byId(payload.contactListId)
-    @push(UrlFactory.contactList(contactList))
+    if contactList then @push(UrlFactory.contactList(contactList))
 
 Structural.Tasks.ChangeUrl = ChangeUrl
