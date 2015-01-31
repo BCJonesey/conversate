@@ -13,13 +13,18 @@ Collection = {
   # Assume that if you want to reverse-sort a collection your key is a number.
   # I'm not sure how to invert the sort order of a string, and I'd rather not
   # do full array reverse (which I think is O(n)) if I can avoid it.
-  hashToSortedArray: (hash, key, order) ->
+  hashToSortedArray: (hash, predicate, order) ->
     order ||= Collection.Order.Ascending
+
+    getKey = predicate
+    if typeof predicate == 'string'
+      getKey = (o) -> o[predicate]
+
     keyFn = (o) ->
       if order == Collection.Order.Descending
-        -o[key]
+        -getKey(o)
       else
-        o[key]
+        getKey(o)
 
     _.sortBy(_.values(hash), keyFn)
 }

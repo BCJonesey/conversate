@@ -51,6 +51,24 @@ describe 'Data.Collection', ->
 
       expect(hashToSortedArray(hash, 'key', Order.Descending)).toEqual(sorted)
 
+    it 'sorts by a function', ->
+      alice =
+        email: 'alice@example.com'
+      bob =
+        email: 'bob@example.com'
+        full_name: 'Bob'
+      charlie =
+        email: 'charlie@example.com'
+        name: 'Charlie'
+      hash =
+        1: bob
+        2: alice
+        3: charlie
+      sorted = [bob, charlie, alice]
+
+      expect(hashToSortedArray(hash, Structural.Data.Participant.name))
+        .toEqual(sorted)
+
   describe 'arrayToIndexedHash', ->
     {arrayToIndexedHash} = Structural.Data.Collection
     arr = [
