@@ -1,13 +1,13 @@
 {div, span, a} = React.DOM
 
-NewsHeader = React.createClass
+NewsHeader = React.createFactory React.createClass
   displayName: 'News Header'
   render: ->
     div {className: 'news-header'},
       span({className: 'subject'}, @props.children)
       span({className: 'date'}, @props.date)
 
-NewsBlock = React.createClass
+NewsBlock = React.createFactory React.createClass
   displayName: 'News Block'
   render: ->
     div {className: 'news-block'}, @props.children
