@@ -13,6 +13,7 @@ ContactsPane = React.createClass
   updateContacts: ->
     contactList = ContactLists.byId(ActiveContactList.id())
     return {
+      activeContactList: contactList
       contacts: Contacts.alphabeticalOrder(contactList)
     }
 
@@ -25,7 +26,7 @@ ContactsPane = React.createClass
         key: contact.id
 
     div {className: 'contacts-pane'},
-      ContactsToolbar(),
+      ContactsToolbar(activeContactList: @state.activeContactList),
       div {className: 'contacts'}
         contacts
 
