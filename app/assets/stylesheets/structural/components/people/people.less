@@ -32,4 +32,45 @@
 .contacts-toolbar {
   .button-toolbar();
   .standard-border-bottom();
+  text-align: center;
+
+  .contact-list-title {
+    .title-font();
+  }
+}
+
+.contacts-pane {
+  .contacts-headers {
+    .button-toolbar(@small-toolbar-height);
+    .standard-border-bottom();
+    .small-light-font();
+
+    .header {
+      display: inline-block;
+      width: 50%;
+    }
+  }
+
+  .contacts {
+    .absolute-fill-y(@top: @button-toolbar-height + @small-toolbar-height, @bottom: 0);
+    overflow-y: scroll;
+
+    .contact {
+      .standard-border-bottom();
+      padding: 0.5rem;
+
+      &:hover {
+        background-color: @active-background-color;
+      }
+
+      .email {
+        .small-light-font();
+      }
+
+      .name, .email {
+        display: inline-block;
+        width: 50%;
+      }
+    }
+  }
 }

@@ -18,7 +18,7 @@ ContactsPane = React.createClass
     }
 
   render: ->
-    {ContactsToolbar, Contact} = Structural.Components
+    {ContactsToolbar, Contact, ContactsHeaders} = Structural.Components
 
     contacts = _.map @state.contacts, (contact) ->
       Contact
@@ -26,8 +26,8 @@ ContactsPane = React.createClass
         key: contact.id
 
     div {className: 'contacts-pane'},
-      ContactsToolbar(activeContactList: @state.activeContactList),
-      div {className: 'contacts'}
-        contacts
+      ContactsToolbar(activeContactList: @state.activeContactList)
+      ContactsHeaders()
+      div({className: 'contacts'}, contacts)
 
 Structural.Components.ContactsPane = React.createFactory(ContactsPane)
