@@ -24,7 +24,10 @@ ParticipantsEditorBar = React.createClass
       MenuTrigger({
         className: 'participant-editor-trigger'
         title: 'Participants'
-        content: ConversationParticipantsEditor({conversation: @props.conversation})
+        content: ConversationParticipantsEditor({
+          conversation: @props.conversation
+          addressBook: @props.addressBook
+        })
       }, IconButton({icon: 'plus'}))
 
 Structural.Components.ParticipantsEditorBar =

@@ -26,14 +26,17 @@ Autocomplete = React.createClass
       ref: 'input'
     }
 
-    if @state.query == undefined
+    if @state.query == undefined or @state.query.length == 0
       optionValues = []
     else
-      optionValues = @state.sifter.search(@state.query, {
+      items = @state.sifter.search(@state.query, {
         fields: ['name', 'email', 'full_name']
         sort: [{field: 'name'}, {field: 'full_name'}, {field: 'email'}]
         filter: true
-      })
+      }).items
+
+      optionValues = _.map items, (item) =>
+        @state.dictionary[item.id]
 
     options = AutocompleteOptions {
       displayFn: name

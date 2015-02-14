@@ -25,6 +25,6 @@ ContactLists = Hippodrome.createStore
     alphabeticalContacts: (contactListId) ->
       hashToSortedArray(@_contactLists[contactListId].contacts, @contactName)
     allUsers: () ->
-      _.uniq(_.union(_.map(_.values(@_contactLists), 'contacts')), false, 'id')
+      _.uniq(_.map(_.flatten(_.map(_.values(@_contactLists), 'contacts')), 'user'), false, 'id')
 
 Structural.Stores.ContactLists = ContactLists

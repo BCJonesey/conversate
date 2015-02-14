@@ -13,8 +13,8 @@ ConversationParticipantsEditor = React.createClass
       Autocomplete({
         className: 'participant-input'
         placeholder: 'Add people...'
-        dictionary: []
-        blacklist: []
+        dictionary: @props.addressBook
+        blacklist: @props.conversation.participants
       })
       div {className: 'participant-list'}, participants
 

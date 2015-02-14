@@ -1,5 +1,5 @@
 {Messages, Conversations, ActiveConversation, CurrentUser, Folders,
- ActiveFolder, MessagesState} = Structural.Stores
+ ActiveFolder, MessagesState, ContactLists} = Structural.Stores
 {div} = React.DOM
 
 MessagesPane = React.createClass
@@ -12,6 +12,7 @@ MessagesPane = React.createClass
     Messages.listenWith('updateConversation')
     CurrentUser.listen('currentUser', CurrentUser.getUser)
     MessagesState.listenWith('updateMessagesState')
+    ContactLists.listen('addressBook', ContactLists.allUsers)
   ]
 
   updateConversation: ->
@@ -38,6 +39,7 @@ MessagesPane = React.createClass
       )
       Structural.Components.ParticipantsEditorBar(
         conversation: @state.conversation
+        addressBook: @state.addressBook
       )
       Structural.Components.MessagesList(
         messages: @state.messages

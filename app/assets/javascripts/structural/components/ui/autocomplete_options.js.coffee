@@ -3,7 +3,7 @@
 AutocompleteOptions = React.createClass
   displayName: 'Autocomplete Options'
   render: ->
-    options = _.map @props.options, (opt) ->
+    options = _.map @props.options, (opt) =>
       div {
         className: 'option'
         onClick: _.partial(@chooseOption, opt)
