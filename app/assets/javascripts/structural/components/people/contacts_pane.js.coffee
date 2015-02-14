@@ -1,4 +1,4 @@
-{ContactLists, ActiveContactList, Contacts} = Structural.Stores
+{ContactLists, ActiveContactList} = Structural.Stores
 {div} = React.DOM
 
 ContactsPane = React.createClass
@@ -7,14 +7,13 @@ ContactsPane = React.createClass
   mixins: [
     ContactLists.listenWith('updateContacts')
     ActiveContactList.listenWith('updateContacts')
-    Contacts.listenWith('updateContacts')
   ]
 
   updateContacts: ->
     contactList = ContactLists.byId(ActiveContactList.id())
     return {
       activeContactList: contactList
-      contacts: Contacts.alphabeticalOrder(contactList)
+      contacts: if contactList then ContactLists.alphabeticalContacts(contactList.id) else []
     }
 
   render: ->
