@@ -4,15 +4,17 @@
 ConversationParticipantsEditor = React.createClass
   displayName: 'Conversation Participants Editor'
   render: ->
-    {IconButton, AutocompleteInput} = Structural.Components
+    {IconButton, Autocomplete} = Structural.Components
 
     participants = _.map @props.conversation.participants, (p) ->
       div {className: 'participant', key: p.id}, name(p), IconButton({icon: 'times', className: 'remove-participant'})
 
     div {className: 'conversation-participants-editor'},
-      AutocompleteInput({
+      Autocomplete({
         className: 'participant-input'
         placeholder: 'Add people...'
+        dictionary: []
+        blacklist: []
       })
       div {className: 'participant-list'}, participants
 

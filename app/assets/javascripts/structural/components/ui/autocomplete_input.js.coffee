@@ -2,19 +2,18 @@
 
 AutocompleteInput = React.createClass
   displayName: 'AutocompleteInput'
-  getInitialState: ->
-    query: ''
   render: ->
     className = "autocomplete-input #{@props.className}"
 
     input {
       className: className
       placeholder: @props.placeholder
-      value: @state.query
+      value: if @props.query then @props.query else ''
       onChange: @onChange
     }
 
   onChange: (event) ->
-    @setState(query: event.target.value)
+    if @props.onQueryChange
+      @props.onQueryChange(event.target.value)
 
 Structural.Components.AutocompleteInput = React.createFactory(AutocompleteInput)
