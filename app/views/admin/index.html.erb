@@ -20,14 +20,14 @@
   <div class="beta-referrers-table">
     <div class="btn-toolbar">
       <div class="btn-group">
-        <span class="toolbar-title">Beta Referrer Stats</span>
+        <span class="toolbar-title">Beta Referrer Stats (Total: <%= @referrers.values.sum %>)</span>
       </div>
     </div>
     <table>
       <thead>
         <tr>
           <td>Referrer</td>
-          <td>Count (Total: <%= @referrers.values.sum %>)</td>
+          <td>Count</td>
         </tr>
       </thead>
       <tbody>
@@ -54,7 +54,7 @@
 
     <div class="btn-toolbar">
       <div class="btn-group">
-        <span class="toolbar-title">Beta Signups</span>
+        <span class="toolbar-title">Beta Signups (Total: <%= BetaSignup.all.count %>)</span>
       </div>
     </div>
 
