@@ -1,7 +1,10 @@
 class AdminController < ApplicationController
+  include AdminHelper
+
   before_filter :require_site_admin
 
   def index
+    @referrers = referrers_with_counts
   end
 
   def promote

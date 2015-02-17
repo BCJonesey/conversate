@@ -27,11 +27,11 @@
       <thead>
         <tr>
           <td>Referrer</td>
-          <td>Count</td>
+          <td>Count (Total: <%= @referrers.values.sum %>)</td>
         </tr>
       </thead>
       <tbody>
-        <% referrers_with_counts.each do |referrer, count| %>
+        <% @referrers.each do |referrer, count| %>
           <tr>
             <td><%= referrer %></td>
             <td><%= count %></td>
