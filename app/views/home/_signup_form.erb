@@ -5,7 +5,10 @@
   </div>
 <% else %>
   <form method="post" action="<%= beta_signup_path %>" class='beta-signup-form'>
-    <p>Water Cooler is currently in private beta.  We'll send you an invite as soon we can. </p>
+    <p>Water Cooler is currently in private beta. Sign up with your email below and we'll
+      send you an invite as soon we can. </p>
+    <p class="beta-signup-disclaimer">We'll only ever use this email to send you an invite, and it
+      will never be shared with third parties.</p>
     <div class='sign-up-inputs'>
       <div class='input-wrapper'>
         <input type='email' class='beta-signup-input' placeholder='Email Address' tabindex=1 name="email"/>
