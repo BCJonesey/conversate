@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= unread_count_string %>Water Cooler</title>
+  <title><%= unread_count_string %>Water Cooler - Group Discussions for Work</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= csrf_meta_tags %>
   <%= favicon_tag %>
@@ -9,5 +9,7 @@
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui" />
   <link rel="apple-touch-icon" href="<%= asset_path('apple-touch-icon.png') %>">
+  <meta charset="utf-8">
+  <%= yield :head %>
 </head>
 <body class="<%= logged_in? ? 'logged-in' : 'not-logged-in' %>">
