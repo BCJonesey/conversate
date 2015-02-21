@@ -21,9 +21,17 @@ class HomeController < ApplicationController
   end
 
   def beta_signup
-    signup = BetaSignup.new(email: params[:email], referrer: params[:referrer])
-    success = signup.save
-    flash[:signed_up] = success
+
+    unless BetaSignup.find_by_email(:email => params[:email])
+      signup = BetaSignup.new(email: params[:email], referrer: params[:referrer])
+      success = signup.save
+      flash[:signed_up] = success
+    else
+      # We could make another flash message, but then that sort of leaks that their email
+      # address is a thing. At least this way they'll think it went through again if they
+      # had a browser problem and we won't spam them or get duped in the database.
+      flash[:signed_up] = true
+    end
 
     if success
       BetaSignupMailer.beta_signup_email(signup).deliver
