@@ -22,7 +22,7 @@ class HomeController < ApplicationController
 
   def beta_signup
 
-    if BetaSignup.where(:email => params[:email]).empty?
+    unless BetaSignup.find_by_email(:email => params[:email])
       signup = BetaSignup.new(email: params[:email], referrer: params[:referrer])
       success = signup.save
       flash[:signed_up] = success
