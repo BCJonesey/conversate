@@ -7,9 +7,14 @@ AutocompleteOptions = React.createClass
       div {
         className: 'option'
         onClick: _.partial(@chooseOption, opt)
+        key: opt.id
       }, @props.displayFn(opt)
 
-    div {className: 'autocomplete-options'}, options
+    className = 'autocomplete-options'
+    if options.length == 0
+      className += ' autocomplete-options-empty'
+
+    div {className: className}, options
 
   chooseOption: (option, event) ->
     # TODO: A Thing

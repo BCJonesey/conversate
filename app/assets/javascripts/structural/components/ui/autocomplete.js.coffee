@@ -20,7 +20,7 @@ Autocomplete = React.createClass
 
     input = AutocompleteInput {
       placeholder: @props.placeholder
-      className: ''
+      className: @props.inputClassName
       onQueryChange: @queryChange
       query: @state.query
       ref: 'input'
@@ -45,7 +45,7 @@ Autocomplete = React.createClass
       ref: 'options'
     }
 
-    div {className: "autocomplete #{@props.className}"},
+    div {className: 'autocomplete'},
       input,
       options
 

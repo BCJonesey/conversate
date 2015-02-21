@@ -11,7 +11,7 @@ ConversationParticipantsEditor = React.createClass
 
     div {className: 'conversation-participants-editor'},
       Autocomplete({
-        className: 'participant-input'
+        inputClassName: 'participant-input'
         placeholder: 'Add people...'
         dictionary: @props.addressBook
         blacklist: @props.conversation.participants

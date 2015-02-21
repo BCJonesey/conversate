@@ -1,6 +1,33 @@
 @import "structural/variables.less";
 @import "structural/mixins.less";
 
+.autocomplete {
+  position: relative;
+}
+
 .autocomplete-input {
   .focusable-input();
+}
+
+.autocomplete-options {
+  .standard-border();
+  background-color: @standard-background-color;
+  position: absolute;
+  overflow-y: scroll;
+  min-height: 8rem;
+  max-height: 10rem;
+  width: 13rem;
+
+  &.autocomplete-options-empty {
+    height: 0;
+  }
+
+  .option {
+    .standard-border-bottom();
+    padding: 0.5rem;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
 }
