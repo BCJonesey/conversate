@@ -13,8 +13,8 @@
   .standard-border();
   background-color: @standard-background-color;
   position: absolute;
+  left: 0.5rem;
   overflow-y: scroll;
-  min-height: 8rem;
   max-height: 10rem;
   width: 13rem;
 
@@ -25,9 +25,14 @@
   .option {
     .standard-border-bottom();
     padding: 0.5rem;
+    cursor: pointer;
 
     &:last-child {
       border-bottom: none;
+    }
+
+    &:hover {
+      background-color: @standard-border-color;
     }
   }
 }
