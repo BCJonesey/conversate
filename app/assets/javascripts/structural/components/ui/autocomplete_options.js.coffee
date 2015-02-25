@@ -17,7 +17,7 @@ AutocompleteOptions = React.createClass
     div {className: className}, options
 
   chooseOption: (option, event) ->
-    # TODO: A Thing
+    @props.onSelect(option)
 
 Structural.Components.AutocompleteOptions =
   React.createFactory(AutocompleteOptions)

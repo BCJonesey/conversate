@@ -6,13 +6,18 @@ Autocomplete = React.createClass
   displayName: 'Autocomplete'
 
   getInitialState: ->
-    blacklist = arrayToIndexedHash(@props.blacklist, 'id')
-    dictionary = _.reject(@props.dictionary, (item) -> !!blacklist[item.id])
+    return _.merge(@getSifterDictionary(@props), {query: undefined})
+
+  componentWillRecieveProps: (newProps) ->
+    @setState(@getSifterDictionary(newProps))
+
+  getSifterDictionary: (props) ->
+    blacklist = arrayToIndexedHash(props.blacklist, 'id')
+    dictionary = _.reject(props.dictionary, (item) -> !!blacklist[item.id])
+    sifter = new Sifter(dictionary)
     return {
-      blacklist: blacklist
       dictionary: dictionary
-      sifter: new Sifter(dictionary)
-      query: undefined
+      sifter: sifter
     }
 
   render: ->
@@ -53,5 +58,7 @@ Autocomplete = React.createClass
     @setState(query: query)
 
   optionSelected: (option) ->
+    @setState(query: undefined)
+    @props.optionSelected(option)
 
 Structural.Components.Autocomplete = React.createFactory(Autocomplete)
