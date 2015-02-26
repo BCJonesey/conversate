@@ -8,7 +8,7 @@ Autocomplete = React.createClass
   getInitialState: ->
     return _.merge(@getSifterDictionary(@props), {query: undefined})
 
-  componentWillRecieveProps: (newProps) ->
+  componentWillReceiveProps: (newProps) ->
     @setState(@getSifterDictionary(newProps))
 
   getSifterDictionary: (props) ->
