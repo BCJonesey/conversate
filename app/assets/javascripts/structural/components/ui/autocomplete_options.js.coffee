@@ -2,6 +2,12 @@
 
 AutocompleteOptions = React.createClass
   displayName: 'Autocomplete Options'
+
+  componentDidUpdate: (prevProps, prevState) ->
+    dom = @getDOMNode()
+    activeElement = dom.getElementsByClassName('active')[0]
+    dom.scrollTop = activeElement.offsetTop - (dom.offsetHeight / 2)
+
   render: ->
     options = _.map @props.options, (opt, idx) =>
       className = 'option'
