@@ -3,11 +3,16 @@
 AutocompleteOptions = React.createClass
   displayName: 'Autocomplete Options'
   render: ->
-    options = _.map @props.options, (opt) =>
+    options = _.map @props.options, (opt, idx) =>
+      className = 'option'
+      if idx == @props.activeIndex
+        className += ' active'
+
       div {
-        className: 'option'
-        onClick: _.partial(@chooseOption, opt)
+        className: className
         key: opt.id
+        onClick: _.partial(@chooseOption, opt)
+        onMouseOver: () => @props.setActive(idx)
       }, @props.displayFn(opt)
 
     className = 'autocomplete-options'

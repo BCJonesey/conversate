@@ -6,18 +6,32 @@ Autocomplete = React.createClass
   displayName: 'Autocomplete'
 
   getInitialState: ->
-    return _.merge(@getSifterDictionary(@props), {query: undefined})
+    return _.merge({
+      query: undefined
+      activeIndex: 0
+    }, @getOptions(@props, {}))
 
   componentWillReceiveProps: (newProps) ->
-    @setState(@getSifterDictionary(newProps))
+    @setState(@getOptions(newProps, @state))
 
-  getSifterDictionary: (props) ->
+  getOptions: (props, state) ->
     blacklist = arrayToIndexedHash(props.blacklist, 'id')
     dictionary = _.reject(props.dictionary, (item) -> !!blacklist[item.id])
     sifter = new Sifter(dictionary)
+
+    if state.query == undefined or state.query.length == 0
+      options = []
+    else
+      items = sifter.search(state.query, {
+        fields: ['name', 'email', 'full_name']
+        sort: [{field: 'name'}, {field: 'full_name'}, {field: 'email'}]
+        filter: true
+      }).items
+
+      options = _.map items, (item) -> dictionary[item.id]
+
     return {
-      dictionary: dictionary
-      sifter: sifter
+      options: options
     }
 
   render: ->
@@ -27,26 +41,17 @@ Autocomplete = React.createClass
       placeholder: @props.placeholder
       className: @props.inputClassName
       onQueryChange: @queryChange
+      moveActive: @moveActive
       query: @state.query
       ref: 'input'
     }
 
-    if @state.query == undefined or @state.query.length == 0
-      optionValues = []
-    else
-      items = @state.sifter.search(@state.query, {
-        fields: ['name', 'email', 'full_name']
-        sort: [{field: 'name'}, {field: 'full_name'}, {field: 'email'}]
-        filter: true
-      }).items
-
-      optionValues = _.map items, (item) =>
-        @state.dictionary[item.id]
-
     options = AutocompleteOptions {
       displayFn: name
-      options: optionValues
+      options: @state.options
+      activeIndex: @state.activeIndex
       onSelect: @optionSelected
+      setActive: @setActive
       ref: 'options'
     }
 
@@ -55,10 +60,20 @@ Autocomplete = React.createClass
       options
 
   queryChange: (query) ->
-    @setState(query: query)
+    options = @getOptions(@props, _.merge({}, @state, {query: query})).options
+
+    @setState(query: query, options: options)
 
   optionSelected: (option) ->
-    @setState(query: undefined)
+    @setState(query: undefined, activeIndex: 0, options: [])
     @props.optionSelected(option)
+
+  setActive: (idx) ->
+    @setState(activeIndex: idx)
+
+  moveActive: (offset) ->
+    newIndex = @state.activeIndex + offset
+    newIndex = Math.max(0, Math.min(@state.options.length - 1, newIndex))
+    @setState(activeIndex: newIndex)
 
 Structural.Components.Autocomplete = React.createFactory(Autocomplete)
