@@ -10,14 +10,14 @@ AutocompleteInput = React.createClass
       placeholder: @props.placeholder
       value: if @props.query then @props.query else ''
       onChange: @onChange
-      onKeyDown: @moveActive
+      onKeyDown: @handleKeys
     }
 
   onChange: (event) ->
     if @props.onQueryChange
       @props.onQueryChange(event.target.value)
 
-  moveActive: (event) ->
+  handleKeys: (event) ->
     if @props.moveActive
       if event.key == 'ArrowUp'
         event.preventDefault()
@@ -25,5 +25,10 @@ AutocompleteInput = React.createClass
       else if event.key == 'ArrowDown'
         event.preventDefault()
         @props.moveActive(1)
+
+    if @props.selectActive
+      if event.key == 'Enter' or event.key == 'Tab'
+        event.preventDefault()
+        @props.selectActive()
 
 Structural.Components.AutocompleteInput = React.createFactory(AutocompleteInput)

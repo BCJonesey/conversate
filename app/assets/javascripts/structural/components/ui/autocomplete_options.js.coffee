@@ -6,7 +6,9 @@ AutocompleteOptions = React.createClass
   componentDidUpdate: (prevProps, prevState) ->
     dom = @getDOMNode()
     activeElement = dom.getElementsByClassName('active')[0]
-    dom.scrollTop = activeElement.offsetTop - (dom.offsetHeight / 2)
+
+    if activeElement
+      dom.scrollTop = activeElement.offsetTop - (dom.offsetHeight / 2)
 
   render: ->
     options = _.map @props.options, (opt, idx) =>

@@ -31,6 +31,7 @@ Autocomplete = React.createClass
       options = _.map items, (item) -> dictionary[item.id]
 
     return {
+      dictionary: dictionary
       options: options
     }
 
@@ -42,6 +43,7 @@ Autocomplete = React.createClass
       className: @props.inputClassName
       onQueryChange: @queryChange
       moveActive: @moveActive
+      selectActive: @selectActive
       query: @state.query
       ref: 'input'
     }
@@ -75,5 +77,9 @@ Autocomplete = React.createClass
     newIndex = @state.activeIndex + offset
     newIndex = Math.max(0, Math.min(@state.options.length - 1, newIndex))
     @setState(activeIndex: newIndex)
+
+  selectActive: () ->
+    activeOption = @state.options[@state.activeIndex]
+    @optionSelected(activeOption)
 
 Structural.Components.Autocomplete = React.createFactory(Autocomplete)
