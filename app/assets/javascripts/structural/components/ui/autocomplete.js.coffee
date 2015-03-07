@@ -19,8 +19,9 @@ Autocomplete = React.createClass
     dictionary = _.reject(props.dictionary, (item) -> !!blacklist[item.id])
     sifter = new Sifter(dictionary)
 
-    if state.query == undefined or state.query.length == 0
+    if state.query == undefined or state.query.length == 0 or @forceEmptyOptions
       options = []
+      @forceEmptyOptions = false
     else
       items = sifter.search(state.query, {
         fields: ['name', 'email', 'full_name']
@@ -67,6 +68,7 @@ Autocomplete = React.createClass
     @setState(query: query, options: options)
 
   optionSelected: (option) ->
+    @forceEmptyOptions = true
     @setState(query: undefined, activeIndex: 0, options: [])
     @props.optionSelected(option)
 
