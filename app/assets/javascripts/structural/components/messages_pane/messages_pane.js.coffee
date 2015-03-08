@@ -40,6 +40,8 @@ MessagesPane = React.createClass
       Structural.Components.ParticipantsEditorBar(
         conversation: @state.conversation
         addressBook: @state.addressBook
+        folder: @state.folder
+        currentUser: @state.currentUser
       )
       Structural.Components.MessagesList(
         messages: @state.messages

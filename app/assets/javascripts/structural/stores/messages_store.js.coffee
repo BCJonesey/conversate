@@ -14,6 +14,7 @@ Messages = Hippodrome.createStore
     @dispatch(Structural.Actions.RetitleConversation)
       .to(@appendTemporaryMessage)
     @dispatch(Structural.Actions.UpdateFolders).to(@appendTemporaryMessage)
+    @dispatch(Structural.Actions.UpdateUsers).to(@appendTemporaryMessage)
 
   messagesForConversation: (conversation) ->
     if not conversation

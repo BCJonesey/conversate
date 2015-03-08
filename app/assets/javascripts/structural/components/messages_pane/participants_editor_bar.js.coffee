@@ -27,6 +27,8 @@ ParticipantsEditorBar = React.createClass
         content: ConversationParticipantsEditor({
           conversation: @props.conversation
           addressBook: @props.addressBook
+          folder: @props.folder
+          currentUser: @props.currentUser
         })
       }, IconButton({icon: 'plus'}))
 

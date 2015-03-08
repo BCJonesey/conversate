@@ -47,3 +47,14 @@ Structural.Actions.UpdateFolders = Hippodrome.createAction
     conversation: conversation
     folder: folder
     user: user
+
+Structural.Actions.UpdateUsers = Hippodrome.createAction
+  displayName: 'Update Users'
+  build: (added, removed, conversation, folder, user) ->
+    added: added
+    removed: removed
+    message: buildMessage(user, {added: added, removed: removed}, 'update_users')
+    temporaryId: nextId()
+    conversation: conversation
+    folder: folder
+    user: user

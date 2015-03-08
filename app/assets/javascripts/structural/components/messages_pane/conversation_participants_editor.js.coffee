@@ -1,4 +1,5 @@
 {name} = Structural.Data.Participant
+{UpdateUsers} = Structural.Actions
 {div} = React.DOM
 
 ConversationParticipantsEditor = React.createClass
@@ -8,6 +9,20 @@ ConversationParticipantsEditor = React.createClass
     return {
       participants: @props.conversation.participants
     }
+
+  componentWillUnmount: ->
+    oldParticipants = @props.conversation.participants
+    newParticipants = @state.participants
+
+    oldIds = _.pluck(oldParticipants, 'id')
+    newIds = _.pluck(newParticipants, 'id')
+
+    addedIds = _.difference(newIds, oldIds)
+    removedIds = _.difference(oldIds, newIds)
+
+    addedParticipants = _.filter newParticipants, (p) -> p.id in addedIds
+    removedParticipants = _.filter oldParticipants, (p) -> p.id in removedIds
+    UpdateUsers(addedParticipants, removedParticipants, @props.conversation, @props.folder, @props.currentUser)
 
   render: ->
     {RemovableParticipants, Autocomplete} = Structural.Components

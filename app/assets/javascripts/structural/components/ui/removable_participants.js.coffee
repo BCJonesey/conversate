@@ -21,4 +21,5 @@ RemovableParticipants = React.createClass
   remove: (participant) ->
     @props.removeParticipant(participant)
 
-Structural.Components.RemovableParticipants = RemovableParticipants
+Structural.Components.RemovableParticipants =
+  React.createFactory(RemovableParticipants)

@@ -7,6 +7,7 @@ SendMessage = Hippodrome.createDeferredTask
     @dispatch(Structural.Actions.SendMessage).to(@send)
     @dispatch(Structural.Actions.RetitleConversation).to(@send)
     @dispatch(Structural.Actions.UpdateFolders).to(@send)
+    @dispatch(Structural.Actions.UpdateUsers).to(@send)
 
   send: (payload) ->
     activeFolder = Folders.byId(ActiveFolder.id())
