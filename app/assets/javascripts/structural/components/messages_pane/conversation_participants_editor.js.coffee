@@ -10,24 +10,33 @@ ConversationParticipantsEditor = React.createClass
     }
 
   render: ->
-    {IconButton, Autocomplete} = Structural.Components
+    {RemovableParticipants, Autocomplete} = Structural.Components
 
-    participants = _.map @state.participants, (p) ->
-      div {className: 'participant', key: p.id}, name(p), IconButton({icon: 'times', className: 'remove-participant'})
+    autocomplete = Autocomplete({
+      inputClassName: 'participant-input'
+      placeholder: 'Add people...'
+      dictionary: @props.addressBook
+      blacklist: @state.participants
+      optionSelected: @participantSelected
+    })
+
+    participants = RemovableParticipants({
+      participants: @state.participants
+      removeParticipant: @participantRemoved
+    })
 
     div {className: 'conversation-participants-editor'},
-      Autocomplete({
-        inputClassName: 'participant-input'
-        placeholder: 'Add people...'
-        dictionary: @props.addressBook
-        blacklist: @state.participants
-        optionSelected: @participantSelected
-      })
-      div {className: 'participant-list'}, participants
+      autocomplete
+      participants
 
   participantSelected: (participant) ->
     @state.participants.push(participant)
     @setState(participants: @state.participants)
+
+  participantRemoved: (participant) ->
+    participants = _.reject @state.participants, (p) ->
+      p.id == participant.id
+    @setState(participants: participants)
 
 Structural.Components.ConversationParticipantsEditor =
   React.createFactory(ConversationParticipantsEditor)
