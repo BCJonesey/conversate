@@ -2,12 +2,12 @@
 @import "structural/mixins.less";
 
 @scrollbar-background: white;
-@scrollbar-color: @standard-background-color;
+@scrollbar-color: darken(@standard-background-color, 5%);
 @scrollbar-hover-color: darken(@standard-background-color, 20%);
 @scrollbar-size: 10px;
 
 .scrollbar-shadow(@color) {
-  box-shadow: inset 0px 0px 0px 4px @color;
+  box-shadow: inset 0px 0px 0px 2px @color;
 }
 
 .water-cooler, .people, .modal, .menu, {
@@ -15,34 +15,36 @@
     width: @scrollbar-size;
     height: @scrollbar-size;
     background-color: @scrollbar-background;
-    .standard-border-left();
   }
 
   ::-webkit-scrollbar-track {
     background-color: @scrollbar-background;
+   .standard-border-left();
   }
 
   ::-webkit-scrollbar-track:horizontal {
     background-color: @scrollbar-background;
     border-left: none;
     .standard-border-top();
-    margin-left: -1px;
-    margin-right: -1px;
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: @scrollbar-background;
-    border: 2px solid transparent;
-    border-left: 3px solid transparent;
-    .scrollbar-shadow(@scrollbar-color);
+    background-color: @scrollbar-color;
+    .scrollbar-shadow(@scrollbar-background);
+    .standard-border-left();
   }
 
   ::-webkit-scrollbar-thumb:horizontal {
-    border-bottom: none;
-    .standard-border-right();
+    border-left: none;
+    .standard-border-top();
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    .scrollbar-shadow(@scrollbar-hover-color);
+    background-color: @scrollbar-hover-color;
+  }
+  ::-webkit-scrollbar-corner,
+  ::-webkit-resizer {
+    .standard-border-top();
+    .standard-border-left();
   }
 }
