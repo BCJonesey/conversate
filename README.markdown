@@ -1,6 +1,9 @@
 If you can read this, you're building Water Cooler.  Here are some things you
 need to know.
 
+# Production Site
+http://watercooler.io/
+
 # How to set up a server
 Use Heroku.  It'll start the Rails app for you.  That's 90% of what you need.
 
